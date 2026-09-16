@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:acp:kernel:0.1.0",
+  "title": "ACP Phase 1 authoring kernel (not Canonical IR)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["modelVersion", "applicationId", "snapshotId", "nodes", "approvals", "issues"],
+  "properties": {
+    "modelVersion": {"const": "0.1.0"},
+    "applicationId": {"$ref": "#/$defs/id"},
+    "snapshotId": {"$ref": "#/$defs/id"},
+    "nodes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/node"}},
+    "approvals": {"type": "array", "items": {"$ref": "#/$defs/approval"}},
+    "issues": {"type": "array", "items": {"$ref": "#/$defs/issue"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]*(?![\\s\\S])", "maxLength": 128},
+    "text": {"type": "string", "pattern": "\\S", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+    "ref": {
+      "type": "object", "additionalProperties": false, "required": ["id", "revision"],
+      "properties": {"id": {"$ref": "#/$defs/id"}, "revision": {"$ref": "#/$defs/revision"}}
+    },
+    "refs": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/ref"}},
+    "nonemptyRefs": {"allOf": [{"$ref": "#/$defs/refs"}], "minItems": 1},
+    "origin": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source", "locator", "actor", "actorType"],
+      "properties": {
+        "source": {"$ref": "#/$defs/text"}, "locator": {"$ref": "#/$defs/text"},
+        "actor": {"$ref": "#/$defs/text"}, "actorType": {"enum": ["HUMAN", "AI", "IMPORT"]}
+      }
+    },
+    "approval": {
+      "type": "object", "additionalProperties": false, "required": ["subject", "reviewer", "evidence"],
+      "properties": {
+        "subject": {"$ref": "#/$defs/ref"}, "reviewer": {"$ref": "#/$defs/text"},
+        "evidence": {"$ref": "#/$defs/text"}
+      }
+    },
+    "issue": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "question", "subjects", "blocking", "resolution"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "kind": {"enum": ["AMBIGUITY", "CONFLICT"]},
+        "question": {"$ref": "#/$defs/text"}, "subjects": {"$ref": "#/$defs/nonemptyRefs"},
+        "blocking": {"type": "boolean"}, "resolution": {"enum": ["OPEN", "RESOLVED"]},
+        "decision": {"$ref": "#/$defs/ref"}
+      }
+    },
+    "semanticType": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["kind"],
+         "properties": {"kind": {"enum": ["Boolean", "String", "Integer", "Decimal", "Email", "DateTime", "SecretReference"]}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "currency"],
+         "properties": {"kind": {"const": "Money"}, "currency": {"type": "string", "pattern": "^[A-Z]{3}(?![\\s\\S])"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "entity"],
+         "properties": {"kind": {"const": "Identifier"}, "entity": {"$ref": "#/$defs/ref"}}}
+      ]
+    },
+    "literalValue": {"type": ["string", "boolean"]},
+    "expression": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["tag", "type", "value"],
+         "properties": {"tag": {"const": "literal"}, "type": {"$ref": "#/$defs/semanticType"}, "value": {"$ref": "#/$defs/literalValue"}}},
+        {"type": "object", "additionalProperties": false, "required": ["tag", "ref"],
+         "properties": {"tag": {"const": "parameter"}, "ref": {"$ref": "#/$defs/ref"}}},
+        {"type": "object", "additionalProperties": false, "required": ["tag", "binding", "ref"],
+         "properties": {"tag": {"const": "field"}, "binding": {"enum": ["resource", "actor"]}, "ref": {"$ref": "#/$defs/ref"}}},
+        {"type": "object", "additionalProperties": false, "required": ["tag", "op", "left", "right"],
+         "properties": {"tag": {"const": "binary"}, "op": {"enum": ["eq", "gt", "add", "and"]}, "left": {"$ref": "#/$defs/expression"}, "right": {"$ref": "#/$defs/expression"}}}
+      ]
+    },
+    "node": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "revision", "kind", "name", "lifecycle", "steward", "origins", "basis", "data"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "revision": {"$ref": "#/$defs/revision"},
+        "kind": {"enum": ["Fact", "Constraint", "Requirement", "Preference", "Goal", "Assumption", "Decision", "Entity", "Field", "Parameter", "Invariant", "Command", "Event", "Actor", "Role", "Policy", "StateMachine", "State", "Transition", "AcceptanceCriterion"]},
+        "name": {"$ref": "#/$defs/text"},
+        "lifecycle": {"enum": ["CAPTURED", "REFINING", "PROPOSED", "REVIEW_REQUIRED", "APPROVED", "DEPRECATED", "SUPERSEDED", "REJECTED"]},
+        "steward": {"$ref": "#/$defs/text"},
+        "origins": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/origin"}},
+        "basis": {"$ref": "#/$defs/refs"}, "supersededBy": {"$ref": "#/$defs/ref"}, "data": {"type": "object"}
+      },
+      "allOf": [
+        {"if": {"properties": {"kind": {"const": "Fact"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/fact"}}}},
+        {"if": {"properties": {"kind": {"const": "Constraint"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/constraint"}}}},
+        {"if": {"properties": {"kind": {"const": "Requirement"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/requirement"}}}},
+        {"if": {"properties": {"kind": {"const": "Preference"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/preference"}}}},
+        {"if": {"properties": {"kind": {"const": "Goal"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/goal"}}}},
+        {"if": {"properties": {"kind": {"const": "Assumption"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/assumption"}}}},
+        {"if": {"properties": {"kind": {"const": "Decision"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/decision"}}}},
+        {"if": {"properties": {"kind": {"const": "Entity"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/entity"}}}},
+        {"if": {"properties": {"kind": {"const": "Field"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/field"}}}},
+        {"if": {"properties": {"kind": {"const": "Parameter"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/parameter"}}}},
+        {"if": {"properties": {"kind": {"const": "Invariant"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/invariant"}}}},
+        {"if": {"properties": {"kind": {"const": "Command"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/command"}}}},
+        {"if": {"properties": {"kind": {"const": "Event"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/event"}}}},
+        {"if": {"properties": {"kind": {"const": "Actor"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/actor"}}}},
+        {"if": {"properties": {"kind": {"const": "Role"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/role"}}}},
+        {"if": {"properties": {"kind": {"const": "Policy"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/policy"}}}},
+        {"if": {"properties": {"kind": {"const": "StateMachine"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/machine"}}}},
+        {"if": {"properties": {"kind": {"const": "State"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/state"}}}},
+        {"if": {"properties": {"kind": {"const": "Transition"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/transition"}}}},
+        {"if": {"properties": {"kind": {"const": "AcceptanceCriterion"}}}, "then": {"properties": {"data": {"$ref": "#/$defs/criterion"}}}}
+      ]
+    },
+    "fact": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "evidence"],
+      "properties": {"statement": {"$ref": "#/$defs/text"}, "evidence": {"$ref": "#/$defs/text"}}
+    },
+    "constraint": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "subjects"],
+      "properties": {"statement": {"$ref": "#/$defs/text"}, "subjects": {"$ref": "#/$defs/nonemptyRefs"}}
+    },
+    "requirement": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "priority", "acceptance"],
+      "properties": {"statement": {"$ref": "#/$defs/text"}, "priority": {"enum": ["MUST", "SHOULD", "COULD"]}, "acceptance": {"$ref": "#/$defs/nonemptyRefs"}}
+    },
+    "preference": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "rationale"],
+      "properties": {"statement": {"$ref": "#/$defs/text"}, "rationale": {"$ref": "#/$defs/text"}}
+    },
+    "goal": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "measure"],
+      "properties": {"statement": {"$ref": "#/$defs/text"}, "measure": {"$ref": "#/$defs/text"}}
+    },
+    "assumption": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "reviewTrigger"],
+      "properties": {"statement": {"$ref": "#/$defs/text"}, "reviewTrigger": {"$ref": "#/$defs/text"}}
+    },
+    "decision": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "strength", "rationale", "alternatives"],
+      "properties": {"statement": {"$ref": "#/$defs/text"}, "strength": {"enum": ["PREFERRED", "REQUIRED", "LOCKED"]}, "rationale": {"$ref": "#/$defs/text"}, "alternatives": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}}}
+    },
+    "entity": {
+      "type": "object", "additionalProperties": false, "required": ["identity"],
+      "properties": {"identity": {"$ref": "#/$defs/nonemptyRefs"}, "tenantField": {"$ref": "#/$defs/ref"}}
+    },
+    "field": {
+      "type": "object", "additionalProperties": false, "required": ["owner", "type", "optional", "classification"],
+      "properties": {"owner": {"$ref": "#/$defs/ref"}, "type": {"$ref": "#/$defs/semanticType"}, "optional": {"type": "boolean"}, "classification": {"enum": ["PUBLIC", "INTERNAL", "SENSITIVE", "SECRET"]}}
+    },
+    "parameter": {
+      "type": "object", "additionalProperties": false, "required": ["type", "value"],
+      "properties": {"type": {"$ref": "#/$defs/semanticType"}, "value": {"$ref": "#/$defs/literalValue"}}
+    },
+    "invariant": {
+      "type": "object", "additionalProperties": false, "required": ["resource", "predicate", "enforcement"],
+      "properties": {"resource": {"$ref": "#/$defs/ref"}, "predicate": {"$ref": "#/$defs/expression"}, "enforcement": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["WRITE", "TRANSITION", "READ", "EXPORT"]}}}
+    },
+    "command": {
+      "type": "object", "additionalProperties": false, "required": ["resource", "invariants", "emits"],
+      "properties": {"resource": {"$ref": "#/$defs/ref"}, "invariants": {"$ref": "#/$defs/refs"}, "emits": {"$ref": "#/$defs/refs"}}
+    },
+    "event": {
+      "type": "object", "additionalProperties": false, "required": ["resource", "payload"],
+      "properties": {"resource": {"$ref": "#/$defs/ref"}, "payload": {"$ref": "#/$defs/refs"}}
+    },
+    "actor": {
+      "type": "object", "additionalProperties": false, "required": ["subject"],
+      "properties": {"subject": {"$ref": "#/$defs/ref"}}
+    },
+    "role": {
+      "type": "object", "additionalProperties": false, "required": ["actor"],
+      "properties": {"actor": {"$ref": "#/$defs/ref"}}
+    },
+    "policy": {
+      "type": "object", "additionalProperties": false, "required": ["actor", "roles", "resource", "action", "effect", "predicate"],
+      "properties": {"actor": {"$ref": "#/$defs/ref"}, "roles": {"$ref": "#/$defs/nonemptyRefs"}, "resource": {"$ref": "#/$defs/ref"}, "action": {"$ref": "#/$defs/ref"}, "effect": {"enum": ["ALLOW", "DENY"]}, "predicate": {"$ref": "#/$defs/expression"}}
+    },
+    "machine": {
+      "type": "object", "additionalProperties": false, "required": ["resource", "initial"],
+      "properties": {"resource": {"$ref": "#/$defs/ref"}, "initial": {"$ref": "#/$defs/ref"}}
+    },
+    "state": {
+      "type": "object", "additionalProperties": false, "required": ["machine", "terminal"],
+      "properties": {"machine": {"$ref": "#/$defs/ref"}, "terminal": {"type": "boolean"}}
+    },
+    "transition": {
+      "type": "object", "additionalProperties": false, "required": ["machine", "from", "to", "command", "actor", "guard", "effects"],
+      "properties": {"machine": {"$ref": "#/$defs/ref"}, "from": {"$ref": "#/$defs/ref"}, "to": {"$ref": "#/$defs/ref"}, "command": {"$ref": "#/$defs/ref"}, "actor": {"$ref": "#/$defs/ref"}, "guard": {"$ref": "#/$defs/expression"}, "effects": {"$ref": "#/$defs/refs"}}
+    },
+    "criterion": {
+      "type": "object", "additionalProperties": false, "required": ["requirement", "scenario"],
+      "properties": {"requirement": {"$ref": "#/$defs/ref"}, "scenario": {"$ref": "#/$defs/text"}}
+    }
+  }
+}

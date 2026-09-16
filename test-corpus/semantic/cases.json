@@ -1,0 +1,1672 @@
+[
+  {
+    "name": "valid-draft",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [],
+    "expected": []
+  },
+  {
+    "name": "valid-approved-closure",
+    "base": "approved.json",
+    "mode": "compile",
+    "edits": [],
+    "expected": []
+  },
+  {
+    "name": "proposals-cannot-compile",
+    "base": "reference.json",
+    "mode": "compile",
+    "edits": [],
+    "expected": [
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "REQ-PAYMENT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "AC-PAYMENT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "DEC-MONEY"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "FACT-SYNTHETIC"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "CONSTRAINT-TENANT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "PREF-UI"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "GOAL-ENTRY"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "ASSUMPTION-ONLINE"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "ENT-TENANT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "FLD-TENANT-ID"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "ENT-MEMBER"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "FLD-MEMBER-ID"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "FLD-MEMBER-TENANT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "ENT-PAYMENT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "FLD-PAYMENT-ID"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "FLD-PAYMENT-TENANT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "FLD-AMOUNT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "PARAM-ZERO"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "INV-POSITIVE"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "CMD-RECORD"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "EVT-RECORDED"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "ACT-USER"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "ROLE-OPERATOR"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "POL-TENANT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "WF-PAYMENT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "STATE-DRAFT"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "STATE-POSTED"
+      },
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "TRANS-RECORD"
+      }
+    ]
+  },
+  {
+    "name": "unknown-version",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": null,
+        "path": [
+          "modelVersion"
+        ],
+        "value": "0.2.0"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": ""
+      }
+    ]
+  },
+  {
+    "name": "framework-leakage",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "ENT-PAYMENT",
+        "path": [
+          "data",
+          "ormTable"
+        ],
+        "value": "payment"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "ENT-PAYMENT"
+      }
+    ]
+  },
+  {
+    "name": "missing-origin",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "ENT-PAYMENT",
+        "path": [
+          "origins"
+        ],
+        "value": []
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "ENT-PAYMENT"
+      }
+    ]
+  },
+  {
+    "name": "missing-basis",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-AMOUNT",
+        "path": [
+          "basis"
+        ],
+        "value": []
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-BASIS",
+        "subject": "FLD-AMOUNT"
+      }
+    ]
+  },
+  {
+    "name": "wrong-basis-kind",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-AMOUNT",
+        "path": [
+          "basis"
+        ],
+        "value": [
+          {
+            "id": "ENT-PAYMENT",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-KIND",
+        "subject": "FLD-AMOUNT"
+      }
+    ]
+  },
+  {
+    "name": "circular-justification",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "REQ-PAYMENT",
+        "path": [
+          "basis"
+        ],
+        "value": [
+          {
+            "id": "DEC-MONEY",
+            "revision": 1
+          }
+        ]
+      },
+      {
+        "op": "set",
+        "node": "DEC-MONEY",
+        "path": [
+          "basis"
+        ],
+        "value": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-BASIS",
+        "subject": "REQ-PAYMENT"
+      },
+      {
+        "code": "ACP-BASIS",
+        "subject": "DEC-MONEY"
+      }
+    ]
+  },
+  {
+    "name": "duplicate-id",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "append",
+        "node": null,
+        "path": [
+          "nodes"
+        ],
+        "value": {
+          "id": "REQ-PAYMENT",
+          "revision": 1,
+          "kind": "Requirement",
+          "name": "REQ-PAYMENT",
+          "lifecycle": "PROPOSED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "REQ-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [],
+          "data": {
+            "statement": "Synthetic scenario: authorized users record positive payments within their tenant.",
+            "priority": "MUST",
+            "acceptance": [
+              {
+                "id": "AC-PAYMENT",
+                "revision": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-ID",
+        "subject": "REQ-PAYMENT"
+      }
+    ]
+  },
+  {
+    "name": "missing-reference",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-AMOUNT",
+        "path": [
+          "data",
+          "owner"
+        ],
+        "value": {
+          "id": "ENT-MISSING",
+          "revision": 1
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-REF",
+        "subject": "FLD-AMOUNT"
+      }
+    ]
+  },
+  {
+    "name": "stale-reference",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-AMOUNT",
+        "path": [
+          "data",
+          "owner",
+          "revision"
+        ],
+        "value": 2
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-REF",
+        "subject": "FLD-AMOUNT"
+      }
+    ]
+  },
+  {
+    "name": "wrong-owner-kind",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-AMOUNT",
+        "path": [
+          "data",
+          "owner"
+        ],
+        "value": {
+          "id": "ACT-USER",
+          "revision": 1
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-KIND",
+        "subject": "FLD-AMOUNT"
+      }
+    ]
+  },
+  {
+    "name": "currency-mismatch",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "data",
+          "type",
+          "currency"
+        ],
+        "value": "USD"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      },
+      {
+        "code": "ACP-TYPE",
+        "subject": "TRANS-RECORD"
+      }
+    ]
+  },
+  {
+    "name": "boolean-money-literal",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "data",
+          "value"
+        ],
+        "value": true
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "PARAM-ZERO"
+      }
+    ]
+  },
+  {
+    "name": "nonfinite-money-text",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "data",
+          "value"
+        ],
+        "value": "NaN"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "PARAM-ZERO"
+      }
+    ]
+  },
+  {
+    "name": "exponent-money-text",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "data",
+          "value"
+        ],
+        "value": "1e9"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "PARAM-ZERO"
+      }
+    ]
+  },
+  {
+    "name": "nonboolean-invariant",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate"
+        ],
+        "value": {
+          "tag": "parameter",
+          "ref": {
+            "id": "PARAM-ZERO",
+            "revision": 1
+          }
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      }
+    ]
+  },
+  {
+    "name": "optional-read",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-AMOUNT",
+        "path": [
+          "data",
+          "optional"
+        ],
+        "value": true
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      },
+      {
+        "code": "ACP-TYPE",
+        "subject": "TRANS-RECORD"
+      }
+    ]
+  },
+  {
+    "name": "actor-binding-mismatch",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "POL-TENANT",
+        "path": [
+          "data",
+          "predicate",
+          "right",
+          "binding"
+        ],
+        "value": "resource"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-OWNER",
+        "subject": "POL-TENANT"
+      }
+    ]
+  },
+  {
+    "name": "secret-primitive",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-AMOUNT",
+        "path": [
+          "data",
+          "classification"
+        ],
+        "value": "SECRET"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SECRET",
+        "subject": "FLD-AMOUNT"
+      }
+    ]
+  },
+  {
+    "name": "secret-handle-valid",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "data"
+        ],
+        "value": {
+          "type": {
+            "kind": "SecretReference"
+          },
+          "value": "secret:payments/key"
+        }
+      },
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate"
+        ],
+        "value": {
+          "tag": "literal",
+          "type": {
+            "kind": "Boolean"
+          },
+          "value": true
+        }
+      },
+      {
+        "op": "set",
+        "node": "TRANS-RECORD",
+        "path": [
+          "data",
+          "guard"
+        ],
+        "value": {
+          "tag": "literal",
+          "type": {
+            "kind": "Boolean"
+          },
+          "value": true
+        }
+      }
+    ],
+    "expected": []
+  },
+  {
+    "name": "secret-inline-rejected",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "data"
+        ],
+        "value": {
+          "type": {
+            "kind": "SecretReference"
+          },
+          "value": "DO-NOT-ECHO-THIS"
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "PARAM-ZERO"
+      },
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      },
+      {
+        "code": "ACP-TYPE",
+        "subject": "TRANS-RECORD"
+      }
+    ]
+  },
+  {
+    "name": "terminal-outgoing",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "STATE-DRAFT",
+        "path": [
+          "data",
+          "terminal"
+        ],
+        "value": true
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-WORKFLOW",
+        "subject": "TRANS-RECORD"
+      }
+    ]
+  },
+  {
+    "name": "unreachable-state",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "TRANS-RECORD",
+        "path": [
+          "data",
+          "to"
+        ],
+        "value": {
+          "id": "STATE-DRAFT",
+          "revision": 1
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-WORKFLOW",
+        "subject": "STATE-POSTED"
+      }
+    ]
+  },
+  {
+    "name": "ambiguous-transition",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "append",
+        "node": null,
+        "path": [
+          "nodes"
+        ],
+        "value": {
+          "id": "TRANS-DUPLICATE",
+          "revision": 1,
+          "kind": "Transition",
+          "name": "TRANS-RECORD",
+          "lifecycle": "PROPOSED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "TRANS-RECORD",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "machine": {
+              "id": "WF-PAYMENT",
+              "revision": 1
+            },
+            "from": {
+              "id": "STATE-DRAFT",
+              "revision": 1
+            },
+            "to": {
+              "id": "STATE-POSTED",
+              "revision": 1
+            },
+            "command": {
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 1
+            },
+            "guard": {
+              "tag": "binary",
+              "op": "gt",
+              "left": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-AMOUNT",
+                  "revision": 1
+                }
+              },
+              "right": {
+                "tag": "parameter",
+                "ref": {
+                  "id": "PARAM-ZERO",
+                  "revision": 1
+                }
+              }
+            },
+            "effects": [
+              {
+                "id": "EVT-RECORDED",
+                "revision": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-WORKFLOW",
+        "subject": "TRANS-DUPLICATE"
+      },
+      {
+        "code": "ACP-WORKFLOW",
+        "subject": "TRANS-RECORD"
+      }
+    ]
+  },
+  {
+    "name": "missing-approval",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-AMOUNT",
+        "path": [
+          "lifecycle"
+        ],
+        "value": "APPROVED"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-APPROVAL",
+        "subject": "FLD-AMOUNT"
+      }
+    ]
+  },
+  {
+    "name": "approved-with-proposed-dependency",
+    "base": "approved.json",
+    "mode": "compile",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "lifecycle"
+        ],
+        "value": "PROPOSED"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "PARAM-ZERO"
+      }
+    ]
+  },
+  {
+    "name": "stale-approval",
+    "base": "approved.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": null,
+        "path": [
+          "approvals",
+          0,
+          "subject",
+          "revision"
+        ],
+        "value": 2
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-REF",
+        "subject": ""
+      }
+    ]
+  },
+  {
+    "name": "supersession-needs-replacement",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PREF-UI",
+        "path": [
+          "lifecycle"
+        ],
+        "value": "SUPERSEDED"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-LIFECYCLE",
+        "subject": "PREF-UI"
+      }
+    ]
+  },
+  {
+    "name": "invalid-lifecycle-evidence-shortcut",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "REQ-PAYMENT",
+        "path": [
+          "lifecycle"
+        ],
+        "value": "VERIFIED"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "REQ-PAYMENT"
+      }
+    ]
+  },
+  {
+    "name": "draft-preserves-conflict",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "append",
+        "node": null,
+        "path": [
+          "issues"
+        ],
+        "value": {
+          "id": "ISSUE-RETENTION",
+          "kind": "CONFLICT",
+          "question": "May a retained payment be deleted?",
+          "subjects": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "blocking": true,
+          "resolution": "OPEN"
+        }
+      }
+    ],
+    "expected": []
+  },
+  {
+    "name": "conflict-blocks-compilation",
+    "base": "approved.json",
+    "mode": "compile",
+    "edits": [
+      {
+        "op": "append",
+        "node": null,
+        "path": [
+          "issues"
+        ],
+        "value": {
+          "id": "ISSUE-RETENTION",
+          "kind": "CONFLICT",
+          "question": "May a retained payment be deleted?",
+          "subjects": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "blocking": true,
+          "resolution": "OPEN"
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-ISSUE",
+        "subject": "ISSUE-RETENTION"
+      }
+    ]
+  },
+  {
+    "name": "resolution-needs-approved-decision",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "append",
+        "node": null,
+        "path": [
+          "issues"
+        ],
+        "value": {
+          "id": "ISSUE-RETENTION",
+          "kind": "CONFLICT",
+          "question": "May a retained payment be deleted?",
+          "subjects": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "blocking": true,
+          "resolution": "RESOLVED",
+          "decision": {
+            "id": "DEC-MONEY",
+            "revision": 1
+          }
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-ISSUE",
+        "subject": "ISSUE-RETENTION"
+      }
+    ]
+  },
+  {
+    "name": "approved-resolution-record",
+    "base": "approved.json",
+    "mode": "compile",
+    "edits": [
+      {
+        "op": "append",
+        "node": null,
+        "path": [
+          "issues"
+        ],
+        "value": {
+          "id": "ISSUE-RETENTION",
+          "kind": "CONFLICT",
+          "question": "May a retained payment be deleted?",
+          "subjects": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "blocking": true,
+          "resolution": "RESOLVED",
+          "decision": {
+            "id": "DEC-MONEY",
+            "revision": 1
+          }
+        }
+      }
+    ],
+    "expected": []
+  },
+  {
+    "name": "unlisted-acceptance",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "append",
+        "node": null,
+        "path": [
+          "nodes"
+        ],
+        "value": {
+          "id": "AC-UNLISTED",
+          "revision": 1,
+          "kind": "AcceptanceCriterion",
+          "name": "AC-PAYMENT",
+          "lifecycle": "PROPOSED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "AC-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            },
+            "scenario": "Positive in-tenant payment succeeds; nonpositive or cross-tenant attempt is denied."
+          }
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-ACCEPTANCE",
+        "subject": "AC-UNLISTED"
+      }
+    ]
+  },
+  {
+    "name": "cross-resource-event-payload",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "EVT-RECORDED",
+        "path": [
+          "data",
+          "payload"
+        ],
+        "value": [
+          {
+            "id": "FLD-MEMBER-ID",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-OWNER",
+        "subject": "EVT-RECORDED"
+      }
+    ]
+  },
+  {
+    "name": "wrong-identity-type",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "ENT-PAYMENT",
+        "path": [
+          "data",
+          "identity"
+        ],
+        "value": [
+          {
+            "id": "FLD-AMOUNT",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "ENT-PAYMENT"
+      }
+    ]
+  },
+  {
+    "name": "duplicate-set-member",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "CMD-RECORD",
+        "path": [
+          "data",
+          "emits"
+        ],
+        "value": [
+          {
+            "id": "EVT-RECORDED",
+            "revision": 1
+          },
+          {
+            "id": "EVT-RECORDED",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "CMD-RECORD"
+      }
+    ]
+  },
+  {
+    "name": "valid-typed-addition",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate",
+          "left"
+        ],
+        "value": {
+          "tag": "binary",
+          "op": "add",
+          "left": {
+            "tag": "field",
+            "binding": "resource",
+            "ref": {
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          },
+          "right": {
+            "tag": "parameter",
+            "ref": {
+              "id": "PARAM-ZERO",
+              "revision": 1
+            }
+          }
+        }
+      }
+    ],
+    "expected": []
+  },
+  {
+    "name": "id-rejects-trailing-newline",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": null,
+        "path": [
+          "applicationId"
+        ],
+        "value": "APP-INVALID\n"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": ""
+      }
+    ]
+  },
+  {
+    "name": "currency-rejects-trailing-newline",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "data",
+          "type",
+          "currency"
+        ],
+        "value": "UGX\n"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "PARAM-ZERO"
+      }
+    ]
+  },
+  {
+    "name": "malformed-id-diagnostic-is-safe",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "id"
+        ],
+        "value": 123
+      },
+      {
+        "op": "set",
+        "node": "ENT-TENANT",
+        "path": [
+          "name"
+        ],
+        "value": " "
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": ""
+      },
+      {
+        "code": "ACP-SHAPE",
+        "subject": "ENT-TENANT"
+      }
+    ]
+  },
+  {
+    "name": "unsupported-kind",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "GOAL-ENTRY",
+        "path": [
+          "kind"
+        ],
+        "value": "DeploymentProfile"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "GOAL-ENTRY"
+      }
+    ]
+  },
+  {
+    "name": "null-not-absence",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "PARAM-ZERO",
+        "path": [
+          "data",
+          "value"
+        ],
+        "value": null
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "PARAM-ZERO"
+      }
+    ]
+  },
+  {
+    "name": "identifier-entity-mismatch",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "FLD-MEMBER-TENANT",
+        "path": [
+          "data",
+          "type",
+          "entity"
+        ],
+        "value": {
+          "id": "ENT-MEMBER",
+          "revision": 1
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "POL-TENANT"
+      }
+    ]
+  },
+  {
+    "name": "boolean-conjunction",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate"
+        ],
+        "value": {
+          "tag": "binary",
+          "op": "and",
+          "left": {
+            "tag": "binary",
+            "op": "gt",
+            "left": {
+              "tag": "field",
+              "binding": "resource",
+              "ref": {
+                "id": "FLD-AMOUNT",
+                "revision": 1
+              }
+            },
+            "right": {
+              "tag": "parameter",
+              "ref": {
+                "id": "PARAM-ZERO",
+                "revision": 1
+              }
+            }
+          },
+          "right": {
+            "tag": "literal",
+            "type": {
+              "kind": "Boolean"
+            },
+            "value": true
+          }
+        }
+      }
+    ],
+    "expected": []
+  },
+  {
+    "name": "numeric-conjunction-rejected",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate",
+          "op"
+        ],
+        "value": "and"
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      }
+    ]
+  },
+  {
+    "name": "boolean-literal-rejects-text",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate"
+        ],
+        "value": {
+          "tag": "literal",
+          "type": {
+            "kind": "Boolean"
+          },
+          "value": "true"
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      }
+    ]
+  },
+  {
+    "name": "string-does-not-coerce-to-money",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate",
+          "right"
+        ],
+        "value": {
+          "tag": "literal",
+          "type": {
+            "kind": "String"
+          },
+          "value": "0"
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      }
+    ]
+  },
+  {
+    "name": "initial-state-from-other-machine",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "append",
+        "node": null,
+        "path": [
+          "nodes"
+        ],
+        "value": {
+          "id": "WF-OTHER",
+          "revision": 1,
+          "kind": "StateMachine",
+          "name": "WF-PAYMENT",
+          "lifecycle": "PROPOSED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "WF-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 1
+            },
+            "initial": {
+              "id": "STATE-DRAFT",
+              "revision": 1
+            }
+          }
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-OWNER",
+        "subject": "WF-OTHER"
+      }
+    ]
+  },
+  {
+    "name": "secret-comparison-forbidden",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate"
+        ],
+        "value": {
+          "tag": "binary",
+          "op": "eq",
+          "left": {
+            "tag": "literal",
+            "type": {
+              "kind": "SecretReference"
+            },
+            "value": "secret:one"
+          },
+          "right": {
+            "tag": "literal",
+            "type": {
+              "kind": "SecretReference"
+            },
+            "value": "secret:two"
+          }
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      }
+    ]
+  },
+  {
+    "name": "integer-literal-is-not-binary-float",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate"
+        ],
+        "value": {
+          "tag": "binary",
+          "op": "gt",
+          "left": {
+            "tag": "literal",
+            "type": {
+              "kind": "Integer"
+            },
+            "value": "2"
+          },
+          "right": {
+            "tag": "literal",
+            "type": {
+              "kind": "Integer"
+            },
+            "value": "1"
+          }
+        }
+      }
+    ],
+    "expected": []
+  },
+  {
+    "name": "integer-literal-no-fraction",
+    "base": "reference.json",
+    "mode": "draft",
+    "edits": [
+      {
+        "op": "set",
+        "node": "INV-POSITIVE",
+        "path": [
+          "data",
+          "predicate"
+        ],
+        "value": {
+          "tag": "binary",
+          "op": "gt",
+          "left": {
+            "tag": "literal",
+            "type": {
+              "kind": "Integer"
+            },
+            "value": "2.5"
+          },
+          "right": {
+            "tag": "literal",
+            "type": {
+              "kind": "Integer"
+            },
+            "value": "1"
+          }
+        }
+      }
+    ],
+    "expected": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "INV-POSITIVE"
+      }
+    ]
+  }
+]

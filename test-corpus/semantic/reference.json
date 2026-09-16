@@ -1,0 +1,949 @@
+{
+  "modelVersion": "0.1.0",
+  "applicationId": "APP-FIXTURE",
+  "snapshotId": "SNAP-DRAFT",
+  "nodes": [
+    {
+      "id": "REQ-PAYMENT",
+      "revision": 1,
+      "kind": "Requirement",
+      "name": "REQ-PAYMENT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "REQ-PAYMENT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [],
+      "data": {
+        "statement": "Synthetic scenario: authorized users record positive payments within their tenant.",
+        "priority": "MUST",
+        "acceptance": [
+          {
+            "id": "AC-PAYMENT",
+            "revision": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "AC-PAYMENT",
+      "revision": 1,
+      "kind": "AcceptanceCriterion",
+      "name": "AC-PAYMENT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "AC-PAYMENT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "requirement": {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        },
+        "scenario": "Positive in-tenant payment succeeds; nonpositive or cross-tenant attempt is denied."
+      }
+    },
+    {
+      "id": "DEC-MONEY",
+      "revision": 1,
+      "kind": "Decision",
+      "name": "DEC-MONEY",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "DEC-MONEY",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [],
+      "data": {
+        "statement": "This fixture uses exact money values.",
+        "strength": "LOCKED",
+        "rationale": "Exercise semantic currency types without choosing a database.",
+        "alternatives": [
+          "Primitive untyped amount"
+        ]
+      }
+    },
+    {
+      "id": "FACT-SYNTHETIC",
+      "revision": 1,
+      "kind": "Fact",
+      "name": "FACT-SYNTHETIC",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "FACT-SYNTHETIC",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [],
+      "data": {
+        "statement": "All fixture actors and data are synthetic.",
+        "evidence": "fixture:declaration"
+      }
+    },
+    {
+      "id": "CONSTRAINT-TENANT",
+      "revision": 1,
+      "kind": "Constraint",
+      "name": "CONSTRAINT-TENANT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "CONSTRAINT-TENANT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [],
+      "data": {
+        "statement": "Payment authorization is tenant scoped.",
+        "subjects": [
+          {
+            "id": "POL-TENANT",
+            "revision": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PREF-UI",
+      "revision": 1,
+      "kind": "Preference",
+      "name": "PREF-UI",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "PREF-UI",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [],
+      "data": {
+        "statement": "Prefer fewer payment-entry steps.",
+        "rationale": "Reduce repeated input."
+      }
+    },
+    {
+      "id": "GOAL-ENTRY",
+      "revision": 1,
+      "kind": "Goal",
+      "name": "GOAL-ENTRY",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "GOAL-ENTRY",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [],
+      "data": {
+        "statement": "Reduce payment entry effort.",
+        "measure": "Median user actions per completed entry."
+      }
+    },
+    {
+      "id": "ASSUMPTION-ONLINE",
+      "revision": 1,
+      "kind": "Assumption",
+      "name": "ASSUMPTION-ONLINE",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "ASSUMPTION-ONLINE",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [],
+      "data": {
+        "statement": "Operators have connectivity.",
+        "reviewTrigger": "Before selecting an offline workflow."
+      }
+    },
+    {
+      "id": "ENT-TENANT",
+      "revision": 1,
+      "kind": "Entity",
+      "name": "ENT-TENANT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "ENT-TENANT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "identity": [
+          {
+            "id": "FLD-TENANT-ID",
+            "revision": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "FLD-TENANT-ID",
+      "revision": 1,
+      "kind": "Field",
+      "name": "FLD-TENANT-ID",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "FLD-TENANT-ID",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "owner": {
+          "id": "ENT-TENANT",
+          "revision": 1
+        },
+        "type": {
+          "kind": "Identifier",
+          "entity": {
+            "id": "ENT-TENANT",
+            "revision": 1
+          }
+        },
+        "optional": false,
+        "classification": "INTERNAL"
+      }
+    },
+    {
+      "id": "ENT-MEMBER",
+      "revision": 1,
+      "kind": "Entity",
+      "name": "ENT-MEMBER",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "ENT-MEMBER",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "identity": [
+          {
+            "id": "FLD-MEMBER-ID",
+            "revision": 1
+          }
+        ],
+        "tenantField": {
+          "id": "FLD-MEMBER-TENANT",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "id": "FLD-MEMBER-ID",
+      "revision": 1,
+      "kind": "Field",
+      "name": "FLD-MEMBER-ID",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "FLD-MEMBER-ID",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "owner": {
+          "id": "ENT-MEMBER",
+          "revision": 1
+        },
+        "type": {
+          "kind": "Identifier",
+          "entity": {
+            "id": "ENT-MEMBER",
+            "revision": 1
+          }
+        },
+        "optional": false,
+        "classification": "INTERNAL"
+      }
+    },
+    {
+      "id": "FLD-MEMBER-TENANT",
+      "revision": 1,
+      "kind": "Field",
+      "name": "FLD-MEMBER-TENANT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "FLD-MEMBER-TENANT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "owner": {
+          "id": "ENT-MEMBER",
+          "revision": 1
+        },
+        "type": {
+          "kind": "Identifier",
+          "entity": {
+            "id": "ENT-TENANT",
+            "revision": 1
+          }
+        },
+        "optional": false,
+        "classification": "INTERNAL"
+      }
+    },
+    {
+      "id": "ENT-PAYMENT",
+      "revision": 1,
+      "kind": "Entity",
+      "name": "ENT-PAYMENT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "ENT-PAYMENT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "identity": [
+          {
+            "id": "FLD-PAYMENT-ID",
+            "revision": 1
+          }
+        ],
+        "tenantField": {
+          "id": "FLD-PAYMENT-TENANT",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "id": "FLD-PAYMENT-ID",
+      "revision": 1,
+      "kind": "Field",
+      "name": "FLD-PAYMENT-ID",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "FLD-PAYMENT-ID",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "owner": {
+          "id": "ENT-PAYMENT",
+          "revision": 1
+        },
+        "type": {
+          "kind": "Identifier",
+          "entity": {
+            "id": "ENT-PAYMENT",
+            "revision": 1
+          }
+        },
+        "optional": false,
+        "classification": "INTERNAL"
+      }
+    },
+    {
+      "id": "FLD-PAYMENT-TENANT",
+      "revision": 1,
+      "kind": "Field",
+      "name": "FLD-PAYMENT-TENANT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "FLD-PAYMENT-TENANT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "owner": {
+          "id": "ENT-PAYMENT",
+          "revision": 1
+        },
+        "type": {
+          "kind": "Identifier",
+          "entity": {
+            "id": "ENT-TENANT",
+            "revision": 1
+          }
+        },
+        "optional": false,
+        "classification": "INTERNAL"
+      }
+    },
+    {
+      "id": "FLD-AMOUNT",
+      "revision": 1,
+      "kind": "Field",
+      "name": "FLD-AMOUNT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "FLD-AMOUNT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "owner": {
+          "id": "ENT-PAYMENT",
+          "revision": 1
+        },
+        "type": {
+          "kind": "Money",
+          "currency": "UGX"
+        },
+        "optional": false,
+        "classification": "SENSITIVE"
+      }
+    },
+    {
+      "id": "PARAM-ZERO",
+      "revision": 1,
+      "kind": "Parameter",
+      "name": "PARAM-ZERO",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "PARAM-ZERO",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "type": {
+          "kind": "Money",
+          "currency": "UGX"
+        },
+        "value": "0"
+      }
+    },
+    {
+      "id": "INV-POSITIVE",
+      "revision": 1,
+      "kind": "Invariant",
+      "name": "INV-POSITIVE",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "INV-POSITIVE",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "resource": {
+          "id": "ENT-PAYMENT",
+          "revision": 1
+        },
+        "predicate": {
+          "tag": "binary",
+          "op": "gt",
+          "left": {
+            "tag": "field",
+            "binding": "resource",
+            "ref": {
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          },
+          "right": {
+            "tag": "parameter",
+            "ref": {
+              "id": "PARAM-ZERO",
+              "revision": 1
+            }
+          }
+        },
+        "enforcement": [
+          "WRITE",
+          "TRANSITION"
+        ]
+      }
+    },
+    {
+      "id": "CMD-RECORD",
+      "revision": 1,
+      "kind": "Command",
+      "name": "CMD-RECORD",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "CMD-RECORD",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "resource": {
+          "id": "ENT-PAYMENT",
+          "revision": 1
+        },
+        "invariants": [
+          {
+            "id": "INV-POSITIVE",
+            "revision": 1
+          }
+        ],
+        "emits": [
+          {
+            "id": "EVT-RECORDED",
+            "revision": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "EVT-RECORDED",
+      "revision": 1,
+      "kind": "Event",
+      "name": "EVT-RECORDED",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "EVT-RECORDED",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "resource": {
+          "id": "ENT-PAYMENT",
+          "revision": 1
+        },
+        "payload": [
+          {
+            "id": "FLD-AMOUNT",
+            "revision": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "ACT-USER",
+      "revision": 1,
+      "kind": "Actor",
+      "name": "ACT-USER",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "ACT-USER",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "subject": {
+          "id": "ENT-MEMBER",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "id": "ROLE-OPERATOR",
+      "revision": 1,
+      "kind": "Role",
+      "name": "ROLE-OPERATOR",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "ROLE-OPERATOR",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "actor": {
+          "id": "ACT-USER",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "id": "POL-TENANT",
+      "revision": 1,
+      "kind": "Policy",
+      "name": "POL-TENANT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "POL-TENANT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "actor": {
+          "id": "ACT-USER",
+          "revision": 1
+        },
+        "roles": [
+          {
+            "id": "ROLE-OPERATOR",
+            "revision": 1
+          }
+        ],
+        "resource": {
+          "id": "ENT-PAYMENT",
+          "revision": 1
+        },
+        "action": {
+          "id": "CMD-RECORD",
+          "revision": 1
+        },
+        "effect": "ALLOW",
+        "predicate": {
+          "tag": "binary",
+          "op": "eq",
+          "left": {
+            "tag": "field",
+            "binding": "resource",
+            "ref": {
+              "id": "FLD-PAYMENT-TENANT",
+              "revision": 1
+            }
+          },
+          "right": {
+            "tag": "field",
+            "binding": "actor",
+            "ref": {
+              "id": "FLD-MEMBER-TENANT",
+              "revision": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "WF-PAYMENT",
+      "revision": 1,
+      "kind": "StateMachine",
+      "name": "WF-PAYMENT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "WF-PAYMENT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "resource": {
+          "id": "ENT-PAYMENT",
+          "revision": 1
+        },
+        "initial": {
+          "id": "STATE-DRAFT",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "id": "STATE-DRAFT",
+      "revision": 1,
+      "kind": "State",
+      "name": "STATE-DRAFT",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "STATE-DRAFT",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "machine": {
+          "id": "WF-PAYMENT",
+          "revision": 1
+        },
+        "terminal": false
+      }
+    },
+    {
+      "id": "STATE-POSTED",
+      "revision": 1,
+      "kind": "State",
+      "name": "STATE-POSTED",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "STATE-POSTED",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "machine": {
+          "id": "WF-PAYMENT",
+          "revision": 1
+        },
+        "terminal": true
+      }
+    },
+    {
+      "id": "TRANS-RECORD",
+      "revision": 1,
+      "kind": "Transition",
+      "name": "TRANS-RECORD",
+      "lifecycle": "PROPOSED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:synthetic",
+          "locator": "TRANS-RECORD",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "machine": {
+          "id": "WF-PAYMENT",
+          "revision": 1
+        },
+        "from": {
+          "id": "STATE-DRAFT",
+          "revision": 1
+        },
+        "to": {
+          "id": "STATE-POSTED",
+          "revision": 1
+        },
+        "command": {
+          "id": "CMD-RECORD",
+          "revision": 1
+        },
+        "actor": {
+          "id": "ACT-USER",
+          "revision": 1
+        },
+        "guard": {
+          "tag": "binary",
+          "op": "gt",
+          "left": {
+            "tag": "field",
+            "binding": "resource",
+            "ref": {
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          },
+          "right": {
+            "tag": "parameter",
+            "ref": {
+              "id": "PARAM-ZERO",
+              "revision": 1
+            }
+          }
+        },
+        "effects": [
+          {
+            "id": "EVT-RECORDED",
+            "revision": 1
+          }
+        ]
+      }
+    }
+  ],
+  "approvals": [],
+  "issues": []
+}
