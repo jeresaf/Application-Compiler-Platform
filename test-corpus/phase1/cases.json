@@ -1,0 +1,2697 @@
+[
+  {
+    "name": "closed-shape-ValueObject",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ValueObject"
+    ],
+    "edits": [
+      {
+        "node": "VO-TITLE",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "VO-TITLE"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Relation",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Relation"
+    ],
+    "edits": [
+      {
+        "node": "REL-CASE-DOCUMENT",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "REL-CASE-DOCUMENT"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Aggregate",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Aggregate"
+    ],
+    "edits": [
+      {
+        "node": "AGG-ORG",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "AGG-ORG"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-TypeDefinition",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "TypeDefinition"
+    ],
+    "edits": [
+      {
+        "node": "TYPE-CASE-CODE",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "TYPE-CASE-CODE"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-AuthenticationModel",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "AuthenticationModel"
+    ],
+    "edits": [
+      {
+        "node": "AUTH-ACT-REVIEWER",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "AUTH-ACT-REVIEWER"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Permission",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Permission"
+    ],
+    "edits": [
+      {
+        "node": "PERM-CMD-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "PERM-CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Scope",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Scope"
+    ],
+    "edits": [
+      {
+        "node": "SCOPE-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "SCOPE-CASE"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-RoleAssignment",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "RoleAssignment"
+    ],
+    "edits": [
+      {
+        "node": "ASSIGN-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "ASSIGN-CASE"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-PolicySet",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "PolicySet"
+    ],
+    "edits": [
+      {
+        "node": "POLSET-CMD-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "POLSET-CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-DataClassification",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "DataClassification"
+    ],
+    "edits": [
+      {
+        "node": "CLASS-PUBLIC",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "CLASS-PUBLIC"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-SessionPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "SessionPolicy"
+    ],
+    "edits": [
+      {
+        "node": "SESSION-ACT-REVIEWER",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "SESSION-ACT-REVIEWER"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-RatePolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "RatePolicy"
+    ],
+    "edits": [
+      {
+        "node": "RATE-CMD-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "RATE-CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Retention",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Retention"
+    ],
+    "edits": [
+      {
+        "node": "RETENTION-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "RETENTION-CASE"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-DeletionPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "DeletionPolicy"
+    ],
+    "edits": [
+      {
+        "node": "DELETE-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "DELETE-CASE"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-LegalHold",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "LegalHold"
+    ],
+    "edits": [
+      {
+        "node": "HOLD-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "HOLD-CASE"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-DataLifecycle",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "DataLifecycle"
+    ],
+    "edits": [
+      {
+        "node": "LIFECYCLE-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "LIFECYCLE-CASE"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Service",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Service"
+    ],
+    "edits": [
+      {
+        "node": "SERVICE-TASKS",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "SERVICE-TASKS"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Query",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Query"
+    ],
+    "edits": [
+      {
+        "node": "QUERY-TASKS",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "QUERY-TASKS"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-UseCase",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "UseCase"
+    ],
+    "edits": [
+      {
+        "node": "UC-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "UC-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-ExecutionStep",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ExecutionStep"
+    ],
+    "edits": [
+      {
+        "node": "STEP-CMD-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "STEP-CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Transaction",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Transaction"
+    ],
+    "edits": [
+      {
+        "node": "TX-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "TX-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Failure",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Failure"
+    ],
+    "edits": [
+      {
+        "node": "FAIL-TRANSIENT",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "FAIL-TRANSIENT"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-RetryPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "RetryPolicy"
+    ],
+    "edits": [
+      {
+        "node": "RETRY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "RETRY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-IdempotencyPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "IdempotencyPolicy"
+    ],
+    "edits": [
+      {
+        "node": "IDEM-OPERATION",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "IDEM-OPERATION"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-DeliveryPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "DeliveryPolicy"
+    ],
+    "edits": [
+      {
+        "node": "DELIVERY-EVT-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "DELIVERY-EVT-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Schedule",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Schedule"
+    ],
+    "edits": [
+      {
+        "node": "SCHEDULE-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "SCHEDULE-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Job",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Job"
+    ],
+    "edits": [
+      {
+        "node": "JOB-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "JOB-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Screen",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Screen"
+    ],
+    "edits": [
+      {
+        "node": "SCREEN-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "SCREEN-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Form",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Form"
+    ],
+    "edits": [
+      {
+        "node": "FORM-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "FORM-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-InputControl",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "InputControl"
+    ],
+    "edits": [
+      {
+        "node": "CONTROL-TEXT",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "CONTROL-TEXT"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Action",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Action"
+    ],
+    "edits": [
+      {
+        "node": "ACTION-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "ACTION-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Wizard",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Wizard"
+    ],
+    "edits": [
+      {
+        "node": "WIZARD-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "WIZARD-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-WizardStep",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "WizardStep"
+    ],
+    "edits": [
+      {
+        "node": "WSTEP-INPUT",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "WSTEP-INPUT"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Table",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Table"
+    ],
+    "edits": [
+      {
+        "node": "TABLE-TASKS",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "TABLE-TASKS"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Search",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Search"
+    ],
+    "edits": [
+      {
+        "node": "SEARCH-TASKS",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "SEARCH-TASKS"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Filter",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Filter"
+    ],
+    "edits": [
+      {
+        "node": "FILTER-TEXT",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "FILTER-TEXT"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-ViewState",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ViewState"
+    ],
+    "edits": [
+      {
+        "node": "VIEW-EMPTY",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "VIEW-EMPTY"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-PermissionBoundary",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "PermissionBoundary"
+    ],
+    "edits": [
+      {
+        "node": "BOUNDARY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "BOUNDARY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-ResponsivePolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ResponsivePolicy"
+    ],
+    "edits": [
+      {
+        "node": "RESPONSIVE-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "RESPONSIVE-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-AccessibilityRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "AccessibilityRequirement"
+    ],
+    "edits": [
+      {
+        "node": "A11Y-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "A11Y-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Applicability",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Applicability"
+    ],
+    "edits": [
+      {
+        "node": "APPLIES-ALL",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "APPLIES-ALL"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-EvidenceRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "EvidenceRequirement"
+    ],
+    "edits": [
+      {
+        "node": "EVID-A11Y",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "EVID-A11Y"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-TestRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "TestRequirement"
+    ],
+    "edits": [
+      {
+        "node": "TEST-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "TEST-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-PerformanceRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "PerformanceRequirement"
+    ],
+    "edits": [
+      {
+        "node": "PERF-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "PERF-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-ReliabilityRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ReliabilityRequirement"
+    ],
+    "edits": [
+      {
+        "node": "RELIABILITY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "RELIABILITY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-CompatibilityRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "CompatibilityRequirement"
+    ],
+    "edits": [
+      {
+        "node": "COMPATIBILITY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "COMPATIBILITY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-ObservabilityRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ObservabilityRequirement"
+    ],
+    "edits": [
+      {
+        "node": "OBSERVE-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "OBSERVE-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Backup",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Backup"
+    ],
+    "edits": [
+      {
+        "node": "BACKUP-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "BACKUP-TASK"
+      }
+    ]
+  },
+  {
+    "name": "closed-shape-Recovery",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Recovery"
+    ],
+    "edits": [
+      {
+        "node": "RECOVERY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "frameworkImplementation"
+        ],
+        "value": "forbidden"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "RECOVERY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-ValueObject",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ValueObject"
+    ],
+    "edits": [
+      {
+        "node": "FLD-TITLE",
+        "op": "set",
+        "path": [
+          "data",
+          "type"
+        ],
+        "value": {
+          "kind": "Value",
+          "definition": {
+            "id": "VO-TITLE",
+            "revision": 1
+          }
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-DOMAIN",
+        "subject": "VO-TITLE"
+      }
+    ]
+  },
+  {
+    "name": "contract-Relation",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Relation"
+    ],
+    "edits": [
+      {
+        "node": "REL-CASE-DOCUMENT",
+        "op": "set",
+        "path": [
+          "data",
+          "targetCardinality"
+        ],
+        "value": {
+          "min": 2,
+          "max": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-CARDINALITY",
+        "subject": "REL-CASE-DOCUMENT"
+      }
+    ]
+  },
+  {
+    "name": "contract-Aggregate",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Aggregate"
+    ],
+    "edits": [
+      {
+        "node": "AGG-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "root"
+        ],
+        "value": {
+          "id": "USER",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-AGGREGATE",
+        "subject": "AGG-CASE"
+      }
+    ]
+  },
+  {
+    "name": "contract-TypeDefinition",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "TypeDefinition"
+    ],
+    "edits": [
+      {
+        "node": "TYPE-CASE-CODE",
+        "op": "set",
+        "path": [
+          "data",
+          "refinement"
+        ],
+        "value": {
+          "kind": "LENGTH",
+          "min": 10,
+          "max": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "TYPE-CASE-CODE"
+      }
+    ]
+  },
+  {
+    "name": "contract-AuthenticationModel",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "AuthenticationModel"
+    ],
+    "edits": [
+      {
+        "node": "AUTH-ACT-REVIEWER",
+        "op": "set",
+        "path": [
+          "data",
+          "mechanisms"
+        ],
+        "value": [
+          "KNOWLEDGE"
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SECURITY",
+        "subject": "AUTH-ACT-REVIEWER"
+      }
+    ]
+  },
+  {
+    "name": "contract-Permission",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Permission"
+    ],
+    "edits": [
+      {
+        "node": "PERM-CMD-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "resource"
+        ],
+        "value": {
+          "id": "USER",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SECURITY",
+        "subject": "PERM-CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "contract-Scope",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Scope"
+    ],
+    "edits": [
+      {
+        "node": "SCOPE-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "mode"
+        ],
+        "value": "GLOBAL"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-TENANT",
+        "subject": "SCOPE-CASE"
+      }
+    ]
+  },
+  {
+    "name": "contract-RoleAssignment",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "RoleAssignment"
+    ],
+    "edits": [
+      {
+        "node": "ASSIGN-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "actor"
+        ],
+        "value": {
+          "id": "CASE",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "ASSIGN-CASE"
+      }
+    ]
+  },
+  {
+    "name": "contract-PolicySet",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "PolicySet"
+    ],
+    "edits": [
+      {
+        "node": "POLSET-CMD-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "action"
+        ],
+        "value": {
+          "id": "CMD-ARCHIVE",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SECURITY",
+        "subject": "POLSET-CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "contract-DataClassification",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "DataClassification"
+    ],
+    "edits": [
+      {
+        "node": "CLASS-SENSITIVE",
+        "op": "set",
+        "path": [
+          "data",
+          "audit"
+        ],
+        "value": "NONE"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-PRIVACY",
+        "subject": "CLASS-SENSITIVE"
+      }
+    ]
+  },
+  {
+    "name": "contract-SessionPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "SessionPolicy"
+    ],
+    "edits": [
+      {
+        "node": "SESSION-ACT-REVIEWER",
+        "op": "set",
+        "path": [
+          "data",
+          "idleSeconds"
+        ],
+        "value": 999999
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SECURITY",
+        "subject": "SESSION-ACT-REVIEWER"
+      }
+    ]
+  },
+  {
+    "name": "contract-RatePolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "RatePolicy"
+    ],
+    "edits": [
+      {
+        "node": "RATE-CMD-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "burst"
+        ],
+        "value": 101
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SECURITY",
+        "subject": "RATE-CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "contract-Retention",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Retention"
+    ],
+    "edits": [
+      {
+        "node": "RETENTION-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "trigger"
+        ],
+        "value": "CREATED"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-PRIVACY",
+        "subject": "LIFECYCLE-CASE"
+      }
+    ]
+  },
+  {
+    "name": "contract-DeletionPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "DeletionPolicy"
+    ],
+    "edits": [
+      {
+        "node": "DELETE-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "fields"
+        ],
+        "value": [
+          {
+            "id": "CASE-ID",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-PRIVACY",
+        "subject": "DELETE-CASE"
+      }
+    ]
+  },
+  {
+    "name": "contract-LegalHold",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "LegalHold"
+    ],
+    "edits": [
+      {
+        "node": "HOLD-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "condition"
+        ],
+        "value": {
+          "tag": "literal",
+          "type": {
+            "kind": "String"
+          },
+          "value": "yes"
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "HOLD-CASE"
+      }
+    ]
+  },
+  {
+    "name": "contract-DataLifecycle",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "DataLifecycle"
+    ],
+    "edits": [
+      {
+        "node": "LIFECYCLE-CASE",
+        "op": "set",
+        "path": [
+          "data",
+          "retention"
+        ],
+        "value": {
+          "id": "CASE",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "LIFECYCLE-CASE"
+      }
+    ]
+  },
+  {
+    "name": "contract-Service",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Service"
+    ],
+    "edits": [
+      {
+        "node": "SERVICE-TASKS",
+        "op": "set",
+        "path": [
+          "data",
+          "operations"
+        ],
+        "value": [
+          {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-EXECUTION",
+        "subject": "CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "contract-Query",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Query"
+    ],
+    "edits": [
+      {
+        "node": "QUERY-TASKS",
+        "op": "set",
+        "path": [
+          "data",
+          "projection"
+        ],
+        "value": [
+          {
+            "field": {
+              "id": "OUTPUT-TASK-TEXT",
+              "revision": 1
+            },
+            "value": {
+              "tag": "literal",
+              "type": {
+                "kind": "Boolean"
+              },
+              "value": true
+            }
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-TYPE",
+        "subject": "QUERY-TASKS"
+      }
+    ]
+  },
+  {
+    "name": "contract-UseCase",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "UseCase"
+    ],
+    "edits": [
+      {
+        "node": "UC-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "input"
+        ],
+        "value": {
+          "id": "CASE",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "UC-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-ExecutionStep",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ExecutionStep"
+    ],
+    "edits": [
+      {
+        "node": "STEP-CMD-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "onFailure"
+        ],
+        "value": "COMPENSATE"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-EXECUTION",
+        "subject": "STEP-CMD-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "contract-Transaction",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Transaction"
+    ],
+    "edits": [
+      {
+        "node": "TX-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "aggregate"
+        ],
+        "value": {
+          "id": "AGG-USER",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-EXECUTION",
+        "subject": "TX-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Failure",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Failure"
+    ],
+    "edits": [
+      {
+        "node": "FAIL-BUSINESS",
+        "op": "set",
+        "path": [
+          "data",
+          "retryable"
+        ],
+        "value": true
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-RETRY",
+        "subject": "FAIL-BUSINESS"
+      }
+    ]
+  },
+  {
+    "name": "contract-RetryPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "RetryPolicy"
+    ],
+    "edits": [
+      {
+        "node": "RETRY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "failures"
+        ],
+        "value": [
+          {
+            "id": "FAIL-BUSINESS",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-RETRY",
+        "subject": "RETRY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-IdempotencyPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "IdempotencyPolicy"
+    ],
+    "edits": [
+      {
+        "node": "IDEM-OPERATION",
+        "op": "set",
+        "path": [
+          "data",
+          "keyType"
+        ],
+        "value": {
+          "kind": "Nullable",
+          "item": {
+            "kind": "String"
+          }
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-RETRY",
+        "subject": "IDEM-OPERATION"
+      }
+    ]
+  },
+  {
+    "name": "contract-DeliveryPolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "DeliveryPolicy"
+    ],
+    "edits": [
+      {
+        "node": "DELIVERY-EVT-REVIEW",
+        "op": "set",
+        "path": [
+          "data",
+          "windowSeconds"
+        ],
+        "value": 999999
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-DELIVERY",
+        "subject": "DELIVERY-EVT-REVIEW"
+      }
+    ]
+  },
+  {
+    "name": "contract-Schedule",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Schedule"
+    ],
+    "edits": [
+      {
+        "node": "SCHEDULE-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "timezone"
+        ],
+        "value": "Unrecognized/Location"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SCHEDULE",
+        "subject": "SCHEDULE-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Job",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Job"
+    ],
+    "edits": [
+      {
+        "node": "JOB-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "timeoutSeconds"
+        ],
+        "value": 86400
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-RETRY",
+        "subject": "JOB-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Screen",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Screen"
+    ],
+    "edits": [
+      {
+        "node": "SCREEN-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "accessibility"
+        ],
+        "value": {
+          "id": "TEST-TASK",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "SCREEN-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Form",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Form"
+    ],
+    "edits": [
+      {
+        "node": "FORM-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "controls"
+        ],
+        "value": [
+          {
+            "id": "FLD-TITLE",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "FORM-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-InputControl",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "InputControl"
+    ],
+    "edits": [
+      {
+        "node": "CONTROL-TEXT",
+        "op": "set",
+        "path": [
+          "data",
+          "field"
+        ],
+        "value": {
+          "id": "CASE-ID",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-UI",
+        "subject": "CONTROL-TEXT"
+      }
+    ]
+  },
+  {
+    "name": "contract-Action",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Action"
+    ],
+    "edits": [
+      {
+        "node": "ACTION-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "permissions"
+        ],
+        "value": [
+          {
+            "id": "PERM-CMD-REVIEW",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-UI",
+        "subject": "ACTION-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Wizard",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Wizard"
+    ],
+    "edits": [
+      {
+        "node": "WIZARD-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "steps"
+        ],
+        "value": [
+          {
+            "id": "FORM-TASK",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "WIZARD-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-WizardStep",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "WizardStep"
+    ],
+    "edits": [
+      {
+        "node": "WSTEP-INPUT",
+        "op": "set",
+        "path": [
+          "data",
+          "requiresPrevious"
+        ],
+        "value": true
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-UI",
+        "subject": "WIZARD-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Table",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Table"
+    ],
+    "edits": [
+      {
+        "node": "TABLE-TASKS",
+        "op": "set",
+        "path": [
+          "data",
+          "columns"
+        ],
+        "value": [
+          {
+            "id": "CASE-ID",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-UI",
+        "subject": "TABLE-TASKS"
+      }
+    ]
+  },
+  {
+    "name": "contract-Search",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Search"
+    ],
+    "edits": [
+      {
+        "node": "SEARCH-TASKS",
+        "op": "set",
+        "path": [
+          "data",
+          "filters"
+        ],
+        "value": [
+          {
+            "id": "CASE",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "SEARCH-TASKS"
+      }
+    ]
+  },
+  {
+    "name": "contract-Filter",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Filter"
+    ],
+    "edits": [
+      {
+        "node": "FILTER-TEXT",
+        "op": "set",
+        "path": [
+          "data",
+          "operator"
+        ],
+        "value": "RANGE"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-UI",
+        "subject": "FILTER-TEXT"
+      }
+    ]
+  },
+  {
+    "name": "contract-ViewState",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ViewState"
+    ],
+    "edits": [
+      {
+        "node": "VIEW-SUCCESS",
+        "op": "set",
+        "path": [
+          "data",
+          "state"
+        ],
+        "value": "ERROR"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-UI",
+        "subject": "SCREEN-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-PermissionBoundary",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "PermissionBoundary"
+    ],
+    "edits": [
+      {
+        "node": "BOUNDARY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "denied"
+        ],
+        "value": {
+          "id": "VIEW-SUCCESS",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-UI",
+        "subject": "BOUNDARY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-ResponsivePolicy",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ResponsivePolicy"
+    ],
+    "edits": [
+      {
+        "node": "RESPONSIVE-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "preserveActions"
+        ],
+        "value": false
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-SHAPE",
+        "subject": "RESPONSIVE-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-AccessibilityRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "AccessibilityRequirement"
+    ],
+    "edits": [
+      {
+        "node": "A11Y-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "evidence"
+        ],
+        "value": {
+          "id": "EVID-TEST",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-QUALITY",
+        "subject": "A11Y-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Applicability",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Applicability"
+    ],
+    "edits": [
+      {
+        "node": "APPLIES-ALL",
+        "op": "set",
+        "path": [
+          "data",
+          "condition"
+        ],
+        "value": {
+          "tag": "literal",
+          "type": {
+            "kind": "String"
+          },
+          "value": "yes"
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-APPLICABILITY",
+        "subject": "APPLIES-ALL"
+      }
+    ]
+  },
+  {
+    "name": "contract-EvidenceRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "EvidenceRequirement"
+    ],
+    "edits": [
+      {
+        "node": "EVID-PERF",
+        "op": "set",
+        "path": [
+          "data",
+          "methods"
+        ],
+        "value": [
+          "UNIT"
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-QUALITY",
+        "subject": "PERF-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-TestRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "TestRequirement"
+    ],
+    "edits": [
+      {
+        "node": "TEST-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "criterion"
+        ],
+        "value": {
+          "id": "CASE",
+          "revision": 1
+        }
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "TEST-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-PerformanceRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "PerformanceRequirement"
+    ],
+    "edits": [
+      {
+        "node": "PERF-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "threshold"
+        ],
+        "value": "NaN"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-QUALITY",
+        "subject": "PERF-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-ReliabilityRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ReliabilityRequirement"
+    ],
+    "edits": [
+      {
+        "node": "RELIABILITY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "threshold"
+        ],
+        "value": "101"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-QUALITY",
+        "subject": "RELIABILITY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-CompatibilityRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "CompatibilityRequirement"
+    ],
+    "edits": [
+      {
+        "node": "COMPATIBILITY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "currentVersion"
+        ],
+        "value": "3"
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-QUALITY",
+        "subject": "COMPATIBILITY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-ObservabilityRequirement",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ObservabilityRequirement"
+    ],
+    "edits": [
+      {
+        "node": "OBSERVE-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "subjects"
+        ],
+        "value": [
+          {
+            "id": "CASE",
+            "revision": 1
+          }
+        ]
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-KIND",
+        "subject": "OBSERVE-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Backup",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Backup"
+    ],
+    "edits": [
+      {
+        "node": "BACKUP-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "retentionSeconds"
+        ],
+        "value": 1
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-RECOVERY",
+        "subject": "BACKUP-TASK"
+      }
+    ]
+  },
+  {
+    "name": "contract-Recovery",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "Recovery"
+    ],
+    "edits": [
+      {
+        "node": "RECOVERY-TASK",
+        "op": "set",
+        "path": [
+          "data",
+          "rpoSeconds"
+        ],
+        "value": 1
+      }
+    ],
+    "requiredDiagnostics": [
+      {
+        "code": "ACP-RECOVERY",
+        "subject": "RECOVERY-TASK"
+      }
+    ]
+  },
+  {
+    "name": "valid-payment.json",
+    "base": "payment.json",
+    "mode": "draft",
+    "covers": [
+      "ValueObject",
+      "Relation",
+      "Aggregate",
+      "TypeDefinition",
+      "AuthenticationModel",
+      "Permission",
+      "Scope",
+      "RoleAssignment",
+      "PolicySet",
+      "DataClassification",
+      "SessionPolicy",
+      "RatePolicy",
+      "Retention",
+      "DeletionPolicy",
+      "LegalHold",
+      "DataLifecycle",
+      "Service",
+      "Query",
+      "UseCase",
+      "ExecutionStep",
+      "Transaction",
+      "Failure",
+      "RetryPolicy",
+      "IdempotencyPolicy",
+      "DeliveryPolicy",
+      "Schedule",
+      "Job",
+      "Screen",
+      "Form",
+      "InputControl",
+      "Action",
+      "Wizard",
+      "WizardStep",
+      "Table",
+      "Search",
+      "Filter",
+      "ViewState",
+      "PermissionBoundary",
+      "ResponsivePolicy",
+      "AccessibilityRequirement",
+      "Applicability",
+      "EvidenceRequirement",
+      "TestRequirement",
+      "PerformanceRequirement",
+      "ReliabilityRequirement",
+      "CompatibilityRequirement",
+      "ObservabilityRequirement",
+      "Backup",
+      "Recovery"
+    ],
+    "edits": [],
+    "requiredDiagnostics": []
+  },
+  {
+    "name": "valid-case-management.json",
+    "base": "case-management.json",
+    "mode": "draft",
+    "covers": [
+      "ValueObject",
+      "Relation",
+      "Aggregate",
+      "TypeDefinition",
+      "AuthenticationModel",
+      "Permission",
+      "Scope",
+      "RoleAssignment",
+      "PolicySet",
+      "DataClassification",
+      "SessionPolicy",
+      "RatePolicy",
+      "Retention",
+      "DeletionPolicy",
+      "LegalHold",
+      "DataLifecycle",
+      "Service",
+      "Query",
+      "UseCase",
+      "ExecutionStep",
+      "Transaction",
+      "Failure",
+      "RetryPolicy",
+      "IdempotencyPolicy",
+      "DeliveryPolicy",
+      "Schedule",
+      "Job",
+      "Screen",
+      "Form",
+      "InputControl",
+      "Action",
+      "Wizard",
+      "WizardStep",
+      "Table",
+      "Search",
+      "Filter",
+      "ViewState",
+      "PermissionBoundary",
+      "ResponsivePolicy",
+      "AccessibilityRequirement",
+      "Applicability",
+      "EvidenceRequirement",
+      "TestRequirement",
+      "PerformanceRequirement",
+      "ReliabilityRequirement",
+      "CompatibilityRequirement",
+      "ObservabilityRequirement",
+      "Backup",
+      "Recovery"
+    ],
+    "edits": [],
+    "requiredDiagnostics": []
+  }
+]

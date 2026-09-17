@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:acp:phase1-evidence:0.1.0",
+  "type": "object", "additionalProperties": false,
+  "required": ["version", "requirement", "obligation", "subjects", "snapshotId", "artifactDigest", "configurationDigest", "toolDigest", "profileVersion", "method", "observedAt", "result", "measurements"],
+  "properties": {
+    "version": {"const": "0.1.0"},
+    "requirement": {"$ref": "#/$defs/ref"}, "obligation": {"$ref": "#/$defs/ref"},
+    "subjects": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/ref"}},
+    "snapshotId": {"type": "string", "minLength": 1},
+    "artifactDigest": {"$ref": "#/$defs/digest"}, "configurationDigest": {"$ref": "#/$defs/digest"}, "toolDigest": {"$ref": "#/$defs/digest"},
+    "profileVersion": {"type": "string", "minLength": 1},
+    "method": {"enum": ["UNIT", "INTEGRATION", "AUTHORIZATION", "E2E", "MIGRATION", "PERFORMANCE", "AUTO_A11Y", "MANUAL_A11Y", "RELIABILITY", "COMPATIBILITY", "OBSERVABILITY", "BACKUP", "RECOVERY"]},
+    "observedAt": {"type": "string"}, "result": {"enum": ["PASS", "FAIL", "NOT_RUN"]},
+    "measurements": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["metric", "value", "samples"], "properties": {
+      "metric": {"enum": ["P95_LATENCY_MS", "MAX_MEMORY_MB", "THROUGHPUT_PER_SECOND", "AVAILABILITY_PERCENT", "FAILURE_PERCENT", "RESTORE_SECONDS", "DATA_LOSS_SECONDS"]},
+      "value": {"type": "string"}, "samples": {"type": "integer", "minimum": 1}
+    }}},
+    "workload": {"type": "object", "additionalProperties": false, "required": ["concurrency", "records", "durationSeconds", "minimumSamples"], "properties": {"concurrency": {"type": "integer", "minimum": 1}, "records": {"type": "integer", "minimum": 0}, "durationSeconds": {"type": "integer", "minimum": 1}, "minimumSamples": {"type": "integer", "minimum": 1}}},
+    "windowSeconds": {"type": "integer", "minimum": 1}
+  },
+  "$defs": {
+    "ref": {"type": "object", "additionalProperties": false, "required": ["id", "revision"], "properties": {"id": {"type": "string", "minLength": 1}, "revision": {"type": "integer", "minimum": 1}}},
+    "digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}(?![\\s\\S])"}
+  }
+}

@@ -1,0 +1,32 @@
+name: Phase 1 contracts
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14.7'
+          cache: pip
+          cache-dependency-path: tooling/requirements.txt
+      - name: Install pinned contract tooling
+        run: python -m pip install -r tooling/requirements.txt
+      - name: Check dependency consistency
+        run: python -m pip check
+      - name: Check documentation and repository contracts
+        run: python tooling/check_repository.py
+      - name: Validate schemas, both corpora, and semantic tests
+        run: python -m unittest discover -s tooling/tests -v

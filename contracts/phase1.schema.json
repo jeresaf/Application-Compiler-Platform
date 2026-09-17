@@ -1,0 +1,4930 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:acp:phase1:0.2.0",
+  "title": "ACP Phase 1 complete bounded authoring model (not Canonical IR)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "modelVersion",
+    "applicationId",
+    "snapshotId",
+    "nodes",
+    "approvals",
+    "issues"
+  ],
+  "properties": {
+    "modelVersion": {
+      "const": "0.2.0"
+    },
+    "applicationId": {
+      "$ref": "#/$defs/id"
+    },
+    "snapshotId": {
+      "$ref": "#/$defs/id"
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/approval"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/issue"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]*(?![\\s\\S])",
+      "maxLength": 128
+    },
+    "text": {
+      "type": "string",
+      "pattern": "\\S",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "revision"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "revision": {
+          "$ref": "#/$defs/revision"
+        }
+      }
+    },
+    "refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/ref"
+      }
+    },
+    "nonemptyRefs": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/refs"
+        }
+      ],
+      "minItems": 1
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "locator",
+        "actor",
+        "actorType"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/text"
+        },
+        "locator": {
+          "$ref": "#/$defs/text"
+        },
+        "actor": {
+          "$ref": "#/$defs/text"
+        },
+        "actorType": {
+          "enum": [
+            "HUMAN",
+            "AI",
+            "IMPORT"
+          ]
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "reviewer",
+        "evidence"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/ref"
+        },
+        "reviewer": {
+          "$ref": "#/$defs/text"
+        },
+        "evidence": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "question",
+        "subjects",
+        "blocking",
+        "resolution"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "AMBIGUITY",
+            "CONFLICT"
+          ]
+        },
+        "question": {
+          "$ref": "#/$defs/text"
+        },
+        "subjects": {
+          "$ref": "#/$defs/nonemptyRefs"
+        },
+        "blocking": {
+          "type": "boolean"
+        },
+        "resolution": {
+          "enum": [
+            "OPEN",
+            "RESOLVED"
+          ]
+        },
+        "decision": {
+          "$ref": "#/$defs/ref"
+        }
+      }
+    },
+    "semanticType": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "Boolean",
+                "String",
+                "Integer",
+                "Email",
+                "SecretReference",
+                "Date",
+                "Instant",
+                "LocalDateTime",
+                "Duration"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "precision",
+            "scale",
+            "rounding"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "Decimal"
+              ]
+            },
+            "precision": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 38
+            },
+            "scale": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18
+            },
+            "rounding": {
+              "enum": [
+                "REJECT",
+                "HALF_EVEN",
+                "HALF_UP",
+                "DOWN"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "currency",
+            "precision",
+            "scale",
+            "rounding"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "Money"
+              ]
+            },
+            "currency": {
+              "type": "string",
+              "pattern": "^[A-Z]{3}(?![\\s\\S])"
+            },
+            "precision": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 38
+            },
+            "scale": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18
+            },
+            "rounding": {
+              "enum": [
+                "REJECT",
+                "HALF_EVEN",
+                "HALF_UP",
+                "DOWN"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "entity"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "Identifier"
+              ]
+            },
+            "entity": {
+              "$ref": "#/$defs/ref",
+              "x-acp-targetKinds": [
+                "Entity"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "definition"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "Value"
+              ]
+            },
+            "definition": {
+              "$ref": "#/$defs/ref",
+              "x-acp-targetKinds": [
+                "ValueObject"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "definition"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "Named"
+              ]
+            },
+            "definition": {
+              "$ref": "#/$defs/ref",
+              "x-acp-targetKinds": [
+                "TypeDefinition"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "item"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "Nullable"
+              ]
+            },
+            "item": {
+              "$ref": "#/$defs/semanticType"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "element",
+            "minItems",
+            "maxItems"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "List",
+                "Set"
+              ]
+            },
+            "element": {
+              "$ref": "#/$defs/semanticType"
+            },
+            "minItems": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000
+            },
+            "maxItems": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000
+            }
+          }
+        }
+      ]
+    },
+    "literalValue": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/literalValue"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/literalValue"
+          }
+        }
+      ]
+    },
+    "expression": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tag",
+            "type",
+            "value"
+          ],
+          "properties": {
+            "tag": {
+              "const": "literal"
+            },
+            "type": {
+              "$ref": "#/$defs/semanticType"
+            },
+            "value": {
+              "$ref": "#/$defs/literalValue"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tag",
+            "ref"
+          ],
+          "properties": {
+            "tag": {
+              "const": "parameter"
+            },
+            "ref": {
+              "$ref": "#/$defs/ref"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tag",
+            "binding",
+            "ref"
+          ],
+          "properties": {
+            "tag": {
+              "const": "field"
+            },
+            "binding": {
+              "enum": [
+                "resource",
+                "actor"
+              ]
+            },
+            "ref": {
+              "$ref": "#/$defs/ref"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tag",
+            "op",
+            "left",
+            "right"
+          ],
+          "properties": {
+            "tag": {
+              "const": "binary"
+            },
+            "op": {
+              "enum": [
+                "eq",
+                "identityEq",
+                "gt",
+                "add",
+                "and"
+              ]
+            },
+            "left": {
+              "$ref": "#/$defs/expression"
+            },
+            "right": {
+              "$ref": "#/$defs/expression"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tag",
+            "binding",
+            "ref"
+          ],
+          "properties": {
+            "tag": {
+              "enum": [
+                "present"
+              ]
+            },
+            "binding": {
+              "enum": [
+                "resource",
+                "actor"
+              ]
+            },
+            "ref": {
+              "$ref": "#/$defs/ref",
+              "x-acp-targetKinds": [
+                "Field"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tag",
+            "value",
+            "fallback"
+          ],
+          "properties": {
+            "tag": {
+              "enum": [
+                "coalesce"
+              ]
+            },
+            "value": {
+              "$ref": "#/$defs/expression"
+            },
+            "fallback": {
+              "$ref": "#/$defs/expression"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tag",
+            "value"
+          ],
+          "properties": {
+            "tag": {
+              "enum": [
+                "size"
+              ]
+            },
+            "value": {
+              "$ref": "#/$defs/expression"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tag",
+            "collection",
+            "value"
+          ],
+          "properties": {
+            "tag": {
+              "enum": [
+                "contains"
+              ]
+            },
+            "collection": {
+              "$ref": "#/$defs/expression"
+            },
+            "value": {
+              "$ref": "#/$defs/expression"
+            }
+          }
+        }
+      ]
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "revision",
+        "kind",
+        "name",
+        "lifecycle",
+        "steward",
+        "origins",
+        "basis",
+        "data"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "revision": {
+          "$ref": "#/$defs/revision"
+        },
+        "kind": {
+          "enum": [
+            "Fact",
+            "Constraint",
+            "Requirement",
+            "Preference",
+            "Goal",
+            "Assumption",
+            "Decision",
+            "Entity",
+            "Field",
+            "Parameter",
+            "Invariant",
+            "Command",
+            "Event",
+            "Actor",
+            "Role",
+            "Policy",
+            "StateMachine",
+            "State",
+            "Transition",
+            "AcceptanceCriterion",
+            "ValueObject",
+            "Relation",
+            "Aggregate",
+            "TypeDefinition",
+            "AuthenticationModel",
+            "Permission",
+            "Scope",
+            "RoleAssignment",
+            "PolicySet",
+            "DataClassification",
+            "SessionPolicy",
+            "RatePolicy",
+            "Retention",
+            "DeletionPolicy",
+            "LegalHold",
+            "DataLifecycle",
+            "Service",
+            "Query",
+            "UseCase",
+            "ExecutionStep",
+            "Transaction",
+            "Failure",
+            "RetryPolicy",
+            "IdempotencyPolicy",
+            "DeliveryPolicy",
+            "Schedule",
+            "Job",
+            "Screen",
+            "Form",
+            "InputControl",
+            "Action",
+            "Wizard",
+            "WizardStep",
+            "Table",
+            "Search",
+            "Filter",
+            "ViewState",
+            "PermissionBoundary",
+            "ResponsivePolicy",
+            "AccessibilityRequirement",
+            "Applicability",
+            "EvidenceRequirement",
+            "TestRequirement",
+            "PerformanceRequirement",
+            "ReliabilityRequirement",
+            "CompatibilityRequirement",
+            "ObservabilityRequirement",
+            "Backup",
+            "Recovery"
+          ]
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "lifecycle": {
+          "enum": [
+            "CAPTURED",
+            "REFINING",
+            "PROPOSED",
+            "REVIEW_REQUIRED",
+            "APPROVED",
+            "DEPRECATED",
+            "SUPERSEDED",
+            "REJECTED"
+          ]
+        },
+        "steward": {
+          "$ref": "#/$defs/text"
+        },
+        "origins": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/origin"
+          }
+        },
+        "basis": {
+          "$ref": "#/$defs/refs"
+        },
+        "supersededBy": {
+          "$ref": "#/$defs/ref"
+        },
+        "data": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Fact"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/fact"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Constraint"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/constraint"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Requirement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/requirement"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Preference"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/preference"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Goal"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/goal"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Assumption"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/assumption"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Decision"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/decision"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Entity"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/entity"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Field"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/field"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Parameter"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/parameter"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Invariant"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/invariant"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Command"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/command"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Event"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/event"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Actor"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/actor"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Role"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/role"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Policy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/policy"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "StateMachine"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/machine"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "State"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/state"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Transition"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/transition"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "AcceptanceCriterion"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/criterion"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ValueObject"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/ValueObject"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Relation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Relation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Aggregate"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Aggregate"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "TypeDefinition"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/TypeDefinition"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "AuthenticationModel"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/AuthenticationModel"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Permission"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Permission"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Scope"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Scope"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "RoleAssignment"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/RoleAssignment"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "PolicySet"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/PolicySet"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "DataClassification"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/DataClassification"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "SessionPolicy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/SessionPolicy"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "RatePolicy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/RatePolicy"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Retention"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Retention"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "DeletionPolicy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/DeletionPolicy"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "LegalHold"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/LegalHold"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "DataLifecycle"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/DataLifecycle"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Service"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Service"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Query"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Query"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "UseCase"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/UseCase"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ExecutionStep"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/ExecutionStep"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Transaction"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Transaction"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Failure"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Failure"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "RetryPolicy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/RetryPolicy"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "IdempotencyPolicy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/IdempotencyPolicy"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "DeliveryPolicy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/DeliveryPolicy"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Schedule"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Schedule"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Job"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Job"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Screen"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Screen"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Form"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Form"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "InputControl"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/InputControl"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Action"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Action"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Wizard"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Wizard"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "WizardStep"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/WizardStep"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Table"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Table"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Search"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Search"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Filter"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Filter"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ViewState"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/ViewState"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "PermissionBoundary"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/PermissionBoundary"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ResponsivePolicy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/ResponsivePolicy"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "AccessibilityRequirement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/AccessibilityRequirement"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Applicability"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Applicability"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "EvidenceRequirement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/EvidenceRequirement"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "TestRequirement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/TestRequirement"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "PerformanceRequirement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/PerformanceRequirement"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ReliabilityRequirement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/ReliabilityRequirement"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "CompatibilityRequirement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/CompatibilityRequirement"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ObservabilityRequirement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/ObservabilityRequirement"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Backup"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Backup"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "Recovery"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/Recovery"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "evidence"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "evidence": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "subjects"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "subjects": {
+          "$ref": "#/$defs/nonemptyRefs"
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "priority",
+        "acceptance"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "priority": {
+          "enum": [
+            "MUST",
+            "SHOULD",
+            "COULD"
+          ]
+        },
+        "acceptance": {
+          "$ref": "#/$defs/nonemptyRefs"
+        }
+      }
+    },
+    "preference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "rationale"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "rationale": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "goal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "measure"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "measure": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "reviewTrigger"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "reviewTrigger": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "strength",
+        "rationale",
+        "alternatives"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "strength": {
+          "enum": [
+            "PREFERRED",
+            "REQUIRED",
+            "LOCKED"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/text"
+        },
+        "alternatives": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "tenancy"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/nonemptyRefs"
+        },
+        "tenantField": {
+          "$ref": "#/$defs/ref"
+        },
+        "tenancy": {
+          "enum": [
+            "GLOBAL",
+            "TENANT_ROOT",
+            "SCOPED"
+          ]
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "type",
+        "optional",
+        "classification",
+        "classificationRef"
+      ],
+      "properties": {
+        "owner": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity",
+            "ValueObject"
+          ]
+        },
+        "type": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "classification": {
+          "enum": [
+            "PUBLIC",
+            "INTERNAL",
+            "SENSITIVE",
+            "SECRET"
+          ]
+        },
+        "classificationRef": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "DataClassification"
+          ]
+        },
+        "exportPermission": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Permission"
+          ]
+        }
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "value": {
+          "$ref": "#/$defs/literalValue"
+        }
+      }
+    },
+    "invariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "predicate",
+        "enforcement"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "predicate": {
+          "$ref": "#/$defs/expression"
+        },
+        "enforcement": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "WRITE",
+              "TRANSITION",
+              "READ",
+              "EXPORT"
+            ]
+          }
+        }
+      }
+    },
+    "command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "invariants",
+        "emits",
+        "aggregate",
+        "writes",
+        "failures",
+        "idempotency"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "invariants": {
+          "$ref": "#/$defs/refs"
+        },
+        "emits": {
+          "$ref": "#/$defs/refs"
+        },
+        "aggregate": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Aggregate"
+          ]
+        },
+        "writes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Entity"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "failures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Failure"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "idempotency": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "IdempotencyPolicy"
+          ]
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "payload",
+        "delivery"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "payload": {
+          "$ref": "#/$defs/refs"
+        },
+        "delivery": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "DeliveryPolicy"
+          ]
+        }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "authentication"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/ref"
+        },
+        "authentication": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "AuthenticationModel"
+          ]
+        }
+      }
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "permissions"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/ref"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Permission"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "roles",
+        "resource",
+        "action",
+        "effect",
+        "predicate",
+        "permission",
+        "scope"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/ref"
+        },
+        "roles": {
+          "$ref": "#/$defs/nonemptyRefs"
+        },
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "action": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Command",
+            "Query"
+          ]
+        },
+        "effect": {
+          "enum": [
+            "ALLOW",
+            "DENY"
+          ]
+        },
+        "predicate": {
+          "$ref": "#/$defs/expression"
+        },
+        "permission": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Permission"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Scope"
+          ]
+        }
+      }
+    },
+    "machine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "initial"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "initial": {
+          "$ref": "#/$defs/ref"
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "machine",
+        "terminal"
+      ],
+      "properties": {
+        "machine": {
+          "$ref": "#/$defs/ref"
+        },
+        "terminal": {
+          "type": "boolean"
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "machine",
+        "from",
+        "to",
+        "command",
+        "actor",
+        "guard",
+        "effects"
+      ],
+      "properties": {
+        "machine": {
+          "$ref": "#/$defs/ref"
+        },
+        "from": {
+          "$ref": "#/$defs/ref"
+        },
+        "to": {
+          "$ref": "#/$defs/ref"
+        },
+        "command": {
+          "$ref": "#/$defs/ref"
+        },
+        "actor": {
+          "$ref": "#/$defs/ref"
+        },
+        "guard": {
+          "$ref": "#/$defs/expression"
+        },
+        "effects": {
+          "$ref": "#/$defs/refs"
+        }
+      }
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement",
+        "scenario"
+      ],
+      "properties": {
+        "requirement": {
+          "$ref": "#/$defs/ref"
+        },
+        "scenario": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "ValueObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "equality"
+      ],
+      "properties": {
+        "equality": {
+          "enum": [
+            "STRUCTURAL"
+          ]
+        }
+      }
+    },
+    "Relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "target",
+        "sourceCardinality",
+        "targetCardinality",
+        "ownership",
+        "onDelete"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "sourceCardinality": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "max": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "const": "UNBOUNDED"
+                }
+              ]
+            }
+          }
+        },
+        "targetCardinality": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "max": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "const": "UNBOUNDED"
+                }
+              ]
+            }
+          }
+        },
+        "ownership": {
+          "enum": [
+            "REFERENCE",
+            "COMPOSITION"
+          ]
+        },
+        "onDelete": {
+          "enum": [
+            "RESTRICT",
+            "DETACH",
+            "DELETE_OWNED"
+          ]
+        }
+      }
+    },
+    "Aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root",
+        "members",
+        "invariants",
+        "consistency"
+      ],
+      "properties": {
+        "root": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Entity"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "invariants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Invariant"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "consistency": {
+          "enum": [
+            "ATOMIC"
+          ]
+        }
+      }
+    },
+    "TypeDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base",
+        "semantics",
+        "refinement"
+      ],
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "semantics": {
+          "enum": [
+            "NOMINAL",
+            "REFINED"
+          ]
+        },
+        "refinement": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind"
+              ],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "NONE"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "min",
+                "max"
+              ],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "RANGE"
+                  ]
+                },
+                "min": {
+                  "$ref": "#/$defs/text"
+                },
+                "max": {
+                  "$ref": "#/$defs/text"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "min",
+                "max"
+              ],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "LENGTH"
+                  ]
+                },
+                "min": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "max": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "AuthenticationModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "assurance",
+        "mechanisms"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Actor"
+          ]
+        },
+        "assurance": {
+          "enum": [
+            "SINGLE_FACTOR",
+            "MULTI_FACTOR"
+          ]
+        },
+        "mechanisms": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "KNOWLEDGE",
+              "POSSESSION",
+              "EXTERNAL_ASSERTION"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "resource",
+        "action"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Actor"
+          ]
+        },
+        "resource": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "action": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Command",
+            "Query"
+          ]
+        }
+      }
+    },
+    "Scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "resource",
+        "mode"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Actor"
+          ]
+        },
+        "resource": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "GLOBAL",
+            "SAME_TENANT"
+          ]
+        },
+        "actorTenant": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Field"
+          ]
+        },
+        "resourceTenant": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Field"
+          ]
+        }
+      }
+    },
+    "RoleAssignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "actor",
+        "scope",
+        "principal"
+      ],
+      "properties": {
+        "role": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Role"
+          ]
+        },
+        "actor": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Actor"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Scope"
+          ]
+        },
+        "principal": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "PolicySet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "action",
+        "policies",
+        "combining",
+        "default"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "action": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Command",
+            "Query"
+          ]
+        },
+        "policies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Policy"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "combining": {
+          "enum": [
+            "DENY_OVERRIDES"
+          ]
+        },
+        "default": {
+          "enum": [
+            "DENY"
+          ]
+        }
+      }
+    },
+    "DataClassification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "audit",
+        "encryptAtRest",
+        "encryptInTransit",
+        "export",
+        "redaction"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "PUBLIC",
+            "INTERNAL",
+            "SENSITIVE",
+            "SECRET"
+          ]
+        },
+        "audit": {
+          "enum": [
+            "NONE",
+            "WRITE",
+            "READ_WRITE"
+          ]
+        },
+        "encryptAtRest": {
+          "type": "boolean"
+        },
+        "encryptInTransit": {
+          "type": "boolean"
+        },
+        "export": {
+          "enum": [
+            "DENY",
+            "PERMISSION_REQUIRED"
+          ]
+        },
+        "redaction": {
+          "enum": [
+            "NONE",
+            "MASK",
+            "OMIT"
+          ]
+        }
+      }
+    },
+    "SessionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authentication",
+        "idleSeconds",
+        "absoluteSeconds",
+        "reauthSeconds"
+      ],
+      "properties": {
+        "authentication": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "AuthenticationModel"
+          ]
+        },
+        "idleSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "absoluteSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "reauthSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "RatePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "permission",
+        "requests",
+        "windowSeconds",
+        "burst",
+        "partition"
+      ],
+      "properties": {
+        "permission": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Permission"
+          ]
+        },
+        "requests": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "windowSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "burst": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "partition": {
+          "enum": [
+            "ACTOR",
+            "TENANT"
+          ]
+        }
+      }
+    },
+    "Retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "trigger",
+        "minimumSeconds"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "trigger": {
+          "enum": [
+            "CREATED",
+            "CLOSED"
+          ]
+        },
+        "minimumSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "DeletionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "trigger",
+        "mode",
+        "afterSeconds",
+        "fields",
+        "holdBehavior"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "trigger": {
+          "enum": [
+            "CREATED",
+            "CLOSED"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "DELETE",
+            "ANONYMIZE",
+            "PRESERVE"
+          ]
+        },
+        "afterSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Field"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "holdBehavior": {
+          "enum": [
+            "BLOCK"
+          ]
+        }
+      }
+    },
+    "LegalHold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "condition",
+        "release"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "condition": {
+          "$ref": "#/$defs/expression"
+        },
+        "release": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Permission"
+          ]
+        }
+      }
+    },
+    "DataLifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "retention",
+        "deletion",
+        "holds"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "retention": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Retention"
+          ]
+        },
+        "deletion": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "DeletionPolicy"
+          ]
+        },
+        "holds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "LegalHold"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      }
+    },
+    "Service": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operations"
+      ],
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Command",
+              "Query"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "Query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "scope",
+        "result",
+        "projection",
+        "paginated",
+        "maximumResults"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Scope"
+          ]
+        },
+        "result": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "projection": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "field",
+              "value"
+            ],
+            "properties": {
+              "field": {
+                "$ref": "#/$defs/ref",
+                "x-acp-targetKinds": [
+                  "Field"
+                ]
+              },
+              "value": {
+                "$ref": "#/$defs/expression"
+              }
+            }
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "paginated": {
+          "type": "boolean"
+        },
+        "maximumResults": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    },
+    "UseCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "service",
+        "steps",
+        "input",
+        "output"
+      ],
+      "properties": {
+        "service": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Service"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "ExecutionStep"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "input": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "ValueObject"
+          ]
+        },
+        "output": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "ValueObject"
+          ]
+        }
+      }
+    },
+    "ExecutionStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "operation",
+        "onFailure"
+      ],
+      "properties": {
+        "owner": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "UseCase"
+          ]
+        },
+        "operation": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Command",
+            "Query"
+          ]
+        },
+        "onFailure": {
+          "enum": [
+            "STOP",
+            "COMPENSATE"
+          ]
+        },
+        "compensation": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Command"
+          ]
+        },
+        "transaction": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Transaction"
+          ]
+        }
+      }
+    },
+    "Transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aggregate",
+        "commands",
+        "consistency",
+        "onFailure"
+      ],
+      "properties": {
+        "aggregate": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Aggregate"
+          ]
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Command"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "consistency": {
+          "enum": [
+            "ATOMIC"
+          ]
+        },
+        "onFailure": {
+          "enum": [
+            "ROLLBACK"
+          ]
+        }
+      }
+    },
+    "Failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "category",
+        "retryable"
+      ],
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/text"
+        },
+        "category": {
+          "enum": [
+            "BUSINESS",
+            "TRANSIENT",
+            "SECURITY"
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "RetryPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "failures",
+        "maxAttempts",
+        "initialSeconds",
+        "maxDelaySeconds",
+        "multiplier"
+      ],
+      "properties": {
+        "failures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Failure"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "maxAttempts": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "initialSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "maxDelaySeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 604800
+        },
+        "multiplier": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        }
+      }
+    },
+    "IdempotencyPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "keyType",
+        "windowSeconds",
+        "replay",
+        "conflict"
+      ],
+      "properties": {
+        "scope": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity"
+          ]
+        },
+        "keyType": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "windowSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "replay": {
+          "enum": [
+            "RETURN_RESULT"
+          ]
+        },
+        "conflict": {
+          "enum": [
+            "REJECT_DIFFERENT_INPUT"
+          ]
+        }
+      }
+    },
+    "DeliveryPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event",
+        "guarantee",
+        "ordering",
+        "windowSeconds"
+      ],
+      "properties": {
+        "event": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Event"
+          ]
+        },
+        "guarantee": {
+          "enum": [
+            "AT_MOST_ONCE",
+            "AT_LEAST_ONCE"
+          ]
+        },
+        "ordering": {
+          "enum": [
+            "NONE",
+            "PER_AGGREGATE"
+          ]
+        },
+        "windowSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "deduplication": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "IdempotencyPolicy"
+          ]
+        }
+      }
+    },
+    "Schedule": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "intervalSeconds"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "INTERVAL"
+              ]
+            },
+            "intervalSeconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "localTime",
+            "timezone",
+            "tzdbVersion",
+            "gap",
+            "overlap"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "LOCAL_DAILY"
+              ]
+            },
+            "localTime": {
+              "$ref": "#/$defs/text"
+            },
+            "timezone": {
+              "$ref": "#/$defs/text"
+            },
+            "tzdbVersion": {
+              "$ref": "#/$defs/text"
+            },
+            "gap": {
+              "enum": [
+                "SKIP",
+                "REJECT"
+              ]
+            },
+            "overlap": {
+              "enum": [
+                "EARLIER",
+                "LATER",
+                "REJECT"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Job": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "useCase",
+        "schedule",
+        "retry",
+        "idempotency",
+        "timeoutSeconds"
+      ],
+      "properties": {
+        "useCase": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "UseCase"
+          ]
+        },
+        "schedule": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Schedule"
+          ]
+        },
+        "retry": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "RetryPolicy"
+          ]
+        },
+        "idempotency": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "IdempotencyPolicy"
+          ]
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "Screen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task",
+        "content",
+        "actions",
+        "states",
+        "boundary",
+        "responsive",
+        "accessibility"
+      ],
+      "properties": {
+        "task": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "UseCase"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Form",
+              "Wizard",
+              "Table",
+              "Search"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Action"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "ViewState"
+            ]
+          },
+          "minItems": 4,
+          "uniqueItems": true
+        },
+        "boundary": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "PermissionBoundary"
+          ]
+        },
+        "responsive": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "ResponsivePolicy"
+          ]
+        },
+        "accessibility": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "AccessibilityRequirement"
+          ]
+        }
+      }
+    },
+    "Form": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "useCase",
+        "controls",
+        "submit"
+      ],
+      "properties": {
+        "useCase": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "UseCase"
+          ]
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "InputControl"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "submit": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Action"
+          ]
+        }
+      }
+    },
+    "InputControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "form",
+        "field",
+        "label",
+        "errorMessage",
+        "required",
+        "purpose"
+      ],
+      "properties": {
+        "form": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Form"
+          ]
+        },
+        "field": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Field"
+          ]
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "errorMessage": {
+          "$ref": "#/$defs/text"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "purpose": {
+          "enum": [
+            "TEXT",
+            "MULTILINE",
+            "DATE",
+            "CHOICE"
+          ]
+        }
+      }
+    },
+    "Action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "useCase",
+        "permissions",
+        "label",
+        "confirmation"
+      ],
+      "properties": {
+        "useCase": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "UseCase"
+          ]
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Permission"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "confirmation": {
+          "enum": [
+            "NONE",
+            "REQUIRED"
+          ]
+        }
+      }
+    },
+    "Wizard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "screen",
+        "steps"
+      ],
+      "properties": {
+        "screen": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Screen"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "WizardStep"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "WizardStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "wizard",
+        "form",
+        "requiresPrevious"
+      ],
+      "properties": {
+        "wizard": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Wizard"
+          ]
+        },
+        "form": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Form"
+          ]
+        },
+        "requiresPrevious": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "query",
+        "columns",
+        "emptyMessage"
+      ],
+      "properties": {
+        "query": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Query"
+          ]
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Field"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "emptyMessage": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "Search": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "query",
+        "filters",
+        "label"
+      ],
+      "properties": {
+        "query": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Query"
+          ]
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Filter"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "query",
+        "field",
+        "operator",
+        "inputType"
+      ],
+      "properties": {
+        "query": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Query"
+          ]
+        },
+        "field": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Field"
+          ]
+        },
+        "operator": {
+          "enum": [
+            "EQ",
+            "CONTAINS",
+            "RANGE"
+          ]
+        },
+        "inputType": {
+          "$ref": "#/$defs/semanticType"
+        }
+      }
+    },
+    "ViewState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "screen",
+        "state",
+        "message"
+      ],
+      "properties": {
+        "screen": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Screen"
+          ]
+        },
+        "state": {
+          "enum": [
+            "EMPTY",
+            "LOADING",
+            "ERROR",
+            "SUCCESS"
+          ]
+        },
+        "message": {
+          "$ref": "#/$defs/text"
+        },
+        "recovery": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Action"
+          ]
+        }
+      }
+    },
+    "PermissionBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "permissions",
+        "denied"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Actor"
+          ]
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Permission"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "denied": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "ViewState"
+          ]
+        }
+      }
+    },
+    "ResponsivePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "screen",
+        "modes",
+        "preserveActions",
+        "preserveReadingOrder"
+      ],
+      "properties": {
+        "screen": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Screen"
+          ]
+        },
+        "modes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "COMPACT",
+              "EXPANDED"
+            ]
+          },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "preserveActions": {
+          "const": true
+        },
+        "preserveReadingOrder": {
+          "const": true
+        }
+      }
+    },
+    "AccessibilityRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subjects",
+        "checks",
+        "method",
+        "evidence"
+      ],
+      "properties": {
+        "subjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Screen",
+              "Form",
+              "InputControl",
+              "Action"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "LABELS",
+              "KEYBOARD",
+              "FOCUS",
+              "ERROR_ANNOUNCEMENT"
+            ]
+          },
+          "minItems": 4,
+          "uniqueItems": true
+        },
+        "method": {
+          "enum": [
+            "AUTOMATED_AND_MANUAL"
+          ]
+        },
+        "evidence": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "EvidenceRequirement"
+          ]
+        }
+      }
+    },
+    "Applicability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "condition",
+        "rationale",
+        "decision"
+      ],
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/expression"
+        },
+        "rationale": {
+          "$ref": "#/$defs/text"
+        },
+        "decision": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Decision"
+          ]
+        }
+      }
+    },
+    "EvidenceRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subjects",
+        "methods",
+        "maxAgeSeconds",
+        "applicability"
+      ],
+      "properties": {
+        "subjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": []
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "UNIT",
+              "INTEGRATION",
+              "AUTHORIZATION",
+              "E2E",
+              "MIGRATION",
+              "PERFORMANCE",
+              "AUTO_A11Y",
+              "MANUAL_A11Y",
+              "RELIABILITY",
+              "COMPATIBILITY",
+              "OBSERVABILITY",
+              "BACKUP",
+              "RECOVERY"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "maxAgeSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "applicability": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Applicability"
+          ]
+        }
+      }
+    },
+    "TestRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "criterion",
+        "subjects",
+        "level",
+        "evidence"
+      ],
+      "properties": {
+        "criterion": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "AcceptanceCriterion"
+          ]
+        },
+        "subjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": []
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "level": {
+          "enum": [
+            "UNIT",
+            "INTEGRATION",
+            "AUTHORIZATION",
+            "E2E",
+            "MIGRATION"
+          ]
+        },
+        "evidence": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "EvidenceRequirement"
+          ]
+        }
+      }
+    },
+    "PerformanceRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "metric",
+        "comparison",
+        "threshold",
+        "workload",
+        "evidence"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Query",
+            "UseCase"
+          ]
+        },
+        "metric": {
+          "enum": [
+            "P95_LATENCY_MS",
+            "MAX_MEMORY_MB",
+            "THROUGHPUT_PER_SECOND"
+          ]
+        },
+        "comparison": {
+          "enum": [
+            "LTE",
+            "GTE"
+          ]
+        },
+        "threshold": {
+          "$ref": "#/$defs/text"
+        },
+        "workload": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "concurrency",
+            "records",
+            "durationSeconds",
+            "minimumSamples"
+          ],
+          "properties": {
+            "concurrency": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "records": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "durationSeconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "minimumSamples": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            }
+          }
+        },
+        "evidence": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "EvidenceRequirement"
+          ]
+        }
+      }
+    },
+    "ReliabilityRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "metric",
+        "threshold",
+        "windowSeconds",
+        "evidence"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Service",
+            "UseCase",
+            "Job"
+          ]
+        },
+        "metric": {
+          "enum": [
+            "AVAILABILITY_PERCENT",
+            "FAILURE_PERCENT"
+          ]
+        },
+        "threshold": {
+          "$ref": "#/$defs/text"
+        },
+        "windowSeconds": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 9007199254740991
+        },
+        "evidence": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "EvidenceRequirement"
+          ]
+        }
+      }
+    },
+    "CompatibilityRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "policy",
+        "supportedVersions",
+        "currentVersion",
+        "windowSeconds",
+        "evidence"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Command",
+            "Query",
+            "Event",
+            "UseCase"
+          ]
+        },
+        "policy": {
+          "enum": [
+            "BACKWARD"
+          ]
+        },
+        "supportedVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "currentVersion": {
+          "$ref": "#/$defs/text"
+        },
+        "windowSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "evidence": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "EvidenceRequirement"
+          ]
+        }
+      }
+    },
+    "ObservabilityRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subjects",
+        "signals",
+        "correlation",
+        "redaction",
+        "evidence"
+      ],
+      "properties": {
+        "subjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Command",
+              "Query",
+              "Service",
+              "Job"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "signals": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "LOG",
+              "METRIC",
+              "TRACE",
+              "AUDIT",
+              "HEALTH",
+              "READINESS"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "correlation": {
+          "enum": [
+            "REQUIRED"
+          ]
+        },
+        "redaction": {
+          "enum": [
+            "CLASSIFICATION"
+          ]
+        },
+        "evidence": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "EvidenceRequirement"
+          ]
+        }
+      }
+    },
+    "Backup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resources",
+        "intervalSeconds",
+        "retentionSeconds",
+        "encrypted",
+        "evidence"
+      ],
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Entity"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "intervalSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "retentionSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "encrypted": {
+          "const": true
+        },
+        "evidence": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "EvidenceRequirement"
+          ]
+        }
+      }
+    },
+    "Recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "backup",
+        "rpoSeconds",
+        "rtoSeconds",
+        "restoreTestIntervalSeconds",
+        "evidence"
+      ],
+      "properties": {
+        "backup": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Backup"
+          ]
+        },
+        "rpoSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "rtoSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "restoreTestIntervalSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "evidence": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "EvidenceRequirement"
+          ]
+        }
+      }
+    },
+    "Fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "evidence"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "evidence": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "Constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "subjects"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "subjects": {
+          "$ref": "#/$defs/nonemptyRefs"
+        }
+      }
+    },
+    "Requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "priority",
+        "acceptance"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "priority": {
+          "enum": [
+            "MUST",
+            "SHOULD",
+            "COULD"
+          ]
+        },
+        "acceptance": {
+          "$ref": "#/$defs/nonemptyRefs"
+        }
+      }
+    },
+    "Preference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "rationale"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "rationale": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "Goal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "measure"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "measure": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "Assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "reviewTrigger"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "reviewTrigger": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "Decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "strength",
+        "rationale",
+        "alternatives"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "strength": {
+          "enum": [
+            "PREFERRED",
+            "REQUIRED",
+            "LOCKED"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/text"
+        },
+        "alternatives": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "Entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "tenancy"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/nonemptyRefs"
+        },
+        "tenantField": {
+          "$ref": "#/$defs/ref"
+        },
+        "tenancy": {
+          "enum": [
+            "GLOBAL",
+            "TENANT_ROOT",
+            "SCOPED"
+          ]
+        }
+      }
+    },
+    "Field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "type",
+        "optional",
+        "classification",
+        "classificationRef"
+      ],
+      "properties": {
+        "owner": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Entity",
+            "ValueObject"
+          ]
+        },
+        "type": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "classification": {
+          "enum": [
+            "PUBLIC",
+            "INTERNAL",
+            "SENSITIVE",
+            "SECRET"
+          ]
+        },
+        "classificationRef": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "DataClassification"
+          ]
+        },
+        "exportPermission": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Permission"
+          ]
+        }
+      }
+    },
+    "Parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "value": {
+          "$ref": "#/$defs/literalValue"
+        }
+      }
+    },
+    "Invariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "predicate",
+        "enforcement"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "predicate": {
+          "$ref": "#/$defs/expression"
+        },
+        "enforcement": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "WRITE",
+              "TRANSITION",
+              "READ",
+              "EXPORT"
+            ]
+          }
+        }
+      }
+    },
+    "Command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "invariants",
+        "emits",
+        "aggregate",
+        "writes",
+        "failures",
+        "idempotency"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "invariants": {
+          "$ref": "#/$defs/refs"
+        },
+        "emits": {
+          "$ref": "#/$defs/refs"
+        },
+        "aggregate": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Aggregate"
+          ]
+        },
+        "writes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Entity"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "failures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Failure"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "idempotency": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "IdempotencyPolicy"
+          ]
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "payload",
+        "delivery"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "payload": {
+          "$ref": "#/$defs/refs"
+        },
+        "delivery": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "DeliveryPolicy"
+          ]
+        }
+      }
+    },
+    "Actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "authentication"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/ref"
+        },
+        "authentication": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "AuthenticationModel"
+          ]
+        }
+      }
+    },
+    "Role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "permissions"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/ref"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref",
+            "x-acp-targetKinds": [
+              "Permission"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "Policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "roles",
+        "resource",
+        "action",
+        "effect",
+        "predicate",
+        "permission",
+        "scope"
+      ],
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/ref"
+        },
+        "roles": {
+          "$ref": "#/$defs/nonemptyRefs"
+        },
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "action": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Command",
+            "Query"
+          ]
+        },
+        "effect": {
+          "enum": [
+            "ALLOW",
+            "DENY"
+          ]
+        },
+        "predicate": {
+          "$ref": "#/$defs/expression"
+        },
+        "permission": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Permission"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/ref",
+          "x-acp-targetKinds": [
+            "Scope"
+          ]
+        }
+      }
+    },
+    "StateMachine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "initial"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/ref"
+        },
+        "initial": {
+          "$ref": "#/$defs/ref"
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "machine",
+        "terminal"
+      ],
+      "properties": {
+        "machine": {
+          "$ref": "#/$defs/ref"
+        },
+        "terminal": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "machine",
+        "from",
+        "to",
+        "command",
+        "actor",
+        "guard",
+        "effects"
+      ],
+      "properties": {
+        "machine": {
+          "$ref": "#/$defs/ref"
+        },
+        "from": {
+          "$ref": "#/$defs/ref"
+        },
+        "to": {
+          "$ref": "#/$defs/ref"
+        },
+        "command": {
+          "$ref": "#/$defs/ref"
+        },
+        "actor": {
+          "$ref": "#/$defs/ref"
+        },
+        "guard": {
+          "$ref": "#/$defs/expression"
+        },
+        "effects": {
+          "$ref": "#/$defs/refs"
+        }
+      }
+    },
+    "AcceptanceCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement",
+        "scenario"
+      ],
+      "properties": {
+        "requirement": {
+          "$ref": "#/$defs/ref"
+        },
+        "scenario": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    }
+  }
+}

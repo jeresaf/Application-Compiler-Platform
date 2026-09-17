@@ -1,4 +1,6 @@
-# ACP meta-model
+# Historical ACP kernel 0.1
+
+Historical reference only. The current accepted Phase 1 model is [meta-model 0.2](metamodel.md). The original schema and financial fixtures remain regression assets; their narrower validation cannot satisfy the current Phase 1 exit contract.
 
 Status: normative Phase 1 kernel and explicit extension proposals. Version: `0.1.0`. This version is experimental, not a stable interchange promise. [Schema](../contracts/kernel.schema.json) defines closed record shapes; this document defines their meaning. [Coverage](coverage.md) identifies enforcement limits.
 

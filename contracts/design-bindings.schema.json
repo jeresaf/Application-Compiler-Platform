@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:acp:design-associations:0.1.0",
+  "type": "object", "additionalProperties": false,
+  "required": ["version", "applicationId", "snapshotId", "catalogue", "catalogueVersion", "bindings"],
+  "properties": {
+    "version": {"const": "0.1.0"},
+    "applicationId": {"type": "string", "minLength": 1},
+    "snapshotId": {"type": "string", "minLength": 1},
+    "catalogue": {"type": "string", "minLength": 1},
+    "catalogueVersion": {"type": "string", "minLength": 1},
+    "bindings": {"type": "array", "minItems": 1, "items": {
+      "type": "object", "additionalProperties": false, "required": ["subject", "component"],
+      "properties": {
+        "subject": {"type": "object", "additionalProperties": false, "required": ["id", "revision"], "properties": {"id": {"type": "string", "minLength": 1}, "revision": {"type": "integer", "minimum": 1}}},
+        "component": {"type": "string", "minLength": 1}
+      }
+    }}
+  }
+}

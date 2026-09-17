@@ -32,6 +32,22 @@ REPAIR = {
     "SECRET": "Use a symbolic SecretReference with SECRET classification.",
     "WORKFLOW": "Correct workflow topology or ambiguous triggers explicitly.",
     "ACCEPTANCE": "Make requirement and acceptance references reciprocal.",
+    "DOMAIN": "Use a bounded domain definition with explicit value semantics.",
+    "CARDINALITY": "Use consistent endpoint bounds and deletion behavior.",
+    "AGGREGATE": "Keep writes and composition inside one root-owned consistency boundary.",
+    "OWNERSHIP": "Remove cyclic or conflicting semantic ownership.",
+    "SECURITY": "Bind authentication, permissions, roles and policies consistently; missing context denies.",
+    "TENANT": "Preserve the resource and actor's mandatory tenant boundary.",
+    "PRIVACY": "Satisfy classification, retention and legal-hold obligations explicitly.",
+    "EXECUTION": "Declare consistent service, step, failure and transaction boundaries.",
+    "RETRY": "Retry only declared transient failures within the idempotency horizon.",
+    "DELIVERY": "Declare achievable delivery and deduplication windows.",
+    "SCHEDULE": "Use a supported explicit schedule with pinned timezone and DST policy.",
+    "UI": "Bind task UI to use-case inputs and query projections with complete states and permissions.",
+    "ACCESSIBILITY": "Declare and verify labels, keyboard, focus and error-announcement obligations.",
+    "QUALITY": "Bind measurable obligations to compatible methods and exact subjects.",
+    "RECOVERY": "Align backup intervals, RPO/RTO and restore evidence freshness.",
+    "APPLICABILITY": "Use an explicit Boolean applicability condition backed by a decision.",
 }
 
 
@@ -49,6 +65,19 @@ def walk(value, path=()):
         yield item, at
         if isinstance(item, dict):
             stack.extend((v, at + (k,)) for k, v in item.items())
+        elif isinstance(item, list):
+            stack.extend((v, at + (i,)) for i, v in enumerate(item))
+
+
+def semantic_walk(value, path=()):
+    """Literal value-object payloads are data, not semantic references/types."""
+    stack = [(value, path)]
+    while stack:
+        item, at = stack.pop()
+        yield item, at
+        if isinstance(item, dict):
+            literal_payload = item.get("tag") == "literal" or set(item) == {"type", "value"}
+            stack.extend((v, at + (k,)) for k, v in item.items() if not (literal_payload and k == "value"))
         elif isinstance(item, list):
             stack.extend((v, at + (i,)) for i, v in enumerate(item))
 
@@ -81,6 +110,9 @@ SCHEMA = strict_load(ROOT / "contracts/kernel.schema.json")
 Draft202012Validator.check_schema(SCHEMA)
 # No retrieval callback: only the repository's local schema is trusted.
 SHAPES = Draft202012Validator(SCHEMA, registry=Registry())
+PHASE1_SCHEMA = strict_load(ROOT / "contracts/phase1.schema.json")
+Draft202012Validator.check_schema(PHASE1_SCHEMA)
+PHASE1_SHAPES = Draft202012Validator(PHASE1_SCHEMA, registry=Registry())
 
 
 def diagnostic(code, subject, path, message, stage="semantic"):
@@ -113,8 +145,9 @@ def validate(document, mode="draft"):
         emit("INPUT", None, (), "Input exceeds the supported structural/numeric limits.", "input")
         return finish()
 
+    extended = isinstance(document, dict) and document.get("modelVersion") == "0.2.0"
     try:
-        shape_errors = list(SHAPES.iter_errors(document))
+        shape_errors = list((PHASE1_SHAPES if extended else SHAPES).iter_errors(document))
     except RecursionError:
         emit("INPUT", None, (), "Input exceeds the validator recursion budget.", "input")
         return finish()
@@ -130,6 +163,7 @@ def validate(document, mode="draft"):
         return finish()
 
     nodes = document["nodes"]
+    semantic_items = semantic_walk if extended else walk
     index = {}
     paths = {}
     for i, node in enumerate(nodes):
@@ -156,7 +190,7 @@ def validate(document, mode="draft"):
         return None
 
     # Resolve every reference before any code dereferences it.
-    for item, path in walk(document):
+    for item, path in semantic_items(document):
         if isinstance(item, dict) and set(item) == {"id", "revision"}:
             target = index.get(item["id"])
             if target is None or target["revision"] != item["revision"]:
@@ -188,6 +222,9 @@ def validate(document, mode="draft"):
         "Transition": {"machine": {"StateMachine"}, "from": {"State"}, "to": {"State"}, "command": {"Command"}, "actor": {"Actor"}, "effects": {"Event"}},
         "AcceptanceCriterion": {"requirement": {"Requirement"}},
     }
+    if extended:
+        links["Field"]["owner"] = {"Entity", "ValueObject"}
+        links["Policy"]["action"] = {"Command", "Query"}
     for node in nodes:
         for i, basis in enumerate(node["basis"]):
             expect(node, basis, {"Requirement", "Decision"}, at(node, "basis", i))
@@ -202,13 +239,25 @@ def validate(document, mode="draft"):
                     expect(node, item, kinds, at(node, "data", key, i))
             else:
                 expect(node, value, kinds, at(node, "data", key))
-        for item, path in walk(node["data"], at(node, "data")):
+        for item, path in semantic_items(node["data"], at(node, "data")):
             if not isinstance(item, dict):
                 continue
             if item.get("kind") == "Identifier":
                 expect(node, item["entity"], {"Entity"}, path + ("entity",))
             if item.get("tag") in {"field", "parameter"}:
                 expect(node, item["ref"], {"Field" if item["tag"] == "field" else "Parameter"}, path + ("ref",))
+    if extended:
+        from phase1_semantics import typed_references
+        for node in nodes:
+            defs = PHASE1_SCHEMA["$defs"]
+            shape = defs.get(node["kind"])
+            if shape:
+                typed_references(node["data"], shape, defs, expect, node, at(node, "data"))
+            for item, path in semantic_items(node["data"], at(node, "data")):
+                if isinstance(item, dict) and item.get("kind") in {"Named", "Value"}:
+                    expect(node, item["definition"], {"TypeDefinition" if item["kind"] == "Named" else "ValueObject"}, path + ("definition",))
+                if isinstance(item, dict) and item.get("tag") == "present":
+                    expect(node, item["ref"], {"Field"}, path + ("ref",))
     for i, issue in enumerate(document["issues"]):
         if "decision" in issue:
             expect(issue, issue["decision"], {"Decision"}, ("issues", i, "decision"))
@@ -303,6 +352,10 @@ def validate(document, mode="draft"):
         if target(reference)["data"][key] != expected:
             emit("OWNER", node, path, "Referenced concept belongs to a different semantic owner.")
 
+    if extended:
+        from type_semantics import Types
+        types = Types(index, emit)
+        literal, expression = types.literal, types.expression
     for node in nodes:
         kind, data = node["kind"], node["data"]
         if kind == "Parameter":
@@ -380,6 +433,9 @@ def validate(document, mode="draft"):
         for state in states:
             if state["id"] not in reached:
                 emit("WORKFLOW", state, at(state, "data", "machine"), "State is unreachable from the initial state.")
+    if extended:
+        from phase1_semantics import checks
+        checks(index, at, emit, semantic_items)
     return finish()
 
 
