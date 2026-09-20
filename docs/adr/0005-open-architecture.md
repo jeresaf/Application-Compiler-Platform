@@ -4,6 +4,8 @@ Status: PROPOSED investigation register; no option below is approved by implicat
 
 ## Meta-model extensions
 
+Resolution note, 2026-09-20: the P-01 through P-05 investigation rows below are preserved as history. Their bounded semantic questions are superseded by accepted [ADR-0006](0006-domain-semantics.md), [ADR-0007](0007-security-privacy.md), [ADR-0008](0008-execution-semantics.md), [ADR-0009](0009-task-interfaces.md) and [ADR-0010](0010-quality-operations.md), respectively (all dated 2026-09-16). Their explicit exclusions are safe deferrals, not unresolved foundational Phase 1 semantics. P-06 through P-13 remain PROPOSED. This note does not accept any production technology or rewrite the original investigations.
+
 | ID / question | Options and recommendation | Consequences / evidence / blocked work |
 | --- | --- | --- |
 | P-01 How complete is the domain/type/rule algebra? | Flat records vs explicit value objects/relations/aggregates/refinements. Recommend typed bounded records and pure expressions; explicitly define nullable, collection, numeric, temporal and identity behavior | Needs money rounding, cascade, cyclic containment, aggregate consistency, relation/cardinality, precision and type-registry vectors. Blocks full domain IR and database lowering |

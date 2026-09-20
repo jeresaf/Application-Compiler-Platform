@@ -41,7 +41,9 @@ These are logical interfaces, not a selected language API or ABI.
 
 ## Canonical and lowered envelopes
 
-Proposed stable envelope: `{irKind, schemaVersion, applicationId, snapshotDigest, inputDigests, producer, requiredFeatures, payload, provenanceMap, obligations}`. The Phase 1 kernel schema is an authoring/type experiment and does not implement this envelope. Final serialization is P-07.
+Proposed stable envelope: `{irKind, schemaVersion, applicationId, snapshotDigest, inputDigests, producer, requiredFeatures, payload, provenanceMap, obligations}`. Neither the current [Phase 1 authoring model 0.2.0](metamodel.md) nor the historical kernel 0.1 implements this envelope. Final serialization is P-07; Phase 2 has not begun.
+
+ADR-0006 through ADR-0010 define accepted bounded domain, security/privacy, execution, task UI and quality/operations semantics for a future Canonical IR. They do not choose its serialization or implement normalization. The separate design-binding sidecar associates semantic UI with catalogue handles; it is not Design IR. Evidence observations validate bindings/freshness in the harness; they are not canonical approval proofs. Exact-input digest strings in fixtures are supplied values, not a canonical hashing specification. Architecture/Design/Target realization and authenticated authority must remain separate from framework-neutral canonical meaning.
 
 - Canonical references are exact and closed; approved policy/invariant meaning is preserved.
 - Architecture IR may introduce logical APIs, persistence strategies, delivery mechanisms, topology, and enforcement locations, each justified by decisions/requirements.

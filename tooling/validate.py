@@ -19,7 +19,7 @@ INTENT = {"Fact", "Constraint", "Requirement", "Preference", "Goal", "Assumption
 ACTIVE = {"APPROVED", "DEPRECATED"}
 REPAIR = {
     "INPUT": "Supply bounded strict UTF-8 JSON without duplicate keys or nonfinite numbers.",
-    "SHAPE": "Use kernel 0.1.0 record shapes; propose unsupported semantics explicitly.",
+    "SHAPE": "Use the declared authoring-model version's record shapes; propose unsupported semantics explicitly.",
     "ID": "Give each durable concept a unique semantic ID.",
     "REF": "Include the exact referenced semantic ID and revision.",
     "KIND": "Reference a concept of the required semantic kind.",

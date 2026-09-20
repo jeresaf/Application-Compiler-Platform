@@ -1,7 +1,18 @@
-# Contract types
+# Machine-readable Phase 1 contracts
 
-`kernel.schema.json` is the closed JSON Schema 2020-12 **authoring kernel** at version `0.1.0`. It defines 20 semantic kinds, typed expressions, exact references, origins, candidate lifecycles, fixture attestations, and explicit issues.
+| Schema | Exact version | Role |
+| --- | --- | --- |
+| [phase1.schema.json](phase1.schema.json) | Authoring model 0.2.0 | Current 69-kind bounded Phase 1 model: common identity/lifecycle/basis, P-01 through P-05 semantics and closed expression/type algebra. |
+| [kernel.schema.json](kernel.schema.json) | Historical authoring kernel 0.1.0 | Frozen 20-kind regression contract; does not enforce 0.2 obligations. |
+| [design-bindings.schema.json](design-bindings.schema.json) | Sidecar 0.1.0 | Exact application/snapshot/UI subject references, versioned catalogue and component handles, independent of semantic intent. |
+| [evidence.schema.json](evidence.schema.json) | Observation artifact 0.1.0 | Exact obligation/requirement/subject references, artifact/configuration/tool/profile context, time, method, result and bounded measurements. |
 
-Shape validation is necessary but insufficient. `docs/metamodel.md` defines cross-record meaning, and `tooling/validate.py` implements the supported subset listed in `docs/coverage.md`. No schema reference is loaded from input or fetched over the network. Unknown fields/kinds/versions are rejected.
+All use JSON Schema 2020-12 as replaceable contract tooling. Sidecar version 0.1.0 is independent of the historical kernel version; current design/evidence tests bind to model 0.2.0. The [current meta-model](../docs/metamodel.md) defines cross-record meaning; the [historical specification](../docs/kernel-0.1.md) applies only to the original kernel.
 
-This is not the final Canonical IR envelope, persistence format, plugin ABI, or approval proof format. Changes require an ADR when material, a versioned contract change, corresponding positive/negative fixtures, and migration reasoning. Keep framework/runtime/vendor constructs out of these semantics.
+Shape validation alone is insufficient. [validate.py](../tooling/validate.py) selects the authoring schema by exact modelVersion, checks references and shared contracts, then invokes the corresponding semantics. [design_bindings.py](../tooling/design_bindings.py) and [evidence_semantics.py](../tooling/evidence_semantics.py) check sidecar relationships against an already validated model. No input-supplied schema is fetched. Unknown versions, kinds and properties fail closed.
+
+[phase1_contract.py](../tooling/phase1_contract.py) constructs the committed current schema from the retained kernel plus explicit typed additions; a test checks exact equality with the committed JSON. This is development tooling, not a parser, migration system or production-language choice. There is no automatic 0.1-to-0.2 migration.
+
+The [payment](../test-corpus/phase1/payment.json) and [case-management](../test-corpus/phase1/case-management.json) fixtures use the current model. The [historical corpus](../test-corpus/semantic/cases.json) remains a separate regression suite. [Coverage](../docs/coverage.md) states the enforcement limits.
+
+None of these artifacts selects Canonical IR serialization, canonical hashing, storage, target layout, plugin ABI or authenticated approval/evidence formats. Material changes require an ADR, explicit contract version reasoning and positive/negative fixtures. Framework, parser, ORM, database, cloud, MCP and production-language annotations are outside semantic records.

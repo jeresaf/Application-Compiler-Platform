@@ -1,40 +1,53 @@
 # Application Compiler Platform
 
-ACP maintains an authoritative application specification through semantic compilation, verification, and repeated production evolution.
+ACP maintains an authoritative application specification through semantic compilation, verification and repeated production evolution. The [architecture charter](ACP_CODEX_MASTER_HANDOFF.md) is authoritative.
 
 ## Current state
 
-Phase 1 contract baseline with an executable **kernel**, not a complete application model or compiler. The [architecture charter](ACP_CODEX_MASTER_HANDOFF.md) is authoritative. No production implementation language, textual frontend, target stack, storage engine, or plugin ABI has been selected.
+**Phase 1 authoring model 0.2.0** contains 69 closed semantic kinds with executable shape and semantic validation. ADR-0006 through ADR-0010 resolve the bounded P-01 through P-05 contracts. Payment and case-management reference domains exercise the same model. See the [completion report](docs/phase1-completion-report.md) for closure evidence and the review gate.
 
-Start with:
+This is **not Canonical IR or a production compiler**. No production runtime/language, parser, target stack, storage engine or plugin ABI has been selected. [ADR-0004](docs/adr/0004-technology-evaluation.md) remains PROPOSED. Phase 2 is the next gated phase and has not begun.
 
-1. [Constitution](docs/constitution.md) and [glossary](docs/glossary.md).
-2. [Meta-model](docs/metamodel.md), [IR and compiler contracts](docs/ir-design.md), and [diagnostics](docs/diagnostics.md).
-3. [Change model](docs/change-model.md), [threat model](docs/threat-model.md), and [production gates](docs/production-gates.md).
-4. [Decisions and proposals](docs/adr/README.md), [coverage](docs/coverage.md), and [roadmap](docs/roadmap.md).
+Two versions are deliberately retained:
+
+| Contract | Role |
+| --- | --- |
+| [Phase 1 model 0.2](docs/metamodel.md) / [schema](contracts/phase1.schema.json) | Current bounded authoring semantics, including domain, security/privacy, execution, task UI and quality/evidence obligations. |
+| [Historical kernel 0.1](docs/kernel-0.1.md) / [schema](contracts/kernel.schema.json) | Original 20-kind regression contract. Passing it does not satisfy current 0.2 requirements. No automatic migration is implemented. |
+
+Start with the [constitution](docs/constitution.md), [glossary](docs/glossary.md), [meta-model](docs/metamodel.md), [ADRs](docs/adr/README.md), [coverage](docs/coverage.md) and [roadmap](docs/roadmap.md). Later-stage boundary contracts remain in [IR design](docs/ir-design.md), [change model](docs/change-model.md), [threat model](docs/threat-model.md), [production gates](docs/production-gates.md) and [diagnostics](docs/diagnostics.md).
 
 ## Repository boundaries
 
 | Path | Responsibility |
 | --- | --- |
-| `docs/` | Normative contracts, explicit proposals, architectural decisions |
-| `contracts/` | Language-independent machine-readable kernel schema |
-| `test-corpus/` | Portable semantic examples and expected diagnostics |
-| `tooling/` | Replaceable contract validation harness; no production compiler dependency |
+| `docs/` | Semantic specifications, architecture decisions, safe deferrals and phase gates |
+| `contracts/` | Closed historical/current authoring schemas and independent design/evidence sidecars |
+| `test-corpus/` | Portable positive/negative cases and two synthetic reference domains |
+| `tooling/` | Replaceable validation harness and reference decision helpers; no production compiler dependency |
+| `.github/workflows/` | Phase 1 checks on Ubuntu and Windows for every push and PR |
 
-Only demonstrated boundaries have directories. Future packages must earn their own boundary through contracts and tests.
+## Run all contract checks
 
-## Run contract checks
-
-Python is a test-harness choice only; see [ADR-0003](docs/adr/0003-contract-harness.md). The current harness was verified on CPython 3.14.7; dependencies are pinned for that environment.
+CPython 3.14.7 and the pinned dependencies are test tooling only under [ADR-0003](docs/adr/0003-contract-harness.md).
 
 ```powershell
 python -m venv .venv
 .venv/Scripts/python -m pip install -r tooling/requirements.txt
+.venv/Scripts/python -m pip check
+.venv/Scripts/python tooling/check_repository.py
 .venv/Scripts/python -m unittest discover -s tooling/tests -v
-.venv/Scripts/python tooling/validate.py test-corpus/semantic/reference.json
 ```
 
-On POSIX use `.venv/bin/python`. Validation is offline after dependency installation. Exit codes: `0` kernel-valid, `1` validation errors, `2` unreadable/invalid input. `--mode compile` additionally checks approval closure; it **does not certify approval authenticity or production readiness**. The schema and corpus are portable to the eventual compiler runtime.
+On POSIX use `.venv/bin/python`. The full suite includes historical 0.1 regression tests; current 0.2 schema, payment and case-management tests; all portable negative semantic cases; design-binding tests; evidence applicability, binding, freshness and measurement tests. [Corpus documentation](test-corpus/README.md) identifies the file-based and in-test fixtures.
 
-See [coverage](docs/coverage.md) for what is executable, contractual, or still proposed. Fixture actors, requirements, and approvals are synthetic test data.
+Optional individual model checks:
+
+```powershell
+.venv/Scripts/python tooling/validate.py test-corpus/semantic/reference.json
+.venv/Scripts/python tooling/validate.py test-corpus/semantic/approved.json --mode compile
+.venv/Scripts/python tooling/validate.py test-corpus/phase1/payment.json
+.venv/Scripts/python tooling/validate.py test-corpus/phase1/case-management.json
+```
+
+Validation is offline after dependency installation. CLI exits: 0 valid for the selected authoring profile, 1 validation errors, 2 invalid/unreadable input. The legacy CLI envelope label `scope: kernel` is retained for both versions; `modelVersion` selects the contract. The `compile` profile checks necessary approval closure only: it does not normalize IR, authenticate approval or certify production readiness. Fixtures and attestations are synthetic.
