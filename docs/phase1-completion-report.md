@@ -1,5 +1,7 @@
 # Phase 1 Completion Report
 
+Historical Phase 1 closure record. Phase 2 began on 2026-09-28 after the user's continuation; current progress is in the [Phase 2 report](phase2-completion-report.md). References below to Phase 2 being unstarted describe the Phase 1 closure boundary.
+
 Date: 2026-09-20. Exact scope: **ACP bounded authoring meta-model `0.2.0`**, with historical kernel `0.1.0` regression assets and independent design-binding/evidence sidecars at `0.1.0`.
 
 **PHASE 1 = CLOSED AND GREEN. PHASE 2 = NOT STARTED.** All required local checks and both GitHub Actions matrix jobs passed for closure implementation commit `6bc7e5718e100e6a884bd1f252174618e20ab39a`; exact run/job evidence appears below. This report records that completed validation, and the documentation-only closure commit is subject to the same CI workflow.

@@ -1,6 +1,6 @@
 # IR and compiler architecture contracts
 
-Status: normative boundaries; serialization details marked proposed. Basis: charter §§2, 8–11, 15, 20–24, 27, 30, 36–37. No compiler pipeline is implemented in Phase 1.
+Status: normative stage boundaries. Basis: charter §§2, 8–11, 15, 20–24, 27, 30, 36–37. Phase 2's [canonical contract](canonical-ir.md) defines serialization and a reference harness; the production compiler pipeline remains unimplemented.
 
 ## Stages and invariants
 
@@ -41,9 +41,9 @@ These are logical interfaces, not a selected language API or ABI.
 
 ## Canonical and lowered envelopes
 
-Proposed stable envelope: `{irKind, schemaVersion, applicationId, snapshotDigest, inputDigests, producer, requiredFeatures, payload, provenanceMap, obligations}`. Neither the current [Phase 1 authoring model 0.2.0](metamodel.md) nor the historical kernel 0.1 implements this envelope. Final serialization is P-07; Phase 2 has not begun.
+The accepted Canonical Application 0.1.0 envelope is `{content, contentDigest}`, with exact versions, application ID, required features, typed nodes and retained issues inside content. [ADR-0011](adr/0011-canonical-interchange.md) separates semantic content from external approval/build attestations. The earlier combined `{irKind, schemaVersion, applicationId, snapshotDigest, inputDigests, producer, requiredFeatures, payload, provenanceMap, obligations}` proposal remains a possible later lowered/build envelope, not the accepted canonical wire shape.
 
-ADR-0006 through ADR-0010 define accepted bounded domain, security/privacy, execution, task UI and quality/operations semantics for a future Canonical IR. They do not choose its serialization or implement normalization. The separate design-binding sidecar associates semantic UI with catalogue handles; it is not Design IR. Evidence observations validate bindings/freshness in the harness; they are not canonical approval proofs. Exact-input digest strings in fixtures are supplied values, not a canonical hashing specification. Architecture/Design/Target realization and authenticated authority must remain separate from framework-neutral canonical meaning.
+ADR-0006 through ADR-0010 define the accepted bounded domain, security/privacy, execution, task UI and quality/operations semantics retained by Phase 2; ADR-0011 supplies normalization/serialization. The separate design-binding sidecar associates semantic UI with catalogue handles; it is not Design IR. Evidence observations validate bindings/freshness in the harness; they are not canonical approval proofs. Phase 1 evidence digest strings remain supplied test values, while Phase 2 computes content digests under its explicit profile. Architecture/Design/Target realization and authenticated authority remain separate from framework-neutral canonical meaning.
 
 - Canonical references are exact and closed; approved policy/invariant meaning is preserved.
 - Architecture IR may introduce logical APIs, persistence strategies, delivery mechanisms, topology, and enforcement locations, each justified by decisions/requirements.
@@ -57,13 +57,13 @@ Example: canonical `Money<UGX>` remains typed money. A target may select a preci
 
 Input manifest includes semantic snapshot, compiler/pass versions, target/profile/design versions, generator/plugin digests, dependency/toolchain locks, configuration schema and declared values, feature flags, and accepted AI candidate artifact digests. Locale, clock, filesystem order, machine paths, random state, network responses, and ambient environment are forbidden undeclared inputs.
 
-Canonical equivalence will ignore map/set ordering and insignificant serialization whitespace, but preserve ordered workflows/operands, exact semantic numbers, identities, and meaning. Byte canonicalization, Unicode policy, and digest algorithms require P-07 vectors before hashes become authoritative. Never claim ordinary sorted JSON is a complete cross-runtime canonicalization scheme.
+Canonical equivalence ignores map/set ordering and insignificant serialization whitespace under [explicit Phase 2 rules](canonical-ir.md#normal-form), while preserving ordered steps/operands, exact semantic numbers, identities and meaning. ADR-0011 and portable vectors define Unicode handling and domain-separated SHA-256. Hash validity is not approval authority. Ordinary sorted JSON without the full profile is insufficient.
 
 Deterministic artifact plans require stable relative paths, line endings, encoding, generated names, and source-map treatment. Separate nondeterministic timestamps/signatures into attestation envelopes. Cache key = all declared inputs and stage identity; cache reuse verifies output digests and trust. Failed or incomplete evidence cannot be reused as success. AI cache reuse requires matching candidate input/policy/version provenance and approval; it does not make sampling deterministic.
 
 ## Versioning and compatibility
 
-Meta-model version, application snapshot revision, concept revision, producer version, plugin version, and artifact digest are distinct. Kernel tooling accepts exactly `0.1.0`. Before 1.0, every shape/semantic change needs a versioned fixture migration, no implicit compatibility promise.
+Meta-model version, application snapshot revision, concept revision, producer version, plugin version, and artifact digest are distinct. Authoring tooling accepts exactly `0.1.0` or `0.2.0` under separate contracts; canonical tooling accepts exactly envelope `0.1.0` with semantic model `0.2.0`. Before 1.0, every shape/semantic change needs a versioned fixture migration, no implicit compatibility promise.
 
 Proposed stable policy: major for incompatible meaning/shape, minor for explicitly negotiated additive capabilities, patch for meaning-preserving corrections. Unknown required features fail closed even with matching major version. Readers must not discard unknown security/behavior fields. Schema migrations take immutable old snapshots to new candidates with ID continuity, provenance, semantic diff, migration diagnostics, and reapproval when meaning changes. Migrations cannot overwrite history or imply database migration completion. Bidirectional/downgrade guarantees must be explicitly declared, never assumed.
 

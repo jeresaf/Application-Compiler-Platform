@@ -57,11 +57,11 @@ These are accepted scope limits, not unresolved foundational P-01 through P-05 d
 
 ## Later-phase obligations and known limits
 
-P-06 through P-13 remain proposals: persistence/concurrency, canonical encoding/migration, plugin capabilities, provenance/source intelligence, build isolation, production evidence authority and AI candidate validation. ADR-0004's production language/parser experiments have not run. Python/JSON tooling does not decide them.
+P-06 and P-08 through P-13 remain proposals: persistence/concurrency, plugin capabilities, provenance/source intelligence, build isolation, production evidence authority and AI candidate validation. Phase 2 resolves bounded P-07 in [ADR-0011](adr/0011-canonical-interchange.md), with coverage in its [report](phase2-completion-report.md). ADR-0004's production language/parser experiments have not run. Test-tool languages do not decide them.
 
-Validation is bounded to 1 MiB/48 levels. Model validity does not prove guard satisfiability, dynamic cardinality, live tenant enforcement, execution safety, accessibility or measured quality. Synthetic approvals and applicability-authority inputs are not trusted credentials. No generated application, migration, deployment, production benchmark or cross-runtime canonical hash has been produced. Coverage is representative, not exhaustive branch or model checking.
+Validation is bounded to 1 MiB/48 levels. Model validity does not prove guard satisfiability, dynamic cardinality, live tenant enforcement, execution safety, accessibility or measured quality. Synthetic approvals and applicability-authority inputs are not trusted credentials. No generated application, database migration, deployment or production benchmark has been produced. Phase 2 adds candidate schema import and cross-runtime canonical byte/hash checks; neither proves a production system. Coverage is representative, not exhaustive branch or model checking.
 
-Phase 1 closes the bounded meta-model contract only. [Roadmap](roadmap.md) keeps Phase 2 behind an explicit review gate.
+Phase 1 closes the bounded meta-model contract only. The [roadmap](roadmap.md) now records Phase 2 work separately.
 
 ## Regression policy
 

@@ -1,0 +1,5874 @@
+{
+  "content": {
+    "irKind": "CanonicalApplication",
+    "schemaVersion": "0.1.0",
+    "semanticModelVersion": "0.2.0",
+    "canonicalProfile": "acp-jcs-safe-v1",
+    "applicationId": "APP-CASE-MANAGEMENT",
+    "requiredFeatures": [
+      "acp.phase1.0.2"
+    ],
+    "nodes": [
+      {
+        "id": "A11Y-TASK",
+        "revision": 1,
+        "kind": "AccessibilityRequirement",
+        "name": "A11Y-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "A11Y-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "ACTION-TASK",
+              "revision": 1
+            },
+            {
+              "id": "CONTROL-TEXT",
+              "revision": 1
+            },
+            {
+              "id": "FORM-TASK",
+              "revision": 1
+            },
+            {
+              "id": "SCREEN-TASK",
+              "revision": 1
+            }
+          ],
+          "checks": [
+            "ERROR_ANNOUNCEMENT",
+            "FOCUS",
+            "KEYBOARD",
+            "LABELS"
+          ],
+          "method": "AUTOMATED_AND_MANUAL",
+          "evidence": {
+            "id": "EVID-A11Y",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "AC-CASE",
+        "revision": 1,
+        "kind": "AcceptanceCriterion",
+        "name": "AC-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "AC-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "requirement": {
+            "id": "REQ-CASE",
+            "revision": 1
+          },
+          "scenario": "An assigned reviewer in the same organization reviews documents; an authorized approver approves; only approved cases archive."
+        }
+      },
+      {
+        "id": "ACT-REVIEWER",
+        "revision": 1,
+        "kind": "Actor",
+        "name": "ACT-REVIEWER",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ACT-REVIEWER",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subject": {
+            "id": "USER",
+            "revision": 1
+          },
+          "authentication": {
+            "id": "AUTH-ACT-REVIEWER",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "ACTION-TASK",
+        "revision": 1,
+        "kind": "Action",
+        "name": "ACTION-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ACTION-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "useCase": {
+            "id": "UC-TASK",
+            "revision": 1
+          },
+          "permissions": [
+            {
+              "id": "PERM-CMD-APPROVE",
+              "revision": 1
+            },
+            {
+              "id": "PERM-CMD-ARCHIVE",
+              "revision": 1
+            },
+            {
+              "id": "PERM-CMD-REVIEW",
+              "revision": 1
+            }
+          ],
+          "label": "Complete task",
+          "confirmation": "REQUIRED"
+        }
+      },
+      {
+        "id": "AGG-CASE",
+        "revision": 1,
+        "kind": "Aggregate",
+        "name": "AGG-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "AGG-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "root": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "members": [
+            {
+              "id": "APPROVAL",
+              "revision": 1
+            },
+            {
+              "id": "ASSIGNMENT",
+              "revision": 1
+            },
+            {
+              "id": "CASE",
+              "revision": 1
+            },
+            {
+              "id": "COMMENT",
+              "revision": 1
+            },
+            {
+              "id": "DOCUMENT",
+              "revision": 1
+            },
+            {
+              "id": "REVIEW",
+              "revision": 1
+            }
+          ],
+          "invariants": [],
+          "consistency": "ATOMIC"
+        }
+      },
+      {
+        "id": "AGG-ORG",
+        "revision": 1,
+        "kind": "Aggregate",
+        "name": "AGG-ORG",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "AGG-ORG",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "root": {
+            "id": "ORG",
+            "revision": 1
+          },
+          "members": [
+            {
+              "id": "ORG",
+              "revision": 1
+            }
+          ],
+          "invariants": [],
+          "consistency": "ATOMIC"
+        }
+      },
+      {
+        "id": "AGG-USER",
+        "revision": 1,
+        "kind": "Aggregate",
+        "name": "AGG-USER",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "AGG-USER",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "root": {
+            "id": "USER",
+            "revision": 1
+          },
+          "members": [
+            {
+              "id": "USER",
+              "revision": 1
+            }
+          ],
+          "invariants": [],
+          "consistency": "ATOMIC"
+        }
+      },
+      {
+        "id": "APPLIES-ALL",
+        "revision": 1,
+        "kind": "Applicability",
+        "name": "APPLIES-ALL",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "APPLIES-ALL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "condition": {
+            "tag": "literal",
+            "type": {
+              "kind": "Boolean"
+            },
+            "value": true
+          },
+          "rationale": "Synthetic reference obligations are applicable.",
+          "decision": {
+            "id": "DEC-APPLICABILITY",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "APPROVAL",
+        "revision": 1,
+        "kind": "Entity",
+        "name": "APPROVAL",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "APPROVAL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "identity": [
+            {
+              "id": "APPROVAL-ID",
+              "revision": 1
+            }
+          ],
+          "tenantField": {
+            "id": "APPROVAL-TENANT",
+            "revision": 1
+          },
+          "tenancy": "SCOPED"
+        }
+      },
+      {
+        "id": "APPROVAL-ID",
+        "revision": 1,
+        "kind": "Field",
+        "name": "APPROVAL-ID",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "APPROVAL-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "APPROVAL",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "APPROVAL",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "APPROVAL-TENANT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "APPROVAL-TENANT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "APPROVAL-TENANT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "APPROVAL",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ORG",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "APPROVAL-reason",
+        "revision": 1,
+        "kind": "Field",
+        "name": "APPROVAL-reason",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "APPROVAL-reason",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "APPROVAL",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "ASSIGN-CASE",
+        "revision": 1,
+        "kind": "RoleAssignment",
+        "name": "ASSIGN-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ASSIGN-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "role": {
+            "id": "ROLE-REVIEWER",
+            "revision": 1
+          },
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "scope": {
+            "id": "SCOPE-CASE",
+            "revision": 1
+          },
+          "principal": "fixture:operator"
+        }
+      },
+      {
+        "id": "ASSIGNMENT",
+        "revision": 1,
+        "kind": "Entity",
+        "name": "ASSIGNMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ASSIGNMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "identity": [
+            {
+              "id": "ASSIGNMENT-ID",
+              "revision": 1
+            }
+          ],
+          "tenantField": {
+            "id": "ASSIGNMENT-TENANT",
+            "revision": 1
+          },
+          "tenancy": "SCOPED"
+        }
+      },
+      {
+        "id": "ASSIGNMENT-ID",
+        "revision": 1,
+        "kind": "Field",
+        "name": "ASSIGNMENT-ID",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ASSIGNMENT-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "ASSIGNMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ASSIGNMENT",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "ASSIGNMENT-TENANT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "ASSIGNMENT-TENANT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ASSIGNMENT-TENANT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "ASSIGNMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ORG",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "ASSIGNMENT-task",
+        "revision": 1,
+        "kind": "Field",
+        "name": "ASSIGNMENT-task",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ASSIGNMENT-task",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "ASSIGNMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "AUTH-ACT-REVIEWER",
+        "revision": 1,
+        "kind": "AuthenticationModel",
+        "name": "AUTH-ACT-REVIEWER",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "AUTH-ACT-REVIEWER",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "assurance": "MULTI_FACTOR",
+          "mechanisms": [
+            "KNOWLEDGE",
+            "POSSESSION"
+          ]
+        }
+      },
+      {
+        "id": "BACKUP-TASK",
+        "revision": 1,
+        "kind": "Backup",
+        "name": "BACKUP-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "BACKUP-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resources": [
+            {
+              "id": "CASE",
+              "revision": 1
+            }
+          ],
+          "intervalSeconds": 3600,
+          "retentionSeconds": 604800,
+          "encrypted": true,
+          "evidence": {
+            "id": "EVID-BACKUP",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "BOUNDARY-TASK",
+        "revision": 1,
+        "kind": "PermissionBoundary",
+        "name": "BOUNDARY-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "BOUNDARY-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "permissions": [
+            {
+              "id": "PERM-CMD-APPROVE",
+              "revision": 1
+            },
+            {
+              "id": "PERM-CMD-ARCHIVE",
+              "revision": 1
+            },
+            {
+              "id": "PERM-CMD-REVIEW",
+              "revision": 1
+            },
+            {
+              "id": "PERM-QUERY-TASKS",
+              "revision": 1
+            }
+          ],
+          "denied": {
+            "id": "VIEW-ERROR",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "CASE",
+        "revision": 1,
+        "kind": "Entity",
+        "name": "CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "identity": [
+            {
+              "id": "CASE-ID",
+              "revision": 1
+            }
+          ],
+          "tenantField": {
+            "id": "CASE-TENANT",
+            "revision": 1
+          },
+          "tenancy": "SCOPED"
+        }
+      },
+      {
+        "id": "CASE-ASSIGNEE",
+        "revision": 1,
+        "kind": "Field",
+        "name": "CASE-ASSIGNEE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CASE-ASSIGNEE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "USER",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "CASE-ID",
+        "revision": 1,
+        "kind": "Field",
+        "name": "CASE-ID",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CASE-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "CASE",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "CASE-TENANT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "CASE-TENANT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CASE-TENANT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ORG",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "CLASS-INTERNAL",
+        "revision": 1,
+        "kind": "DataClassification",
+        "name": "CLASS-INTERNAL",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-INTERNAL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "level": "INTERNAL",
+          "audit": "WRITE",
+          "encryptAtRest": true,
+          "encryptInTransit": true,
+          "export": "DENY",
+          "redaction": "NONE"
+        }
+      },
+      {
+        "id": "CLASS-PUBLIC",
+        "revision": 1,
+        "kind": "DataClassification",
+        "name": "CLASS-PUBLIC",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-PUBLIC",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "level": "PUBLIC",
+          "audit": "WRITE",
+          "encryptAtRest": true,
+          "encryptInTransit": true,
+          "export": "DENY",
+          "redaction": "NONE"
+        }
+      },
+      {
+        "id": "CLASS-SECRET",
+        "revision": 1,
+        "kind": "DataClassification",
+        "name": "CLASS-SECRET",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-SECRET",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "level": "SECRET",
+          "audit": "READ_WRITE",
+          "encryptAtRest": true,
+          "encryptInTransit": true,
+          "export": "DENY",
+          "redaction": "OMIT"
+        }
+      },
+      {
+        "id": "CLASS-SENSITIVE",
+        "revision": 1,
+        "kind": "DataClassification",
+        "name": "CLASS-SENSITIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-SENSITIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "level": "SENSITIVE",
+          "audit": "READ_WRITE",
+          "encryptAtRest": true,
+          "encryptInTransit": true,
+          "export": "DENY",
+          "redaction": "MASK"
+        }
+      },
+      {
+        "id": "CMD-APPROVE",
+        "revision": 1,
+        "kind": "Command",
+        "name": "CMD-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "invariants": [],
+          "emits": [
+            {
+              "id": "EVT-APPROVE",
+              "revision": 1
+            }
+          ],
+          "aggregate": {
+            "id": "AGG-CASE",
+            "revision": 1
+          },
+          "writes": [
+            {
+              "id": "APPROVAL",
+              "revision": 1
+            },
+            {
+              "id": "ASSIGNMENT",
+              "revision": 1
+            },
+            {
+              "id": "CASE",
+              "revision": 1
+            },
+            {
+              "id": "COMMENT",
+              "revision": 1
+            },
+            {
+              "id": "DOCUMENT",
+              "revision": 1
+            },
+            {
+              "id": "REVIEW",
+              "revision": 1
+            }
+          ],
+          "failures": [
+            {
+              "id": "FAIL-BUSINESS",
+              "revision": 1
+            },
+            {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            }
+          ],
+          "idempotency": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "CMD-ARCHIVE",
+        "revision": 1,
+        "kind": "Command",
+        "name": "CMD-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CMD-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "invariants": [],
+          "emits": [
+            {
+              "id": "EVT-ARCHIVE",
+              "revision": 1
+            }
+          ],
+          "aggregate": {
+            "id": "AGG-CASE",
+            "revision": 1
+          },
+          "writes": [
+            {
+              "id": "APPROVAL",
+              "revision": 1
+            },
+            {
+              "id": "ASSIGNMENT",
+              "revision": 1
+            },
+            {
+              "id": "CASE",
+              "revision": 1
+            },
+            {
+              "id": "COMMENT",
+              "revision": 1
+            },
+            {
+              "id": "DOCUMENT",
+              "revision": 1
+            },
+            {
+              "id": "REVIEW",
+              "revision": 1
+            }
+          ],
+          "failures": [
+            {
+              "id": "FAIL-BUSINESS",
+              "revision": 1
+            },
+            {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            }
+          ],
+          "idempotency": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "CMD-REVIEW",
+        "revision": 1,
+        "kind": "Command",
+        "name": "CMD-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CMD-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "invariants": [],
+          "emits": [
+            {
+              "id": "EVT-REVIEW",
+              "revision": 1
+            }
+          ],
+          "aggregate": {
+            "id": "AGG-CASE",
+            "revision": 1
+          },
+          "writes": [
+            {
+              "id": "APPROVAL",
+              "revision": 1
+            },
+            {
+              "id": "ASSIGNMENT",
+              "revision": 1
+            },
+            {
+              "id": "CASE",
+              "revision": 1
+            },
+            {
+              "id": "COMMENT",
+              "revision": 1
+            },
+            {
+              "id": "DOCUMENT",
+              "revision": 1
+            },
+            {
+              "id": "REVIEW",
+              "revision": 1
+            }
+          ],
+          "failures": [
+            {
+              "id": "FAIL-BUSINESS",
+              "revision": 1
+            },
+            {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            }
+          ],
+          "idempotency": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "COMMENT",
+        "revision": 1,
+        "kind": "Entity",
+        "name": "COMMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "COMMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "identity": [
+            {
+              "id": "COMMENT-ID",
+              "revision": 1
+            }
+          ],
+          "tenantField": {
+            "id": "COMMENT-TENANT",
+            "revision": 1
+          },
+          "tenancy": "SCOPED"
+        }
+      },
+      {
+        "id": "COMMENT-ID",
+        "revision": 1,
+        "kind": "Field",
+        "name": "COMMENT-ID",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "COMMENT-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "COMMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "COMMENT",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "COMMENT-TENANT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "COMMENT-TENANT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "COMMENT-TENANT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "COMMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ORG",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "COMMENT-body",
+        "revision": 1,
+        "kind": "Field",
+        "name": "COMMENT-body",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "COMMENT-body",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "COMMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "COMPATIBILITY-TASK",
+        "revision": 1,
+        "kind": "CompatibilityRequirement",
+        "name": "COMPATIBILITY-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "COMPATIBILITY-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subject": {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          },
+          "policy": "BACKWARD",
+          "supportedVersions": [
+            "1",
+            "2"
+          ],
+          "currentVersion": "2",
+          "windowSeconds": 86400,
+          "evidence": {
+            "id": "EVID-COMPATIBILITY",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "CONTROL-TEXT",
+        "revision": 1,
+        "kind": "InputControl",
+        "name": "CONTROL-TEXT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CONTROL-TEXT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "form": {
+            "id": "FORM-TASK",
+            "revision": 1
+          },
+          "field": {
+            "id": "INPUT-TASK-TEXT",
+            "revision": 1
+          },
+          "label": "Task note",
+          "errorMessage": "Enter a task note.",
+          "required": true,
+          "purpose": "MULTILINE"
+        }
+      },
+      {
+        "id": "DEC-APPLICABILITY",
+        "revision": 1,
+        "kind": "Decision",
+        "name": "DEC-APPLICABILITY",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DEC-APPLICABILITY",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "statement": "All declared fixture quality obligations apply.",
+          "strength": "REQUIRED",
+          "rationale": "Exercise the complete bounded quality model.",
+          "alternatives": [
+            "Omit verification"
+          ]
+        }
+      },
+      {
+        "id": "DELETE-CASE",
+        "revision": 1,
+        "kind": "DeletionPolicy",
+        "name": "DELETE-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELETE-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "trigger": "CLOSED",
+          "mode": "ANONYMIZE",
+          "afterSeconds": 172800,
+          "fields": [
+            {
+              "id": "FLD-NOTE",
+              "revision": 1
+            }
+          ],
+          "holdBehavior": "BLOCK"
+        }
+      },
+      {
+        "id": "DELIVERY-EVT-APPROVE",
+        "revision": 1,
+        "kind": "DeliveryPolicy",
+        "name": "DELIVERY-EVT-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELIVERY-EVT-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "event": {
+            "id": "EVT-APPROVE",
+            "revision": 1
+          },
+          "guarantee": "AT_LEAST_ONCE",
+          "ordering": "PER_AGGREGATE",
+          "windowSeconds": 3600,
+          "deduplication": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "DELIVERY-EVT-ARCHIVE",
+        "revision": 1,
+        "kind": "DeliveryPolicy",
+        "name": "DELIVERY-EVT-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELIVERY-EVT-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "event": {
+            "id": "EVT-ARCHIVE",
+            "revision": 1
+          },
+          "guarantee": "AT_LEAST_ONCE",
+          "ordering": "PER_AGGREGATE",
+          "windowSeconds": 3600,
+          "deduplication": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "DELIVERY-EVT-REVIEW",
+        "revision": 1,
+        "kind": "DeliveryPolicy",
+        "name": "DELIVERY-EVT-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELIVERY-EVT-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "event": {
+            "id": "EVT-REVIEW",
+            "revision": 1
+          },
+          "guarantee": "AT_LEAST_ONCE",
+          "ordering": "PER_AGGREGATE",
+          "windowSeconds": 3600,
+          "deduplication": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "DOCUMENT",
+        "revision": 1,
+        "kind": "Entity",
+        "name": "DOCUMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DOCUMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "identity": [
+            {
+              "id": "DOCUMENT-ID",
+              "revision": 1
+            }
+          ],
+          "tenantField": {
+            "id": "DOCUMENT-TENANT",
+            "revision": 1
+          },
+          "tenancy": "SCOPED"
+        }
+      },
+      {
+        "id": "DOCUMENT-ID",
+        "revision": 1,
+        "kind": "Field",
+        "name": "DOCUMENT-ID",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DOCUMENT-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "DOCUMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "DOCUMENT",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "DOCUMENT-TENANT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "DOCUMENT-TENANT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DOCUMENT-TENANT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "DOCUMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ORG",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "DOCUMENT-title",
+        "revision": 1,
+        "kind": "Field",
+        "name": "DOCUMENT-title",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DOCUMENT-title",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "DOCUMENT",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVID-A11Y",
+        "revision": 1,
+        "kind": "EvidenceRequirement",
+        "name": "EVID-A11Y",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVID-A11Y",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "ACTION-TASK",
+              "revision": 1
+            },
+            {
+              "id": "CONTROL-TEXT",
+              "revision": 1
+            },
+            {
+              "id": "FORM-TASK",
+              "revision": 1
+            },
+            {
+              "id": "SCREEN-TASK",
+              "revision": 1
+            }
+          ],
+          "methods": [
+            "AUTO_A11Y",
+            "MANUAL_A11Y"
+          ],
+          "maxAgeSeconds": 86400,
+          "applicability": {
+            "id": "APPLIES-ALL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVID-BACKUP",
+        "revision": 1,
+        "kind": "EvidenceRequirement",
+        "name": "EVID-BACKUP",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVID-BACKUP",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "CASE",
+              "revision": 1
+            }
+          ],
+          "methods": [
+            "BACKUP"
+          ],
+          "maxAgeSeconds": 86400,
+          "applicability": {
+            "id": "APPLIES-ALL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVID-COMPATIBILITY",
+        "revision": 1,
+        "kind": "EvidenceRequirement",
+        "name": "EVID-COMPATIBILITY",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVID-COMPATIBILITY",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "QUERY-TASKS",
+              "revision": 1
+            }
+          ],
+          "methods": [
+            "COMPATIBILITY"
+          ],
+          "maxAgeSeconds": 86400,
+          "applicability": {
+            "id": "APPLIES-ALL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVID-OBSERVE",
+        "revision": 1,
+        "kind": "EvidenceRequirement",
+        "name": "EVID-OBSERVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVID-OBSERVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "JOB-TASK",
+              "revision": 1
+            },
+            {
+              "id": "SERVICE-TASKS",
+              "revision": 1
+            }
+          ],
+          "methods": [
+            "OBSERVABILITY"
+          ],
+          "maxAgeSeconds": 86400,
+          "applicability": {
+            "id": "APPLIES-ALL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVID-PERF",
+        "revision": 1,
+        "kind": "EvidenceRequirement",
+        "name": "EVID-PERF",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVID-PERF",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "QUERY-TASKS",
+              "revision": 1
+            }
+          ],
+          "methods": [
+            "PERFORMANCE"
+          ],
+          "maxAgeSeconds": 86400,
+          "applicability": {
+            "id": "APPLIES-ALL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVID-RECOVERY",
+        "revision": 1,
+        "kind": "EvidenceRequirement",
+        "name": "EVID-RECOVERY",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVID-RECOVERY",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "CASE",
+              "revision": 1
+            }
+          ],
+          "methods": [
+            "RECOVERY"
+          ],
+          "maxAgeSeconds": 86400,
+          "applicability": {
+            "id": "APPLIES-ALL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVID-RELIABILITY",
+        "revision": 1,
+        "kind": "EvidenceRequirement",
+        "name": "EVID-RELIABILITY",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVID-RELIABILITY",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "SERVICE-TASKS",
+              "revision": 1
+            }
+          ],
+          "methods": [
+            "RELIABILITY"
+          ],
+          "maxAgeSeconds": 86400,
+          "applicability": {
+            "id": "APPLIES-ALL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVID-TEST",
+        "revision": 1,
+        "kind": "EvidenceRequirement",
+        "name": "EVID-TEST",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVID-TEST",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "UC-TASK",
+              "revision": 1
+            }
+          ],
+          "methods": [
+            "AUTHORIZATION"
+          ],
+          "maxAgeSeconds": 86400,
+          "applicability": {
+            "id": "APPLIES-ALL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVT-APPROVE",
+        "revision": 1,
+        "kind": "Event",
+        "name": "EVT-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVT-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "payload": [
+            {
+              "id": "FLD-CASE-TITLE",
+              "revision": 1
+            }
+          ],
+          "delivery": {
+            "id": "DELIVERY-EVT-APPROVE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVT-ARCHIVE",
+        "revision": 1,
+        "kind": "Event",
+        "name": "EVT-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVT-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "payload": [
+            {
+              "id": "FLD-CASE-TITLE",
+              "revision": 1
+            }
+          ],
+          "delivery": {
+            "id": "DELIVERY-EVT-ARCHIVE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "EVT-REVIEW",
+        "revision": 1,
+        "kind": "Event",
+        "name": "EVT-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "EVT-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "payload": [
+            {
+              "id": "FLD-CASE-TITLE",
+              "revision": 1
+            }
+          ],
+          "delivery": {
+            "id": "DELIVERY-EVT-REVIEW",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "FAIL-BUSINESS",
+        "revision": 1,
+        "kind": "Failure",
+        "name": "FAIL-BUSINESS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FAIL-BUSINESS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "code": "INVALID_STATE",
+          "category": "BUSINESS",
+          "retryable": false
+        }
+      },
+      {
+        "id": "FAIL-TRANSIENT",
+        "revision": 1,
+        "kind": "Failure",
+        "name": "FAIL-TRANSIENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FAIL-TRANSIENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "code": "DEPENDENCY_UNAVAILABLE",
+          "category": "TRANSIENT",
+          "retryable": true
+        }
+      },
+      {
+        "id": "FILTER-TEXT",
+        "revision": 1,
+        "kind": "Filter",
+        "name": "FILTER-TEXT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FILTER-TEXT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "query": {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          },
+          "field": {
+            "id": "OUTPUT-TASK-TEXT",
+            "revision": 1
+          },
+          "operator": "CONTAINS",
+          "inputType": {
+            "kind": "String"
+          }
+        }
+      },
+      {
+        "id": "FLD-CASE-TITLE",
+        "revision": 1,
+        "kind": "Field",
+        "name": "FLD-CASE-TITLE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FLD-CASE-TITLE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Value",
+            "definition": {
+              "id": "VO-TITLE",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "PUBLIC",
+          "classificationRef": {
+            "id": "CLASS-PUBLIC",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "FLD-NOTE",
+        "revision": 1,
+        "kind": "Field",
+        "name": "FLD-NOTE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FLD-NOTE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Nullable",
+            "item": {
+              "kind": "String"
+            }
+          },
+          "optional": true,
+          "classification": "SENSITIVE",
+          "classificationRef": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "FLD-TASK-SUMMARY",
+        "revision": 1,
+        "kind": "Field",
+        "name": "FLD-TASK-SUMMARY",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FLD-TASK-SUMMARY",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "FLD-TITLE",
+        "revision": 1,
+        "kind": "Field",
+        "name": "FLD-TITLE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FLD-TITLE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "VO-TITLE",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "PUBLIC",
+          "classificationRef": {
+            "id": "CLASS-PUBLIC",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "FORM-TASK",
+        "revision": 1,
+        "kind": "Form",
+        "name": "FORM-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FORM-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "useCase": {
+            "id": "UC-TASK",
+            "revision": 1
+          },
+          "controls": [
+            {
+              "id": "CONTROL-TEXT",
+              "revision": 1
+            }
+          ],
+          "submit": {
+            "id": "ACTION-TASK",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "HOLD-CASE",
+        "revision": 1,
+        "kind": "LegalHold",
+        "name": "HOLD-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "HOLD-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "condition": {
+            "tag": "literal",
+            "type": {
+              "kind": "Boolean"
+            },
+            "value": true
+          },
+          "release": {
+            "id": "PERM-CMD-REVIEW",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "IDEM-OPERATION",
+        "revision": 1,
+        "kind": "IdempotencyPolicy",
+        "name": "IDEM-OPERATION",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "IDEM-OPERATION",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "scope": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "keyType": {
+            "kind": "String"
+          },
+          "windowSeconds": 86400,
+          "replay": "RETURN_RESULT",
+          "conflict": "REJECT_DIFFERENT_INPUT"
+        }
+      },
+      {
+        "id": "INPUT-TASK",
+        "revision": 1,
+        "kind": "ValueObject",
+        "name": "INPUT-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "INPUT-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "equality": "STRUCTURAL"
+        }
+      },
+      {
+        "id": "INPUT-TASK-TEXT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "INPUT-TASK-TEXT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "INPUT-TASK-TEXT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "INPUT-TASK",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "JOB-TASK",
+        "revision": 1,
+        "kind": "Job",
+        "name": "JOB-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "JOB-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "useCase": {
+            "id": "UC-TASK",
+            "revision": 1
+          },
+          "schedule": {
+            "id": "SCHEDULE-TASK",
+            "revision": 1
+          },
+          "retry": {
+            "id": "RETRY-TASK",
+            "revision": 1
+          },
+          "idempotency": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          },
+          "timeoutSeconds": 30
+        }
+      },
+      {
+        "id": "LIFECYCLE-CASE",
+        "revision": 1,
+        "kind": "DataLifecycle",
+        "name": "LIFECYCLE-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "LIFECYCLE-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "retention": {
+            "id": "RETENTION-CASE",
+            "revision": 1
+          },
+          "deletion": {
+            "id": "DELETE-CASE",
+            "revision": 1
+          },
+          "holds": [
+            {
+              "id": "HOLD-CASE",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "OBSERVE-TASK",
+        "revision": 1,
+        "kind": "ObservabilityRequirement",
+        "name": "OBSERVE-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "OBSERVE-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subjects": [
+            {
+              "id": "JOB-TASK",
+              "revision": 1
+            },
+            {
+              "id": "SERVICE-TASKS",
+              "revision": 1
+            }
+          ],
+          "signals": [
+            "AUDIT",
+            "HEALTH",
+            "LOG",
+            "METRIC",
+            "READINESS",
+            "TRACE"
+          ],
+          "correlation": "REQUIRED",
+          "redaction": "CLASSIFICATION",
+          "evidence": {
+            "id": "EVID-OBSERVE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "ORG",
+        "revision": 1,
+        "kind": "Entity",
+        "name": "ORG",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ORG",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "identity": [
+            {
+              "id": "ORG-ID",
+              "revision": 1
+            }
+          ],
+          "tenancy": "TENANT_ROOT"
+        }
+      },
+      {
+        "id": "ORG-ID",
+        "revision": 1,
+        "kind": "Field",
+        "name": "ORG-ID",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ORG-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "ORG",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ORG",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "OUTPUT-TASK",
+        "revision": 1,
+        "kind": "ValueObject",
+        "name": "OUTPUT-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "OUTPUT-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "equality": "STRUCTURAL"
+        }
+      },
+      {
+        "id": "OUTPUT-TASK-TEXT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "OUTPUT-TASK-TEXT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "OUTPUT-TASK-TEXT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "OUTPUT-TASK",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "PARAM-CODE",
+        "revision": 1,
+        "kind": "Parameter",
+        "name": "PARAM-CODE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PARAM-CODE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "type": {
+            "kind": "Named",
+            "definition": {
+              "id": "TYPE-CASE-CODE",
+              "revision": 1
+            }
+          },
+          "value": "CASE-001"
+        }
+      },
+      {
+        "id": "PARAM-DATE",
+        "revision": 1,
+        "kind": "Parameter",
+        "name": "PARAM-DATE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PARAM-DATE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "type": {
+            "kind": "Date"
+          },
+          "value": "2026-09-16"
+        }
+      },
+      {
+        "id": "PARAM-INSTANT",
+        "revision": 1,
+        "kind": "Parameter",
+        "name": "PARAM-INSTANT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PARAM-INSTANT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "type": {
+            "kind": "Instant"
+          },
+          "value": "2026-09-16T09:00:00Z"
+        }
+      },
+      {
+        "id": "PARAM-NULL",
+        "revision": 1,
+        "kind": "Parameter",
+        "name": "PARAM-NULL",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PARAM-NULL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "type": {
+            "kind": "Nullable",
+            "item": {
+              "kind": "String"
+            }
+          },
+          "value": null
+        }
+      },
+      {
+        "id": "PARAM-TAGS",
+        "revision": 1,
+        "kind": "Parameter",
+        "name": "PARAM-TAGS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PARAM-TAGS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "type": {
+            "kind": "Set",
+            "element": {
+              "kind": "String"
+            },
+            "minItems": 0,
+            "maxItems": 8
+          },
+          "value": [
+            "archive",
+            "review"
+          ]
+        }
+      },
+      {
+        "id": "PARAM-TITLE",
+        "revision": 1,
+        "kind": "Parameter",
+        "name": "PARAM-TITLE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PARAM-TITLE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "type": {
+            "kind": "Value",
+            "definition": {
+              "id": "VO-TITLE",
+              "revision": 1
+            }
+          },
+          "value": {
+            "FLD-TITLE": "Review request"
+          }
+        }
+      },
+      {
+        "id": "PERF-TASK",
+        "revision": 1,
+        "kind": "PerformanceRequirement",
+        "name": "PERF-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PERF-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subject": {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          },
+          "metric": "P95_LATENCY_MS",
+          "comparison": "LTE",
+          "threshold": "500",
+          "workload": {
+            "concurrency": 10,
+            "records": 10000,
+            "durationSeconds": 60,
+            "minimumSamples": 100
+          },
+          "evidence": {
+            "id": "EVID-PERF",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "PERM-CMD-APPROVE",
+        "revision": 1,
+        "kind": "Permission",
+        "name": "PERM-CMD-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PERM-CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-APPROVE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "PERM-CMD-ARCHIVE",
+        "revision": 1,
+        "kind": "Permission",
+        "name": "PERM-CMD-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PERM-CMD-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-ARCHIVE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "PERM-CMD-REVIEW",
+        "revision": 1,
+        "kind": "Permission",
+        "name": "PERM-CMD-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PERM-CMD-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-REVIEW",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "PERM-QUERY-TASKS",
+        "revision": 1,
+        "kind": "Permission",
+        "name": "PERM-QUERY-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PERM-QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "POL-APPROVE",
+        "revision": 1,
+        "kind": "Policy",
+        "name": "POL-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POL-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "roles": [
+            {
+              "id": "ROLE-REVIEWER",
+              "revision": 1
+            }
+          ],
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-APPROVE",
+            "revision": 1
+          },
+          "effect": "ALLOW",
+          "predicate": {
+            "tag": "binary",
+            "op": "identityEq",
+            "left": {
+              "tag": "field",
+              "binding": "resource",
+              "ref": {
+                "id": "CASE-TENANT",
+                "revision": 1
+              }
+            },
+            "right": {
+              "tag": "field",
+              "binding": "actor",
+              "ref": {
+                "id": "USER-TENANT",
+                "revision": 1
+              }
+            }
+          },
+          "permission": {
+            "id": "PERM-CMD-APPROVE",
+            "revision": 1
+          },
+          "scope": {
+            "id": "SCOPE-CASE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "POL-ARCHIVE",
+        "revision": 1,
+        "kind": "Policy",
+        "name": "POL-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POL-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "roles": [
+            {
+              "id": "ROLE-REVIEWER",
+              "revision": 1
+            }
+          ],
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-ARCHIVE",
+            "revision": 1
+          },
+          "effect": "ALLOW",
+          "predicate": {
+            "tag": "binary",
+            "op": "identityEq",
+            "left": {
+              "tag": "field",
+              "binding": "resource",
+              "ref": {
+                "id": "CASE-TENANT",
+                "revision": 1
+              }
+            },
+            "right": {
+              "tag": "field",
+              "binding": "actor",
+              "ref": {
+                "id": "USER-TENANT",
+                "revision": 1
+              }
+            }
+          },
+          "permission": {
+            "id": "PERM-CMD-ARCHIVE",
+            "revision": 1
+          },
+          "scope": {
+            "id": "SCOPE-CASE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "POL-QUERY-TASKS",
+        "revision": 1,
+        "kind": "Policy",
+        "name": "POL-QUERY-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POL-QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "roles": [
+            {
+              "id": "ROLE-REVIEWER",
+              "revision": 1
+            }
+          ],
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          },
+          "effect": "ALLOW",
+          "predicate": {
+            "tag": "literal",
+            "type": {
+              "kind": "Boolean"
+            },
+            "value": true
+          },
+          "permission": {
+            "id": "PERM-QUERY-TASKS",
+            "revision": 1
+          },
+          "scope": {
+            "id": "SCOPE-CASE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "POL-REVIEW",
+        "revision": 1,
+        "kind": "Policy",
+        "name": "POL-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POL-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "roles": [
+            {
+              "id": "ROLE-REVIEWER",
+              "revision": 1
+            }
+          ],
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-REVIEW",
+            "revision": 1
+          },
+          "effect": "ALLOW",
+          "predicate": {
+            "tag": "binary",
+            "op": "and",
+            "left": {
+              "tag": "binary",
+              "op": "identityEq",
+              "left": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "CASE-TENANT",
+                  "revision": 1
+                }
+              },
+              "right": {
+                "tag": "field",
+                "binding": "actor",
+                "ref": {
+                  "id": "USER-TENANT",
+                  "revision": 1
+                }
+              }
+            },
+            "right": {
+              "tag": "binary",
+              "op": "identityEq",
+              "left": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "CASE-ASSIGNEE",
+                  "revision": 1
+                }
+              },
+              "right": {
+                "tag": "field",
+                "binding": "actor",
+                "ref": {
+                  "id": "USER-ID",
+                  "revision": 1
+                }
+              }
+            }
+          },
+          "permission": {
+            "id": "PERM-CMD-REVIEW",
+            "revision": 1
+          },
+          "scope": {
+            "id": "SCOPE-CASE",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "POLSET-CMD-APPROVE",
+        "revision": 1,
+        "kind": "PolicySet",
+        "name": "POLSET-CMD-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POLSET-CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-APPROVE",
+            "revision": 1
+          },
+          "policies": [
+            {
+              "id": "POL-APPROVE",
+              "revision": 1
+            }
+          ],
+          "combining": "DENY_OVERRIDES",
+          "default": "DENY"
+        }
+      },
+      {
+        "id": "POLSET-CMD-ARCHIVE",
+        "revision": 1,
+        "kind": "PolicySet",
+        "name": "POLSET-CMD-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POLSET-CMD-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-ARCHIVE",
+            "revision": 1
+          },
+          "policies": [
+            {
+              "id": "POL-ARCHIVE",
+              "revision": 1
+            }
+          ],
+          "combining": "DENY_OVERRIDES",
+          "default": "DENY"
+        }
+      },
+      {
+        "id": "POLSET-CMD-REVIEW",
+        "revision": 1,
+        "kind": "PolicySet",
+        "name": "POLSET-CMD-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POLSET-CMD-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "CMD-REVIEW",
+            "revision": 1
+          },
+          "policies": [
+            {
+              "id": "POL-REVIEW",
+              "revision": 1
+            }
+          ],
+          "combining": "DENY_OVERRIDES",
+          "default": "DENY"
+        }
+      },
+      {
+        "id": "POLSET-QUERY-TASKS",
+        "revision": 1,
+        "kind": "PolicySet",
+        "name": "POLSET-QUERY-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POLSET-QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "action": {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          },
+          "policies": [
+            {
+              "id": "POL-QUERY-TASKS",
+              "revision": 1
+            }
+          ],
+          "combining": "DENY_OVERRIDES",
+          "default": "DENY"
+        }
+      },
+      {
+        "id": "QUERY-TASKS",
+        "revision": 1,
+        "kind": "Query",
+        "name": "QUERY-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "scope": {
+            "id": "SCOPE-CASE",
+            "revision": 1
+          },
+          "result": {
+            "kind": "Value",
+            "definition": {
+              "id": "OUTPUT-TASK",
+              "revision": 1
+            }
+          },
+          "projection": [
+            {
+              "field": {
+                "id": "OUTPUT-TASK-TEXT",
+                "revision": 1
+              },
+              "value": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-TASK-SUMMARY",
+                  "revision": 1
+                }
+              }
+            }
+          ],
+          "paginated": true,
+          "maximumResults": 100
+        }
+      },
+      {
+        "id": "RATE-CMD-APPROVE",
+        "revision": 1,
+        "kind": "RatePolicy",
+        "name": "RATE-CMD-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RATE-CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "permission": {
+            "id": "PERM-CMD-APPROVE",
+            "revision": 1
+          },
+          "requests": 100,
+          "windowSeconds": 60,
+          "burst": 10,
+          "partition": "ACTOR"
+        }
+      },
+      {
+        "id": "RATE-CMD-ARCHIVE",
+        "revision": 1,
+        "kind": "RatePolicy",
+        "name": "RATE-CMD-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RATE-CMD-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "permission": {
+            "id": "PERM-CMD-ARCHIVE",
+            "revision": 1
+          },
+          "requests": 100,
+          "windowSeconds": 60,
+          "burst": 10,
+          "partition": "ACTOR"
+        }
+      },
+      {
+        "id": "RATE-CMD-REVIEW",
+        "revision": 1,
+        "kind": "RatePolicy",
+        "name": "RATE-CMD-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RATE-CMD-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "permission": {
+            "id": "PERM-CMD-REVIEW",
+            "revision": 1
+          },
+          "requests": 100,
+          "windowSeconds": 60,
+          "burst": 10,
+          "partition": "ACTOR"
+        }
+      },
+      {
+        "id": "RATE-QUERY-TASKS",
+        "revision": 1,
+        "kind": "RatePolicy",
+        "name": "RATE-QUERY-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RATE-QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "permission": {
+            "id": "PERM-QUERY-TASKS",
+            "revision": 1
+          },
+          "requests": 100,
+          "windowSeconds": 60,
+          "burst": 10,
+          "partition": "ACTOR"
+        }
+      },
+      {
+        "id": "RECOVERY-TASK",
+        "revision": 1,
+        "kind": "Recovery",
+        "name": "RECOVERY-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RECOVERY-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "backup": {
+            "id": "BACKUP-TASK",
+            "revision": 1
+          },
+          "rpoSeconds": 3600,
+          "rtoSeconds": 1800,
+          "restoreTestIntervalSeconds": 86400,
+          "evidence": {
+            "id": "EVID-RECOVERY",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "REL-ASSIGNEE",
+        "revision": 1,
+        "kind": "Relation",
+        "name": "REL-ASSIGNEE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REL-ASSIGNEE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "source": {
+            "id": "USER",
+            "revision": 1
+          },
+          "target": {
+            "id": "ASSIGNMENT",
+            "revision": 1
+          },
+          "sourceCardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "targetCardinality": {
+            "min": 0,
+            "max": "UNBOUNDED"
+          },
+          "ownership": "REFERENCE",
+          "onDelete": "RESTRICT"
+        }
+      },
+      {
+        "id": "REL-CASE-APPROVAL",
+        "revision": 1,
+        "kind": "Relation",
+        "name": "REL-CASE-APPROVAL",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REL-CASE-APPROVAL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "source": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "target": {
+            "id": "APPROVAL",
+            "revision": 1
+          },
+          "sourceCardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "targetCardinality": {
+            "min": 0,
+            "max": "UNBOUNDED"
+          },
+          "ownership": "COMPOSITION",
+          "onDelete": "RESTRICT"
+        }
+      },
+      {
+        "id": "REL-CASE-ASSIGNMENT",
+        "revision": 1,
+        "kind": "Relation",
+        "name": "REL-CASE-ASSIGNMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REL-CASE-ASSIGNMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "source": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "target": {
+            "id": "ASSIGNMENT",
+            "revision": 1
+          },
+          "sourceCardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "targetCardinality": {
+            "min": 0,
+            "max": "UNBOUNDED"
+          },
+          "ownership": "COMPOSITION",
+          "onDelete": "RESTRICT"
+        }
+      },
+      {
+        "id": "REL-CASE-COMMENT",
+        "revision": 1,
+        "kind": "Relation",
+        "name": "REL-CASE-COMMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REL-CASE-COMMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "source": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "target": {
+            "id": "COMMENT",
+            "revision": 1
+          },
+          "sourceCardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "targetCardinality": {
+            "min": 0,
+            "max": "UNBOUNDED"
+          },
+          "ownership": "COMPOSITION",
+          "onDelete": "RESTRICT"
+        }
+      },
+      {
+        "id": "REL-CASE-DOCUMENT",
+        "revision": 1,
+        "kind": "Relation",
+        "name": "REL-CASE-DOCUMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REL-CASE-DOCUMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "source": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "target": {
+            "id": "DOCUMENT",
+            "revision": 1
+          },
+          "sourceCardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "targetCardinality": {
+            "min": 0,
+            "max": "UNBOUNDED"
+          },
+          "ownership": "COMPOSITION",
+          "onDelete": "RESTRICT"
+        }
+      },
+      {
+        "id": "REL-CASE-REVIEW",
+        "revision": 1,
+        "kind": "Relation",
+        "name": "REL-CASE-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REL-CASE-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "source": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "target": {
+            "id": "REVIEW",
+            "revision": 1
+          },
+          "sourceCardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "targetCardinality": {
+            "min": 0,
+            "max": "UNBOUNDED"
+          },
+          "ownership": "COMPOSITION",
+          "onDelete": "RESTRICT"
+        }
+      },
+      {
+        "id": "RELIABILITY-TASK",
+        "revision": 1,
+        "kind": "ReliabilityRequirement",
+        "name": "RELIABILITY-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RELIABILITY-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "subject": {
+            "id": "SERVICE-TASKS",
+            "revision": 1
+          },
+          "metric": "AVAILABILITY_PERCENT",
+          "threshold": "99.5",
+          "windowSeconds": 86400,
+          "evidence": {
+            "id": "EVID-RELIABILITY",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "REQ-CASE",
+        "revision": 1,
+        "kind": "Requirement",
+        "name": "REQ-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REQ-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [],
+        "data": {
+          "statement": "Synthetic organization case intake, document review, assignment, approval, comments and archival tasks.",
+          "priority": "MUST",
+          "acceptance": [
+            {
+              "id": "AC-CASE",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "RESPONSIVE-TASK",
+        "revision": 1,
+        "kind": "ResponsivePolicy",
+        "name": "RESPONSIVE-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RESPONSIVE-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "screen": {
+            "id": "SCREEN-TASK",
+            "revision": 1
+          },
+          "modes": [
+            "COMPACT",
+            "EXPANDED"
+          ],
+          "preserveActions": true,
+          "preserveReadingOrder": true
+        }
+      },
+      {
+        "id": "RETENTION-CASE",
+        "revision": 1,
+        "kind": "Retention",
+        "name": "RETENTION-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RETENTION-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "trigger": "CLOSED",
+          "minimumSeconds": 86400
+        }
+      },
+      {
+        "id": "RETRY-TASK",
+        "revision": 1,
+        "kind": "RetryPolicy",
+        "name": "RETRY-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RETRY-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "failures": [
+            {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            }
+          ],
+          "maxAttempts": 3,
+          "initialSeconds": 1,
+          "maxDelaySeconds": 10,
+          "multiplier": 2
+        }
+      },
+      {
+        "id": "REVIEW",
+        "revision": 1,
+        "kind": "Entity",
+        "name": "REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "identity": [
+            {
+              "id": "REVIEW-ID",
+              "revision": 1
+            }
+          ],
+          "tenantField": {
+            "id": "REVIEW-TENANT",
+            "revision": 1
+          },
+          "tenancy": "SCOPED"
+        }
+      },
+      {
+        "id": "REVIEW-ID",
+        "revision": 1,
+        "kind": "Field",
+        "name": "REVIEW-ID",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REVIEW-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "REVIEW",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "REVIEW",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "REVIEW-TENANT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "REVIEW-TENANT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REVIEW-TENANT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "REVIEW",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ORG",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "REVIEW-outcome",
+        "revision": 1,
+        "kind": "Field",
+        "name": "REVIEW-outcome",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "REVIEW-outcome",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "REVIEW",
+            "revision": 1
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "ROLE-REVIEWER",
+        "revision": 1,
+        "kind": "Role",
+        "name": "ROLE-REVIEWER",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ROLE-REVIEWER",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "permissions": [
+            {
+              "id": "PERM-CMD-APPROVE",
+              "revision": 1
+            },
+            {
+              "id": "PERM-CMD-ARCHIVE",
+              "revision": 1
+            },
+            {
+              "id": "PERM-CMD-REVIEW",
+              "revision": 1
+            },
+            {
+              "id": "PERM-QUERY-TASKS",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "SCHEDULE-TASK",
+        "revision": 1,
+        "kind": "Schedule",
+        "name": "SCHEDULE-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SCHEDULE-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "mode": "LOCAL_DAILY",
+          "localTime": "09:00:00",
+          "timezone": "Africa/Nairobi",
+          "tzdbVersion": "2026d",
+          "gap": "SKIP",
+          "overlap": "EARLIER"
+        }
+      },
+      {
+        "id": "SCOPE-CASE",
+        "revision": 1,
+        "kind": "Scope",
+        "name": "SCOPE-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SCOPE-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "mode": "SAME_TENANT",
+          "actorTenant": {
+            "id": "USER-TENANT",
+            "revision": 1
+          },
+          "resourceTenant": {
+            "id": "CASE-TENANT",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "SCREEN-TASK",
+        "revision": 1,
+        "kind": "Screen",
+        "name": "SCREEN-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SCREEN-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "task": {
+            "id": "UC-TASK",
+            "revision": 1
+          },
+          "content": [
+            {
+              "id": "SEARCH-TASKS",
+              "revision": 1
+            },
+            {
+              "id": "TABLE-TASKS",
+              "revision": 1
+            },
+            {
+              "id": "WIZARD-TASK",
+              "revision": 1
+            }
+          ],
+          "actions": [
+            {
+              "id": "ACTION-TASK",
+              "revision": 1
+            }
+          ],
+          "states": [
+            {
+              "id": "VIEW-EMPTY",
+              "revision": 1
+            },
+            {
+              "id": "VIEW-ERROR",
+              "revision": 1
+            },
+            {
+              "id": "VIEW-LOADING",
+              "revision": 1
+            },
+            {
+              "id": "VIEW-SUCCESS",
+              "revision": 1
+            }
+          ],
+          "boundary": {
+            "id": "BOUNDARY-TASK",
+            "revision": 1
+          },
+          "responsive": {
+            "id": "RESPONSIVE-TASK",
+            "revision": 1
+          },
+          "accessibility": {
+            "id": "A11Y-TASK",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "SEARCH-TASKS",
+        "revision": 1,
+        "kind": "Search",
+        "name": "SEARCH-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SEARCH-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "query": {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          },
+          "filters": [
+            {
+              "id": "FILTER-TEXT",
+              "revision": 1
+            }
+          ],
+          "label": "Find a task"
+        }
+      },
+      {
+        "id": "SERVICE-TASKS",
+        "revision": 1,
+        "kind": "Service",
+        "name": "SERVICE-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SERVICE-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "operations": [
+            {
+              "id": "CMD-APPROVE",
+              "revision": 1
+            },
+            {
+              "id": "CMD-ARCHIVE",
+              "revision": 1
+            },
+            {
+              "id": "CMD-REVIEW",
+              "revision": 1
+            },
+            {
+              "id": "QUERY-TASKS",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "SESSION-ACT-REVIEWER",
+        "revision": 1,
+        "kind": "SessionPolicy",
+        "name": "SESSION-ACT-REVIEWER",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SESSION-ACT-REVIEWER",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "authentication": {
+            "id": "AUTH-ACT-REVIEWER",
+            "revision": 1
+          },
+          "idleSeconds": 900,
+          "absoluteSeconds": 28800,
+          "reauthSeconds": 3600
+        }
+      },
+      {
+        "id": "STATE-APPROVED",
+        "revision": 1,
+        "kind": "State",
+        "name": "STATE-APPROVED",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "STATE-APPROVED",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "machine": {
+            "id": "WF-CASE",
+            "revision": 1
+          },
+          "terminal": false
+        }
+      },
+      {
+        "id": "STATE-ARCHIVED",
+        "revision": 1,
+        "kind": "State",
+        "name": "STATE-ARCHIVED",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "STATE-ARCHIVED",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "machine": {
+            "id": "WF-CASE",
+            "revision": 1
+          },
+          "terminal": true
+        }
+      },
+      {
+        "id": "STATE-OPEN",
+        "revision": 1,
+        "kind": "State",
+        "name": "STATE-OPEN",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "STATE-OPEN",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "machine": {
+            "id": "WF-CASE",
+            "revision": 1
+          },
+          "terminal": false
+        }
+      },
+      {
+        "id": "STATE-REVIEWED",
+        "revision": 1,
+        "kind": "State",
+        "name": "STATE-REVIEWED",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "STATE-REVIEWED",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "machine": {
+            "id": "WF-CASE",
+            "revision": 1
+          },
+          "terminal": false
+        }
+      },
+      {
+        "id": "STEP-CMD-APPROVE",
+        "revision": 1,
+        "kind": "ExecutionStep",
+        "name": "STEP-CMD-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "STEP-CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "UC-TASK",
+            "revision": 1
+          },
+          "operation": {
+            "id": "CMD-APPROVE",
+            "revision": 1
+          },
+          "onFailure": "STOP",
+          "transaction": {
+            "id": "TX-TASK",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "STEP-CMD-ARCHIVE",
+        "revision": 1,
+        "kind": "ExecutionStep",
+        "name": "STEP-CMD-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "STEP-CMD-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "UC-TASK",
+            "revision": 1
+          },
+          "operation": {
+            "id": "CMD-ARCHIVE",
+            "revision": 1
+          },
+          "onFailure": "STOP",
+          "transaction": {
+            "id": "TX-TASK",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "STEP-CMD-REVIEW",
+        "revision": 1,
+        "kind": "ExecutionStep",
+        "name": "STEP-CMD-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "STEP-CMD-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "UC-TASK",
+            "revision": 1
+          },
+          "operation": {
+            "id": "CMD-REVIEW",
+            "revision": 1
+          },
+          "onFailure": "STOP",
+          "transaction": {
+            "id": "TX-TASK",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "TABLE-TASKS",
+        "revision": 1,
+        "kind": "Table",
+        "name": "TABLE-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "TABLE-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "query": {
+            "id": "QUERY-TASKS",
+            "revision": 1
+          },
+          "columns": [
+            {
+              "id": "OUTPUT-TASK-TEXT",
+              "revision": 1
+            }
+          ],
+          "emptyMessage": "No tasks are available."
+        }
+      },
+      {
+        "id": "TEST-TASK",
+        "revision": 1,
+        "kind": "TestRequirement",
+        "name": "TEST-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "TEST-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "criterion": {
+            "id": "AC-CASE",
+            "revision": 1
+          },
+          "subjects": [
+            {
+              "id": "UC-TASK",
+              "revision": 1
+            }
+          ],
+          "level": "AUTHORIZATION",
+          "evidence": {
+            "id": "EVID-TEST",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "TRANS-APPROVE",
+        "revision": 1,
+        "kind": "Transition",
+        "name": "TRANS-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "TRANS-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "machine": {
+            "id": "WF-CASE",
+            "revision": 1
+          },
+          "from": {
+            "id": "STATE-REVIEWED",
+            "revision": 1
+          },
+          "to": {
+            "id": "STATE-APPROVED",
+            "revision": 1
+          },
+          "command": {
+            "id": "CMD-APPROVE",
+            "revision": 1
+          },
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "guard": {
+            "tag": "literal",
+            "type": {
+              "kind": "Boolean"
+            },
+            "value": true
+          },
+          "effects": [
+            {
+              "id": "EVT-APPROVE",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "TRANS-ARCHIVE",
+        "revision": 1,
+        "kind": "Transition",
+        "name": "TRANS-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "TRANS-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "machine": {
+            "id": "WF-CASE",
+            "revision": 1
+          },
+          "from": {
+            "id": "STATE-APPROVED",
+            "revision": 1
+          },
+          "to": {
+            "id": "STATE-ARCHIVED",
+            "revision": 1
+          },
+          "command": {
+            "id": "CMD-ARCHIVE",
+            "revision": 1
+          },
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "guard": {
+            "tag": "literal",
+            "type": {
+              "kind": "Boolean"
+            },
+            "value": true
+          },
+          "effects": [
+            {
+              "id": "EVT-ARCHIVE",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "TRANS-REVIEW",
+        "revision": 1,
+        "kind": "Transition",
+        "name": "TRANS-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "TRANS-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "machine": {
+            "id": "WF-CASE",
+            "revision": 1
+          },
+          "from": {
+            "id": "STATE-OPEN",
+            "revision": 1
+          },
+          "to": {
+            "id": "STATE-REVIEWED",
+            "revision": 1
+          },
+          "command": {
+            "id": "CMD-REVIEW",
+            "revision": 1
+          },
+          "actor": {
+            "id": "ACT-REVIEWER",
+            "revision": 1
+          },
+          "guard": {
+            "tag": "literal",
+            "type": {
+              "kind": "Boolean"
+            },
+            "value": true
+          },
+          "effects": [
+            {
+              "id": "EVT-REVIEW",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "TX-TASK",
+        "revision": 1,
+        "kind": "Transaction",
+        "name": "TX-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "TX-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "aggregate": {
+            "id": "AGG-CASE",
+            "revision": 1
+          },
+          "commands": [
+            {
+              "id": "CMD-APPROVE",
+              "revision": 1
+            },
+            {
+              "id": "CMD-ARCHIVE",
+              "revision": 1
+            },
+            {
+              "id": "CMD-REVIEW",
+              "revision": 1
+            }
+          ],
+          "consistency": "ATOMIC",
+          "onFailure": "ROLLBACK"
+        }
+      },
+      {
+        "id": "TYPE-CASE-CODE",
+        "revision": 1,
+        "kind": "TypeDefinition",
+        "name": "TYPE-CASE-CODE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "TYPE-CASE-CODE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "base": {
+            "kind": "String"
+          },
+          "semantics": "NOMINAL",
+          "refinement": {
+            "kind": "LENGTH",
+            "min": 1,
+            "max": 40
+          }
+        }
+      },
+      {
+        "id": "UC-TASK",
+        "revision": 1,
+        "kind": "UseCase",
+        "name": "UC-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "UC-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "service": {
+            "id": "SERVICE-TASKS",
+            "revision": 1
+          },
+          "steps": [
+            {
+              "id": "STEP-CMD-REVIEW",
+              "revision": 1
+            },
+            {
+              "id": "STEP-CMD-APPROVE",
+              "revision": 1
+            },
+            {
+              "id": "STEP-CMD-ARCHIVE",
+              "revision": 1
+            }
+          ],
+          "input": {
+            "id": "INPUT-TASK",
+            "revision": 1
+          },
+          "output": {
+            "id": "OUTPUT-TASK",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "USER",
+        "revision": 1,
+        "kind": "Entity",
+        "name": "USER",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "USER",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "identity": [
+            {
+              "id": "USER-ID",
+              "revision": 1
+            }
+          ],
+          "tenantField": {
+            "id": "USER-TENANT",
+            "revision": 1
+          },
+          "tenancy": "SCOPED"
+        }
+      },
+      {
+        "id": "USER-ID",
+        "revision": 1,
+        "kind": "Field",
+        "name": "USER-ID",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "USER-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "USER",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "USER",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "USER-TENANT",
+        "revision": 1,
+        "kind": "Field",
+        "name": "USER-TENANT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "USER-TENANT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "USER",
+            "revision": 1
+          },
+          "type": {
+            "kind": "Identifier",
+            "entity": {
+              "id": "ORG",
+              "revision": 1
+            }
+          },
+          "optional": false,
+          "classification": "INTERNAL",
+          "classificationRef": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "VIEW-EMPTY",
+        "revision": 1,
+        "kind": "ViewState",
+        "name": "VIEW-EMPTY",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "VIEW-EMPTY",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "screen": {
+            "id": "SCREEN-TASK",
+            "revision": 1
+          },
+          "state": "EMPTY",
+          "message": "Task view: empty"
+        }
+      },
+      {
+        "id": "VIEW-ERROR",
+        "revision": 1,
+        "kind": "ViewState",
+        "name": "VIEW-ERROR",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "VIEW-ERROR",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "screen": {
+            "id": "SCREEN-TASK",
+            "revision": 1
+          },
+          "state": "ERROR",
+          "message": "Task view: error",
+          "recovery": {
+            "id": "ACTION-TASK",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "VIEW-LOADING",
+        "revision": 1,
+        "kind": "ViewState",
+        "name": "VIEW-LOADING",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "VIEW-LOADING",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "screen": {
+            "id": "SCREEN-TASK",
+            "revision": 1
+          },
+          "state": "LOADING",
+          "message": "Task view: loading"
+        }
+      },
+      {
+        "id": "VIEW-SUCCESS",
+        "revision": 1,
+        "kind": "ViewState",
+        "name": "VIEW-SUCCESS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "VIEW-SUCCESS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "screen": {
+            "id": "SCREEN-TASK",
+            "revision": 1
+          },
+          "state": "SUCCESS",
+          "message": "Task view: success"
+        }
+      },
+      {
+        "id": "VO-TITLE",
+        "revision": 1,
+        "kind": "ValueObject",
+        "name": "VO-TITLE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "VO-TITLE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "equality": "STRUCTURAL"
+        }
+      },
+      {
+        "id": "WF-CASE",
+        "revision": 1,
+        "kind": "StateMachine",
+        "name": "WF-CASE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "WF-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "CASE",
+            "revision": 1
+          },
+          "initial": {
+            "id": "STATE-OPEN",
+            "revision": 1
+          }
+        }
+      },
+      {
+        "id": "WIZARD-TASK",
+        "revision": 1,
+        "kind": "Wizard",
+        "name": "WIZARD-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "WIZARD-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "screen": {
+            "id": "SCREEN-TASK",
+            "revision": 1
+          },
+          "steps": [
+            {
+              "id": "WSTEP-INPUT",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "WSTEP-INPUT",
+        "revision": 1,
+        "kind": "WizardStep",
+        "name": "WSTEP-INPUT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "WSTEP-INPUT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "wizard": {
+            "id": "WIZARD-TASK",
+            "revision": 1
+          },
+          "form": {
+            "id": "FORM-TASK",
+            "revision": 1
+          },
+          "requiresPrevious": false
+        }
+      }
+    ],
+    "issues": []
+  },
+  "contentDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+}

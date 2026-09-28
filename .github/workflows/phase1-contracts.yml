@@ -1,4 +1,4 @@
-name: Phase 1 contracts
+name: ACP semantic and canonical contracts
 
 on:
   push:
@@ -24,9 +24,15 @@ jobs:
           cache-dependency-path: tooling/requirements.txt
       - name: Install pinned contract tooling
         run: python -m pip install -r tooling/requirements.txt
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+          package-manager-cache: false
       - name: Check dependency consistency
         run: python -m pip check
       - name: Check documentation and repository contracts
         run: python tooling/check_repository.py
       - name: Validate schemas, both corpora, and semantic tests
         run: python -m unittest discover -s tooling/tests -v
+      - name: Independently verify canonical bytes and hashes
+        run: node tooling/check_canonical_vectors.mjs

@@ -9,7 +9,7 @@ Status: normative Phase 1 elaboration of charter v0.2, sections 1–6, 27, 31, 4
 3. Proposals, conversations, imported observations, and AI suggestions are candidates, never implicit approvals.
 4. Source/infrastructure observations describe what exists; deployment/runtime observations describe what runs. Neither rewrites intended behavior. Differences produce drift records and proposed change sets.
 
-MUST, MUST NOT, SHOULD, and MAY express contract strength. `Normative` means a requirement for implementation, not a claim that it is already executable. [Coverage](coverage.md) makes that distinction explicit. `PROPOSED` ADRs have no decision authority. Accepted engineering ADRs in this repository record decisions made under the user's Phase 1 authorization; they do not approve fixture business rules or grant production privileges.
+MUST, MUST NOT, SHOULD, and MAY express contract strength. `Normative` means a requirement for implementation, not a claim that it is already executable. [Coverage](coverage.md) makes that distinction explicit. `PROPOSED` ADRs have no decision authority. Accepted engineering ADRs in this repository record decisions within the user's authorized development phase; they do not approve fixture business rules or grant production privileges.
 
 ## Invariants
 

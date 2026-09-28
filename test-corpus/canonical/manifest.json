@@ -1,0 +1,15 @@
+{
+  "profile": "acp-jcs-safe-v1",
+  "examples": [
+    {
+      "file": "payment.json",
+      "contentDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+      "sourceDigest": "sha256:6177521b3ea4a9e5fd6326010f01755d9ef54300e96c5bdeb0d83a757d0d4bc8"
+    },
+    {
+      "file": "case-management.json",
+      "contentDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+      "sourceDigest": "sha256:749d1fbdcf7a59cfd4f5c28ec37ed83e7d5913a72a2922521eb5697f90418418"
+    }
+  ]
+}

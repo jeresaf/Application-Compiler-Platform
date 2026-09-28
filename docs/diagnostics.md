@@ -1,5 +1,7 @@
 # Executable Phase 1 diagnostic contract
 
+Phase 2's separate `ACP-IR-*` codes and CLI behavior are documented in the [canonical contract](canonical-ir.md#reproduction-and-diagnostics). The Phase 1 catalogue below is unchanged.
+
 Applies to historical kernel 0.1 and current authoring model 0.2.0. This catalogue contains only emitted codes; future compiler/target diagnostics require their own implementation and fixtures.
 
 ## Authoring-model envelope and ordering

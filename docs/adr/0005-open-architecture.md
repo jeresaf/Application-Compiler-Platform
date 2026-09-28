@@ -16,6 +16,8 @@ Resolution note, 2026-09-20: the P-01 through P-05 investigation rows below are 
 
 ## Infrastructure and evolution decisions
 
+Resolution note, 2026-09-28: [ADR-0011](0011-canonical-interchange.md) resolves P-07 for bounded Canonical Application 0.1.0 interchange, normalization, bytes/digests and authoring 0.2.0 candidate import. The historical row below remains the original investigation. Production authority/signatures, persistence, future-version transformations and plugin wire ABI are not implemented by this resolution. P-06 and P-08 through P-13 remain open.
+
 | ID / question | Options and recommendation | Consequences / evidence / blocked work |
 | --- | --- | --- |
 | P-06 Durable state and concurrent proposals | Mutable document store, full event sourcing, or immutable snapshots with semantic journal. Recommend evaluate snapshots plus atomic append-only change journal behind a repository port; not a commitment to event sourcing | Crash/retry/branch/read-set conflict experiments; compare storage cost and operational recovery. Blocks storage engine, merge algorithm, trusted atomic apply |

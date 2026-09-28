@@ -15,7 +15,7 @@ def main():
                 problems.append(f"{path.relative_to(ROOT)}: missing link {target}")
     for folder in ("docs", "contracts", "test-corpus", "tooling", ".github"):
         for path in (ROOT / folder).rglob("*"):
-            if path.suffix not in {".md", ".json", ".py", ".txt", ".yml"}:
+            if path.suffix not in {".md", ".json", ".py", ".mjs", ".txt", ".yml"}:
                 continue
             for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
                 if line.rstrip() != line:
