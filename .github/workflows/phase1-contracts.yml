@@ -1,4 +1,4 @@
-name: ACP semantic and canonical contracts
+name: ACP semantic, canonical and change contracts
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
         run: python -m pip check
       - name: Check documentation and repository contracts
         run: python tooling/check_repository.py
-      - name: Validate schemas, both corpora, and semantic tests
+      - name: Validate all schemas, corpora, history and recovery tests
         run: python -m unittest discover -s tooling/tests -v
       - name: Independently verify canonical bytes and hashes
         run: node tooling/check_canonical_vectors.mjs

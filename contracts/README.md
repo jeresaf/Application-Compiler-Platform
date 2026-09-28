@@ -2,6 +2,7 @@
 
 | Schema | Exact version | Role |
 | --- | --- | --- |
+| [change.schema.json](change.schema.json) | ChangeSet 0.1.0 | Exact base, closed operations, migrations, source receipts and bounded history-observation definition. |
 | [canonical.schema.json](canonical.schema.json) | Canonical Application 0.1.0 | Normalized content using semantic model 0.2.0, exact versions/features and digest; approval authority remains external. |
 | [phase1.schema.json](phase1.schema.json) | Authoring model 0.2.0 | Current 69-kind bounded Phase 1 model: common identity/lifecycle/basis, P-01 through P-05 semantics and closed expression/type algebra. |
 | [kernel.schema.json](kernel.schema.json) | Historical authoring kernel 0.1.0 | Frozen 20-kind regression contract; does not enforce 0.2 obligations. |
@@ -16,4 +17,4 @@ Shape validation alone is insufficient. [validate.py](../tooling/validate.py) se
 
 The [payment](../test-corpus/phase1/payment.json) and [case-management](../test-corpus/phase1/case-management.json) fixtures use the current model. The [historical corpus](../test-corpus/semantic/cases.json) remains a separate regression suite. [Coverage](../docs/coverage.md) states the enforcement limits.
 
-The [canonical contract](../docs/canonical-ir.md) and ADR-0011 select canonical serialization/hashing. [canonical_contract.py](../tooling/canonical_contract.py) generates the separate schema from pinned Phase 1 types; tests enforce reproducibility. Storage, target layout, plugin ABI and authenticated approval/evidence formats remain unselected. Material changes require an ADR, explicit contract version reasoning and positive/negative fixtures. Framework, parser, ORM, database, cloud, MCP and production-language annotations are outside semantic records.
+The [canonical contract](../docs/canonical-ir.md) and ADR-0011 select canonical serialization/hashing. [canonical_contract.py](../tooling/canonical_contract.py) generates the separate schema from pinned Phase 1 types; tests enforce reproducibility. [change_contract.py](../tooling/change_contract.py) similarly builds the independent Phase 3 schema. [ADR-0012](../docs/adr/0012-change-history.md) defines reference history and authority ports; production storage/identity, target layout, plugin ABI and evidence trust remain unselected. Material changes require explicit version reasoning and tests. Framework, parser, ORM, database, cloud, MCP and production-language annotations remain outside semantic records.

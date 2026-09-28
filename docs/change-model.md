@@ -1,6 +1,8 @@
 # Semantic change and provenance contract
 
-Status: normative logical contract; persistence, merge algorithm and execution implementation remain P-06/P-09. Phase 2's [canonical contract](canonical-ir.md) resolves bounded P-07 content encoding/import, not this change engine. Basis: charter §§3.7, 3.11, 17–22, 26.
+The [executable reference protocol](change-reference.md) and [ADR-0012](adr/0012-change-history.md) implement the bounded semantic-history portion of this logical contract. Broader build/release/source/data-analysis obligations below remain future requirements.
+
+Status: normative logical contract with bounded Phase 3 reference implementation. Production persistence and generated-source P-09 remain deferred. Phase 2's [canonical contract](canonical-ir.md) is unchanged. Basis: charter §§3.7, 3.11, 17–22, 26.
 
 ## Records
 
@@ -30,7 +32,7 @@ This avoids holding a storage transaction across a build or deployment. A crash 
 
 ## Concurrency and history
 
-Edits on disjoint files are not necessarily semantically independent. Compare declared read/write sets and dependency closure. Simultaneous change of an ID/revision, conflicting policy, changed locked decision, or incompatible requirement produces a merge proposal, never last-write-wins. Disjoint semantic changes may be rebased only with fresh validation, impact, and approvals. Exact merge algorithm and storage engine are proposed in ADR-0005.
+Edits on disjoint files are not necessarily semantically independent. Compare declared read/write sets and dependency closure. Simultaneous change of an ID/revision, conflicting policy, changed locked decision, or incompatible requirement produces a merge proposal, never last-write-wins. Disjoint semantic changes may be rebased only with fresh validation, impact, and approvals. ADR-0012 and the reference protocol define bounded rebase/conflict rules; production storage remains unselected.
 
 Rollback of a specification creates a new history entry; it cannot undo deployed data destruction. Production rollback may require restore or forward repair. Retired IDs remain reserved. Historical evidence remains inspectable but becomes stale when any relevant revision, artifact, environment, tool, or profile changes.
 
@@ -38,4 +40,4 @@ Rollback of a specification creates a new history entry; it cannot undo deployed
 
 Plan expand → optional dual read/write → backfill → verify → switch → contract when compatibility requires it. Each phase has retry/idempotency behavior, ownership, data preconditions, active client constraints, and recovery evidence. Contracting schema before old clients retire blocks release. Financial/audit deletion and secret/security changes require dedicated approval scope. A backup claim is insufficient without restore verification.
 
-Acceptance scenarios for Phase 3: rename preserves ID; stale base fails without writes; retry does not duplicate journal entries; concurrent security edits conflict; a locked decision cannot be casually revised; narrowing detects incompatible observed data; a crash resumes safely; stale evidence cannot satisfy a new revision. These are contracts, not tests claimed to run in Phase 1.
+The [Phase 3 report](phase3-completion-report.md) records executable rename, stale-base/read-set, retry, security conflict, locked-decision, crash and evidence-staleness tests. Structural narrowing requires a reviewed migration plan; live observed-data analysis remains deferred and is not claimed by these tests.

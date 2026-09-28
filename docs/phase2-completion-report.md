@@ -1,5 +1,7 @@
 # Phase 2 Canonical IR report
 
+Historical closure record: the Phase 3-not-started statement below was true at Phase 2 closure. Subsequent authorized Phase 3 work is recorded separately in its [completion report](phase3-completion-report.md); the accepted Canonical IR is unchanged.
+
 Date: 2026-09-28. Scope: Canonical Application `0.1.0`, semantic model `0.2.0`, byte profile `acp-jcs-safe-v1`.
 
 **PHASE 2 = CLOSED AND GREEN at the bounded contract scope below. PHASE 3 = NOT STARTED.** Local validation and both hosted CI jobs passed for implementation commit `4ee23b9987b74ffc4bb1bc769e4e9ba83e5be233`. The documentation-only closure commit is subject to the same CI workflow.

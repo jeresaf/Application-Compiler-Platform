@@ -79,4 +79,27 @@ Applicability/context failures may return immediately. Invalid records contribut
 
 There are 30 model codes, five design codes and seven evidence codes. Historical cases compare exact model code/subject multiplicity; current portable negatives require specified code/subject pairs and allow independent extra errors. Focused sidecar tests compare code strings. [Coverage](coverage.md) records representative test limits.
 
-Later adapters may add exact revisions, source URI/spans, related locations and provenance only through a separate tested contract. Capability, lowering, migration, trust and production verification error families are not executable here and are intentionally absent from this catalogue. A raised development-helper exception (for example explicit rounding rejection) is not another ACP diagnostic family.
+Later adapters may add source spans and richer locations only through tested contracts. Capability, lowering and production verification families remain deferred. Phase 3's separate change/reference-authority errors are listed below. Ordinary development-helper exceptions are not additional ACP diagnostic families.
+
+## Phase 3 change errors
+
+`ChangeError.code` is a stable `ACP-CHANGE-` prefixed code; the Python API raises it and performs no partial accepted-state write. Messages are explanations, not stable matching keys. No change CLI or frontend source-location envelope is implemented. Phase 2 canonical errors remain their own family at canonical boundaries.
+
+| Suffix | Meaning |
+| --- | --- |
+| SHAPE | Closed/versioned/bounded ChangeSet violation |
+| BASE / STALE_BASE | Inconsistent exact historical binding / current head advanced |
+| READSET | Declared or inferred dependency/absent-ID reservation stale |
+| OPERATION / REVISION | Duplicate/no-effect operation / wrong expected or next revision |
+| IDENTITY / LIFECYCLE / SUPERSESSION | ID reuse or kind issue / invalid transition / invalid replacement |
+| SEMANTIC | Candidate fails accepted canonical semantics |
+| MIGRATION / ROLLBACK | Missing or unknown migration obligations / invalid historical restoration or irreversible repair |
+| AUTHORITY | Invalid, insufficient, expired/revoked or unavailable approval/session authority |
+| PLAN | Recomputed content/impact/migration differs from reviewed plan |
+| PROVENANCE / SOURCE | Unknown parent / non-reproducible retained import receipt |
+| IDEMPOTENCY | Invalid retry key or key bound to another change |
+| EVIDENCE | Invalid bounded observation or wrong historical binding |
+| HISTORY | Journal, snapshot, indexes, proof binding or external anchor inconsistent |
+| NOT_FOUND / STORAGE | Missing record / reference store failure or unsupported format |
+
+Tests assert expected codes and unchanged accepted head for rejections. Integrity checking is bounded: malformed privileged storage corruption may also fail strict JSON/canonical parsing; unanchored coherent rewrites cannot be detected by hashes alone. See [reference protocol](change-reference.md).

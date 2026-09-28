@@ -1,0 +1,30 @@
+{
+  "experiment": "synthetic-six-snapshot-storage-v1",
+  "python": "3.14.7",
+  "sqlite": "3.50.4",
+  "platform": "Windows",
+  "results": [
+    {
+      "domain": "payment.json",
+      "entries": 6,
+      "initialDatabaseBytes": 307200,
+      "finalDatabaseBytes": 2359296,
+      "snapshotPayloadBytes": 281870,
+      "journalPayloadBytes": 506603,
+      "proposalPayloadBytes": 1387260,
+      "reopenAndAnchoredAudit": "PASS",
+      "finalContentDigest": "sha256:a85576d6beabfb7a2a5417a18539db6160cc925f819a0b6c6e183b9f33f88311"
+    },
+    {
+      "domain": "case-management.json",
+      "entries": 6,
+      "initialDatabaseBytes": 442368,
+      "finalDatabaseBytes": 3235840,
+      "snapshotPayloadBytes": 420609,
+      "journalPayloadBytes": 710315,
+      "proposalPayloadBytes": 1895720,
+      "reopenAndAnchoredAudit": "PASS",
+      "finalContentDigest": "sha256:d019e23f6455f5aeb38da324f0726b22e875e223a3d4420721a654db3fb150ca"
+    }
+  ]
+}

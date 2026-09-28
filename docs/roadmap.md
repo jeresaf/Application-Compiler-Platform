@@ -7,8 +7,8 @@ The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 throu
 | 0 Constitution | Authority hierarchy, vocabulary, AI boundaries, production definition | Baseline recorded |
 | 1 Meta-model | Typed identity/lifecycle/basis/ownership, bounded domain semantics, closed schemas, diagnostics, positive/negative corpus, two domains and cross-platform CI | **COMPLETE: bounded model 0.2.0 closed and green** |
 | 2 Canonical IR | Approved/typed/normalized framework-neutral snapshots; serialization/version/hash vectors; migrations and compatibility suite | **COMPLETE: bounded Canonical Application 0.1.0, closed and green.** ADR-0011 resolves bounded P-07; [report](phase2-completion-report.md) |
-| 3 Change/provenance | Atomic changes, semantic diff/impact, proposals, authenticated approval, journal/history and crash/race tests | Logical contracts only; P-06/P-09 open |
-| 4 Compiler core | Independently testable compiler stages, ports, diagnostics and mappings | Stage contracts only; production runtime unselected |
+| 3 Change/provenance | Atomic changes, semantic diff/impact, proposals, authenticated approval, journal/history and crash/race tests | Implementation complete; final validation pending. Bounded P-06 and semantic-history P-09 in [ADR-0012](adr/0012-change-history.md); [report](phase3-completion-report.md) |
+| 4 Compiler core | Independently testable compiler stages, ports, diagnostics and mappings | **NOT STARTED**; stage contracts only; production runtime unselected |
 | 5 DSL/frontend evaluation | Comparative parser/editor/diagnostic/refactor/performance experiments and technology ADR | ADR-0004 protocol only; no experiments, grammar or selection |
 | 6 First target | Selected production stack, capability negotiation, Target IR, deterministic generation and migration/ownership tests | No target chosen; P-08 open |
 | 7 Source intelligence | Symbol/reference/type graph, completeness, ownership, impact and drift regressions | Port contracts only; P-09/P-10 open |
@@ -25,14 +25,14 @@ Accepted bounded semantics and safe exclusions are in [coverage](coverage.md); e
 ## Next gated investigations
 
 1. Phase 2 local and Ubuntu/Windows validation is complete, including independent canonical-byte checks. The user's continuation after Phase 1 closure began this phase on 2026-09-28; its [report](phase2-completion-report.md) records exact evidence and limitations.
-2. Phase 3 next addresses P-06: atomic changes/journal, revision and read-set conflict detection, provenance retention and approval integration. Phase 2 defines immutable content and candidate import, not durable state or authenticated authority.
-3. Preserve P-06 and P-09 for durable changes, concurrency, provenance and regeneration; P-08 for capability/plugin boundaries; P-10 for source intelligence; P-11 for isolation; P-12 for production authority/evidence; P-13 for AI candidate validation.
+2. Phase 3 implements atomic history, dependency-aware conflicts, provenance and authenticated approval through replaceable reference adapters. Its report records current validation; do not begin Phase 4 in this task.
+3. Preserve the remaining P-09 generated-source ownership/regeneration work; P-08 capability/plugin boundaries; P-10 source intelligence; P-11 isolation; P-12 production authority/evidence; P-13 AI candidate validation. Production persistence and identity remain unselected despite executable reference adapters.
 4. Perform ADR-0004's required evidence-based experiments before selecting any production language/parser. Semantic stabilization does not select a technology automatically.
 
 P-01 through P-05 are resolved at bounded Phase 1 scope; they are not immediate open investigations. Their explicit exclusions remain rejected until separately proposed and approved.
 
-## Reference evolution remains later work
+## Reference evolution and later releases
 
 Payment tests monetary types and tenant-scoped command/workflow contracts. Case-management tests organization/users, related owned case records, assigned review, approval/archive workflows and task UI without financial assumptions. Neither is a generated or production-validated application.
 
-The later repeated-release corpus must exercise stable-ID rename, optional relationship addition, required-field backfill, tenant policy tightening, workflow evolution, API/event version coexistence, UI redesign, target upgrade and recovery. Each measures migration safety, provenance, custom-source preservation, stale evidence, drift and reproducibility. One-time generation cannot satisfy production readiness.
+Phase 3 executes initial state, stable-ID rename, optional relationship, required field with migration obligations, security tightening and workflow change in both domains. These are semantic history sequences, not deployed releases. Later work must execute actual backfills, API/event coexistence, UI redesign, target upgrades and recovery, measuring migration safety, custom-source preservation, stale evidence and drift. One-time generation cannot satisfy production readiness.

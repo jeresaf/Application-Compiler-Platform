@@ -1,5 +1,7 @@
 # Phase 1 executable coverage
 
+This document preserves Phase 1 coverage below. Phase 3 adds the separate reference history coverage described at the end; Phase 1 helper limitations do not negate those later additions.
+
 Current authoring model: **0.2.0, 69 kinds**. P-01 through P-05 have accepted bounded semantics in ADR-0006 through ADR-0010. The 20-kind 0.1 kernel is historical regression coverage, not the current model. The [meta-model](metamodel.md) is normative; the [completion report](phase1-completion-report.md) records test and CI evidence.
 
 ## Supported kind inventory
@@ -57,7 +59,7 @@ These are accepted scope limits, not unresolved foundational P-01 through P-05 d
 
 ## Later-phase obligations and known limits
 
-P-06 and P-08 through P-13 remain proposals: persistence/concurrency, plugin capabilities, provenance/source intelligence, build isolation, production evidence authority and AI candidate validation. Phase 2 resolves bounded P-07 in [ADR-0011](adr/0011-canonical-interchange.md), with coverage in its [report](phase2-completion-report.md). ADR-0004's production language/parser experiments have not run. Test-tool languages do not decide them.
+Phase 2 resolves bounded P-07 in [ADR-0011](adr/0011-canonical-interchange.md). Phase 3 addresses bounded P-06 and semantic-history P-09 in [ADR-0012](adr/0012-change-history.md). P-08, remaining generated-source P-09, and P-10 through P-13 remain proposals. Production persistence/identity remain unselected. ADR-0004's production language/parser experiments have not run; test-tool languages do not decide them.
 
 Validation is bounded to 1 MiB/48 levels. Model validity does not prove guard satisfiability, dynamic cardinality, live tenant enforcement, execution safety, accessibility or measured quality. Synthetic approvals and applicability-authority inputs are not trusted credentials. No generated application, database migration, deployment or production benchmark has been produced. Phase 2 adds candidate schema import and cross-runtime canonical byte/hash checks; neither proves a production system. Coverage is representative, not exhaustive branch or model checking.
 
@@ -66,3 +68,19 @@ Phase 1 closes the bounded meta-model contract only. The [roadmap](roadmap.md) n
 ## Regression policy
 
 Material semantic changes require updated contracts, a design decision when appropriate, positive and negative fixtures, stable diagnostics and coverage updates. Reproducing cases accompany semantic validator fixes. A schema addition alone is not implemented semantic support.
+
+## Phase 3 reference history coverage
+
+[Protocol](change-reference.md), [corpus](../test-corpus/change/README.md) and [completion report](phase3-completion-report.md) define the scope and observed results. There are 24 new test methods plus all 39 earlier methods, with subcases and seeded permutations. Exhaustive branch coverage and distributed model checking are not claimed.
+
+| Area | Executable evidence | Boundaries |
+| --- | --- | --- |
+| Identity/history | Immutable snapshots/revisions, stable rename, deprecation, supersession tombstones, retired-ID reservation, exact historical lookup | No resurrection or destructive history rewrite |
+| Change planning | Closed operations, isolated proposals, deterministic diff, read/write sets and transitive exact-reference closure | Source/runtime impact explicitly NOT_ANALYZED; no general satisfiability analysis |
+| Concurrency | Real competing connections, stale reads/head, independent rebase, conflicts and security fences | One application per store, one serialized writer; conservative fences can require extra review |
+| Approval | Injected authenticated sessions, exact content/plan proof, scopes, expiry, revocation, separation and unavailable-authority denial | HMAC/session/grant/revocation reference only; production IAM and key management deferred |
+| Recovery/integrity | Atomic snapshot/journal/index/retry writes, real subprocess exits, retry deduplication, hash/index audit, coherent-tamper external-anchor test, portable restore | Process crashes are not power-loss certification; independent trusted anchors required for privileged rewrites |
+| Provenance/evidence | Requirement/decision/concept/change/snapshot lineage, original source receipts, stale and failed observations, forward rollback | No generated-source ownership or production evidence authority; rollback cannot undo deployed data |
+| Evolution | Six accepted stages for payment and case-management; required migration and irreversible review | Migration obligations are reviewed descriptions; no actual application data is migrated |
+
+Canonical schemas, canonical serialization/hash implementation and Phase 2 byte/hash vectors are unchanged. SQLite and Python are replaceable reference tooling. Phase 4 is not started.

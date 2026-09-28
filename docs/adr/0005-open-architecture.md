@@ -16,6 +16,8 @@ Resolution note, 2026-09-20: the P-01 through P-05 investigation rows below are 
 
 ## Infrastructure and evolution decisions
 
+Phase 3 resolution note, 2026-09-28: [ADR-0012](0012-change-history.md) implements bounded P-06 and the requirement/decision/concept/change/snapshot history portion of P-09. Final executable acceptance is recorded in its report. Production storage/identity and generated-source ownership/regeneration remain unselected. Older status notes below describe their original phases and do not reopen already resolved bounded questions.
+
 Resolution note, 2026-09-28: [ADR-0011](0011-canonical-interchange.md) resolves P-07 for bounded Canonical Application 0.1.0 interchange, normalization, bytes/digests and authoring 0.2.0 candidate import. The historical row below remains the original investigation. Production authority/signatures, persistence, future-version transformations and plugin wire ABI are not implemented by this resolution. P-06 and P-08 through P-13 remain open.
 
 | ID / question | Options and recommendation | Consequences / evidence / blocked work |

@@ -1,5 +1,7 @@
 # Phase 1 semantic corpus
 
+Phase 3's [change corpus](change/README.md) adds deterministic evolution vectors, storage observations and transaction/authority/history tests for both existing domains. No authoring or canonical regression vectors are replaced.
+
 Phase 2's separate [canonical corpus](canonical/README.md) adds normalized versions of both domains, expected hashes, portable byte vectors and migration/approval-boundary tests. The authoring regression assets below remain unchanged.
 
 The corpus contains two separate authoring versions. Historical validation remains regression evidence; it is not a shortcut around current model requirements.

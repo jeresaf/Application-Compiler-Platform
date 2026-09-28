@@ -1,0 +1,223 @@
+{
+  "scenarioVersion": "0.1.0",
+  "domains": [
+    {
+      "base": "payment.json",
+      "steps": [
+        {
+          "step": "initial-release",
+          "contentDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e"
+        },
+        {
+          "step": "stable-id-rename",
+          "contentDigest": "sha256:2a190961cc1514837db3267eaf001a6c0d2c7401da33309a4f1a8e96b6da9132",
+          "writeSet": [
+            "A11Y-TASK",
+            "ACT-USER",
+            "ACTION-TASK",
+            "AGG-ENT-MEMBER",
+            "ASSIGN-ENT-PAYMENT",
+            "AUTH-ACT-USER",
+            "BOUNDARY-TASK",
+            "COMPATIBILITY-TASK",
+            "CONSTRAINT-TENANT",
+            "CONTROL-TEXT",
+            "ENT-MEMBER",
+            "EVID-A11Y",
+            "EVID-COMPATIBILITY",
+            "EVID-OBSERVE",
+            "EVID-PERF",
+            "EVID-RELIABILITY",
+            "EVID-TEST",
+            "FILTER-TEXT",
+            "FLD-MEMBER-ID",
+            "FLD-MEMBER-TENANT",
+            "FORM-TASK",
+            "HOLD-ENT-PAYMENT",
+            "JOB-TASK",
+            "LIFECYCLE-ENT-PAYMENT",
+            "OBSERVE-TASK",
+            "PERF-TASK",
+            "PERM-CMD-RECORD",
+            "PERM-QUERY-TASKS",
+            "POL-QUERY-TASKS",
+            "POL-TENANT",
+            "POLSET-CMD-RECORD",
+            "POLSET-QUERY-TASKS",
+            "QUERY-TASKS",
+            "RATE-CMD-RECORD",
+            "RATE-QUERY-TASKS",
+            "REL-MEMBER-PAYMENT",
+            "RELIABILITY-TASK",
+            "RESPONSIVE-TASK",
+            "ROLE-OPERATOR",
+            "SCOPE-ENT-PAYMENT",
+            "SCREEN-TASK",
+            "SEARCH-TASKS",
+            "SERVICE-TASKS",
+            "SESSION-ACT-USER",
+            "STEP-CMD-RECORD",
+            "TABLE-TASKS",
+            "TEST-TASK",
+            "TRANS-RECORD",
+            "UC-TASK",
+            "VIEW-EMPTY",
+            "VIEW-ERROR",
+            "VIEW-LOADING",
+            "VIEW-SUCCESS",
+            "WIZARD-TASK",
+            "WSTEP-INPUT"
+          ],
+          "risk": "LOW",
+          "compatibility": "BACKWARD"
+        },
+        {
+          "step": "optional-relationship",
+          "contentDigest": "sha256:b144dbdc5839ce7e49b2c72d8795e55d43ef1d28d728a0ccce18c6f80c042d27",
+          "writeSet": [
+            "EVOLUTION-optional-relationship"
+          ],
+          "risk": "LOW",
+          "compatibility": "BACKWARD"
+        },
+        {
+          "step": "required-field",
+          "contentDigest": "sha256:107b477da9d3dba0786a383655fe14ace8fb9095f8c548ac32445b0ea7e7da21",
+          "writeSet": [
+            "EVOLUTION-required-field"
+          ],
+          "risk": "HIGH",
+          "compatibility": "REVIEW_REQUIRED"
+        },
+        {
+          "step": "security-tightening",
+          "contentDigest": "sha256:f46de7fe55cb3fed216cf4a3bedda68231215a968e74b32ac7ab5517f6e44ac6",
+          "writeSet": [
+            "SESSION-ACT-USER"
+          ],
+          "risk": "HIGH",
+          "compatibility": "REVIEW_REQUIRED"
+        },
+        {
+          "step": "workflow-change",
+          "contentDigest": "sha256:a85576d6beabfb7a2a5417a18539db6160cc925f819a0b6c6e183b9f33f88311",
+          "writeSet": [
+            "TRANS-RECORD"
+          ],
+          "risk": "REVIEW",
+          "compatibility": "REVIEW_REQUIRED"
+        }
+      ]
+    },
+    {
+      "base": "case-management.json",
+      "steps": [
+        {
+          "step": "initial-release",
+          "contentDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+        },
+        {
+          "step": "stable-id-rename",
+          "contentDigest": "sha256:d9a39a2a64dd573ead0b24f5c90ea2e063c5a96090cd0547184f05b6959cb548",
+          "writeSet": [
+            "A11Y-TASK",
+            "ACTION-TASK",
+            "AGG-CASE",
+            "APPROVAL",
+            "APPROVAL-ID",
+            "APPROVAL-TENANT",
+            "APPROVAL-reason",
+            "ASSIGN-CASE",
+            "BOUNDARY-TASK",
+            "CMD-APPROVE",
+            "CMD-ARCHIVE",
+            "CMD-REVIEW",
+            "CONTROL-TEXT",
+            "EVID-A11Y",
+            "EVID-OBSERVE",
+            "EVID-RELIABILITY",
+            "EVID-TEST",
+            "FORM-TASK",
+            "HOLD-CASE",
+            "JOB-TASK",
+            "LIFECYCLE-CASE",
+            "OBSERVE-TASK",
+            "PERM-CMD-APPROVE",
+            "PERM-CMD-ARCHIVE",
+            "PERM-CMD-REVIEW",
+            "POL-APPROVE",
+            "POL-ARCHIVE",
+            "POL-QUERY-TASKS",
+            "POL-REVIEW",
+            "POLSET-CMD-APPROVE",
+            "POLSET-CMD-ARCHIVE",
+            "POLSET-CMD-REVIEW",
+            "POLSET-QUERY-TASKS",
+            "RATE-CMD-APPROVE",
+            "RATE-CMD-ARCHIVE",
+            "RATE-CMD-REVIEW",
+            "REL-CASE-APPROVAL",
+            "RELIABILITY-TASK",
+            "RESPONSIVE-TASK",
+            "ROLE-REVIEWER",
+            "SCREEN-TASK",
+            "SERVICE-TASKS",
+            "STEP-CMD-APPROVE",
+            "STEP-CMD-ARCHIVE",
+            "STEP-CMD-REVIEW",
+            "TEST-TASK",
+            "TRANS-APPROVE",
+            "TRANS-ARCHIVE",
+            "TRANS-REVIEW",
+            "TX-TASK",
+            "UC-TASK",
+            "VIEW-EMPTY",
+            "VIEW-ERROR",
+            "VIEW-LOADING",
+            "VIEW-SUCCESS",
+            "WIZARD-TASK",
+            "WSTEP-INPUT"
+          ],
+          "risk": "LOW",
+          "compatibility": "BACKWARD"
+        },
+        {
+          "step": "optional-relationship",
+          "contentDigest": "sha256:726a57b0ff385d824ee1702f2457e870bf58c123027a4bc65a42f17b2ed9f91c",
+          "writeSet": [
+            "EVOLUTION-optional-relationship"
+          ],
+          "risk": "LOW",
+          "compatibility": "BACKWARD"
+        },
+        {
+          "step": "required-field",
+          "contentDigest": "sha256:e809857519045082cec5f59811dbaeda0f3038c7adde066a257039aae8cfbfb8",
+          "writeSet": [
+            "EVOLUTION-required-field"
+          ],
+          "risk": "HIGH",
+          "compatibility": "REVIEW_REQUIRED"
+        },
+        {
+          "step": "security-tightening",
+          "contentDigest": "sha256:0005dec5c13c32afc15b4436612c275625114230a1bd864bfbdac41bbea8c0da",
+          "writeSet": [
+            "SESSION-ACT-REVIEWER"
+          ],
+          "risk": "HIGH",
+          "compatibility": "REVIEW_REQUIRED"
+        },
+        {
+          "step": "workflow-change",
+          "contentDigest": "sha256:d019e23f6455f5aeb38da324f0726b22e875e223a3d4420721a654db3fb150ca",
+          "writeSet": [
+            "TRANS-APPROVE"
+          ],
+          "risk": "REVIEW",
+          "compatibility": "REVIEW_REQUIRED"
+        }
+      ]
+    }
+  ]
+}
