@@ -2,7 +2,7 @@
 
 Date: 2026-09-28. Scope: Canonical Application `0.1.0`, semantic model `0.2.0`, byte profile `acp-jcs-safe-v1`.
 
-Status: implementation and local validation complete; hosted Ubuntu/Windows CI pending. Phase 3 has not begun. Closure requires both hosted jobs to pass.
+**PHASE 2 = CLOSED AND GREEN at the bounded contract scope below. PHASE 3 = NOT STARTED.** Local validation and both hosted CI jobs passed for implementation commit `4ee23b9987b74ffc4bb1bc769e4e9ba83e5be233`. The documentation-only closure commit is subject to the same CI workflow.
 
 ## Delivered scope
 
@@ -16,7 +16,14 @@ Status: implementation and local validation complete; hosted Ubuntu/Windows CI p
 
 Local Windows/CPython 3.14.7 full regression suite: **39 tests passed in 145.537 seconds**, comprising the original 23 tests and 16 Phase 2 tests. Repository link/whitespace checks, dependency consistency and diff checks passed. Both canonical examples also passed the CLI with `authorityVerified: false`.
 
-Independent Node.js 24.21.0 in the local Linux tooling container: **PASS** for 9 positive byte/hash vectors, 13 negative inputs, malformed UTF-8, oversized input, and both complete example content hashes. Hosted Ubuntu/Windows evidence is pending. The CI workflow runs all Python tests and the independent Node checker on both OSs.
+Independent Node.js 24.21.0 in the local Linux tooling container: **PASS** for 9 positive byte/hash vectors, 13 negative inputs, malformed UTF-8, oversized input, and both complete example content hashes.
+
+[GitHub Actions run 36420005203](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/36420005203) completed successfully for the implementation commit on 2026-09-28. Both jobs passed dependency consistency, repository checks, all 39 Python tests and the independent Node.js 24.21.0 byte/hash checker:
+
+| Hosted runner | Observed full-suite result |
+| --- | --- |
+| Ubuntu 24.04 | [PASS: 39 tests in 63.587 seconds](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/36420005203/job/108920168015) |
+| Windows 2025 | [PASS: 39 tests in 50.511 seconds](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/36420005203/job/108920167338) |
 
 ## Exit criteria
 
@@ -28,7 +35,7 @@ Independent Node.js 24.21.0 in the local Linux tooling container: **PASS** for 9
 | Exact version/feature rejection and migration/reapproval | Implemented for the only registered source/target pair |
 | Authenticated approval remains independent of content validity | Contract and fail-closed port tested with synthetic authority doubles; real authority is later work |
 | Local regression suite and repository checks | PASS: 39 tests, repository/diff checks and dependency consistency |
-| Ubuntu and Windows CI including independent byte checks | Pending push |
+| Ubuntu and Windows CI including independent byte checks | PASS: run 36420005203, both jobs above |
 
 ## Limits and next phase
 

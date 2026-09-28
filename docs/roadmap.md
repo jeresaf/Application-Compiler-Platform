@@ -6,7 +6,7 @@ The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 throu
 | --- | --- | --- |
 | 0 Constitution | Authority hierarchy, vocabulary, AI boundaries, production definition | Baseline recorded |
 | 1 Meta-model | Typed identity/lifecycle/basis/ownership, bounded domain semantics, closed schemas, diagnostics, positive/negative corpus, two domains and cross-platform CI | **COMPLETE: bounded model 0.2.0 closed and green** |
-| 2 Canonical IR | Approved/typed/normalized framework-neutral snapshots; serialization/version/hash vectors; migrations and compatibility suite | **Implemented; closure validation in progress.** ADR-0011 resolves bounded P-07; [report](phase2-completion-report.md) |
+| 2 Canonical IR | Approved/typed/normalized framework-neutral snapshots; serialization/version/hash vectors; migrations and compatibility suite | **COMPLETE: bounded Canonical Application 0.1.0, closed and green.** ADR-0011 resolves bounded P-07; [report](phase2-completion-report.md) |
 | 3 Change/provenance | Atomic changes, semantic diff/impact, proposals, authenticated approval, journal/history and crash/race tests | Logical contracts only; P-06/P-09 open |
 | 4 Compiler core | Independently testable compiler stages, ports, diagnostics and mappings | Stage contracts only; production runtime unselected |
 | 5 DSL/frontend evaluation | Comparative parser/editor/diagnostic/refactor/performance experiments and technology ADR | ADR-0004 protocol only; no experiments, grammar or selection |
@@ -24,7 +24,7 @@ Accepted bounded semantics and safe exclusions are in [coverage](coverage.md); e
 
 ## Next gated investigations
 
-1. Complete Phase 2 local and Ubuntu/Windows validation, including independent canonical-byte checks. The user's continuation after Phase 1 closure began this phase on 2026-09-28.
+1. Phase 2 local and Ubuntu/Windows validation is complete, including independent canonical-byte checks. The user's continuation after Phase 1 closure began this phase on 2026-09-28; its [report](phase2-completion-report.md) records exact evidence and limitations.
 2. Phase 3 next addresses P-06: atomic changes/journal, revision and read-set conflict detection, provenance retention and approval integration. Phase 2 defines immutable content and candidate import, not durable state or authenticated authority.
 3. Preserve P-06 and P-09 for durable changes, concurrency, provenance and regeneration; P-08 for capability/plugin boundaries; P-10 for source intelligence; P-11 for isolation; P-12 for production authority/evidence; P-13 for AI candidate validation.
 4. Perform ADR-0004's required evidence-based experiments before selecting any production language/parser. Semantic stabilization does not select a technology automatically.

@@ -1,6 +1,6 @@
 # Semantic change and provenance contract
 
-Status: normative logical contract; persistence, merge algorithm, and execution implementation remain P-06/P-07/P-09. Basis: charter §§3.7, 3.11, 17–22, 26.
+Status: normative logical contract; persistence, merge algorithm and execution implementation remain P-06/P-09. Phase 2's [canonical contract](canonical-ir.md) resolves bounded P-07 content encoding/import, not this change engine. Basis: charter §§3.7, 3.11, 17–22, 26.
 
 ## Records
 
