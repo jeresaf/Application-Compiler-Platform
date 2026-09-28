@@ -2,7 +2,7 @@
 
 Date: 2026-09-20. Exact scope: **ACP bounded authoring meta-model `0.2.0`**, with historical kernel `0.1.0` regression assets and independent design-binding/evidence sidecars at `0.1.0`.
 
-**Closure status: validation in progress; final Ubuntu/Windows CI evidence pending. Phase 2 has not begun.** This report will mark Phase 1 closed only after every required check is green.
+**PHASE 1 = CLOSED AND GREEN. PHASE 2 = NOT STARTED.** All required local checks and both GitHub Actions matrix jobs passed for closure implementation commit `6bc7e5718e100e6a884bd1f252174618e20ab39a`; exact run/job evidence appears below. This report records that completed validation, and the documentation-only closure commit is subject to the same CI workflow.
 
 ## Scope and closure changes
 
@@ -80,7 +80,11 @@ The original 28-node tenant/payment draft and synthetic approved snapshot still 
 
 ## Local and CI evidence
 
-The final post-edit full suite passed on Windows/CPython 3.14.7: **23 tests, 105.451 seconds, OK**. Dependency consistency, repository links/whitespace and staged diff checks also passed. An additional documentation audit found all 69 kinds and exactly the 42 emitted diagnostic codes documented. Cross-platform CI is still required before closure.
+Continuation validation on 2026-09-28 passed: all 23 tests in 123.413 seconds, repository contract checks, dependency consistency and staged whitespace checks. This local rerun does not constitute a new hosted CI run.
+
+The final post-edit full suite passed on Windows/CPython 3.14.7: **23 tests, 105.451 seconds, OK**. Dependency consistency, repository links/whitespace and staged diff checks also passed. An additional documentation audit found all 69 kinds and exactly the 42 emitted diagnostic codes documented.
+
+[GitHub Actions run 35513441694](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/35513441694) completed with **success** for commit `6bc7e5718e100e6a884bd1f252174618e20ab39a` on 2026-09-20. Both hosted runners reported version 2.337.0 and passed setup-python v7.0.0, dependency consistency, repository checks and the complete suite. Neither job log contained an obsolete/deprecated action-runtime warning. These are observed results, not a planned workflow configuration.
 
 | Required check | Result |
 | --- | --- |
@@ -93,8 +97,8 @@ The final post-edit full suite passed on Windows/CPython 3.14.7: **23 tests, 105
 | Design-binding tests | PASS in full local suite |
 | Evidence semantics tests | PASS in full local suite |
 | Complete unittest suite | PASS: 23 tests in 105.451 seconds after edits |
-| GitHub Actions Ubuntu 24.04 | Pending closure push |
-| GitHub Actions Windows 2025 | Pending closure push |
+| GitHub Actions Ubuntu 24.04 | [PASS: 23 tests in 56.816 seconds](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/35513441694/job/106085261899) |
+| GitHub Actions Windows 2025 | [PASS: 23 tests in 51.885 seconds](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/35513441694/job/106085261796) |
 
 Reproduction commands are in the [root README](../README.md). The [workflow](../.github/workflows/phase1-contracts.yml) runs dependency consistency, repository checks and full unittest discovery on every push/PR with both OS jobs and fail-fast disabled.
 
@@ -113,22 +117,22 @@ No Canonical IR encoding/hash format, production implementation language/runtime
 
 ## Exact remaining Phase 2 blockers
 
-At this report revision, both green CI jobs are still closure blockers; all required local checks pass. Once CI passes, no known unresolved P-01 through P-05 semantic decision blocks a separately authorized Phase 2 design. **The user's review/authorization gate remains required before Phase 2 starts.** P-07 is work to resolve within that future phase before adopting canonical serialization/digests; it is not implicitly settled here. Production language/parser implementation remains gated by ADR-0004's experiments, and other P-06 onward proposals retain their specific later-stage blockers.
+**No known Phase 1 semantic or test issue remains that blocks a separately authorized Phase 2 design.** All required local and cross-platform checks pass. **The user's review/authorization gate remains required before Phase 2 starts.** P-07 is work to resolve within that future phase before adopting canonical serialization/digests; it is not implicitly settled here. Production language/parser implementation remains gated by ADR-0004's experiments, and other P-06 onward proposals retain their specific later-stage blockers. Safe deferrals and representative-coverage limits above remain explicit; closure does not certify production implementation.
 
 ## Final Phase 1 exit-criteria table
 
 | Criterion | Status | Evidence |
 | --- | --- | --- |
 | P-01 through P-05 accepted or safely deferred | SATISFIED | ADR-0006 through ADR-0010 and bounded exclusions above |
-| Machine-readable model matches accepted scope | SATISFIED locally | Closed 0.2.0 schema and semantic validators; schema/builder tests |
+| Machine-readable model matches accepted scope | SATISFIED | Closed 0.2.0 schema and semantic validators; schema/builder tests |
 | Identity/lifecycle/ownership/basis/reference contracts precise | SATISFIED | Normative meta-model, common validator and focused regression checks |
-| Positive and negative semantic corpus | SATISFIED locally | 154 portable cases, including per-promoted-kind negatives |
-| Two meaningfully different domains | SATISFIED locally | Payment and case-management; union covers 69 kinds |
-| Framework leakage remains rejected | SATISFIED locally | Closed schemas and unknown-property corpus/UI tests |
+| Positive and negative semantic corpus | SATISFIED | 154 portable cases, including per-promoted-kind negatives |
+| Two meaningfully different domains | SATISFIED | Payment and case-management; union covers 69 kinds |
+| Framework leakage remains rejected | SATISFIED | Closed schemas and unknown-property corpus/UI tests |
 | ADR-0004 remains unresolved without experiments | SATISFIED | PROPOSED; no production technology selection |
 | Foundational semantics no longer reported unresolved | SATISFIED | Coverage, ADR index and historical resolution note |
 | Repository checks and complete local suite pass | SATISFIED | Final local results above |
-| Ubuntu and Windows CI finish green | PENDING | Closure push required |
+| Ubuntu and Windows CI finish green | SATISFIED | Successful run and individual job logs linked above |
 | Phase 2 remains gated and unstarted | SATISFIED | This task stops at Phase 1 closure |
 
-Final closure is withheld until the pending rows pass.
+All Phase 1 exit criteria are satisfied. Stop at this review gate; no Canonical IR, parser experiment, MCP implementation, target generation or production-runtime selection is part of this closure.

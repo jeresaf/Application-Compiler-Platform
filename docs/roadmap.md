@@ -1,11 +1,11 @@
 # Roadmap and exit criteria
 
-The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 through P-05 through ADR-0006 through ADR-0010. Phase 1 closure awaits the final repository checks and green Ubuntu/Windows CI evidence recorded in the [completion report](phase1-completion-report.md). Later-stage boundary documents are contracts, not implementations.
+The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 through P-05 through ADR-0006 through ADR-0010. **Phase 1 exit criteria are satisfied:** repository checks and all 23 tests passed locally and on both Ubuntu and Windows in [CI run 35513441694](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/35513441694). The [completion report](phase1-completion-report.md) records the evidence and limitations. Later-stage boundary documents are contracts, not implementations.
 
 | Phase | Deliverable / exit evidence | Current state |
 | --- | --- | --- |
 | 0 Constitution | Authority hierarchy, vocabulary, AI boundaries, production definition | Baseline recorded |
-| 1 Meta-model | Typed identity/lifecycle/basis/ownership, bounded domain semantics, closed schemas, diagnostics, positive/negative corpus, two domains and cross-platform CI | Model 0.2.0 implemented; closure validation pending |
+| 1 Meta-model | Typed identity/lifecycle/basis/ownership, bounded domain semantics, closed schemas, diagnostics, positive/negative corpus, two domains and cross-platform CI | **COMPLETE: bounded model 0.2.0 closed and green** |
 | 2 Canonical IR | Approved/typed/normalized framework-neutral snapshots; serialization/version/hash vectors; migrations and compatibility suite | **Next gated phase; not started.** P-07 requires a decision during that phase |
 | 3 Change/provenance | Atomic changes, semantic diff/impact, proposals, authenticated approval, journal/history and crash/race tests | Logical contracts only; P-06/P-09 open |
 | 4 Compiler core | Independently testable compiler stages, ports, diagnostics and mappings | Stage contracts only; production runtime unselected |

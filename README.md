@@ -4,7 +4,7 @@ ACP maintains an authoritative application specification through semantic compil
 
 ## Current state
 
-**Phase 1 authoring model 0.2.0** contains 69 closed semantic kinds with executable shape and semantic validation. ADR-0006 through ADR-0010 resolve the bounded P-01 through P-05 contracts. Payment and case-management reference domains exercise the same model. See the [completion report](docs/phase1-completion-report.md) for closure evidence and the review gate.
+**Phase 1 is closed and green: authoring model 0.2.0.** It contains 69 closed semantic kinds with executable shape and semantic validation. ADR-0006 through ADR-0010 resolve the bounded P-01 through P-05 contracts. Payment and case-management reference domains exercise the same model. See the [completion report](docs/phase1-completion-report.md) for local and Ubuntu/Windows CI evidence and the review gate.
 
 This is **not Canonical IR or a production compiler**. No production runtime/language, parser, target stack, storage engine or plugin ABI has been selected. [ADR-0004](docs/adr/0004-technology-evaluation.md) remains PROPOSED. Phase 2 is the next gated phase and has not begun.
 
