@@ -1,8 +1,8 @@
 # Phase 3 Change and Provenance report
 
-Date: 2026-09-28. Scope: ChangeSet/reference history 0.1.0 over unchanged Canonical Application 0.1.0 and semantic model 0.2.0.
+Implementation date: 2026-09-28; closure verified 2026-09-29. Scope: ChangeSet/reference history 0.1.0 over unchanged Canonical Application 0.1.0 and semantic model 0.2.0.
 
-**Implementation and local validation complete; cross-platform CI pending. Phase 4 is not started.** Phase 1 and Phase 2 remain accepted baselines. Closure will be recorded only after both hosted jobs pass.
+**PHASE 1 = CLOSED AND GREEN. PHASE 2 = CLOSED AND GREEN. PHASE 3 = CLOSED AND GREEN. PHASE 4 = NOT STARTED.** Local validation and both hosted jobs passed for implementation commit `d5dd58864c5ff9bfe078c56c81d522635dbd2016`. The documentation-only closure commit uses the same CI workflow.
 
 ## Delivered contract and decisions
 
@@ -39,7 +39,14 @@ Full local Windows regression: **63 tests passed in 362.524 seconds** (39 earlie
 
 Independent Node.js 24.21.0 in the local Linux tooling container: **PASS**, 9 positive vectors, 13 negative inputs, malformed UTF-8, oversized input and both complete snapshot hashes. Repository links/whitespace, dependency consistency and diff checks passed. Canonical schema, implementation and corpus are byte-for-byte unchanged relative to accepted baseline `085a8d4b97692a148c732ff4d227cd3409c2058d`.
 
-Hosted Ubuntu/Windows results are pending.
+[GitHub Actions run 36435314943](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/36435314943) passed both hosted jobs for the final implementation, including dependency consistency, repository checks, all 63 Python tests and independent Node.js 24.21.0 byte/hash checks:
+
+| Hosted runner | Observed full-suite result |
+| --- | --- |
+| Ubuntu 24.04 | [PASS: 63 tests in 84.835 seconds](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/36435314943/job/108971600446) |
+| Windows 2025 | [PASS: 63 tests in 196.377 seconds](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/36435314943/job/108971600102) |
+
+All required Phase 3 exit checks are satisfied. Canonical vectors remain unchanged, earlier regressions are green, both domain evolution sequences pass, and documentation accompanies the executable contracts. No Phase 4 work was begun.
 
 Both domain sequences execute **initial -> stable-ID rename -> optional relationship -> required field -> security tightening -> workflow change**. Each accepted transition is authenticated and audited, with exact historical revisions retained. Golden content hashes/write sets/risk/compatibility are regenerated and compared. Session-policy tightening reduces the idle window; workflow change adds a restrictive guard. These are meaningful semantic changes, not executed application releases or a satisfiability proof.
 

@@ -1,6 +1,6 @@
 # ADR-0012: Bounded semantic changes and durable history
 
-Status: ACCEPTED, bounded Phase 3 reference contract; transactional invariants pass local executable tests. Date: 2026-09-28. Scope: P-06 and the semantic-history portion of P-09. Phase closure still requires hosted Ubuntu/Windows checks in the completion report.
+Status: ACCEPTED, bounded Phase 3 reference contract. Date: 2026-09-28; closure verified 2026-09-29. Scope: P-06 and the semantic-history portion of P-09. Transactional invariants and all earlier regressions pass locally and on hosted Ubuntu/Windows; the completion report records the evidence.
 
 ## Decision and alternatives
 
