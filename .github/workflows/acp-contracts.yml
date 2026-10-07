@@ -9,11 +9,7 @@ permissions:
 
 jobs:
   contracts:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-24.04, windows-2025]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
@@ -23,16 +19,16 @@ jobs:
           cache: pip
           cache-dependency-path: tooling/requirements.txt
       - name: Install pinned contract tooling
-        run: python -m pip install -r tooling/requirements.txt
+        run: python3.14 -m pip install -r tooling/requirements.txt
       - uses: actions/setup-node@v7
         with:
           node-version: '24.21.0'
           package-manager-cache: false
       - name: Check dependency consistency
-        run: python -m pip check
+        run: python3.14 -m pip check
       - name: Check documentation and repository contracts
-        run: python tooling/check_repository.py
+        run: python3.14 tooling/check_repository.py
       - name: Validate all schemas, corpora, history and recovery tests
-        run: python -m unittest discover -s tooling/tests -v
+        run: python3.14 -m unittest discover -s tooling/tests -v
       - name: Independently verify canonical bytes and hashes
         run: node tooling/check_canonical_vectors.mjs

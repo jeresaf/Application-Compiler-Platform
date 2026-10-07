@@ -102,7 +102,7 @@ The final post-edit full suite passed on Windows/CPython 3.14.7: **23 tests, 105
 | GitHub Actions Ubuntu 24.04 | [PASS: 23 tests in 56.816 seconds](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/35513441694/job/106085261899) |
 | GitHub Actions Windows 2025 | [PASS: 23 tests in 51.885 seconds](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/35513441694/job/106085261796) |
 
-Reproduction commands are in the [root README](../README.md). The [workflow](../.github/workflows/phase1-contracts.yml) runs dependency consistency, repository checks and full unittest discovery on every push/PR with both OS jobs and fail-fast disabled.
+Reproduction commands are in the [root README](../README.md). The [workflow](https://github.com/jeresaf/Application-Compiler-Platform/blob/46e6907c7d2589d1d35bede722c55612cd7cc862/.github/workflows/phase1-contracts.yml) runs dependency consistency, repository checks and full unittest discovery on every push/PR with both OS jobs and fail-fast disabled.
 
 ## Known limitations
 

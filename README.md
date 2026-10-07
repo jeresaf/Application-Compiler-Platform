@@ -4,11 +4,11 @@ ACP maintains an authoritative application specification through semantic compil
 
 ## Current state
 
-**Phase 1 is closed and green: authoring model 0.2.0.** It contains 69 closed semantic kinds with executable shape and semantic validation. ADR-0006 through ADR-0010 resolve the bounded P-01 through P-05 contracts. Payment and case-management reference domains exercise the same model. See the [completion report](docs/phase1-completion-report.md) for local and Ubuntu/Windows CI evidence and the review gate.
+**Phase 1 is closed and green: authoring model 0.2.0.** It contains 69 closed semantic kinds with executable shape and semantic validation. ADR-0006 through ADR-0010 resolve the bounded P-01 through P-05 contracts. Payment and case-management reference domains exercise the same model. See the [completion report](docs/phase1-completion-report.md) for historical local and Ubuntu/Windows CI evidence and the review gate.
 
 **Phase 2 is closed and green: Canonical Application IR 0.1.0.** The [canonical contract](docs/canonical-ir.md), [ADR-0011](docs/adr/0011-canonical-interchange.md) and [Phase 2 report](docs/phase2-completion-report.md) define typed content, canonical bytes/hashes, compatibility and migration/reapproval. Its schemas and byte/hash vectors are unchanged by Phase 3.
 
-**Phase 3 is closed and green: bounded Change and Provenance 0.1.0.** Immutable snapshots, atomic journal, proposals, dependency conflicts, authenticated approval, provenance and recovery are executable reference contracts. All 63 tests and independent canonical checks pass on Ubuntu and Windows. See [ADR-0012](docs/adr/0012-change-history.md), the [reference protocol](docs/change-reference.md) and [completion report](docs/phase3-completion-report.md). SQLite and HMAC are replaceable reference adapters. No production language/runtime, parser, storage engine, authority, target or plugin ABI is selected; [ADR-0004](docs/adr/0004-technology-evaluation.md) remains PROPOSED. **Phase 4 is not started.**
+**Phase 3 is closed and green: bounded Change and Provenance 0.1.0.** Immutable snapshots, atomic journal, proposals, dependency conflicts, authenticated approval, provenance and recovery are executable reference contracts. All 63 tests and independent canonical checks pass on Linux; the completion report preserves earlier Ubuntu and Windows validation evidence. See [ADR-0012](docs/adr/0012-change-history.md), the [reference protocol](docs/change-reference.md) and [completion report](docs/phase3-completion-report.md). SQLite and HMAC are replaceable reference adapters. No production language/runtime, parser, storage engine, authority, target or plugin ABI is selected; [ADR-0004](docs/adr/0004-technology-evaluation.md) remains PROPOSED. **Phase 4 is not started.**
 
 Authoring and canonical versions have separate roles:
 
@@ -29,45 +29,38 @@ Start with the [constitution](docs/constitution.md), [glossary](docs/glossary.md
 | `contracts/` | Closed authoring/canonical schemas and independent design/evidence sidecars |
 | `test-corpus/` | Portable semantic/canonical cases and two synthetic reference domains |
 | `tooling/` | Replaceable validation harness and reference decision helpers; no production compiler dependency |
-| `.github/workflows/` | Semantic/canonical checks on Ubuntu and Windows for every push and PR |
+| `.github/workflows/` | Full semantic, canonical and change-history checks on Ubuntu 24.04 for every push and PR |
 
 ## Run all contract checks
 
 CPython 3.14.7 and the pinned dependencies are test tooling only under [ADR-0003](docs/adr/0003-contract-harness.md).
 
-For Ubuntu setup, migration notes and rollback, see [DEV_LINUX.md](DEV_LINUX.md).
+Linux is the supported ACP development and CI host platform. Ubuntu 24.04 is the official hosted CI environment. This engineering-environment decision does not make the Canonical IR, semantic model, change model, compiler contracts or generated targets Linux-specific; ACP architecture remains target-neutral.
+
+Phase 1–3 completion reports retain their historical validation evidence. Future phase reports use Linux evidence unless another environment is deliberately added.
+
+For Linux setup and local validation, see [DEV_LINUX.md](DEV_LINUX.md).
 
 ```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r tooling/requirements.txt
-.venv/bin/python -m pip check
-.venv/bin/python tooling/check_repository.py
-.venv/bin/python -m unittest discover -s tooling/tests -v
+python3.14 -m venv .venv
+.venv/bin/python3.14 -m pip install -r tooling/requirements.txt
+.venv/bin/python3.14 -m pip check
+.venv/bin/python3.14 tooling/check_repository.py
+.venv/bin/python3.14 -m unittest discover -s tooling/tests -v
 node tooling/check_canonical_vectors.mjs
 ```
 
-Windows PowerShell:
-
-```powershell
-python -m venv .venv
-.venv/Scripts/python -m pip install -r tooling/requirements.txt
-.venv/Scripts/python -m pip check
-.venv/Scripts/python tooling/check_repository.py
-.venv/Scripts/python -m unittest discover -s tooling/tests -v
-node tooling/check_canonical_vectors.mjs
-```
-
-On POSIX use `.venv/bin/python`. Node.js 24.21.0 independently checks canonical bytes/hashes as test tooling only. The full Python suite includes all earlier authoring/canonical checks and Phase 3 transactions, crash/concurrency, approval, history and two-domain evolution tests. [Corpus documentation](test-corpus/README.md) identifies the fixtures. Run `python tooling/history_experiment.py` for synthetic storage-size and reopened-history observations.
+Node.js 24.21.0 independently checks canonical bytes/hashes as test tooling only. The full Python suite includes all earlier authoring/canonical checks and Phase 3 transactions, crash/concurrency, approval, history and two-domain evolution tests. [Corpus documentation](test-corpus/README.md) identifies the fixtures. Run `.venv/bin/python3.14 tooling/history_experiment.py` for synthetic storage-size and reopened-history observations.
 
 Optional individual model checks:
 
-```powershell
-.venv/Scripts/python tooling/validate.py test-corpus/semantic/reference.json
-.venv/Scripts/python tooling/validate.py test-corpus/semantic/approved.json --mode compile
-.venv/Scripts/python tooling/validate.py test-corpus/phase1/payment.json
-.venv/Scripts/python tooling/validate.py test-corpus/phase1/case-management.json
+```bash
+.venv/bin/python3.14 tooling/validate.py test-corpus/semantic/reference.json
+.venv/bin/python3.14 tooling/validate.py test-corpus/semantic/approved.json --mode compile
+.venv/bin/python3.14 tooling/validate.py test-corpus/phase1/payment.json
+.venv/bin/python3.14 tooling/validate.py test-corpus/phase1/case-management.json
 ```
 
 Validation is offline after dependency installation. CLI exits: 0 valid for the selected authoring profile, 1 validation errors, 2 invalid/unreadable input. The legacy CLI envelope label `scope: kernel` is retained for both versions; `modelVersion` selects the contract. The `compile` profile checks necessary approval closure only: it does not normalize IR, authenticate approval or certify production readiness. Fixtures and attestations are synthetic.
 
-Validate a canonical candidate with `.venv/Scripts/python tooling/canonical_ir.py validate test-corpus/canonical/payment.json`. Separate `normalize` and `migrate` operations require compile-eligible authoring 0.2.0 input and produce candidates only; see the [canonical commands](docs/canonical-ir.md#reproduction-and-diagnostics).
+Validate a canonical candidate with `.venv/bin/python3.14 tooling/canonical_ir.py validate test-corpus/canonical/payment.json`. Separate `normalize` and `migrate` operations require compile-eligible authoring 0.2.0 input and produce candidates only; see the [canonical commands](docs/canonical-ir.md#reproduction-and-diagnostics).

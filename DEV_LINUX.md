@@ -1,95 +1,75 @@
-# Ubuntu L490 development
+# Linux development baseline
+
+Linux is the supported ACP development and CI host platform. Hosted CI uses
+Ubuntu 24.04 in `.github/workflows/acp-contracts.yml`. This is an engineering
+environment decision only: ACP semantics, Canonical IR, change model, compiler
+contracts and generated targets remain target-neutral.
 
 This checkout contains specifications, JSON contracts, a Python validation CLI,
-and an independent Node canonical-byte/hash checker. There is no application
-server, Docker/Compose stack, external database, environment file, migration or
-seed command. No host ports, containers or background services are required.
-SQLite is a standard-library reference adapter; tests create temporary databases.
-Do not add shared PostgreSQL/MariaDB infrastructure for this harness.
+and an independent Node canonical-byte/hash checker. No application server,
+Docker stack, external database, environment file, host ports or background
+services are required. SQLite is a standard-library reference adapter; tests
+create temporary databases.
 
 ## Setup
 
-Run from the repository root. Use Node 24.21.0 through the existing NVM setup
-(`nvm use 24.21.0`), matching CI. Python tooling is CPython 3.14;
-CI remains pinned to 3.14.7. This laptop has Ubuntu CPython 3.14.4, which is
-validated separately; it does not replace the CI pin or select a production runtime.
-All dependency versions in `tooling/requirements.txt` remain unchanged.
+Run from the repository root. CPython 3.14.7 and Node.js 24.21.0 are pinned in CI
+as test tooling, not production runtime selections. Use the existing NVM setup
+(`nvm use 24.21.0`) for Node. This Ubuntu laptop currently has CPython 3.14.4;
+local results record that patch version separately from the unchanged CI pin.
+Dependency versions remain pinned in `tooling/requirements.txt`.
 
-Never reuse a Windows virtual environment or bytecode cache. Preserve a copied
-`.venv` outside the checkout before creating the Linux environment. Python
-regenerates incompatible bytecode automatically; caches are ignored by Git.
-
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r tooling/requirements.txt
-.venv/bin/python -m pip check
-```
-
-If Ubuntu reports missing `ensurepip`, install `python3.14-venv` with your
-administrator account, then repeat setup. Alternatively, bootstrap pip only
-inside the isolated environment (the fallback used for this migration):
+If virtual environment creation reports missing `ensurepip`, install the matching
+Ubuntu package using your administrator account, then repeat setup:
 
 ```bash
-python3 -m venv --without-pip .venv
-curl -fsS https://bootstrap.pypa.io/get-pip.py -o /tmp/acp-get-pip.py
-.venv/bin/python /tmp/acp-get-pip.py
-.venv/bin/python -m pip install -r tooling/requirements.txt
+sudo apt-get install python3.14-venv
 ```
 
-No activation is required. Do not run global pip installs or change host runtimes.
-Dependency installation needs network access; validation is offline afterward.
+Keep all Python dependency installation isolated inside the ignored `.venv`:
+
+```bash
+python3.14 -m venv .venv
+.venv/bin/python3.14 -m pip install -r tooling/requirements.txt
+.venv/bin/python3.14 -m pip check
+```
+
+No activation or global pip installation is required. Do not reuse virtual
+environments copied from another OS. To rebuild tooling, preserve any existing
+local environment you need, create a fresh `.venv`, and install the same pinned
+requirements. Dependency installation needs network access; validation is offline
+afterward. Python bytecode caches are ignored by Git.
 
 ## Run and test
 
 ```bash
-.venv/bin/python -m pip check
-.venv/bin/python tooling/check_repository.py
-.venv/bin/python -m unittest discover -s tooling/tests -v
+.venv/bin/python3.14 -m pip check
+.venv/bin/python3.14 tooling/check_repository.py
+.venv/bin/python3.14 -m unittest discover -s tooling/tests -v
 node tooling/check_canonical_vectors.mjs
-.venv/bin/python tooling/validate.py test-corpus/semantic/approved.json --mode compile
-.venv/bin/python tooling/canonical_ir.py validate test-corpus/canonical/payment.json
+.venv/bin/python3.14 tooling/validate.py test-corpus/semantic/approved.json --mode compile
+.venv/bin/python3.14 tooling/canonical_ir.py validate test-corpus/canonical/payment.json
 ```
 
-The last two commands exercise the real CLIs. Compile eligibility is not
-production approval. Commands terminate when complete; there is no service to
-start or stop. Rebuild tooling by creating a fresh virtual environment and
-installing the same requirements. The suite includes SQLite transactions,
-subprocess crash/recovery, concurrency and history persistence tests.
+The first four commands are also required CI gates. The full suite includes all
+Phase 1–3 contracts, SQLite transactions, subprocess crash/recovery, concurrency,
+approval, provenance and two-domain evolution tests. The last two commands
+exercise the real CLIs; compile eligibility is not production approval.
+Commands terminate when complete; there is no service to start or stop.
 
-## Migration and rollback
+## Evidence and phase boundaries
 
-Starting commit: `46e6907c7d2589d1d35bede722c55612cd7cc862`.
-Branch: `codex/ubuntu-l490-migration`.
-The copied Windows environment referenced `C:\Users\User` and contained
-`Scripts/` and `Lib/`; it was preserved at
-`/tmp/acp-windows-venv-20261007` (temporary storage, not a durable backup).
-The new ignored `.venv` uses Linux binaries. README now includes Linux commands;
-`.gitattributes` enforces LF for executable source and shell/CI files.
-No semantic contracts, runtime pins, application behavior or stored data changed.
+Phase 1, Phase 2 and Phase 3 remain CLOSED AND GREEN. Phase 4 is NOT STARTED.
+Their completion reports are historical records, including Windows results that
+actually occurred; this environment cleanup does not rewrite them. Future phase
+reports use Linux evidence unless another environment is deliberately added.
+Canonical byte/hash vectors and semantic/compiler contracts are unchanged.
 
-To roll back the tracked migration changes, first preserve any subsequent work,
-then switch back to `main` after committing or stashing this branch's edits.
-The Linux `.venv` is untracked and independent of branches. Retain it on Ubuntu;
-restore the saved Windows environment only on Windows. No Docker volumes or
-project data need restoration.
+The earlier Ubuntu migration run on 2026-10-07 passed 63 tests in 185.821 seconds
+with CPython 3.14.4, Node v24.21.0 and SQLite 3.46.1. Independent canonical checks
+passed 9 positive vectors, 13 negative vectors and 2 snapshot hashes. That run also
+passed dependency, repository and validation CLI checks.
 
-## Laptop verification — 2026-10-07
-
-- Linux x86_64, CPython 3.14.4, Node v24.21.0, SQLite 3.46.1.
-- Fresh Linux wheels installed with all six dependency pins unchanged.
-- `pip check`, repository checks and `git diff --check`: PASS.
-- Full regression: 63 tests passed in 185.821 seconds.
-- Independent canonical checker: 9 positive and 13 negative vectors plus
-  2 snapshot hashes passed.
-- Approved-authoring compile-profile CLI and canonical payment validation: PASS.
-  Canonical output correctly reports `authorityVerified: false`.
-- Pip reported an unwritable host cache under sandboxing; caching was disabled.
-  Installation and dependency consistency succeeded. No host package was installed.
-- Docker build/health/volume/resource checks are inapplicable: this project has no
-  container services. Container memory/CPU consumption is zero for this workflow;
-  native test-process peak memory/CPU was not measured.
-- No remaining setup step is required in this checkout. For a fresh setup,
-  use the documented isolated pip fallback if the host still lacks `ensurepip`.
-
-Full test log for this run: `/tmp/acp-ubuntu-tests.log` (temporary).
-Changes are left uncommitted for review on the migration branch.
+Any logs under `/tmp`, including `/tmp/acp-ubuntu-tests.log`, are ephemeral local
+evidence, not durable or hosted CI records. Use GitHub Actions run links for hosted
+CI evidence. No container resources or persistent Docker volumes are involved.
