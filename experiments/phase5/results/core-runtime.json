@@ -1,0 +1,233 @@
+{
+  "1000": {
+    "java": {
+      "exitCode": 0,
+      "elapsedMs": 192.02163400041172,
+      "peakRssBytes": 54419456,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Java 21",
+        "nodes": 1000,
+        "graphMs": [
+          63.565425,
+          3.463057,
+          2.886889,
+          2.80972,
+          3.13054,
+          2.779883,
+          2.750952,
+          2.808091
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": 8,
+        "canonical": "NOT_RUN"
+      }
+    },
+    "typescript": {
+      "exitCode": 0,
+      "elapsedMs": 145.8986290017492,
+      "peakRssBytes": 70332416,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "TypeScript 5.9.3 / Node 24.21.0",
+        "nodes": 1000,
+        "graphMs": [
+          3.2521699999999925,
+          1.4953270000000032,
+          1.9840410000000048,
+          0.777985000000001,
+          0.3804749999999899,
+          0.8475080000000048,
+          0.35728299999999535,
+          0.3347660000000019
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": "NOT_RUN",
+        "canonical": "Existing independent Node checker; no new candidate encoder"
+      }
+    },
+    "rust": {
+      "exitCode": 0,
+      "elapsedMs": 6.070585000998108,
+      "peakRssBytes": 2818048,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Rust 1.90.0",
+        "nodes": 1000,
+        "graphMs": [
+          0.297586,
+          0.163243,
+          0.162564,
+          0.15988999999999998,
+          0.160195,
+          0.161466,
+          0.170737,
+          0.160578
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": 8,
+        "canonical": "NOT_RUN"
+      }
+    }
+  },
+  "10000": {
+    "java": {
+      "exitCode": 0,
+      "elapsedMs": 300.99475699898903,
+      "peakRssBytes": 77819904,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Java 21",
+        "nodes": 10000,
+        "graphMs": [
+          81.198402,
+          14.272217,
+          15.766648,
+          12.808266,
+          11.491846,
+          10.353619,
+          8.32865,
+          8.52051
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": 8,
+        "canonical": "NOT_RUN"
+      }
+    },
+    "typescript": {
+      "exitCode": 0,
+      "elapsedMs": 240.30276000121376,
+      "peakRssBytes": 88059904,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "TypeScript 5.9.3 / Node 24.21.0",
+        "nodes": 10000,
+        "graphMs": [
+          12.928920000000005,
+          10.513141999999988,
+          4.354113999999981,
+          6.456698999999986,
+          6.587973000000005,
+          7.045715000000001,
+          5.199331999999998,
+          5.507508000000001
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": "NOT_RUN",
+        "canonical": "Existing independent Node checker; no new candidate encoder"
+      }
+    },
+    "rust": {
+      "exitCode": 0,
+      "elapsedMs": 23.813522999262204,
+      "peakRssBytes": 9359360,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Rust 1.90.0",
+        "nodes": 10000,
+        "graphMs": [
+          2.246146,
+          1.9734829999999999,
+          1.935576,
+          1.9578870000000002,
+          2.028522,
+          1.947582,
+          1.9696370000000003,
+          1.948595
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": 8,
+        "canonical": "NOT_RUN"
+      }
+    }
+  },
+  "100000": {
+    "java": {
+      "exitCode": 0,
+      "elapsedMs": 857.415825001226,
+      "peakRssBytes": 346132480,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Java 21",
+        "nodes": 100000,
+        "graphMs": [
+          177.387505,
+          86.764718,
+          61.29718,
+          29.340315,
+          58.478217,
+          29.059934,
+          61.430671,
+          35.294018
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": 8,
+        "canonical": "NOT_RUN"
+      }
+    },
+    "typescript": {
+      "exitCode": 0,
+      "elapsedMs": 793.4254529973259,
+      "peakRssBytes": 189063168,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "TypeScript 5.9.3 / Node 24.21.0",
+        "nodes": 100000,
+        "graphMs": [
+          93.90470200000001,
+          81.02763099999999,
+          105.16082399999999,
+          62.67321399999997,
+          64.50885300000004,
+          68.30200400000001,
+          72.80707600000005,
+          63.58073400000001
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": "NOT_RUN",
+        "canonical": "Existing independent Node checker; no new candidate encoder"
+      }
+    },
+    "rust": {
+      "exitCode": 0,
+      "elapsedMs": 194.02230700143264,
+      "peakRssBytes": 66781184,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Rust 1.90.0",
+        "nodes": 100000,
+        "graphMs": [
+          19.963216999999997,
+          21.477014999999998,
+          19.71893,
+          19.83565,
+          20.330283,
+          19.270766000000002,
+          17.447693,
+          16.936453
+        ],
+        "cancellation": true,
+        "workLimit": true,
+        "concurrentRuns": 8,
+        "canonical": "NOT_RUN"
+      }
+    }
+  }
+}

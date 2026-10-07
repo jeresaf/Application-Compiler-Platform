@@ -1,0 +1,320 @@
+{
+  "diagnostics": {
+    "duplicate-id": {
+      "exitCode": 0,
+      "elapsedMs": 363.71715200220933,
+      "peakRssBytes": 68079616,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "ANTLR 4.13.2 / Java 21",
+        "errors": [],
+        "parseMs": [
+          95.587543
+        ],
+        "elapsedMs": 138.142757
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 52.25715299820877,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-ID",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "REQ-PAYMENT",
+          "path": "/nodes/28/id",
+          "message": "Semantic ID occurs more than once.",
+          "remediation": "Give each durable concept a unique semantic ID."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 29,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "missing-reference": {
+      "exitCode": 0,
+      "elapsedMs": 376.17399300143006,
+      "peakRssBytes": 67821568,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "ANTLR 4.13.2 / Java 21",
+        "errors": [],
+        "parseMs": [
+          104.814603
+        ],
+        "elapsedMs": 149.731815
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 51.700789997994434,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "FLD-AMOUNT",
+          "path": "/nodes/16/data/owner",
+          "message": "Referenced revision is absent from this snapshot.",
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "stale-reference": {
+      "exitCode": 0,
+      "elapsedMs": 362.6094100000046,
+      "peakRssBytes": 67821568,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "ANTLR 4.13.2 / Java 21",
+        "errors": [],
+        "parseMs": [
+          100.913083
+        ],
+        "elapsedMs": 140.528464
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 43.418581000878476,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "FLD-AMOUNT",
+          "path": "/nodes/16/data/owner",
+          "message": "Referenced revision is absent from this snapshot.",
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "currency-mismatch": {
+      "exitCode": 0,
+      "elapsedMs": 357.81375400256366,
+      "peakRssBytes": 63815680,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "ANTLR 4.13.2 / Java 21",
+        "errors": [],
+        "parseMs": [
+          86.489522
+        ],
+        "elapsedMs": 126.256385
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 48.558816000877414,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "INV-POSITIVE",
+          "path": "/nodes/18/data/predicate",
+          "message": "Operator operands have incompatible semantic types.",
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        },
+        {
+          "code": "ACP-TYPE",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "TRANS-RECORD",
+          "path": "/nodes/27/data/guard",
+          "message": "Operator operands have incompatible semantic types.",
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "boolean-money-literal": {
+      "exitCode": 0,
+      "elapsedMs": 355.8971419988666,
+      "peakRssBytes": 67710976,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "ANTLR 4.13.2 / Java 21",
+        "errors": [],
+        "parseMs": [
+          92.738374
+        ],
+        "elapsedMs": 134.746646
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 49.210088000108954,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "PARAM-ZERO",
+          "path": "/nodes/17/data/value",
+          "message": "Literal does not conform to its semantic type.",
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "terminal-outgoing": {
+      "exitCode": 0,
+      "elapsedMs": 403.03021100044134,
+      "peakRssBytes": 67862528,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "ANTLR 4.13.2 / Java 21",
+        "errors": [],
+        "parseMs": [
+          100.271482
+        ],
+        "elapsedMs": 147.394877
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 84.86334199915291,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "TRANS-RECORD",
+          "path": "/nodes/27/data/from",
+          "message": "A terminal state cannot have an outgoing transition.",
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "ambiguous-transition": {
+      "exitCode": 0,
+      "elapsedMs": 375.4988040018361,
+      "peakRssBytes": 68333568,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "ANTLR 4.13.2 / Java 21",
+        "errors": [],
+        "parseMs": [
+          93.826856
+        ],
+        "elapsedMs": 137.166387
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 51.91732299863361,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "TRANS-DUPLICATE",
+          "path": "/nodes/28/data/command",
+          "message": "Machine has an ambiguous state/command trigger.",
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        },
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "TRANS-RECORD",
+          "path": "/nodes/27/data/command",
+          "message": "Machine has an ambiguous state/command trigger.",
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 29,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "conflict-blocks-compilation": {
+      "exitCode": 0,
+      "elapsedMs": 355.89659600009327,
+      "peakRssBytes": 68280320,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "ANTLR 4.13.2 / Java 21",
+        "errors": [],
+        "parseMs": [
+          82.533422
+        ],
+        "elapsedMs": 127.050731
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 78.05072399787605,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-ISSUE",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "ISSUE-RETENTION",
+          "path": "/issues/0",
+          "message": "Blocking issue remains unresolved.",
+          "remediation": "Resolve blocking uncertainty through an approved Decision."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    }
+  },
+  "determinism": [
+    {
+      "exitCode": 0,
+      "elapsedMs": 435.8539149980061,
+      "peakRssBytes": 79368192,
+      "stderr": "",
+      "status": "PASS",
+      "canonicalEqual": true
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 426.870579001843,
+      "peakRssBytes": 77086720,
+      "stderr": "",
+      "status": "PASS",
+      "canonicalEqual": true
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 434.07966200174997,
+      "peakRssBytes": 75624448,
+      "stderr": "",
+      "status": "PASS",
+      "canonicalEqual": true
+    }
+  ],
+  "stageBoundary": {
+    "payment": {
+      "analyze": "PASS",
+      "normalize": "PASS",
+      "plainDocumentRoundTrip": true,
+      "sourceMapPreserved": true,
+      "scope": "Text adaptation precedes existing Phase 4 structured-only Ingest; Analyze and Normalize execute unchanged; no claim of production textual Ingest selection"
+    },
+    "case-management": {
+      "analyze": "PASS",
+      "normalize": "PASS",
+      "plainDocumentRoundTrip": true,
+      "sourceMapPreserved": true,
+      "scope": "Text adaptation precedes existing Phase 4 structured-only Ingest; Analyze and Normalize execute unchanged; no claim of production textual Ingest selection"
+    }
+  }
+}

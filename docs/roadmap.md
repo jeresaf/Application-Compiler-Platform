@@ -9,7 +9,7 @@ The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 throu
 | 2 Canonical IR | Approved/typed/normalized framework-neutral snapshots; serialization/version/hash vectors; migrations and compatibility suite | **COMPLETE: bounded Canonical Application 0.1.0, closed and green.** ADR-0011 resolves bounded P-07; [report](phase2-completion-report.md) |
 | 3 Change/provenance | Atomic changes, semantic diff/impact, proposals, authenticated approval, journal/history and crash/race tests | **COMPLETE: bounded Change and Provenance 0.1.0, closed and green.** Bounded P-06 and semantic-history P-09 resolved in [ADR-0012](adr/0012-change-history.md); [report](phase3-completion-report.md) |
 | 4 Compiler core | Independently testable compiler stages, ports, diagnostics and mappings | **COMPLETE: bounded Compiler Core 0.1.0, closed and green**; 92 regression tests and Ubuntu CI; eight-stage reference compiler; [report](phase4-completion-report.md); production runtime unselected |
-| 5 DSL/frontend evaluation | Comparative parser/editor/diagnostic/refactor/performance experiments and technology ADR | **NOT STARTED**; ADR-0004 protocol only; no experiments, grammar or selection |
+| 5 DSL/frontend evaluation | Comparative parser/editor/diagnostic/refactor/performance experiments and technology ADR | **EXPLICITLY BLOCKED ON EVIDENCE**; three executable frontends, JVM/TypeScript/Rust slices, canonical and source-analysis probes; [report](phase5-completion-report.md); ADR-0004 remains PROPOSED |
 | 6 First target | Selected production stack, capability negotiation, Target IR, deterministic generation and migration/ownership tests | No target chosen; P-08 open |
 | 7 Source intelligence | Symbol/reference/type graph, completeness, ownership, impact and drift regressions | Port contracts only; P-09/P-10 open |
 | 8 Verification | Isolated build/test/migration/security/traceability/evidence gates | Typed obligations and reference evidence checks only; P-11/P-12 open |
@@ -40,4 +40,4 @@ Phase 3 executes initial state, stable-ID rename, optional relationship, require
 Phase 4 uses typed contracts, a structured reference frontend and a synthetic test
 target. Its P-08/P-09 scope is compiler orchestration/capability/plan provenance only;
 production plugin ABI, real source regeneration and worker isolation remain later
-work. Phase 5 requires a separate continuation; it is not part of this task.
+work. The separately authorized Phase 5 experiments are recorded in their [report](phase5-completion-report.md). No production technology is selected; Phase 6 is NOT STARTED.

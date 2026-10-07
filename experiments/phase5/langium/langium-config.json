@@ -1,0 +1,5 @@
+{
+  "projectName": "Acp",
+  "languages": [{"id":"acp-experiment", "grammar":"Acp.langium", "fileExtensions":[".acp"]}],
+  "out": "generated"
+}

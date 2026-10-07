@@ -1,0 +1,178 @@
+{
+  "percentileMethod": "Nearest rank; n=3 cold, n=5 warm. p95 is the maximum sample, not a statistically stable tail estimate.",
+  "ranked": false,
+  "reason": "Hard-gate evidence incomplete; descriptive timings cannot compensate.",
+  "frontendParse": [
+    {
+      "candidate": "antlr",
+      "nodes": 1000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 115.724,
+      "coldParseP95Ms": 123.276,
+      "warmParseP50Ms": 12.581,
+      "warmParseP95Ms": 15.577,
+      "coldProcessP50Ms": 401.081,
+      "peakRssMiB": 72.66,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "candidate": "antlr",
+      "nodes": 10000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 200.833,
+      "coldParseP95Ms": 204.52,
+      "warmParseP50Ms": 49.041,
+      "warmParseP95Ms": 95.107,
+      "coldProcessP50Ms": 562.728,
+      "peakRssMiB": 171.76,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "candidate": "antlr",
+      "nodes": 100000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 622.748,
+      "coldParseP95Ms": 625.305,
+      "warmParseP50Ms": 361.189,
+      "warmParseP95Ms": 423.808,
+      "coldProcessP50Ms": 890.27,
+      "peakRssMiB": 708.89,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "candidate": "langium",
+      "nodes": 1000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 99.597,
+      "coldParseP95Ms": 108.619,
+      "warmParseP50Ms": 34.872,
+      "warmParseP95Ms": 53.75,
+      "coldProcessP50Ms": 667.041,
+      "peakRssMiB": 137.96,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "candidate": "langium",
+      "nodes": 10000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 479.265,
+      "coldParseP95Ms": 481.034,
+      "warmParseP50Ms": 284.641,
+      "warmParseP95Ms": 355.396,
+      "coldProcessP50Ms": 1083.758,
+      "peakRssMiB": 342.82,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "candidate": "langium",
+      "nodes": 100000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 6171.256,
+      "coldParseP95Ms": 6673.638,
+      "warmParseP50Ms": 6313.803,
+      "warmParseP95Ms": 6798.671,
+      "coldProcessP50Ms": 7032.727,
+      "peakRssMiB": 873.88,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "candidate": "xtext",
+      "nodes": 1000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 171.857,
+      "coldParseP95Ms": 334.039,
+      "warmParseP50Ms": 47.588,
+      "warmParseP95Ms": 58.008,
+      "coldProcessP50Ms": 2308.786,
+      "peakRssMiB": 151.16,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "candidate": "xtext",
+      "nodes": 10000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 578.334,
+      "coldParseP95Ms": 608.713,
+      "warmParseP50Ms": 125.608,
+      "warmParseP95Ms": 266.911,
+      "coldProcessP50Ms": 2885.817,
+      "peakRssMiB": 330.88,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "candidate": "xtext",
+      "nodes": 100000,
+      "coldSamples": 3,
+      "warmSamples": 5,
+      "coldParseP50Ms": 2080.879,
+      "coldParseP95Ms": 2288.904,
+      "warmParseP50Ms": 1255.121,
+      "warmParseP95Ms": 1359.704,
+      "coldProcessP50Ms": 4199.773,
+      "peakRssMiB": 840.05,
+      "observedRssBudgetPass": true,
+      "statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+module Generate
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+Workflow {
+ component = XtextGenerator {
+  configuration = {
+   project = StandardProjectConfig {
+    baseName = "org.acp.experiment"
+    rootPath = "generated"
+    runtime = { enabled = true }
+    genericIde = { enabled = true }
+    eclipsePlugin = { enabled = false }
+    eclipsePluginTest = { enabled = false }
+    createEclipseMetaData = false
+   }
+   code = { encoding = "UTF-8" preferXtendStubs = false }
+  }
+  language = StandardLanguage {
+   name = "org.acp.experiment.Acp"
+   grammarUri = "Acp.xtext"
+   fileExtensions = "acp"
+   serializer = { generateStub = false }
+  }
+ }
+}

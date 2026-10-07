@@ -1,0 +1,8 @@
+{
+  "exitCode": 1,
+  "elapsedMs": 3012.2516800001904,
+  "peakRssBytes": 180281344,
+  "stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"org.eclipse.xtext.service.OperationCanceledManager.checkCanceled(org.eclipse.xtext.util.CancelIndicator)\" because \"this.operationCanceledManager\" is null\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalAcceptor.accept(IdeContentProposalAcceptor.java:50)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider.lookupCrossReference(IdeCrossrefProposalProvider.java:47)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider._createProposals(IdeContentProposalProvider.java:144)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider.createProposals(IdeContentProposalProvider.java:160)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider._createProposals(IdeContentProposalProvider.java:88)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider.createProposals(IdeContentProposalProvider.java:157)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider.createProposals(IdeContentProposalProvider.java:71)\n\tat XtextProbe.main(XtextProbe.java:48)\n",
+  "status": "FAIL",
+  "stdout": ""
+}

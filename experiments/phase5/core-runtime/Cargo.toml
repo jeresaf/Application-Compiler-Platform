@@ -1,0 +1,13 @@
+[package]
+name = "acp-phase5-canonical-probe"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "canonical-probe"
+path = "canonical.rs"
+
+[dependencies]
+serde_json = "=1.0.145"
+sha2 = "=0.10.9"

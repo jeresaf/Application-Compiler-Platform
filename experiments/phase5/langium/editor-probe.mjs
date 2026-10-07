@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import {performance} from 'node:perf_hooks';
+import {createServices} from './services.mjs';
+import {URI} from 'langium';
+const services=createServices();
+const input=fs.readFileSync(new URL('../corpora/payment.acp',import.meta.url),'utf8').trimEnd().split('\n');
+const middle=Math.floor(input.length/2);
+const texts=[[input[0],...input.slice(1,middle)].join('\n'),[input[0],...input.slice(middle)].join('\n')];
+const documents=texts.map((text,i)=>services.shared.workspace.LangiumDocumentFactory.fromString(text,URI.parse(`memory:/module-${i}.acp`)));
+for(const doc of documents)services.shared.workspace.LangiumDocuments.addDocument(doc);
+let start=performance.now();await services.shared.workspace.DocumentBuilder.build(documents,{validation:true});
+const buildMs=performance.now()-start;
+const doc=documents[0], offset=texts[0].indexOf('ref ')+4;
+const params={textDocument:{uri:doc.uri.toString()},position:doc.textDocument.positionAt(offset+2)};
+start=performance.now();const definition=await services.lsp.DefinitionProvider.getDefinition(doc,params);const definitionMs=performance.now()-start;
+start=performance.now();const references=await services.lsp.ReferencesProvider.findReferences(doc,{...params,context:{includeDeclaration:true}});const referencesMs=performance.now()-start;
+start=performance.now();const completion=await services.lsp.CompletionProvider.getCompletion(doc,{...params,position:doc.textDocument.positionAt(offset)});const completionMs=performance.now()-start;
+start=performance.now();const rename=await services.lsp.RenameProvider.rename(doc,{...params,newName:'RENAMED-STABLE-ID'});const renameMs=performance.now()-start;
+const beforeDiagnostics=documents.map(d=>d.diagnostics);
+// Delete the other module and ask the actual native builder to invalidate references.
+start=performance.now();await services.shared.workspace.DocumentBuilder.update([], [documents[1].uri]);const deleteMs=performance.now()-start;
+console.log(JSON.stringify({candidate:'Langium 4.4.0 native services',project:'Two modules registered in native workspace; no import visibility policy implemented',buildMs,definitionMs,definition, referencesMs,referenceCount:references.length,completionMs,completionCount:completion?.items.length,renameMs,rename,renameSafety:'FAIL: native declaration-name rename changes stable ID; production requires separate label rename',beforeDiagnostics,deleteMs,afterDeleteDiagnostics:doc.diagnostics,imports:'NOT_SUPPORTED',cyclicImports:'NOT_SUPPORTED',semanticHighlighting:'NOT_RUN'}));

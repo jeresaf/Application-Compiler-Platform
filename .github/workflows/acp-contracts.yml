@@ -32,3 +32,47 @@ jobs:
         run: python3.14 -m unittest discover -s tooling/tests -v
       - name: Independently verify canonical bytes and hashes
         run: node tooling/check_canonical_vectors.mjs
+  phase5-experiments:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+          package-manager-cache: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21.0.0+35'
+      - name: Install pinned reference and frontend dependencies
+        run: |
+          python3.14 -m pip install -r tooling/requirements.txt
+          npm --prefix experiments/phase5/langium ci --ignore-scripts --no-audit --no-fund
+          mvn -B -ntp -f experiments/phase5/xtext/pom.xml -Dmaven.repo.local="$GITHUB_WORKSPACE/experiments/phase5/.cache/m2" dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
+          python3.14 experiments/phase5/setup.py
+      - name: Build all three actual ACP grammars
+        run: |
+          python3.14 experiments/phase5/generate.py
+          python3.14 experiments/phase5/build.py antlr
+          python3.14 experiments/phase5/build.py xtext
+          npm --prefix experiments/phase5/langium run generate
+          npm --prefix experiments/phase5/langium run build
+          mkdir -p experiments/phase5/core-runtime/out
+      - name: Verify frontend interchange, diagnostics, determinism and Java bytes
+        run: |
+          python3.14 -m unittest discover -s experiments/phase5 -p 'test_*.py' -v
+          python3.14 experiments/phase5/smoke.py
+      - name: Verify pinned Rust canonical interoperability and graph slice
+        run: |
+          rustup toolchain install 1.90.0 --profile minimal
+          cargo +1.90.0 run --locked --release --manifest-path experiments/phase5/core-runtime/Cargo.toml -- test-corpus/canonical
+          rustc +1.90.0 --edition=2024 -O experiments/phase5/core-runtime/core.rs -o experiments/phase5/core-runtime/out/core
+          experiments/phase5/core-runtime/out/core 1000
+      - name: Exercise native editor and source-analysis APIs
+        run: |
+          node experiments/phase5/langium/editor-probe.mjs
+          node experiments/phase5/langium/source-probe.mjs

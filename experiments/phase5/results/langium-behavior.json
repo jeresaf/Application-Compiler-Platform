@@ -1,0 +1,328 @@
+{
+  "diagnostics": {
+    "duplicate-id": {
+      "exitCode": 0,
+      "elapsedMs": 471.6970690024027,
+      "peakRssBytes": 84828160,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Langium 4.4.0",
+        "startupMs": 52.00016099999999,
+        "parseMs": [
+          40.03999299999998
+        ],
+        "peakRssBytes": 84508672,
+        "errors": []
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 51.12716900111991,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-ID",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "REQ-PAYMENT",
+          "path": "/nodes/28/id",
+          "message": "Semantic ID occurs more than once.",
+          "remediation": "Give each durable concept a unique semantic ID."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 29,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "missing-reference": {
+      "exitCode": 0,
+      "elapsedMs": 442.04675299988594,
+      "peakRssBytes": 87228416,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Langium 4.4.0",
+        "startupMs": 49.269127000000026,
+        "parseMs": [
+          36.00166999999999
+        ],
+        "peakRssBytes": 86396928,
+        "errors": []
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 55.371921000187285,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "FLD-AMOUNT",
+          "path": "/nodes/16/data/owner",
+          "message": "Referenced revision is absent from this snapshot.",
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "stale-reference": {
+      "exitCode": 0,
+      "elapsedMs": 445.31921899761073,
+      "peakRssBytes": 87764992,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Langium 4.4.0",
+        "startupMs": 51.21722500000004,
+        "parseMs": [
+          37.41476699999998
+        ],
+        "peakRssBytes": 86933504,
+        "errors": []
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 45.62943699784228,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "FLD-AMOUNT",
+          "path": "/nodes/16/data/owner",
+          "message": "Referenced revision is absent from this snapshot.",
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "currency-mismatch": {
+      "exitCode": 0,
+      "elapsedMs": 442.8431129999808,
+      "peakRssBytes": 86884352,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Langium 4.4.0",
+        "startupMs": 52.00469800000002,
+        "parseMs": [
+          36.327995999999985
+        ],
+        "peakRssBytes": 86429696,
+        "errors": []
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 46.73545900004683,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "INV-POSITIVE",
+          "path": "/nodes/18/data/predicate",
+          "message": "Operator operands have incompatible semantic types.",
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        },
+        {
+          "code": "ACP-TYPE",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "TRANS-RECORD",
+          "path": "/nodes/27/data/guard",
+          "message": "Operator operands have incompatible semantic types.",
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "boolean-money-literal": {
+      "exitCode": 0,
+      "elapsedMs": 435.29204000151367,
+      "peakRssBytes": 84340736,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Langium 4.4.0",
+        "startupMs": 52.66148800000002,
+        "parseMs": [
+          42.872934999999984
+        ],
+        "peakRssBytes": 84033536,
+        "errors": []
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 47.40517800019006,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "PARAM-ZERO",
+          "path": "/nodes/17/data/value",
+          "message": "Literal does not conform to its semantic type.",
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "terminal-outgoing": {
+      "exitCode": 0,
+      "elapsedMs": 455.7083120016614,
+      "peakRssBytes": 87793664,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Langium 4.4.0",
+        "startupMs": 53.449828000000025,
+        "parseMs": [
+          37.50235200000003
+        ],
+        "peakRssBytes": 87224320,
+        "errors": []
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 51.61481400136836,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "TRANS-RECORD",
+          "path": "/nodes/27/data/from",
+          "message": "A terminal state cannot have an outgoing transition.",
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "ambiguous-transition": {
+      "exitCode": 0,
+      "elapsedMs": 448.45167200037395,
+      "peakRssBytes": 86958080,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Langium 4.4.0",
+        "startupMs": 49.212377000000004,
+        "parseMs": [
+          36.68354499999998
+        ],
+        "peakRssBytes": 85995520,
+        "errors": []
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 52.49788700166391,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "TRANS-DUPLICATE",
+          "path": "/nodes/28/data/command",
+          "message": "Machine has an ambiguous state/command trigger.",
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        },
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "TRANS-RECORD",
+          "path": "/nodes/27/data/command",
+          "message": "Machine has an ambiguous state/command trigger.",
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 29,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    },
+    "conflict-blocks-compilation": {
+      "exitCode": 0,
+      "elapsedMs": 469.356206998782,
+      "peakRssBytes": 84901888,
+      "stderr": "",
+      "status": "PASS",
+      "output": {
+        "candidate": "Langium 4.4.0",
+        "startupMs": 52.42271500000004,
+        "parseMs": [
+          54.171486999999956
+        ],
+        "peakRssBytes": 84463616,
+        "errors": []
+      },
+      "exactAuthoringEquality": true,
+      "semanticMs": 60.954398999456316,
+      "diagnosticEquality": true,
+      "diagnostics": [
+        {
+          "code": "ACP-ISSUE",
+          "severity": "ERROR",
+          "stage": "semantic",
+          "subject": "ISSUE-RETENTION",
+          "path": "/issues/0",
+          "message": "Blocking issue remains unresolved.",
+          "remediation": "Resolve blocking uncertainty through an approved Decision."
+        }
+      ],
+      "deterministicDiagnostics": true,
+      "sourceSpanCount": 28,
+      "relatedLocations": "NOT_RUN: existing diagnostics expose subject/path; complete related-source projection is missing"
+    }
+  },
+  "determinism": [
+    {
+      "exitCode": 0,
+      "elapsedMs": 512.538510000013,
+      "peakRssBytes": 92356608,
+      "stderr": "",
+      "status": "PASS",
+      "canonicalEqual": true
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 490.5845479988784,
+      "peakRssBytes": 92241920,
+      "stderr": "",
+      "status": "PASS",
+      "canonicalEqual": true
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 477.4321869990672,
+      "peakRssBytes": 91504640,
+      "stderr": "",
+      "status": "PASS",
+      "canonicalEqual": true
+    }
+  ],
+  "stageBoundary": {
+    "payment": {
+      "analyze": "PASS",
+      "normalize": "PASS",
+      "plainDocumentRoundTrip": true,
+      "sourceMapPreserved": true,
+      "scope": "Text adaptation precedes existing Phase 4 structured-only Ingest; Analyze and Normalize execute unchanged; no claim of production textual Ingest selection"
+    },
+    "case-management": {
+      "analyze": "PASS",
+      "normalize": "PASS",
+      "plainDocumentRoundTrip": true,
+      "sourceMapPreserved": true,
+      "scope": "Text adaptation precedes existing Phase 4 structured-only Ingest; Analyze and Normalize execute unchanged; no claim of production textual Ingest selection"
+    }
+  }
+}
