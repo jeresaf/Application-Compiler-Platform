@@ -3,15 +3,15 @@
   "domains": {
     "payment": {
       "exitCode": 0,
-      "elapsedMs": 2398.287842999707,
-      "peakRssBytes": 145661952,
+      "elapsedMs": 2398.1130680003844,
+      "peakRssBytes": 140398592,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1444.386394,
+        "startupMs": 1549.03531,
         "parseMs": [
-          217.877833
+          191.601749
         ],
         "errors": [],
         "model": {
@@ -4368,21 +4368,21 @@
       "exactAuthoringEquality": true,
       "canonicalEquality": true,
       "contentDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
-      "analysisMs": 321.1211759989965,
+      "analysisMs": 319.440080998902,
       "diagnosticCount": 0,
       "approvalScope": "Existing synthetic fixture approval applied equally to both inputs; not production approval"
     },
     "case-management": {
       "exitCode": 0,
-      "elapsedMs": 2485.4772920007235,
-      "peakRssBytes": 144084992,
+      "elapsedMs": 2399.2379929986782,
+      "peakRssBytes": 143835136,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1551.669012,
+        "startupMs": 1442.952046,
         "parseMs": [
-          244.288606
+          262.693449
         ],
         "errors": [],
         "model": {
@@ -11152,7 +11152,7 @@
       "exactAuthoringEquality": true,
       "canonicalEquality": true,
       "contentDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
-      "analysisMs": 467.936576998909,
+      "analysisMs": 476.5782989998115,
       "diagnosticCount": 0,
       "approvalScope": "Existing synthetic fixture approval applied equally to both inputs; not production approval"
     }
@@ -11160,15 +11160,15 @@
   "recovery": {
     "incomplete": {
       "exitCode": 0,
-      "elapsedMs": 2087.6706979979645,
-      "peakRssBytes": 140419072,
+      "elapsedMs": 2136.0456270012946,
+      "peakRssBytes": 141586432,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1441.070335,
+        "startupMs": 1462.028028,
         "parseMs": [
-          53.531813
+          51.139398
         ],
         "errors": [
           {
@@ -11182,15 +11182,15 @@
     },
     "missing-close": {
       "exitCode": 0,
-      "elapsedMs": 2291.1612810021325,
-      "peakRssBytes": 143384576,
+      "elapsedMs": 2371.087406998413,
+      "peakRssBytes": 137646080,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1450.441922,
+        "startupMs": 1544.666041,
         "parseMs": [
-          231.171678
+          188.270463
         ],
         "errors": [
           {
@@ -11204,15 +11204,15 @@
     },
     "malformed": {
       "exitCode": 0,
-      "elapsedMs": 2184.5335670004715,
-      "peakRssBytes": 142139392,
+      "elapsedMs": 2223.6564550003095,
+      "peakRssBytes": 140804096,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1510.029927,
+        "startupMs": 1449.16427,
         "parseMs": [
-          88.681661
+          92.749824
         ],
         "errors": [
           {
@@ -11232,45 +11232,45 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 2213.592707998032,
-          "peakRssBytes": 141869056,
+          "elapsedMs": 2343.7211549971835,
+          "peakRssBytes": 141582336,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1469.429404,
+            "startupMs": 1489.803213,
             "parseMs": [
-              164.350094
+              175.526369
             ],
             "errors": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 2616.7801740011782,
-          "peakRssBytes": 142467072,
+          "elapsedMs": 2490.6492519985477,
+          "peakRssBytes": 141770752,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1549.78278,
+            "startupMs": 1747.222032,
             "parseMs": [
-              334.039066
+              160.90229
             ],
             "errors": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 2308.7863119981193,
-          "peakRssBytes": 142217216,
+          "elapsedMs": 2359.549339998921,
+          "peakRssBytes": 145199104,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1525.068982,
+            "startupMs": 1416.14394,
             "parseMs": [
-              171.856858
+              176.127981
             ],
             "errors": []
           }
@@ -11278,20 +11278,20 @@
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 2664.33769500145,
-        "peakRssBytes": 158498816,
+        "elapsedMs": 2442.7280239979154,
+        "peakRssBytes": 157872128,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "Xtext 2.44.0 / Java 21",
-          "startupMs": 1514.153003,
+          "startupMs": 1450.615942,
           "parseMs": [
-            174.114554,
-            56.313186,
-            58.007924,
-            47.587633,
-            41.877137,
-            38.596344
+            162.826144,
+            57.798687,
+            44.817713,
+            40.366423,
+            38.42855,
+            33.720439
           ],
           "errors": []
         }
@@ -11307,45 +11307,45 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 2946.9474269972125,
-          "peakRssBytes": 175775744,
+          "elapsedMs": 2761.173383001733,
+          "peakRssBytes": 173875200,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1410.173428,
+            "startupMs": 1561.908753,
             "parseMs": [
-              608.712714
+              577.09961
             ],
             "errors": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 2885.8169750019442,
-          "peakRssBytes": 176029696,
+          "elapsedMs": 2860.0971209998534,
+          "peakRssBytes": 176713728,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1603.290767,
+            "startupMs": 1525.030456,
             "parseMs": [
-              578.334115
+              570.581335
             ],
             "errors": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 2779.5411629995215,
-          "peakRssBytes": 209682432,
+          "elapsedMs": 2835.8780890011985,
+          "peakRssBytes": 173219840,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1461.588659,
+            "startupMs": 1568.413483,
             "parseMs": [
-              567.671378
+              529.113538
             ],
             "errors": []
           }
@@ -11353,20 +11353,20 @@
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 3668.74704500151,
-        "peakRssBytes": 346951680,
+        "elapsedMs": 3649.5647320007265,
+        "peakRssBytes": 338378752,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "Xtext 2.44.0 / Java 21",
-          "startupMs": 1630.515453,
+          "startupMs": 1489.453759,
           "parseMs": [
-            545.422105,
-            266.910953,
-            197.575539,
-            90.35386,
-            125.607709,
-            116.374243
+            605.397113,
+            226.353196,
+            201.903463,
+            97.392498,
+            124.503502,
+            109.881061
           ],
           "errors": []
         }
@@ -11382,45 +11382,45 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 4199.772541000129,
-          "peakRssBytes": 511328256,
+          "elapsedMs": 4319.705596000858,
+          "peakRssBytes": 531709952,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1458.632357,
+            "startupMs": 1492.98773,
             "parseMs": [
-              2080.878827
+              2131.465294
             ],
             "errors": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 4413.0462870016345,
-          "peakRssBytes": 519122944,
+          "elapsedMs": 4095.111108999845,
+          "peakRssBytes": 548139008,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1480.678508,
+            "startupMs": 1388.761784,
             "parseMs": [
-              2288.903984
+              2063.893628
             ],
             "errors": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 4067.9494659998454,
-          "peakRssBytes": 492269568,
+          "elapsedMs": 4737.165337002807,
+          "peakRssBytes": 533868544,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Xtext 2.44.0 / Java 21",
-            "startupMs": 1405.91426,
+            "startupMs": 1517.317956,
             "parseMs": [
-              2069.227555
+              2481.43832
             ],
             "errors": []
           }
@@ -11428,20 +11428,20 @@
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 10603.989882998576,
-        "peakRssBytes": 880861184,
+        "elapsedMs": 11919.802942000388,
+        "peakRssBytes": 936558592,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "Xtext 2.44.0 / Java 21",
-          "startupMs": 1377.502048,
+          "startupMs": 1561.546267,
           "parseMs": [
-            2045.322387,
-            1359.703984,
-            1255.121045,
-            1180.438523,
-            1227.154755,
-            1334.241502
+            2299.641266,
+            1803.42205,
+            1247.321954,
+            1419.283217,
+            1430.143503,
+            1382.743975
           ],
           "errors": []
         }

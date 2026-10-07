@@ -2,7 +2,9 @@
 import json
 from pathlib import Path
 import sys
-from threading import Event
+from threading import Event, Timer
+import tempfile
+import time
 import unittest
 
 AREA = Path(__file__).resolve().parent
@@ -41,6 +43,21 @@ class EvidenceTests(unittest.TestCase):
             exchange([sys.executable, str(AREA / "worker.py")], {}, cancelled=event)
         with self.assertRaisesRegex(WorkerFailure, "REQUEST_SIZE"):
             exchange([sys.executable, str(AREA / "worker.py")], "x" * MAX_MESSAGE)
+        event = Event()
+        timer = Timer(.05, event.set)
+        timer.start()
+        with self.assertRaisesRegex(WorkerFailure, "CANCELLED"):
+            exchange([sys.executable, "-c", "import time; time.sleep(5)"], {}, timeout=1, cancelled=event)
+        timer.join()
+        # A timed-out benchmark must kill its worker descendants, not only /usr/bin/time.
+        from run import invoke
+        with tempfile.TemporaryDirectory() as directory:
+            marker = Path(directory) / "leaked-child"
+            child = f"import time; from pathlib import Path; time.sleep(.4); Path({str(marker)!r}).write_text('leak')"
+            parent = f"import subprocess,sys,time; subprocess.Popen([sys.executable,'-c',{child!r}]); time.sleep(5)"
+            self.assertEqual("TIMEOUT", invoke([sys.executable, "-c", parent], timeout=.1)["status"])
+            time.sleep(.5)
+            self.assertFalse(marker.exists())
 
 
 if __name__ == "__main__":

@@ -1,8 +1,25 @@
 {
-  "exitCode": 1,
-  "elapsedMs": 3012.2516800001904,
-  "peakRssBytes": 180281344,
-  "stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"org.eclipse.xtext.service.OperationCanceledManager.checkCanceled(org.eclipse.xtext.util.CancelIndicator)\" because \"this.operationCanceledManager\" is null\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalAcceptor.accept(IdeContentProposalAcceptor.java:50)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider.lookupCrossReference(IdeCrossrefProposalProvider.java:47)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider._createProposals(IdeContentProposalProvider.java:144)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider.createProposals(IdeContentProposalProvider.java:160)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider._createProposals(IdeContentProposalProvider.java:88)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider.createProposals(IdeContentProposalProvider.java:157)\n\tat org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider.createProposals(IdeContentProposalProvider.java:71)\n\tat XtextProbe.main(XtextProbe.java:48)\n",
-  "status": "FAIL",
-  "stdout": ""
+  "exitCode": 0,
+  "elapsedMs": 3544.391966002877,
+  "peakRssBytes": 236355584,
+  "stderr": "",
+  "status": "PASS",
+  "output": {
+    "candidate": "Xtext 2.44.0 / Java 21",
+    "startupMs": 1525.002619,
+    "parseMs": [
+      189.224209
+    ],
+    "errors": [],
+    "nativeValidationMs": 282.285007,
+    "nativeIssueCount": 0,
+    "nativeCompletionMs": 68.209064,
+    "nativeCompletionCount": 100,
+    "nativeLinkNavigationMs": 511.999161,
+    "nativeResolvedReferences": 316,
+    "nativeUsageResultsIncludingRepeatedTargets": 10778,
+    "nativeIncrementalWhitespaceEditMs": 161.64178,
+    "rename": "NOT_RUN: stable-ID aware source edits missing",
+    "imports": "NOT_SUPPORTED: no module visibility policy"
+  }
 }

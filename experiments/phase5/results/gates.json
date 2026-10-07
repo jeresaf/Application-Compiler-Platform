@@ -1,0 +1,17 @@
+{
+  "phase5": "EXPLICITLY_BLOCKED_ON_EVIDENCE",
+  "phase6": "NOT_STARTED",
+  "selections": {"productionCore": null, "textualFrontend": null, "integrationModel": null, "sourceAnalysis": null},
+  "weightedScores": null,
+  "hardGates": {
+    "semantic-fidelity": {"status":"UNKNOWN", "demonstrated":"All three complete reference-domain lowerings equal structured input; unchanged Analyze/Normalize and canonical results", "missing":["Production textual Ingest boundary", "Wider numeric/syntax evolution coverage"]},
+    "stage-isolation": {"status":"UNKNOWN", "demonstrated":"Plain JSON/Document boundary; independent structured adapter; bounded versioned worker guard fault tests", "missing":["Actual frontend/core pairings through the versioned guard", "Mid-stage cancellation, restart and retry authority-state evidence"]},
+    "diagnostic-correctness": {"status":"UNKNOWN", "demonstrated":"Three syntax recovery probes and eight deterministic semantic negative cases for all frontends; no malformed production model", "missing":["Related source locations", "Full policy conflict combinations", "Module/import visibility and cycles", "Complete stable-label rename/source edits for all candidates"], "observedFailure":"Langium default declaration rename changes stable ID"},
+    "determinism": {"status":"UNKNOWN", "demonstrated":"Independent-process map/declaration-order, locale, temporary-directory, seed and irrelevant-environment variations; cross-language canonical bytes/hashes", "missing":["Working-directory variation", "Concurrent frontend/core variation", "Explicit textual ordered-meaning perturbations", "Worker restart/retry permutations"]},
+    "source-intelligence-viability": {"status":"UNKNOWN", "demonstrated":"Actual Tree-sitter syntax, native TypeScript semantic API and combined span correlation; KNOWN/UNKNOWN/UNRESOLVED/ABSENT distinctions", "missing":["Source ownership and rename continuity", "Other target-native source adapters", "Exact prebuilt wasm grammar provenance and deployment review"]},
+    "evolution-maintenance-viability": {"status":"UNKNOWN", "demonstrated":"Pinned versions/locks/digests, dependency inventory, offline cache restoration, clean generated builds and TypeScript patch upgrade", "missing":["Framework/toolchain controlled upgrades", "Legacy textual fixture migration", "Full transitive license/release/support review", "Maven transitive reproducibility proof"]}
+  },
+  "unrunScaleExperiments": ["Full validation of semantically complete 10k/100k-node workloads within a justified production contract", "Incremental semantic validation at all requested scales", "Rename/reference updates at all requested scales"],
+  "coreLimitations": ["Full Phase 4 wire/contract interoperability beyond graph/result slice", "TypeScript parallel workers", "Measured same-process versus versioned-worker serialization costs", "Candidate-native process isolation integration"],
+  "rule": "UNKNOWN and NOT_RUN never count as PASS or a zero-valued competitive score. Descriptive parse/graph timings do not justify a production selection."
+}

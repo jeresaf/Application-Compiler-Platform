@@ -2,20 +2,20 @@
   "diagnostics": {
     "duplicate-id": {
       "exitCode": 0,
-      "elapsedMs": 2325.003400001151,
-      "peakRssBytes": 139726848,
+      "elapsedMs": 2175.3995010003564,
+      "peakRssBytes": 141668352,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1539.783168,
+        "startupMs": 1475.843846,
         "parseMs": [
-          114.565619
+          105.455109
         ],
         "errors": []
       },
       "exactAuthoringEquality": true,
-      "semanticMs": 81.00425399970845,
+      "semanticMs": 52.41970700080856,
       "diagnosticEquality": true,
       "diagnostics": [
         {
@@ -34,20 +34,20 @@
     },
     "missing-reference": {
       "exitCode": 0,
-      "elapsedMs": 2095.525640001142,
-      "peakRssBytes": 144580608,
+      "elapsedMs": 2342.375001000619,
+      "peakRssBytes": 143196160,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1399.84083,
+        "startupMs": 1574.747716,
         "parseMs": [
-          103.775696
+          141.874925
         ],
         "errors": []
       },
       "exactAuthoringEquality": true,
-      "semanticMs": 76.94383200214361,
+      "semanticMs": 91.92318699933821,
       "diagnosticEquality": true,
       "diagnostics": [
         {
@@ -66,20 +66,20 @@
     },
     "stale-reference": {
       "exitCode": 0,
-      "elapsedMs": 2159.965030001331,
-      "peakRssBytes": 144465920,
+      "elapsedMs": 2181.8020820028323,
+      "peakRssBytes": 138870784,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1462.469764,
+        "startupMs": 1476.170804,
         "parseMs": [
-          107.563117
+          104.713523
         ],
         "errors": []
       },
       "exactAuthoringEquality": true,
-      "semanticMs": 55.35167500056559,
+      "semanticMs": 75.8946299974923,
       "diagnosticEquality": true,
       "diagnostics": [
         {
@@ -98,20 +98,20 @@
     },
     "currency-mismatch": {
       "exitCode": 0,
-      "elapsedMs": 2359.0053910011193,
-      "peakRssBytes": 142254080,
+      "elapsedMs": 2307.1563160010555,
+      "peakRssBytes": 140472320,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1521.906911,
+        "startupMs": 1627.586046,
         "parseMs": [
-          173.992113
+          113.585913
         ],
         "errors": []
       },
       "exactAuthoringEquality": true,
-      "semanticMs": 83.70747799926903,
+      "semanticMs": 63.727032000315376,
       "diagnosticEquality": true,
       "diagnostics": [
         {
@@ -139,20 +139,20 @@
     },
     "boolean-money-literal": {
       "exitCode": 0,
-      "elapsedMs": 2288.857947998622,
-      "peakRssBytes": 143577088,
+      "elapsedMs": 2293.7077790011244,
+      "peakRssBytes": 143945728,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1553.827658,
+        "startupMs": 1581.504536,
         "parseMs": [
-          115.183487
+          107.685392
         ],
         "errors": []
       },
       "exactAuthoringEquality": true,
-      "semanticMs": 87.85314199849381,
+      "semanticMs": 53.35567799920682,
       "diagnosticEquality": true,
       "diagnostics": [
         {
@@ -171,20 +171,20 @@
     },
     "terminal-outgoing": {
       "exitCode": 0,
-      "elapsedMs": 2192.6524650007195,
-      "peakRssBytes": 141725696,
+      "elapsedMs": 2126.422226003342,
+      "peakRssBytes": 138723328,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1442.302393,
+        "startupMs": 1440.779043,
         "parseMs": [
-          131.333751
+          98.907689
         ],
         "errors": []
       },
       "exactAuthoringEquality": true,
-      "semanticMs": 71.91972100190469,
+      "semanticMs": 80.1254189973406,
       "diagnosticEquality": true,
       "diagnostics": [
         {
@@ -203,20 +203,20 @@
     },
     "ambiguous-transition": {
       "exitCode": 0,
-      "elapsedMs": 2217.317015001754,
-      "peakRssBytes": 143724544,
+      "elapsedMs": 2315.9743279975373,
+      "peakRssBytes": 141553664,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1497.582017,
+        "startupMs": 1522.899064,
         "parseMs": [
-          117.843073
+          126.071955
         ],
         "errors": []
       },
       "exactAuthoringEquality": true,
-      "semanticMs": 52.16910900344374,
+      "semanticMs": 75.74142700104858,
       "diagnosticEquality": true,
       "diagnostics": [
         {
@@ -244,20 +244,20 @@
     },
     "conflict-blocks-compilation": {
       "exitCode": 0,
-      "elapsedMs": 2552.9824840014044,
-      "peakRssBytes": 143880192,
+      "elapsedMs": 2224.4820990017615,
+      "peakRssBytes": 141479936,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Xtext 2.44.0 / Java 21",
-        "startupMs": 1531.299089,
+        "startupMs": 1456.270894,
         "parseMs": [
-          269.912119
+          133.909467
         ],
         "errors": []
       },
       "exactAuthoringEquality": true,
-      "semanticMs": 98.86928600099054,
+      "semanticMs": 109.50569600026938,
       "diagnosticEquality": true,
       "diagnostics": [
         {
@@ -278,24 +278,24 @@
   "determinism": [
     {
       "exitCode": 0,
-      "elapsedMs": 2318.2287529998575,
-      "peakRssBytes": 142462976,
+      "elapsedMs": 2608.832699999766,
+      "peakRssBytes": 144023552,
       "stderr": "",
       "status": "PASS",
       "canonicalEqual": true
     },
     {
       "exitCode": 0,
-      "elapsedMs": 2399.9540859986155,
-      "peakRssBytes": 141905920,
+      "elapsedMs": 2365.1341080003476,
+      "peakRssBytes": 142680064,
       "stderr": "",
       "status": "PASS",
       "canonicalEqual": true
     },
     {
       "exitCode": 0,
-      "elapsedMs": 2520.224423002219,
-      "peakRssBytes": 144654336,
+      "elapsedMs": 2403.7182880019827,
+      "peakRssBytes": 145158144,
       "stderr": "",
       "status": "PASS",
       "canonicalEqual": true

@@ -74,5 +74,6 @@ jobs:
           experiments/phase5/core-runtime/out/core 1000
       - name: Exercise native editor and source-analysis APIs
         run: |
+          python3.14 experiments/phase5/native.py
           node experiments/phase5/langium/editor-probe.mjs
           node experiments/phase5/langium/source-probe.mjs

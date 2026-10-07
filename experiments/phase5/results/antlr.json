@@ -3,15 +3,15 @@
   "domains": {
     "payment": {
       "exitCode": 0,
-      "elapsedMs": 443.6195129965199,
-      "peakRssBytes": 78950400,
+      "elapsedMs": 457.99482300208183,
+      "peakRssBytes": 76398592,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "ANTLR 4.13.2 / Java 21",
         "errors": [],
         "parseMs": [
-          127.695066
+          123.516144
         ],
         "model": {
           "modelVersion": "0.2.0",
@@ -4464,26 +4464,26 @@
             "endColumn": 397
           }
         ],
-        "elapsedMs": 205.794078
+        "elapsedMs": 203.950206
       },
       "exactAuthoringEquality": true,
       "canonicalEquality": true,
       "contentDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
-      "analysisMs": 353.27202799817314,
+      "analysisMs": 333.8567859973409,
       "diagnosticCount": 0,
       "approvalScope": "Existing synthetic fixture approval applied equally to both inputs; not production approval"
     },
     "case-management": {
       "exitCode": 0,
-      "elapsedMs": 455.411818002176,
-      "peakRssBytes": 88743936,
+      "elapsedMs": 490.0258660018153,
+      "peakRssBytes": 88805376,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "ANTLR 4.13.2 / Java 21",
         "errors": [],
         "parseMs": [
-          102.550962
+          124.380238
         ],
         "model": {
           "modelVersion": "0.2.0",
@@ -11397,12 +11397,12 @@
             "endColumn": 394
           }
         ],
-        "elapsedMs": 206.222149
+        "elapsedMs": 223.957699
       },
       "exactAuthoringEquality": true,
       "canonicalEquality": true,
       "contentDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
-      "analysisMs": 490.4976110010466,
+      "analysisMs": 478.7802909995662,
       "diagnosticCount": 0,
       "approvalScope": "Existing synthetic fixture approval applied equally to both inputs; not production approval"
     }
@@ -11410,8 +11410,8 @@
   "recovery": {
     "incomplete": {
       "exitCode": 0,
-      "elapsedMs": 309.64695299917366,
-      "peakRssBytes": 63959040,
+      "elapsedMs": 295.11658199771773,
+      "peakRssBytes": 63700992,
       "stderr": "",
       "status": "PASS",
       "output": {
@@ -11429,16 +11429,16 @@
           }
         ],
         "parseMs": [
-          67.049046
+          68.571383
         ],
-        "elapsedMs": 75.318308
+        "elapsedMs": 74.485202
       },
       "rejectsProduction": true
     },
     "missing-close": {
       "exitCode": 0,
-      "elapsedMs": 351.99183199802064,
-      "peakRssBytes": 66179072,
+      "elapsedMs": 384.7101510000357,
+      "peakRssBytes": 66846720,
       "stderr": "",
       "status": "PASS",
       "output": {
@@ -11451,16 +11451,16 @@
           }
         ],
         "parseMs": [
-          117.824081
+          124.540936
         ],
-        "elapsedMs": 123.608036
+        "elapsedMs": 133.006164
       },
       "rejectsProduction": true
     },
     "malformed": {
       "exitCode": 0,
-      "elapsedMs": 414.5868490013527,
-      "peakRssBytes": 63856640,
+      "elapsedMs": 368.4427290027088,
+      "peakRssBytes": 64180224,
       "stderr": "",
       "status": "PASS",
       "output": {
@@ -11488,9 +11488,9 @@
           }
         ],
         "parseMs": [
-          108.236283
+          101.604575
         ],
-        "elapsedMs": 114.289368
+        "elapsedMs": 109.38441
       },
       "rejectsProduction": true
     }
@@ -11502,68 +11502,68 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 401.0813370005053,
-          "peakRssBytes": 67448832,
+          "elapsedMs": 363.5520380012167,
+          "peakRssBytes": 68292608,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              115.724268
+              102.997534
             ],
-            "elapsedMs": 125.538479
+            "elapsedMs": 111.524124
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 411.87328299929504,
-          "peakRssBytes": 67293184,
+          "elapsedMs": 597.8550029976759,
+          "peakRssBytes": 67489792,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              123.275993
+              144.872488
             ],
-            "elapsedMs": 130.992
+            "elapsedMs": 160.315551
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 353.07264299990493,
-          "peakRssBytes": 67870720,
+          "elapsedMs": 518.7940940013505,
+          "peakRssBytes": 66568192,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              103.652268
+              112.069997
             ],
-            "elapsedMs": 114.178002
+            "elapsedMs": 121.030774
           }
         }
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 427.00133900143555,
-        "peakRssBytes": 76193792,
+        "elapsedMs": 478.25511200062465,
+        "peakRssBytes": 77352960,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "ANTLR 4.13.2 / Java 21",
           "errors": [],
           "parseMs": [
-            110.685217,
-            14.095414,
-            15.577434,
-            12.580667,
-            8.268969,
-            7.564802
+            109.372325,
+            15.005472,
+            10.966113,
+            16.665833,
+            13.289218,
+            8.281798
           ],
-          "elapsedMs": 178.186238
+          "elapsedMs": 181.41748
         }
       },
       "warmInterpretation": "First parse discarded; remaining five retained",
@@ -11577,68 +11577,68 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 485.4761269998562,
-          "peakRssBytes": 83066880,
+          "elapsedMs": 476.56130700124777,
+          "peakRssBytes": 83783680,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              204.519941
+              201.359269
             ],
-            "elapsedMs": 215.789919
+            "elapsedMs": 212.484244
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 591.3645979999274,
-          "peakRssBytes": 82829312,
+          "elapsedMs": 505.7689550012583,
+          "peakRssBytes": 84004864,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              194.732378
+              210.290378
             ],
-            "elapsedMs": 203.796659
+            "elapsedMs": 219.440272
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 562.7282979985466,
-          "peakRssBytes": 83734528,
+          "elapsedMs": 507.58067700007814,
+          "peakRssBytes": 83537920,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              200.832754
+              191.98817
             ],
-            "elapsedMs": 213.941242
+            "elapsedMs": 200.925328
           }
         }
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 788.5324589988159,
-        "peakRssBytes": 180101120,
+        "elapsedMs": 1087.9024630012282,
+        "peakRssBytes": 166879232,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "ANTLR 4.13.2 / Java 21",
           "errors": [],
           "parseMs": [
-            209.756974,
-            44.074966,
-            80.582182,
-            47.84791,
-            49.04109,
-            95.107417
+            309.272207,
+            83.856276,
+            111.756868,
+            45.42058,
+            40.887231,
+            52.994224
           ],
-          "elapsedMs": 537.482343
+          "elapsedMs": 661.443454
         }
       },
       "warmInterpretation": "First parse discarded; remaining five retained",
@@ -11652,68 +11652,68 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 1003.9711879981041,
-          "peakRssBytes": 213954560,
+          "elapsedMs": 1052.0495970013144,
+          "peakRssBytes": 227770368,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              625.305436
+              627.427804
             ],
-            "elapsedMs": 653.987197
+            "elapsedMs": 659.036912
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 890.2699459977157,
-          "peakRssBytes": 220680192,
+          "elapsedMs": 876.4960469998186,
+          "peakRssBytes": 234094592,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              622.747717
+              614.571292
             ],
-            "elapsedMs": 641.662185
+            "elapsedMs": 633.026586
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 807.321136999235,
-          "peakRssBytes": 236171264,
+          "elapsedMs": 855.33744300119,
+          "peakRssBytes": 229507072,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "ANTLR 4.13.2 / Java 21",
             "errors": [],
             "parseMs": [
-              550.61268
+              597.526729
             ],
-            "elapsedMs": 569.588899
+            "elapsedMs": 617.333106
           }
         }
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 2838.2367370031716,
-        "peakRssBytes": 743321600,
+        "elapsedMs": 3052.389860000403,
+        "peakRssBytes": 672018432,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "ANTLR 4.13.2 / Java 21",
           "errors": [],
           "parseMs": [
-            639.297305,
-            423.808012,
-            361.188747,
-            296.975334,
-            419.559795,
-            319.694478
+            681.727146,
+            438.982728,
+            410.010906,
+            337.996982,
+            329.785272,
+            272.969049
           ],
-          "elapsedMs": 2481.17653
+          "elapsedMs": 2510.535585
         }
       },
       "warmInterpretation": "First parse discarded; remaining five retained",

@@ -3,17 +3,17 @@
   "domains": {
     "payment": {
       "exitCode": 0,
-      "elapsedMs": 752.5442330006626,
-      "peakRssBytes": 106086400,
+      "elapsedMs": 513.0939680020674,
+      "peakRssBytes": 93495296,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Langium 4.4.0",
-        "startupMs": 169.33915100000007,
+        "startupMs": 53.60523999999998,
         "parseMs": [
-          99.87060099999997
+          76.819952
         ],
-        "peakRssBytes": 103534592,
+        "peakRssBytes": 92184576,
         "errors": [],
         "model": {
           "modelVersion": "0.2.0",
@@ -5076,23 +5076,23 @@
       "exactAuthoringEquality": true,
       "canonicalEquality": true,
       "contentDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
-      "analysisMs": 290.83123199961847,
+      "analysisMs": 305.0708159971691,
       "diagnosticCount": 0,
       "approvalScope": "Existing synthetic fixture approval applied equally to both inputs; not production approval"
     },
     "case-management": {
       "exitCode": 0,
-      "elapsedMs": 713.3377099999052,
-      "peakRssBytes": 116940800,
+      "elapsedMs": 545.8953769993968,
+      "peakRssBytes": 105312256,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Langium 4.4.0",
-        "startupMs": 168.969431,
+        "startupMs": 51.72389800000002,
         "parseMs": [
-          131.62763899999993
+          125.72704699999997
         ],
-        "peakRssBytes": 112861184,
+        "peakRssBytes": 105050112,
         "errors": [],
         "model": {
           "modelVersion": "0.2.0",
@@ -12904,7 +12904,7 @@
       "exactAuthoringEquality": true,
       "canonicalEquality": true,
       "contentDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
-      "analysisMs": 459.0935099986382,
+      "analysisMs": 445.0879750002059,
       "diagnosticCount": 0,
       "approvalScope": "Existing synthetic fixture approval applied equally to both inputs; not production approval"
     }
@@ -12912,17 +12912,17 @@
   "recovery": {
     "incomplete": {
       "exitCode": 0,
-      "elapsedMs": 643.6373680007819,
-      "peakRssBytes": 92270592,
+      "elapsedMs": 402.78196500003105,
+      "peakRssBytes": 77434880,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Langium 4.4.0",
-        "startupMs": 177.60451400000005,
+        "startupMs": 46.994737999999984,
         "parseMs": [
-          33.691137000000026
+          8.94513599999999
         ],
-        "peakRssBytes": 91963392,
+        "peakRssBytes": 76419072,
         "errors": [
           {
             "message": "unexpected character: ->\"<- at offset: 168, skipped 1 characters.",
@@ -12955,17 +12955,17 @@
     },
     "missing-close": {
       "exitCode": 0,
-      "elapsedMs": 688.7779389981006,
-      "peakRssBytes": 105623552,
+      "elapsedMs": 544.9312220007414,
+      "peakRssBytes": 93777920,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Langium 4.4.0",
-        "startupMs": 161.677729,
+        "startupMs": 49.81199000000004,
         "parseMs": [
-          100.59443099999999
+          101.570944
         ],
-        "peakRssBytes": 103567360,
+        "peakRssBytes": 92946432,
         "errors": [
           {
             "message": "Expecting token of type '}' but found ``.",
@@ -14293,17 +14293,17 @@
     },
     "malformed": {
       "exitCode": 0,
-      "elapsedMs": 684.0220730009605,
-      "peakRssBytes": 107786240,
+      "elapsedMs": 486.8791330009117,
+      "peakRssBytes": 92745728,
       "stderr": "",
       "status": "PASS",
       "output": {
         "candidate": "Langium 4.4.0",
-        "startupMs": 164.12461200000007,
+        "startupMs": 46.30188500000003,
         "parseMs": [
-          93.99333100000001
+          77.52515499999998
         ],
-        "peakRssBytes": 105529344,
+        "peakRssBytes": 90996736,
         "errors": [
           {
             "message": "unexpected character: ->?<- at offset: 0, skipped 3 characters.",
@@ -15642,51 +15642,51 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 650.954370998079,
-          "peakRssBytes": 107663360,
+          "elapsedMs": 562.6837619965954,
+          "peakRssBytes": 93339648,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 149.504232,
+            "startupMs": 58.62147699999997,
             "parseMs": [
-              98.23425700000007
+              84.17873900000006
             ],
-            "peakRssBytes": 105676800,
+            "peakRssBytes": 91181056,
             "errors": [],
             "spans": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 667.041322998557,
-          "peakRssBytes": 105730048,
+          "elapsedMs": 607.2338669982855,
+          "peakRssBytes": 94281728,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 151.93969600000003,
+            "startupMs": 59.17159800000002,
             "parseMs": [
-              99.59671300000002
+              106.57943000000006
             ],
-            "peakRssBytes": 103489536,
+            "peakRssBytes": 92504064,
             "errors": [],
             "spans": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 707.6604750000115,
-          "peakRssBytes": 106115072,
+          "elapsedMs": 553.4471329992812,
+          "peakRssBytes": 94584832,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 161.76915800000006,
+            "startupMs": 51.706632999999954,
             "parseMs": [
-              108.61928
+              98.7425
             ],
-            "peakRssBytes": 104169472,
+            "peakRssBytes": 92573696,
             "errors": [],
             "spans": []
           }
@@ -15694,22 +15694,22 @@
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 892.9829970002174,
-        "peakRssBytes": 144666624,
+        "elapsedMs": 711.275208999723,
+        "peakRssBytes": 130002944,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "Langium 4.4.0",
-          "startupMs": 166.93177999999995,
+          "startupMs": 50.12961899999999,
           "parseMs": [
-            95.311013,
-            53.74965099999997,
-            41.70449999999994,
-            32.35718700000007,
-            29.028061999999977,
-            34.87186600000007
+            91.37819300000001,
+            59.251491000000044,
+            65.71166500000004,
+            25.395136999999977,
+            28.17792099999997,
+            26.41730599999994
           ],
-          "peakRssBytes": 144228352,
+          "peakRssBytes": 129433600,
           "errors": [],
           "spans": []
         }
@@ -15725,51 +15725,51 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 1094.8782230007055,
-          "peakRssBytes": 204865536,
+          "elapsedMs": 878.5085260024061,
+          "peakRssBytes": 199557120,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 160.55834,
+            "startupMs": 48.730751999999995,
             "parseMs": [
-              479.265226
+              436.19282999999996
             ],
-            "peakRssBytes": 199970816,
+            "peakRssBytes": 194662400,
             "errors": [],
             "spans": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 1083.75789099955,
-          "peakRssBytes": 209072128,
+          "elapsedMs": 921.9811760012817,
+          "peakRssBytes": 200937472,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 156.590415,
+            "startupMs": 53.620811,
             "parseMs": [
-              469.51623600000005
+              447.682734
             ],
-            "peakRssBytes": 203784192,
+            "peakRssBytes": 195649536,
             "errors": [],
             "spans": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 1066.185260999191,
-          "peakRssBytes": 197578752,
+          "elapsedMs": 882.162519999838,
+          "peakRssBytes": 181846016,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 155.337648,
+            "startupMs": 49.29528700000003,
             "parseMs": [
-              481.033511
+              433.792135
             ],
-            "peakRssBytes": 196354048,
+            "peakRssBytes": 181747712,
             "errors": [],
             "spans": []
           }
@@ -15777,22 +15777,22 @@
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 2610.2297919969715,
-        "peakRssBytes": 359469056,
+        "elapsedMs": 2364.3821669975296,
+        "peakRssBytes": 349319168,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "Langium 4.4.0",
-          "startupMs": 161.359781,
+          "startupMs": 47.46384499999999,
           "parseMs": [
-            457.594109,
-            355.395798,
-            284.6413050000001,
-            271.015797,
-            352.0121569999999,
-            283.9210939999998
+            431.650101,
+            341.3553750000001,
+            263.232712,
+            338.960505,
+            278.40753599999994,
+            265.7471670000002
           ],
-          "peakRssBytes": 359469056,
+          "peakRssBytes": 349319168,
           "errors": [],
           "spans": []
         }
@@ -15808,51 +15808,51 @@
       "cold": [
         {
           "exitCode": 0,
-          "elapsedMs": 7550.753188999806,
-          "peakRssBytes": 603586560,
+          "elapsedMs": 6430.418574000214,
+          "peakRssBytes": 598876160,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 165.164579,
+            "startupMs": 52.70828499999999,
             "parseMs": [
-              6673.638427999999
+              5906.480456
             ],
-            "peakRssBytes": 602624000,
+            "peakRssBytes": 598437888,
             "errors": [],
             "spans": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 7032.727073001297,
-          "peakRssBytes": 606294016,
+          "elapsedMs": 6176.3354139984585,
+          "peakRssBytes": 596529152,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 187.41134,
+            "startupMs": 49.989364999999964,
             "parseMs": [
-              6171.2555569999995
+              5666.527163
             ],
-            "peakRssBytes": 605462528,
+            "peakRssBytes": 596135936,
             "errors": [],
             "spans": []
           }
         },
         {
           "exitCode": 0,
-          "elapsedMs": 7011.475906001579,
-          "peakRssBytes": 605368320,
+          "elapsedMs": 6301.267273000121,
+          "peakRssBytes": 596164608,
           "stderr": "",
           "status": "PASS",
           "output": {
             "candidate": "Langium 4.4.0",
-            "startupMs": 183.64756399999993,
+            "startupMs": 54.04159099999998,
             "parseMs": [
-              6113.608378
+              5769.662408
             ],
-            "peakRssBytes": 599425024,
+            "peakRssBytes": 595726336,
             "errors": [],
             "spans": []
           }
@@ -15860,22 +15860,22 @@
       ],
       "warm": {
         "exitCode": 0,
-        "elapsedMs": 38601.46247400189,
-        "peakRssBytes": 916324352,
+        "elapsedMs": 37678.53770900183,
+        "peakRssBytes": 899551232,
         "stderr": "",
         "status": "PASS",
         "output": {
           "candidate": "Langium 4.4.0",
-          "startupMs": 158.49622200000005,
+          "startupMs": 53.701611000000014,
           "parseMs": [
-            6067.64281,
-            6414.025795,
-            6313.803094000001,
-            6034.556260999998,
-            6078.313185999999,
-            6798.671493000002
+            5887.08627,
+            6051.114484000001,
+            6394.472107000001,
+            6385.200046999998,
+            6212.90005,
+            6182.210882999996
           ],
-          "peakRssBytes": 916324352,
+          "peakRssBytes": 899551232,
           "errors": [],
           "spans": []
         }

@@ -137,7 +137,33 @@ constitute a redistribution clearance.
 
 ## Validation record
 
-Local complete regression, experiment smoke and Ubuntu CI evidence is recorded
-after the final source and measurement pass. Historical Phase 1–4 reports retain
-their original evidence. This report is an explicit evidence-blocked evaluation,
-not an assertion that all Phase 5 exit criteria passed.
+Local Linux validation: **92 existing regression tests PASS** in 277.696 seconds;
+**3 experiment guard tests PASS**; all-candidate smoke gates PASS; Java/Rust/Node
+canonical interoperability PASS; repository checks and dependency consistency PASS.
+The [validation record](../experiments/phase5/results/validation.json) preserves
+local output, CI metadata and source digests. [Ubuntu CI run 37618487121](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/37618487121)
+is GREEN for both contract and experiment jobs on source commit `7b4032c`.
+The final evidence commit also runs the workflow; its result is checked before
+handoff. Official Python/Node pins remain 3.14.7 / 24.21.0; Java setup resolves
+Temurin 21.0.0 (21+35). Historical Phase 1–4 reports retain their original evidence.
+This report is an explicit evidence-blocked evaluation, not an assertion that all
+Phase 5 exit criteria passed.
+
+
+## Implementation and operational observations
+
+The inventory records handwritten adapter/core lines separately from generated
+Java volume; maintenance results record build durations. These quantify effort,
+not product quality. Reproduction requires a Java/Maven parser-generator toolchain,
+Node/npm for Langium and native TypeScript APIs, and Rust/Cargo for the systems
+probe. Same-process deployment and versioned worker serialization cost remain
+unmeasured rather than receiving an inferred integration score.
+
+Concrete integration defects found and corrected: Gson's default omitted explicit
+null values from the case-management fixture; generated Langium rules required
+avoiding reserved JavaScript runtime names; Xtext required its generated grammar
+resources, mixed IDE bindings and an injected native completion acceptor. The
+initial hosted Java build selector was unsupported and was corrected to its exact
+release selector. These are measured implementation experiences, not architectural
+arguments for a preferred ecosystem. The narrow Xtext experiment integer datatype
+and incomplete module/rename policies remain explicit limitations.

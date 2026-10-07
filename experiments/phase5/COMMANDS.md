@@ -69,6 +69,7 @@ runner toolchain. No generated application or production target is built.
 .venv/bin/python3.14 experiments/phase5/run.py xtext
 .venv/bin/python3.14 experiments/phase5/run.py core
 .venv/bin/python3.14 experiments/phase5/editor.py
+.venv/bin/python3.14 experiments/phase5/native.py
 node experiments/phase5/langium/editor-probe.mjs
 node experiments/phase5/langium/source-probe.mjs
 .venv/bin/python3.14 experiments/phase5/inventory.py

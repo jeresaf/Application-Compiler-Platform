@@ -1,11 +1,11 @@
 {
   "candidate": "ANTLR custom Python index adapter",
-  "indexMs": 1.276012000744231,
-  "completionMs": 0.015147998055908829,
+  "indexMs": 1.300834999710787,
+  "completionMs": 0.015909998182905838,
   "completionCount": 1,
-  "definitionMs": 0.0007439994078595191,
+  "definitionMs": 0.0006010013748891652,
   "definitionId": "REQ-PAYMENT",
-  "referencesMs": 0.0016160011000465602,
+  "referencesMs": 0.001686999894445762,
   "references": [
     "AC-PAYMENT",
     "AC-PAYMENT",
@@ -103,7 +103,7 @@
     "EVID-RECOVERY",
     "RECOVERY-TASK"
   ],
-  "renameMs": 2.2802189996582456,
+  "renameMs": 2.448590999847511,
   "stableIdsPreserved": true,
   "referencesPreserved": true,
   "limitations": [

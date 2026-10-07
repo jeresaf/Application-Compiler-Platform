@@ -9,6 +9,7 @@ import subprocess
 import sys
 import time
 import tempfile
+import signal
 
 AREA = Path(__file__).resolve().parent
 ROOT = AREA.parents[1]
@@ -28,11 +29,18 @@ def command(candidate, filename, runs=1):
     return ["java", "-XX:-UsePerfData", "-Xmx768m", "-cp", f'{AREA}/xtext/out:{AREA}/xtext/generated/org.acp.experiment/src-gen:{cp}', "XtextProbe", str(filename), str(runs)]
 
 
-def invoke(args, **env):
+def invoke(args, *, timeout=90, **env):
     start = time.perf_counter()
     try:
         with tempfile.NamedTemporaryFile(prefix="acp-phase5-rss-") as memory:
-            result = subprocess.run(["/usr/bin/time", "-f", "%M", "-o", memory.name, *args], cwd=ROOT, env={**os.environ, **env}, text=True, capture_output=True, timeout=90)
+            with subprocess.Popen(["/usr/bin/time", "-f", "%M", "-o", memory.name, *args], cwd=ROOT, env={**os.environ, **env}, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True) as process:
+                try:
+                    stdout, stderr = process.communicate(timeout=timeout)
+                except subprocess.TimeoutExpired:
+                    os.killpg(process.pid, signal.SIGKILL)
+                    process.communicate()
+                    raise
+                result = subprocess.CompletedProcess(args, process.returncode, stdout, stderr)
             rss = Path(memory.name).read_text().splitlines()[-1]
         raw = {"exitCode": result.returncode, "elapsedMs": (time.perf_counter()-start)*1000, "peakRssBytes": int(rss)*1024, "stderr": result.stderr}
         if result.returncode:

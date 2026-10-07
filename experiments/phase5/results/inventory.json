@@ -676,18 +676,19 @@
     "antlr": {
       "files": {
         "antlr/Acp.g4": 13,
-        "antlr/Probe.java": 38
+        "antlr/Probe.java": 39
       },
-      "handwrittenLines": 51
+      "handwrittenLines": 52
     },
     "langium": {
       "files": {
         "langium/source-probe.mjs": 24,
+        "langium/services.mjs": 10,
         "langium/editor-probe.mjs": 22,
-        "langium/probe.mjs": 59,
+        "langium/probe.mjs": 66,
         "langium/Acp.langium": 17
       },
-      "handwrittenLines": 122
+      "handwrittenLines": 139
     },
     "xtext": {
       "files": {
@@ -701,11 +702,11 @@
       "files": {
         "core-runtime/canonical.rs": 32,
         "core-runtime/core.rs": 27,
-        "core-runtime/core.ts": 23,
+        "core-runtime/core.ts": 24,
         "core-runtime/Canonical.java": 48,
         "core-runtime/Core.java": 31
       },
-      "handwrittenLines": 161
+      "handwrittenLines": 162
     },
     "source-analysis": {
       "files": {

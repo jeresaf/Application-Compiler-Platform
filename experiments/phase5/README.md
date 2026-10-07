@@ -17,3 +17,15 @@ Dependencies/build caches stay ignored and local to this area. Raw results recor
 failed/unrun workloads explicitly. Missing evidence blocks selection; it never
 creates a performance win. The eventual report distinguishes exercised prototypes
 from missing editor/maintenance/scale evidence.
+
+
+Phase 5 is **EXPLICITLY BLOCKED ON EVIDENCE**, with no production selection.
+See [reproduction commands](COMMANDS.md), [machine-readable gates](results/gates.json),
+[raw/derived measurements](results/comparison.md), and the
+[evaluation report](../../docs/phase5-completion-report.md).
+
+The three grammars lower into ordinary records before the existing structured
+Phase 4 Ingest boundary. Separate probes enter the existing SemanticAST → Analyze
+→ Normalize stages without altering those contracts. The current experiments do
+not claim a production textual Ingest ABI, complete module system, safe source
+refactoring, or full-scale semantic validation.

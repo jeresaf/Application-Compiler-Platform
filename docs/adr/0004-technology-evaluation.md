@@ -17,7 +17,7 @@ Primary documentation reviewed 2026-09-15; these are documented capabilities, **
 | [Xtext language implementation](https://eclipse.dev/Xtext/documentation/303_runtime_concepts.html) | Provides language implementation services including linking/scoping, validation and generation integration | Relevant language-workbench candidate; measure runtime/model integration, deployment footprint and maintenance burden |
 | [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) | Incremental syntax parsing for source tooling | Source syntax adapter candidate; syntax alone does not establish resolved calls/types or runtime enforcement |
 
-The repository initially had no language/build precedent. CPython 3.14.7 and pinned JSON Schema tooling now run the Phase 1 corpus only (ADR-0003). That evidence does not establish production suitability. No parser benchmark, native-source experiment, or long-term dependency study has run. None of these candidates has earned a selection score.
+At the original investigation baseline, the repository had no language/build precedent beyond reference tooling (ADR-0003), and no comparative parser/native-source experiments had run. That historical starting point did not establish production suitability. The Phase 5 evidence update below supersedes the absence-of-experiments statement; no candidate has earned a production selection score.
 
 ## Alternatives to investigate
 
@@ -49,3 +49,52 @@ All hard gates must pass; performance cannot compensate for incorrect semantics 
 ## Consequences and blocked work
 
 Production core language, DSL/editor framework, source analyzer stack, runtime colocation, and plugin ABI remain blocked on evidence. Contract/schema/corpus work is independent and continues. Accepting this ADR later requires raw experiment results, known limitations, maintenance plan, chosen versions, and a reasoned comparison across all seven concerns requested by the user. A documentation-only comparison cannot select a winner.
+
+## Phase 5 evidence update — 2026-10-07
+
+Status remains **PROPOSED; selection explicitly deferred on evidence**. The
+[evaluation report](../phase5-completion-report.md), [reproduction commands](../../experiments/phase5/COMMANDS.md),
+[gate register](../../experiments/phase5/results/gates.json) and
+[descriptive measurements](../../experiments/phase5/results/comparison.md) record
+the completed bounded experiment pass and the remaining unrun requirements.
+Phases 1–4 remain CLOSED AND GREEN; Phase 5 is EXPLICITLY BLOCKED ON EVIDENCE;
+Phase 6 is NOT STARTED. The structured frontend remains supported.
+
+| Independent decision | Disposition | Evidence and reason |
+| --- | --- | --- |
+| Production compiler-core runtime | **DEFERRED**: Java 21, TypeScript 5.9.3/Node 24.21.0 and Rust 1.90.0 remain candidates | Typed graph/result/diagnostic/provenance/port/cancellation/budget slices execute; Java and Rust independently verify authoritative canonical vectors alongside the existing Node verifier. Full Phase 4 wire/worker conformance, serialization cost and TypeScript parallelism remain missing |
+| Textual frontend framework | **DEFERRED**: ANTLR 4.13.2, Langium/CLI 4.4.0 and Xtext 2.44.0 remain candidates | All three generated ACP grammars lower both domains exactly, preserve semantic diagnostics and run unchanged Analyze/Normalize stages. Production textual Ingest, module visibility/cycles, related locations, safe label refactoring and incremental scale evidence remain incomplete |
+| Frontend/core integration model | **DEFERRED**: same-process and versioned process boundaries remain open | Actual parsers export ordinary records; worker fault guard is tested. Candidate-native end-to-end versioned integration, authority state on retry/restart and comparable serialization/isolation measurements are not complete. No runtime dictates core colocation |
+| Source-analysis approach | **DEFERRED**: syntax, native and combined adapters remain open | Tree-sitter web 0.25.10/wasm bundle 0.1.13 and TypeScript 5.9.3 native APIs demonstrate uncertainty-aware feasibility on the same source fixture. Ownership/rename continuity, additional native adapters and exact wasm grammar provenance remain missing |
+
+No alternative is rejected on familiarity, popularity, LOC or exploratory speed.
+The Langium default declaration-name rename **fails ACP stable-ID label-rename
+safety**; this rejects that default behavior, not the framework before a custom
+policy can be tested. ANTLR's adapter is not a complete LSP; Xtext's native API
+coverage does not establish a production module or rename implementation. No PEG
+candidate was added because no demonstrated requirement gap justified one.
+
+Weights were committed before measurements: editor 25, performance 20, memory 15,
+integration 20, ergonomics 10, operations 10. Required hard-gate evidence is still
+UNKNOWN/NOT_RUN, so no weighted score or winner is published. Parse-only 100k-node
+success does not establish semantic validation at that size. Reference limits and
+canonical expected bytes/hashes are unchanged.
+
+Exact runtime/package pins, generator digests, npm/Cargo locks and resolved JVM
+dependencies/licenses are recorded in [versions](../../experiments/phase5/versions.json)
+and [inventory](../../experiments/phase5/results/inventory.json). Offline cached
+restoration and clean generated-output rebuilding passed; native source results
+are identical across the controlled TypeScript 5.9.2 → 5.9.3 patch comparison.
+Framework/toolchain upgrades, legacy textual migration, full transitive license
+inheritance, release/support review and Maven transitive reproducibility remain
+unresolved. The prototype Xtext numeric datatype is narrower than the accepted
+safe-integer canonical profile; representative fixtures pass, but wider authoring
+numeric coverage must be demonstrated before selection.
+
+Maintain pins and corpus equivalence checks; upgrade one component at a time on
+Linux with rollback evidence. ANTLR's BSD, Langium/Tree-sitter's MIT, Xtext's EPL,
+TypeScript's Apache and Rust/dependency MIT/Apache terms, plus JVM distribution
+obligations, require artifact-level deployment/redistribution review. Inherited
+licenses and patched/prebuilt artifact provenance are explicitly unresolved;
+top-level license names are not production clearance. No Linux host preference
+changes ACP semantic or generated-target neutrality.
