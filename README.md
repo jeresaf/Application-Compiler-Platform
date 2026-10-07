@@ -35,6 +35,19 @@ Start with the [constitution](docs/constitution.md), [glossary](docs/glossary.md
 
 CPython 3.14.7 and the pinned dependencies are test tooling only under [ADR-0003](docs/adr/0003-contract-harness.md).
 
+For Ubuntu setup, migration notes and rollback, see [DEV_LINUX.md](DEV_LINUX.md).
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r tooling/requirements.txt
+.venv/bin/python -m pip check
+.venv/bin/python tooling/check_repository.py
+.venv/bin/python -m unittest discover -s tooling/tests -v
+node tooling/check_canonical_vectors.mjs
+```
+
+Windows PowerShell:
+
 ```powershell
 python -m venv .venv
 .venv/Scripts/python -m pip install -r tooling/requirements.txt
