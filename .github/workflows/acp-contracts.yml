@@ -34,7 +34,7 @@ jobs:
         run: node tooling/check_canonical_vectors.mjs
   phase5-experiments:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v7.0.0
@@ -77,3 +77,22 @@ jobs:
           python3.14 experiments/phase5/native.py
           node experiments/phase5/langium/editor-probe.mjs
           node experiments/phase5/langium/source-probe.mjs
+      - name: Verify Phase 5B wire, source, diagnostics, determinism and scale evidence
+        run: |
+          python3.14 experiments/phase5/wire.py
+          python3.14 experiments/phase5/source5b.py
+          python3.14 experiments/phase5/evidence5b.py
+          python3.14 experiments/phase5/scale5b.py
+          python3.14 experiments/phase5/inventory5b.py
+      - name: Reproduce controlled frontend upgrades from isolated locks
+        run: |
+          python3.14 experiments/phase5/evolution.py prepare
+          npm --prefix experiments/phase5/.cache/evolution/langium ci --ignore-scripts --no-audit --no-fund
+          mvn -B -ntp -f experiments/phase5/.cache/evolution/xtext/pom.xml -Dmaven.repo.local="$GITHUB_WORKSPACE/experiments/phase5/.cache/m2" dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
+          python3.14 experiments/phase5/evolution.py
+      - name: Preserve hosted evidence separately from laptop measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase5b-ubuntu-evidence
+          path: experiments/phase5/results/phase5b/

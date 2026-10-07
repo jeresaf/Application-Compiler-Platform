@@ -1,0 +1,34 @@
+{
+  "engineeringHost": "Linux laptop; Ubuntu 24.04 official hosted CI",
+  "baseline": {
+    "status": "PASS",
+    "tests": 92,
+    "elapsedSeconds": 357.184
+  },
+  "experiments": {
+    "status": "PASS",
+    "tests": 15,
+    "elapsedSeconds": 239.277,
+    "additionalAmbiguousImportAllParsers": "PASS; targeted rerun 51.122 seconds"
+  },
+  "canonical": {
+    "status": "PASS",
+    "positive": 9,
+    "negative": 13,
+    "snapshotHashes": 2,
+    "node": "24.21.0",
+    "rust": "1.90.0",
+    "baselineContent": "Unchanged after Git LF normalization; preserved-baselines.json"
+  },
+  "repository": "PASS",
+  "dependencyConsistency": "PASS",
+  "typescriptGraphConcurrency": {
+    "actualWorkerThreads": 8,
+    "status": "PASS",
+    "typecheck": "PASS after explicit ESM package declaration"
+  },
+  "phase5": "EXPLICITLY_BLOCKED_ON_PRECISELY_IDENTIFIED_EVIDENCE",
+  "phase6": "NOT_STARTED",
+  "hostedEvidence": "Official workflow runs on this branch and uploads phase5b-ubuntu-evidence; see GitHub Actions for commit-bound result.",
+  "localLogs": "/tmp logs are ephemeral; structured evidence is committed separately."
+}

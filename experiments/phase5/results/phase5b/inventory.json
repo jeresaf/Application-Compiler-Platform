@@ -1,0 +1,1327 @@
+{
+  "npm": [
+    {
+      "package": "@chevrotain/cst-dts-gen",
+      "version": "13.2.0",
+      "source": "https://registry.npmjs.org/@chevrotain/cst-dts-gen/-/cst-dts-gen-13.2.0.tgz",
+      "integrity": "sha512-bA9dvWlhAUcHkNwU+8w9yiUxJPlj/Lm3VqS7MD+NbIR/7LmpNLuK/AWNFdCo/T3SK5ND0/UHf3IJvl/Jn/i6yg==",
+      "license": "Apache-2.0",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "@chevrotain/gast",
+      "version": "13.2.0",
+      "source": "https://registry.npmjs.org/@chevrotain/gast/-/gast-13.2.0.tgz",
+      "integrity": "sha512-bCARdAsG+eEbOveSXcOAC7pVxA04I1ionzeMOwIYf5NX7SaS7zgn4Dgug2BSqoL+iyKeMNSorQjsFSHJHsCNwg==",
+      "license": "Apache-2.0",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "@chevrotain/regexp-to-ast",
+      "version": "13.2.0",
+      "source": "https://registry.npmjs.org/@chevrotain/regexp-to-ast/-/regexp-to-ast-13.2.0.tgz",
+      "integrity": "sha512-kxpUkLtiaK09ph+dib+Yvm+3sWSnuwlo25gqfKRgTPNmF6H7uW4gVkMjaRdtnN783S9sM6vUNWh9CsxYX4QwKw==",
+      "license": "Apache-2.0",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "@chevrotain/types",
+      "version": "13.2.0",
+      "source": "https://registry.npmjs.org/@chevrotain/types/-/types-13.2.0.tgz",
+      "integrity": "sha512-7qrYHRlKfWf2AvBfJi5eVOrKAkbxvMFsy/iIHTGIiApNcEecCaVIdR+mIQhyCBsTDJxBz4JWXHMo6krbhR9hVg==",
+      "license": "Apache-2.0",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "@chevrotain/utils",
+      "version": "13.2.0",
+      "source": "https://registry.npmjs.org/@chevrotain/utils/-/utils-13.2.0.tgz",
+      "integrity": "sha512-SzKYY68rseOrb9KILVzPsl6SjkQtdWw01SRGB5aCVI5kFcHltQsOYV3JB0Ffst72DgkvHCyDQ0NLwxtmCCf97Q==",
+      "license": "Apache-2.0",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "@types/node",
+      "version": "24.10.1",
+      "source": "https://registry.npmjs.org/@types/node/-/node-24.10.1.tgz",
+      "integrity": "sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "chalk",
+      "version": "5.6.2",
+      "source": "https://registry.npmjs.org/chalk/-/chalk-5.6.2.tgz",
+      "integrity": "sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "chevrotain",
+      "version": "13.2.0",
+      "source": "https://registry.npmjs.org/chevrotain/-/chevrotain-13.2.0.tgz",
+      "integrity": "sha512-GTouk5YzgBxlTPCaDn5q0q2EJKkrYmnPF+HmF8v0Qo4r3iyPG7HJivkN1wthCXZcm3sIcZFpGTRovLPNdJNRCA==",
+      "license": "Apache-2.0",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "chevrotain-allstar",
+      "version": "0.5.0",
+      "source": "https://registry.npmjs.org/chevrotain-allstar/-/chevrotain-allstar-0.5.0.tgz",
+      "integrity": "sha512-KV7jVd28Qp4Kg9Ovhwlx5vyucoQxqxB22DLpxqRR2YDsHUHirr/NHAHx5bYk+bhJCD88xrLvOrfjlrrZRVa2Mg==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "commander",
+      "version": "15.0.0",
+      "source": "https://registry.npmjs.org/commander/-/commander-15.0.0.tgz",
+      "integrity": "sha512-z67u4ZhzCL/Tydu1lJARtEZYWbWaN7oYLHbsuzocr6y4N6WZAagG3RQ4FW61V1/0+jImpj293XfrcYnd1qxtPg==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "fs-extra",
+      "version": "11.4.1",
+      "source": "https://registry.npmjs.org/fs-extra/-/fs-extra-11.4.1.tgz",
+      "integrity": "sha512-KYAb4c9BJQI6QqGKthV68OHe0badztdXJWKo0WtBA9IuCFPTKvE5ZdUBglP833aMjhaSPNO4A5j/EkzZtGlKjA==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "graceful-fs",
+      "version": "4.2.11",
+      "source": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.11.tgz",
+      "integrity": "sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==",
+      "license": "ISC",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "jsonfile",
+      "version": "6.2.1",
+      "source": "https://registry.npmjs.org/jsonfile/-/jsonfile-6.2.1.tgz",
+      "integrity": "sha512-zwOTdL3rFQ/lRdBnntKVOX6k5cKJwEc1HdilT71BWEu7J41gXIB2MRp+vxduPSwZJPWBxEzv4yH1wYLJGUHX4Q==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "jsonschema",
+      "version": "1.5.0",
+      "source": "https://registry.npmjs.org/jsonschema/-/jsonschema-1.5.0.tgz",
+      "integrity": "sha512-K+A9hhqbn0f3pJX17Q/7H6yQfD/5OXgdrR5UE12gMXCiN9D5Xq2o5mddV2QEcX/bjla99ASsAAQUyMCCRWAEhw==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "langium",
+      "version": "4.4.0",
+      "source": "https://registry.npmjs.org/langium/-/langium-4.4.0.tgz",
+      "integrity": "sha512-VFIFtohpsmJeQ+LkaeuUNtyvkklecklI0FSLxFS8JfiGABE9XCpUJwYUNnLk6C2aOyk0w99tNlvd0pmbJ2AW/w==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "langium-cli",
+      "version": "4.4.0",
+      "source": "https://registry.npmjs.org/langium-cli/-/langium-cli-4.4.0.tgz",
+      "integrity": "sha512-CSqwKebp8qWa9Y5s1xgEl4qxGPH71Wf4yMXKPuwICoL2yRfVtUl2zpTwF4O5WhYOxnuSpf0rJrxzjQRK5whL7Q==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "langium-railroad",
+      "version": "4.4.0",
+      "source": "https://registry.npmjs.org/langium-railroad/-/langium-railroad-4.4.0.tgz",
+      "integrity": "sha512-5dZINWslRqUkQaVtn+45SdZyOZ2+LwBGrzWKbRkVf76IZPCRTBzbmNYaCFW09Nwl5dMmv+iQvwkUwViljN0hvg==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "lodash",
+      "version": "4.18.1",
+      "source": "https://registry.npmjs.org/lodash/-/lodash-4.18.1.tgz",
+      "integrity": "sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "lodash-es",
+      "version": "4.18.1",
+      "source": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.18.1.tgz",
+      "integrity": "sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "railroad-diagrams",
+      "version": "1.0.0",
+      "source": "https://registry.npmjs.org/railroad-diagrams/-/railroad-diagrams-1.0.0.tgz",
+      "integrity": "sha512-cz93DjNeLY0idrCNOH6PviZGRN9GJhsdm9hpn1YCS879fj4W+x5IFJhhkRZcwVgMmFF7R82UA/7Oh+R8lLZg6A==",
+      "license": "CC0-1.0",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "tree-sitter-wasms",
+      "version": "0.1.13",
+      "source": "https://registry.npmjs.org/tree-sitter-wasms/-/tree-sitter-wasms-0.1.13.tgz",
+      "integrity": "sha512-wT+cR6DwaIz80/vho3AvSF0N4txuNx/5bcRKoXouOfClpxh/qqrF4URNLQXbbt8MaAxeksZcZd1j8gcGjc+QxQ==",
+      "license": "Unlicense",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "typescript",
+      "version": "5.9.3",
+      "source": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
+      "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
+      "license": "Apache-2.0",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "undici-types",
+      "version": "7.16.0",
+      "source": "https://registry.npmjs.org/undici-types/-/undici-types-7.16.0.tgz",
+      "integrity": "sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "universalify",
+      "version": "2.0.1",
+      "source": "https://registry.npmjs.org/universalify/-/universalify-2.0.1.tgz",
+      "integrity": "sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==",
+      "license": "MIT",
+      "developmentOnly": true,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "vscode-jsonrpc",
+      "version": "9.0.3",
+      "source": "https://registry.npmjs.org/vscode-jsonrpc/-/vscode-jsonrpc-9.0.3.tgz",
+      "integrity": "sha512-qETYf9PCl1lVfwR+oBmMfc4vP2nqLNA35ABxorw3j06+xlKRgDVxbLgKm4Y/xPL0YWdeDjLoI4ImICIT3nB0zQ==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "vscode-languageserver",
+      "version": "10.1.2",
+      "source": "https://registry.npmjs.org/vscode-languageserver/-/vscode-languageserver-10.1.2.tgz",
+      "integrity": "sha512-pXPWde3RytdeBVEs6PulOOT5OpeXC5GkWRpcT11f5rNn41jviQsAYPyAqJ/0oVGETQLKPJtYbHNiMPlfLb0NTQ==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "vscode-languageserver-protocol",
+      "version": "3.18.4",
+      "source": "https://registry.npmjs.org/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.18.4.tgz",
+      "integrity": "sha512-CCXbyr99dafRJzJH/0Ryk7ly5T8XPmSR0//OuF2w4m+9JiOin7zcAT5iET8GRE7Z9taFBejb3GbM0a0mbjdbrg==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "vscode-languageserver-textdocument",
+      "version": "1.0.15",
+      "source": "https://registry.npmjs.org/vscode-languageserver-textdocument/-/vscode-languageserver-textdocument-1.0.15.tgz",
+      "integrity": "sha512-Gsfr9S8LU3S6885cS+NaleasJ0n3V5y/SOTqHCifQiXWFw3G9w9/YItDfwHrlCz+dSZWWZ8ilYVMcJe7Sz7Sxw==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "vscode-languageserver-types",
+      "version": "3.18.4",
+      "source": "https://registry.npmjs.org/vscode-languageserver-types/-/vscode-languageserver-types-3.18.4.tgz",
+      "integrity": "sha512-nQsacoiijvl0fRf2q28uFDrAVwRhdCa3QveiF7/CX0r18mLR5FU/1WskSsCKOjmEbtteKUnY8x8Yzxop+k0zwg==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "vscode-uri",
+      "version": "3.1.0",
+      "source": "https://registry.npmjs.org/vscode-uri/-/vscode-uri-3.1.0.tgz",
+      "integrity": "sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    },
+    {
+      "package": "web-tree-sitter",
+      "version": "0.25.10",
+      "source": "https://registry.npmjs.org/web-tree-sitter/-/web-tree-sitter-0.25.10.tgz",
+      "integrity": "sha512-Y09sF44/13XvgVKgO2cNDw5rGk6s26MgoZPXLESvMXeefBf7i6/73eFurre0IsTW6E14Y0ArIzhUMmjoc7xyzA==",
+      "license": "MIT",
+      "developmentOnly": false,
+      "redistribution": "Retain package license/notice and inspect bundled dependencies; lock metadata is not clearance."
+    }
+  ],
+  "jvm": [
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtext.common.types/2.44.0/org.eclipse.xtext.common.types-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtext.common.types/2.44.0/org.eclipse.xtext.common.types-2.44.0.jar",
+      "sha256": "a1bee24b0bb010612219911281b158184b00012092d5808d91810691208c83e6",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtext/2.44.0/org.eclipse.xtext-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtext/2.44.0/org.eclipse.xtext-2.44.0.jar",
+      "sha256": "7bef3a2bb019ed028f772cf168d340ac57788068b5ee0b5a42e84df6cc2ca4b7",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtend.lib/2.44.0/org.eclipse.xtend.lib-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtend.lib/2.44.0/org.eclipse.xtend.lib-2.44.0.jar",
+      "sha256": "f23f1bb1c70e13b227d2759fa32131dedd5d855cb6d2102736aa779315c3726e",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtext.xbase.lib/2.44.0/org.eclipse.xtext.xbase.lib-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtext.xbase.lib/2.44.0/org.eclipse.xtext.xbase.lib-2.44.0.jar",
+      "sha256": "c6c2b8593cd39c279e74e7055cbd146d39dc6f16011961b4928b92728d32d00d",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtend.lib.macro/2.44.0/org.eclipse.xtend.lib.macro-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtend.lib.macro/2.44.0/org.eclipse.xtend.lib.macro-2.44.0.jar",
+      "sha256": "413ad8f81703ae51a8dba8d6d9c8b645a0977e9920af34a968240850418f29c5",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtext.util/2.44.0/org.eclipse.xtext.util-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtext.util/2.44.0/org.eclipse.xtext.util-2.44.0.jar",
+      "sha256": "3f49289e6c027a06508ef92dda2e720677bdddb10ea8014efc3ec952c6181874",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "com/google/inject/guice/7.0.0/guice-7.0.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/inject/guice/7.0.0/guice-7.0.0.jar",
+      "sha256": "de5b0e359bd7b03ca42806b368846efd95484380fe05ae2a4ea71bc338c59c00",
+      "licenses": [
+        {
+          "name": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar",
+      "source": "https://repo.maven.apache.org/maven2/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar",
+      "sha256": "f7dc98062fccf14126abb751b64fab12c312566e8cbdc8483598bffcea93af7c",
+      "licenses": [
+        {
+          "name": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "aopalliance/aopalliance/1.0/aopalliance-1.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar",
+      "sha256": "0addec670fedcd3f113c5c8091d783280d23f75e3acb841b61a9cdb079376a08",
+      "licenses": [],
+      "unresolved": [
+        "No declared/inherited license located"
+      ],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar",
+      "sha256": "6d9f997202cc02d4d4fa3d4e84e6d2d3de3a1b1f951e9a1a83b40d0279a50389",
+      "licenses": [],
+      "unresolved": [
+        "No declared/inherited license located"
+      ],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb",
+      "licenses": [
+        {
+          "name": "BSD-3-Clause",
+          "url": "https://asm.ow2.io/license.html"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "io/github/classgraph/classgraph/4.8.192/classgraph-4.8.192.jar",
+      "source": "https://repo.maven.apache.org/maven2/io/github/classgraph/classgraph/4.8.192/classgraph-4.8.192.jar",
+      "sha256": "8d3e9d3864e51438a8a33391dc469f06d2d878278efc784b78ac5d4c0d5cfc87",
+      "licenses": [
+        {
+          "name": "The MIT License (MIT)",
+          "url": "http://opensource.org/licenses/MIT"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtext.xtext.generator/2.44.0/org.eclipse.xtext.xtext.generator-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtext.xtext.generator/2.44.0/org.eclipse.xtext.xtext.generator-2.44.0.jar",
+      "sha256": "022bdef34120e7c88695554ac939603a5d6b6cfc7c8eecdd43e2a1a5cc7c631d",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtext.ecore/2.44.0/org.eclipse.xtext.ecore-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtext.ecore/2.44.0/org.eclipse.xtext.ecore-2.44.0.jar",
+      "sha256": "7e4e2b997dba242159479636a802e6eaeb1f4af65269e1e6471182fe921a27c6",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.ecore/2.36.0/org.eclipse.emf.ecore-2.36.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.ecore/2.36.0/org.eclipse.emf.ecore-2.36.0.jar",
+      "sha256": "bebb33f7683098ab65997e23fc1273c58bd0d39cc9334aaa6110abe240daa3f3",
+      "licenses": [
+        {
+          "name": "The Eclipse Public License Version 2.0",
+          "url": "https://www.eclipse.org/legal/epl-v20.html"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.37.0/org.eclipse.emf.ecore.xmi-2.37.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.37.0/org.eclipse.emf.ecore.xmi-2.37.0.jar",
+      "sha256": "86607313d60acf901bee23378c9625a591b1f346a0b9c01c657a47e235d7e805",
+      "licenses": [
+        {
+          "name": "The Eclipse Public License Version 2.0",
+          "url": "https://www.eclipse.org/legal/epl-v20.html"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.common/2.30.0/org.eclipse.emf.common-2.30.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.common/2.30.0/org.eclipse.emf.common-2.30.0.jar",
+      "sha256": "4e4d516e2958a28b3dea3ab95bca91a14af3c3cebd11705d6027417a93178fde",
+      "licenses": [
+        {
+          "name": "The Eclipse Public License Version 2.0",
+          "url": "https://www.eclipse.org/legal/epl-v20.html"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.codegen/2.23.0/org.eclipse.emf.codegen-2.23.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.codegen/2.23.0/org.eclipse.emf.codegen-2.23.0.jar",
+      "sha256": "16d4b1ad4e438a544a6de19317c2669d7e582920f48475f93adb31e226bfce44",
+      "licenses": [
+        {
+          "name": "The Eclipse Public License Version 2.0",
+          "url": "https://www.eclipse.org/legal/epl-v20.html"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.codegen.ecore/2.37.0/org.eclipse.emf.codegen.ecore-2.37.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.codegen.ecore/2.37.0/org.eclipse.emf.codegen.ecore-2.37.0.jar",
+      "sha256": "0cba92688b348f2062a1ac10036cdd069fb4a329cdaf20d20187538bdaa7e92d",
+      "licenses": [
+        {
+          "name": "The Eclipse Public License Version 2.0",
+          "url": "https://www.eclipse.org/legal/epl-v20.html"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.mwe.utils/1.21.0/org.eclipse.emf.mwe.utils-1.21.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.mwe.utils/1.21.0/org.eclipse.emf.mwe.utils-1.21.0.jar",
+      "sha256": "0fdf675a4027176e9483f4b88d6bbe05dcff585462bde8008a8f62d10921668b",
+      "licenses": [
+        {
+          "name": "Eclipse Public License - v 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.mwe.core/1.21.0/org.eclipse.emf.mwe.core-1.21.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.mwe.core/1.21.0/org.eclipse.emf.mwe.core-1.21.0.jar",
+      "sha256": "6a152344c5fa998468d49bb92646fa8ac7a4a3ccaeded6665b33c3e805de8488",
+      "licenses": [
+        {
+          "name": "Eclipse Public License - v 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "commons-logging/commons-logging/1.3.4/commons-logging-1.3.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.3.4/commons-logging-1.3.4.jar",
+      "sha256": "bc2dfe32f1ef06509e6a065144c1adf7b420eabf11a87f30bd127f8faa332016",
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.27.0/org.eclipse.emf.mwe2.lib-2.27.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.27.0/org.eclipse.emf.mwe2.lib-2.27.0.jar",
+      "sha256": "0269cd7693f11f2bbb5d8ade76a2e88caea192a1568b664699892811309be649",
+      "licenses": [
+        {
+          "name": "Eclipse Public License - v 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.equinox.common/3.20.300/org.eclipse.equinox.common-3.20.300.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.equinox.common/3.20.300/org.eclipse.equinox.common-3.20.300.jar",
+      "sha256": "855d239af29ddb1d2248d378697c095be62efb9a5b3c1bb26d31f7b97a8e16ae",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.core.runtime/3.34.100/org.eclipse.core.runtime-3.34.100.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.core.runtime/3.34.100/org.eclipse.core.runtime-3.34.100.jar",
+      "sha256": "181180916a2bfe4da2c06e8c7c305586bc6bb6f14c87845c0562d20edf688890",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.osgi/3.24.0/org.eclipse.osgi-3.24.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.osgi/3.24.0/org.eclipse.osgi-3.24.0.jar",
+      "sha256": "789454014c150f2adf681cd80f8ecf49817d93ed790f3659b362dca07ade87b8",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.core.jobs/3.15.700/org.eclipse.core.jobs-3.15.700.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.core.jobs/3.15.700/org.eclipse.core.jobs-3.15.700.jar",
+      "sha256": "37015179a7b9b90d16cb92f4b1be6083a1a6dad25428fa8f6b89626f0cc2da79",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.equinox.registry/3.12.600/org.eclipse.equinox.registry-3.12.600.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.600/org.eclipse.equinox.registry-3.12.600.jar",
+      "sha256": "4f8cd72681446b598390a8c24ee9b9996f6e4c5fabed022b50bd26f6f5a0bf6c",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.equinox.preferences/3.12.100/org.eclipse.equinox.preferences-3.12.100.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.equinox.preferences/3.12.100/org.eclipse.equinox.preferences-3.12.100.jar",
+      "sha256": "fd04e81a28ab32b6bb073286eb293c44b760176fcf1e35ef15614d62df820f86",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar",
+      "sha256": "43c7c870710e363405d422da653cce0d798a4537f76e4930f79bceadd3a55345",
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://opensource.org/licenses/Apache-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar",
+      "sha256": "a0e8a4c362bd3600812f37b0ea45fba966c7bc049d01fed56a09ecc74082759e",
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://opensource.org/licenses/Apache-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.core.contenttype/3.9.800/org.eclipse.core.contenttype-3.9.800.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.800/org.eclipse.core.contenttype-3.9.800.jar",
+      "sha256": "e0c2db96600d519ce36a75f9b7c971afd2870d2d059eee4bf2436d9b33aa0b8d",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.equinox.app/1.7.500/org.eclipse.equinox.app-1.7.500.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.equinox.app/1.7.500/org.eclipse.equinox.app-1.7.500.jar",
+      "sha256": "19f2e3611347db6433a48a62187c9f6bd46886d0d56836697dafffe985ea93ef",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.core.expressions/3.9.500/org.eclipse.core.expressions-3.9.500.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.core.expressions/3.9.500/org.eclipse.core.expressions-3.9.500.jar",
+      "sha256": "8444b5de90c9b4ab528c8ea5c341c7e872d0dbe8241ab79085551086d96e7c9e",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.core.filesystem/1.11.400/org.eclipse.core.filesystem-1.11.400.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.core.filesystem/1.11.400/org.eclipse.core.filesystem-1.11.400.jar",
+      "sha256": "6f70b95d14b90ec57b94c5e3dba7e1d189679cf9a4bc4526e9c91beed7d6a0ef",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "net/java/dev/jna/jna/5.18.1/jna-5.18.1.jar",
+      "source": "https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.18.1/jna-5.18.1.jar",
+      "sha256": "260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557",
+      "licenses": [
+        {
+          "name": "LGPL-2.1-or-later",
+          "url": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1"
+        },
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "net/java/dev/jna/jna-platform/5.18.1/jna-platform-5.18.1.jar",
+      "source": "https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.18.1/jna-platform-5.18.1.jar",
+      "sha256": "ad14c1b1ec4f43d396231219dfa635ebf828f738eac9f890ea1bc07795892d9a",
+      "licenses": [
+        {
+          "name": "LGPL-2.1-or-later",
+          "url": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1"
+        },
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.core.commands/3.12.500/org.eclipse.core.commands-3.12.500.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.core.commands/3.12.500/org.eclipse.core.commands-3.12.500.jar",
+      "sha256": "44713362e55ed28e6db5d2c31bf67524fef087645a44dc3239dac60ece017cb9",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.text/3.14.500/org.eclipse.text-3.14.500.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.text/3.14.500/org.eclipse.text-3.14.500.jar",
+      "sha256": "1b6758522917f7cf0b7a7aa42bfefed5dbbae862899adab4fe3bed5536dc78ca",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.core.variables/3.6.700/org.eclipse.core.variables-3.6.700.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.core.variables/3.6.700/org.eclipse.core.variables-3.6.700.jar",
+      "sha256": "dd33a48fb6e349c4dbd25124db0acb486bb705ba9735cf42b28355e309c1eb8c",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/jdt/org.eclipse.jdt.debug/3.25.0/org.eclipse.jdt.debug-3.25.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/jdt/org.eclipse.jdt.debug/3.25.0/org.eclipse.jdt.debug-3.25.0.jar",
+      "sha256": "71eb25a68ddc6187eb4c9cdae9f1b252da76ec342191d658f2db8b0b6378034d",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.debug.core/3.23.200/org.eclipse.debug.core-3.23.200.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.debug.core/3.23.200/org.eclipse.debug.core-3.23.200.jar",
+      "sha256": "b565e8dea240564d94ad8d5cb64aa9e1e796192739d5aee9fa0af816b7fa03b1",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/platform/org.eclipse.core.resources/3.23.100/org.eclipse.core.resources-3.23.100.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.core.resources/3.23.100/org.eclipse.core.resources-3.23.100.jar",
+      "sha256": "fa21146a5033ac8d53a55f7df68d952ceb68b1097d9986aa9b799872ff608574",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/jdt/org.eclipse.jdt.core/3.44.0/org.eclipse.jdt.core-3.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/jdt/org.eclipse.jdt.core/3.44.0/org.eclipse.jdt.core-3.44.0.jar",
+      "sha256": "5cc842b72f8c87086747d464c1c375680c84eaae2dfd83f53a43205a221bf5e7",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/jdt/ecj/3.44.0/ecj-3.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/jdt/ecj/3.44.0/ecj-3.44.0.jar",
+      "sha256": "14c46ddc2e511c46c998da728f6a80f13a689c920f3832402f7ad150f6a6188d",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/jdt/org.eclipse.jdt.launching/3.24.0/org.eclipse.jdt.launching-3.24.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/jdt/org.eclipse.jdt.launching/3.24.0/org.eclipse.jdt.launching-3.24.0.jar",
+      "sha256": "eb4ca6afc8cf8ac442e1618457f01aa2c6be4b7c3eac12b4770e975c964e85f0",
+      "licenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/jdt/org.eclipse.jdt.launching.macosx/3.6.300/org.eclipse.jdt.launching.macosx-3.6.300.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/jdt/org.eclipse.jdt.launching.macosx/3.6.300/org.eclipse.jdt.launching.macosx-3.6.300.jar",
+      "sha256": "2997d3e66accd0cd6d44c13cd77bde6beef94b2c3aec1d7eaa73618a817e0563",
+      "licenses": [
+        {
+          "name": "Eclipse Public License - v 2.0",
+          "url": "https://www.eclipse.org/legal/epl-2.0/"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/xtext/org.eclipse.xtext.ide/2.44.0/org.eclipse.xtext.ide-2.44.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/xtext/org.eclipse.xtext.ide/2.44.0/org.eclipse.xtext.ide-2.44.0.jar",
+      "sha256": "df9d9e292063712eaa05a21cae894e2f3e253356519b2fbc3f5bf66794b24748",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.ecore.change/2.16.0/org.eclipse.emf.ecore.change-2.16.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.ecore.change/2.16.0/org.eclipse.emf.ecore.change-2.16.0.jar",
+      "sha256": "77db96a3bd664e2a20d37a0f208fdea3d21a6f9a7efa11674f04582e6f789825",
+      "licenses": [
+        {
+          "name": "The Eclipse Public License Version 2.0",
+          "url": "https://www.eclipse.org/legal/epl-v20.html"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/lsp4j/org.eclipse.lsp4j/1.0.0/org.eclipse.lsp4j-1.0.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/lsp4j/org.eclipse.lsp4j/1.0.0/org.eclipse.lsp4j-1.0.0.jar",
+      "sha256": "ccd78893facc6bfcc359d56cba05d3d5b85eb41e4c40d4b4215ca45db5f416d9",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/lsp4j/org.eclipse.lsp4j.jsonrpc/1.0.0/org.eclipse.lsp4j.jsonrpc-1.0.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/lsp4j/org.eclipse.lsp4j.jsonrpc/1.0.0/org.eclipse.lsp4j.jsonrpc-1.0.0.jar",
+      "sha256": "9647feb0524bf763c878e12ab878a684102b81cccb3f77feecbec709d54f9bbb",
+      "licenses": [
+        {
+          "name": "Eclipse Public License, Version 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.mwe2.launch/2.24.0/org.eclipse.emf.mwe2.launch-2.24.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.mwe2.launch/2.24.0/org.eclipse.emf.mwe2.launch-2.24.0.jar",
+      "sha256": "8cc5c951e12fd95b3408b0d572c3fd8752ad15ae32c9e00afec43ff089c94351",
+      "licenses": [
+        {
+          "name": "Eclipse Public License - v 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.mwe2.runtime/2.24.0/org.eclipse.emf.mwe2.runtime-2.24.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.mwe2.runtime/2.24.0/org.eclipse.emf.mwe2.runtime-2.24.0.jar",
+      "sha256": "f4813c1aa9d651afb4e498b8ad83b174b94af68eefdc6e045c4f9e32f1047f80",
+      "licenses": [
+        {
+          "name": "Eclipse Public License - v 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/eclipse/emf/org.eclipse.emf.mwe2.language/2.24.0/org.eclipse.emf.mwe2.language-2.24.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/eclipse/emf/org.eclipse.emf.mwe2.language/2.24.0/org.eclipse.emf.mwe2.language-2.24.0.jar",
+      "sha256": "aef973548060f37a11065eab301a59243cd6549a5a2b202ebb95c700ab7192cd",
+      "licenses": [
+        {
+          "name": "Eclipse Public License - v 2.0",
+          "url": "http://www.eclipse.org/legal/epl-2.0"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar",
+      "sha256": "1e301f0c52ac248b0b14fdc3d12283c77252d4d6f48521d572e7d8c4c2cc4ac7",
+      "licenses": [
+        {
+          "name": "Apache License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar",
+      "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb",
+      "licenses": [
+        {
+          "name": "Apache License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+      "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+      "licenses": [
+        {
+          "name": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+      "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+      "licenses": [
+        {
+          "name": "The Apache License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.jar",
+      "sha256": "84d3a150518485f8140ea99b8a985656749629f6433c92b80c75b36aba3b099b",
+      "licenses": [
+        {
+          "name": "Apache License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "commons-cli/commons-cli/1.11.0/commons-cli-1.11.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/commons-cli/commons-cli/1.11.0/commons-cli-1.11.0.jar",
+      "sha256": "8f7f8605d68e15bf32db61ec94eac6fdafc51b1bdbe1e0e0802b57d23f387792",
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "ch/qos/reload4j/reload4j/1.2.26/reload4j-1.2.26.jar",
+      "source": "https://repo.maven.apache.org/maven2/ch/qos/reload4j/reload4j/1.2.26/reload4j-1.2.26.jar",
+      "sha256": "a7e86ae144541d04d24d1b7123d7425415477d50f387bb868e5c955aeaedd96f",
+      "licenses": [
+        {
+          "name": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "com/google/code/gson/gson/2.13.2/gson-2.13.2.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.13.2/gson-2.13.2.jar",
+      "sha256": "dd0ce1b55a3ed2080cb70f9c655850cda86c206862310009dcb5e5c95265a5e0",
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    },
+    {
+      "artifact": "com/google/errorprone/error_prone_annotations/2.41.0/error_prone_annotations-2.41.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.41.0/error_prone_annotations-2.41.0.jar",
+      "sha256": "a56e782b5b50811ac204073a355a21d915a2107fce13ec711331ad036f660fcc",
+      "licenses": [
+        {
+          "name": "Apache 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ],
+      "unresolved": [],
+      "redistribution": "Review artifact notices, EPL source obligations and applicable linking/Classpath exceptions; do not infer from top-level Xtext license."
+    }
+  ],
+  "rust": [
+    {
+      "package": "block-buffer",
+      "version": "0.10.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/utils",
+      "unresolved": []
+    },
+    {
+      "package": "cfg-if",
+      "version": "1.0.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/rust-lang/cfg-if",
+      "unresolved": []
+    },
+    {
+      "package": "cpufeatures",
+      "version": "0.2.17",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "59ed5838eebb26a2bb2e58f6d5b5316989ae9d08bab10e0e6d103e656d1b0280",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/utils",
+      "unresolved": []
+    },
+    {
+      "package": "crypto-common",
+      "version": "0.1.7",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "78c8292055d1c1df0cce5d180393dc8cce0abec0a7102adb6c7b1eef6016d60a",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/traits",
+      "unresolved": []
+    },
+    {
+      "package": "digest",
+      "version": "0.10.7",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/traits",
+      "unresolved": []
+    },
+    {
+      "package": "generic-array",
+      "version": "0.14.7",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a",
+      "license": "MIT",
+      "repository": "https://github.com/fizyk20/generic-array.git",
+      "unresolved": []
+    },
+    {
+      "package": "itoa",
+      "version": "1.0.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/dtolnay/itoa",
+      "unresolved": []
+    },
+    {
+      "package": "libc",
+      "version": "0.2.190",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "ce5d3ddc6d3fa000eb1536d85e147bfe31aacaba692ed6a876f95cb7c855be78",
+      "license": null,
+      "repository": null,
+      "unresolved": [
+        "crate license metadata not restored"
+      ]
+    },
+    {
+      "package": "memchr",
+      "version": "2.8.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98",
+      "license": "Unlicense OR MIT",
+      "repository": "https://github.com/BurntSushi/memchr",
+      "unresolved": []
+    },
+    {
+      "package": "proc-macro2",
+      "version": "1.0.107",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9",
+      "license": null,
+      "repository": null,
+      "unresolved": [
+        "crate license metadata not restored"
+      ]
+    },
+    {
+      "package": "quote",
+      "version": "1.0.47",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001",
+      "license": null,
+      "repository": null,
+      "unresolved": [
+        "crate license metadata not restored"
+      ]
+    },
+    {
+      "package": "ryu",
+      "version": "1.0.23",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f",
+      "license": "Apache-2.0 OR BSL-1.0",
+      "repository": "https://github.com/dtolnay/ryu",
+      "unresolved": []
+    },
+    {
+      "package": "serde",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba",
+      "license": null,
+      "repository": null,
+      "unresolved": [
+        "crate license metadata not restored"
+      ]
+    },
+    {
+      "package": "serde_core",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "67dca2c9c51e58a4791a4b1ed58308b39c64224d349a935ab5039aa360942a48",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/serde-rs/serde",
+      "unresolved": []
+    },
+    {
+      "package": "serde_derive",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348",
+      "license": null,
+      "repository": null,
+      "unresolved": [
+        "crate license metadata not restored"
+      ]
+    },
+    {
+      "package": "serde_json",
+      "version": "1.0.145",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/serde-rs/json",
+      "unresolved": []
+    },
+    {
+      "package": "sha2",
+      "version": "0.10.9",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/hashes",
+      "unresolved": []
+    },
+    {
+      "package": "syn",
+      "version": "3.0.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee",
+      "license": null,
+      "repository": null,
+      "unresolved": [
+        "crate license metadata not restored"
+      ]
+    },
+    {
+      "package": "typenum",
+      "version": "1.20.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/paholg/typenum",
+      "unresolved": []
+    },
+    {
+      "package": "unicode-ident",
+      "version": "1.0.26",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "d245f478577f809a851594d02313b640fb437e0bb33866753cff937863096954",
+      "license": null,
+      "repository": null,
+      "unresolved": [
+        "crate license metadata not restored"
+      ]
+    },
+    {
+      "package": "version_check",
+      "version": "0.9.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "sha256": "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a",
+      "license": "MIT/Apache-2.0",
+      "repository": "https://github.com/SergioBenitez/version_check",
+      "unresolved": []
+    }
+  ],
+  "generatedCode": {
+    "antlr": "ANTLR BSD-3-Clause tool/runtime; generated code is user output but runtime notices remain relevant. Release review still required.",
+    "langium": "MIT generated infrastructure and runtime; preserve applicable notices.",
+    "xtext": "EPL-2.0 tool/runtime and mixed transitive licenses; output/runtime redistribution review needed. Patched ANTLR3 generator artifact source/build provenance remains unresolved."
+  },
+  "unresolvedJvmLicenses": [
+    "aopalliance/aopalliance/1.0/aopalliance-1.0.jar",
+    "org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar"
+  ],
+  "productionClearance": "UNKNOWN: declared/inherited metadata inventory does not establish complete legal and redistribution clearance.",
+  "reproduction": {
+    "npmLockSha256": "03e848a4c9c6e930518ac47e8a0945e0fc232656af3a710ec44a93e0f3678f3e",
+    "cargoLockSha256": "1920709bce9ea9908ddceabca9805f867d0cd6ad7b4f1cdcc2e32dc6a94b5434",
+    "maven": "Resolved artifact digest manifest captured; cached offline resolution and clean Ubuntu network restore are separate evidence. No independently rebuildable patched generator/source provenance proof."
+  },
+  "treeSitterWasm": "REJECTED_FOR_PRODUCTION; exact binary digest and reason in source.json"
+}

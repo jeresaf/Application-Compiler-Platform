@@ -24,8 +24,17 @@ See [reproduction commands](COMMANDS.md), [machine-readable gates](results/gates
 [raw/derived measurements](results/comparison.md), and the
 [evaluation report](../../docs/phase5-completion-report.md).
 
-The three grammars lower into ordinary records before the existing structured
-Phase 4 Ingest boundary. Separate probes enter the existing SemanticAST → Analyze
-→ Normalize stages without altering those contracts. The current experiments do
-not claim a production textual Ingest ABI, complete module system, safe source
-refactoring, or full-scale semantic validation.
+Phase 5B now invokes every actual parser inside Phase 4 Ingest, then Elaborate;
+framework objects stop at strict immutable Document boundaries. The common module
+and visibility policy is deliberately bounded experiment logic. Shared lexical
+label edits preserve stable IDs and update qualified references across files.
+
+See [Phase 5B raw evidence](results/phase5b/), [current gates](results/gates.json)
+and [commands](COMMANDS.md). Persistent Python framing workers currently start a
+cold native parser per request; do not describe those timings as warm native
+workers. Native builder/resource updates are separate from full ACP semantic
+validation. Full 10k/100k semantics remain NOT_SUPPORTED under existing limits.
+
+Four production decisions remain independently DEFERRED. The unprovenanced
+third-party Tree-sitter wasm is explicitly rejected for production; syntax-only
+analysis never counts as resolved semantic evidence. No Phase 6 work is included.

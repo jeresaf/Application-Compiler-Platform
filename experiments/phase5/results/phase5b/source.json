@@ -1,0 +1,304 @@
+{
+  "java": {
+    "before": {
+      "analyzer": "javac 21 Trees native semantic API",
+      "calls": [
+        {
+          "file": "GeneratedPayment.java",
+          "name": "super",
+          "status": "UNRESOLVED",
+          "binding": "",
+          "start": 95,
+          "end": -1
+        },
+        {
+          "file": "GeneratedPayment.java",
+          "name": "super",
+          "status": "UNRESOLVED",
+          "binding": "",
+          "start": 212,
+          "end": -1
+        },
+        {
+          "file": "GeneratedPayment.java",
+          "name": "payment.amount",
+          "status": "KNOWN",
+          "binding": "amount()",
+          "start": 332,
+          "end": 348
+        },
+        {
+          "file": "HumanExtension.java",
+          "name": "super",
+          "status": "UNRESOLVED",
+          "binding": "",
+          "start": 105,
+          "end": -1
+        },
+        {
+          "file": "HumanExtension.java",
+          "name": "settle",
+          "status": "KNOWN",
+          "binding": "settle(experiment.Payment)",
+          "start": 227,
+          "end": 239
+        },
+        {
+          "file": "HumanExtension.java",
+          "name": "noSuchPayment",
+          "status": "UNRESOLVED",
+          "binding": "",
+          "start": 270,
+          "end": 285
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "compiler.err.cant.resolve.location.args",
+          "line": 7
+        }
+      ],
+      "decorators": "ABSENT"
+    },
+    "afterRename": {
+      "analyzer": "javac 21 Trees native semantic API",
+      "calls": [
+        {
+          "file": "GeneratedPayment.java",
+          "name": "super",
+          "status": "UNRESOLVED",
+          "binding": "",
+          "start": 95,
+          "end": -1
+        },
+        {
+          "file": "GeneratedPayment.java",
+          "name": "super",
+          "status": "UNRESOLVED",
+          "binding": "",
+          "start": 212,
+          "end": -1
+        },
+        {
+          "file": "GeneratedPayment.java",
+          "name": "payment.amount",
+          "status": "KNOWN",
+          "binding": "amount()",
+          "start": 346,
+          "end": 362
+        },
+        {
+          "file": "HumanExtension.java",
+          "name": "super",
+          "status": "UNRESOLVED",
+          "binding": "",
+          "start": 112,
+          "end": -1
+        },
+        {
+          "file": "HumanExtension.java",
+          "name": "settleRenamed",
+          "status": "KNOWN",
+          "binding": "settleRenamed(experiment.Payment)",
+          "start": 234,
+          "end": 253
+        },
+        {
+          "file": "HumanExtension.java",
+          "name": "noSuchPayment",
+          "status": "UNRESOLVED",
+          "binding": "",
+          "start": 284,
+          "end": 299
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "compiler.err.cant.resolve.location.args",
+          "line": 7
+        }
+      ],
+      "decorators": "ABSENT"
+    },
+    "ownershipContinuity": true,
+    "nativeBindingStatusContinuity": true,
+    "limitations": "Java has static imports rather than TypeScript-style import aliases; aliases demonstrated by native TS."
+  },
+  "typescript": {
+    "analyzer": "TypeScript 5.9.3",
+    "evidence": [
+      {
+        "kind": "interface",
+        "name": "Payment",
+        "status": "KNOWN",
+        "heritage": []
+      },
+      {
+        "kind": "class",
+        "name": "PaymentBase",
+        "status": "KNOWN",
+        "heritage": []
+      },
+      {
+        "kind": "import",
+        "status": "KNOWN",
+        "file": "extension.ts",
+        "module": "./generated.js"
+      },
+      {
+        "kind": "alias",
+        "name": "pay",
+        "status": "KNOWN",
+        "target": "settle"
+      },
+      {
+        "kind": "alias",
+        "name": "PaymentBase",
+        "status": "KNOWN",
+        "target": "PaymentBase"
+      },
+      {
+        "kind": "alias",
+        "name": "Payment",
+        "status": "KNOWN",
+        "target": "Payment"
+      },
+      {
+        "kind": "class",
+        "name": "Extension",
+        "status": "KNOWN",
+        "heritage": [
+          "extends PaymentBase",
+          "implements Payment"
+        ]
+      },
+      {
+        "kind": "call",
+        "name": "pay",
+        "status": "KNOWN",
+        "binding": "export function settle(value: Payment): number;",
+        "start": 244,
+        "end": 264
+      },
+      {
+        "kind": "call",
+        "name": "noSuchPayment",
+        "status": "UNRESOLVED",
+        "start": 282,
+        "end": 298
+      }
+    ],
+    "absent": {
+      "decorators": "ABSENT"
+    },
+    "syntaxOnlyResolution": "UNKNOWN",
+    "ownership": "Exact marker extraction and rename continuity checked by host source5b.py",
+    "afterRename": {
+      "analyzer": "TypeScript 5.9.3",
+      "evidence": [
+        {
+          "kind": "interface",
+          "name": "Payment",
+          "status": "KNOWN",
+          "heritage": []
+        },
+        {
+          "kind": "class",
+          "name": "PaymentBase",
+          "status": "KNOWN",
+          "heritage": []
+        },
+        {
+          "kind": "import",
+          "status": "KNOWN",
+          "file": "extension.ts",
+          "module": "./generated.js"
+        },
+        {
+          "kind": "alias",
+          "name": "pay",
+          "status": "KNOWN",
+          "target": "settleRenamed"
+        },
+        {
+          "kind": "alias",
+          "name": "PaymentBase",
+          "status": "KNOWN",
+          "target": "PaymentBase"
+        },
+        {
+          "kind": "alias",
+          "name": "Payment",
+          "status": "KNOWN",
+          "target": "Payment"
+        },
+        {
+          "kind": "class",
+          "name": "Extension",
+          "status": "KNOWN",
+          "heritage": [
+            "extends PaymentBase",
+            "implements Payment"
+          ]
+        },
+        {
+          "kind": "call",
+          "name": "pay",
+          "status": "KNOWN",
+          "binding": "export function settleRenamed(value: Payment): number;",
+          "start": 251,
+          "end": 271
+        },
+        {
+          "kind": "call",
+          "name": "noSuchPayment",
+          "status": "UNRESOLVED",
+          "start": 289,
+          "end": 305
+        }
+      ],
+      "absent": {
+        "decorators": "ABSENT"
+      },
+      "syntaxOnlyResolution": "UNKNOWN",
+      "ownership": "Exact marker extraction and rename continuity checked by host source5b.py"
+    },
+    "ownershipAndNativeBindingContinuity": true
+  },
+  "ownership": {
+    "GeneratedPayment.java": [
+      [
+        "GENERATED",
+        "ENT-PAYMENT"
+      ],
+      [
+        "GENERATED",
+        "SERVICE-SETTLE"
+      ]
+    ],
+    "HumanExtension.java": [
+      [
+        "HUMAN",
+        "EXT-PAYMENT"
+      ]
+    ],
+    "generated.ts": [
+      [
+        "GENERATED",
+        "SERVICE-SETTLE"
+      ]
+    ],
+    "extension.ts": [
+      [
+        "HUMAN",
+        "EXT-PAYMENT"
+      ]
+    ]
+  },
+  "treeSitterWasm": {
+    "decision": "REJECTED_FOR_PRODUCTION",
+    "sha256": "8515404dceed38e1ed86aa34b09fcf3379fff1b4ff9dd3967bcd6d1eb5ac3d8f",
+    "reason": "Exact grammar source revision and reproducible source-to-wasm build not established. Experimental syntax results remain UNKNOWN for semantic resolution.",
+    "fallback": "Build a reviewed grammar from pinned upstream source; use target-native semantic analyzer for bindings."
+  }
+}

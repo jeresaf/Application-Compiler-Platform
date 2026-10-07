@@ -1,0 +1,34 @@
+{
+  "test-corpus/canonical/byte-vectors.json": {
+    "unchangedAfterGitLFNormalization": true,
+    "sha256LF": "27ff7cddb2057f9a8477bb903b95100d529ab1db0e7d958132e2edf3a4769f43"
+  },
+  "test-corpus/canonical/case-management.json": {
+    "unchangedAfterGitLFNormalization": true,
+    "sha256LF": "b99f36518a47ce5c0c93dd856dde301df0683f778e5a8de180cb55410153558f"
+  },
+  "test-corpus/canonical/manifest.json": {
+    "unchangedAfterGitLFNormalization": true,
+    "sha256LF": "8d0326366ecaa138c7ba075a85ed9ea3a8f595240f931841c94c550a16578fc0"
+  },
+  "test-corpus/canonical/payment.json": {
+    "unchangedAfterGitLFNormalization": true,
+    "sha256LF": "b319b005b8dafbcebd1d7c6c58a2a116fc029a4efd7c42df0bc9f9ea0b8f0204"
+  },
+  "docs/phase1-completion-report.md": {
+    "unchangedAfterGitLFNormalization": true,
+    "sha256LF": "8b556dda6d1102bdcfc87fba1e9f2fd632cde67a4ba60a5e7296b09d0e0f9a1f"
+  },
+  "docs/phase2-completion-report.md": {
+    "unchangedAfterGitLFNormalization": true,
+    "sha256LF": "362b36f86facd65b0e7b16f5d8a7ecb9ee52f6e4800053af7455c641b316fd00"
+  },
+  "docs/phase3-completion-report.md": {
+    "unchangedAfterGitLFNormalization": true,
+    "sha256LF": "05f3f82fd950711cd85d884d505fd666b969ff7b4492046c0aa6e833fbd3f6ac"
+  },
+  "docs/phase4-completion-report.md": {
+    "unchangedAfterGitLFNormalization": true,
+    "sha256LF": "c3f581d5f55568f06cba5bea18f2af369ab6c4fd2f49ee61739bef4f5e2a3a61"
+  }
+}

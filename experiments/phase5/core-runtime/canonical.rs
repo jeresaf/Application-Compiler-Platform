@@ -20,9 +20,9 @@ impl Parser<'_>{
  }}
  fn word(&mut self,w:&[u8])->Result<(),String>{if self.raw.get(self.i..self.i+w.len())!=Some(w){return Err("token".into());}self.i+=w.len();Ok(())}
 }
-fn parse(raw:&[u8])->Result<Value,String>{if raw.len()>1048576||raw.starts_with(&[239,187,191]){return Err("size/bom".into());}std::str::from_utf8(raw).map_err(|e|e.to_string())?;let mut p=Parser{raw,i:0};let v=p.value(0)?;p.skip();if p.i!=raw.len(){return Err("trailing".into());}Ok(v)}
-fn encode(v:&Value)->String{match v{Value::Object(m)=>{let mut keys:Vec<_>=m.keys().collect();keys.sort_by(|a,b|a.encode_utf16().cmp(b.encode_utf16()));format!("{{{}}}",keys.iter().map(|k|format!("{}:{}",serde_json::to_string(k).unwrap(),encode(&m[*k]))).collect::<Vec<_>>().join(","))},Value::Array(a)=>format!("[{}]",a.iter().map(encode).collect::<Vec<_>>().join(",")),_=>serde_json::to_string(v).unwrap()}}
-fn hash(v:&Value,domain:&str)->String{let mut h=Sha256::new();h.update(format!("ACP\0acp-jcs-safe-v1\0{domain}\0").as_bytes());h.update(encode(v).as_bytes());format!("sha256:{:x}",h.finalize())}
+pub(crate) fn parse(raw:&[u8])->Result<Value,String>{if raw.len()>1048576||raw.starts_with(&[239,187,191]){return Err("size/bom".into());}std::str::from_utf8(raw).map_err(|e|e.to_string())?;let mut p=Parser{raw,i:0};let v=p.value(0)?;p.skip();if p.i!=raw.len(){return Err("trailing".into());}Ok(v)}
+pub(crate) fn encode(v:&Value)->String{match v{Value::Object(m)=>{let mut keys:Vec<_>=m.keys().collect();keys.sort_by(|a,b|a.encode_utf16().cmp(b.encode_utf16()));format!("{{{}}}",keys.iter().map(|k|format!("{}:{}",serde_json::to_string(k).unwrap(),encode(&m[*k]))).collect::<Vec<_>>().join(","))},Value::Array(a)=>format!("[{}]",a.iter().map(encode).collect::<Vec<_>>().join(",")),_=>serde_json::to_string(v).unwrap()}}
+pub(crate) fn hash(v:&Value,domain:&str)->String{let mut h=Sha256::new();h.update(format!("ACP\0acp-jcs-safe-v1\0{domain}\0").as_bytes());h.update(encode(v).as_bytes());format!("sha256:{:x}",h.finalize())}
 fn main(){let root=std::env::args().nth(1).unwrap();let root=Path::new(&root);let vectors=parse(&fs::read(root.join("byte-vectors.json")).unwrap()).unwrap();
  for v in vectors["positive"].as_array().unwrap(){let value=parse(v["input"].as_str().unwrap().as_bytes()).unwrap();assert_eq!(encode(&value),v["canonical"].as_str().unwrap(),"{}",v["name"]);assert_eq!(hash(&value,"vector"),v["digest"].as_str().unwrap());}
  for v in vectors["negative"].as_array().unwrap(){assert!(parse(v["input"].as_str().unwrap().as_bytes()).is_err(),"{}",v["name"]);}

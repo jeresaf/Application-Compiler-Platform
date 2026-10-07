@@ -1,16 +1,17 @@
 grammar org.acp.experiment.Acp with org.eclipse.xtext.common.Terminals
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate acp "https://acp.example/experiments/phase5"
-Document: 'application' header=Object ';' declarations+=Declaration*;
-Declaration: kind=ID name=STRING '@' revision=INT body=Object ';';
+Document: ('module' module=STRING ';' ('import' imports+=STRING ';')*)? 'application' header=Object ';' declarations+=Declaration*;
+Declaration: exported?='export'? kind=ID name=STRING '@' revision=UnsignedInt body=Object ';';
 Value: Object | Array | Text | Number | Boolean | Null | Reference | Money;
-Object: '{' (pairs+=Pair (',' pairs+=Pair)*)? '}';
+Object: {Object} '{' (pairs+=Pair (',' pairs+=Pair)*)? '}';
 Pair: key=STRING ':' value=Value;
 Array: {Array} '[' (values+=Value (',' values+=Value)*)? ']';
 Text: value=STRING;
 Number: value=SignedInt;
-SignedInt returns ecore::EInt: '-'? INT;
+SignedInt returns ecore::ELong: '-'? INT;
+UnsignedInt returns ecore::ELong: INT;
 Boolean: value=('true' | 'false');
 Null: value='null';
-Reference: 'ref' target=[Declaration|STRING] '@' revision=INT;
+Reference: 'ref' target=[Declaration|STRING] '@' revision=UnsignedInt;
 Money: 'Money' currency=STRING 'precision' precision=INT 'scale' scale=INT 'rounding' rounding=STRING;

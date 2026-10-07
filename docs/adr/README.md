@@ -7,7 +7,7 @@ ACCEPTED records an engineering choice within its stated scope. PROPOSED records
 | [0001](0001-semantic-boundaries.md) | ACCEPTED | 2026-09-15 | Typed semantic boundaries and minimal repository |
 | [0002](0002-identity-lifecycle.md) | ACCEPTED | 2026-09-15 | Stable identity, exact references, independent lifecycle/evidence |
 | [0003](0003-contract-harness.md) | ACCEPTED, tooling only | 2026-09-15 | JSON Schema and replaceable Python contract harness |
-| [0004](0004-technology-evaluation.md) | **PROPOSED** | 2026-09-15 | Production language/frontend experiments and selection protocol; no selection |
+| [0004](0004-technology-evaluation.md) | **PROPOSED** | 2026-09-15 | Phase 5B evidence closure; four independent DEFERRED production decisions |
 | [0005](0005-open-architecture.md) | PROPOSED register with bounded resolution notes | 2026-09-15; updated 2026-09-28 | P-01 through P-07 and semantic-history P-09 have scoped successor ADRs; P-08, remaining P-09 and P-10 through P-13 remain open |
 | [0006](0006-domain-semantics.md) | ACCEPTED | 2026-09-16 | P-01 bounded domain/type/rule semantics; model 0.2.0 |
 | [0007](0007-security-privacy.md) | ACCEPTED | 2026-09-16 | P-02 explicit security/privacy and mandatory tenant obligations |
@@ -29,4 +29,4 @@ P-07's bounded interchange/normalization questions are resolved by ADR-0011; see
 
 ADR-0012 now implements bounded P-06 and semantic-history P-09. The remainder of P-09 concerns generated-source ownership, maps and regeneration and remains open. Its final acceptance evidence is recorded in the [Phase 3 report](../phase3-completion-report.md).
 
-**No production language, runtime or parser has been selected.** Python, JSON, SQLite, HMAC, the independent Node.js byte checker and CI action runtimes are reference/development choices only. ADR-0004 remains PROPOSED because the executable Phase 5 experiments leave hard-gate evidence unresolved; see the [evaluation report](../phase5-completion-report.md). Phase 4 reference compiler-core work is recorded in ADR-0013. Phase 5 is EXPLICITLY BLOCKED ON EVIDENCE; Phase 6 is NOT STARTED.
+**No production language, runtime or parser has been selected.** Python, JSON, SQLite, HMAC, the independent Node.js byte checker and CI action runtimes are reference/development choices only. ADR-0004 remains PROPOSED because the Phase 5B experiments leave precisely identified hard-gate evidence unresolved; see the [evaluation report](../phase5-completion-report.md). Phase 4 reference compiler-core work is recorded in ADR-0013. Phase 5 is EXPLICITLY BLOCKED ON EVIDENCE; Phase 6 is NOT STARTED.

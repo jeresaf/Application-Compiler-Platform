@@ -1,6 +1,6 @@
 grammar Acp
-entry Document: 'application' header=RecordValue ';' declarations+=Declaration*;
-Declaration: kind=ID name=STRING '@' revision=INT body=RecordValue ';';
+entry Document: ('module' module=STRING ';' ('import' imports+=STRING ';')*)? 'application' header=RecordValue ';' declarations+=Declaration*;
+Declaration: exported?='export'? kind=ID name=STRING '@' revision=INT body=RecordValue ';';
 Value: RecordValue | ListValue | Text | IntegerValue | BooleanValue | Null | Reference | Money;
 RecordValue: '{' (pairs+=Pair (',' pairs+=Pair)*)? '}';
 Pair: key=STRING ':' value=Value;

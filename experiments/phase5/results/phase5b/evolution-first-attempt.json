@@ -1,0 +1,250 @@
+{
+  "antlr": {
+    "from": "4.13.1",
+    "to": "4.13.2",
+    "cleanBuild": [
+      {
+        "exitCode": 0,
+        "elapsedMs": 1150.7662010008062,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "exitCode": 0,
+        "elapsedMs": 2910.2846720015805,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "corpus": {
+      "payment": {
+        "oldStatus": "PASS",
+        "newStatus": "PASS",
+        "equalModels": true,
+        "oldErrors": [],
+        "newErrors": []
+      },
+      "case-management": {
+        "oldStatus": "PASS",
+        "newStatus": "PASS",
+        "equalModels": true,
+        "oldErrors": [],
+        "newErrors": []
+      }
+    },
+    "generatedFilesBefore": 4,
+    "generatedFilesAfter": 4,
+    "changedGeneratedFiles": [
+      "AcpBaseListener.java",
+      "AcpLexer.java",
+      "AcpListener.java",
+      "AcpParser.java"
+    ],
+    "generatedHashesBefore": {
+      "AcpListener.java": "1d8c9c2e568282f009b3d9c53204cfad4a9b277d24b63eba7058e674ab539212",
+      "AcpParser.java": "146c5466cce05db05a0ab5fb6c096a4a94a04766a6f9cff68090c721248bc0b6",
+      "AcpBaseListener.java": "0d1ace8278a6360b13a04c429a4b1149a674c0d2765f5b36db4751a971454e6e",
+      "AcpLexer.java": "533f86dae5e6068aded6310ede7cdf40bfdbc302ea860011fa2010c60dd05128"
+    },
+    "generatedHashesAfter": {
+      "AcpListener.java": "740ed7aeca50d0a27bda8756345b51609d76e210ed9d3091a09cd78f99c736a3",
+      "AcpParser.java": "84a4795fcf9916a34937c50ef52bdbb02503eaf367dccb76f5835fc1240c780e",
+      "AcpBaseListener.java": "cb6a73e48c730e1734ab62b70a5f1b5259f8a43bb5be7ab9c4be4fdd8f5ed981",
+      "AcpLexer.java": "93497e3d7617316788cbf53b8169c7cfa97fa35106801393a9cff6b00a3c0d3a"
+    },
+    "migration": "Same grammar and adapter sources, no migration edits during comparison. Probe display version strings remain current; resolved artifact/lock identifies actual previous runtime.",
+    "rollback": "Production locks/pins are untouched; remove ignored .cache/evolution and regenerate with pinned commands.",
+    "status": "PASS"
+  },
+  "langium": {
+    "from": "4.3.0",
+    "to": "4.4.0",
+    "cleanBuild": [
+      {
+        "exitCode": 1,
+        "elapsedMs": 838.4230419978849,
+        "stdout": "\n> acp-phase5-langium-experiment@0.1.0 generate\n> langium generate\n\nReading config from /home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/langium-config.json\n",
+        "stderr": "TypeError: Invalid URL\n    at new URL (node:internal/url:895:25)\n    at Validator.resolve (/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/node_modules/jsonschema/lib/validator.js:263:16)\n    at Validator.validateSchema (/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/node_modules/jsonschema/lib/validator.js:194:25)\n    at /home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/node_modules/jsonschema/lib/attribute.js:455:20\n    at Array.every (<anonymous>)\n    at Validator.validateItems (/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/node_modules/jsonschema/lib/attribute.js:439:12)\n    at Validator.validateSchema (/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/node_modules/jsonschema/lib/validator.js:206:34)\n    at Validator.validateProperties (/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/node_modules/jsonschema/lib/attribute.js:277:20)\n    at Validator.validateSchema (/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/node_modules/jsonschema/lib/validator.js:206:34)\n    at Validator.validate (/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/node_modules/jsonschema/lib/validator.js:133:21) {\n  code: 'ERR_INVALID_URL',\n  input: '/undefined#/$defs/languageItem',\n  base: 'thismessage::/'\n}\n"
+      },
+      {
+        "exitCode": 2,
+        "elapsedMs": 517.4367889994755,
+        "stdout": "\n> acp-phase5-langium-experiment@0.1.0 build\n> tsc -p tsconfig.json\n\nerror TS18003: No inputs were found in config file '/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/tsconfig.json'. Specified 'include' paths were '[\"generated/**/*.ts\"]' and 'exclude' paths were '[\"/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/langium/out\"]'.\n",
+        "stderr": ""
+      }
+    ],
+    "corpus": {},
+    "generatedFilesBefore": 0,
+    "generatedFilesAfter": 3,
+    "changedGeneratedFiles": [
+      "ast.ts",
+      "grammar.ts",
+      "module.ts"
+    ],
+    "generatedHashesBefore": {},
+    "generatedHashesAfter": {
+      "ast.ts": "1d05fd3bd9546251fdde0c82e1364afe3649bdff55a30a3f2529097a1655c3ce",
+      "module.ts": "f38190b6ab6765f8eba4bc7f8d5cd5808933b861629a39482f8da9decbf51bb6",
+      "grammar.ts": "56d65cb58283ff56dc4f3ac05bd67ce7d1decc2dbdaa8910faf578bf553d3788"
+    },
+    "migration": "Same grammar and adapter sources, no migration edits during comparison. Probe display version strings remain current; resolved artifact/lock identifies actual previous runtime.",
+    "rollback": "Production locks/pins are untouched; remove ignored .cache/evolution and regenerate with pinned commands.",
+    "status": "FAIL"
+  },
+  "xtext": {
+    "from": "2.43.0",
+    "to": "2.44.0",
+    "cleanBuild": [
+      {
+        "exitCode": 0,
+        "elapsedMs": 1418.7951120002253,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "exitCode": 0,
+        "elapsedMs": 7722.769283998787,
+        "stdout": "0    [main] INFO  xt.xtext.generator.StandardLanguage  - Skipping registration of Xbase genmodel. Xbase is not on the classpath.\n5    [main] INFO  text.xtext.generator.XtextGenerator  - Initializing Xtext generator\n537  [main] INFO  text.xtext.generator.XtextGenerator  - Generating org.acp.experiment.Acp\n706  [main] INFO  nerator.ecore.EMFGeneratorFragment2  - Generating EMF model code\n4075 [main] INFO  text.xtext.generator.XtextGenerator  - Generating common infrastructure\n4077 [main] INFO  .emf.mwe2.runtime.workflow.Workflow  - Done.\n",
+        "stderr": "Oct 07, 2026 3:57:26 PM org.eclipse.emf.mwe.utils.StandaloneSetup addRegisterGeneratedEPackage\nINFO: Adding generated EPackage 'org.eclipse.xtext.common.types.TypesPackage'\nOct 07, 2026 3:57:26 PM org.eclipse.emf.mwe.utils.StandaloneSetup findProjectFileForPossibleClassesFolder\nWARNING: No project file found for /home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/xtext/out. The folder was neither an Eclipse 'bin' folder, nor a Maven 'target/classes' folder, nor a Gradle bin/main folder\nOct 07, 2026 3:57:26 PM org.eclipse.emf.mwe.utils.StandaloneSetup addProjectMapping\nINFO: Registering project org.acp.experiment at 'file:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/xtext/generated/org.acp.experiment/'\nOct 07, 2026 3:57:26 PM org.eclipse.emf.mwe.utils.StandaloneSetup addProjectMapping\nINFO: Registering project org.acp.experiment.ide at 'file:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/evolution/xtext/generated/org.acp.experiment.ide/'\nOct 07, 2026 3:57:26 PM org.eclipse.emf.mwe.utils.StandaloneSetup setResourceSet\nINFO: Using resourceSet registry. The registered Packages will not be registered in the global EPackage.Registry.INSTANCE!\nOct 07, 2026 3:57:27 PM org.eclipse.emf.mwe.utils.GenModelHelper registerGenModel\nINFO: Registered GenModel 'https://acp.example/experiments/phase5' from 'platform:/resource/org.acp.experiment/model/generated/Acp.genmodel'\n"
+      },
+      {
+        "exitCode": 0,
+        "elapsedMs": 4448.33949200256,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "corpus": {
+      "payment": {
+        "oldStatus": "PASS",
+        "newStatus": "PASS",
+        "equalModels": true,
+        "oldErrors": [],
+        "newErrors": []
+      },
+      "case-management": {
+        "oldStatus": "PASS",
+        "newStatus": "PASS",
+        "equalModels": true,
+        "oldErrors": [],
+        "newErrors": []
+      }
+    },
+    "generatedFilesBefore": 53,
+    "generatedFilesAfter": 53,
+    "changedGeneratedFiles": [],
+    "generatedHashesBefore": {
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/AbstractAcpIdeModule.java": "0ab9600766e9b4c65ad7d2db5d63d622538ff0fec81559426d7105dade3edc32",
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/contentassist/antlr/AcpParser.java": "feef54b2017aca31d4e36ed230fcfebe008b57609ad531106dcad9be9d08a00c",
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/contentassist/antlr/PartialAcpContentAssistParser.java": "07d5224bf8067998965ac7f443065b12194bfcff391037ab7a900effe4852189",
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/contentassist/antlr/internal/InternalAcpLexer.java": "1924658b4e47179202951d84137cf09ced7919f8651a2bdda6ab384432358f99",
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/contentassist/antlr/internal/InternalAcpParser.java": "d6dcb4c606efec71cb671e1bcaf6b2750efcae1985e2f049286f558fd0c7386c",
+      "org.acp.experiment.ide/src/org/acp/experiment/ide/AcpIdeSetup.java": "6130214e04593c6aa61dcee9e2f1b0511cc370300e81f8119c8e4d2f3b4b5036",
+      "org.acp.experiment.ide/src/org/acp/experiment/ide/AcpIdeModule.java": "3cde7502e532ea0f063cfcbd80e935fa2afd8b6d2b46dc5948938493fcacbb12",
+      "org.acp.experiment/src-gen/org/acp/experiment/AbstractAcpRuntimeModule.java": "d75f3607099504fb41801390af73431146f10c0ae9096892f1f7e4874fc49ae1",
+      "org.acp.experiment/src-gen/org/acp/experiment/AcpStandaloneSetupGenerated.java": "36696a99ed3d47a021a56f890145d20eb02420cb1df6086bfb7c43dc100b31fa",
+      "org.acp.experiment/src-gen/org/acp/experiment/scoping/AbstractAcpScopeProvider.java": "b59bbe4036fc7c4238688b1d174d256bb7afd6b1434d9561e99f7ff469975683",
+      "org.acp.experiment/src-gen/org/acp/experiment/serializer/AcpSemanticSequencer.java": "41b3e18862fb3487aa907a9f90575252a7fb8c65e6b507c6620797d0adbfd190",
+      "org.acp.experiment/src-gen/org/acp/experiment/serializer/AcpSyntacticSequencer.java": "7334963958f5b78c9cb1ac0637442d01d14394b2cc156f91aa7be1ef0a89f6b3",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Array.java": "9fbf92b84eaf7ec3f5a1957bb8593d11d819475d95455b00da1f9d0f311fbbee",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Declaration.java": "983d14f06faa7b9bac9cbf9c2208913f4d5400ebfd206a69095976551c1efcae",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Value.java": "1cc8925747e2922d5045f82b16c8705d5a638a285e391cd18fe5e4a774fec5f2",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Money.java": "2b2ce5fad6f64f72ec0a1e2c251eb2f1ed74a4d36692c12f55ebc338b44c9e46",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Text.java": "5439ec28a17a7528ba3c12d623ed2642b521da44807a77e58f0a9da3c4393a4c",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Object.java": "3f500dec83daa8c8ef8e5330194f0e68c1b7a809349bcf9ff6ac9a574360cb8b",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Pair.java": "9212f32c2589cc59f85eb61a555052d4b20b55a4446192acf0b10a190b2a05b6",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Null.java": "ecf1d145cdd048e0b24d4e4f6594b278ae972570a3fb0d44f1d37614e1aa1361",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Boolean.java": "246d6b7a853602f0ac059254ae9ea3c7452afeabb2863d285a38d46a77eee215",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Document.java": "4258714a8e9f626eaaf31c90c0ed92428f94305f5a8283c2a90b897086de0ee5",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Reference.java": "50fcdd4e69b05d94f44dc13dec1eecc172f07223034b9689c4a104ec44489e25",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/AcpFactory.java": "8ed15221954fd8f1101aa9c709e2430ef1f828a065a908f60c87467fb13509ea",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Number.java": "3e325f238df4439e8d2f8229c7a65212365e57f632e369f1a6ac3d795c8a9e80",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/AcpPackage.java": "f67d40108b9d5396731e8811f2d86cfdf3b2e5fb2285a1b45c4c83fc6a8aabd3",
+      "org.acp.experiment/src-gen/org/acp/experiment/services/AcpGrammarAccess.java": "3251a9a4c029c547941b62073ae67c2cdb8d04d3f07543b37acdbd9913796de2",
+      "org.acp.experiment/src-gen/org/acp/experiment/validation/AbstractAcpValidator.java": "a1864f8682acdbb6a7e141c035520c26dcf393d5919d5007b9cd2b85820f351d",
+      "org.acp.experiment/src-gen/org/acp/experiment/parser/antlr/AcpParser.java": "d1637a66453f9b46abf0f5bd92b658d0b13905304ad015ad2d4a432aaab49dc5",
+      "org.acp.experiment/src-gen/org/acp/experiment/parser/antlr/AcpAntlrTokenFileProvider.java": "a31288c3e4a84a782bdbd2bd2fd7b53e17c83e40fd18aa1114ce8f4cfcc7d0e4",
+      "org.acp.experiment/src-gen/org/acp/experiment/parser/antlr/internal/InternalAcpLexer.java": "0c6ced5810103799a4df60dc1eed6d7221e8a47c94814deaf3baaeffa3159a25",
+      "org.acp.experiment/src-gen/org/acp/experiment/parser/antlr/internal/InternalAcpParser.java": "0892caa9744688d2702c1b7f4845e58f716683a9c039c302d1d8c7915ea607d5",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/util/AcpAdapterFactory.java": "4c1f3872ddf0d02e9aef680c2b2e43afd273ed4814ccbab2ee54897691b20fa5",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/util/AcpSwitch.java": "2f96a50d69fda0b03acbb6077f50de54ede7d3bc4c0cf8722bfd28457a122345",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/PairImpl.java": "91ac5810e76aaedf88b5359c46d4df3d827e96502ed76ba912ae67970728c801",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/NumberImpl.java": "f1bbb098ea9c07a175278d2a5db815d3c2ee899b8b4da0c90d5ad721cba3dd8d",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/NullImpl.java": "7cc08496ad2300e12a04a29d91a10b0df67cb6b8f394aa2d37449ef2751d8189",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/TextImpl.java": "ff5fdb8ba6b646fec62adee493a58ed2192e4df09db07d02d151ffa7636c04d3",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/DeclarationImpl.java": "0ec596937c5f41380b4b10a243b0a97f855a8f7ebc429d159b3130c620bf438f",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/ArrayImpl.java": "fb651b49077edbeac33cf270d0208b31ca74adeefdfd2e62e86c1d2732f2ca1e",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/ReferenceImpl.java": "a70af501649bf0a404db8de0ce5e8910e69ec56b0335b229e96d41543809fee6",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/AcpFactoryImpl.java": "5874cbef591d20528b0dbd0cd5c83a0704defb38793c443803072348f32c43bf",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/BooleanImpl.java": "f1a177a54a8da160953e8af6389a14eb32d1223feb24a35971c32433888fd31b",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/ObjectImpl.java": "2d95430ed5198bb2fbee37a7fff2fe8d9b4efd85aee218d65f7915ea153fbe58",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/ValueImpl.java": "2d2dbf58c8e0bf7e184ff1a51a13e98e275a11ec8ccb107087f27b2cbe3e2771",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/MoneyImpl.java": "62233c32673ad046261e08babfc6ed85223f9e7719455ac9c5a3f1b00b1d456f",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/AcpPackageImpl.java": "853113bfefd8733008ef9b71e6fbae2abab3ea3884826ba16a7b51544778f845",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/DocumentImpl.java": "f139b0a408a3ceb59cae7201cfb8138a859167f1a0e2b445e1c52566815c083e",
+      "org.acp.experiment/src/org/acp/experiment/AcpStandaloneSetup.java": "f62b5a2bc962cdbdced4e331831f30d1343d7b1db8e3d53cb12603b65f85c175",
+      "org.acp.experiment/src/org/acp/experiment/AcpRuntimeModule.java": "0c3fcc70186aeab48329b4e20a4db1bea951073b6d0fb8239a962eaf3cbb79a3",
+      "org.acp.experiment/src/org/acp/experiment/scoping/AcpScopeProvider.java": "70c3e10a45a3e5431ef612e850679ef825db7a0b6221f7375beef68fe270b8e6",
+      "org.acp.experiment/src/org/acp/experiment/generator/AcpGenerator.java": "9401b1e9047e78ecd0c3b41d31aab3d928ecac4f34948bc484810dcf5016d3b0",
+      "org.acp.experiment/src/org/acp/experiment/validation/AcpValidator.java": "406f918a24e3c15e5573c9ece67b0a3641f4751a98ba8ffdca72e929c1a9bfd8"
+    },
+    "generatedHashesAfter": {
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/AbstractAcpIdeModule.java": "0ab9600766e9b4c65ad7d2db5d63d622538ff0fec81559426d7105dade3edc32",
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/contentassist/antlr/AcpParser.java": "feef54b2017aca31d4e36ed230fcfebe008b57609ad531106dcad9be9d08a00c",
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/contentassist/antlr/PartialAcpContentAssistParser.java": "07d5224bf8067998965ac7f443065b12194bfcff391037ab7a900effe4852189",
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/contentassist/antlr/internal/InternalAcpLexer.java": "1924658b4e47179202951d84137cf09ced7919f8651a2bdda6ab384432358f99",
+      "org.acp.experiment.ide/src-gen/org/acp/experiment/ide/contentassist/antlr/internal/InternalAcpParser.java": "d6dcb4c606efec71cb671e1bcaf6b2750efcae1985e2f049286f558fd0c7386c",
+      "org.acp.experiment.ide/src/org/acp/experiment/ide/AcpIdeSetup.java": "6130214e04593c6aa61dcee9e2f1b0511cc370300e81f8119c8e4d2f3b4b5036",
+      "org.acp.experiment.ide/src/org/acp/experiment/ide/AcpIdeModule.java": "3cde7502e532ea0f063cfcbd80e935fa2afd8b6d2b46dc5948938493fcacbb12",
+      "org.acp.experiment/src-gen/org/acp/experiment/AbstractAcpRuntimeModule.java": "d75f3607099504fb41801390af73431146f10c0ae9096892f1f7e4874fc49ae1",
+      "org.acp.experiment/src-gen/org/acp/experiment/AcpStandaloneSetupGenerated.java": "36696a99ed3d47a021a56f890145d20eb02420cb1df6086bfb7c43dc100b31fa",
+      "org.acp.experiment/src-gen/org/acp/experiment/scoping/AbstractAcpScopeProvider.java": "b59bbe4036fc7c4238688b1d174d256bb7afd6b1434d9561e99f7ff469975683",
+      "org.acp.experiment/src-gen/org/acp/experiment/serializer/AcpSemanticSequencer.java": "41b3e18862fb3487aa907a9f90575252a7fb8c65e6b507c6620797d0adbfd190",
+      "org.acp.experiment/src-gen/org/acp/experiment/serializer/AcpSyntacticSequencer.java": "7334963958f5b78c9cb1ac0637442d01d14394b2cc156f91aa7be1ef0a89f6b3",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Array.java": "9fbf92b84eaf7ec3f5a1957bb8593d11d819475d95455b00da1f9d0f311fbbee",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Declaration.java": "983d14f06faa7b9bac9cbf9c2208913f4d5400ebfd206a69095976551c1efcae",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Value.java": "1cc8925747e2922d5045f82b16c8705d5a638a285e391cd18fe5e4a774fec5f2",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Money.java": "2b2ce5fad6f64f72ec0a1e2c251eb2f1ed74a4d36692c12f55ebc338b44c9e46",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Text.java": "5439ec28a17a7528ba3c12d623ed2642b521da44807a77e58f0a9da3c4393a4c",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Object.java": "3f500dec83daa8c8ef8e5330194f0e68c1b7a809349bcf9ff6ac9a574360cb8b",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Pair.java": "9212f32c2589cc59f85eb61a555052d4b20b55a4446192acf0b10a190b2a05b6",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Null.java": "ecf1d145cdd048e0b24d4e4f6594b278ae972570a3fb0d44f1d37614e1aa1361",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Boolean.java": "246d6b7a853602f0ac059254ae9ea3c7452afeabb2863d285a38d46a77eee215",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Document.java": "4258714a8e9f626eaaf31c90c0ed92428f94305f5a8283c2a90b897086de0ee5",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Reference.java": "50fcdd4e69b05d94f44dc13dec1eecc172f07223034b9689c4a104ec44489e25",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/AcpFactory.java": "8ed15221954fd8f1101aa9c709e2430ef1f828a065a908f60c87467fb13509ea",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/Number.java": "3e325f238df4439e8d2f8229c7a65212365e57f632e369f1a6ac3d795c8a9e80",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/AcpPackage.java": "f67d40108b9d5396731e8811f2d86cfdf3b2e5fb2285a1b45c4c83fc6a8aabd3",
+      "org.acp.experiment/src-gen/org/acp/experiment/services/AcpGrammarAccess.java": "3251a9a4c029c547941b62073ae67c2cdb8d04d3f07543b37acdbd9913796de2",
+      "org.acp.experiment/src-gen/org/acp/experiment/validation/AbstractAcpValidator.java": "a1864f8682acdbb6a7e141c035520c26dcf393d5919d5007b9cd2b85820f351d",
+      "org.acp.experiment/src-gen/org/acp/experiment/parser/antlr/AcpParser.java": "d1637a66453f9b46abf0f5bd92b658d0b13905304ad015ad2d4a432aaab49dc5",
+      "org.acp.experiment/src-gen/org/acp/experiment/parser/antlr/AcpAntlrTokenFileProvider.java": "a31288c3e4a84a782bdbd2bd2fd7b53e17c83e40fd18aa1114ce8f4cfcc7d0e4",
+      "org.acp.experiment/src-gen/org/acp/experiment/parser/antlr/internal/InternalAcpLexer.java": "0c6ced5810103799a4df60dc1eed6d7221e8a47c94814deaf3baaeffa3159a25",
+      "org.acp.experiment/src-gen/org/acp/experiment/parser/antlr/internal/InternalAcpParser.java": "0892caa9744688d2702c1b7f4845e58f716683a9c039c302d1d8c7915ea607d5",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/util/AcpAdapterFactory.java": "4c1f3872ddf0d02e9aef680c2b2e43afd273ed4814ccbab2ee54897691b20fa5",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/util/AcpSwitch.java": "2f96a50d69fda0b03acbb6077f50de54ede7d3bc4c0cf8722bfd28457a122345",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/PairImpl.java": "91ac5810e76aaedf88b5359c46d4df3d827e96502ed76ba912ae67970728c801",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/NumberImpl.java": "f1bbb098ea9c07a175278d2a5db815d3c2ee899b8b4da0c90d5ad721cba3dd8d",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/NullImpl.java": "7cc08496ad2300e12a04a29d91a10b0df67cb6b8f394aa2d37449ef2751d8189",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/TextImpl.java": "ff5fdb8ba6b646fec62adee493a58ed2192e4df09db07d02d151ffa7636c04d3",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/DeclarationImpl.java": "0ec596937c5f41380b4b10a243b0a97f855a8f7ebc429d159b3130c620bf438f",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/ArrayImpl.java": "fb651b49077edbeac33cf270d0208b31ca74adeefdfd2e62e86c1d2732f2ca1e",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/ReferenceImpl.java": "a70af501649bf0a404db8de0ce5e8910e69ec56b0335b229e96d41543809fee6",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/AcpFactoryImpl.java": "5874cbef591d20528b0dbd0cd5c83a0704defb38793c443803072348f32c43bf",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/BooleanImpl.java": "f1a177a54a8da160953e8af6389a14eb32d1223feb24a35971c32433888fd31b",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/ObjectImpl.java": "2d95430ed5198bb2fbee37a7fff2fe8d9b4efd85aee218d65f7915ea153fbe58",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/ValueImpl.java": "2d2dbf58c8e0bf7e184ff1a51a13e98e275a11ec8ccb107087f27b2cbe3e2771",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/MoneyImpl.java": "62233c32673ad046261e08babfc6ed85223f9e7719455ac9c5a3f1b00b1d456f",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/AcpPackageImpl.java": "853113bfefd8733008ef9b71e6fbae2abab3ea3884826ba16a7b51544778f845",
+      "org.acp.experiment/src-gen/org/acp/experiment/acp/impl/DocumentImpl.java": "f139b0a408a3ceb59cae7201cfb8138a859167f1a0e2b445e1c52566815c083e",
+      "org.acp.experiment/src/org/acp/experiment/AcpStandaloneSetup.java": "f62b5a2bc962cdbdced4e331831f30d1343d7b1db8e3d53cb12603b65f85c175",
+      "org.acp.experiment/src/org/acp/experiment/AcpRuntimeModule.java": "0c3fcc70186aeab48329b4e20a4db1bea951073b6d0fb8239a962eaf3cbb79a3",
+      "org.acp.experiment/src/org/acp/experiment/scoping/AcpScopeProvider.java": "70c3e10a45a3e5431ef612e850679ef825db7a0b6221f7375beef68fe270b8e6",
+      "org.acp.experiment/src/org/acp/experiment/generator/AcpGenerator.java": "9401b1e9047e78ecd0c3b41d31aab3d928ecac4f34948bc484810dcf5016d3b0",
+      "org.acp.experiment/src/org/acp/experiment/validation/AcpValidator.java": "406f918a24e3c15e5573c9ece67b0a3641f4751a98ba8ffdca72e929c1a9bfd8"
+    },
+    "migration": "Same grammar and adapter sources, no migration edits during comparison. Probe display version strings remain current; resolved artifact/lock identifies actual previous runtime.",
+    "rollback": "Production locks/pins are untouched; remove ignored .cache/evolution and regenerate with pinned commands.",
+    "status": "PASS"
+  }
+}

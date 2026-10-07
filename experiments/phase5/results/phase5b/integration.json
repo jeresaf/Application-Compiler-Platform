@@ -1,0 +1,95 @@
+{
+  "antlr": {
+    "sameProcess": "NOT_RUN: Python host cannot load JVM/Node frameworks in-process without a new embedding adapter. Native repeated-parse timings remain separate.",
+    "nativeCli": {
+      "elapsedMs": 467.6564569999755,
+      "peakRssBytes": 80551936,
+      "status": "PASS"
+    },
+    "supervisorSpawnMs": 0.7382769981632009,
+    "requestBytes": 46014,
+    "requestEncodeMs": 0.600814997596899,
+    "persistentSupervisorCalls": [
+      {
+        "elapsedMs": 1497.0849310011545,
+        "responseBytes": 50020,
+        "encodeDecodeMs": 13.35035599913681
+      },
+      {
+        "elapsedMs": 604.6189270018658,
+        "responseBytes": 50020,
+        "encodeDecodeMs": 14.45526899988181
+      },
+      {
+        "elapsedMs": 582.1799919976911,
+        "responseBytes": 50020,
+        "encodeDecodeMs": 17.105865998019
+      }
+    ],
+    "nativeParserPersistence": false,
+    "failureIsolation": "Process group termination and restart exercised by test_worker5b.py",
+    "scope": "Warm framing process, cold native parser per request; do not interpret as warm native worker."
+  },
+  "langium": {
+    "sameProcess": "NOT_RUN: Python host cannot load JVM/Node frameworks in-process without a new embedding adapter. Native repeated-parse timings remain separate.",
+    "nativeCli": {
+      "elapsedMs": 559.1273410027497,
+      "peakRssBytes": 97226752,
+      "status": "PASS"
+    },
+    "supervisorSpawnMs": 0.7072250009514391,
+    "requestBytes": 46016,
+    "requestEncodeMs": 0.584566001634812,
+    "persistentSupervisorCalls": [
+      {
+        "elapsedMs": 1558.8074209990737,
+        "responseBytes": 50021,
+        "encodeDecodeMs": 16.185571999812964
+      },
+      {
+        "elapsedMs": 654.4812050015025,
+        "responseBytes": 50021,
+        "encodeDecodeMs": 16.71262600211776
+      },
+      {
+        "elapsedMs": 715.6193470000289,
+        "responseBytes": 50021,
+        "encodeDecodeMs": 16.278588998829946
+      }
+    ],
+    "nativeParserPersistence": false,
+    "failureIsolation": "Process group termination and restart exercised by test_worker5b.py",
+    "scope": "Warm framing process, cold native parser per request; do not interpret as warm native worker."
+  },
+  "xtext": {
+    "sameProcess": "NOT_RUN: Python host cannot load JVM/Node frameworks in-process without a new embedding adapter. Native repeated-parse timings remain separate.",
+    "nativeCli": {
+      "elapsedMs": 2333.709069996985,
+      "peakRssBytes": 145162240,
+      "status": "PASS"
+    },
+    "supervisorSpawnMs": 1.0033580001618247,
+    "requestBytes": 46014,
+    "requestEncodeMs": 0.592838001466589,
+    "persistentSupervisorCalls": [
+      {
+        "elapsedMs": 3727.7450959991256,
+        "responseBytes": 50020,
+        "encodeDecodeMs": 16.043241001170827
+      },
+      {
+        "elapsedMs": 2456.3474810020125,
+        "responseBytes": 50020,
+        "encodeDecodeMs": 15.777684999193298
+      },
+      {
+        "elapsedMs": 2616.305363997526,
+        "responseBytes": 50020,
+        "encodeDecodeMs": 18.773537998640677
+      }
+    ],
+    "nativeParserPersistence": false,
+    "failureIsolation": "Process group termination and restart exercised by test_worker5b.py",
+    "scope": "Warm framing process, cold native parser per request; do not interpret as warm native worker."
+  }
+}

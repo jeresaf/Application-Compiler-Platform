@@ -97,4 +97,4 @@ ambient-state independence. Contracts, reference adapters and synthetic target a
 distinct from future production implementations. No canonical vectors, prior
 semantic contracts or Phase 1–3 reports are changed. No production framework, parser,
 plugin ABI, filesystem generator, source analyzer or MCP implementation is selected.
-Phase 5 is EXPLICITLY BLOCKED ON EVIDENCE. The isolated [technology experiments](../experiments/phase5/README.md) exercise three frontends, typed core slices and source APIs without extending accepted semantics or selecting a production stack. Missing gates are recorded in the [evaluation report](phase5-completion-report.md). Phase 6 is NOT STARTED.
+Phase 5 is EXPLICITLY BLOCKED ON EVIDENCE. The isolated [technology experiments](../experiments/phase5/README.md) exercise real Ingest/Elaborate with three frontends, bounded module/refactor/worker contracts, expanded four-runtime wire slices, native Java/TS source APIs and controlled frontend upgrades without extending accepted semantics or selecting a production stack. Missing gates are recorded in the [evaluation report](phase5-completion-report.md). Phase 6 is NOT STARTED.

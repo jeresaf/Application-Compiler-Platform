@@ -51,8 +51,8 @@ A partial success is marked RANGE_COMPLETE, never complete compilation.
 
 | Stage | Immutable input → output | Executable reference behavior |
 | --- | --- | --- |
-| Ingest | Source → Ingested | Exact source digest, model version, byte/node/depth bounds and relative source map; structured frontend port only |
-| Elaborate | Ingested → SemanticAST | Exact reference dialect; copy into a frontend-independent semantic-node envelope; no parser class escapes |
+| Ingest | Source → Ingested | Exact source digest, negotiated frontend version, byte/node/depth bounds and relative source map; structured input stays supported, textual adapters parse inside the frontend port |
+| Elaborate | Ingested → SemanticAST | Exact negotiated dialect; frontend elaboration returns an immutable SemanticAST with validated model version and source map; no parser class escapes |
 | Analyze | SemanticAST → ResolvedModel | Validate exact dependency snapshots and acyclic dependency manifest; reuse full Phase 1 compile checks for exact references, types, blocking issues, security/workflow and conflicts; extract obligations |
 | Normalize | ResolvedModel → CanonicalModel | Reuse `normalize_candidate` and `admit`; require exact requested digest and trusted current exact-content approval; no second canonicalizer |
 | Project | CanonicalModel → Projections | Recheck admission; partition every canonical node exactly once into typed Product/Domain/Application views, preserving complete semantic records and ID/revision mappings |
@@ -184,3 +184,10 @@ real specifications. It prints plan identity and outstanding obligation counts;
 it writes no generated files. Phase 4 vector regeneration is separate:
 `.venv/bin/python3.14 tooling/compiler_fixtures.py`. Review changed expected hashes;
 never regenerate Phase 2 vectors to accommodate a compiler change.
+
+Phase 5B adds an optional elaboration operation to the reference frontend port so
+real textual adapters enter Ingest before producing semantic records. Existing
+structured adapters retain the copy fallback. This is a target-neutral adapter
+extension; Canonical Application 0.1.0, authority contracts and resource limits do
+not change. Experimental frontend identities are exact manifest versions, not a
+production plugin registration or selected DSL ABI.

@@ -1,6 +1,6 @@
 grammar Acp;
-document: 'application' object ';' declaration* EOF;
-declaration: ID STRING '@' INT object ';';
+document: ('module' STRING ';' ('import' STRING ';')*)? 'application' object ';' declaration* EOF;
+declaration: 'export'? ID STRING '@' INT object ';';
 value: object | array | STRING | INT | 'true' | 'false' | 'null'
      | 'ref' STRING '@' INT
      | 'Money' STRING 'precision' INT 'scale' INT 'rounding' STRING;

@@ -1,17 +1,112 @@
 {
   "phase5": "EXPLICITLY_BLOCKED_ON_EVIDENCE",
   "phase6": "NOT_STARTED",
-  "selections": {"productionCore": null, "textualFrontend": null, "integrationModel": null, "sourceAnalysis": null},
-  "weightedScores": null,
-  "hardGates": {
-    "semantic-fidelity": {"status":"UNKNOWN", "demonstrated":"All three complete reference-domain lowerings equal structured input; unchanged Analyze/Normalize and canonical results", "missing":["Production textual Ingest boundary", "Wider numeric/syntax evolution coverage"]},
-    "stage-isolation": {"status":"UNKNOWN", "demonstrated":"Plain JSON/Document boundary; independent structured adapter; bounded versioned worker guard fault tests", "missing":["Actual frontend/core pairings through the versioned guard", "Mid-stage cancellation, restart and retry authority-state evidence"]},
-    "diagnostic-correctness": {"status":"UNKNOWN", "demonstrated":"Three syntax recovery probes and eight deterministic semantic negative cases for all frontends; no malformed production model", "missing":["Related source locations", "Full policy conflict combinations", "Module/import visibility and cycles", "Complete stable-label rename/source edits for all candidates"], "observedFailure":"Langium default declaration rename changes stable ID"},
-    "determinism": {"status":"UNKNOWN", "demonstrated":"Independent-process map/declaration-order, locale, temporary-directory, seed and irrelevant-environment variations; cross-language canonical bytes/hashes", "missing":["Working-directory variation", "Concurrent frontend/core variation", "Explicit textual ordered-meaning perturbations", "Worker restart/retry permutations"]},
-    "source-intelligence-viability": {"status":"UNKNOWN", "demonstrated":"Actual Tree-sitter syntax, native TypeScript semantic API and combined span correlation; KNOWN/UNKNOWN/UNRESOLVED/ABSENT distinctions", "missing":["Source ownership and rename continuity", "Other target-native source adapters", "Exact prebuilt wasm grammar provenance and deployment review"]},
-    "evolution-maintenance-viability": {"status":"UNKNOWN", "demonstrated":"Pinned versions/locks/digests, dependency inventory, offline cache restoration, clean generated builds and TypeScript patch upgrade", "missing":["Framework/toolchain controlled upgrades", "Legacy textual fixture migration", "Full transitive license/release/support review", "Maven transitive reproducibility proof"]}
+  "evidencePass": "Phase 5B",
+  "selections": {
+    "productionCore": null,
+    "textualFrontend": null,
+    "integrationModel": null,
+    "sourceAnalysis": null
   },
-  "unrunScaleExperiments": ["Full validation of semantically complete 10k/100k-node workloads within a justified production contract", "Incremental semantic validation at all requested scales", "Rename/reference updates at all requested scales"],
-  "coreLimitations": ["Full Phase 4 wire/contract interoperability beyond graph/result slice", "TypeScript parallel workers", "Measured same-process versus versioned-worker serialization costs", "Candidate-native process isolation integration"],
-  "rule": "UNKNOWN and NOT_RUN never count as PASS or a zero-valued competitive score. Descriptive parse/graph timings do not justify a production selection."
+  "decisionDispositions": {
+    "productionCore": "DEFERRED",
+    "textualFrontend": "DEFERRED",
+    "integrationModel": "DEFERRED",
+    "sourceAnalysis": "DEFERRED"
+  },
+  "weightedScores": null,
+  "softWeights": {
+    "editor": 25,
+    "performance": 20,
+    "memory": 15,
+    "integration": 20,
+    "ergonomics": 10,
+    "operations": 10
+  },
+  "hardGates": {
+    "semantic-fidelity": {
+      "status": "PASS",
+      "demonstrated": "Bounded two-domain fidelity through actual Ingest, Elaborate and full pipeline for all three real frontends; common module policy and stable-label edits; safe-integer range; structured frontend retained.",
+      "evidence": [
+        "test_phase5b.py",
+        "results/phase5b/diagnostics.json"
+      ],
+      "scope": "Experimental declaration grammar and accepted Phase 4 bounds; no final DSL selection."
+    },
+    "stage-isolation": {
+      "status": "UNKNOWN",
+      "demonstrated": "Exact-version real frontend workers, immutable Document firewall, host approval authority, restart/retry and bounded protocol fault guards; expanded four-runtime representative wire equality.",
+      "missing": [
+        "Persistent native parser workers: current persistent Python supervisor starts a cold native parser on each request.",
+        "Comparable in-process embedding and native-worker isolation/cancellation for complete core/frontend pairings.",
+        "Representative core wire does not yet expose the frontend supervisor fault algebra for malformed/oversize core requests."
+      ],
+      "evidence": [
+        "test_worker5b.py",
+        "results/phase5b/integration.json",
+        "results/phase5b/wire.json"
+      ]
+    },
+    "diagnostic-correctness": {
+      "status": "UNKNOWN",
+      "demonstrated": "Identical deterministic safe subject/primary/related diagnostic projections for semantic negatives, including permission/scope mismatch; all-parser module rejection; token-aware cross-file label edits preserve IDs and fresh locations.",
+      "missing": [
+        "Exact recovery-token spans: incomplete/malformed syntax uses a safe file-start fallback.",
+        "Module error metadata and related locations are not yet transported through the compiler Failure diagnostic algebra.",
+        "Reference-token locations and complete policy-conflict combinations beyond tested negatives."
+      ],
+      "observedFailure": "Langium default declaration-name rename still changes stable ID; preserved first-pass failure. Custom ACP label rename passes.",
+      "evidence": [
+        "results/phase5b/diagnostics.json",
+        "test_phase5b.py",
+        "results/langium-editor.json"
+      ]
+    },
+    "determinism": {
+      "status": "UNKNOWN",
+      "demonstrated": "Separate cwd/tmp/seed/locale/environment processes, unordered declarations, meaningful ordered-step changes, concurrent Langium frontend requests, worker restart/retry, concurrent Java/TS/Rust core work.",
+      "missing": [
+        "Actual concurrent native ANTLR/Xtext execution remains NOT_RUN under the preregistered one-heavy-worker laptop budget.",
+        "Whole-pipeline candidate concurrency and native persistent-worker scheduling permutations."
+      ],
+      "evidence": [
+        "results/phase5b/determinism.json",
+        "results/phase5b/wire.json",
+        "core-runtime/core.ts"
+      ]
+    },
+    "source-intelligence-viability": {
+      "status": "PASS",
+      "demonstrated": "Native TypeScript and javac semantic bindings demonstrate imports, TS aliases, overloads, interfaces/inheritance, generated/human ownership markers, rename continuity and unresolved calls. Syntax-only stays UNKNOWN. Unprovenanced prebuilt wasm explicitly rejected for production.",
+      "scope": "Bounded feasibility fixtures, not complete production target adapters.",
+      "evidence": [
+        "results/phase5b/source.json"
+      ]
+    },
+    "evolution-maintenance-viability": {
+      "status": "UNKNOWN",
+      "demonstrated": "Clean ANTLR 4.13.1\u21924.13.2, Langium 4.3.0\u21924.4.0 and Xtext 2.43.0\u21922.44.0 builds/corpus/generated diffs and rollback; isolated locks; legacy fixture rejection; prior TS 5.9.2\u21925.9.3 comparison; transitive npm/JVM/Rust inventory.",
+      "missing": [
+        "Patched Xtext ANTLR3 generator exact source/build provenance remains unavailable.",
+        "Two JVM artifacts lack declared/inherited POM license metadata: aopalliance 1.0 and antlr-runtime 3.2; artifact-level notice/redistribution review remains incomplete.",
+        "Clean offline Maven restoration without the prepared cache is not demonstrated; exact external URLs/digests are inventoried.",
+        "Java, Node and Rust toolchain upgrades NOT_RUN; current clean pinned builds and TS patch upgrade are separate evidence."
+      ],
+      "evidence": [
+        "results/phase5b/evolution.json",
+        "results/phase5b/inventory.json",
+        "results/maintenance.json",
+        "evolution-locks/versions.json"
+      ]
+    }
+  },
+  "unrunScaleExperiments": [
+    "Full 10k/100k ACP semantic validation is NOT_SUPPORTED under unchanged 2000-node/1MiB bounds.",
+    "Incremental ACP semantic validation is NOT_SUPPORTED; bounded full revalidation is measured. Native document-builder/resource updates are separate."
+  ],
+  "coreLimitations": [
+    "Representative graph/wire/provenance/obligation slice is not a complete compiler port.",
+    "Same-process versus persistent native-worker colocation comparison remains incomplete."
+  ],
+  "rule": "Only PASS satisfies a required hard gate. UNKNOWN/NOT_RUN/FAIL never earn weighted scores. Decisions remain independent. Raw metrics are not normalized rankings."
 }

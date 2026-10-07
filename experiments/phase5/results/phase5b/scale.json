@@ -1,0 +1,566 @@
+{
+  "1000": {
+    "sourceBytes": 387050,
+    "semanticValidation": {
+      "status": "PASS",
+      "elapsedMs": 2897.1591770023224
+    },
+    "candidates": {
+      "antlr": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 585.1285989992903,
+          "peakRssBytes": 103387136,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "ANTLR 4.13.2 / Java 21",
+            "errors": [],
+            "parseMs": [
+              202.665724,
+              111.690798
+            ],
+            "imports": [],
+            "exports": [],
+            "elapsedMs": 328.280481
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 634.6909630010487,
+          "peakRssBytes": 85139456,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "ANTLR 4.13.2 / Java 21",
+            "errors": [],
+            "parseMs": [
+              219.055237
+            ],
+            "imports": [],
+            "exports": [],
+            "elapsedMs": 233.223836
+          }
+        },
+        "nativeIncremental": "NOT_RUN",
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 68.87816400558222,
+        "updatedQualifiedReferences": 999,
+        "dependentCrossFileEdit": "Native Langium builder above; ANTLR/Xtext scale workspace invalidation NOT_RUN.",
+        "diagnosticRefreshFullSemanticMs": 2803.153389999352
+      },
+      "langium": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 1247.163886000635,
+          "peakRssBytes": 268165120,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "imports": [],
+            "exports": [],
+            "candidate": "Langium 4.4.0",
+            "startupMs": 58.11686900000001,
+            "parseMs": [
+              474.783707,
+              323.83491200000003
+            ],
+            "peakRssBytes": 267595776,
+            "errors": [],
+            "spans": []
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 919.8396209976636,
+          "peakRssBytes": 180760576,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "imports": [],
+            "exports": [],
+            "candidate": "Langium 4.4.0",
+            "startupMs": 58.38669799999997,
+            "parseMs": [
+              460.66498100000007
+            ],
+            "peakRssBytes": 180588544,
+            "errors": [],
+            "spans": []
+          }
+        },
+        "nativeIncremental": {
+          "exitCode": 0,
+          "elapsedMs": 3661.477200999798,
+          "peakRssBytes": 291049472,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "initialParseMs": 597.081493,
+            "initialNativeValidationMs": 684.818134,
+            "localEditMs": 689.4068720000002,
+            "dependentCrossFileEditMs": 673.9752130000002,
+            "labelRenameMs": 581.3055589999999,
+            "stableIdsPreserved": true,
+            "diagnosticRefreshReadMs": 0.026450000000295404,
+            "nativeDiagnosticCount": 0,
+            "peakRssBytes": 290787328,
+            "referenceUpdate": "Measured by shared ACP rename adapter; native references use stable IDs",
+            "incrementalSemanticValidation": "NOT_SUPPORTED: native linking/validation is not ACP Phase 4 semantic validation",
+            "scope": "Native document-builder invalidation/rebuild; parser may fully reparse changed documents. ACP module policy is independently enforced by host."
+          }
+        },
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 33.06010099913692,
+        "updatedQualifiedReferences": 999,
+        "dependentCrossFileEdit": "Native Langium builder above; ANTLR/Xtext scale workspace invalidation NOT_RUN.",
+        "diagnosticRefreshFullSemanticMs": 2826.744707999751
+      },
+      "xtext": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 2857.8354959972785,
+          "peakRssBytes": 205348864,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 1448.73729,
+            "parseMs": [
+              583.183774,
+              246.021292
+            ],
+            "errors": []
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 2940.1242029998684,
+          "peakRssBytes": 167862272,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 1544.275812,
+            "parseMs": [
+              644.433888
+            ],
+            "errors": []
+          }
+        },
+        "nativeIncremental": {
+          "exitCode": 0,
+          "elapsedMs": 31383.774073001405,
+          "peakRssBytes": 354230272,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 1554.415471,
+            "parseMs": [
+              629.498169
+            ],
+            "errors": [],
+            "module": null,
+            "imports": "Shared bounded ACP module policy, not native Xtext scope customization",
+            "exports": [],
+            "nativeValidationMs": 881.796332,
+            "nativeIssueCount": 0,
+            "nativeCompletionMs": 83.3713,
+            "nativeCompletionCount": 100,
+            "nativeLinkNavigationMs": 25333.402256,
+            "nativeResolvedReferences": 1999,
+            "nativeUsageResultsIncludingRepeatedTargets": 1000999,
+            "nativeIncrementalWhitespaceEditMs": 1146.71,
+            "nativeLabelRenameMs": 215.736536,
+            "nativeDiagnosticRefreshMs": 509.950413,
+            "nativeRefreshedIssueCount": 0,
+            "rename": "ACP body-label edit; stable declaration ID token unchanged. Cross-file edits independently tested by shared adapter."
+          }
+        },
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 49.28234800172504,
+        "updatedQualifiedReferences": 999,
+        "dependentCrossFileEdit": "Native Langium builder above; ANTLR/Xtext scale workspace invalidation NOT_RUN.",
+        "diagnosticRefreshFullSemanticMs": 4573.283585996251
+      }
+    }
+  },
+  "10000": {
+    "sourceBytes": 478977,
+    "semanticValidation": {
+      "status": "NOT_SUPPORTED",
+      "reason": "Exceeds accepted 2000-node/1MiB compiler bounds; synthetic declarations are parse-only."
+    },
+    "candidates": {
+      "antlr": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 1503.6860990003333,
+          "peakRssBytes": 111366144,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "ANTLR 4.13.2 / Java 21",
+            "errors": [],
+            "parseMs": [
+              412.749311,
+              130.779487
+            ],
+            "imports": [],
+            "exports": [],
+            "elapsedMs": 604.685905
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 992.8470469967579,
+          "peakRssBytes": 97095680,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "ANTLR 4.13.2 / Java 21",
+            "errors": [],
+            "parseMs": [
+              388.299095
+            ],
+            "imports": [],
+            "exports": [],
+            "elapsedMs": 492.410484
+          }
+        },
+        "nativeIncremental": "NOT_RUN",
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 261.7247409943957,
+        "updatedQualifiedReferences": 9999,
+        "refactoringScope": "Source-edit cost on a synthetic qualified-reference workspace; no claim of full ACP semantic validation above accepted bounds."
+      },
+      "langium": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 2358.0116419980186,
+          "peakRssBytes": 280645632,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "imports": [],
+            "exports": [],
+            "candidate": "Langium 4.4.0",
+            "startupMs": 95.161876,
+            "parseMs": [
+              960.4796000000001,
+              568.969464
+            ],
+            "peakRssBytes": 267276288,
+            "errors": [],
+            "spans": []
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 1406.1683480031206,
+          "peakRssBytes": 180969472,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "imports": [],
+            "exports": [],
+            "candidate": "Langium 4.4.0",
+            "startupMs": 86.22297900000001,
+            "parseMs": [
+              744.0254490000001
+            ],
+            "peakRssBytes": 180400128,
+            "errors": [],
+            "spans": []
+          }
+        },
+        "nativeIncremental": {
+          "exitCode": 0,
+          "elapsedMs": 3834.817878996546,
+          "peakRssBytes": 313114624,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "initialParseMs": 758.978298,
+            "initialNativeValidationMs": 758.3903609999998,
+            "localEditMs": 572.7278659999997,
+            "dependentCrossFileEditMs": 538.1524990000003,
+            "labelRenameMs": 506.12998100000004,
+            "stableIdsPreserved": true,
+            "diagnosticRefreshReadMs": 0.12370499999997264,
+            "nativeDiagnosticCount": 0,
+            "peakRssBytes": 313114624,
+            "referenceUpdate": "Measured by shared ACP rename adapter; native references use stable IDs",
+            "incrementalSemanticValidation": "NOT_SUPPORTED: native linking/validation is not ACP Phase 4 semantic validation",
+            "scope": "Native document-builder invalidation/rebuild; parser may fully reparse changed documents. ACP module policy is independently enforced by host."
+          }
+        },
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 242.43643200316,
+        "updatedQualifiedReferences": 9999,
+        "refactoringScope": "Source-edit cost on a synthetic qualified-reference workspace; no claim of full ACP semantic validation above accepted bounds."
+      },
+      "xtext": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 4049.8155520035652,
+          "peakRssBytes": 212508672,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 1749.24538,
+            "parseMs": [
+              1064.501679,
+              405.109364
+            ],
+            "errors": []
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 3418.824961001519,
+          "peakRssBytes": 170053632,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 2021.606533,
+            "parseMs": [
+              718.804386
+            ],
+            "errors": []
+          }
+        },
+        "nativeIncremental": {
+          "exitCode": 0,
+          "elapsedMs": 5493.029053999635,
+          "peakRssBytes": 346644480,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 1671.789309,
+            "parseMs": [
+              759.322773
+            ],
+            "errors": [],
+            "module": null,
+            "imports": "Shared bounded ACP module policy, not native Xtext scope customization",
+            "exports": [],
+            "nativeValidationMs": 539.426807,
+            "nativeIssueCount": 0,
+            "nativeCompletionMs": 84.082043,
+            "nativeCompletionCount": 1,
+            "nativeLinkNavigationMs": 46.780995,
+            "nativeResolvedReferences": 0,
+            "nativeUsageResultsIncludingRepeatedTargets": 0,
+            "nativeIncrementalWhitespaceEditMs": 1169.190789,
+            "nativeLabelRenameMs": 99.065542,
+            "nativeDiagnosticRefreshMs": 108.94083,
+            "nativeRefreshedIssueCount": 0,
+            "rename": "ACP body-label edit; stable declaration ID token unchanged. Cross-file edits independently tested by shared adapter."
+          }
+        },
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 182.93629900290398,
+        "updatedQualifiedReferences": 9999,
+        "refactoringScope": "Source-edit cost on a synthetic qualified-reference workspace; no claim of full ACP semantic validation above accepted bounds."
+      }
+    }
+  },
+  "100000": {
+    "sourceBytes": 4888977,
+    "semanticValidation": {
+      "status": "NOT_SUPPORTED",
+      "reason": "Exceeds accepted 2000-node/1MiB compiler bounds; synthetic declarations are parse-only."
+    },
+    "candidates": {
+      "antlr": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 1489.0806969997357,
+          "peakRssBytes": 368316416,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "ANTLR 4.13.2 / Java 21",
+            "errors": [],
+            "parseMs": [
+              599.375181,
+              528.662452
+            ],
+            "imports": [],
+            "exports": [],
+            "elapsedMs": 1229.738746
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 1130.8622209980967,
+          "peakRssBytes": 219516928,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "ANTLR 4.13.2 / Java 21",
+            "errors": [],
+            "parseMs": [
+              619.148839
+            ],
+            "imports": [],
+            "exports": [],
+            "elapsedMs": 757.339731
+          }
+        },
+        "nativeIncremental": "NOT_RUN",
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 1290.9458150024875,
+        "updatedQualifiedReferences": 99999,
+        "refactoringScope": "Source-edit cost on a synthetic qualified-reference workspace; no claim of full ACP semantic validation above accepted bounds."
+      },
+      "langium": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 13164.942069997778,
+          "peakRssBytes": 853233664,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "imports": [],
+            "exports": [],
+            "candidate": "Langium 4.4.0",
+            "startupMs": 51.104038,
+            "parseMs": [
+              6140.635367999999,
+              6469.629693999999
+            ],
+            "peakRssBytes": 852246528,
+            "errors": [],
+            "spans": []
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 7084.553532993596,
+          "peakRssBytes": 610258944,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "imports": [],
+            "exports": [],
+            "candidate": "Langium 4.4.0",
+            "startupMs": 57.665705,
+            "parseMs": [
+              6465.357524
+            ],
+            "peakRssBytes": 610258944,
+            "errors": [],
+            "spans": []
+          }
+        },
+        "nativeIncremental": {
+          "exitCode": 0,
+          "elapsedMs": 38186.884740993264,
+          "peakRssBytes": 948903936,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "initialParseMs": 4565.375877,
+            "initialNativeValidationMs": 10095.154929,
+            "localEditMs": 7124.667348999999,
+            "dependentCrossFileEditMs": 7706.9833739999995,
+            "labelRenameMs": 7686.476768,
+            "stableIdsPreserved": true,
+            "diagnosticRefreshReadMs": 0.07390700000541983,
+            "nativeDiagnosticCount": 0,
+            "peakRssBytes": 948903936,
+            "referenceUpdate": "Measured by shared ACP rename adapter; native references use stable IDs",
+            "incrementalSemanticValidation": "NOT_SUPPORTED: native linking/validation is not ACP Phase 4 semantic validation",
+            "scope": "Native document-builder invalidation/rebuild; parser may fully reparse changed documents. ACP module policy is independently enforced by host."
+          }
+        },
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 1301.4063200025703,
+        "updatedQualifiedReferences": 99999,
+        "refactoringScope": "Source-edit cost on a synthetic qualified-reference workspace; no claim of full ACP semantic validation above accepted bounds."
+      },
+      "xtext": {
+        "initialParse": {
+          "exitCode": 0,
+          "elapsedMs": 6485.075417003827,
+          "peakRssBytes": 731340800,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 1847.504267,
+            "parseMs": [
+              2150.025023,
+              1879.569155
+            ],
+            "errors": []
+          }
+        },
+        "localEdit": {
+          "exitCode": 0,
+          "elapsedMs": 4781.8123170000035,
+          "peakRssBytes": 533143552,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 1512.962507,
+            "parseMs": [
+              2542.307645
+            ],
+            "errors": []
+          }
+        },
+        "nativeIncremental": {
+          "exitCode": 0,
+          "elapsedMs": 23400.748897001904,
+          "peakRssBytes": 970055680,
+          "stderr": "",
+          "status": "PASS",
+          "output": {
+            "candidate": "Xtext 2.44.0 / Java 21",
+            "startupMs": 1586.583383,
+            "parseMs": [
+              2743.466681
+            ],
+            "errors": [],
+            "module": null,
+            "imports": "Shared bounded ACP module policy, not native Xtext scope customization",
+            "exports": [],
+            "nativeValidationMs": 1145.808095,
+            "nativeIssueCount": 0,
+            "nativeCompletionMs": 130.218041,
+            "nativeCompletionCount": 1,
+            "nativeLinkNavigationMs": 160.023402,
+            "nativeResolvedReferences": 0,
+            "nativeUsageResultsIncludingRepeatedTargets": 0,
+            "nativeIncrementalWhitespaceEditMs": 14781.961506,
+            "nativeLabelRenameMs": 424.019987,
+            "nativeDiagnosticRefreshMs": 620.932903,
+            "nativeRefreshedIssueCount": 0,
+            "rename": "ACP body-label edit; stable declaration ID token unchanged. Cross-file edits independently tested by shared adapter."
+          }
+        },
+        "incrementalSemanticValidation": "NOT_SUPPORTED: no incremental ACP validator is implemented; full bounded validation remains authoritative.",
+        "localEditInterpretation": "Cold full reparse of one local edit; not native incremental parsing.",
+        "labelRenameAndReferenceUpdateMs": 1218.6256360000698,
+        "updatedQualifiedReferences": 99999,
+        "refactoringScope": "Source-edit cost on a synthetic qualified-reference workspace; no claim of full ACP semantic validation above accepted bounds."
+      }
+    }
+  }
+}

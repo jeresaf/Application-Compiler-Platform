@@ -1,0 +1,407 @@
+{
+  "protocol": "acp-core-wire/1",
+  "fixtures": 6,
+  "requestBytes": 330167,
+  "runtimes": {
+    "java": {
+      "cold": {
+        "elapsedMs": 721.5760610015423,
+        "outputBytes": 2899,
+        "semanticEquality": true,
+        "metrics": [
+          {
+            "decodeNs": 138178662,
+            "executeEncodeNs": 229687383,
+            "inputBytes": 54300,
+            "outputBytes": 356
+          },
+          {
+            "decodeNs": 5151744,
+            "executeEncodeNs": 39562276,
+            "inputBytes": 54301,
+            "outputBytes": 516
+          },
+          {
+            "decodeNs": 2558353,
+            "executeEncodeNs": 27991190,
+            "inputBytes": 54301,
+            "outputBytes": 508
+          },
+          {
+            "decodeNs": 1869633,
+            "executeEncodeNs": 15542437,
+            "inputBytes": 54300,
+            "outputBytes": 504
+          },
+          {
+            "decodeNs": 1198885,
+            "executeEncodeNs": 12513046,
+            "inputBytes": 54297,
+            "outputBytes": 498
+          },
+          {
+            "decodeNs": 1389268,
+            "executeEncodeNs": 25473533,
+            "inputBytes": 58662,
+            "outputBytes": 511
+          }
+        ]
+      },
+      "concurrentIndependentProcesses": [
+        {
+          "elapsedMs": 1244.8391380021349,
+          "outputBytes": 2899,
+          "semanticEquality": true,
+          "metrics": [
+            {
+              "decodeNs": 176260057,
+              "executeEncodeNs": 370507092,
+              "inputBytes": 54300,
+              "outputBytes": 356
+            },
+            {
+              "decodeNs": 17300506,
+              "executeEncodeNs": 106225115,
+              "inputBytes": 54301,
+              "outputBytes": 516
+            },
+            {
+              "decodeNs": 5001228,
+              "executeEncodeNs": 82835918,
+              "inputBytes": 54301,
+              "outputBytes": 508
+            },
+            {
+              "decodeNs": 2046835,
+              "executeEncodeNs": 22331843,
+              "inputBytes": 54300,
+              "outputBytes": 504
+            },
+            {
+              "decodeNs": 1824413,
+              "executeEncodeNs": 25909280,
+              "inputBytes": 54297,
+              "outputBytes": 498
+            },
+            {
+              "decodeNs": 5044853,
+              "executeEncodeNs": 87497130,
+              "inputBytes": 58662,
+              "outputBytes": 511
+            }
+          ]
+        },
+        {
+          "elapsedMs": 1275.0806949989055,
+          "outputBytes": 2899,
+          "semanticEquality": true,
+          "metrics": [
+            {
+              "decodeNs": 152535285,
+              "executeEncodeNs": 345408438,
+              "inputBytes": 54300,
+              "outputBytes": 356
+            },
+            {
+              "decodeNs": 25390552,
+              "executeEncodeNs": 169089238,
+              "inputBytes": 54301,
+              "outputBytes": 516
+            },
+            {
+              "decodeNs": 5740942,
+              "executeEncodeNs": 93511629,
+              "inputBytes": 54301,
+              "outputBytes": 508
+            },
+            {
+              "decodeNs": 9158947,
+              "executeEncodeNs": 45746299,
+              "inputBytes": 54300,
+              "outputBytes": 504
+            },
+            {
+              "decodeNs": 1896101,
+              "executeEncodeNs": 46436222,
+              "inputBytes": 54297,
+              "outputBytes": 498
+            },
+            {
+              "decodeNs": 6049871,
+              "executeEncodeNs": 73320226,
+              "inputBytes": 58662,
+              "outputBytes": 511
+            }
+          ]
+        }
+      ]
+    },
+    "typescript": {
+      "cold": {
+        "elapsedMs": 309.06256700109225,
+        "outputBytes": 2899,
+        "semanticEquality": true,
+        "metrics": [
+          {
+            "decodeMs": 0.4755260000000021,
+            "executeEncodeMs": 19.312678000000005,
+            "inputBytes": 54300,
+            "outputBytes": 356
+          },
+          {
+            "decodeMs": 0.4515989999999874,
+            "executeEncodeMs": 12.196013000000022,
+            "inputBytes": 54301,
+            "outputBytes": 516
+          },
+          {
+            "decodeMs": 0.40111899999999423,
+            "executeEncodeMs": 12.467668000000003,
+            "inputBytes": 54301,
+            "outputBytes": 508
+          },
+          {
+            "decodeMs": 0.42750499999999647,
+            "executeEncodeMs": 6.33995299999998,
+            "inputBytes": 54300,
+            "outputBytes": 504
+          },
+          {
+            "decodeMs": 0.3927129999999579,
+            "executeEncodeMs": 5.097631000000035,
+            "inputBytes": 54297,
+            "outputBytes": 498
+          },
+          {
+            "decodeMs": 0.3118740000000457,
+            "executeEncodeMs": 12.466398999999967,
+            "inputBytes": 58662,
+            "outputBytes": 511
+          }
+        ]
+      },
+      "concurrentIndependentProcesses": [
+        {
+          "elapsedMs": 314.396358000522,
+          "outputBytes": 2899,
+          "semanticEquality": true,
+          "metrics": [
+            {
+              "decodeMs": 0.46643799999998237,
+              "executeEncodeMs": 18.503231999999997,
+              "inputBytes": 54300,
+              "outputBytes": 356
+            },
+            {
+              "decodeMs": 0.4723240000000146,
+              "executeEncodeMs": 11.920033999999987,
+              "inputBytes": 54301,
+              "outputBytes": 516
+            },
+            {
+              "decodeMs": 0.40474499999999125,
+              "executeEncodeMs": 14.61215900000002,
+              "inputBytes": 54301,
+              "outputBytes": 508
+            },
+            {
+              "decodeMs": 0.36251400000000444,
+              "executeEncodeMs": 7.132408999999996,
+              "inputBytes": 54300,
+              "outputBytes": 504
+            },
+            {
+              "decodeMs": 0.39001299999998196,
+              "executeEncodeMs": 8.10379900000001,
+              "inputBytes": 54297,
+              "outputBytes": 498
+            },
+            {
+              "decodeMs": 0.3725299999999834,
+              "executeEncodeMs": 11.92389700000001,
+              "inputBytes": 58662,
+              "outputBytes": 511
+            }
+          ]
+        },
+        {
+          "elapsedMs": 317.5206230007461,
+          "outputBytes": 2899,
+          "semanticEquality": true,
+          "metrics": [
+            {
+              "decodeMs": 0.31973800000000097,
+              "executeEncodeMs": 19.037675000000007,
+              "inputBytes": 54300,
+              "outputBytes": 356
+            },
+            {
+              "decodeMs": 0.4797790000000077,
+              "executeEncodeMs": 10.045324999999991,
+              "inputBytes": 54301,
+              "outputBytes": 516
+            },
+            {
+              "decodeMs": 0.4016279999999881,
+              "executeEncodeMs": 12.241416000000015,
+              "inputBytes": 54301,
+              "outputBytes": 508
+            },
+            {
+              "decodeMs": 0.3542809999999861,
+              "executeEncodeMs": 6.448460000000011,
+              "inputBytes": 54300,
+              "outputBytes": 504
+            },
+            {
+              "decodeMs": 0.3936840000000075,
+              "executeEncodeMs": 18.90830600000001,
+              "inputBytes": 54297,
+              "outputBytes": 498
+            },
+            {
+              "decodeMs": 0.42680999999998903,
+              "executeEncodeMs": 14.915940999999975,
+              "inputBytes": 58662,
+              "outputBytes": 511
+            }
+          ]
+        }
+      ]
+    },
+    "rust": {
+      "cold": {
+        "elapsedMs": 39.11011200034409,
+        "outputBytes": 2899,
+        "semanticEquality": true,
+        "metrics": [
+          {
+            "decodeNs": 699664,
+            "executeEncodeNs": 6966854,
+            "inputBytes": 54300,
+            "outputBytes": 356
+          },
+          {
+            "decodeNs": 559893,
+            "executeEncodeNs": 6665445,
+            "inputBytes": 54301,
+            "outputBytes": 516
+          },
+          {
+            "decodeNs": 381577,
+            "executeEncodeNs": 6278899,
+            "inputBytes": 54301,
+            "outputBytes": 508
+          },
+          {
+            "decodeNs": 361911,
+            "executeEncodeNs": 3290574,
+            "inputBytes": 54300,
+            "outputBytes": 504
+          },
+          {
+            "decodeNs": 397044,
+            "executeEncodeNs": 3382342,
+            "inputBytes": 54297,
+            "outputBytes": 498
+          },
+          {
+            "decodeNs": 383520,
+            "executeEncodeNs": 6783049,
+            "inputBytes": 58662,
+            "outputBytes": 511
+          }
+        ]
+      },
+      "concurrentIndependentProcesses": [
+        {
+          "elapsedMs": 68.06904699988081,
+          "outputBytes": 2899,
+          "semanticEquality": true,
+          "metrics": [
+            {
+              "decodeNs": 700544,
+              "executeEncodeNs": 11723835,
+              "inputBytes": 54300,
+              "outputBytes": 356
+            },
+            {
+              "decodeNs": 598160,
+              "executeEncodeNs": 11314944,
+              "inputBytes": 54301,
+              "outputBytes": 516
+            },
+            {
+              "decodeNs": 604763,
+              "executeEncodeNs": 11500212,
+              "inputBytes": 54301,
+              "outputBytes": 508
+            },
+            {
+              "decodeNs": 585530,
+              "executeEncodeNs": 6320693,
+              "inputBytes": 54300,
+              "outputBytes": 504
+            },
+            {
+              "decodeNs": 585124,
+              "executeEncodeNs": 6144299,
+              "inputBytes": 54297,
+              "outputBytes": 498
+            },
+            {
+              "decodeNs": 619017,
+              "executeEncodeNs": 11490953,
+              "inputBytes": 58662,
+              "outputBytes": 511
+            }
+          ]
+        },
+        {
+          "elapsedMs": 65.68582299951231,
+          "outputBytes": 2899,
+          "semanticEquality": true,
+          "metrics": [
+            {
+              "decodeNs": 723906,
+              "executeEncodeNs": 11703745,
+              "inputBytes": 54300,
+              "outputBytes": 356
+            },
+            {
+              "decodeNs": 617411,
+              "executeEncodeNs": 11258475,
+              "inputBytes": 54301,
+              "outputBytes": 516
+            },
+            {
+              "decodeNs": 596242,
+              "executeEncodeNs": 11394215,
+              "inputBytes": 54301,
+              "outputBytes": 508
+            },
+            {
+              "decodeNs": 822317,
+              "executeEncodeNs": 6080589,
+              "inputBytes": 54300,
+              "outputBytes": 504
+            },
+            {
+              "decodeNs": 617035,
+              "executeEncodeNs": 6068906,
+              "inputBytes": 54297,
+              "outputBytes": 498
+            },
+            {
+              "decodeNs": 632510,
+              "executeEncodeNs": 11408088,
+              "inputBytes": 58662,
+              "outputBytes": 511
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "scope": "Representative graph-stage contract slice; not the complete Phase 4 compiler or production wire. Authority remains external. Cycles visit each identity once."
+}

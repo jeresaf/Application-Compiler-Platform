@@ -1,4 +1,64 @@
-# Phase 5 — technology evaluation evidence and explicit deferral
+# Phase 5 — technology evaluation and Phase 5B evidence closure
+
+Status: **EXPLICITLY BLOCKED ON PRECISELY IDENTIFIED EVIDENCE**.
+Phases 1–4 remain CLOSED AND GREEN. **Phase 6 is NOT STARTED.**
+The four production technology decisions remain independently **DEFERRED**.
+
+## Current Phase 5B result — 2026-10-07
+
+The [gate register](../experiments/phase5/results/gates.json) is authoritative for
+current dispositions. Semantic fidelity and source-intelligence feasibility pass
+at the stated bounded scope; stage isolation, diagnostic completeness,
+concurrency determinism and production maintenance still have specific gaps.
+The preregistered six gates and weights are unchanged. No weighted scores apply.
+The approved first-pass record is preserved below as historical evidence.
+
+| Requested evidence | Phase 5B result |
+| --- | --- |
+| Actual textual entry | All three real generated parsers execute inside Phase 4 Ingest, then Elaborate and the complete pipeline. Exact frontend identities and malformed responses are tested. Strict Document bytes prevent framework-object leakage. Structured input remains supported. The frontend port has a target-neutral elaboration extension; Canonical Application contracts do not change. |
+| Modules and visibility | Common bounded adapter policy consumes actual grammar metadata: module/import/export, qualified labels or IDs, direct imports, private symbols, missing/duplicate/ambiguous modules, cycles, deletion and rename. Real-parser negative tests share identical expectations. This is an experiment policy, not final DSL design. |
+| Stable-ID refactoring | ACP lexical source edits update top-level display labels and qualified reference tokens across files; nested names, Unicode and stable-ID header tokens are protected. Fresh parsing produces valid locations. Canonical IDs/revisions remain identical. Label content can change a content hash; identity preservation does not require unchanged content. The historical Langium default-rename failure remains recorded. |
+| Diagnostics/recovery | [Related-location evidence](../experiments/phase5/results/phase5b/diagnostics.json) covers duplicate ID, dangling/stale refs, currency/Money, workflow/ambiguity, blocking conflict, permission and scope mismatch. Deterministic projections carry only codes, IDs, locations and safe remediation. Recovery never produces compilable success. Exact recovery-token locations and compiler transport of module-related diagnostics remain incomplete. |
+| Scale | [Separate measurements](../experiments/phase5/results/phase5b/scale.json) cover 1k/10k/100k parse, local edits, native document/resource updates where exercised, label/reference source edits, RSS and elapsed time. The 1k corpus is complete ACP input and passes full validation. Larger synthetic corpora are parse/editor evidence only. Full 10k/100k semantic validation and incremental ACP validation are NOT_SUPPORTED under current contracts; no limits increase. |
+| Determinism | [Independent runs](../experiments/phase5/results/phase5b/determinism.json) vary cwd, tmp, seed, locale, irrelevant environment and declaration order. Reversing meaningful ordered steps changes canonical output. Langium frontend requests execute concurrently; heavy ANTLR/Xtext concurrency remains NOT_RUN under the original one-heavy-worker budget. Worker restart/retry and independent core concurrency pass. |
+| Worker/integration | [Real versioned worker](../experiments/phase5/test_worker5b.py) tests success, versions, malformed request/response, oversizes, timeout/crash, cancellation, restart/retry, stale response and duplicate IDs. Host authority survives worker disposal. [Costs](../experiments/phase5/results/phase5b/integration.json) distinguish native CLI startup, persistent framing supervisor, encoding and message sizes. Native parsers are cold per request; this is not a persistent native parser or an in-process embedding comparison. |
+| Core/wire | [Java, TS, Rust and Python](../experiments/phase5/results/phase5b/wire.json) agree on versioned representative immutable request/result, deterministic diagnostics, exact canonical input/hash, provenance, outstanding obligations, dependency traversal, budgets/cancellation and versioned ports. Java/TS/Rust independent work executes concurrently; TS graph workers now run eight actual worker threads. This is a shared typed contract subset, not a compiler port. Malformed core-wire fault transport is still incomplete. |
+| Source intelligence | [Native TS and javac](../experiments/phase5/results/phase5b/source.json) demonstrate exact ownership markers, generated/human files, rename continuity, imports, TS aliases, overloads, interfaces/inheritance and unresolved calls. KNOWN/UNKNOWN/UNRESOLVED/ABSENT remain explicit. The third-party prebuilt Tree-sitter wasm is REJECTED FOR PRODUCTION because exact grammar source/build provenance is unavailable. Syntax-only results remain experimental UNKNOWN. |
+| Evolution | [Controlled upgrades](../experiments/phase5/results/phase5b/evolution.json): ANTLR 4.13.1→4.13.2, Langium 4.3.0→4.4.0, Xtext 2.43.0→2.44.0. Clean generated builds, identical domain corpus, generated hashes/diffs and rollback are recorded. Langium's previous packaged schema required one `$id` metadata repair; the initial failure is preserved separately. A legacy v0 textual fixture is explicitly rejected by every current parser. Prior TS patch-upgrade evidence remains; Java/Node/Rust toolchain upgrades are NOT_RUN. |
+| Dependencies/reproduction | [Transitive inventory](../experiments/phase5/results/phase5b/inventory.json): 31 npm, 63 JVM and 21 Rust packages, sources/digests/licenses, generated/runtime redistribution notes and unresolved provenance. Two JVM POM license records remain unresolved. Offline cached restoration is distinct from clean Ubuntu network restoration. Patched generator source provenance and clean-cache offline Maven restoration remain unproven. Top-level licenses do not establish clearance. |
+
+## Remaining blockers and independent decisions
+
+ADR-0004 records four independent DEFERRED decisions. Production core runtime
+needs broader wire/fault conformance; textual frontend needs complete diagnostic
+transport and comparable editor evidence; integration needs native persistent
+workers versus in-process embedding; source analysis needs production adapter
+coverage and deployment/maintenance review. No choice is inferred from benchmark
+speed, familiarity or the harness language.
+
+Additional exact blockers are the Xtext patched ANTLR3 generator's source/build
+provenance, unresolved artifact-level redistribution evidence, native heavy-worker
+concurrency under an approved workload budget, and missing exact recovery/reference
+token diagnostics. These are not converted to PASS. No production technology is
+selected merely to advance the roadmap.
+
+## Validation and engineering boundary
+
+All **92 Phase 1–4 regressions pass locally on Linux**. Independent Node checks
+retain all 9 positive/13 negative byte vectors and 2 canonical snapshot hashes.
+Original canonical vector files and Phase 1–4 completion reports are unchanged.
+The official Ubuntu 24.04 workflow retains CPython 3.14.7 and Node 24.21.0,
+rebuilds all three grammars and runs baseline contracts plus applicable Phase 5B
+tests, core wire, native source, diagnostics, determinism, scale and upgrades.
+Hosted raw evidence is uploaded separately from the committed laptop measurements.
+Linux remains an engineering host decision only; semantic and target neutrality
+are preserved. `/tmp` logs are ephemeral local evidence.
+
+## Approved first-pass record (historical)
+
+The following describes the approved evaluation at commit `ba3e550`, before
+Phase 5B. Statements of missing work below describe that historical pass; consult
+the current gate register and evidence above for today's status.
 
 Status: **EXPLICITLY BLOCKED ON EVIDENCE; NOT CLOSED AND GREEN**.
 Phases 1–4 remain CLOSED AND GREEN. Phase 6 is NOT STARTED. No production

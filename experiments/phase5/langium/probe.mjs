@@ -63,4 +63,4 @@ if (process.env.ACP_EDITOR === '1') {
     const rename = await services.lsp.RenameProvider.rename(doc, {...params, newName:'RENAMED-STABLE-ID'});
     nativeServices = {validationMs, completionMs, diagnostics:doc.diagnostics, completionItems:completions?.items.length, definition, referenceCount:references.length, rename};
 }
-console.log(JSON.stringify({candidate:'Langium 4.4.0', startupMs, parseMs:measurements, peakRssBytes:process.resourceUsage().maxRSS*1024, errors, model, spans, nativeServices}));
+console.log(JSON.stringify({module:parsed.value.module, imports:parsed.value.imports, exports:parsed.value.declarations.filter(d=>d.exported).map(d=>d.name), candidate:'Langium 4.4.0', startupMs, parseMs:measurements, peakRssBytes:process.resourceUsage().maxRSS*1024, errors, model, spans, nativeServices}));

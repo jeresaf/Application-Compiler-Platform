@@ -1,0 +1,926 @@
+{
+  "antlr": {
+    "duplicate-id": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-ID",
+          "subject": "REQ-PAYMENT",
+          "primary": "domain.acp#L2C1",
+          "related": [
+            "domain.acp#L30C1",
+            "domain.acp#L3C1"
+          ],
+          "remediation": "Give each durable concept a unique semantic ID."
+        }
+      ],
+      "elapsedMs": 463.9131459989585
+    },
+    "missing-reference": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "subject": "FLD-AMOUNT",
+          "primary": "domain.acp#L18C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "elapsedMs": 523.9285120005661
+    },
+    "stale-reference": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "subject": "FLD-AMOUNT",
+          "primary": "domain.acp#L18C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "elapsedMs": 490.86739600170404
+    },
+    "currency-mismatch": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "INV-POSITIVE",
+          "primary": "domain.acp#L20C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        },
+        {
+          "code": "ACP-TYPE",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 467.4908980014152
+    },
+    "boolean-money-literal": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "PARAM-ZERO",
+          "primary": "domain.acp#L19C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 475.2379390010901
+    },
+    "nonfinite-money-text": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "PARAM-ZERO",
+          "primary": "domain.acp#L19C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 689.5685759991466
+    },
+    "terminal-outgoing": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "elapsedMs": 722.1500640007434
+    },
+    "ambiguous-transition": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-DUPLICATE",
+          "primary": "domain.acp#L30C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L29C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        },
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1",
+            "domain.acp#L30C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "elapsedMs": 576.5560469990305
+    },
+    "conflict-blocks-compilation": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-ISSUE",
+          "subject": "ISSUE-RETENTION",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Resolve blocking uncertainty through an approved Decision."
+        }
+      ],
+      "elapsedMs": 576.3100740005029
+    },
+    "conflicting-permission": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-TENANT",
+          "primary": "domain.acp#L25C1",
+          "related": [
+            "domain.acp#L14C1",
+            "domain.acp#L15C1",
+            "domain.acp#L17C1",
+            "domain.acp#L21C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L57C1",
+            "domain.acp#L62C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        }
+      ],
+      "elapsedMs": 690.4478719989129
+    },
+    "conflicting-scope": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-QUERY-TASKS",
+          "primary": "domain.acp#L63C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L43C1",
+            "domain.acp#L57C1",
+            "domain.acp#L62C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        },
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-TENANT",
+          "primary": "domain.acp#L25C1",
+          "related": [
+            "domain.acp#L14C1",
+            "domain.acp#L15C1",
+            "domain.acp#L17C1",
+            "domain.acp#L21C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L57C1",
+            "domain.acp#L59C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        },
+        {
+          "code": "ACP-TENANT",
+          "subject": "QUERY-TASKS",
+          "primary": "domain.acp#L43C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L2C1",
+            "domain.acp#L40C1",
+            "domain.acp#L41C1",
+            "domain.acp#L42C1",
+            "domain.acp#L57C1"
+          ],
+          "remediation": "Preserve the resource and actor's mandatory tenant boundary."
+        },
+        {
+          "code": "ACP-TENANT",
+          "subject": "SCOPE-ENT-PAYMENT",
+          "primary": "domain.acp#L57C1",
+          "related": [
+            "domain.acp#L12C1",
+            "domain.acp#L14C1",
+            "domain.acp#L17C1",
+            "domain.acp#L23C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Preserve the resource and actor's mandatory tenant boundary."
+        }
+      ],
+      "elapsedMs": 644.8669909987075
+    },
+    "incomplete": {
+      "status": "PASS",
+      "compilable": false,
+      "diagnostics": [
+        {
+          "code": "SYNTAX",
+          "subject": "",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Complete or repair the source before compiling."
+        }
+      ],
+      "scope": "Safe rejection; exact recovery token spans remain candidate-specific."
+    },
+    "malformed": {
+      "status": "PASS",
+      "compilable": false,
+      "diagnostics": [
+        {
+          "code": "SYNTAX",
+          "subject": "",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Complete or repair the source before compiling."
+        }
+      ],
+      "scope": "Safe rejection; exact recovery token spans remain candidate-specific."
+    }
+  },
+  "langium": {
+    "duplicate-id": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-ID",
+          "subject": "REQ-PAYMENT",
+          "primary": "domain.acp#L2C1",
+          "related": [
+            "domain.acp#L30C1",
+            "domain.acp#L3C1"
+          ],
+          "remediation": "Give each durable concept a unique semantic ID."
+        }
+      ],
+      "elapsedMs": 624.2912859997887
+    },
+    "missing-reference": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "subject": "FLD-AMOUNT",
+          "primary": "domain.acp#L18C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "elapsedMs": 555.817644999479
+    },
+    "stale-reference": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "subject": "FLD-AMOUNT",
+          "primary": "domain.acp#L18C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "elapsedMs": 570.532275000005
+    },
+    "currency-mismatch": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "INV-POSITIVE",
+          "primary": "domain.acp#L20C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        },
+        {
+          "code": "ACP-TYPE",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 506.8802780006081
+    },
+    "boolean-money-literal": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "PARAM-ZERO",
+          "primary": "domain.acp#L19C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 545.8739590030746
+    },
+    "nonfinite-money-text": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "PARAM-ZERO",
+          "primary": "domain.acp#L19C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 511.76792700061924
+    },
+    "terminal-outgoing": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "elapsedMs": 524.7021540017158
+    },
+    "ambiguous-transition": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-DUPLICATE",
+          "primary": "domain.acp#L30C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L29C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        },
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1",
+            "domain.acp#L30C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "elapsedMs": 587.3157480018563
+    },
+    "conflict-blocks-compilation": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-ISSUE",
+          "subject": "ISSUE-RETENTION",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Resolve blocking uncertainty through an approved Decision."
+        }
+      ],
+      "elapsedMs": 543.6430679983459
+    },
+    "conflicting-permission": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-TENANT",
+          "primary": "domain.acp#L25C1",
+          "related": [
+            "domain.acp#L14C1",
+            "domain.acp#L15C1",
+            "domain.acp#L17C1",
+            "domain.acp#L21C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L57C1",
+            "domain.acp#L62C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        }
+      ],
+      "elapsedMs": 672.3084559998824
+    },
+    "conflicting-scope": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-QUERY-TASKS",
+          "primary": "domain.acp#L63C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L43C1",
+            "domain.acp#L57C1",
+            "domain.acp#L62C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        },
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-TENANT",
+          "primary": "domain.acp#L25C1",
+          "related": [
+            "domain.acp#L14C1",
+            "domain.acp#L15C1",
+            "domain.acp#L17C1",
+            "domain.acp#L21C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L57C1",
+            "domain.acp#L59C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        },
+        {
+          "code": "ACP-TENANT",
+          "subject": "QUERY-TASKS",
+          "primary": "domain.acp#L43C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L2C1",
+            "domain.acp#L40C1",
+            "domain.acp#L41C1",
+            "domain.acp#L42C1",
+            "domain.acp#L57C1"
+          ],
+          "remediation": "Preserve the resource and actor's mandatory tenant boundary."
+        },
+        {
+          "code": "ACP-TENANT",
+          "subject": "SCOPE-ENT-PAYMENT",
+          "primary": "domain.acp#L57C1",
+          "related": [
+            "domain.acp#L12C1",
+            "domain.acp#L14C1",
+            "domain.acp#L17C1",
+            "domain.acp#L23C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Preserve the resource and actor's mandatory tenant boundary."
+        }
+      ],
+      "elapsedMs": 606.5320649977366
+    },
+    "incomplete": {
+      "status": "PASS",
+      "compilable": false,
+      "diagnostics": [
+        {
+          "code": "SYNTAX",
+          "subject": "",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Complete or repair the source before compiling."
+        }
+      ],
+      "scope": "Safe rejection; exact recovery token spans remain candidate-specific."
+    },
+    "malformed": {
+      "status": "PASS",
+      "compilable": false,
+      "diagnostics": [
+        {
+          "code": "SYNTAX",
+          "subject": "",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Complete or repair the source before compiling."
+        }
+      ],
+      "scope": "Safe rejection; exact recovery token spans remain candidate-specific."
+    }
+  },
+  "xtext": {
+    "duplicate-id": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-ID",
+          "subject": "REQ-PAYMENT",
+          "primary": "domain.acp#L2C1",
+          "related": [
+            "domain.acp#L30C1",
+            "domain.acp#L3C1"
+          ],
+          "remediation": "Give each durable concept a unique semantic ID."
+        }
+      ],
+      "elapsedMs": 2790.7022069994127
+    },
+    "missing-reference": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "subject": "FLD-AMOUNT",
+          "primary": "domain.acp#L18C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "elapsedMs": 2931.0327120001602
+    },
+    "stale-reference": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "subject": "FLD-AMOUNT",
+          "primary": "domain.acp#L18C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Include the exact referenced semantic ID and revision."
+        }
+      ],
+      "elapsedMs": 2999.901425002463
+    },
+    "currency-mismatch": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "INV-POSITIVE",
+          "primary": "domain.acp#L20C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        },
+        {
+          "code": "ACP-TYPE",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 4648.448949003068
+    },
+    "boolean-money-literal": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "PARAM-ZERO",
+          "primary": "domain.acp#L19C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 4683.486945999903
+    },
+    "nonfinite-money-text": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-TYPE",
+          "subject": "PARAM-ZERO",
+          "primary": "domain.acp#L19C1",
+          "related": [
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Use compatible semantic types and explicit presence handling."
+        }
+      ],
+      "elapsedMs": 5110.869406998972
+    },
+    "terminal-outgoing": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "elapsedMs": 5112.772518001293
+    },
+    "ambiguous-transition": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-DUPLICATE",
+          "primary": "domain.acp#L30C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L29C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        },
+        {
+          "code": "ACP-WORKFLOW",
+          "subject": "TRANS-RECORD",
+          "primary": "domain.acp#L29C1",
+          "related": [
+            "domain.acp#L18C1",
+            "domain.acp#L19C1",
+            "domain.acp#L21C1",
+            "domain.acp#L22C1",
+            "domain.acp#L23C1",
+            "domain.acp#L26C1",
+            "domain.acp#L27C1",
+            "domain.acp#L28C1",
+            "domain.acp#L2C1",
+            "domain.acp#L30C1"
+          ],
+          "remediation": "Correct workflow topology or ambiguous triggers explicitly."
+        }
+      ],
+      "elapsedMs": 4094.806664998032
+    },
+    "conflict-blocks-compilation": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-ISSUE",
+          "subject": "ISSUE-RETENTION",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Resolve blocking uncertainty through an approved Decision."
+        }
+      ],
+      "elapsedMs": 2487.1717220012215
+    },
+    "conflicting-permission": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-TENANT",
+          "primary": "domain.acp#L25C1",
+          "related": [
+            "domain.acp#L14C1",
+            "domain.acp#L15C1",
+            "domain.acp#L17C1",
+            "domain.acp#L21C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L57C1",
+            "domain.acp#L62C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        }
+      ],
+      "elapsedMs": 2666.096382003161
+    },
+    "conflicting-scope": {
+      "status": "PASS",
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-QUERY-TASKS",
+          "primary": "domain.acp#L63C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L43C1",
+            "domain.acp#L57C1",
+            "domain.acp#L62C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        },
+        {
+          "code": "ACP-SECURITY",
+          "subject": "POL-TENANT",
+          "primary": "domain.acp#L25C1",
+          "related": [
+            "domain.acp#L14C1",
+            "domain.acp#L15C1",
+            "domain.acp#L17C1",
+            "domain.acp#L21C1",
+            "domain.acp#L23C1",
+            "domain.acp#L24C1",
+            "domain.acp#L2C1",
+            "domain.acp#L57C1",
+            "domain.acp#L59C1"
+          ],
+          "remediation": "Bind authentication, permissions, roles and policies consistently; missing context denies."
+        },
+        {
+          "code": "ACP-TENANT",
+          "subject": "QUERY-TASKS",
+          "primary": "domain.acp#L43C1",
+          "related": [
+            "domain.acp#L15C1",
+            "domain.acp#L2C1",
+            "domain.acp#L40C1",
+            "domain.acp#L41C1",
+            "domain.acp#L42C1",
+            "domain.acp#L57C1"
+          ],
+          "remediation": "Preserve the resource and actor's mandatory tenant boundary."
+        },
+        {
+          "code": "ACP-TENANT",
+          "subject": "SCOPE-ENT-PAYMENT",
+          "primary": "domain.acp#L57C1",
+          "related": [
+            "domain.acp#L12C1",
+            "domain.acp#L14C1",
+            "domain.acp#L17C1",
+            "domain.acp#L23C1",
+            "domain.acp#L2C1"
+          ],
+          "remediation": "Preserve the resource and actor's mandatory tenant boundary."
+        }
+      ],
+      "elapsedMs": 2634.3678679986624
+    },
+    "incomplete": {
+      "status": "PASS",
+      "compilable": false,
+      "diagnostics": [
+        {
+          "code": "SYNTAX",
+          "subject": "",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Complete or repair the source before compiling."
+        }
+      ],
+      "scope": "Safe rejection; exact recovery token spans remain candidate-specific."
+    },
+    "malformed": {
+      "status": "PASS",
+      "compilable": false,
+      "diagnostics": [
+        {
+          "code": "SYNTAX",
+          "subject": "",
+          "primary": "domain.acp#L1C1",
+          "related": [],
+          "remediation": "Complete or repair the source before compiling."
+        }
+      ],
+      "scope": "Safe rejection; exact recovery token spans remain candidate-specific."
+    }
+  }
+}

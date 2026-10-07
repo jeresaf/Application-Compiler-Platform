@@ -19,6 +19,13 @@ class EvidenceTests(unittest.TestCase):
         self.assertTrue(protocol["registeredBeforeMeasurements"])
         self.assertEqual(100, sum(protocol["softWeights"].values()))
         self.assertEqual(6, len(protocol["hardGates"]))
+        gates=json.loads((AREA/"results/gates.json").read_text())
+        self.assertEqual(set(protocol["hardGates"]),set(gates["hardGates"]))
+        self.assertEqual(protocol["softWeights"],gates["softWeights"])
+        self.assertTrue(all(v["status"] in {"PASS","FAIL","UNKNOWN","NOT_RUN"} for v in gates["hardGates"].values()))
+        if any(v["status"]!="PASS" for v in gates["hardGates"].values()):
+            self.assertIsNone(gates["weightedScores"])
+            self.assertTrue(all(v is None for v in gates["selections"].values()))
 
     def test_fixtures_are_regenerable_without_modifying_source(self):
         root = AREA.parents[1]

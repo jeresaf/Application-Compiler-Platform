@@ -18,7 +18,7 @@ for candidate in ("antlr","langium","xtext"):
         assert normalize_candidate(synthetic_approved(model))==normalize_candidate(synthetic_approved(reference))
         assert {s["id"] for s in result["output"]["spans"]}=={n["id"] for n in model["nodes"]}
     behavior(candidate)
-    evidence=json.loads((AREA/f"results/{candidate}-behavior.json").read_text())
+    evidence=json.loads((AREA/f"results/phase5b/{candidate}-behavior.json").read_text())
     assert all(r.get("exactAuthoringEquality") and r.get("diagnosticEquality") and r.get("deterministicDiagnostics") for r in evidence["diagnostics"].values()),candidate
     assert all(r.get("canonicalEqual") for r in evidence["determinism"]),candidate
     filename=AREA/".cache/smoke-incomplete.acp";filename.parent.mkdir(exist_ok=True)

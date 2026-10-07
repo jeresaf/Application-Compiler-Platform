@@ -1,0 +1,3 @@
+legacy-acp/0
+application {"applicationId":"APP-LEGACY","modelVersion":"0.1.0","snapshotId":"SNAP-LEGACY"};
+Entity "ENT-OLD" @ 1 {"name":"Old label"};

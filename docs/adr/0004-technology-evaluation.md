@@ -98,3 +98,33 @@ obligations, require artifact-level deployment/redistribution review. Inherited
 licenses and patched/prebuilt artifact provenance are explicitly unresolved;
 top-level license names are not production clearance. No Linux host preference
 changes ACP semantic or generated-target neutrality.
+
+## Phase 5B independent dispositions — 2026-10-07
+
+This update supersedes the first-pass missing-evidence inventory above. Status
+remains **PROPOSED**. Consult the [current gate register](../../experiments/phase5/results/gates.json)
+and [Phase 5B report](../phase5-completion-report.md). Required gates are evaluated
+as PASS/FAIL/UNKNOWN/NOT_RUN; only PASS permits scoring. Weights remain exactly
+25/20/15/20/10/10. No weighted ranking is computed.
+
+| Independent production decision | Disposition | Current evidence / exact remaining reason |
+| --- | --- | --- |
+| Compiler-core runtime | **DEFERRED** | Java 21, TS 5.9.3/Node 24.21.0 and Rust 1.90.0 execute identical expanded representative wire fixtures with hashes, provenance, obligations, ports, budgets/cancellation and concurrent work. Full core-wire malformed/oversize failure transport and broader Phase 4 conformance are missing. |
+| Textual DSL/frontend | **DEFERRED** | ANTLR 4.13.2, Langium 4.4.0 and Xtext 2.44.0 enter real Ingest→Elaborate, execute both domains, enforce common bounded modules and preserve IDs under custom label edits. Exact recovery/reference-token diagnostics, module diagnostic transport and comparable editor/maintenance closure remain incomplete. |
+| Frontend/core integration | **DEFERRED** | Real frontends use one bounded exact-version protocol, with restart/retry and external authority. Persistent framing still invokes cold native parsers. No measured equivalent persistent-native versus same-process embedding comparison justifies colocation. |
+| Source-analysis approach | **DEFERRED** | Native TS and javac semantic bindings demonstrate ownership/rename, aliases/imports/overloads/inheritance and unresolved calls in two ecosystems. Feasibility passes; production adapter coverage and maintenance/redistribution review remain open. The third-party prebuilt wasm grammar is **REJECTED FOR PRODUCTION** as a component, not selected through syntax-only evidence. |
+
+No production choice is ACCEPTED, so there is no selected version or rejected
+competing framework disguised as a recommendation. The Langium default ID-changing
+rename remains a recorded failure; the ACP top-level label/ref-token adapter passes
+without changing its generated AST architecture. All three controlled frontend
+upgrades and legacy rejection are executable; previous Langium schema metadata
+repair and rollback are recorded. Java/Node/Rust toolchain upgrades are NOT_RUN.
+
+The transitive inventory records unresolved aopalliance 1.0 and antlr-runtime 3.2
+POM license metadata and the patched Xtext generator's missing exact source/build
+provenance. Cached offline Maven success does not prove independent clean-cache
+restoration. These gaps prevent production maintenance clearance. Fallback is the
+supported structured frontend and existing reference compiler; preserve pins,
+upgrade one component at a time, require corpus/byte/failure gates and roll back
+via the unchanged production experiment locks. No Phase 6 work is authorized.

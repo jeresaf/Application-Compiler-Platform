@@ -1,0 +1,1 @@
+{"name":"acp-phase5-langium-experiment","version":"0.1.0","private":true,"type":"module","scripts":{"generate":"langium generate","build":"tsc -p tsconfig.json"},"dependencies":{"langium":"4.3.0","typescript":"5.9.3","web-tree-sitter":"0.25.10","tree-sitter-wasms":"0.1.13"},"devDependencies":{"langium-cli":"4.3.0","@types/node":"24.10.1"}}

@@ -29,15 +29,18 @@ def command(candidate, filename, runs=1):
     return ["java", "-XX:-UsePerfData", "-Xmx768m", "-cp", f'{AREA}/xtext/out:{AREA}/xtext/generated/org.acp.experiment/src-gen:{cp}', "XtextProbe", str(filename), str(runs)]
 
 
-def invoke(args, *, timeout=90, **env):
+def invoke(args, *, timeout=90, isolate=True, working_directory=None, **env):
     start = time.perf_counter()
     try:
         with tempfile.NamedTemporaryFile(prefix="acp-phase5-rss-") as memory:
-            with subprocess.Popen(["/usr/bin/time", "-f", "%M", "-o", memory.name, *args], cwd=ROOT, env={**os.environ, **env}, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True) as process:
+            with subprocess.Popen(["/usr/bin/time", "-f", "%M", "-o", memory.name, *args], cwd=working_directory or ROOT, env={**os.environ, **env}, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=isolate) as process:
                 try:
                     stdout, stderr = process.communicate(timeout=timeout)
                 except subprocess.TimeoutExpired:
-                    os.killpg(process.pid, signal.SIGKILL)
+                    if isolate:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    else:
+                        process.kill()
                     process.communicate()
                     raise
                 result = subprocess.CompletedProcess(args, process.returncode, stdout, stderr)

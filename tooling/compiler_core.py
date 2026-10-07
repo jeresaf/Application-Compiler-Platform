@@ -380,28 +380,44 @@ def _perform(stage, value, ctx, budget):
         if fingerprint(value, "source") != r.source_digest:
             fail("INPUT")
         model = value.document.read()
-        if type(model) is not dict or model.get("modelVersion") != "0.2.0":
+        structured = r.frontend == "acp-structured-reference/0.1.0"
+        if type(model) is not dict or (structured and model.get("modelVersion") != "0.2.0"):
             fail("VERSION")
         if len(model.get("nodes", [])) > r.resources.nodes:
             fail("RESOURCE")
         locations = value.source_map.read()
-        if set(locations) - {n.get("id") for n in model.get("nodes", []) if isinstance(n, dict)}:
+        if structured and set(locations) - {n.get("id") for n in model.get("nodes", []) if isinstance(n, dict)}:
             fail("INPUT")
         if type(locations) is not dict or any(type(v) is not str or v.startswith("/") or "\\" in v or ":" in v or ".." in v.split("/") for v in locations.values()):
             fail("INPUT")
         _port(ctx, "frontend")
         result = ctx.frontend.ingest(value)
-        if type(result) is not Ingested or result.representation != value.document or result.source_map != value.source_map or result.dialect != r.frontend:
+        if type(result) is not Ingested or type(result.representation) is not Document or type(result.source_map) is not Document or result.dialect != r.frontend:
+            fail("INPUT")
+        if structured and (result.representation != value.document or result.source_map != value.source_map):
             fail("INPUT")
         return result, 0, 0
     if stage == Stage.ELABORATE:
         if value.dialect != r.frontend:
             fail("VERSION")
-        model = value.representation.read()
+        _port(ctx, "frontend")
+        if hasattr(ctx.frontend, "elaborate"):
+            ast = ctx.frontend.elaborate(value)
+        elif r.frontend == "acp-structured-reference/0.1.0":
+            ast = SemanticAST(value.representation, value.source_map)
+        else:
+            fail("PORT")
+        if type(ast) is not SemanticAST or type(ast.model) is not Document or type(ast.source_map) is not Document or ast.version != VERSION:
+            fail("INPUT")
+        model = ast.model.read()
         if type(model) is not dict or model.get("modelVersion") != "0.2.0":
             fail("VERSION")
-        # Structured representation is copied into the frontend-independent contract.
-        return SemanticAST(Document.of(model), value.source_map), 0, 0
+        locations = ast.source_map.read()
+        identities = {n.get("id") for n in model.get("nodes", []) if isinstance(n, dict)}
+        if type(locations) is not dict or set(locations) - identities:
+            fail("INPUT")
+        # Only immutable frontend-independent records leave Elaborate.
+        return ast, 0, 0
     if stage == Stage.ANALYZE:
         deps = _dependencies(ctx, budget)
         model = value.model.read()
@@ -603,6 +619,7 @@ def execute(stage, value, context: CompilationContext, *, repeat=False):
         if type(result) is not OUTPUT_TYPES[stage]:
             fail("INPUT")
         _immutable(result)
+        _source_map(result)
         budget.inspect(result, output=True)
         origins = _result_origins(result)
         provenance = replace(provenance, origins=origins)

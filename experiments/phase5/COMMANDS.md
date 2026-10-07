@@ -102,3 +102,57 @@ offline restoration, clean generated Java rebuilds, Rust offline rebuilding and
 native API equivalence across TypeScript 5.9.2 → 5.9.3. It preserves previous
 generated Java output under the ignored cache. `/tmp` caches/logs are ephemeral;
 the durable evidence is the checked-in `results/` content.
+
+## Phase 5B evidence closure
+
+Use the same clean Linux prerequisites, exact current pins and locked restores
+above. The workflow runs these commands on a fresh Ubuntu 24.04 hosted runner.
+Local Python dependencies remain isolated in `.venv`; replace `python3.14` below
+with `.venv/bin/python3.14` when the environment is not activated.
+
+```sh
+python3.14 -m unittest discover -s experiments/phase5 -p 'test_*.py' -v
+python3.14 experiments/phase5/smoke.py
+python3.14 experiments/phase5/wire.py
+python3.14 experiments/phase5/source5b.py
+python3.14 experiments/phase5/evidence5b.py
+python3.14 experiments/phase5/scale5b.py
+python3.14 experiments/phase5/inventory5b.py
+python3.14 experiments/phase5/evolution.py prepare
+npm --prefix experiments/phase5/.cache/evolution/langium ci --ignore-scripts --no-audit --no-fund
+mvn -B -ntp -f experiments/phase5/.cache/evolution/xtext/pom.xml -Dmaven.repo.local="$PWD/experiments/phase5/.cache/m2" dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
+python3.14 experiments/phase5/evolution.py
+```
+
+`evolution-locks/` pins isolated previous ANTLR 4.13.1, Langium/CLI 4.3.0 and Xtext
+2.43.0. Current pins are untouched. Preparation downloads the previous ANTLR jar
+only if absent and verifies its recorded SHA-256. Previous Langium's packaged
+configuration schema needs a recorded `$id` metadata repair; the comparison
+applies that one edit before regeneration. The unmodified first-attempt failure
+is preserved in `results/phase5b/evolution-first-attempt.json`. Generated-code
+hashes/diffs, corpus results, compatibility effects and rollback are recorded.
+Rollback uses unchanged current pins/locks and fresh generated outputs; ignored
+previous-version directories can be discarded after review.
+
+The expanded Rust wire binary uses the existing exact Cargo lock. On this laptop
+`wire.py` detects the ignored local Rust toolchain; clean CI uses `cargo +1.90.0`.
+The Python reference, Java, TS and Rust handlers exercise one shared message set.
+They are not complete production compiler/plugin wire contracts.
+
+Clean restoration requires the pinned CPython/Node/JDK/Rust toolchains, PyPI
+packages in `tooling/requirements.txt`, npm registry artifacts from both lockfiles,
+Cargo registry artifacts from `Cargo.lock`, Maven Central artifacts listed with
+exact URLs/digests in `results/phase5b/inventory.json`, the ANTLR download site and
+the digest-pinned patched generator URL in `versions.json`. Offline cached
+restoration is demonstrated separately in the first-pass maintenance evidence;
+independent clean-cache offline Maven restoration and patched-generator source
+provenance remain UNKNOWN. The inventory is not legal redistribution clearance.
+
+Phase 5B outputs go to `results/phase5b/`; first-pass measurements remain historical.
+Hosted outputs are uploaded as `phase5b-ubuntu-evidence`, separately from laptop
+measurements. Process/heap/time measurements are descriptive observations on a
+shared laptop, not normalized competitive scores. The supervisor persists, but
+its native parser children currently start cold on each request. Native editor
+builder/resource updates and source-edit adapter timings are labeled separately.
+Full 10k/100k ACP semantic validation remains NOT_SUPPORTED under unchanged bounds.
+All `/tmp` logs are ephemeral. No Phase 6 work is included.

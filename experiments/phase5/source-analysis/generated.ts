@@ -1,5 +1,7 @@
+// acp-owner: GENERATED id=SERVICE-SETTLE
 // Experiment fixture: generator-owned.
 export interface Payment { amount: number; }
+export class PaymentBase { amount = 0; }
 export function settle(value: number): number;
 export function settle(value: Payment): number;
 export function settle(value: number | Payment): number {

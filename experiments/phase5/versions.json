@@ -1,15 +1,63 @@
 {
-  "antlr": {"version":"4.13.2", "license":"BSD-3-Clause", "url":"https://www.antlr.org/download/antlr-4.13.2-complete.jar", "sha256":"eae2dfa119a64327444672aff63e9ec35a20180dc5b8090b7a6ab85125df4d76"},
-  "xtextGeneratorAntlr": {"version":"3.2.0-patch", "url":"https://artifacts.itemis.cloud/repository/p2/antlr-generator-3.2.0-patch.jar", "sha256":"35853e64321ed8aded0bf89b791db4af0a18b362c7c084fb8a46c78dca21f74e", "license":"ANTLR BSD; patched artifact redistribution/provenance review remains unresolved"},
-  "langium": {"version":"4.4.0", "license":"MIT", "source":"https://github.com/eclipse-langium/langium"},
-  "xtext": {"version":"2.44.0", "license":"EPL-2.0", "source":"https://github.com/eclipse-xtext/xtext"},
-  "typescript": {"version":"5.9.3", "license":"Apache-2.0"},
-  "rust": {"version":"1.90.0", "license":"MIT OR Apache-2.0"},
-  "serde_json": {"version":"1.0.145", "license":"MIT OR Apache-2.0"},
-  "sha2": {"version":"0.10.9", "license":"MIT OR Apache-2.0"},
-  "webTreeSitter": {"version":"0.25.10", "license":"MIT"},
-  "wasmBundle": {"version":"0.1.13", "license":"MIT", "note":"Third-party prebuilt grammar; exact grammar revision and deployment provenance not established. Source-intelligence production selection remains blocked."},
-  "java": {"version":"Temurin 21+35 local", "languageRelease":"21", "license":"GPL-2.0 WITH Classpath-exception-2.0"},
-  "node": {"version":"24.21.0", "license":"MIT plus bundled third-party licenses"},
-  "python": {"localVersion":"3.14.4", "ciVersion":"3.14.7", "role":"Existing reference harness only; no production candidacy preference"}
+  "antlr": {
+    "version": "4.13.2",
+    "license": "BSD-3-Clause",
+    "url": "https://www.antlr.org/download/antlr-4.13.2-complete.jar",
+    "sha256": "eae2dfa119a64327444672aff63e9ec35a20180dc5b8090b7a6ab85125df4d76"
+  },
+  "xtextGeneratorAntlr": {
+    "version": "3.2.0-patch",
+    "url": "https://artifacts.itemis.cloud/repository/p2/antlr-generator-3.2.0-patch.jar",
+    "sha256": "35853e64321ed8aded0bf89b791db4af0a18b362c7c084fb8a46c78dca21f74e",
+    "license": "ANTLR BSD; patched artifact redistribution/provenance review remains unresolved"
+  },
+  "langium": {
+    "version": "4.4.0",
+    "license": "MIT",
+    "source": "https://github.com/eclipse-langium/langium"
+  },
+  "xtext": {
+    "version": "2.44.0",
+    "license": "EPL-2.0",
+    "source": "https://github.com/eclipse-xtext/xtext"
+  },
+  "typescript": {
+    "version": "5.9.3",
+    "license": "Apache-2.0"
+  },
+  "rust": {
+    "version": "1.90.0",
+    "license": "MIT OR Apache-2.0"
+  },
+  "serde_json": {
+    "version": "1.0.145",
+    "license": "MIT OR Apache-2.0"
+  },
+  "sha2": {
+    "version": "0.10.9",
+    "license": "MIT OR Apache-2.0"
+  },
+  "webTreeSitter": {
+    "version": "0.25.10",
+    "license": "MIT"
+  },
+  "wasmBundle": {
+    "version": "0.1.13",
+    "license": "MIT",
+    "note": "REJECTED_FOR_PRODUCTION in Phase 5B: exact grammar source revision and reproducible source-to-wasm provenance are unavailable. Experimental syntax evidence remains UNKNOWN for semantic resolution; target-native semantic adapters provide bindings."
+  },
+  "java": {
+    "version": "Temurin 21+35 local",
+    "languageRelease": "21",
+    "license": "GPL-2.0 WITH Classpath-exception-2.0"
+  },
+  "node": {
+    "version": "24.21.0",
+    "license": "MIT plus bundled third-party licenses"
+  },
+  "python": {
+    "localVersion": "3.14.4",
+    "ciVersion": "3.14.7",
+    "role": "Existing reference harness only; no production candidacy preference"
+  }
 }

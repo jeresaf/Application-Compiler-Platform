@@ -1,0 +1,15 @@
+{
+  "antlrPrevious": {
+    "version": "4.13.1",
+    "url": "https://www.antlr.org/download/antlr-4.13.1-complete.jar",
+    "sha256": "bc13a9c57a8dd7d5196888211e5ede657cb64a3ce968608697e4f668251a8487"
+  },
+  "langiumPrevious": "4.3.0",
+  "xtextPrevious": "2.43.0",
+  "typescriptPrevious": "5.9.2",
+  "toolchainUpgrades": {
+    "java": "NOT_RUN",
+    "node": "NOT_RUN",
+    "rust": "NOT_RUN"
+  }
+}

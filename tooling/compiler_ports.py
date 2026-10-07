@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from compiler_contracts import (ArtifactPlan, CacheEntry, CompilationRequest,
-    AICandidate, Decision, Document, ExistingArtifact, Ingested, Realization, Source, TargetIR)
+    AICandidate, Decision, Document, ExistingArtifact, Ingested, Realization, SemanticAST, Source, TargetIR)
 
 
 class SnapshotRepository(Protocol):
@@ -14,6 +14,7 @@ class SnapshotRepository(Protocol):
 class Frontend(Protocol):
     identity: str
     def ingest(self, source: Source) -> Ingested: ...
+    def elaborate(self, parsed: Ingested) -> SemanticAST: ...
 
 
 class ApprovalAuthority(Protocol):

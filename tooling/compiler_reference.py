@@ -22,6 +22,10 @@ class StructuredFrontend:
     def ingest(self, source):
         return Ingested(source.document, source.source_map)
 
+    def elaborate(self, parsed):
+        from compiler_contracts import SemanticAST
+        return SemanticAST(parsed.representation, parsed.source_map)
+
 
 class FixtureApproval:
     """Host-injected allowlist, bound to exact bytes/decisions/evidence. NOT production IAM."""
