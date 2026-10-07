@@ -80,7 +80,11 @@ def handle(request):
 
 
 def main():
-    sandbox()
+    try:
+        sandbox()
+    except Exception:
+        sys.stdout.buffer.write(b'{"ok":false,"error":"SANDBOX_SETUP"}\n')
+        return
     raw = sys.stdin.buffer.read(4000001)
     try:
         if len(raw) > 4000000:

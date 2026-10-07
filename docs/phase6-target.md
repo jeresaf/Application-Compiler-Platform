@@ -15,7 +15,7 @@ The [profile](../targets/spring-vue-postgres/profile.json) and [ADR](adr/0014-fi
 | plan | `model`, `inventory` |
 | validate-plan | `artifacts` |
 
-The manifest contains profile, protocol, generator, stack versions, per-family versioned capabilities/constraints, required architecture/design decisions, four ownership classes, migration strategies, evidence labels and resource bounds. Input is limited to 4 MB, output to 16 MB, semantic nodes to 4,000, worker CPU to 20 seconds, host timeout to 30 seconds and address space to 512 MB. Stronger adversarial output supervision remains outstanding.
+The manifest contains profile, protocol, generator, stack versions, per-family versioned capabilities/constraints, required architecture/design decisions, four ownership classes, migration strategies, evidence labels and resource bounds. Input is limited to 4 MB, output to 16 MB, semantic nodes to 4,000, worker CPU to 20 seconds, host timeout to 30 seconds and address space to 512 MB. The host drains pipes concurrently, limits output while streaming, bounds stderr to 8 KB and terminates the worker process group on failure. Malformed responses, timeout, abnormal exits, signals and sandbox setup failures fail closed. Generator bundle identity is checked before and after target operations.
 
 The host retains snapshot/decision approval and history authority. The worker receives immutable data, not repository credentials or write ports. It starts with a fixed environment; trusted code/profile/templates load before Linux seccomp denies filesystem opens, network creation, process creation, kernel clock/random/identity syscalls and other effects. Pure planning does not read clocks or random values. This prototype is not a completed hostile-plugin security certification; vDSO clock access and startup trust still require explicit hardening assessment.
 
@@ -35,7 +35,8 @@ The executable manifest is authoritative for current negotiation; retrieve it wi
 | --- | --- |
 | primitives, Money, entities | SQL lowering and exact-decimal value boundary; broader refined/nested validation remains incomplete |
 | relations/cardinality | UNSUPPORTED in negotiation; no silent omission permitted |
-| invariants, commands, queries, use cases, workflow | Source templates exist; complete executable conformance and idempotency/rate behavior remain outstanding |
+| invariants, commands, queries, workflow | Source templates exist; complete executable conformance and idempotency/rate behavior remain outstanding |
+| use cases | UNSUPPORTED until explicit input-to-operation and output-construction bindings are defined and implemented; names are not behavior contracts |
 | permissions, policies, tenant scope | Server policy and tenant predicates with unit tests; full authorization and isolation integration suite outstanding |
 | authentication/session | UNSUPPORTED canonical assurance/session negotiation until MFA and session semantics are implemented |
 | audit/events | Audit/outbox source sites exist; delivery semantics remain UNSUPPORTED |
@@ -60,7 +61,9 @@ Unsupported families produce deterministic capability errors. The two complete d
 
 An explicit `adopt_human` handoff is limited to backend/frontend extension paths. Frontend identity and registry files provide extension seams. Backend extension interfaces and broader extension coverage remain outstanding. Generated-source round-trip editing is not promised.
 
-Host-declared ephemeral build scopes may include only `backend/target`, `frontend/node_modules` and `frontend/dist`. They are excluded from source inventory and discarded at regeneration without following contained links. Default policy declares none; unknown paths otherwise block. Concurrent noncooperating filesystem writers and crash/durability cases need further adversarial testing before acceptance.
+Host-declared ephemeral build scopes may include only `backend/target`, `frontend/node_modules` and `frontend/dist`. They are excluded from source inventory and discarded at regeneration without following contained links. Default policy declares none; unknown paths otherwise block. Inventory, staging and publication use directory descriptors and no-follow opens. A per-root advisory lock serializes cooperating writers; publication rechecks source contents, ownership metadata, directory identity and the staged tree. Human ownership handoff also publishes atomically.
+
+Fault tests cover concurrent stale writers, process termination before publication, unknown-file insertion and a root-to-symlink swap before publication. A crash before publication can leave an orphan staging directory; the published source remains intact and subsequent generation can proceed. These tests do not establish power-loss durability or protection against an arbitrary same-user process mutating the directory between the final check and exchange. The adapter requires cooperating source writers during publication; this is not Phase 11 hostile-process certification.
 
 ## Provenance
 
@@ -75,6 +78,8 @@ This planner is not yet connected to the complete six-step target pipeline. Rela
 ## Reproduction and evidence
 
 Run `.venv/bin/python3.14 -m unittest discover -s tooling/tests -p test_phase6_foundations.py -v` and the equivalent `test_target_migrations.py` suite. Existing validation remains `python3.14 -m unittest discover -s tooling/tests -v`, repository checks and independent Node vectors.
+
+Worker and materializer fault tests run with `.venv/bin/python3.14 -m unittest discover -s tooling/tests -p 'test_*faults.py' -v`. Their success is boundary evidence only and does not discharge full-domain target acceptance.
 
 Generated frontend inputs include an npm lockfile with exact release/integrity values. Maven uses exact direct dependencies, plugins and Boot BOM; a complete transitively verified dependency inventory/lock and license provenance remains outstanding. Template Maven tests require an explicit ephemeral PostgreSQL 18.6 connection using `ACP_TEST_DATABASE_URL`, `ACP_TEST_DATABASE_USER` and `ACP_TEST_DATABASE_PASSWORD`. They fail rather than skip when the database is absent. Production configuration uses separate opaque `ACP_DATABASE_*` and `ACP_OIDC_*` handles, with no generated secret defaults.
 

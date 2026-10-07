@@ -18,7 +18,7 @@ class CapabilityError(ValueError):
 METADATA = set("Requirement Decision Fact Goal Assumption Preference AcceptanceCriterion Applicability EvidenceRequirement TestRequirement Backup Recovery PerformanceRequirement ReliabilityRequirement CompatibilityRequirement".split())
 SUPPORTED = set("Entity Field ValueObject TypeDefinition Parameter Aggregate Relation Constraint Invariant Actor AuthenticationModel SessionPolicy Role RoleAssignment Permission Scope Policy PolicySet DataClassification Command Query UseCase ExecutionStep Service Transaction StateMachine State Transition Failure RatePolicy IdempotencyPolicy Event DeliveryPolicy Screen Form InputControl Table Filter Search Wizard WizardStep Action ViewState PermissionBoundary ResponsivePolicy AccessibilityRequirement ObservabilityRequirement".split())
 # Negotiation stays fail-closed while these runtime capabilities are implemented.
-PENDING = set("Job Schedule RetryPolicy DataLifecycle Retention DeletionPolicy LegalHold Relation AuthenticationModel SessionPolicy RatePolicy IdempotencyPolicy DeliveryPolicy TypeDefinition ValueObject".split())
+PENDING = set("Job Schedule RetryPolicy DataLifecycle Retention DeletionPolicy LegalHold Relation AuthenticationModel SessionPolicy RatePolicy IdempotencyPolicy DeliveryPolicy TypeDefinition ValueObject UseCase".split())
 SUPPORTED -= PENDING
 
 
@@ -28,6 +28,8 @@ def manifest(profile):
                     for kind in sorted(SUPPORTED | METADATA)}
     capabilities.update({kind + "/0.2.0": {"status": "UNSUPPORTED", "constraints": ["runtime lowering not yet implemented"]}
                          for kind in sorted(PENDING | {"File", "Blob", "DistributedTransaction"})})
+    capabilities["UseCase/0.2.0"]["constraints"] = [
+        "explicit input-to-operation and output construction bindings required; no inferred mutation semantics"]
     return {**profile, "releaseStatus": "INCOMPLETE", "capabilities": capabilities,
             "requiredDecisions": profile["decisions"],
             "ownership": ["COMPILER_OWNED", "FRAMEWORK_OWNED", "AI_MANAGED", "HUMAN_OWNED"],

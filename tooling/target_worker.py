@@ -2,9 +2,14 @@
 from dataclasses import replace
 import hashlib
 import json
+import os
 from pathlib import Path
+import re
+import selectors
+import signal
 import subprocess
 import sys
+import time
 
 from compiler_contracts import Artifact, ArtifactPlan, Document, Owner, Provenance, Stage, fingerprint
 from compiler_reference import SyntheticTarget
@@ -21,6 +26,8 @@ def bundle_digest():
     files = [ROOT / "profile.json", *sorted((ROOT / "worker").glob("*.py")), *sorted((ROOT / "templates").rglob("*"))]
     digest = hashlib.sha256()
     for path in files:
+        if path.is_symlink() or any(p.is_symlink() for p in path.parents if p != ROOT.parent):
+            raise TargetWorkerError("BUNDLE_SYMLINK")
         if path.is_file():
             digest.update(path.relative_to(ROOT).as_posix().encode() + b"\0" + path.read_bytes() + b"\0")
     return digest.hexdigest()
@@ -29,27 +36,114 @@ def bundle_digest():
 class TargetWorker:
     protocol = PROFILE["protocol"]
 
+    def __init__(self, *, command=None, timeout=30, output_limit=16000000):
+        # Only a trusted host chooses launch commands and stricter limits.
+        self.command = tuple(command or (sys.executable, "-I", "-B", str(ROOT / "worker/main.py")))
+        if not 0 < timeout <= 30 or type(output_limit) is not int or not 0 < output_limit <= 16000000:
+            raise ValueError("WORKER_LIMITS")
+        self.timeout = timeout
+        self.output_limit = output_limit
+
+    def _exchange(self, raw, cwd):
+        try:
+            child = subprocess.Popen(self.command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE, cwd=cwd or "/", env={"LC_ALL": "C", "PYTHONHASHSEED": "0"},
+                start_new_session=True, close_fds=True)
+        except OSError:
+            raise TargetWorkerError("WORKER_UNAVAILABLE") from None
+        stdout, stderr = bytearray(), bytearray()
+        offset = 0
+        deadline = time.monotonic() + self.timeout
+        selector = selectors.DefaultSelector()
+        try:
+            for stream, event in ((child.stdin, selectors.EVENT_WRITE), (child.stdout, selectors.EVENT_READ), (child.stderr, selectors.EVENT_READ)):
+                os.set_blocking(stream.fileno(), False)
+                selector.register(stream, event)
+            while selector.get_map():
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise TargetWorkerError("WORKER_TIMEOUT")
+                for key, _ in selector.select(remaining):
+                    stream = key.fileobj
+                    if stream is child.stdin:
+                        try:
+                            offset += os.write(stream.fileno(), raw[offset:offset + 65536])
+                        except BrokenPipeError:
+                            offset = len(raw)
+                        if offset == len(raw):
+                            selector.unregister(stream)
+                            stream.close()
+                    else:
+                        data = os.read(stream.fileno(), 65536)
+                        if not data:
+                            selector.unregister(stream)
+                            stream.close()
+                            continue
+                        sink = stdout if stream is child.stdout else stderr
+                        limit = self.output_limit if stream is child.stdout else 8192
+                        if len(sink) + len(data) > limit:
+                            raise TargetWorkerError("WORKER_OUTPUT_LIMIT")
+                        sink.extend(data)
+            try:
+                code = child.wait(timeout=max(0.001, deadline - time.monotonic()))
+            except subprocess.TimeoutExpired:
+                raise TargetWorkerError("WORKER_TIMEOUT") from None
+            if code < 0:
+                raise TargetWorkerError("WORKER_SIGNAL")
+            if code:
+                raise TargetWorkerError("WORKER_EXIT")
+            if stderr:
+                raise TargetWorkerError("WORKER_STDERR")
+            return bytes(stdout)
+        finally:
+            selector.close()
+            # Kill the process group even if a faulty worker left descendants.
+            try:
+                os.killpg(child.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            child.wait()
+            for stream in (child.stdin, child.stdout, child.stderr):
+                if not stream.closed:
+                    stream.close()
+
     def call(self, operation, payload, *, cwd=None):
         envelope = {"protocol": self.protocol, "operation": operation, "payload": payload}
         raw = json.dumps(envelope, ensure_ascii=False, separators=(",", ":")).encode()
         if len(raw) > 4000000:
             raise TargetWorkerError("RESOURCE_INPUT")
+        result = self._exchange(raw, cwd)
         try:
-            result = subprocess.run([sys.executable, "-I", "-B", str(ROOT / "worker/main.py")],
-                input=raw, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=cwd or "/",
-                env={"LC_ALL": "C", "PYTHONHASHSEED": "0"}, timeout=30, check=False)
-        except (subprocess.TimeoutExpired, OSError):
-            raise TargetWorkerError("WORKER_UNAVAILABLE") from None
-        if result.returncode or len(result.stdout) > 16000000 or result.stderr:
-            raise TargetWorkerError("WORKER_FAILED")
-        try:
-            response = json.loads(result.stdout)
-            if response["ok"] is not True:
+            def unique_pairs(pairs):
+                result = {}
+                for key, value in pairs:
+                    if key in result:
+                        raise ValueError()
+                    result[key] = value
+                return result
+            response = json.loads(result, object_pairs_hook=unique_pairs,
+                parse_constant=lambda value: (_ for _ in ()).throw(ValueError()))
+            pending = [(response, 0)]
+            count = 0
+            while pending:
+                value, depth = pending.pop()
+                count += 1
+                if depth > 128 or count > 200000:
+                    raise ValueError()
+                if type(value) is dict:
+                    pending.extend((item, depth + 1) for item in value.values())
+                elif type(value) is list:
+                    pending.extend((item, depth + 1) for item in value)
+            if type(response) is not dict or type(response.get("ok")) is not bool:
+                raise ValueError()
+            if response["ok"] is False:
+                if set(response) != {"ok", "error"} or type(response["error"]) is not str or not re.fullmatch(r"[A-Za-z0-9_:;/.-]{1,16384}", response["error"]):
+                    raise ValueError()
                 raise TargetWorkerError(response["error"])
             if set(response) != {"ok", "result"}:
                 raise ValueError()
             return response["result"]
-        except (KeyError, TypeError, json.JSONDecodeError, ValueError) as error:
+        except (KeyError, TypeError, json.JSONDecodeError, ValueError, RecursionError) as error:
             if isinstance(error, TargetWorkerError):
                 raise
             raise TargetWorkerError("WORKER_PROTOCOL") from None
@@ -62,14 +156,25 @@ class ProductionTarget(SyntheticTarget):
 
     def __init__(self):
         self.worker = TargetWorker()
-        self.generator = PROFILE["generator"] + "+sha256:" + bundle_digest()
+        self.bundle = bundle_digest()
+        if json.loads((ROOT / "profile.json").read_text()) != PROFILE:
+            raise TargetWorkerError("BUNDLE_CHANGED")
+        self.generator = PROFILE["generator"] + "+sha256:" + self.bundle
+
+    def _call(self, operation, payload):
+        if bundle_digest() != self.bundle:
+            raise TargetWorkerError("BUNDLE_CHANGED")
+        result = self.worker.call(operation, payload)
+        if bundle_digest() != self.bundle:
+            raise TargetWorkerError("BUNDLE_CHANGED")
+        return result
 
     def lower(self, realization, request):
         choices = {d.role: d.choice.read().get("choice") for d in (*realization.architecture, *realization.design)}
         payload = {"nodes": sorted((o.semantic.read() for o in realization.objects), key=lambda n: n["id"]),
                    "required": [], "decisions": choices}
         # Host approved decisions are checked by compiler_core before this port.
-        model = self.worker.call("lower", payload)
+        model = self._call("lower", payload)
         expected = payload["nodes"]
         if model.get("nodes") != expected or model.get("profile") != self.identity or model.get("version") != "0.1.0":
             raise TargetWorkerError("LOWER_PROVENANCE")
@@ -78,9 +183,9 @@ class ProductionTarget(SyntheticTarget):
 
     def plan(self, target, request, *, inventory=()):
         model = target.target_model.read()
-        rows = self.worker.call("plan", {"model": model, "inventory": [
+        rows = self._call("plan", {"model": model, "inventory": [
             {"path": item.path, "digest": item.digest, "owner": str(item.owner)} for item in inventory]})
-        self.worker.call("validate-plan", {"artifacts": rows})
+        self._call("validate-plan", {"artifacts": rows})
         by_id = {o.provenance.origins[0].id: o for o in target.objects}
         artifacts = []
         for row in rows:

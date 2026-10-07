@@ -35,12 +35,12 @@ class ArtifactStoreTests(unittest.TestCase):
             store.apply(ArtifactPlan((artifact(),), ()))
             prior = store.inventory()[0]
             before_metadata = (root / store.META).read_bytes()
-            original = Path.write_bytes
-            def fail_second(path, data):
-                if path.name == "second.txt":
+            original = FilesystemArtifactStore._write_file
+            def fail_second(self, directory, relative, data, mode=0o644):
+                if relative == "second.txt":
                     raise OSError("injected staging failure")
-                return original(path, data)
-            with patch.object(Path, "write_bytes", fail_second), self.assertRaises(OSError):
+                return original(self, directory, relative, data, mode)
+            with patch.object(FilesystemArtifactStore, "_write_file", fail_second), self.assertRaises(OSError):
                 store.apply(ArtifactPlan((artifact(text="new\n", prior=prior), artifact("second.txt")), ()))
             self.assertEqual("initial\n", (root / "backend/example.txt").read_text())
             self.assertFalse((root / "second.txt").exists())
@@ -207,6 +207,14 @@ class WorkerTests(unittest.TestCase):
         worker = TargetWorker()
         for required, decisions in [(["Money/999"], PROFILE["decisions"]), ([], {}), (["File/0.2.0"], PROFILE["decisions"])]:
             with self.assertRaises(TargetWorkerError): worker.call("negotiate", {"nodes": [], "required": required, "decisions": decisions})
+
+    def test_use_case_requires_explicit_behavior_bindings(self):
+        worker = TargetWorker()
+        capability = worker.call("manifest", {})["capabilities"]["UseCase/0.2.0"]
+        self.assertEqual("UNSUPPORTED", capability["status"])
+        self.assertIn("no inferred mutation semantics", capability["constraints"][0])
+        with self.assertRaisesRegex(TargetWorkerError, "UNSUPPORTED:UseCase/0.2.0"):
+            worker.call("negotiate", {"nodes": [], "required": ["UseCase/0.2.0"], "decisions": PROFILE["decisions"]})
 
     def test_complete_domains_explicitly_block_pending_capabilities(self):
         worker = TargetWorker()
