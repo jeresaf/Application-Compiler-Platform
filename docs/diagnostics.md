@@ -137,3 +137,7 @@ is independent of map traversal. Prior authoring/IR/change codes remain unchange
 The [compiler tests](../tooling/tests/test_compiler.py) exercise these paths.
 Port definitions for future phases do not imply new diagnostic codes or successful
 production implementations. No recovery AST is exposed as compilable output.
+
+## Authoring 0.3 dataflow diagnostics
+
+`ACP-FLOW_SHAPE` rejects unknown shapes/versions; `ACP-FLOW_REF` rejects absent/wrong-kind exact references; `ACP-FLOW_CONTEXT` rejects unavailable inputs, later steps or wrong output owners; `ACP-FLOW_TYPE` rejects type/presence mismatches; `ACP-FLOW_WRITE` rejects illicit identity, tenant, field and resource mutation; `ACP-FLOW_REQUIRED` rejects missing construction; `ACP-FLOW_BINDING` rejects duplicate/foreign destinations; `ACP-FLOW_UNUSED` rejects unused required invocation values; `ACP-FLOW_EVENT` rejects incomplete/conflicting emission declarations; `ACP-FLOW_CLASSIFICATION` rejects implicit classification downgrade; `ACP-FLOW_COMPENSATION` rejects missing or inappropriate compensation input mappings. Diagnostics identify semantic subjects and structural paths without echoing input values. Migration review uses `ACP-FLOW-REVIEW-REQUIRED` and never invents behavior.

@@ -1,0 +1,47 @@
+# ADR-0015 — Explicit operation effects and use-case dataflow
+
+Status: proposed for human review; executable reference contracts and fixtures are test evidence, not business approval.
+
+## Problem and authority
+
+The [complete inventory](../execution-dataflow-inventory.md) confirms that operation write envelopes and typed use-case signatures do not determine application effects. Authoring 0.2.0 and Canonical Application 0.1.0 remain valid historical bounded contracts. Their schemas, vectors, reports and journals are preserved. The abandoned realization-sidecar investigation is historical only.
+
+Authoritative semantic meaning includes operation inputs, resource mutations, use-case dataflow, step input/output bindings, output construction, event payload construction and every business-visible effect. Architecture may choose transaction implementation, JDBC/ORM mechanism, HTTP representation derived from semantics, persistence strategy, worker/runtime, generated classes/components, UI component mapping and deployment configuration. No target may invent missing application effects.
+
+## Versioned decision
+
+Introduce Authoring 0.3.0 and Canonical Application 0.2.0 with `semanticModelVersion: 0.3.0`, exact feature `acp.execution.0.3`, and the unchanged `acp-jcs-safe-v1` byte profile. Separate closed schemas reject unknown fields, kinds and versions. ChangeSet 0.2 explicitly selects Canonical 0.2; old ChangeSet 0.1 cannot operate on a new snapshot. Existing journal storage/digest/authority protocols can bind either exact snapshot without rewriting any entry. Version upgrades are explicit ChangeSets with independently approved plans.
+
+## Closed dataflow vocabulary
+
+Command `input` and `output` reference ValueObjects. `writeFields` narrows the existing aggregate/entity write envelope to exact mutable fields. Ordered `assignments` each bind the exact root resource, Field and pure typed expression. This bounded version supports assignment to existing root resources; it does not infer child creation, resource insertion/deletion, relation mutation or cross-root effects. Declared write envelopes remain permissions, not instructions to mutate every member.
+
+Query `input` is distinct from its resource, actor and existing global Parameters. Its Boolean `predicate` explicitly consumes invocation values. Each task Filter binds an exact compatible Query-input Field through `inputField`, so its control value has an explicit operation destination. Existing `projection` still constructs each query result record. Standalone pagination remains the historical query contract; a query used as an ExecutionStep selects one authorized resource by exact identity and yields one projected result or declared failure, not an arbitrary first row.
+
+Each ExecutionStep has an explicit resource-identity expression and `inputBindings` constructing its operation input. Command step results have the Command output type; Query step results have the Query result ValueObject type. `stepResult` references an exact prior step and exact output Field. It cannot reference itself, a later step, another use case or undeclared output. UseCase `outputBindings` constructs every required output member. Optional destination members may be deliberately omitted; nullable values remain explicit typed null. Required source inputs must have consumers, including resource selection. Duplicate destination bindings and unresolved revisions reject admission.
+
+Pure expressions add three value sources: `input` with explicit OPERATION or USE_CASE scope; `stepResult`; and `postField`. Existing literals, Parameters, field/actor references, presence/coalesce, collections and bounded binary operators retain their meanings. A single bounded `textContains` operator performs case-sensitive Unicode code-point substring containment for the declared query filters; it has two nonnullable String operands and a Boolean result. No locale-dependent matching, scripts or host-language snippets are admitted. New sources are accepted only at declared dataflow sites. An optional source requires existing explicit presence/coalesce handling; a required destination cannot consume possible absence.
+
+## State, ordering, failure and events
+
+Authorization, tenant boundary, resource identity and workflow guards are evaluated against pre-command state. Ordered assignments execute against a staged copy. Existing `field/resource` reads refer to pre-command state; `postField` reads the current staged state, including earlier assignments. Each assignment value is type checked. Invariants are checked after the complete ordered assignment list, before the transition commits. Workflow state changes then occur. Command output and event payload bindings observe that post-command state. No evaluation depends on map/source ordering.
+
+A command/transition emission requires typed payload mappings covering all required payload Fields. Emission identity is the Event semantic ID within one command execution. Shared command/transition declarations must have identical constructions and produce one event. Distinct commands may emit distinct occurrences of the same Event. This explicit successor rule resolves the historical duplicate-declaration ambiguity; it does not claim exactly-once external delivery.
+
+A transaction invocation is a maximal contiguous group of steps naming the same exact Transaction; reusing that declaration later starts another invocation. A command without a Transaction executes in its own atomic boundary. Step results within a boundary remain tentative; earlier committed results may feed later steps. A transaction group must resolve one aggregate-root instance; switching root identity fails before the next effect and rolls back the boundary. Effects, workflow changes and event intents in the failing boundary roll back together. Earlier committed boundaries are not silently undone. Use-case output is evaluated inside the final boundary after all checks, before that boundary commits, and becomes observable only on complete use-case success. Output-construction failure rolls back that final boundary and returns no successful output. Storage implementations must provide these barriers. The pure reference algebra demonstrates the single-boundary flows used in both fixtures, returns detached committed state/output/event intents, and has no external effects. It explicitly rejects multi-commit execution rather than pretending all accepted coordination is one distributed transaction; the semantic model retains the ADR-0008 coordination forms.
+
+ADR-0008 compensation remains an explicit business Command. `compensationBindings` must construct its input from invocation input/Parameters, not rolled-back tentative step results. STOP forbids compensation mappings. Compensating commands run after rollback, through authorization and their own atomic boundary; they are never generated inverse assignments. The reference interpreter demonstrates atomic STOP flows in the two domains and rejects compensation execution before effects with `COMPENSATION_EXECUTOR_REQUIRED`; compensation remains a valid, explicit model contract, not target support.
+
+## Security
+
+Identity and tenant Fields are immutable through assignment. Assignments cannot exceed the root, aggregate write envelope or exact field write set. Step resource selection has an exact Identifier entity type and still requires runtime authorization and same-tenant checks. Input values cannot grant privileges. Existing policy, permission, classification, export, retention and privacy obligations remain in force. Dataflow cannot implicitly lower classification; source/destination type identity remains exact. Trusted authorization is an injected host port, never an imported approval flag. Reference execution is not authentication/session or production privacy enforcement.
+
+## Migration, fixtures and approval
+
+Authoring 0.2 → 0.3 review enumerates missing execution sites and supplies no candidate when behavior decisions are required. For behavior-free input it may preserve content but clears approval and requires new exact-content admission. Names never select assignments. Existing exact IDs are preserved and changed meanings advance revisions; dependency reference revisions advance through the existing closure algorithm.
+
+The new reference fixtures explicitly propose: select the supplied root identity; update summary from operation text only; leave payment amount and case child entities unchanged; flow text through prior command results; return the last result; construct payment amount/case-title events from post-state; bind task query-filter text explicitly and scheduled resource/text literally. These are proposed test decisions authored in source and recorded as AI proposal provenance. They require human review; they are not inferred migrations or inherited human approvals. Synthetic allowlists prove approval binding only. No real business approval is claimed.
+
+Compiler support uses a separately identified structured frontend and feature set. Synthetic records preserve all explicit semantics and exact digest-bound approval. Historical frontend/vector behavior remains unchanged. A target requiring explicit effects must reject old incomplete snapshots; no Spring lowering work is part of this task.
+
+Phase 6 remains IN PROGRESS. Phase 7 is NOT STARTED. Historical Phase 1–5 status is not reopened.

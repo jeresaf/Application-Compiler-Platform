@@ -1,0 +1,20 @@
+{
+  "profile": "acp-jcs-safe-v1",
+  "status": "PROPOSED_TEST_SEMANTICS_REQUIRES_HUMAN_REVIEW",
+  "examples": [
+    {
+      "file": "payment-canonical.json",
+      "contentDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+      "sourceDigest": "sha256:43955a083fe3a919f58e81a26af998c2082879e90083a2edbb6bc20dd348d022",
+      "historicalDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+      "planDigest": "sha256:9f32a52a87ef1faa12daf0a24dbbbb6687d2c59e10cb07ea9f1b6035e5f448a0"
+    },
+    {
+      "file": "case-management-canonical.json",
+      "contentDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+      "sourceDigest": "sha256:943f3921587b5f6d4287ee3f6ecaad2eb0ac7476a4a617e75a7a858f1df30445",
+      "historicalDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+      "planDigest": "sha256:9d79387aa309a5e6b3d979edb2a796c93da2461f6d5d8efd42effca017eefb10"
+    }
+  ]
+}

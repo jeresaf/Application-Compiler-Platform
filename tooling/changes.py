@@ -19,6 +19,13 @@ WORKFLOW = {"State", "StateMachine", "Transition"}
 DATA = {"Field", "Entity", "TypeDefinition", "ValueObject", "Parameter", "Relation", "Aggregate"}
 
 
+def valid_change_shape(change):
+    if isinstance(change, dict) and change.get("changeVersion") == "0.2.0":
+        from execution_contract import change_schema
+        return Draft202012Validator(change_schema(), registry=Registry()).is_valid(change)
+    return SHAPES.is_valid(change)
+
+
 class ChangeError(ValueError):
     def __init__(self, code, message):
         super().__init__(message)
@@ -99,7 +106,7 @@ def rewrite(value, revisions, replacements):
 
 def normalize_content(content):
     """Structural witnesses only, as in Phase 2; actual admission is separate."""
-    authoring = {"modelVersion": "0.2.0", "applicationId": content["applicationId"], "snapshotId": "CHANGE-CANDIDATE",
+    authoring = {"modelVersion": content["semanticModelVersion"], "applicationId": content["applicationId"], "snapshotId": "CHANGE-CANDIDATE",
         "nodes": content["nodes"], "issues": content["issues"], "approvals": [
             {"subject": {"id": n["id"], "revision": n["revision"]}, "reviewer": "structural-only", "evidence": "not-authority"}
             for n in content["nodes"]]}
@@ -130,7 +137,7 @@ def request(plan):
 
 def genesis(source, author):
     receipt = migrate_authoring(source)
-    return seal({"planVersion": "0.1.0", "kind": "INITIALIZE", "author": author,
+    return seal({"planVersion": "0.2.0" if source.get("modelVersion") == "0.3.0" else "0.1.0", "kind": "INITIALIZE", "author": author,
         "candidate": receipt["candidate"], "sources": [{"source": copy.deepcopy(source), "receipt": receipt}],
         "requiredScopes": ["SEMANTIC", "SECURITY"], "change": None})
 
@@ -150,12 +157,14 @@ def semantic_diff(before, after):
 def prepare(base, change):
     try:
         canonical_bytes(change)
-        valid = SHAPES.is_valid(change)
+        valid = valid_change_shape(change)
     except (ValueError, RecursionError):
         valid = False
     if not valid:
         raise ChangeError("SHAPE", "ChangeSet violates the closed versioned input contract.")
     validate_snapshot(base)
+    if base["content"]["schemaVersion"] == "0.2.0" and change["changeVersion"] != "0.2.0":
+        raise ChangeError("VERSION", "Canonical 0.2 requires ChangeSet 0.2; downgrade is forbidden.")
     if change["base"]["digest"] != base["contentDigest"]:
         raise ChangeError("BASE", "ChangeSet does not bind the supplied base snapshot.")
     check_sources(change["sources"])
@@ -212,6 +221,8 @@ def prepare(base, change):
     nodes = {id: rewrite(n, revisions, replacements) for id, n in nodes.items()}
     content = {**copy.deepcopy(base["content"]), "nodes": list(nodes.values()),
                "issues": rewrite(base["content"]["issues"], revisions, replacements)}
+    if change["changeVersion"] == "0.2.0":
+        content.update(schemaVersion="0.2.0", semanticModelVersion="0.3.0", requiredFeatures=["acp.execution.0.3"])
     candidate = normalize_content(content)
     diff = semantic_diff(base, candidate)
     if not diff:
@@ -262,7 +273,7 @@ def prepare(base, change):
     provenance = [{"concept": {"id": id, "revision": n["revision"]}, "basis": n["basis"],
                    "origins": n["origins"], "changeId": change["id"], "snapshotDigest": candidate["contentDigest"]}
                   for id, n in sorted(actual.items()) if id in write_ids]
-    return seal({"planVersion": "0.1.0", "kind": "CHANGE", "author": change["author"], "change": copy.deepcopy(change),
+    return seal({"planVersion": "0.2.0" if change["changeVersion"] == "0.2.0" else "0.1.0", "kind": "CHANGE", "author": change["author"], "change": copy.deepcopy(change),
         "candidate": candidate, "readSet": read_set, "writeSet": sorted(write_ids), "diff": diff,
         "impact": {"semanticIds": impact, "external": "NOT_ANALYZED", "method": "exact-reference-closure-v1"},
         "risk": risk, "compatibility": compatible, "requiredScopes": sorted(scopes), "tombstones": tombstones,

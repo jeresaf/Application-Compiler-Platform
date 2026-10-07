@@ -41,3 +41,7 @@ Rollback of a specification creates a new history entry; it cannot undo deployed
 Plan expand → optional dual read/write → backfill → verify → switch → contract when compatibility requires it. Each phase has retry/idempotency behavior, ownership, data preconditions, active client constraints, and recovery evidence. Contracting schema before old clients retire blocks release. Financial/audit deletion and secret/security changes require dedicated approval scope. A backup claim is insufficient without restore verification.
 
 The [Phase 3 report](phase3-completion-report.md) records executable rename, stale-base/read-set, retry, security conflict, locked-decision, crash and evidence-staleness tests. Structural narrowing requires a reviewed migration plan; live observed-data analysis remains deferred and is not claimed by these tests.
+
+## ChangeSet 0.2 semantic-version successor
+
+See [ADR-0015](adr/0015-explicit-operation-effects-and-dataflow.md) and [compatibility](change-reference.md). ChangeSet 0.2 adds exact Canonical version selection and successor node shapes. Plan version 0.2 identifies these proposals; historical 0.1 plans, schemas and journal entries remain unchanged. Semantic diffs contain explicit command assignments and dataflow changes, not an implicit reinterpretation of prior snapshots.

@@ -32,6 +32,8 @@ jobs:
         run: python3.14 -m unittest discover -s tooling/tests -v
       - name: Independently verify canonical bytes and hashes
         run: node tooling/check_canonical_vectors.mjs
+      - name: Independently verify Canonical 0.2 execution vectors
+        run: node tooling/check_canonical_vectors.mjs test-corpus/execution-v03
   phase5-experiments:
     runs-on: ubuntu-24.04
     timeout-minutes: 40

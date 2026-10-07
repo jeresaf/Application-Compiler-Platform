@@ -210,3 +210,7 @@ uses the empty default sidecar and retains its existing diagnostic behavior.
 These reference extensions are not a production plugin ABI. Native worker
 protocols and Linux process controls belong to the engineering experiment, not
 Canonical IR or generated-target semantics.
+
+## Explicit Authoring 0.3 / Canonical 0.2 support
+
+The structured reference frontend `acp-structured-reference/0.2.0` accepts Authoring 0.3 with exact feature `acp.execution.0.3`. The historical frontend and feature remain exact and preserve their vectors. New requests also require `semantic.execution-dataflow/0.3`; an old target cannot silently accept and ignore the successor effects. All eight neutral stages retain explicit effects/dataflow and exact new approval; resumed canonical stages also check feature identity. The synthetic target emits semantic records, not executable target support. Old snapshots cannot acquire effects from target inference. Spring capability work remains paused pending review of [ADR-0015](adr/0015-explicit-operation-effects-and-dataflow.md).

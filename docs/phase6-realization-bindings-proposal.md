@@ -1,4 +1,6 @@
-# Phase 6 realization bindings — proposal, not approved behavior
+# Phase 6 realization bindings — historical investigation, rejected approach
+
+The subsequent semantic-evolution decision rejects this sidecar as an authority for business behavior. See [ADR-0015](adr/0015-explicit-operation-effects-and-dataflow.md). This document records the investigation only; its proposal must not be implemented.
 
 The approved Canonical snapshots describe use-case input/output types and ordered execution steps. They do not specify which operation receives an input member, which resource field it mutates, or how a use-case output is constructed. Query projections specify query output only. The target must not derive these behaviors from names or silently treat required inputs as unused.
 

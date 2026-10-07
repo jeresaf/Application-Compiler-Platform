@@ -27,6 +27,13 @@ class StructuredFrontend:
         return SemanticAST(parsed.representation, parsed.source_map)
 
 
+class StructuredFrontendV03(StructuredFrontend):
+    identity = "acp-structured-reference/0.2.0"
+
+    def ingest(self, source):
+        return Ingested(source.document, source.source_map, self.identity)
+
+
 class FixtureApproval:
     """Host-injected allowlist, bound to exact bytes/decisions/evidence. NOT production IAM."""
     identity = "acp-fixture-approval/0.1.0"
@@ -72,7 +79,7 @@ class ReferenceControl:
 class SyntheticTarget:
     identity = TARGET
     generator = GENERATOR
-    capabilities = ("reference.obligations/1", "reference.records/1")
+    capabilities = ("reference.obligations/1", "reference.records/1", "semantic.execution-dataflow/0.3")
 
     def lower(self, realization, request):
         objects = tuple(Derived(derived_id(o.provenance.origins, str(Stage.LOWER)), str(Stage.LOWER), o.semantic,
@@ -128,9 +135,15 @@ def fixture_context(model, *, cache=None, inventory=(), dependencies=(), depende
     request = CompilationRequest(content["applicationId"], snapshot.read()["contentDigest"],
         fingerprint(source, "source"), evidence, decisions,
         tuple(sorted(fingerprint(d, "decision") for d in decisions)), tuple(dependencies))
+    frontend = StructuredFrontend()
+    if model["modelVersion"] == "0.3.0":
+        from dataclasses import replace
+        frontend = StructuredFrontendV03()
+        request = replace(request, frontend=frontend.identity, features=("acp.execution.0.3",),
+                          required_capabilities=tuple(sorted((*request.required_capabilities, "semantic.execution-dataflow/0.3"))))
     authority = FixtureApproval((snapshot, *dependency_snapshots), decisions, evidence)
     return source, CompilationContext(request, MemorySnapshots((snapshot, *dependency_snapshots)),
-        StructuredFrontend(), authority, SyntheticTarget(), cache if cache is not None else MemoryCache(),
+        frontend, authority, SyntheticTarget(), cache if cache is not None else MemoryCache(),
         ReferenceControl(), tuple(inventory))
 
 

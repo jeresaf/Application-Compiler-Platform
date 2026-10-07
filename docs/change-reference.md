@@ -56,3 +56,7 @@ Append-only observations bind exact snapshot digest, subject revisions, artifact
 Lookup supports snapshot sequence/content digest, semantic ID/revision, journal history, source digest and transitive basis provenance. Requirement -> decision -> concept lineage retains exact historical revisions, origins, changes and snapshot digests. Full authoring inputs and Phase 2 migration receipts are retained and deterministically revalidated. Unknown provenance parents and inconsistent receipts fail.
 
 Generated-source ownership/maps, source intelligence, production migrations, production authority/storage, distributed repositories and signing infrastructure remain later work. Phase 4 is not started.
+
+## Explicit execution-version compatibility
+
+The [ChangeSet 0.2 schema](../contracts/change-0.2.schema.json) explicitly binds `canonicalVersion: 0.2.0`. It can upgrade a historical 0.1 snapshot only through explicit authored revisions/additions and a newly approved plan. Dependent exact references advance through the existing closure rule. History keeps old snapshots/journal entries intact and exact lookups can retrieve both versions. ChangeSet 0.1 cannot revise a Canonical 0.2 snapshot. Existing storage, CAS, stale-base and digest-bound authority protocols remain mandatory. [Successor tests](../tooling/tests/test_execution_v03.py) exercise both reference domains and rejection of inherited approval.

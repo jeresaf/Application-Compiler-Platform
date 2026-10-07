@@ -14,6 +14,8 @@ ACP maintains an authoritative application specification through semantic compil
 
 Authoring and canonical versions have separate roles:
 
+The [explicit execution/dataflow successor](docs/adr/0015-explicit-operation-effects-and-dataflow.md) introduces separately versioned Authoring 0.3.0, Canonical 0.2.0 and ChangeSet 0.2.0. Historical contracts remain preserved. Proposed reference behavior requires human review before Phase 6 target work resumes; see the [dedicated report](docs/execution-v03-completion-report.md).
+
 | Contract | Role |
 | --- | --- |
 | [ChangeSet 0.1](docs/change-reference.md) / [schema](contracts/change.schema.json) | Exact-base semantic operations, migration and provenance inputs; independent of canonical content. |
@@ -50,6 +52,7 @@ python3.14 -m venv .venv
 .venv/bin/python3.14 tooling/check_repository.py
 .venv/bin/python3.14 -m unittest discover -s tooling/tests -v
 node tooling/check_canonical_vectors.mjs
+node tooling/check_canonical_vectors.mjs test-corpus/execution-v03
 ```
 
 Node.js 24.21.0 independently checks canonical bytes/hashes as test tooling only. The full Python suite includes all earlier authoring/canonical checks, Phase 4 compiler-stage/determinism/cache/ownership tests and Phase 3 transactions, crash/concurrency, approval, history and two-domain evolution tests. [Corpus documentation](test-corpus/README.md) identifies the fixtures. Run `.venv/bin/python3.14 tooling/history_experiment.py` for synthetic storage-size and reopened-history observations.

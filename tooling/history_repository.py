@@ -137,9 +137,10 @@ class HistoryRepository:
             raise ChangeError("AUTHORITY", "Trusted authority is unavailable or did not return a valid exact-content approval.") from None
 
     def propose(self, change, authority, session):
+        from changes import valid_change_shape
         try:
             canonical_bytes(change)
-            if not SHAPES.is_valid(change) or change["id"] == "GENESIS":
+            if not valid_change_shape(change) or change["id"] == "GENESIS":
                 raise ValueError()
         except (ValueError, RecursionError):
             raise ChangeError("SHAPE", "ChangeSet violates its bounded input contract.") from None

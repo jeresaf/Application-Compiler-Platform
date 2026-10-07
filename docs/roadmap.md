@@ -41,3 +41,7 @@ Phase 4 uses typed contracts, a structured reference frontend and a synthetic te
 target. Its P-08/P-09 scope is compiler orchestration/capability/plan provenance only;
 production plugin ABI, real source regeneration and worker isolation remain later
 work. The separately authorized Phase 5 experiments are recorded in their [report](phase5-completion-report.md). Integration and source-analysis architectures are accepted; production core/frontend remain deferred. Phase 6 is IN PROGRESS and NOT CLOSED; Phase 7 is NOT STARTED.
+
+## Phase 6 semantic blocker resolution
+
+Before resuming target capability work, review the [explicit execution/dataflow successor](adr/0015-explicit-operation-effects-and-dataflow.md) and its [dedicated report](execution-v03-completion-report.md). Authoring 0.2 / Canonical 0.1 and historical Phase 1–5 closure remain preserved. Authoring 0.3 / Canonical 0.2 are separately versioned contracts with proposed reference behavior requiring human review. Phase 6 remains IN PROGRESS; Phase 7 remains NOT STARTED. This task adds no Spring/Vue/PostgreSQL lowering.

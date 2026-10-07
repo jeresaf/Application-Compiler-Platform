@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-08",
+  "scope": "bounded semantic execution/dataflow successor; no target implementation",
+  "status": "REFERENCE_VALIDATION_GREEN_REQUIRES_HUMAN_SEMANTIC_REVIEW",
+  "environment": {
+    "host": "Linux",
+    "python": "3.14.4",
+    "node": "24.21.0"
+  },
+  "checks": {
+    "completeRegression": {
+      "result": "PASS",
+      "tests": 154,
+      "seconds": 570.884,
+      "note": "Full run followed by focused validation of final snapshot-detachment and aggregate-instance safeguards."
+    },
+    "finalReferenceBoundaries": {
+      "result": "PASS",
+      "tests": 4,
+      "seconds": 14.822
+    },
+    "historicalAssetPreservation": {
+      "result": "PASS",
+      "files": 25
+    },
+    "historicalNodeVectors": {
+      "result": "PASS",
+      "positive": 9,
+      "negative": 13,
+      "snapshots": 2
+    },
+    "successorNodeVectors": {
+      "result": "PASS",
+      "positive": 9,
+      "negative": 13,
+      "snapshots": 2
+    },
+    "schemaMetaValidation": "PASS",
+    "storedUpgradePlanReproduction": "PASS_BOTH_DOMAINS",
+    "dependencyConsistency": "PASS",
+    "repositoryContracts": "PASS"
+  },
+  "hostedCI": {
+    "result": "NOT_RUN",
+    "configuredHost": "ubuntu-24.04",
+    "python": "3.14.7",
+    "node": "24.21.0"
+  },
+  "approval": "PROPOSED_AI_AUTHORED_FIXTURE_DECISIONS_REQUIRE_HUMAN_REVIEW",
+  "historicalPhases1Through5": "CLOSED_AND_GREEN_PRESERVED",
+  "phase6": "IN_PROGRESS_TARGET_WORK_PAUSED",
+  "phase7": "NOT_STARTED"
+}

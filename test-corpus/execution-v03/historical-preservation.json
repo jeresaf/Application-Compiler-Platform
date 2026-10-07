@@ -1,0 +1,31 @@
+{
+  "checkpoint": "fab36ed1148cfb36e8f85cc76afa7f9715bcee08",
+  "bytePolicy": "LF-normalized checkout bytes; semantic JSON values unchanged",
+  "files": {
+    "contracts/canonical.schema.json": "4ed467457c8944eb60b095984753a7079b76dccaf886485b22f9313b8a538536",
+    "contracts/change.schema.json": "6d7dcdd917a6c4dbb1572b3a710f52f2f7b2f0da078b97b540a79cf8ea84da1d",
+    "contracts/kernel.schema.json": "e7875d4847151b656c0568e6940bc1e3671806268209b3d1442f494239f95edf",
+    "contracts/phase1.schema.json": "76486fd2ac375ad8c403a3f282ea755a49d0ce83512d625e3745a28c3d57b1d7",
+    "docs/phase1-completion-report.md": "8b556dda6d1102bdcfc87fba1e9f2fd632cde67a4ba60a5e7296b09d0e0f9a1f",
+    "docs/phase2-completion-report.md": "362b36f86facd65b0e7b16f5d8a7ecb9ee52f6e4800053af7455c641b316fd00",
+    "docs/phase3-completion-report.md": "05f3f82fd950711cd85d884d505fd666b969ff7b4492046c0aa6e833fbd3f6ac",
+    "docs/phase4-completion-report.md": "c3f581d5f55568f06cba5bea18f2af369ab6c4fd2f49ee61739bef4f5e2a3a61",
+    "docs/phase5-completion-report.md": "a05c6135477cd04e5b279de32aca4adbc10b1ea9ef3981a88591d3cfb362f5d3",
+    "test-corpus/canonical/README.md": "588cc526d763a09db41873df468921e15bb06e708d9bf6c8cf5cd00bc71cf2df",
+    "test-corpus/canonical/byte-vectors.json": "27ff7cddb2057f9a8477bb903b95100d529ab1db0e7d958132e2edf3a4769f43",
+    "test-corpus/canonical/case-management.json": "b99f36518a47ce5c0c93dd856dde301df0683f778e5a8de180cb55410153558f",
+    "test-corpus/canonical/manifest.json": "8d0326366ecaa138c7ba075a85ed9ea3a8f595240f931841c94c550a16578fc0",
+    "test-corpus/canonical/payment.json": "b319b005b8dafbcebd1d7c6c58a2a116fc029a4efd7c42df0bc9f9ea0b8f0204",
+    "test-corpus/compiler/README.md": "202c278ced3adcd3a28d21b57456b4c33979bd227ecab168efeaae8feb7f3f3c",
+    "test-corpus/compiler/vectors.json": "cefb29e90028f078bc21318abecaf5231ac6b431634367b7c6e332d622f274fc",
+    "test-corpus/phase1/case-management.json": "e07fff4055d92ae1eac5ac97ae0f44380a7c4072aeb713583d086d3b20d40b78",
+    "test-corpus/phase1/cases.json": "afb60b26b58e515e82aa7f30680c46295a36a3e667ca2c3e1de63766630cc661",
+    "test-corpus/phase1/payment.json": "1ba41e50106e3e46ae49eeafd2e3fbcb323c67cc8b4ec276dd2254ee8303f3f2",
+    "test-corpus/change/evolution.json": "5e1a0497db5bea605e1e084b84b7e4bf46b6e43879b7f21781de86a34c989307",
+    "test-corpus/change/storage-observations.json": "3f6452a5cecd72fc0be738d9f84072ab7603d687cf4d0c43e410dcbca1d44bd3",
+    "test-corpus/change/README.md": "c77873f6ed901cf45fee1dd300c2c43aefedfdbad316c90452e849ae80015e1a",
+    "test-corpus/semantic/approved.json": "b0e855ca66efbf7bcb277174fcc7c63631a7e7ebfbb6aafad4f26dd206e6d0dd",
+    "test-corpus/semantic/reference.json": "faa7a67ae1f23faa7a99dd05abd9c30bbae261b7ea4c0ae5e85cbe8cac8a3e8c",
+    "test-corpus/semantic/cases.json": "2996991ecc709a19a6704c956ec497c5742a0a682074f841f65d1c909a82ebf4"
+  }
+}

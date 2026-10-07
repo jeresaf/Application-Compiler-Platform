@@ -52,3 +52,7 @@ suite automatically discovers `test_compiler.py`; the independent Node canonical
 checker remains unchanged. No production application/target/parser is generated.
 
 Phase 6 adds worker, materialization, provenance and migration-planner boundary tests in `tooling/tests/test_phase6_foundations.py` and `tooling/tests/test_target_migrations.py`. Both complete domains currently fail production-target negotiation on explicit unsupported capabilities. Unnegotiated source-template builds are not acceptance vectors; the [Phase 6 status report](../docs/phase6-completion-report.md) records this limitation.
+
+## Versioned execution/dataflow successor
+
+[Execution 0.3 fixtures](execution-v03/README.md) preserve historical corpora and separately define proposed operation effects/dataflow, Canonical 0.2 vectors, explicit upgrade ChangeSets/plans and historical-preservation digests. They are synthetic test semantics requiring human review, not inferred migrations or real approval evidence.

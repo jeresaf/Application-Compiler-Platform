@@ -148,9 +148,11 @@ def _manifest(ctx):
     if ctx.frontend is None or ctx.target is None:
         fail("PORT")
     if (r.version != VERSION or r.compiler != COMPILER or r.pipeline != PIPELINE or
-            r.features != ("acp.phase1.0.2",) or ctx.frontend.identity != r.frontend or ctx.approval.identity != r.authority or
+            r.features != (("acp.execution.0.3",) if r.frontend == "acp-structured-reference/0.2.0" else ("acp.phase1.0.2",)) or ctx.frontend.identity != r.frontend or ctx.approval.identity != r.authority or
             ctx.target.identity != r.target or ctx.target.generator != r.generator):
         fail("VERSION")
+    if r.features == ("acp.execution.0.3",) and "semantic.execution-dataflow/0.3" not in r.required_capabilities:
+        fail("CAPABILITY")
     if (type(r.start) is not Stage or type(r.end) is not Stage or
             STAGES.index(r.start) > STAGES.index(r.end) or r.repository_root != "."):
         fail("INPUT")
@@ -223,6 +225,8 @@ def _dependencies(ctx, budget):
 
 
 def _approve(snapshot, ctx):
+    if tuple(snapshot["content"]["requiredFeatures"]) != ctx.request.features:
+        fail("VERSION")
     _port(ctx, "approval")
     try:
         admitted = admit(snapshot, lambda query: ctx.approval.approve_content(query, ctx.request.approval_evidence))
@@ -380,8 +384,9 @@ def _perform(stage, value, ctx, budget):
         if fingerprint(value, "source") != r.source_digest:
             fail("INPUT")
         model = value.document.read()
-        structured = r.frontend == "acp-structured-reference/0.1.0"
-        if type(model) is not dict or (structured and model.get("modelVersion") != "0.2.0"):
+        structured = r.frontend in {"acp-structured-reference/0.1.0", "acp-structured-reference/0.2.0"}
+        semantic_version = "0.3.0" if r.frontend == "acp-structured-reference/0.2.0" else "0.2.0"
+        if type(model) is not dict or (structured and model.get("modelVersion") != semantic_version):
             fail("VERSION")
         if len(model.get("nodes", [])) > r.resources.nodes:
             fail("RESOURCE")
@@ -410,7 +415,7 @@ def _perform(stage, value, ctx, budget):
         if type(ast) is not SemanticAST or type(ast.model) is not Document or type(ast.source_map) is not Document or ast.version != VERSION:
             fail("INPUT")
         model = ast.model.read()
-        if type(model) is not dict or model.get("modelVersion") != "0.2.0":
+        if type(model) is not dict or model.get("modelVersion") != ("0.3.0" if r.frontend == "acp-structured-reference/0.2.0" else "0.2.0"):
             fail("VERSION")
         locations = ast.source_map.read()
         identities = {n.get("id") for n in model.get("nodes", []) if isinstance(n, dict)}
