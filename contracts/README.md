@@ -18,3 +18,8 @@ Shape validation alone is insufficient. [validate.py](../tooling/validate.py) se
 The [payment](../test-corpus/phase1/payment.json) and [case-management](../test-corpus/phase1/case-management.json) fixtures use the current model. The [historical corpus](../test-corpus/semantic/cases.json) remains a separate regression suite. [Coverage](../docs/coverage.md) states the enforcement limits.
 
 The [canonical contract](../docs/canonical-ir.md) and ADR-0011 select canonical serialization/hashing. [canonical_contract.py](../tooling/canonical_contract.py) generates the separate schema from pinned Phase 1 types; tests enforce reproducibility. [change_contract.py](../tooling/change_contract.py) similarly builds the independent Phase 3 schema. [ADR-0012](../docs/adr/0012-change-history.md) defines reference history and authority ports; production storage/identity, target layout, plugin ABI and evidence trust remain unselected. Material changes require explicit version reasoning and tests. Framework, parser, ORM, database, cloud, MCP and production-language annotations remain outside semantic records.
+
+Phase 4 compiler execution uses the versioned immutable typed records in
+[compiler_contracts.py](../tooling/compiler_contracts.py), with executable boundary
+checks described in [compiler-core.md](../docs/compiler-core.md). They do not alter
+these semantic/canonical/history schemas or define a production plugin wire ABI.

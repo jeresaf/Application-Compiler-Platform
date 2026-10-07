@@ -17,6 +17,8 @@ ACCEPTED records an engineering choice within its stated scope. PROPOSED records
 | [0011](0011-canonical-interchange.md) | ACCEPTED, bounded Phase 2 | 2026-09-28 | P-07 canonical interchange, normalization, digests, compatibility and candidate migration |
 | [0012](0012-change-history.md) | ACCEPTED, bounded Phase 3 | 2026-09-28 | P-06 immutable snapshots and atomic semantic journal; semantic-history portion of P-09 |
 
+| [0013](0013-compiler-core.md) | ACCEPTED, bounded Phase 4 | 2026-10-07 | Immutable compiler execution, ports, provenance/obligations, incremental cache and synthetic artifact planning |
+
 ## Resolution without rewriting history
 
 ADR-0005's P-01/P-02/P-03/P-04/P-05 rows describe the investigations as recorded. Their accepted replacements are ADR-0006/0007/0008/0009/0010 respectively, including explicit bounded exclusions. They are no longer open foundational Phase 1 questions. The remaining register stays PROPOSED.
@@ -27,4 +29,4 @@ P-07's bounded interchange/normalization questions are resolved by ADR-0011; see
 
 ADR-0012 now implements bounded P-06 and semantic-history P-09. The remainder of P-09 concerns generated-source ownership, maps and regeneration and remains open. Its final acceptance evidence is recorded in the [Phase 3 report](../phase3-completion-report.md).
 
-**No production language, runtime or parser has been selected.** Python, JSON, SQLite, HMAC, the independent Node.js byte checker and CI action runtimes are reference/development choices only. ADR-0004 remains PROPOSED because its comparative experiments have not run. Phase 4 is not started.
+**No production language, runtime or parser has been selected.** Python, JSON, SQLite, HMAC, the independent Node.js byte checker and CI action runtimes are reference/development choices only. ADR-0004 remains PROPOSED because its comparative experiments have not run. Phase 4 reference compiler-core work is recorded in ADR-0013; Phase 5 is NOT STARTED.

@@ -8,7 +8,7 @@ ACP maintains an authoritative application specification through semantic compil
 
 **Phase 2 is closed and green: Canonical Application IR 0.1.0.** The [canonical contract](docs/canonical-ir.md), [ADR-0011](docs/adr/0011-canonical-interchange.md) and [Phase 2 report](docs/phase2-completion-report.md) define typed content, canonical bytes/hashes, compatibility and migration/reapproval. Its schemas and byte/hash vectors are unchanged by Phase 3.
 
-**Phase 3 is closed and green: bounded Change and Provenance 0.1.0.** Immutable snapshots, atomic journal, proposals, dependency conflicts, authenticated approval, provenance and recovery are executable reference contracts. All 63 tests and independent canonical checks pass on Linux; the completion report preserves earlier Ubuntu and Windows validation evidence. See [ADR-0012](docs/adr/0012-change-history.md), the [reference protocol](docs/change-reference.md) and [completion report](docs/phase3-completion-report.md). SQLite and HMAC are replaceable reference adapters. No production language/runtime, parser, storage engine, authority, target or plugin ABI is selected; [ADR-0004](docs/adr/0004-technology-evaluation.md) remains PROPOSED. **Phase 4 is not started.**
+**Phase 3 is closed and green: bounded Change and Provenance 0.1.0.** Immutable snapshots, atomic journal, proposals, dependency conflicts, authenticated approval, provenance and recovery are executable reference contracts. All 63 tests and independent canonical checks pass on Linux; the completion report preserves earlier Ubuntu and Windows validation evidence. See [ADR-0012](docs/adr/0012-change-history.md), the [reference protocol](docs/change-reference.md) and [completion report](docs/phase3-completion-report.md). SQLite and HMAC are replaceable reference adapters. No production language/runtime, parser, storage engine, authority, target or plugin ABI is selected; [ADR-0004](docs/adr/0004-technology-evaluation.md) remains PROPOSED. **Phase 4 compiler core is implemented; final acceptance is in progress.** See the [execution contract](docs/compiler-core.md), [ADR-0013](docs/adr/0013-compiler-core.md) and [completion report](docs/phase4-completion-report.md). **Phase 5 is NOT STARTED.**
 
 Authoring and canonical versions have separate roles:
 
@@ -50,7 +50,7 @@ python3.14 -m venv .venv
 node tooling/check_canonical_vectors.mjs
 ```
 
-Node.js 24.21.0 independently checks canonical bytes/hashes as test tooling only. The full Python suite includes all earlier authoring/canonical checks and Phase 3 transactions, crash/concurrency, approval, history and two-domain evolution tests. [Corpus documentation](test-corpus/README.md) identifies the fixtures. Run `.venv/bin/python3.14 tooling/history_experiment.py` for synthetic storage-size and reopened-history observations.
+Node.js 24.21.0 independently checks canonical bytes/hashes as test tooling only. The full Python suite includes all earlier authoring/canonical checks, Phase 4 compiler-stage/determinism/cache/ownership tests and Phase 3 transactions, crash/concurrency, approval, history and two-domain evolution tests. [Corpus documentation](test-corpus/README.md) identifies the fixtures. Run `.venv/bin/python3.14 tooling/history_experiment.py` for synthetic storage-size and reopened-history observations.
 
 Optional individual model checks:
 
@@ -64,3 +64,17 @@ Optional individual model checks:
 Validation is offline after dependency installation. CLI exits: 0 valid for the selected authoring profile, 1 validation errors, 2 invalid/unreadable input. The legacy CLI envelope label `scope: kernel` is retained for both versions; `modelVersion` selects the contract. The `compile` profile checks necessary approval closure only: it does not normalize IR, authenticate approval or certify production readiness. Fixtures and attestations are synthetic.
 
 Validate a canonical candidate with `.venv/bin/python3.14 tooling/canonical_ir.py validate test-corpus/canonical/payment.json`. Separate `normalize` and `migrate` operations require compile-eligible authoring 0.2.0 input and produce candidates only; see the [canonical commands](docs/canonical-ir.md#reproduction-and-diagnostics).
+
+## Reference compiler pipeline
+
+The Phase 4 structured reference frontend and synthetic test target produce an
+immutable artifact plan with outstanding obligations; they do not generate or
+write application source. No AI, production parser or target framework is required.
+
+```bash
+.venv/bin/python3.14 tooling/compiler_reference.py test-corpus/phase1/payment.json
+.venv/bin/python3.14 tooling/compiler_reference.py test-corpus/phase1/case-management.json
+```
+
+These commands use explicitly synthetic fixture approvals. See the
+[compiler corpus](test-corpus/compiler/README.md) for vectors and test boundaries.

@@ -84,3 +84,17 @@ Material semantic changes require updated contracts, a design decision when appr
 | Evolution | Six accepted stages for payment and case-management; required migration and irreversible review | Migration obligations are reviewed descriptions; no actual application data is migrated |
 
 Canonical schemas, canonical serialization/hash implementation and Phase 2 byte/hash vectors are unchanged. SQLite and Python are replaceable reference tooling. Phase 4 is not started.
+
+## Phase 4 reference compiler coverage
+
+[Execution contract](compiler-core.md), [compiler corpus](../test-corpus/compiler/README.md)
+and [completion report](phase4-completion-report.md) define the bounded eight-stage
+compiler API, pure projections, declared ports, provenance/obligations, exact
+authority/version/capability failures, conservative invalidation and verified cache,
+cooperative resource policy, deterministic audits and ownership-safe artifact plans.
+Both full domains compile to synthetic records; separate-process vectors exercise
+ambient-state independence. Contracts, reference adapters and synthetic target are
+distinct from future production implementations. No canonical vectors, prior
+semantic contracts or Phase 1–3 reports are changed. No production framework, parser,
+plugin ABI, filesystem generator, source analyzer or MCP implementation is selected.
+Phase 5 is NOT STARTED.

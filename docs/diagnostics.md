@@ -103,3 +103,37 @@ Later adapters may add source spans and richer locations only through tested con
 | NOT_FOUND / STORAGE | Missing record / reference store failure or unsupported format |
 
 Tests assert expected codes and unchanged accepted head for rejections. Integrity checking is bounded: malformed privileged storage corruption may also fail strict JSON/canonical parsing; unanchored coherent rewrites cannot be detected by hashes alone. See [reference protocol](change-reference.md).
+
+## Phase 4 compiler diagnostics
+
+`execute` emits a separate `ACP-COMPILER-*` family in immutable Failure results.
+Each envelope has code, ERROR severity, stage, exact subjects, optional safe source
+location, related subjects, explanation, remediation and provenance. No adapter
+exception text or semantic payload is echoed. A boundary emits one diagnostic, with
+sorted subject revisions capped by the positive diagnostic limit. Stable ordering
+is independent of map traversal. Prior authoring/IR/change codes remain unchanged.
+
+| Code | Executable condition | Remediation |
+| --- | --- | --- |
+| ACP-COMPILER-INPUT | Stage input or manifest is invalid. | Supply the exact immutable stage contract and declared inputs. |
+| ACP-COMPILER-VERSION | Stage, compiler or manifest version is unsupported. | Use the exact registered versions and features. |
+| ACP-COMPILER-DEPENDENCY | An exact dependency is missing, invalid or cyclic. | Supply validated exact snapshots and an acyclic dependency manifest. |
+| ACP-COMPILER-ANALYSIS | Semantic analysis failed. | Repair authoring references, types, blocking issues or policies. |
+| ACP-COMPILER-SNAPSHOT | Canonical snapshot does not match the declared compilation base. | Compile against the exact validated canonical digest. |
+| ACP-COMPILER-APPROVAL | Exact-content approval is unavailable or rejected. | Supply independently approved exact-content evidence through the authority port. |
+| ACP-COMPILER-PROJECTION | Projection does not preserve the canonical concepts. | Retain exact concepts, revisions and projection partition. |
+| ACP-COMPILER-DECISION | Required approved architecture/design decisions are missing or invalid. | Bind independently approved decisions to exact canonical origins. |
+| ACP-COMPILER-CAPABILITY | The target does not support every required capability. | Use an exact target manifest supporting every required capability. |
+| ACP-COMPILER-OBLIGATION | A required obligation was dropped, changed or incorrectly discharged. | Carry every obligation outstanding until an authorized evidence stage discharges it. |
+| ACP-COMPILER-NONDETERMINISM | Repeated deterministic execution disagreed. | Remove ambient inputs from the stage and pin all producer inputs. |
+| ACP-COMPILER-CACHE | A deterministic cache entry failed integrity verification. | Discard the damaged cache through its adapter and recompute. |
+| ACP-COMPILER-PROVENANCE | Derived identity or provenance is invalid or collides. | Use exact canonical origins, producer versions and an explicit role/discriminator. |
+| ACP-COMPILER-ARTIFACT | Artifact path, digest or plan is unsafe or collides. | Use unique normalized relative paths and digest-bound content. |
+| ACP-COMPILER-OWNERSHIP | Artifact ownership or expected content conflicts with the plan. | Preserve human-owned content and review ownership adoption separately. |
+| ACP-COMPILER-CANCELLED | Compilation was cancelled. | Submit a new uncancelled compilation request. |
+| ACP-COMPILER-RESOURCE | A declared execution budget was exhausted. | Reduce input/work or explicitly revise the execution policy. |
+| ACP-COMPILER-PORT | A declared port failed its reference contract. | Repair the adapter; no partial output is compilable. |
+
+The [compiler tests](../tooling/tests/test_compiler.py) exercise these paths.
+Port definitions for future phases do not imply new diagnostic codes or successful
+production implementations. No recovery AST is exposed as compilable output.

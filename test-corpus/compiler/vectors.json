@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0",
+  "target": "acp-synthetic-test-target/0.1.0",
+  "domains": {
+    "payment.json": {
+      "artifactPlanDigest": "sha256:3bc5ad385fe6234559ce3cdbce9355025ca77902c346ea7b9bdfa8cb042ea0cf",
+      "obligations": 40,
+      "artifacts": 101
+    },
+    "case-management.json": {
+      "artifactPlanDigest": "sha256:1703792678e315bb1fbd981ea84a1245fe5a640570933257e284194c4b52ceea",
+      "obligations": 44,
+      "artifacts": 149
+    }
+  }
+}

@@ -1,10 +1,10 @@
 # IR and compiler architecture contracts
 
-Status: normative stage boundaries. Basis: charter §§2, 8–11, 15, 20–24, 27, 30, 36–37. Phase 2's [canonical contract](canonical-ir.md) defines serialization and a reference harness; the production compiler pipeline remains unimplemented.
+Status: normative stage boundaries. Basis: charter §§2, 8–11, 15, 20–24, 27, 30, 36–37. Phase 2's [canonical contract](canonical-ir.md) defines serialization and a reference harness; Phase 4 implements the bounded reference pipeline described in [compiler-core.md](compiler-core.md); production adapters remain unselected.
 
 ## Stages and invariants
 
-Every pass accepts immutable versioned inputs, an explicit capability/configuration manifest, and cancellation/resource limits. It returns either `Success(output, provenance, obligations, diagnostics)` or `Failure(diagnostics)`; failed output cannot feed production stages. Recovery ASTs may be returned separately for editor use, never as successful Canonical IR. Passes do not mutate inputs or resolve undeclared network/environment state.
+Every pass accepts immutable versioned inputs, an explicit capability/configuration manifest, and cancellation/resource limits. It returns either `Success(output, outputDigest, provenance, obligations, diagnostics, metrics)` or `Failure(diagnostics, provenance, metrics)`; failed output cannot feed production stages. Recovery ASTs may be returned separately for editor use, never as successful Canonical IR. Passes do not mutate inputs or resolve undeclared network/environment state.
 
 | Stage | Input → output | Preconditions → postconditions / failure |
 | --- | --- | --- |
@@ -74,3 +74,12 @@ Source Model records `{sourceDigest, analyzerVersion, symbols, references, infer
 Ownership manifest covers paths or nonoverlapping digest-bound regions, with one owner class: COMPILER_OWNED, FRAMEWORK_OWNED, AI_MANAGED, HUMAN_OWNED. Missing/overlapping ownership blocks writing. Human-owned regions are preserved; compiler-owned edits require a reviewed adoption or regeneration plan. Extension hooks must describe callable contracts and verification needs. No claim of arbitrary legacy round-trip regeneration.
 
 Provenance should be sidecar mappings bound to artifact digests (P-09), with optional target-supported markers. Renames, formatting, or manual edits invalidate location-based mappings until reanalyzed. Context bundles carry dependency closure, snapshot/completeness markers, relevant constraints/locked decisions, and omissions; token budgets must not silently truncate necessary security or change impact.
+
+## Phase 4 executable binding
+
+[ADR-0013](adr/0013-compiler-core.md) binds the logical stage/port contracts to an
+immutable executable reference API. [Compiler core 0.1.0](compiler-core.md) specifies
+request identities, exact inputs, source-map sidecars, stage diagnostics, projection
+cache invalidation, provenance/obligations, cooperative resource policy and safe
+artifact plans. The synthetic target and in-memory store do not select a production
+plugin ABI, target framework, worker, source analyzer or filesystem implementation.

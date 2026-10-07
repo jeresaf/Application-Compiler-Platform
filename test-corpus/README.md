@@ -43,3 +43,10 @@ Use the installation instructions in the [root README](../README.md), then run:
 ```
 
 This is the same repository-check/full-suite sequence used by the Ubuntu and Windows CI matrix. Future target, migration, integration, drift and generated application suites must supply their own evidence when those stages become executable. No fixture reviewer is a real approval authority.
+
+## Phase 4 compiler corpus
+
+[Compiler fixtures and vectors](compiler/README.md) exercise both full domains
+through immutable compiler stages and a synthetic test target. The complete Python
+suite automatically discovers `test_compiler.py`; the independent Node canonical
+checker remains unchanged. No production application/target/parser is generated.
