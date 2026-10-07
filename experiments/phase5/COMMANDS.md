@@ -156,3 +156,46 @@ its native parser children currently start cold on each request. Native editor
 builder/resource updates and source-edit adapter timings are labeled separately.
 Full 10k/100k ACP semantic validation remains NOT_SUPPORTED under unchanged bounds.
 All `/tmp` logs are ephemeral. No Phase 6 work is included.
+
+## Phase 5C — new hard-gate evidence
+
+The Phase 5B commands above describe the approved historical pass. Phase 5C uses
+true persistent native runtimes; it does not relabel the earlier cold CLI timings.
+Build the existing pinned grammars and dependencies first, then run:
+
+```bash
+python3.14 experiments/phase5/native_build.py
+python3.14 experiments/phase5/run5c.py
+python3.14 experiments/phase5/fault5c.py
+python3.14 experiments/phase5/measure5c.py
+rustup toolchain install 1.89.0 --profile minimal
+cargo +1.90.0 fetch --locked --manifest-path experiments/phase5/core-runtime/Cargo.toml
+python3.14 experiments/phase5/maintenance5c.py
+python3.14 experiments/phase5/check5c.py
+```
+
+Use the activated project `.venv`; dependencies remain isolated there. For local
+Rust installed by the experiment, set `RUSTUP_HOME` and `CARGO_HOME` to the ignored
+`.cache/rustup` and `.cache/cargo` paths. `maintenance5c.py` also discovers these.
+For upgrade reproduction provide `ACP5C_JAVA_UPGRADE_HOME` (an alternate JDK 25)
+and `ACP5C_NODE_PREVIOUS` (Node 22.20.0). The default laptop paths are recorded in
+raw evidence. CI sets the alternate JDK explicitly, downloads Node 22.20.0 from
+its official distribution, verifies its official SHA256 before extraction, and
+restores the exact ANTLR runtime 3.2 source artifact for license notice evidence.
+See the workflow for exact URLs and setup order. These tools do not change
+production pins or system defaults. Missing upgrade tools remain NOT_RUN and
+fail the evidence checker; they are never silently passed.
+
+At most two native workers run concurrently. Each worker has 1 MiB framing,
+90-second probe timeout and 768 MiB managed heap; observed RSS must stay below
+1 GiB. Direct JVM/Node calls use actual parser functions. The host owns authority
+and approval. Actual frontend output also passes through normalization into
+representative Java/TypeScript/Rust graph cores. These probes are not full
+production compiler ports. Core fault transport and earlier partial-failure
+traversal correction are new evidence; historical results remain preserved.
+
+Results go to `results/phase5c/`; hosted measurements are uploaded separately as
+`phase5c-ubuntu-evidence`. `check5c.py` validates evidence, limits and honest
+selection dispositions. Passing scoped gates does not fabricate missing editor
+or ergonomics scores. ADR-0004 accepts worker and source-analysis architecture;
+production core/frontend choices remain DEFERRED. Phase 6 is NOT STARTED.

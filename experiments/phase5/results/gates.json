@@ -1,18 +1,18 @@
 {
-  "phase5": "EXPLICITLY_BLOCKED_ON_EVIDENCE",
+  "phase5": "CLOSED_AND_GREEN",
   "phase6": "NOT_STARTED",
-  "evidencePass": "Phase 5B",
+  "evidencePass": "Phase 5C",
   "selections": {
     "productionCore": null,
     "textualFrontend": null,
-    "integrationModel": null,
-    "sourceAnalysis": null
+    "integrationModel": "Versioned disposable native workers; approval and authority stay in the host",
+    "sourceAnalysis": "Syntax adapter + target-native semantic analyzer + explicit completeness/confidence"
   },
   "decisionDispositions": {
     "productionCore": "DEFERRED",
     "textualFrontend": "DEFERRED",
-    "integrationModel": "DEFERRED",
-    "sourceAnalysis": "DEFERRED"
+    "integrationModel": "ACCEPTED",
+    "sourceAnalysis": "ACCEPTED"
   },
   "weightedScores": null,
   "softWeights": {
@@ -34,45 +34,35 @@
       "scope": "Experimental declaration grammar and accepted Phase 4 bounds; no final DSL selection."
     },
     "stage-isolation": {
-      "status": "UNKNOWN",
-      "demonstrated": "Exact-version real frontend workers, immutable Document firewall, host approval authority, restart/retry and bounded protocol fault guards; expanded four-runtime representative wire equality.",
-      "missing": [
-        "Persistent native parser workers: current persistent Python supervisor starts a cold native parser on each request.",
-        "Comparable in-process embedding and native-worker isolation/cancellation for complete core/frontend pairings.",
-        "Representative core wire does not yet expose the frontend supervisor fault algebra for malformed/oversize core requests."
-      ],
+      "status": "PASS",
+      "scope": "Bounded Phase 5 experiment contracts; production candidate eligibility excludes rejected Xtext. This is not complete production compiler/target implementation.",
+      "demonstrated": "True persistent ANTLR/Langium/Xtext native runtimes, PID/sequence checks, active cancellation, real crash/restart/queued retry, native malformed/oversize/stale transport faults, complete host pipelines and independently implemented core fault slices. Direct JVM/Node calls and real frontend-to-core serialization are measured. Approval authority remains outside workers.",
+      "missing": [],
       "evidence": [
-        "test_worker5b.py",
-        "results/phase5b/integration.json",
-        "results/phase5b/wire.json"
+        "test_phase5c.py",
+        "results/phase5c/integration.json",
+        "results/phase5c/core-faults.json"
       ]
     },
     "diagnostic-correctness": {
-      "status": "UNKNOWN",
-      "demonstrated": "Identical deterministic safe subject/primary/related diagnostic projections for semantic negatives, including permission/scope mismatch; all-parser module rejection; token-aware cross-file label edits preserve IDs and fresh locations.",
-      "missing": [
-        "Exact recovery-token spans: incomplete/malformed syntax uses a safe file-start fallback.",
-        "Module error metadata and related locations are not yet transported through the compiler Failure diagnostic algebra.",
-        "Reference-token locations and complete policy-conflict combinations beyond tested negatives."
-      ],
-      "observedFailure": "Langium default declaration-name rename still changes stable ID; preserved first-pass failure. Custom ACP label rename passes.",
+      "status": "PASS",
+      "scope": "Bounded Phase 5 experiment contracts; production candidate eligibility excludes rejected Xtext. This is not complete production compiler/target implementation.",
+      "demonstrated": "Actual immutable compiler Failure transports exact recoverable syntax/reference/module/policy tokens, subject/related IDs, related locations, stable codes and fixed safe remediation. EOF is a real parser token; genuinely unrecoverable locations are explicitly classified. All three frontends share deterministic projections.",
+      "missing": [],
       "evidence": [
-        "results/phase5b/diagnostics.json",
-        "test_phase5b.py",
-        "results/langium-editor.json"
+        "results/phase5c/diagnostics.json",
+        "test_phase5c.py",
+        "../../tooling/tests/test_frontend_diagnostics.py"
       ]
     },
     "determinism": {
-      "status": "UNKNOWN",
-      "demonstrated": "Separate cwd/tmp/seed/locale/environment processes, unordered declarations, meaningful ordered-step changes, concurrent Langium frontend requests, worker restart/retry, concurrent Java/TS/Rust core work.",
-      "missing": [
-        "Actual concurrent native ANTLR/Xtext execution remains NOT_RUN under the preregistered one-heavy-worker laptop budget.",
-        "Whole-pipeline candidate concurrency and native persistent-worker scheduling permutations."
-      ],
+      "status": "PASS",
+      "scope": "Bounded Phase 5 experiment contracts; production candidate eligibility excludes rejected Xtext. This is not complete production compiler/target implementation.",
+      "demonstrated": "Bounded concurrent independent native parser and complete compiler requests for every frontend; same/different domains, warm requests, queued restart, real cancellation races/crash/retry, environment/cwd/tmp/locale/seed permutations. Ordered semantic changes alter canonical digests and later original input restores the original digest.",
+      "missing": [],
       "evidence": [
-        "results/phase5b/determinism.json",
-        "results/phase5b/wire.json",
-        "core-runtime/core.ts"
+        "results/phase5c/native-tests.json",
+        "results/phase5c/integration.json"
       ]
     },
     "source-intelligence-viability": {
@@ -84,19 +74,14 @@
       ]
     },
     "evolution-maintenance-viability": {
-      "status": "UNKNOWN",
-      "demonstrated": "Clean ANTLR 4.13.1\u21924.13.2, Langium 4.3.0\u21924.4.0 and Xtext 2.43.0\u21922.44.0 builds/corpus/generated diffs and rollback; isolated locks; legacy fixture rejection; prior TS 5.9.2\u21925.9.3 comparison; transitive npm/JVM/Rust inventory.",
-      "missing": [
-        "Patched Xtext ANTLR3 generator exact source/build provenance remains unavailable.",
-        "Two JVM artifacts lack declared/inherited POM license metadata: aopalliance 1.0 and antlr-runtime 3.2; artifact-level notice/redistribution review remains incomplete.",
-        "Clean offline Maven restoration without the prepared cache is not demonstrated; exact external URLs/digests are inventoried.",
-        "Java, Node and Rust toolchain upgrades NOT_RUN; current clean pinned builds and TS patch upgrade are separate evidence."
-      ],
+      "status": "PASS",
+      "scope": "Bounded Phase 5 experiment contracts; production candidate eligibility excludes rejected Xtext. This is not complete production compiler/target implementation.",
+      "demonstrated": "Surviving ANTLR and Langium use the approved controlled grammar upgrades and isolated locks. Java/Node/Rust toolchain fault/canonical corpora pass controlled comparisons with unchanged pins and rollback. All 21 locked Rust crate license records restored. Exact ANTLR3 source notice and upstream AOP Alliance declaration resolve the absent POM metadata. Xtext is formally rejected on critical patched generator source/build provenance; it cannot satisfy this gate.",
+      "missing": [],
       "evidence": [
         "results/phase5b/evolution.json",
-        "results/phase5b/inventory.json",
-        "results/maintenance.json",
-        "evolution-locks/versions.json"
+        "results/phase5c/maintenance.json",
+        "results/phase5c/antlr-runtime-3.2-LICENSE.txt"
       ]
     }
   },
@@ -105,8 +90,33 @@
     "Incremental ACP semantic validation is NOT_SUPPORTED; bounded full revalidation is measured. Native document-builder/resource updates are separate."
   ],
   "coreLimitations": [
-    "Representative graph/wire/provenance/obligation slice is not a complete compiler port.",
-    "Same-process versus persistent native-worker colocation comparison remains incomplete."
+    "Java/TypeScript/Rust remain viable on identical representative happy/fault slices, not complete candidate implementations of all eight Phase 4 stages.",
+    "Same-process comparisons call real native parsers inside JVM/Node. Python cannot directly embed these engines; no synthetic embedding is scored.",
+    "A full production deployment still needs a selected frontend/core implementation and its release packaging. Architecture acceptance does not claim those ports exist."
   ],
-  "rule": "Only PASS satisfies a required hard gate. UNKNOWN/NOT_RUN/FAIL never earn weighted scores. Decisions remain independent. Raw metrics are not normalized rankings."
+  "rule": "Only PASS satisfies required hard gates. Xtext is excluded by a material provenance failure. Missing soft data forbids an aggregate weighted score. Four independent decisions may accept architectures while deferring runtime/framework commitment; Phase 6 requires separate authorization.",
+  "candidateDispositions": {
+    "antlr": {
+      "version": "4.13.2",
+      "hardGates": "PASS_AT_EXPERIMENT_SCOPE",
+      "productionSelection": "DEFERRED"
+    },
+    "langium": {
+      "version": "4.4.0",
+      "hardGates": "PASS_AT_EXPERIMENT_SCOPE",
+      "productionSelection": "DEFERRED"
+    },
+    "xtext": {
+      "version": "2.44.0",
+      "hardGates": "FAIL_EVOLUTION_MAINTENANCE",
+      "productionSelection": "REJECTED",
+      "reason": "Exact patched ANTLR3 generator SHA256 is pinned, but its source revision, patch set and reproducible build are not verified.",
+      "otherEvidence": "Persistent worker, diagnostic and concurrency tests retained; speed did not cause rejection."
+    }
+  },
+  "softScoringDisposition": {
+    "status": "NOT_COMPUTABLE",
+    "reason": "Comparable production editor and team ergonomics measurements remain incomplete. Missing values are not zeroes or favorable scores. Raw performance/memory/serialization data is retained; no runtime/frontend winner is inferred from speed. All hard gates pass for surviving frontends at declared experimental scope; independent final runtime/frontend decisions intentionally remain DEFERRED.",
+    "weightsUnchanged": true
+  }
 }

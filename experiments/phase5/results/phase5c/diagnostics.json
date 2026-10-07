@@ -1,0 +1,1612 @@
+{
+  "antlr": {
+    "ambiguous-import": {
+      "diagnostics": [
+        {
+          "code": "ACP-MODULE-AMBIGUOUS_IMPORT",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-B",
+              "revision": 1
+            }
+          ],
+          "location": "b.acp#L5C52",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-A",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-C",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:adc4357397a4402d2d67e2645a8e60a76b8507c6b85d31c20581d50c45c61ff6",
+              "sha256:e150dce35129d06f3db3e00ef250002e66614991f0ce7802bde59011a4b94bca"
+            ]
+          },
+          "related_locations": [
+            "a.acp#L3C15",
+            "c.acp#L3C15"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:adc4357397a4402d2d67e2645a8e60a76b8507c6b85d31c20581d50c45c61ff6",
+          "sha256:e150dce35129d06f3db3e00ef250002e66614991f0ce7802bde59011a4b94bca"
+        ]
+      },
+      "metrics": {
+        "work": 89,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "malformed": {
+      "diagnostics": [
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L1C13",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:0953b19ca0e936b99460fd24f16becf9111c9791161a69ac35f6ca88a64b3c4c",
+              "sha256:ff3d192de602af83fb6630cdc7785b2c945987dde58c056d8dde634c3abff060"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        },
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L1C14",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:0953b19ca0e936b99460fd24f16becf9111c9791161a69ac35f6ca88a64b3c4c",
+              "sha256:ff3d192de602af83fb6630cdc7785b2c945987dde58c056d8dde634c3abff060"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        },
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L1C15",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:0953b19ca0e936b99460fd24f16becf9111c9791161a69ac35f6ca88a64b3c4c",
+              "sha256:ff3d192de602af83fb6630cdc7785b2c945987dde58c056d8dde634c3abff060"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        },
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L1C16",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:0953b19ca0e936b99460fd24f16becf9111c9791161a69ac35f6ca88a64b3c4c",
+              "sha256:ff3d192de602af83fb6630cdc7785b2c945987dde58c056d8dde634c3abff060"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "END_OF_INPUT"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:0953b19ca0e936b99460fd24f16becf9111c9791161a69ac35f6ca88a64b3c4c",
+          "sha256:ff3d192de602af83fb6630cdc7785b2c945987dde58c056d8dde634c3abff060"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "incomplete": {
+      "diagnostics": [
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "RECOVERY-TASK",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L102C396",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:57893f54b0bcd5c8f4f6be605fd50fa0a38cea920cf45f6fa9163e9f37e348bf",
+              "sha256:f1fda1f66f5b0066b78c8a5de46e307972b5dab6c8eb6dfbf6603c48bc7365f4"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "END_OF_INPUT"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:57893f54b0bcd5c8f4f6be605fd50fa0a38cea920cf45f6fa9163e9f37e348bf",
+          "sha256:f1fda1f66f5b0066b78c8a5de46e307972b5dab6c8eb6dfbf6603c48bc7365f4"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "missing-reference": {
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L18C257",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:f179c3ac6c35e7ec50b50b7d76193749ac197d38c9fc9f07616c2cfb620649fc",
+              "sha256:f72e22331c24d9af2ed4b260da25d29febf530f1c0ee3d4784038397d5857b9e"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:f179c3ac6c35e7ec50b50b7d76193749ac197d38c9fc9f07616c2cfb620649fc",
+          "sha256:f72e22331c24d9af2ed4b260da25d29febf530f1c0ee3d4784038397d5857b9e"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "stale-reference": {
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L18C273",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:41fedba3cc717775f4c564ef19cdba418af9f90d3f87f78e83c33d3dd649f2cd",
+              "sha256:5d8da10b3c8b607dde32743d32428fa89ebb109b1b48cdb54b574c6127dc86b7"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L15C8"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:41fedba3cc717775f4c564ef19cdba418af9f90d3f87f78e83c33d3dd649f2cd",
+          "sha256:5d8da10b3c8b607dde32743d32428fa89ebb109b1b48cdb54b574c6127dc86b7"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "ambiguous-transition": {
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-DUPLICATE",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L103C363",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-RECORD",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:03828c69a0dbf1576f8e58d5eb561172cee19f74caf5d699ac031f7ea43c6606",
+              "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L21C9",
+            "domain.acp#L29C12"
+          ],
+          "location_confidence": "TOKEN"
+        },
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-RECORD",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L29C360",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-DUPLICATE",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:03828c69a0dbf1576f8e58d5eb561172cee19f74caf5d699ac031f7ea43c6606",
+              "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L103C12",
+            "domain.acp#L21C9"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:03828c69a0dbf1576f8e58d5eb561172cee19f74caf5d699ac031f7ea43c6606",
+          "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5"
+        ]
+      },
+      "metrics": {
+        "work": 8490,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "missing-module": {
+      "diagnostics": [
+        {
+          "code": "ACP-MODULE-MISSING_MODULE",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L2C8",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:7dbe8531e75708b6de3f65864f5467996e5a498271c09155758fc97f949a7e03",
+              "sha256:a0d72c5cfe91cf029f30f3c688c32ab26fe945322f485557c50d55f4cf83b0f0"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:7dbe8531e75708b6de3f65864f5467996e5a498271c09155758fc97f949a7e03",
+          "sha256:a0d72c5cfe91cf029f30f3c688c32ab26fe945322f485557c50d55f4cf83b0f0"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "permission-conflict": {
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "POL-TENANT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L25C247",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ACT-USER",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-PAYMENT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-MEMBER-TENANT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-PAYMENT-TENANT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "PERM-QUERY-TASKS",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ROLE-OPERATOR",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "SCOPE-ENT-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:82c7b7bf269212f38e0495440cb7d313f3f9a9ab0cc6fa9c7fc3fdb792a3c691",
+              "sha256:d3e0ecfc79ca82d36b2ad373f7ac0e998da8b2aeb1d0862da68319c1686c1559"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L14C7",
+            "domain.acp#L15C8",
+            "domain.acp#L17C7",
+            "domain.acp#L21C9",
+            "domain.acp#L23C7",
+            "domain.acp#L24C6",
+            "domain.acp#L2C13",
+            "domain.acp#L57C7",
+            "domain.acp#L62C12"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:82c7b7bf269212f38e0495440cb7d313f3f9a9ab0cc6fa9c7fc3fdb792a3c691",
+          "sha256:d3e0ecfc79ca82d36b2ad373f7ac0e998da8b2aeb1d0862da68319c1686c1559"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    }
+  },
+  "langium": {
+    "ambiguous-import": {
+      "diagnostics": [
+        {
+          "code": "ACP-MODULE-AMBIGUOUS_IMPORT",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-B",
+              "revision": 1
+            }
+          ],
+          "location": "b.acp#L5C52",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-A",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-C",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:34bf9a02fc93f28a4c8e51712625a1939bdb246fd2b8befe9f8a88db7b3e3159",
+              "sha256:39387da9a7c0a515221831e149a23503b57c90c7c116be2c1df14a59f22a2114"
+            ]
+          },
+          "related_locations": [
+            "a.acp#L3C15",
+            "c.acp#L3C15"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:34bf9a02fc93f28a4c8e51712625a1939bdb246fd2b8befe9f8a88db7b3e3159",
+          "sha256:39387da9a7c0a515221831e149a23503b57c90c7c116be2c1df14a59f22a2114"
+        ]
+      },
+      "metrics": {
+        "work": 89,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "malformed": {
+      "diagnostics": [
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L1C13",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:22428e77aa9eba1bf419e09ba9003799ebbb167eea27a1ba78e0c97b44dbaba8",
+              "sha256:2364dfe4f3a361105b96f38410aa1f7fbae6ff92c0d4395cdfdac91781321c32"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        },
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L1C16",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:22428e77aa9eba1bf419e09ba9003799ebbb167eea27a1ba78e0c97b44dbaba8",
+              "sha256:2364dfe4f3a361105b96f38410aa1f7fbae6ff92c0d4395cdfdac91781321c32"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "END_OF_INPUT"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:22428e77aa9eba1bf419e09ba9003799ebbb167eea27a1ba78e0c97b44dbaba8",
+          "sha256:2364dfe4f3a361105b96f38410aa1f7fbae6ff92c0d4395cdfdac91781321c32"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "incomplete": {
+      "diagnostics": [
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "RECOVERY-TASK",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L102C396",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:19426ca872ea24c76c1db3e895734b1f1b29221e3df8130567a9797431caf2a5",
+              "sha256:ee3d14292e3c3c16d7d0251a7c2d675fddc48752b540b34459e2bc44215ba531"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "END_OF_INPUT"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:19426ca872ea24c76c1db3e895734b1f1b29221e3df8130567a9797431caf2a5",
+          "sha256:ee3d14292e3c3c16d7d0251a7c2d675fddc48752b540b34459e2bc44215ba531"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "missing-reference": {
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L18C257",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:edc92b6e7739a583e1b36ab6aa6486e8edd969051df12b29f63704f449a83902",
+              "sha256:f179c3ac6c35e7ec50b50b7d76193749ac197d38c9fc9f07616c2cfb620649fc"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:edc92b6e7739a583e1b36ab6aa6486e8edd969051df12b29f63704f449a83902",
+          "sha256:f179c3ac6c35e7ec50b50b7d76193749ac197d38c9fc9f07616c2cfb620649fc"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "stale-reference": {
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L18C273",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:5d8da10b3c8b607dde32743d32428fa89ebb109b1b48cdb54b574c6127dc86b7",
+              "sha256:eb6bfb9ac58626ce3c9e2ced75c3e800f8dafa504358df1e30de0e5d72124d5d"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L15C8"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:5d8da10b3c8b607dde32743d32428fa89ebb109b1b48cdb54b574c6127dc86b7",
+          "sha256:eb6bfb9ac58626ce3c9e2ced75c3e800f8dafa504358df1e30de0e5d72124d5d"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "ambiguous-transition": {
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-DUPLICATE",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L103C363",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-RECORD",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5",
+              "sha256:57c8dab159776449b65c79f5a9f5df15c7f369540454bf472d1c13d5aa91dad5"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L21C9",
+            "domain.acp#L29C12"
+          ],
+          "location_confidence": "TOKEN"
+        },
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-RECORD",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L29C360",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-DUPLICATE",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5",
+              "sha256:57c8dab159776449b65c79f5a9f5df15c7f369540454bf472d1c13d5aa91dad5"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L103C12",
+            "domain.acp#L21C9"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5",
+          "sha256:57c8dab159776449b65c79f5a9f5df15c7f369540454bf472d1c13d5aa91dad5"
+        ]
+      },
+      "metrics": {
+        "work": 8490,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "missing-module": {
+      "diagnostics": [
+        {
+          "code": "ACP-MODULE-MISSING_MODULE",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L2C8",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:6ecf380fec762756fc0af9c4be818b8f8490efa0ebbaf273fd1ffe2c56c9e287",
+              "sha256:c67ec292d29b624a3812a8ec8803eb066ca1d186522c9297da486f21f93d8524"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:6ecf380fec762756fc0af9c4be818b8f8490efa0ebbaf273fd1ffe2c56c9e287",
+          "sha256:c67ec292d29b624a3812a8ec8803eb066ca1d186522c9297da486f21f93d8524"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "permission-conflict": {
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "POL-TENANT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L25C247",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ACT-USER",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-PAYMENT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-MEMBER-TENANT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-PAYMENT-TENANT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "PERM-QUERY-TASKS",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ROLE-OPERATOR",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "SCOPE-ENT-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:718c3897fa0977c1087d4085b44f42a0dc6f013287f014be85dc1f31d18755f1",
+              "sha256:d3e0ecfc79ca82d36b2ad373f7ac0e998da8b2aeb1d0862da68319c1686c1559"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L14C7",
+            "domain.acp#L15C8",
+            "domain.acp#L17C7",
+            "domain.acp#L21C9",
+            "domain.acp#L23C7",
+            "domain.acp#L24C6",
+            "domain.acp#L2C13",
+            "domain.acp#L57C7",
+            "domain.acp#L62C12"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:718c3897fa0977c1087d4085b44f42a0dc6f013287f014be85dc1f31d18755f1",
+          "sha256:d3e0ecfc79ca82d36b2ad373f7ac0e998da8b2aeb1d0862da68319c1686c1559"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    }
+  },
+  "xtext": {
+    "ambiguous-import": {
+      "diagnostics": [
+        {
+          "code": "ACP-MODULE-AMBIGUOUS_IMPORT",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-B",
+              "revision": 1
+            }
+          ],
+          "location": "b.acp#L5C52",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-A",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-C",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:e300f5b61d44b06a904a93198e2d05d2a9f1b59606e5ca01d9b9928a613baf14",
+              "sha256:fb841aecff8ecaeac1ffd504b5e0ff526d87c87ff2b357fd0d07ea5aeb82665c"
+            ]
+          },
+          "related_locations": [
+            "a.acp#L3C15",
+            "c.acp#L3C15"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:e300f5b61d44b06a904a93198e2d05d2a9f1b59606e5ca01d9b9928a613baf14",
+          "sha256:fb841aecff8ecaeac1ffd504b5e0ff526d87c87ff2b357fd0d07ea5aeb82665c"
+        ]
+      },
+      "metrics": {
+        "work": 89,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "malformed": {
+      "diagnostics": [
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L1C13",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:4291c9596cfe19e61da69ae32c3ece351e1d4312113ea574f0997d72bab72329",
+              "sha256:b642c9a4644adcafafb1bc9b75ea5742cc26445cf1c3ecea207b5ceec4853197"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        },
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L1C15",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:4291c9596cfe19e61da69ae32c3ece351e1d4312113ea574f0997d72bab72329",
+              "sha256:b642c9a4644adcafafb1bc9b75ea5742cc26445cf1c3ecea207b5ceec4853197"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:4291c9596cfe19e61da69ae32c3ece351e1d4312113ea574f0997d72bab72329",
+          "sha256:b642c9a4644adcafafb1bc9b75ea5742cc26445cf1c3ecea207b5ceec4853197"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "incomplete": {
+      "diagnostics": [
+        {
+          "code": "ACP-FRONTEND-SYNTAX",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "RECOVERY-TASK",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L102C395",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:a51b3f4c85bc284e95e4d95a710f87ac78dbc1f3f0b19eb5ce36a2a34edeee3d",
+              "sha256:cf41fe45d2cd9e07d7e2db58605202cd0d60845fea8ac98fce16713c6a0c17bf"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:a51b3f4c85bc284e95e4d95a710f87ac78dbc1f3f0b19eb5ce36a2a34edeee3d",
+          "sha256:cf41fe45d2cd9e07d7e2db58605202cd0d60845fea8ac98fce16713c6a0c17bf"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "missing-reference": {
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L18C257",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:6674233e2421b7d5551c7c4339bd6415a9b9a9ddc006e4dd4cda35494a4ef1ce",
+              "sha256:f179c3ac6c35e7ec50b50b7d76193749ac197d38c9fc9f07616c2cfb620649fc"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:6674233e2421b7d5551c7c4339bd6415a9b9a9ddc006e4dd4cda35494a4ef1ce",
+          "sha256:f179c3ac6c35e7ec50b50b7d76193749ac197d38c9fc9f07616c2cfb620649fc"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "stale-reference": {
+      "diagnostics": [
+        {
+          "code": "ACP-REF",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L18C273",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:5d8da10b3c8b607dde32743d32428fa89ebb109b1b48cdb54b574c6127dc86b7",
+              "sha256:9460c19eb314132db80d2ae38db2fa1f0f655d4d0464c466861a63158377517f"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L15C8"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:5d8da10b3c8b607dde32743d32428fa89ebb109b1b48cdb54b574c6127dc86b7",
+          "sha256:9460c19eb314132db80d2ae38db2fa1f0f655d4d0464c466861a63158377517f"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "ambiguous-transition": {
+      "diagnostics": [
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-DUPLICATE",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L103C363",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-RECORD",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5",
+              "sha256:43901e78d83ec6f3b19163c625a42dabf750628ca479ba99a827cd5113292ede"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L21C9",
+            "domain.acp#L29C12"
+          ],
+          "location_confidence": "TOKEN"
+        },
+        {
+          "code": "ACP-WORKFLOW",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-RECORD",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L29C360",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "TRANS-DUPLICATE",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5",
+              "sha256:43901e78d83ec6f3b19163c625a42dabf750628ca479ba99a827cd5113292ede"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L103C12",
+            "domain.acp#L21C9"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:36cc23f59e3112405959a46c592440da17914fe36ae66d9a9df840a34a55efe5",
+          "sha256:43901e78d83ec6f3b19163c625a42dabf750628ca479ba99a827cd5113292ede"
+        ]
+      },
+      "metrics": {
+        "work": 8490,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "missing-module": {
+      "diagnostics": [
+        {
+          "code": "ACP-MODULE-MISSING_MODULE",
+          "severity": "ERROR",
+          "stage": "Ingest",
+          "subjects": [],
+          "location": "domain.acp#L2C8",
+          "related": [],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Ingest",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:4a5e8193b67aed4b3917eb867816e2ac39cbea6dd1fac137e2510e3899780926",
+              "sha256:6d3c8279eb9e72d50b382e063152c833457610feb1327490affe8a78da1744f6"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Ingest",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:4a5e8193b67aed4b3917eb867816e2ac39cbea6dd1fac137e2510e3899780926",
+          "sha256:6d3c8279eb9e72d50b382e063152c833457610feb1327490affe8a78da1744f6"
+        ]
+      },
+      "metrics": {
+        "work": 83,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    },
+    "permission-conflict": {
+      "diagnostics": [
+        {
+          "code": "ACP-SECURITY",
+          "severity": "ERROR",
+          "stage": "Analyze",
+          "subjects": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "POL-TENANT",
+              "revision": 1
+            }
+          ],
+          "location": "domain.acp#L25C247",
+          "related": [
+            {
+              "application": "APP-FIXTURE",
+              "id": "ACT-USER",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "CMD-RECORD",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ENT-PAYMENT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-MEMBER-TENANT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "FLD-PAYMENT-TENANT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "PERM-QUERY-TASKS",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "ROLE-OPERATOR",
+              "revision": 1
+            },
+            {
+              "application": "APP-FIXTURE",
+              "id": "SCOPE-ENT-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "explanation": "Source validation failed.",
+          "remediation": "Repair the identified source tokens and exact references; retain stable semantic IDs and review policy changes.",
+          "provenance": {
+            "origins": [],
+            "stage": "Analyze",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:5a0b551af1e0e9492130a021a290969c07212c1afeff91139ccc7892b922a941",
+              "sha256:d3e0ecfc79ca82d36b2ad373f7ac0e998da8b2aeb1d0862da68319c1686c1559"
+            ]
+          },
+          "related_locations": [
+            "domain.acp#L14C7",
+            "domain.acp#L15C8",
+            "domain.acp#L17C7",
+            "domain.acp#L21C9",
+            "domain.acp#L23C7",
+            "domain.acp#L24C6",
+            "domain.acp#L2C13",
+            "domain.acp#L57C7",
+            "domain.acp#L62C12"
+          ],
+          "location_confidence": "TOKEN"
+        }
+      ],
+      "provenance": {
+        "origins": [],
+        "stage": "Analyze",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "inputs": [
+          "sha256:5a0b551af1e0e9492130a021a290969c07212c1afeff91139ccc7892b922a941",
+          "sha256:d3e0ecfc79ca82d36b2ad373f7ac0e998da8b2aeb1d0862da68319c1686c1559"
+        ]
+      },
+      "metrics": {
+        "work": 8327,
+        "cache_hits": 0,
+        "cache_misses": 0
+      }
+    }
+  }
+}

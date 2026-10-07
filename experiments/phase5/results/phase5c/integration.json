@@ -1,0 +1,1175 @@
+{
+  "scope": "Linux engineering measurements; 3 cold starts, 5 warm requests per start. Two native workers maximum. Same-process probes call actual native parse functions; Python host cannot embed JVM/Node directly. No synthetic cross-runtime embedding.",
+  "candidates": {
+    "antlr": {
+      "persistent": [
+        {
+          "coldStartupAndFirstRequestMs": 479.3799890030641,
+          "warm": [
+            {
+              "elapsedMs": 196.37803300429368,
+              "nativeMicroseconds": 74739,
+              "requestBytes": 57827,
+              "responseBytes": 65767,
+              "hostEncodeMicroseconds": 968.4030010248534,
+              "rssBytes": 86724608,
+              "nativeHeapBytes": 15152496
+            },
+            {
+              "elapsedMs": 169.19006199896103,
+              "nativeMicroseconds": 47653,
+              "requestBytes": 57827,
+              "responseBytes": 65767,
+              "hostEncodeMicroseconds": 1327.6280005811714,
+              "rssBytes": 98320384,
+              "nativeHeapBytes": 32377288
+            },
+            {
+              "elapsedMs": 147.7490709949052,
+              "nativeMicroseconds": 49831,
+              "requestBytes": 57827,
+              "responseBytes": 65767,
+              "hostEncodeMicroseconds": 1058.560999808833,
+              "rssBytes": 129744896,
+              "nativeHeapBytes": 49152464
+            },
+            {
+              "elapsedMs": 178.91381999652367,
+              "nativeMicroseconds": 59828,
+              "requestBytes": 57827,
+              "responseBytes": 65767,
+              "hostEncodeMicroseconds": 1433.7699976749718,
+              "rssBytes": 155594752,
+              "nativeHeapBytes": 65931720
+            },
+            {
+              "elapsedMs": 163.16688399820123,
+              "nativeMicroseconds": 62184,
+              "requestBytes": 57827,
+              "responseBytes": 65766,
+              "hostEncodeMicroseconds": 1401.9059963175096,
+              "rssBytes": 169332736,
+              "nativeHeapBytes": 8965400
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 1927.275889000157,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        },
+        {
+          "coldStartupAndFirstRequestMs": 460.7155470002908,
+          "warm": [
+            {
+              "elapsedMs": 214.20747000229312,
+              "nativeMicroseconds": 76199,
+              "requestBytes": 57827,
+              "responseBytes": 65768,
+              "hostEncodeMicroseconds": 904.6320046763867,
+              "rssBytes": 86802432,
+              "nativeHeapBytes": 15275608
+            },
+            {
+              "elapsedMs": 206.167980999453,
+              "nativeMicroseconds": 48426,
+              "requestBytes": 57827,
+              "responseBytes": 65768,
+              "hostEncodeMicroseconds": 1438.9659991138615,
+              "rssBytes": 100765696,
+              "nativeHeapBytes": 32478480
+            },
+            {
+              "elapsedMs": 179.1190430012648,
+              "nativeMicroseconds": 72842,
+              "requestBytes": 57827,
+              "responseBytes": 65768,
+              "hostEncodeMicroseconds": 1452.5529986713082,
+              "rssBytes": 126701568,
+              "nativeHeapBytes": 49257736
+            },
+            {
+              "elapsedMs": 141.3370299997041,
+              "nativeMicroseconds": 46380,
+              "requestBytes": 57827,
+              "responseBytes": 65768,
+              "hostEncodeMicroseconds": 1559.9489997839555,
+              "rssBytes": 148754432,
+              "nativeHeapBytes": 66034952
+            },
+            {
+              "elapsedMs": 177.0565609986079,
+              "nativeMicroseconds": 76780,
+              "requestBytes": 57827,
+              "responseBytes": 65767,
+              "hostEncodeMicroseconds": 1489.0550010022707,
+              "rssBytes": 167542784,
+              "nativeHeapBytes": 6012632
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 1959.3386729975464,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        },
+        {
+          "coldStartupAndFirstRequestMs": 528.3627639946644,
+          "warm": [
+            {
+              "elapsedMs": 245.73701700137462,
+              "nativeMicroseconds": 77904,
+              "requestBytes": 57827,
+              "responseBytes": 65768,
+              "hostEncodeMicroseconds": 985.1700015133247,
+              "rssBytes": 86786048,
+              "nativeHeapBytes": 15159752
+            },
+            {
+              "elapsedMs": 179.74780299846316,
+              "nativeMicroseconds": 64554,
+              "requestBytes": 57827,
+              "responseBytes": 65768,
+              "hostEncodeMicroseconds": 980.1339983823709,
+              "rssBytes": 98078720,
+              "nativeHeapBytes": 32382632
+            },
+            {
+              "elapsedMs": 246.7088710036478,
+              "nativeMicroseconds": 107572,
+              "requestBytes": 57827,
+              "responseBytes": 65769,
+              "hostEncodeMicroseconds": 1492.0879984856583,
+              "rssBytes": 130867200,
+              "nativeHeapBytes": 49157808
+            },
+            {
+              "elapsedMs": 155.00252199854003,
+              "nativeMicroseconds": 49632,
+              "requestBytes": 57827,
+              "responseBytes": 65768,
+              "hostEncodeMicroseconds": 971.7959983390756,
+              "rssBytes": 148836352,
+              "nativeHeapBytes": 65937064
+            },
+            {
+              "elapsedMs": 130.17703300283756,
+              "nativeMicroseconds": 39576,
+              "requestBytes": 57827,
+              "responseBytes": 65767,
+              "hostEncodeMicroseconds": 1637.3039979953319,
+              "rssBytes": 162308096,
+              "nativeHeapBytes": 8965400
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 2037.6138649953646,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        }
+      ],
+      "nativeSameProcess": {
+        "processStartupPlusSixDirectCallsMs": 1242.3122589971172,
+        "directCallMicroseconds": [
+          508075,
+          86047,
+          39632,
+          41929,
+          30816,
+          26577
+        ],
+        "semanticDigest": "1e3c1d073c7dd70f470fc1f4dfc8ab75509771638217b9bbc46d8ebaad0add0c",
+        "pid": 79
+      },
+      "environmentPermutations": [
+        {
+          "seed": "1",
+          "domain": "payment",
+          "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e"
+        },
+        {
+          "seed": "1",
+          "domain": "case-management",
+          "digest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+        },
+        {
+          "seed": "7351",
+          "domain": "payment",
+          "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e"
+        },
+        {
+          "seed": "7351",
+          "domain": "case-management",
+          "digest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+        }
+      ],
+      "orderedChangeDigests": [
+        "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+        "sha256:1f8c2ad50b73371466e662e16fde231c9c11b9b56cf69d5f299a6073e77444b3",
+        "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+      ],
+      "footprint": {
+        "resolvedJvmJarBytes": 289901,
+        "antlrGeneratorJarBytes": 2140045
+      },
+      "operations": "Disposable exact-version worker; parent owns approval, request identities, bounded framing, timeout and process-group cancellation. Per-worker FIFO; concurrency uses independent workers, never shared parser objects.",
+      "splitRuntime": {
+        "java": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 1148.0444300032104,
+              "coreRequestMs": 242.29571600153577,
+              "encodeMicroseconds": 757.0099987788126,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 69582848,
+              "frontendRssBytes": 84004864
+            },
+            {
+              "frontendMs": 685.7319019982242,
+              "coreRequestMs": 55.184518998430576,
+              "encodeMicroseconds": 800.7549986359663,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 98725888,
+              "frontendRssBytes": 89673728
+            },
+            {
+              "frontendMs": 656.9575769972289,
+              "coreRequestMs": 17.835621001722757,
+              "encodeMicroseconds": 554.7949986066669,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 99897344,
+              "frontendRssBytes": 112730112
+            },
+            {
+              "frontendMs": 887.6639950030949,
+              "coreRequestMs": 18.37376599723939,
+              "encodeMicroseconds": 539.9660003604367,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 91893760,
+              "frontendRssBytes": 124403712
+            },
+            {
+              "frontendMs": 821.2502500027767,
+              "coreRequestMs": 14.409300005354453,
+              "encodeMicroseconds": 728.6740001291037,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 94240768,
+              "frontendRssBytes": 152981504
+            },
+            {
+              "frontendMs": 652.6599200005876,
+              "coreRequestMs": 18.58261099550873,
+              "encodeMicroseconds": 607.3289987398311,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 103444480,
+              "frontendRssBytes": 168583168
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        },
+        "typescript": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 1192.448998997861,
+              "coreRequestMs": 15.044268999190535,
+              "encodeMicroseconds": 607.5300043448806,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 77094912,
+              "frontendRssBytes": 85880832
+            },
+            {
+              "frontendMs": 762.2123100009048,
+              "coreRequestMs": 10.701808998419438,
+              "encodeMicroseconds": 578.0709980172105,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 78680064,
+              "frontendRssBytes": 90509312
+            },
+            {
+              "frontendMs": 729.7520200008876,
+              "coreRequestMs": 14.700595995236654,
+              "encodeMicroseconds": 717.866001650691,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 81534976,
+              "frontendRssBytes": 113553408
+            },
+            {
+              "frontendMs": 841.9832689978648,
+              "coreRequestMs": 19.470244005788118,
+              "encodeMicroseconds": 638.787001662422,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 84946944,
+              "frontendRssBytes": 123551744
+            },
+            {
+              "frontendMs": 689.0963440018822,
+              "coreRequestMs": 9.843380001257174,
+              "encodeMicroseconds": 947.7010025875643,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 86077440,
+              "frontendRssBytes": 155508736
+            },
+            {
+              "frontendMs": 680.7158540032106,
+              "coreRequestMs": 16.888261001440696,
+              "encodeMicroseconds": 606.8239963497035,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 86724608,
+              "frontendRssBytes": 166182912
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        },
+        "rust": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 1239.4894919998478,
+              "coreRequestMs": 5.938438996963669,
+              "encodeMicroseconds": 688.0290020490065,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3526656,
+              "frontendRssBytes": 82309120
+            },
+            {
+              "frontendMs": 758.0018110020319,
+              "coreRequestMs": 4.56963200122118,
+              "encodeMicroseconds": 635.4680008371361,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3686400,
+              "frontendRssBytes": 87015424
+            },
+            {
+              "frontendMs": 739.604785994743,
+              "coreRequestMs": 5.5900380029925145,
+              "encodeMicroseconds": 666.1360021098517,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3756032,
+              "frontendRssBytes": 96833536
+            },
+            {
+              "frontendMs": 751.2931419987581,
+              "coreRequestMs": 5.2151209965813905,
+              "encodeMicroseconds": 609.2070034355856,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3801088,
+              "frontendRssBytes": 131432448
+            },
+            {
+              "frontendMs": 712.0356899977196,
+              "coreRequestMs": 5.542178005271126,
+              "encodeMicroseconds": 676.6329970560037,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3825664,
+              "frontendRssBytes": 148254720
+            },
+            {
+              "frontendMs": 985.3872989988304,
+              "coreRequestMs": 6.143058999441564,
+              "encodeMicroseconds": 679.2849962948821,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3837952,
+              "frontendRssBytes": 159105024
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        }
+      }
+    },
+    "langium": {
+      "persistent": [
+        {
+          "coldStartupAndFirstRequestMs": 461.18937199935317,
+          "warm": [
+            {
+              "elapsedMs": 145.33420399675379,
+              "nativeMicroseconds": 90101,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 1325.7870014058426,
+              "rssBytes": 109350912,
+              "nativeHeapBytes": 27120504
+            },
+            {
+              "elapsedMs": 89.17479199590161,
+              "nativeMicroseconds": 50817,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 853.9139962522313,
+              "rssBytes": 115576832,
+              "nativeHeapBytes": 33756896
+            },
+            {
+              "elapsedMs": 80.26374300243333,
+              "nativeMicroseconds": 40880,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 781.5319986548275,
+              "rssBytes": 118640640,
+              "nativeHeapBytes": 29782328
+            },
+            {
+              "elapsedMs": 105.0337100023171,
+              "nativeMicroseconds": 56332,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 823.8270020228811,
+              "rssBytes": 122273792,
+              "nativeHeapBytes": 35850408
+            },
+            {
+              "elapsedMs": 71.42190299782669,
+              "nativeMicroseconds": 36667,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 888.8009979273193,
+              "rssBytes": 125542400,
+              "nativeHeapBytes": 35364176
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 982.9951970023103,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        },
+        {
+          "coldStartupAndFirstRequestMs": 436.1278790020151,
+          "warm": [
+            {
+              "elapsedMs": 124.48056600260315,
+              "nativeMicroseconds": 84317,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 778.5530033288524,
+              "rssBytes": 107294720,
+              "nativeHeapBytes": 27141160
+            },
+            {
+              "elapsedMs": 92.6336989941774,
+              "nativeMicroseconds": 53277,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 849.9399991706014,
+              "rssBytes": 112918528,
+              "nativeHeapBytes": 33852952
+            },
+            {
+              "elapsedMs": 72.59277900448069,
+              "nativeMicroseconds": 38353,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 840.222004626412,
+              "rssBytes": 115982336,
+              "nativeHeapBytes": 29943080
+            },
+            {
+              "elapsedMs": 95.20461100328248,
+              "nativeMicroseconds": 46974,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 779.8629958415404,
+              "rssBytes": 119660544,
+              "nativeHeapBytes": 35943264
+            },
+            {
+              "elapsedMs": 71.75255000038305,
+              "nativeMicroseconds": 37006,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 771.211001847405,
+              "rssBytes": 123154432,
+              "nativeHeapBytes": 35292984
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 1101.2983309992705,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        },
+        {
+          "coldStartupAndFirstRequestMs": 428.87031999998726,
+          "warm": [
+            {
+              "elapsedMs": 112.45197700191056,
+              "nativeMicroseconds": 76631,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 779.3879995006137,
+              "rssBytes": 110624768,
+              "nativeHeapBytes": 27295928
+            },
+            {
+              "elapsedMs": 87.66082100191852,
+              "nativeMicroseconds": 48748,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 831.8870022776537,
+              "rssBytes": 116535296,
+              "nativeHeapBytes": 34121376
+            },
+            {
+              "elapsedMs": 73.58728699909989,
+              "nativeMicroseconds": 38835,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 865.2639953652397,
+              "rssBytes": 119693312,
+              "nativeHeapBytes": 30257912
+            },
+            {
+              "elapsedMs": 85.13682099874131,
+              "nativeMicroseconds": 36678,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 1039.1479954705574,
+              "rssBytes": 123293696,
+              "nativeHeapBytes": 36239296
+            },
+            {
+              "elapsedMs": 76.90967399685178,
+              "nativeMicroseconds": 41142,
+              "requestBytes": 57829,
+              "responseBytes": 68585,
+              "hostEncodeMicroseconds": 845.1620014966466,
+              "rssBytes": 126443520,
+              "nativeHeapBytes": 35301696
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 983.9233680031612,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        }
+      ],
+      "nativeSameProcess": {
+        "processStartupPlusSixDirectCallsMs": 917.6222399983089,
+        "directCallMicroseconds": [
+          117872,
+          88912,
+          50500,
+          44484,
+          41523,
+          37051
+        ],
+        "semanticDigest": "a5f34503b613e12130ddfd01705d964d25247c6f64a11297e0bf50cf7313014b",
+        "pid": 205
+      },
+      "environmentPermutations": [
+        {
+          "seed": "1",
+          "domain": "payment",
+          "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e"
+        },
+        {
+          "seed": "1",
+          "domain": "case-management",
+          "digest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+        },
+        {
+          "seed": "7351",
+          "domain": "payment",
+          "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e"
+        },
+        {
+          "seed": "7351",
+          "domain": "case-management",
+          "digest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+        }
+      ],
+      "orderedChangeDigests": [
+        "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+        "sha256:1f8c2ad50b73371466e662e16fde231c9c11b9b56cf69d5f299a6073e77444b3",
+        "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+      ],
+      "footprint": {
+        "nodeModulesBytes": 93836902
+      },
+      "operations": "Disposable exact-version worker; parent owns approval, request identities, bounded framing, timeout and process-group cancellation. Per-worker FIFO; concurrency uses independent workers, never shared parser objects.",
+      "splitRuntime": {
+        "java": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 1137.9413460017531,
+              "coreRequestMs": 311.24567100050626,
+              "encodeMicroseconds": 666.970998281613,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 69996544,
+              "frontendRssBytes": 97488896
+            },
+            {
+              "frontendMs": 809.3113550057751,
+              "coreRequestMs": 64.80020999879343,
+              "encodeMicroseconds": 669.9880032101646,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 93548544,
+              "frontendRssBytes": 110526464
+            },
+            {
+              "frontendMs": 823.3888179966016,
+              "coreRequestMs": 23.04126300441567,
+              "encodeMicroseconds": 771.1270009167492,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 95891456,
+              "frontendRssBytes": 116244480
+            },
+            {
+              "frontendMs": 900.3783959997236,
+              "coreRequestMs": 19.675997995364014,
+              "encodeMicroseconds": 669.4790063193068,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 93917184,
+              "frontendRssBytes": 119369728
+            },
+            {
+              "frontendMs": 824.2549510032404,
+              "coreRequestMs": 22.148755000671372,
+              "encodeMicroseconds": 664.6959955105558,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 95698944,
+              "frontendRssBytes": 123244544
+            },
+            {
+              "frontendMs": 801.1766359995818,
+              "coreRequestMs": 21.315179001248907,
+              "encodeMicroseconds": 769.242993555963,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 103333888,
+              "frontendRssBytes": 126513152
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        },
+        "typescript": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 1195.5484900026931,
+              "coreRequestMs": 19.4350370002212,
+              "encodeMicroseconds": 693.5599958524108,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 77094912,
+              "frontendRssBytes": 97476608
+            },
+            {
+              "frontendMs": 1027.9363599984208,
+              "coreRequestMs": 19.469172002573032,
+              "encodeMicroseconds": 1077.1960005513392,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 78544896,
+              "frontendRssBytes": 110104576
+            },
+            {
+              "frontendMs": 1308.4300019982038,
+              "coreRequestMs": 30.378859999473207,
+              "encodeMicroseconds": 1200.2749936073087,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 81412096,
+              "frontendRssBytes": 115908608
+            },
+            {
+              "frontendMs": 1064.5501210019575,
+              "coreRequestMs": 26.551367998763453,
+              "encodeMicroseconds": 814.3140003085136,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 84353024,
+              "frontendRssBytes": 119033856
+            },
+            {
+              "frontendMs": 1266.9340709981043,
+              "coreRequestMs": 8.556499000405893,
+              "encodeMicroseconds": 683.4130035713315,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 85577728,
+              "frontendRssBytes": 122712064
+            },
+            {
+              "frontendMs": 1171.5504599997075,
+              "coreRequestMs": 19.5695060028811,
+              "encodeMicroseconds": 700.3459977568127,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 86810624,
+              "frontendRssBytes": 125952000
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        },
+        "rust": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 1416.8962800031295,
+              "coreRequestMs": 6.780014999094419,
+              "encodeMicroseconds": 768.243997299578,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3608576,
+              "frontendRssBytes": 95252480
+            },
+            {
+              "frontendMs": 857.5510070004384,
+              "coreRequestMs": 5.498559003171977,
+              "encodeMicroseconds": 662.1110005653463,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3768320,
+              "frontendRssBytes": 106496000
+            },
+            {
+              "frontendMs": 752.1198250033194,
+              "coreRequestMs": 6.153952002932783,
+              "encodeMicroseconds": 713.3429971872829,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3837952,
+              "frontendRssBytes": 112816128
+            },
+            {
+              "frontendMs": 783.0738359989482,
+              "coreRequestMs": 6.085365006583743,
+              "encodeMicroseconds": 845.7379954052158,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3883008,
+              "frontendRssBytes": 115941376
+            },
+            {
+              "frontendMs": 1065.3035299983458,
+              "coreRequestMs": 10.458358003234025,
+              "encodeMicroseconds": 758.171001507435,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3907584,
+              "frontendRssBytes": 119566336
+            },
+            {
+              "frontendMs": 1081.2569150002673,
+              "coreRequestMs": 11.212786004762165,
+              "encodeMicroseconds": 775.1610028208233,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3919872,
+              "frontendRssBytes": 123162624
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        }
+      }
+    },
+    "xtext": {
+      "persistent": [
+        {
+          "coldStartupAndFirstRequestMs": 2248.8617659982992,
+          "warm": [
+            {
+              "elapsedMs": 230.0474040021072,
+              "nativeMicroseconds": 151273,
+              "requestBytes": 57827,
+              "responseBytes": 64577,
+              "hostEncodeMicroseconds": 811.0870039672591,
+              "rssBytes": 153489408,
+              "nativeHeapBytes": 52668528
+            },
+            {
+              "elapsedMs": 177.17047299811384,
+              "nativeMicroseconds": 113165,
+              "requestBytes": 57827,
+              "responseBytes": 64577,
+              "hostEncodeMicroseconds": 758.9920060127042,
+              "rssBytes": 165425152,
+              "nativeHeapBytes": 64202864
+            },
+            {
+              "elapsedMs": 103.78457699698629,
+              "nativeMicroseconds": 57593,
+              "requestBytes": 57827,
+              "responseBytes": 64576,
+              "hostEncodeMicroseconds": 969.6540000732057,
+              "rssBytes": 178954240,
+              "nativeHeapBytes": 75737200
+            },
+            {
+              "elapsedMs": 94.9845209979685,
+              "nativeMicroseconds": 49031,
+              "requestBytes": 57827,
+              "responseBytes": 64576,
+              "hostEncodeMicroseconds": 844.9460001429543,
+              "rssBytes": 201695232,
+              "nativeHeapBytes": 87271536
+            },
+            {
+              "elapsedMs": 119.12654699699488,
+              "nativeMicroseconds": 48667,
+              "requestBytes": 57827,
+              "responseBytes": 64576,
+              "hostEncodeMicroseconds": 830.5900046252646,
+              "rssBytes": 214855680,
+              "nativeHeapBytes": 98283632
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 3508.27377600217,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        },
+        {
+          "coldStartupAndFirstRequestMs": 2589.942204998806,
+          "warm": [
+            {
+              "elapsedMs": 194.78997400437947,
+              "nativeMicroseconds": 113240,
+              "requestBytes": 57827,
+              "responseBytes": 64577,
+              "hostEncodeMicroseconds": 833.705002150964,
+              "rssBytes": 154058752,
+              "nativeHeapBytes": 52036592
+            },
+            {
+              "elapsedMs": 193.71624899940798,
+              "nativeMicroseconds": 122360,
+              "requestBytes": 57827,
+              "responseBytes": 64577,
+              "hostEncodeMicroseconds": 931.5650022472255,
+              "rssBytes": 178913280,
+              "nativeHeapBytes": 63570928
+            },
+            {
+              "elapsedMs": 169.39289899892174,
+              "nativeMicroseconds": 101105,
+              "requestBytes": 57827,
+              "responseBytes": 64577,
+              "hostEncodeMicroseconds": 963.8049959903583,
+              "rssBytes": 197206016,
+              "nativeHeapBytes": 75105264
+            },
+            {
+              "elapsedMs": 168.28906999580795,
+              "nativeMicroseconds": 88544,
+              "requestBytes": 57827,
+              "responseBytes": 64576,
+              "hostEncodeMicroseconds": 902.9020002344623,
+              "rssBytes": 212668416,
+              "nativeHeapBytes": 86113248
+            },
+            {
+              "elapsedMs": 165.14117299811915,
+              "nativeMicroseconds": 72521,
+              "requestBytes": 57827,
+              "responseBytes": 64576,
+              "hostEncodeMicroseconds": 1286.578000872396,
+              "rssBytes": 231325696,
+              "nativeHeapBytes": 97647584
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 3562.555689000874,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        },
+        {
+          "coldStartupAndFirstRequestMs": 2531.2557830038713,
+          "warm": [
+            {
+              "elapsedMs": 256.0177389968885,
+              "nativeMicroseconds": 136402,
+              "requestBytes": 57827,
+              "responseBytes": 64577,
+              "hostEncodeMicroseconds": 818.2859965017997,
+              "rssBytes": 152756224,
+              "nativeHeapBytes": 53228024
+            },
+            {
+              "elapsedMs": 245.95840300025884,
+              "nativeMicroseconds": 146511,
+              "requestBytes": 57827,
+              "responseBytes": 64577,
+              "hostEncodeMicroseconds": 991.3249959936365,
+              "rssBytes": 164503552,
+              "nativeHeapBytes": 64762360
+            },
+            {
+              "elapsedMs": 166.13456299819518,
+              "nativeMicroseconds": 87136,
+              "requestBytes": 57827,
+              "responseBytes": 64576,
+              "hostEncodeMicroseconds": 1112.361998821143,
+              "rssBytes": 178515968,
+              "nativeHeapBytes": 76296696
+            },
+            {
+              "elapsedMs": 173.79244699986884,
+              "nativeMicroseconds": 87976,
+              "requestBytes": 57827,
+              "responseBytes": 64576,
+              "hostEncodeMicroseconds": 991.0249937092885,
+              "rssBytes": 193818624,
+              "nativeHeapBytes": 87831032
+            },
+            {
+              "elapsedMs": 196.624944001087,
+              "nativeMicroseconds": 85703,
+              "requestBytes": 57827,
+              "responseBytes": 64576,
+              "hostEncodeMicroseconds": 1424.109002982732,
+              "rssBytes": 206622720,
+              "nativeHeapBytes": 98839016
+            }
+          ],
+          "nativeRequestsSamePid": 6,
+          "supersededStartupIncludingFixtureConstructionMs": 3931.1272839986486,
+          "correction": "Construct approved fixture/request before timing worker startup. Earlier value retained; warm/direct/split samples are independent."
+        }
+      ],
+      "nativeSameProcess": {
+        "processStartupPlusSixDirectCallsMs": 5043.137235996255,
+        "directCallMicroseconds": [
+          3747278,
+          219570,
+          151864,
+          129827,
+          84471,
+          99456
+        ],
+        "semanticDigest": "d7340d9477a0ace89386943fd4f8d475d55c7dc695734b4d34ddd01b0a2c613d",
+        "pid": 319
+      },
+      "environmentPermutations": [
+        {
+          "seed": "1",
+          "domain": "payment",
+          "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e"
+        },
+        {
+          "seed": "1",
+          "domain": "case-management",
+          "digest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+        },
+        {
+          "seed": "7351",
+          "domain": "payment",
+          "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e"
+        },
+        {
+          "seed": "7351",
+          "domain": "case-management",
+          "digest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+        }
+      ],
+      "orderedChangeDigests": [
+        "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+        "sha256:1f8c2ad50b73371466e662e16fde231c9c11b9b56cf69d5f299a6073e77444b3",
+        "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+      ],
+      "footprint": {
+        "resolvedJvmJarBytes": 33716336,
+        "antlrGeneratorJarBytes": 2140045
+      },
+      "operations": "Disposable exact-version worker; parent owns approval, request identities, bounded framing, timeout and process-group cancellation. Per-worker FIFO; concurrency uses independent workers, never shared parser objects.",
+      "splitRuntime": {
+        "java": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 3773.1341420003446,
+              "coreRequestMs": 436.37719500111416,
+              "encodeMicroseconds": 683.581005432643,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 71581696,
+              "frontendRssBytes": 141611008
+            },
+            {
+              "frontendMs": 1024.8719139999594,
+              "coreRequestMs": 66.48459799907869,
+              "encodeMicroseconds": 798.4709955053404,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 93339648,
+              "frontendRssBytes": 152248320
+            },
+            {
+              "frontendMs": 1406.8654610018712,
+              "coreRequestMs": 27.99181600130396,
+              "encodeMicroseconds": 997.5109933293425,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 95260672,
+              "frontendRssBytes": 164093952
+            },
+            {
+              "frontendMs": 1143.4258199951728,
+              "coreRequestMs": 43.145319003087934,
+              "encodeMicroseconds": 1239.3180004437454,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 95784960,
+              "frontendRssBytes": 199499776
+            },
+            {
+              "frontendMs": 1246.0508459989796,
+              "coreRequestMs": 19.3977349990746,
+              "encodeMicroseconds": 812.3809966491535,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 107610112,
+              "frontendRssBytes": 210927616
+            },
+            {
+              "frontendMs": 1236.2656990007963,
+              "coreRequestMs": 26.735899999039248,
+              "encodeMicroseconds": 1266.715000383556,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 115146752,
+              "frontendRssBytes": 224784384
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        },
+        "typescript": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 4792.095420001715,
+              "coreRequestMs": 19.633709998743143,
+              "encodeMicroseconds": 883.1360028125346,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 77045760,
+              "frontendRssBytes": 141721600
+            },
+            {
+              "frontendMs": 1323.7174919995596,
+              "coreRequestMs": 12.508798005001154,
+              "encodeMicroseconds": 840.3559986618347,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 78483456,
+              "frontendRssBytes": 175128576
+            },
+            {
+              "frontendMs": 956.2711980033782,
+              "coreRequestMs": 9.209667005052324,
+              "encodeMicroseconds": 720.6509981187992,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 80478208,
+              "frontendRssBytes": 187969536
+            },
+            {
+              "frontendMs": 851.363317000505,
+              "coreRequestMs": 15.712221000285354,
+              "encodeMicroseconds": 712.3219984350726,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 82071552,
+              "frontendRssBytes": 195145728
+            },
+            {
+              "frontendMs": 837.3597629979486,
+              "coreRequestMs": 8.373005002795253,
+              "encodeMicroseconds": 576.293001358863,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 83730432,
+              "frontendRssBytes": 206467072
+            },
+            {
+              "frontendMs": 683.293390997278,
+              "coreRequestMs": 7.839594996767119,
+              "encodeMicroseconds": 573.623001400847,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 85610496,
+              "frontendRssBytes": 220250112
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        },
+        "rust": {
+          "coldAndFiveWarm": [
+            {
+              "frontendMs": 2943.0260560038732,
+              "coreRequestMs": 5.217936995904893,
+              "encodeMicroseconds": 602.836997131817,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3551232,
+              "frontendRssBytes": 140132352
+            },
+            {
+              "frontendMs": 775.8333940000739,
+              "coreRequestMs": 5.912765998800751,
+              "encodeMicroseconds": 660.0609995075502,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3710976,
+              "frontendRssBytes": 148336640
+            },
+            {
+              "frontendMs": 702.1444489946589,
+              "coreRequestMs": 4.445491002115887,
+              "encodeMicroseconds": 586.7620056960732,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3780608,
+              "frontendRssBytes": 160219136
+            },
+            {
+              "frontendMs": 645.166636997601,
+              "coreRequestMs": 5.258549004793167,
+              "encodeMicroseconds": 653.0440005008131,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3825664,
+              "frontendRssBytes": 189054976
+            },
+            {
+              "frontendMs": 731.2043069978245,
+              "coreRequestMs": 4.5931660060887225,
+              "encodeMicroseconds": 582.4879990541376,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3850240,
+              "frontendRssBytes": 203083776
+            },
+            {
+              "frontendMs": 703.3808580017649,
+              "coreRequestMs": 4.573154998070095,
+              "encodeMicroseconds": 590.8349994570017,
+              "requestBytes": 54310,
+              "responseBytes": 203,
+              "coreRssBytes": 3862528,
+              "frontendRssBytes": 215744512
+            }
+          ],
+          "scope": "Actual frontend output normalized by existing host then passed as canonical content/digest to independent representative graph core. This is not a complete candidate implementation of the eight Phase 4 stages.",
+          "frontendMsIncludesFixtureConstruction": true
+        }
+      }
+    }
+  },
+  "phase6": "NOT_STARTED"
+}

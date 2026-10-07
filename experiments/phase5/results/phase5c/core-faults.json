@@ -1,0 +1,897 @@
+{
+  "scope": "Representative immutable graph-stage fault slice; external supervisor owns timeout/crash. No production compiler runtime selected.",
+  "protocol": "acp-core-fault/1",
+  "fixtures": [
+    {
+      "name": "success",
+      "inputBytes": 368,
+      "expectedCode": null
+    },
+    {
+      "name": "version",
+      "inputBytes": 359,
+      "expectedCode": "VERSION"
+    },
+    {
+      "name": "semantic",
+      "inputBytes": 366,
+      "expectedCode": "SEMANTIC_VERSION"
+    },
+    {
+      "name": "port",
+      "inputBytes": 363,
+      "expectedCode": "PORT_VERSION"
+    },
+    {
+      "name": "digest",
+      "inputBytes": 306,
+      "expectedCode": "DIGEST"
+    },
+    {
+      "name": "dependency",
+      "inputBytes": 350,
+      "expectedCode": "DEPENDENCY"
+    },
+    {
+      "name": "cancel",
+      "inputBytes": 366,
+      "expectedCode": "CANCELLED"
+    },
+    {
+      "name": "budget",
+      "inputBytes": 367,
+      "expectedCode": "RESOURCE"
+    },
+    {
+      "name": "downstream",
+      "inputBytes": 368,
+      "expectedCode": "DOWNSTREAM"
+    },
+    {
+      "name": "canonical",
+      "inputBytes": 346,
+      "expectedCode": "CANONICAL"
+    },
+    {
+      "name": "multi-fault-order",
+      "inputBytes": 363,
+      "expectedCode": "VERSION"
+    },
+    {
+      "name": "bad-shape",
+      "inputBytes": 372,
+      "expectedCode": "MALFORMED"
+    },
+    {
+      "name": "broken-content",
+      "inputBytes": 348,
+      "expectedCode": "CANONICAL"
+    },
+    {
+      "name": "downstream-null",
+      "inputBytes": 339,
+      "expectedCode": "DOWNSTREAM"
+    },
+    {
+      "name": "malformed",
+      "inputBytes": 6,
+      "expectedCode": "MALFORMED"
+    },
+    {
+      "name": "duplicate-key",
+      "inputBytes": 28,
+      "expectedCode": "MALFORMED"
+    },
+    {
+      "name": "oversize",
+      "inputBytes": 1048577,
+      "expectedCode": "INPUT_SIZE"
+    }
+  ],
+  "runtimes": {
+    "java": {
+      "faultFixtures": [
+        {
+          "diagnostics": [],
+          "id": "success",
+          "output": {
+            "digest": "sha256:fdcd93b603e0557eda1ae039bb5083f5b55db6aa372df1973dfd20ddad73cbca",
+            "visited": [
+              "ROOT",
+              "A",
+              "B"
+            ]
+          },
+          "protocol": "acp-core-fault/1",
+          "status": "SUCCESS"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "version",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "SEMANTIC_VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "semantic",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "PORT_VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "port",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DIGEST",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "digest",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DEPENDENCY",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "dependency",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANCELLED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "cancel",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "RESOURCE",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "budget",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DOWNSTREAM",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "downstream",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANONICAL",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "canonical",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "multi-fault-order",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "bad-shape",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANONICAL",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "broken-content",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DOWNSTREAM",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "downstream-null",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "INPUT_SIZE",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        }
+      ],
+      "batchElapsedMs": 1133.1313110058545,
+      "requestBytes": 1053609,
+      "responseBytes": 4192,
+      "persistentRequests": 17,
+      "timeout": {
+        "failure": {
+          "status": "FAILURE",
+          "diagnostics": [
+            {
+              "code": "TIMEOUT"
+            }
+          ]
+        },
+        "retryEquivalent": true
+      },
+      "crash": {
+        "failure": {
+          "status": "FAILURE",
+          "diagnostics": [
+            {
+              "code": "CRASH"
+            }
+          ]
+        },
+        "retryEquivalent": true
+      }
+    },
+    "typescript": {
+      "faultFixtures": [
+        {
+          "diagnostics": [],
+          "id": "success",
+          "output": {
+            "digest": "sha256:fdcd93b603e0557eda1ae039bb5083f5b55db6aa372df1973dfd20ddad73cbca",
+            "visited": [
+              "ROOT",
+              "A",
+              "B"
+            ]
+          },
+          "protocol": "acp-core-fault/1",
+          "status": "SUCCESS"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "version",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "SEMANTIC_VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "semantic",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "PORT_VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "port",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DIGEST",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "digest",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DEPENDENCY",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "dependency",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANCELLED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "cancel",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "RESOURCE",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "budget",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DOWNSTREAM",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "downstream",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANONICAL",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "canonical",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "multi-fault-order",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "bad-shape",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANONICAL",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "broken-content",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DOWNSTREAM",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "downstream-null",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "INPUT_SIZE",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        }
+      ],
+      "batchElapsedMs": 392.12292800220894,
+      "requestBytes": 1053609,
+      "responseBytes": 4192,
+      "persistentRequests": 17,
+      "timeout": {
+        "failure": {
+          "status": "FAILURE",
+          "diagnostics": [
+            {
+              "code": "TIMEOUT"
+            }
+          ]
+        },
+        "retryEquivalent": true
+      },
+      "crash": {
+        "failure": {
+          "status": "FAILURE",
+          "diagnostics": [
+            {
+              "code": "CRASH"
+            }
+          ]
+        },
+        "retryEquivalent": true
+      }
+    },
+    "rust": {
+      "faultFixtures": [
+        {
+          "diagnostics": [],
+          "id": "success",
+          "output": {
+            "digest": "sha256:fdcd93b603e0557eda1ae039bb5083f5b55db6aa372df1973dfd20ddad73cbca",
+            "visited": [
+              "ROOT",
+              "A",
+              "B"
+            ]
+          },
+          "protocol": "acp-core-fault/1",
+          "status": "SUCCESS"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "version",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "SEMANTIC_VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "semantic",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "PORT_VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "port",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DIGEST",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "digest",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DEPENDENCY",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "dependency",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANCELLED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "cancel",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "RESOURCE",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "budget",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DOWNSTREAM",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "downstream",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANONICAL",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "canonical",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "VERSION",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "multi-fault-order",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "bad-shape",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "CANONICAL",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "broken-content",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "DOWNSTREAM",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "downstream-null",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "MALFORMED",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        },
+        {
+          "diagnostics": [
+            {
+              "code": "INPUT_SIZE",
+              "primary": "graph.acp#L1C1",
+              "related": [],
+              "remediation": "Repair the declared request or retry with valid authority and budgets.",
+              "subject": "ROOT"
+            }
+          ],
+          "id": "unknown",
+          "protocol": "acp-core-fault/1",
+          "status": "FAILURE"
+        }
+      ],
+      "batchElapsedMs": 9.95523099845741,
+      "requestBytes": 1053609,
+      "responseBytes": 4192,
+      "persistentRequests": 17,
+      "timeout": {
+        "failure": {
+          "status": "FAILURE",
+          "diagnostics": [
+            {
+              "code": "TIMEOUT"
+            }
+          ]
+        },
+        "retryEquivalent": true
+      },
+      "crash": {
+        "failure": {
+          "status": "FAILURE",
+          "diagnostics": [
+            {
+              "code": "CRASH"
+            }
+          ]
+        },
+        "retryEquivalent": true
+      }
+    }
+  }
+}

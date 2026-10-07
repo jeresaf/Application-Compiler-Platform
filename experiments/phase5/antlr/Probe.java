@@ -20,11 +20,11 @@ public final class Probe {
         for(int i=0;i<o.STRING().size();i++) {String key=JSON.fromJson(o.STRING(i).getText(),String.class); if(result.has(key)) throw new IllegalArgumentException("Duplicate object key"); result.add(key,value(o.value(i)));}
         return result;
     }
-    public static void main(String[] args) throws Exception {
-        long start=System.nanoTime(); String text=Files.readString(Path.of(args[0]));
+    public static JsonObject parse(String text,int runs) throws Exception {
+        long start=System.nanoTime();
         var errors=new JsonArray(); var measurements=new JsonArray(); AcpParser.DocumentContext doc=null;
         var listener=new BaseErrorListener(){public void syntaxError(Recognizer<?,?> r,Object symbol,int line,int col,String msg,RecognitionException e){var error=new JsonObject(); error.addProperty("line",line);error.addProperty("column",col);error.addProperty("message",msg);errors.add(error);}};
-        for(int i=0;i<Integer.parseInt(args.length>1?args[1]:"1");i++) {
+        for(int i=0;i<runs;i++) {
             long parse=System.nanoTime(); var lexer=new AcpLexer(CharStreams.fromString(text)); lexer.removeErrorListeners();lexer.addErrorListener(listener);
             var parser=new AcpParser(new CommonTokenStream(lexer));parser.removeErrorListeners();parser.addErrorListener(listener);doc=parser.document();measurements.add((System.nanoTime()-parse)/1e6);
         }
@@ -34,6 +34,7 @@ public final class Probe {
             for(var d:doc.declaration()) {var node=object(d.object());identityBody(node);node.addProperty("kind",d.ID().getText());node.add("id",JSON.fromJson(d.STRING().getText(),JsonElement.class));node.addProperty("revision",Long.parseLong(d.INT().getText()));nodes.add(node);var span=new JsonObject();span.add("id",node.get("id"));span.addProperty("line",d.start.getLine());span.addProperty("column",d.start.getCharPositionInLine());span.addProperty("endLine",d.stop.getLine());span.addProperty("endColumn",d.stop.getCharPositionInLine()+d.stop.getText().length());spans.add(span);}
             model.add("nodes",nodes);response.add("model",model);response.add("spans",spans);
         }
-        response.addProperty("elapsedMs",(System.nanoTime()-start)/1e6);System.out.println(JSON.toJson(response));
+        response.addProperty("elapsedMs",(System.nanoTime()-start)/1e6);return response;
     }
+    public static void main(String[] args)throws Exception {System.out.println(JSON.toJson(parse(Files.readString(Path.of(args[0])),Integer.parseInt(args.length>1?args[1]:"1"))));}
 }

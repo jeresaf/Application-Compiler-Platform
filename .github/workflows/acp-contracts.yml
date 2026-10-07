@@ -34,7 +34,7 @@ jobs:
         run: node tooling/check_canonical_vectors.mjs
   phase5-experiments:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v7.0.0
@@ -44,6 +44,12 @@ jobs:
         with:
           node-version: '24.21.0'
           package-manager-cache: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25.0.0'
+      - name: Retain alternate JDK for controlled Phase 5C comparison
+        run: echo "ACP5C_JAVA_UPGRADE_HOME=$JAVA_HOME" >> "$GITHUB_ENV"
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -61,10 +67,10 @@ jobs:
           python3.14 experiments/phase5/build.py xtext
           npm --prefix experiments/phase5/langium run generate
           npm --prefix experiments/phase5/langium run build
-          mkdir -p experiments/phase5/core-runtime/out
+          python3.14 experiments/phase5/native_build.py
       - name: Verify frontend interchange, diagnostics, determinism and Java bytes
         run: |
-          python3.14 -m unittest discover -s experiments/phase5 -p 'test_*.py' -v
+          python3.14 experiments/phase5/regression.py
           python3.14 experiments/phase5/smoke.py
       - name: Verify pinned Rust canonical interoperability and graph slice
         run: |
@@ -90,9 +96,46 @@ jobs:
           npm --prefix experiments/phase5/.cache/evolution/langium ci --ignore-scripts --no-audit --no-fund
           mvn -B -ntp -f experiments/phase5/.cache/evolution/xtext/pom.xml -Dmaven.repo.local="$GITHUB_WORKSPACE/experiments/phase5/.cache/m2" dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
           python3.14 experiments/phase5/evolution.py
+      - name: Verify Phase 5C native persistence, fault parity and toolchain evidence
+        run: |
+          python3.14 experiments/phase5/run5c.py
+          python3.14 experiments/phase5/fault5c.py
+          python3.14 experiments/phase5/measure5c.py
+          rustup toolchain install 1.89.0 --profile minimal
+          cargo +1.90.0 fetch --locked --manifest-path experiments/phase5/core-runtime/Cargo.toml
+          mkdir -p experiments/phase5/.cache/phase5c-toolchains
+          curl --fail --silent --show-error --max-time 120 https://nodejs.org/dist/v22.20.0/node-v22.20.0-linux-x64.tar.xz -o experiments/phase5/.cache/phase5c-toolchains/node-v22.20.0-linux-x64.tar.xz
+          curl --fail --silent --show-error --max-time 120 https://nodejs.org/dist/v22.20.0/SHASUMS256.txt -o experiments/phase5/.cache/phase5c-toolchains/node-v22.20.0-SHASUMS256.txt
+          curl --fail --silent --show-error --max-time 120 https://repo.maven.apache.org/maven2/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2-sources.jar -o experiments/phase5/.cache/phase5c-toolchains/antlr-runtime-3.2-sources.jar
+          python3.14 experiments/phase5/verify_node_archive5c.py
+          tar -xJf experiments/phase5/.cache/phase5c-toolchains/node-v22.20.0-linux-x64.tar.xz -C experiments/phase5/.cache/phase5c-toolchains
+          python3.14 experiments/phase5/maintenance5c.py
+          python3.14 experiments/phase5/check5c.py
+      - name: Preserve Phase 5C hosted evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase5c-ubuntu-evidence
+          path: experiments/phase5/results/phase5c/
       - name: Preserve hosted evidence separately from laptop measurements
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: phase5b-ubuntu-evidence
           path: experiments/phase5/results/phase5b/
+
+  phase5c-hard-gates:
+    needs: [contracts, phase5-experiments]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/download-artifact@v4
+        with:
+          name: phase5c-ubuntu-evidence
+          path: experiments/phase5/results/phase5c/
+      - name: Verify actual Ubuntu evidence and honest unresolved-gate disposition
+        run: python3.14 experiments/phase5/check5c.py

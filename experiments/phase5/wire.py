@@ -22,6 +22,7 @@ def reference(r):
         if node in visited:continue
         if len(visited)>=r['budget']:code='RESOURCE';break
         visited.append(node);pending+=r['dependencies'].get(node,[])
+    if code:return {'protocol':PROTOCOL,'id':r['id'],'status':'FAILURE','diagnostics':[{'code':code,'subject':'ROOT','primary':'graph.acp#L1C1','related':[],'remediation':'Repair the declared request or retry with valid authority and budgets.'}]}
     return {'protocol':PROTOCOL,'id':r['id'],'status':'FAILURE' if code else 'SUCCESS',
             'diagnostics':[{'code':code,'subject':'ROOT','primary':'graph.acp#L1C1','related':[],
                             'remediation':'Repair the declared request or retry with valid authority and budgets.'}] if code else [],

@@ -1,0 +1,7 @@
+test_order_related_locations_and_output_bound (test_frontend_diagnostics.DiagnosticBoundaryTests.test_order_related_locations_and_output_bound) ... ok
+test_unsafe_codes_paths_subjects_and_confidence_fail_closed (test_frontend_diagnostics.DiagnosticBoundaryTests.test_unsafe_codes_paths_subjects_and_confidence_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.373s
+
+OK

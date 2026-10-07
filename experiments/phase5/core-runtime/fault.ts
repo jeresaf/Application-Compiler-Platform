@@ -1,0 +1,17 @@
+import {createHash} from 'node:crypto';
+const LIMIT=1048576;
+function canonical(v:any):string {if(v===null||typeof v!=='object')return JSON.stringify(v);if(Array.isArray(v))return '['+v.map(canonical).join(',')+']';return '{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}';}
+function strict(raw:Buffer):any {const text=new TextDecoder('utf-8',{fatal:true}).decode(raw),v=JSON.parse(text);function check(x:any,depth=0):void{if(depth>48)throw Error();if(typeof x==='number'&&!Number.isSafeInteger(x))throw Error();if(typeof x==='string'&&/[\uD800-\uDFFF]/u.test(x))throw Error();if(x&&typeof x==='object')for(const [k,y] of Object.entries(x)){check(k,depth+1);check(y,depth+1);}}check(v);if(canonical(v)!==text)throw Error();return v;}
+function fail(id:string,code:string):any{return {protocol:'acp-core-fault/1',id,status:'FAILURE',diagnostics:[{code,subject:'ROOT',primary:'graph.acp#L1C1',related:[],remediation:'Repair the declared request or retry with valid authority and budgets.'}]};}
+function execute(raw:Buffer):any{let id='unknown';try{if(raw.length>LIMIT)return fail(id,'INPUT_SIZE');const r=strict(raw);if(typeof r?.id==='string')id=r.id;
+ if(!r||Array.isArray(r)||Object.keys(r).sort().join()!=['id','protocol','semanticVersion','canonicalInput','digest','dependencies','budget','cancelled','portVersion','downstream'].sort().join())return fail(id,'MALFORMED');
+ if(['id','protocol','semanticVersion','canonicalInput','digest','portVersion'].some(k=>typeof r[k]!=='string')||!Number.isSafeInteger(r.budget)||r.budget<0||typeof r.cancelled!=='boolean'||!r.dependencies||Array.isArray(r.dependencies)||typeof r.dependencies!=='object'||Object.values(r.dependencies).some((v:any)=>!Array.isArray(v)||v.some((n:any)=>typeof n!=='string')))return fail(id,'MALFORMED');
+ if(r.protocol!=='acp-core-fault/1')return fail(id,'VERSION');if(r.semanticVersion!=='0.2.0')return fail(id,'SEMANTIC_VERSION');if(r.portVersion!=='graph/1')return fail(id,'PORT_VERSION');
+ let content;try{content=strict(Buffer.from(r.canonicalInput));}catch{return fail(id,'CANONICAL');}
+ const digest='sha256:'+createHash('sha256').update('ACP\0acp-jcs-safe-v1\0canonical\0').update(canonical(content)).digest('hex');if(r.digest!==digest)return fail(id,'DIGEST');
+ if(!r.downstream||Object.keys(r.downstream).sort().join()!=='protocol,status'||r.downstream.protocol!=='graph/1'||r.downstream.status!=='SUCCESS')return fail(id,'DOWNSTREAM');
+ const pending=['ROOT'],visited:string[]=[];while(pending.length){const n=pending.shift()!;if(r.cancelled)return fail(id,'CANCELLED');if(visited.includes(n))continue;if(visited.length>=r.budget)return fail(id,'RESOURCE');if(!Object.hasOwn(r.dependencies,n))return fail(id,'DEPENDENCY');visited.push(n);pending.push(...r.dependencies[n]);}
+ return {protocol:'acp-core-fault/1',id,status:'SUCCESS',diagnostics:[],output:{digest,visited}};
+ }catch{return fail(id,'MALFORMED');}}
+let parts:Buffer[]=[],size=0,over=false;
+for await(const chunk of process.stdin){let start=0;for(let i=0;i<chunk.length;i++){if(chunk[i]!==10)continue;const part=chunk.subarray(start,i);size+=part.length;if(size<=LIMIT)parts.push(part);else over=true;process.stdout.write(canonical(execute(over?Buffer.alloc(LIMIT+1):Buffer.concat(parts)))+'\n');parts=[];size=0;over=false;start=i+1;}if(start<chunk.length){const part=chunk.subarray(start);size+=part.length;if(size<=LIMIT)parts.push(part);else over=true;}}

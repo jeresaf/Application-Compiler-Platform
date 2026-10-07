@@ -1,0 +1,303 @@
+{
+  "status": "PASS",
+  "reason": "Remove partial traversal output from failed Phase 5B wire results. Historical Phase 5B measurements retained; successful output shape unchanged.",
+  "runtimes": {
+    "java": [
+      {
+        "diagnostics": [],
+        "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+        "id": "success",
+        "obligations": [
+          {
+            "id": "OB-TEST",
+            "origin": "ENT-PAYMENT@1",
+            "status": "OUTSTANDING"
+          }
+        ],
+        "protocol": "acp-core-wire/1",
+        "provenance": [
+          {
+            "id": "ENT-PAYMENT",
+            "producer": "experiment/1",
+            "revision": 1
+          }
+        ],
+        "status": "SUCCESS",
+        "visited": [
+          "ROOT",
+          "A",
+          "B"
+        ],
+        "work": 3
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "RESOURCE",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "resource",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "CANCELLED",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "cancelled",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "VERSION",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "version",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "PORT",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "port",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "CANONICAL",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "noncanonical",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      }
+    ],
+    "typescript": [
+      {
+        "protocol": "acp-core-wire/1",
+        "id": "success",
+        "status": "SUCCESS",
+        "diagnostics": [],
+        "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+        "provenance": [
+          {
+            "id": "ENT-PAYMENT",
+            "producer": "experiment/1",
+            "revision": 1
+          }
+        ],
+        "obligations": [
+          {
+            "id": "OB-TEST",
+            "origin": "ENT-PAYMENT@1",
+            "status": "OUTSTANDING"
+          }
+        ],
+        "visited": [
+          "ROOT",
+          "A",
+          "B"
+        ],
+        "work": 3
+      },
+      {
+        "protocol": "acp-core-wire/1",
+        "id": "resource",
+        "status": "FAILURE",
+        "diagnostics": [
+          {
+            "code": "RESOURCE",
+            "subject": "ROOT",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets."
+          }
+        ]
+      },
+      {
+        "protocol": "acp-core-wire/1",
+        "id": "cancelled",
+        "status": "FAILURE",
+        "diagnostics": [
+          {
+            "code": "CANCELLED",
+            "subject": "ROOT",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets."
+          }
+        ]
+      },
+      {
+        "protocol": "acp-core-wire/1",
+        "id": "version",
+        "status": "FAILURE",
+        "diagnostics": [
+          {
+            "code": "VERSION",
+            "subject": "ROOT",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets."
+          }
+        ]
+      },
+      {
+        "protocol": "acp-core-wire/1",
+        "id": "port",
+        "status": "FAILURE",
+        "diagnostics": [
+          {
+            "code": "PORT",
+            "subject": "ROOT",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets."
+          }
+        ]
+      },
+      {
+        "protocol": "acp-core-wire/1",
+        "id": "noncanonical",
+        "status": "FAILURE",
+        "diagnostics": [
+          {
+            "code": "CANONICAL",
+            "subject": "ROOT",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets."
+          }
+        ]
+      }
+    ],
+    "rust": [
+      {
+        "diagnostics": [],
+        "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+        "id": "success",
+        "obligations": [
+          {
+            "id": "OB-TEST",
+            "origin": "ENT-PAYMENT@1",
+            "status": "OUTSTANDING"
+          }
+        ],
+        "protocol": "acp-core-wire/1",
+        "provenance": [
+          {
+            "id": "ENT-PAYMENT",
+            "producer": "experiment/1",
+            "revision": 1
+          }
+        ],
+        "status": "SUCCESS",
+        "visited": [
+          "ROOT",
+          "A",
+          "B"
+        ],
+        "work": 3
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "RESOURCE",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "resource",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "CANCELLED",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "cancelled",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "VERSION",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "version",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "PORT",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "port",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      },
+      {
+        "diagnostics": [
+          {
+            "code": "CANONICAL",
+            "primary": "graph.acp#L1C1",
+            "related": [],
+            "remediation": "Repair the declared request or retry with valid authority and budgets.",
+            "subject": "ROOT"
+          }
+        ],
+        "id": "noncanonical",
+        "protocol": "acp-core-wire/1",
+        "status": "FAILURE"
+      }
+    ]
+  }
+}

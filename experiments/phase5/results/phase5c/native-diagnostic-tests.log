@@ -1,0 +1,8 @@
+test_ambiguous_import_failure_transport_has_related_semantic_ids (test_phase5c.FailureDiagnosticTests.test_ambiguous_import_failure_transport_has_related_semantic_ids) ... ok
+test_exact_syntax_and_semantic_tokens_transport_as_failure (test_phase5c.FailureDiagnosticTests.test_exact_syntax_and_semantic_tokens_transport_as_failure) ... ok
+test_module_and_permission_related_tokens_and_safe_unrecoverable (test_phase5c.FailureDiagnosticTests.test_module_and_permission_related_tokens_and_safe_unrecoverable) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 45.420s
+
+OK

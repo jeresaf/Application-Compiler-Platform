@@ -12,7 +12,7 @@ from compiler_contracts import (VERSION, COMPILER, PIPELINE, STAGES, Stage,
     Derived, Projection, Projections, Realization, TargetIR, Artifact, ArtifactPlan,
     Owner, StageAudit, CompilationAudit, Compilation, CacheEntry, Impact,
     fingerprint, wire)
-from compiler_ports import CompilationContext
+from compiler_ports import CompilationContext, FrontendDiagnosticsFailure
 from validate import validate
 
 # Every listed code has an executable failure path and regression test.
@@ -427,6 +427,9 @@ def _perform(stage, value, ctx, budget):
             fail("INPUT")
         diagnostics = validate(model, "compile")
         if diagnostics:
+            if value.source_details.read():
+                from compiler_diagnostics import semantic_proposals
+                raise FrontendDiagnosticsFailure(semantic_proposals(model, value.source_map.read(), value.source_details.read(), diagnostics))
             # Do not echo third-party wording or input values. Translate only subjects and safe locations.
             subjects = {n["id"]: Subject(r.application, n["id"], n["revision"]) for n in model.get("nodes", []) if type(n) is dict and type(n.get("id")) is str and type(n.get("revision")) is int}
             chosen = tuple(sorted({subjects[d["subject"]] for d in diagnostics if d["subject"] in subjects}))
@@ -632,6 +635,14 @@ def execute(stage, value, context: CompilationContext, *, repeat=False):
             if fingerprint(other) != fingerprint(result):
                 fail("NONDETERMINISM")
         return Success(result, fingerprint(result), provenance, _obligations(result), (), Metrics(budget.used, hits, misses))
+    except FrontendDiagnosticsFailure as error:
+        from compiler_diagnostics import transport
+        try:
+            diagnostics = transport(error.diagnostics, context, stage, provenance)
+            return Failure(diagnostics, provenance, Metrics(budget.used))
+        except Exception:
+            diagnostic = Diagnostic("ACP-COMPILER-PORT", "ERROR", stage, (), None, (),
+                                    *MESSAGES["PORT"], provenance)
     except CompilerFault as error:
         code = error.code
         explanation, repair = MESSAGES[code]

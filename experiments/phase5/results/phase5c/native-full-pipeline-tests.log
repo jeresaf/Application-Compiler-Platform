@@ -1,0 +1,6 @@
+test_full_pipeline_concurrency_and_queued_restart (test_phase5c.NativeIsolationTests.test_full_pipeline_concurrency_and_queued_restart) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 271.581s
+
+OK

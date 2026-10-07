@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "testsRun": 8,
+  "totalExecutedIncludingFocusedRechecks": 11,
+  "failures": 0,
+  "errors": 0,
+  "scope": "Eight distinct final tests; raw prior native tests plus full-pipeline, final diagnostic and native bounds/race runs retained. Max two native workers.",
+  "runs": [
+    {
+      "log": "native-initial-tests.log",
+      "tests": 6
+    },
+    {
+      "log": "native-full-pipeline-tests.log",
+      "tests": 1
+    },
+    {
+      "log": "native-diagnostic-tests.log",
+      "tests": 3
+    },
+    {
+      "log": "native-bounds-tests.log",
+      "tests": 1
+    }
+  ],
+  "finalTokenAssertions": "Independent expected reference ID/revision/command tokens, including non-BMP Unicode before the token; all three frontends PASS."
+}

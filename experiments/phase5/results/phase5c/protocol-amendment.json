@@ -1,0 +1,13 @@
+{
+  "authorization": "User Phase 5C instruction explicitly permits bounded native ANTLR/Xtext concurrency after approved Phase 5B.",
+  "concurrentNativeWorkers": 2,
+  "coldRuns": 3,
+  "warmRuns": 5,
+  "workerMemoryMiB": 1024,
+  "managedHeapMiB": 768,
+  "workerTimeoutSeconds": 90,
+  "messageBytes": 1048576,
+  "softWeights": {"editor":25,"performance":20,"memory":15,"integration":20,"ergonomics":10,"operations":10},
+  "authority": "Outside disposable frontend/core workers.",
+  "phase6": "NOT_STARTED"
+}

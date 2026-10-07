@@ -89,6 +89,8 @@ class Diagnostic:
     explanation: str
     remediation: str
     provenance: Provenance
+    related_locations: tuple[str, ...] = ()
+    location_confidence: str = "UNSPECIFIED"
 
 
 @dataclass(frozen=True)
@@ -212,6 +214,7 @@ class Ingested:
     representation: Document
     source_map: Document
     dialect: str = "acp-structured-reference/0.1.0"
+    source_details: Document = Document.of({})
 
 
 @dataclass(frozen=True)
@@ -219,6 +222,7 @@ class SemanticAST:
     model: Document
     source_map: Document
     version: str = VERSION
+    source_details: Document = Document.of({})
 
 
 @dataclass(frozen=True)

@@ -1,4 +1,33 @@
-# Phase 5 — technology evaluation and Phase 5B evidence closure
+# Phase 5 — final technology selection evidence (Phase 5C)
+
+Status: **CLOSED AND GREEN at the bounded evaluation scope**. Phases 1–4 remain CLOSED AND GREEN. **Phase 6 is NOT STARTED.**
+
+ADR-0004 now records four independent decisions: production compiler-core runtime **DEFERRED**, textual frontend **DEFERRED**, native worker integration architecture **ACCEPTED**, and syntax + target-native semantic analysis + explicit confidence architecture **ACCEPTED**. Xtext 2.44.0 is **REJECTED for production** on the exact patched ANTLR3 generator's unresolved source/build provenance. Its passing experiments are retained. No framework or runtime is selected from speed alone.
+
+## Phase 5C results — 2026-10-07
+
+| Previously unknown gate | New evidence and disposition |
+| --- | --- |
+| Stage isolation | Native ANTLR JVM, Langium Node and Xtext JVM parser/runtime processes now persist across repeated requests. PID/sequence, restart, queued retry, active parse cancellation, malformed/oversize/stale response transport, server and host duplicate IDs, input/output bounds and protocol rejection are exercised. Independent full compiler pipelines execute concurrently. Authority remains outside the worker. **PASS for surviving candidates at experimental scope.** |
+| Diagnostic correctness | Actual compiler Failure carries exact recoverable syntax/reference/import/permission tokens, stable codes, subject and related IDs, related locations and fixed safe repair guidance. Chevrotain EOF token maps to document end; truly unrecoverable locations remain explicit. Ambiguous import and workflow diagnostics have deterministic projections across all three frontends. Unsafe metadata and output bounds fail closed. **PASS at bounded corpus scope.** |
+| Determinism | At most two native workers run concurrently, including real ANTLR/Xtext requests and complete pipelines. Same/different input, repeated warm state, queued restart, cancellation race, crash/retry, cwd/tmp/locale/environment/seed changes preserve expected output; reversing ordered steps changes canonical output and restoring input restores the original digest. **PASS at bounded workload scope.** |
+| Core wire/fault parity | Java, TypeScript and Rust agree on malformed requests, protocol/semantic/port versions, oversized input, bad canonical content/digest, missing dependencies, cancellation, budgets, deterministic fault precedence and malformed downstream response fixtures. Real OS timeout/crash produce no output and retry succeeds. The earlier wire's partial failed traversal is removed without rewriting its historical raw evidence. Representative slices remain distinct from complete compiler ports. |
+| Persistent integration | Three cold starts and five warm requests per start, real native same-process calls, RSS/heap, serialization and actual frontend→host normalization→candidate graph-core calls are retained. Python cannot embed JVM/Node directly; that is an integration constraint, not a synthetic measurement. |
+| Maintenance | Java/Node/Rust toolchain comparisons pass with unchanged production pins and isolated rollback. All 21 Rust license records are restored. Exact ANTLR3 source notice and AOP Alliance's upstream declaration resolve the absent POM metadata. Xtext's patched generator remains unprovenanced and is rejected, rather than converted to PASS. Surviving ANTLR/Langium retain the approved clean upgrade/locked restoration evidence. **PASS for surviving candidates only.** |
+
+[Gate register](../experiments/phase5/results/gates.json), [raw Phase 5C evidence](../experiments/phase5/results/phase5c/) and [ADR-0004](adr/0004-technology-evaluation.md) record eligibility, exact versions, limitations, upgrades, alternatives and fallbacks. Source intelligence and semantic fidelity reuse approved Phase 5B passing evidence. The worker concurrency amendment records the user's authorization while preserving original weights and bounds.
+
+The weights remain 25/20/15/20/10/10. Editor and team ergonomics comparisons are incomplete, so no aggregate normalized score is computed and no missing value is rewarded. Java/TypeScript/Rust remain viable on representative contracts; ANTLR/Langium remain viable frontend alternatives. Deferring these implementation choices is a deliberate result, not permission to start Phase 6. Specific source-language production adapters remain Phase 7 work.
+
+## Validation
+
+Local Linux: all 92 prior regressions plus two new diagnostic-boundary tests pass; native gate checks and independent Node byte/hash verification pass. Ubuntu 24.04 runs all 94 regressions, the existing Phase 5 experiment job and explicit Phase 5C evidence checks. Hosted evidence is separate from laptop timing data. CI pins remain CPython 3.14.7 and Node 24.21.0. Canonical vector files and Phase 1–4 historical completion reports are unchanged. `/tmp` logs are ephemeral; retained logs are copied into the Phase 5C evidence directory. Linux is only an engineering host baseline; semantics and generated targets remain neutral.
+
+## Historical Phase 5B record
+
+The following was the approved Phase 5B status, before Phase 5C. Its blockers and deferred decisions are historical; current dispositions are above.
+
+### Phase 5B evidence closure
 
 Status: **EXPLICITLY BLOCKED ON PRECISELY IDENTIFIED EVIDENCE**.
 Phases 1–4 remain CLOSED AND GREEN. **Phase 6 is NOT STARTED.**

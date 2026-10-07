@@ -191,3 +191,22 @@ structured adapters retain the copy fallback. This is a target-neutral adapter
 extension; Canonical Application 0.1.0, authority contracts and resource limits do
 not change. Experimental frontend identities are exact manifest versions, not a
 production plugin registration or selected DSL ABI.
+
+## Frontend diagnostic metadata (Phase 5C)
+
+The reference frontend port can reject input with immutable `SourceDiagnostic`
+metadata. The compiler transports it through `Failure`, with no output: stable
+code, semantic subject/related IDs, relative primary/related locations and explicit
+location confidence (`TOKEN`, `END_OF_INPUT`, `DECLARATION`, `UNRECOVERABLE`).
+Adapter exception wording and source text never become diagnostic explanations;
+the host supplies fixed safe remediation. Unsupported codes, unsafe paths or IDs,
+inconsistent confidence and oversized metadata fail closed.
+
+`Ingested` and `SemanticAST` may carry an immutable source-detail sidecar for
+JSON-pointer-to-token locations and exact-reference source positions. It is source
+metadata only; Canonical Application content, canonical hashes, semantic identity,
+change contracts and target-neutral stages are unchanged. The structured frontend
+uses the empty default sidecar and retains its existing diagnostic behavior.
+These reference extensions are not a production plugin ABI. Native worker
+protocols and Linux process controls belong to the engineering experiment, not
+Canonical IR or generated-target semantics.

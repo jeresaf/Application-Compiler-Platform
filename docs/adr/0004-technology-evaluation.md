@@ -1,6 +1,47 @@
-# ADR-0004: Production technology evaluation gate
+# ADR-0004: Independent technology and architecture decisions
 
-Status: PROPOSED; **no parser or production implementation language selected**. Date: 2026-09-15; investigation carried forward 2026-09-16. Basis: charter §§23–25, 39–43 and the user's explicit evidence-before-selection instruction.
+Status: **ACCEPTED for integration and source-analysis architecture; production core runtime and textual frontend DEFERRED**. Updated 2026-10-07 after Phase 5C. Phase 6 is NOT STARTED.
+
+## Final independent decisions
+
+| Decision | Disposition | Choice and evidence |
+| --- | --- | --- |
+| Production compiler-core runtime | **DEFERRED** | Java Temurin 21+35, TypeScript 5.9.3 on Node 24.21.0, and Rust 1.90.0 remain viable. Identical immutable representative graph/provenance/obligation slices and expanded native fault fixtures pass. No failed result contains output or partial traversal. These are not complete candidate ports of the eight-stage compiler; speed does not settle implementation/maintenance tradeoffs. |
+| Textual DSL/frontend | **DEFERRED** | ANTLR 4.13.2 and Langium/CLI 4.4.0 pass the bounded experiment hard gates. Xtext 2.44.0 is **REJECTED for production** because the exact patched ANTLR3 generator lacks verified source revision/patch/build provenance. Editor and team ergonomics data are not comparable enough for a weighted winner. Structured input remains supported. |
+| Frontend/core integration | **ACCEPTED** | Default to disposable, long-lived native workers behind exact-version messages and an immutable host adapter. The demonstrated envelope is `acp-frontend-wire/1`, source `acp-text/1`, accepted byte profile `acp-jcs-safe-v1`, exact frontend identities ANTLR 4.13.2 / Langium 4.4.0, semantic model 0.2.0. Authority/approval and scheduling remain in the host; cancel/crash invalidates the whole in-flight result. Core runtime remains independent. |
+| Source-analysis architecture | **ACCEPTED** | Syntax adapter + target-native semantic analyzer + explicit completeness/confidence (`KNOWN`, `UNKNOWN`, `UNRESOLVED`, `ABSENT`). Approved evidence uses TypeScript compiler API 5.9.3 and javac Temurin 21+35. Specific production language adapters remain **Phase 7 work**. Syntax alone never establishes semantic certainty. The previously unprovenanced wasm grammar stays rejected. |
+
+## Why accept these architectures
+
+Native ANTLR/Langium workers preserve parser/runtime state across repeated requests while semantic documents remain independent. The host preserves approval authority and exact request identity across crash/restart and queued retry. Native parser outputs become immutable plain records and bounded source sidecars; generated framework objects never enter Canonical IR. Actual compiler Failures now carry recoverable primary/related token locations and semantic IDs with deterministic, safe diagnostics. Tests include concurrent full pipelines, real active cancellation, malformed/oversized native response transport, stale IDs, duplicate requests and retry. Independent Java/TypeScript/Rust fault probes preserve the same Failure invariant. See [native tests](../../experiments/phase5/results/phase5c/native-tests.json), [diagnostics](../../experiments/phase5/results/phase5c/diagnostics.json), [fault fixtures](../../experiments/phase5/results/phase5c/core-faults.json) and [raw integration measurements](../../experiments/phase5/results/phase5c/integration.json).
+
+The worker architecture wins on required fault containment and separation of authority, without forcing a frontend to dictate the core language. Same-process JVM/Node parser calls are also measured using actual native functions; they remain possible future optimizations when a complete host/core pairing can preserve the same boundaries. No artificial Python embedding is claimed. Split-runtime measurements feed actual frontend output through existing normalization and then into candidate graph-stage cores; these are representative integration proofs, not complete compiler ports.
+
+Source-analysis architecture acceptance relies on the already-approved [Phase 5B native bindings and ownership evidence](../../experiments/phase5/results/phase5b/source.json), which is not rerun for this decision. It demonstrates imports, aliases, overloads, inheritance/interfaces, generated/human ownership, rename continuity and unresolved calls. A native-only syntax adapter is acceptable; no universal parser is required. Future adapters must preserve provenance, identity and confidence, and cannot convert syntax matches into known semantic facts.
+
+## Versions, deployment, limitations and maintenance
+
+Workers use Linux development/CI hosts, currently Ubuntu 24.04, CPython 3.14.7 in CI and Node 24.21.0. This engineering baseline introduces no Linux-specific semantic, IR, compiler-contract or generated-target requirement. Local Python 3.14.4 remains recorded separately. JVM probes use Java 21; Rust probes pin 1.90.0, serde_json 1.0.145 and sha2 0.10.9. These probe pins do not select a production core runtime.
+
+The demonstrated worker model uses FIFO requests per worker and at most two independent native workers, 1 MiB framing, a 90-second probe timeout, observed 1 GiB worker RSS budget and 768 MiB managed heaps. The host owns process lifetime, correlation/version checks, bounded framing and cancellation; workers carry no approval capability. Exact protocol and frontend versions evolve independently with explicit rejection, corpus comparison and rollback. A crash or malformed response discards the result and requires fresh worker retry; source digests and authority are rechecked. Source facts fall back to explicit `UNKNOWN`/`UNRESOLVED`, never guessed certainty. Structured input remains the frontend fallback.
+
+[Maintenance evidence](../../experiments/phase5/results/phase5c/maintenance.json) records Java 21→25, Node 22.20.0→24.21.0 and Rust 1.89.0→1.90.0 comparisons on identical fault/canonical corpora, isolated outputs and rollback. The local Java comparison also changes vendor to JetBrains Runtime; its timing cannot isolate version effects. Hosted comparison uses Temurin. Approved frontend upgrades are retained rather than repeated. npm/Cargo locks, artifact digests and notices remain required. All previously missing Rust crate license metadata is restored. AOP Alliance's upstream Public Domain declaration and the exact ANTLR runtime 3.2 source artifact's BSD notice resolve those metadata gaps; applicable notices/disclaimers must accompany redistribution. This is supply-chain evidence, not blanket legal clearance.
+
+Xtext's patched generator SHA256 `35853e64321ed8aded0bf89b791db4af0a18b362c7c084fb8a46c78dca21f74e` still cannot be matched to verified patch/build sources. Xtext is excluded from production eligibility, despite passing bounded persistence/diagnostic/concurrency probes. The observed ANTLR3 classpath conflict is another operational cost: Xtext needs its Maven ANTLR3 runtime before ANTLR4's bundled classes. The ANTLR worker uses a minimal ANTLR4/Gson classpath and does not inherit Xtext's unresolved generator dependency. Existing clean Ubuntu network restoration is credible for surviving locked models; an empty-cache offline build is not claimed without an artifact bundle.
+
+## Scoring and closure
+
+Weights remain editor 25, performance 20, memory 15, integration 20, ergonomics 10, operations 10. Xtext earns no score after failing provenance. Surviving candidates pass the six gates at the stated experimental scope. Raw startup, warm latency, heap/RSS, byte sizes and direct/split calls are retained. Comparable editor/team ergonomics data remain incomplete, so an aggregate normalized score is **NOT COMPUTABLE**, not zero. No weighted runtime/frontend winner is published; both choices are deliberately deferred. Architecture acceptance is independent of that absent ranking.
+
+**Phase 5 is CLOSED AND GREEN as an evidence evaluation with two justified ACCEPTED architecture decisions and two explicit DEFERRED implementation choices.** This does not authorize production implementation or Phase 6. Any later runtime/frontend commitment must retain these gates and complete the missing comparative decision evidence; it cannot rely on benchmark speed alone. [Gate register](../../experiments/phase5/results/gates.json) and [completion report](../phase5-completion-report.md) are authoritative for the bounded results.
+
+## Historical investigation and approved evidence passes
+
+The following records retain the earlier proposed/deferred findings. Their missing-work statements describe those passes; the independent decisions above supersede them.
+
+### Initial production technology evaluation gate
+
+Historical initial status: PROPOSED; **no parser or production implementation language selected**. Date: 2026-09-15; investigation carried forward 2026-09-16. Basis: charter §§23–25, 39–43 and the user's explicit evidence-before-selection instruction.
 
 ## Question and recommendation
 

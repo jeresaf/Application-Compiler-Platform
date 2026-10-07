@@ -16,3 +16,7 @@ sha2 = "=0.10.9"
 [[bin]]
 name = "wire-core"
 path = "wire.rs"
+
+[[bin]]
+name = "fault-core"
+path = "fault.rs"

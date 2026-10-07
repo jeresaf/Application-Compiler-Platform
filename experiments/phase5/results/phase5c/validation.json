@@ -1,0 +1,11 @@
+{
+  "phase1Through4": "CLOSED_AND_GREEN",
+  "baselineRegressionTests": 92,
+  "newDiagnosticBoundaryTests": 2,
+  "canonicalVectors": "UNCHANGED",
+  "phase6": "NOT_STARTED",
+  "localPython": "3.14.4",
+  "officialCiPython": "3.14.7",
+  "node": "24.21.0",
+  "note": "Local baseline and new boundary tests run separately; Ubuntu discovery runs all 94. Local /tmp logs are ephemeral; copied logs here are retained evidence."
+}

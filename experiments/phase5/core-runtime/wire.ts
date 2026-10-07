@@ -12,6 +12,7 @@ function execute(request:Request):any {
  else if(r.portVersion!=='graph/1')code='PORT';
  else if(canonical(JSON.parse(r.canonicalInput))!==r.canonicalInput)code='CANONICAL';
  while(!code&&pending.length){const id=pending.shift()!;if(r.cancelled){code='CANCELLED';break;}if(visited.includes(id))continue;if(visited.length>=r.budget){code='RESOURCE';break;}visited.push(id);pending.push(...(r.dependencies[id]??[]));}
+ if(code)return freeze({protocol:'acp-core-wire/1',id:r.id,status:'FAILURE',diagnostics:[{code,subject:'ROOT',primary:'graph.acp#L1C1',related:[],remediation:'Repair the declared request or retry with valid authority and budgets.'}]});
  const hash=createHash('sha256').update('ACP\0acp-jcs-safe-v1\0canonical\0').update(canonical(JSON.parse(r.canonicalInput))).digest('hex');
  return freeze({protocol:'acp-core-wire/1',id:r.id,status:code?'FAILURE':'SUCCESS',diagnostics:code?[{code,subject:'ROOT',primary:'graph.acp#L1C1',related:[],remediation:'Repair the declared request or retry with valid authority and budgets.'}]:[],digest:'sha256:'+hash,provenance:r.provenance,obligations:r.obligations,visited,work:visited.length});
 }

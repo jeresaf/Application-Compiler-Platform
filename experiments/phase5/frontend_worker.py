@@ -51,7 +51,7 @@ class Client:
     def __enter__(self):return self
     def __exit__(self,*_):self.close()
 
-    def call(self,request,*,timeout=30,cancelled=None):
+    def call(self,request,*,timeout=30,cancelled=None,on_sent=None):
         if cancelled is not None and cancelled.is_set():raise WireFailure("CANCELLED")
         if request.get("id") in self.seen:raise WireFailure("DUPLICATE_ID")
         if len(self.seen)>=1024:raise WireFailure("SESSION_LIMIT")
@@ -75,7 +75,9 @@ class Client:
                         if key.fileobj is self.process.stdin:
                             try:cursor+=os.write(self.process.stdin.fileno(),raw[cursor:cursor+65536])
                             except BrokenPipeError:raise WireFailure("CRASH") from None
-                            if cursor==len(raw):selector.unregister(self.process.stdin)
+                            if cursor==len(raw):
+                                selector.unregister(self.process.stdin)
+                                if on_sent is not None:on_sent()
                         else:
                             chunk=os.read(self.process.stdout.fileno(),65536)
                             if not chunk:raise WireFailure("CRASH")

@@ -17,6 +17,23 @@ class Frontend(Protocol):
     def elaborate(self, parsed: Ingested) -> SemanticAST: ...
 
 
+@dataclass(frozen=True)
+class SourceDiagnostic:
+    """Bounded diagnostic metadata, never source text or adapter exception wording."""
+    code: str
+    subject: tuple[str, int] | None
+    location: str | None
+    related: tuple[tuple[str, int], ...] = ()
+    related_locations: tuple[str, ...] = ()
+    confidence: str = "UNRECOVERABLE"
+
+
+class FrontendDiagnosticsFailure(Exception):
+    def __init__(self, diagnostics: tuple[SourceDiagnostic, ...]):
+        self.diagnostics = diagnostics
+        super().__init__("Frontend diagnostics")
+
+
 class ApprovalAuthority(Protocol):
     identity: str
     def approve_content(self, request: dict, evidence: Document) -> bool: ...

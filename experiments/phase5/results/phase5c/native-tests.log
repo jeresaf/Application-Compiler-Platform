@@ -1,0 +1,34 @@
+test_ambiguous_import_failure_transport_has_related_semantic_ids (test_phase5c.FailureDiagnosticTests.test_ambiguous_import_failure_transport_has_related_semantic_ids) ... ok
+test_exact_syntax_and_semantic_tokens_transport_as_failure (test_phase5c.FailureDiagnosticTests.test_exact_syntax_and_semantic_tokens_transport_as_failure) ... ok
+test_module_and_permission_related_tokens_and_safe_unrecoverable (test_phase5c.FailureDiagnosticTests.test_module_and_permission_related_tokens_and_safe_unrecoverable) ... ok
+test_native_runtime_stays_alive_and_independent_requests_are_deterministic (test_phase5c.NativeIsolationTests.test_native_runtime_stays_alive_and_independent_requests_are_deterministic) ... ok
+test_real_crash_restart_retry_cancel_versions_duplicate_and_oversize (test_phase5c.NativeIsolationTests.test_real_crash_restart_retry_cancel_versions_duplicate_and_oversize) ... ok
+test_real_native_response_transport_corruption (test_phase5c.NativeIsolationTests.test_real_native_response_transport_corruption) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 146.358s
+
+OK
+
+test_full_pipeline_concurrency_and_queued_restart (test_phase5c.NativeIsolationTests.test_full_pipeline_concurrency_and_queued_restart) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 271.581s
+
+OK
+
+test_ambiguous_import_failure_transport_has_related_semantic_ids (test_phase5c.FailureDiagnosticTests.test_ambiguous_import_failure_transport_has_related_semantic_ids) ... ok
+test_exact_syntax_and_semantic_tokens_transport_as_failure (test_phase5c.FailureDiagnosticTests.test_exact_syntax_and_semantic_tokens_transport_as_failure) ... ok
+test_module_and_permission_related_tokens_and_safe_unrecoverable (test_phase5c.FailureDiagnosticTests.test_module_and_permission_related_tokens_and_safe_unrecoverable) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 45.420s
+
+OK
+
+test_native_oversized_output_server_duplicate_and_cancellation_race (test_phase5c.NativeIsolationTests.test_native_oversized_output_server_duplicate_and_cancellation_race) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 25.725s
+
+OK

@@ -1,0 +1,15 @@
+#[allow(dead_code)] mod strict {include!("canonical.rs");}
+use serde_json::{Value,json};
+use std::io::{self,BufRead};
+fn fail(id:&str,code:&str)->Value{json!({"protocol":"acp-core-fault/1","id":id,"status":"FAILURE","diagnostics":[{"code":code,"subject":"ROOT","primary":"graph.acp#L1C1","related":[],"remediation":"Repair the declared request or retry with valid authority and budgets."}]})}
+fn execute(raw:&[u8])->Value{let mut id="unknown";if raw.len()>1048576{return fail(id,"INPUT_SIZE");}let Ok(r)=strict::parse(raw)else{return fail(id,"MALFORMED");};if strict::encode(&r).as_bytes()!=raw{return fail(id,"MALFORMED");}if let Some(s)=r["id"].as_str(){id=s;}
+ let Some(map)=r.as_object()else{return fail(id,"MALFORMED");};let mut keys:Vec<_>=map.keys().map(String::as_str).collect();keys.sort();let mut expected=vec!["id","protocol","semanticVersion","canonicalInput","digest","dependencies","budget","cancelled","portVersion","downstream"];expected.sort();
+ if keys!=expected||["id","protocol","semanticVersion","canonicalInput","digest","portVersion"].iter().any(|k|!r[k].is_string())||r["budget"].as_u64().is_none()||!r["cancelled"].is_boolean(){return fail(id,"MALFORMED");}
+ let Some(graph)=r["dependencies"].as_object()else{return fail(id,"MALFORMED");};if graph.values().any(|v|v.as_array().is_none_or(|a|a.iter().any(|x|!x.is_string()))){return fail(id,"MALFORMED");}
+ if r["protocol"]!="acp-core-fault/1"{return fail(id,"VERSION");}if r["semanticVersion"]!="0.2.0"{return fail(id,"SEMANTIC_VERSION");}if r["portVersion"]!="graph/1"{return fail(id,"PORT_VERSION");}
+ let raw_content=r["canonicalInput"].as_str().unwrap();let Ok(content)=strict::parse(raw_content.as_bytes())else{return fail(id,"CANONICAL");};if strict::encode(&content)!=raw_content{return fail(id,"CANONICAL");}let digest=strict::hash(&content,"canonical");if r["digest"]!=digest{return fail(id,"DIGEST");}
+ if r["downstream"].as_object().is_none_or(|m|m.len()!=2||r["downstream"]["protocol"]!="graph/1"||r["downstream"]["status"]!="SUCCESS"){return fail(id,"DOWNSTREAM");}
+ let mut pending=std::collections::VecDeque::from(["ROOT"]);let mut visited=Vec::new();while let Some(n)=pending.pop_front(){if r["cancelled"]==true{return fail(id,"CANCELLED");}if visited.contains(&n){continue;}if visited.len() as u64>=r["budget"].as_u64().unwrap(){return fail(id,"RESOURCE");}let Some(next)=graph.get(n)else{return fail(id,"DEPENDENCY");};visited.push(n);pending.extend(next.as_array().unwrap().iter().map(|s|s.as_str().unwrap()));}
+ json!({"protocol":"acp-core-fault/1","id":id,"status":"SUCCESS","diagnostics":[],"output":{"digest":digest,"visited":visited}})
+}
+fn main(){let mut input=io::stdin().lock();loop{let mut raw=Vec::new();let mut over=false;loop{let buffer=input.fill_buf().unwrap();if buffer.is_empty(){return;}let end=buffer.iter().position(|b|*b==10);let count=end.map_or(buffer.len(),|n|n+1);if raw.len()+count<=1048577{raw.extend_from_slice(&buffer[..count]);}else{over=true;}input.consume(count);if end.is_some(){break;}}if over{raw=vec![32;1048577];}else{raw.pop();}println!("{}",strict::encode(&execute(&raw)));}}

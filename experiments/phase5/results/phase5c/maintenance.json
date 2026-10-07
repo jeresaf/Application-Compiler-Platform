@@ -1,0 +1,343 @@
+{
+  "rustInventory": [
+    {
+      "name": "block-buffer",
+      "version": "0.10.4",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/utils",
+      "metadataSha256": "c76e4bd298cd6223882238449e31939d75613e82757ca87e249df843decf5f9a"
+    },
+    {
+      "name": "cfg-if",
+      "version": "1.0.5",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/rust-lang/cfg-if",
+      "metadataSha256": "d646663ec1bd4e8e795bd6a386cff9c374880d6237bbfa36bbac08b7f26ce65c"
+    },
+    {
+      "name": "cpufeatures",
+      "version": "0.2.17",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "59ed5838eebb26a2bb2e58f6d5b5316989ae9d08bab10e0e6d103e656d1b0280",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/utils",
+      "metadataSha256": "25160ea4dfa195721d352d42827b882a41f18f4c55fff58e5c3878ecae84ca44"
+    },
+    {
+      "name": "crypto-common",
+      "version": "0.1.7",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "78c8292055d1c1df0cce5d180393dc8cce0abec0a7102adb6c7b1eef6016d60a",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/traits",
+      "metadataSha256": "303682a6a66fdc98de8a011ac275e18c523f1535ed8de2a291a4fcad91de8348"
+    },
+    {
+      "name": "digest",
+      "version": "0.10.7",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/traits",
+      "metadataSha256": "f0cc2fc18c6e7f3533658b9e59d71b55e641e7d8226e5d1b915a5e7c0a1d3f36"
+    },
+    {
+      "name": "generic-array",
+      "version": "0.14.7",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a",
+      "license": "MIT",
+      "repository": "https://github.com/fizyk20/generic-array.git",
+      "metadataSha256": "4b5daed75505275d11f4854dd9172f910da61d9856ca2936d95e2e6e0c9040e4"
+    },
+    {
+      "name": "itoa",
+      "version": "1.0.18",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/dtolnay/itoa",
+      "metadataSha256": "894c215e4e7e973b556b0e9627bf9b6a719a043fac9b5af9838660816392a09f"
+    },
+    {
+      "name": "libc",
+      "version": "0.2.190",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ce5d3ddc6d3fa000eb1536d85e147bfe31aacaba692ed6a876f95cb7c855be78",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/rust-lang/libc",
+      "metadataSha256": "5d410962aefee7ac5916c9cdd915a717228576dbe3c8a09460fd58c4ec751e2c"
+    },
+    {
+      "name": "memchr",
+      "version": "2.8.3",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98",
+      "license": "Unlicense OR MIT",
+      "repository": "https://github.com/BurntSushi/memchr",
+      "metadataSha256": "a14f68b8fa55f15fd03b15dced37bcf66a0a628f568eedc82817cdb7f9281951"
+    },
+    {
+      "name": "proc-macro2",
+      "version": "1.0.107",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/dtolnay/proc-macro2",
+      "metadataSha256": "6bdbe54a7f052e552dcfca90351764476e2767237ec3f954df8bd9f602861056"
+    },
+    {
+      "name": "quote",
+      "version": "1.0.47",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/dtolnay/quote",
+      "metadataSha256": "13d8c50837f14aff48cd622349f98fb2c46350b7a0c08fd574cf7de4def27d06"
+    },
+    {
+      "name": "ryu",
+      "version": "1.0.23",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f",
+      "license": "Apache-2.0 OR BSL-1.0",
+      "repository": "https://github.com/dtolnay/ryu",
+      "metadataSha256": "410de3eae58a75b9d2558d0a4e3ed43c2c8317781ffbd30a7cbe4aebaa833e1a"
+    },
+    {
+      "name": "serde",
+      "version": "1.0.229",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/serde-rs/serde",
+      "metadataSha256": "6883caefd46e86eb15d22d3a6d274ad304c5e7934ab70eb58d81b7c4a29ef9db"
+    },
+    {
+      "name": "serde_core",
+      "version": "1.0.229",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "67dca2c9c51e58a4791a4b1ed58308b39c64224d349a935ab5039aa360942a48",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/serde-rs/serde",
+      "metadataSha256": "c6049e170e4f7c2b48749fefab59db583bfac4e466cde6d0c53e4f49bc5044f7"
+    },
+    {
+      "name": "serde_derive",
+      "version": "1.0.229",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/serde-rs/serde",
+      "metadataSha256": "d2581160ffa61baa386f882e08b0db20051dc3c782a82268d6473998b61c926e"
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.145",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/serde-rs/json",
+      "metadataSha256": "a603996936a2ed8d62e4bf158aeacd830b7c8f237cefc31c3bf6313fbf26d214"
+    },
+    {
+      "name": "sha2",
+      "version": "0.10.9",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/RustCrypto/hashes",
+      "metadataSha256": "f5b86209df69360114aaee67a66c3fcd31d8c840b8f34b9ad383aacd63cd15da"
+    },
+    {
+      "name": "syn",
+      "version": "3.0.6",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/dtolnay/syn",
+      "metadataSha256": "69b7b5a4f75d37bac9745ced65bf9b715ddc4ecb32308df7d796c55e9cbae40f"
+    },
+    {
+      "name": "typenum",
+      "version": "1.20.1",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20",
+      "license": "MIT OR Apache-2.0",
+      "repository": "https://github.com/paholg/typenum",
+      "metadataSha256": "00785a81eae34b3298dfdde78a6bd96fe3ec000de46edd509bd13b7cab7a9870"
+    },
+    {
+      "name": "unicode-ident",
+      "version": "1.0.26",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d245f478577f809a851594d02313b640fb437e0bb33866753cff937863096954",
+      "license": "(MIT OR Apache-2.0) AND Unicode-3.0",
+      "repository": "https://github.com/dtolnay/unicode-ident",
+      "metadataSha256": "f70dabc0fe831788a202762e62cc76c19941680960e2e2710d1ee9e79877d9af"
+    },
+    {
+      "name": "version_check",
+      "version": "0.9.5",
+      "registry": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a",
+      "license": "MIT/Apache-2.0",
+      "repository": "https://github.com/SergioBenitez/version_check",
+      "metadataSha256": "399ea74400a173c02eabe91cb9487d0cf351117857a5d2ebc6231f0efde67681"
+    }
+  ],
+  "xtext": {
+    "candidateDisposition": "REJECTED_FOR_PRODUCTION",
+    "generatorSha256": "35853e64321ed8aded0bf89b791db4af0a18b362c7c084fb8a46c78dca21f74e",
+    "notices": {
+      "META-INF/MANIFEST.MF": "Manifest-Version: 1.0\r\nAnt-Version: Apache Ant 1.9.2\r\nCreated-By: 1.6.0_65-b14-462-11M4609 (Apple Inc.)\r\n\r\n"
+    },
+    "reason": "No verified mapping from exact patched generator bytes to source revision, patch set and reproducible build. Upstream ANTLR source is not patched-binary provenance. Digest-pinning alone is insufficient.",
+    "licenseEvidence": {
+      "aopalliance1.0": {
+        "source": "https://aopalliance.sourceforge.net/",
+        "declared": "Public Domain",
+        "status": "Upstream primary page inspected 2026-10-07: source code is Public Domain. License statement resolved; do not infer a license from absent POM metadata."
+      },
+      "antlrRuntime3.2": {
+        "source": "https://repo.maven.apache.org/maven2/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2-sources.jar",
+        "declared": "BSD-3-Clause",
+        "status": "Exact Maven source artifact header verified; preserve source/binary notice, disclaimer and non-endorsement condition.",
+        "sourceArtifactSha256": "824f5f244e65274204be2370f0772b69a2e32320c2562281e3dabb9dafbc8887",
+        "noticeSha256": "76543a1f2d7b6c3d6498d47d3138ae0f1cc195055a6b6819f23c7fb05bac51b9"
+      }
+    },
+    "cleanRestoration": "Existing clean Ubuntu Maven/setup builds reproduce artifacts over the network; exact patched generator source rebuild remains unavailable and excludes this production model."
+  },
+  "toolchainUpgrades": {
+    "java": {
+      "status": "PASS",
+      "from": {
+        "command": [
+          "java",
+          "-version"
+        ],
+        "stdout": "",
+        "stderr": "openjdk version \"21\" 2023-09-19 LTS\nOpenJDK Runtime Environment Temurin-21+35 (build 21+35-LTS)\nOpenJDK 64-Bit Server VM Temurin-21+35 (build 21+35-LTS, mixed mode, sharing)\n",
+        "exitCode": 0
+      },
+      "to": {
+        "command": [
+          "/opt/android-studio/jbr/bin/java",
+          "-version"
+        ],
+        "stdout": "",
+        "stderr": "openjdk version \"25.0.3\" 2026-04-21\nOpenJDK Runtime Environment (build 25.0.3+-15898627-b508.16)\nOpenJDK 64-Bit Server VM (build 25.0.3+-15898627-b508.16, mixed mode)\n",
+        "exitCode": 0
+      },
+      "compile": {
+        "command": [
+          "/opt/android-studio/jbr/bin/javac",
+          "--release",
+          "21",
+          "-cp",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.common.types/2.44.0/org.eclipse.xtext.common.types-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext/2.44.0/org.eclipse.xtext-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtend.lib/2.44.0/org.eclipse.xtend.lib-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.xbase.lib/2.44.0/org.eclipse.xtext.xbase.lib-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtend.lib.macro/2.44.0/org.eclipse.xtend.lib.macro-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.util/2.44.0/org.eclipse.xtext.util-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/inject/guice/7.0.0/guice-7.0.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/io/github/classgraph/classgraph/4.8.192/classgraph-4.8.192.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.xtext.generator/2.44.0/org.eclipse.xtext.xtext.generator-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.ecore/2.44.0/org.eclipse.xtext.ecore-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.ecore/2.36.0/org.eclipse.emf.ecore-2.36.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.37.0/org.eclipse.emf.ecore.xmi-2.37.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.common/2.30.0/org.eclipse.emf.common-2.30.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.codegen/2.23.0/org.eclipse.emf.codegen-2.23.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.codegen.ecore/2.37.0/org.eclipse.emf.codegen.ecore-2.37.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe.utils/1.21.0/org.eclipse.emf.mwe.utils-1.21.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe.core/1.21.0/org.eclipse.emf.mwe.core-1.21.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/commons-logging/commons-logging/1.3.4/commons-logging-1.3.4.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.27.0/org.eclipse.emf.mwe2.lib-2.27.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.equinox.common/3.20.300/org.eclipse.equinox.common-3.20.300.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.runtime/3.34.100/org.eclipse.core.runtime-3.34.100.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.osgi/3.24.0/org.eclipse.osgi-3.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.jobs/3.15.700/org.eclipse.core.jobs-3.15.700.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.600/org.eclipse.equinox.registry-3.12.600.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.equinox.preferences/3.12.100/org.eclipse.equinox.preferences-3.12.100.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.800/org.eclipse.core.contenttype-3.9.800.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.equinox.app/1.7.500/org.eclipse.equinox.app-1.7.500.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.expressions/3.9.500/org.eclipse.core.expressions-3.9.500.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.filesystem/1.11.400/org.eclipse.core.filesystem-1.11.400.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/net/java/dev/jna/jna/5.18.1/jna-5.18.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/net/java/dev/jna/jna-platform/5.18.1/jna-platform-5.18.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.commands/3.12.500/org.eclipse.core.commands-3.12.500.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.text/3.14.500/org.eclipse.text-3.14.500.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.variables/3.6.700/org.eclipse.core.variables-3.6.700.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/org.eclipse.jdt.debug/3.25.0/org.eclipse.jdt.debug-3.25.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.debug.core/3.23.200/org.eclipse.debug.core-3.23.200.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.resources/3.23.100/org.eclipse.core.resources-3.23.100.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/org.eclipse.jdt.core/3.44.0/org.eclipse.jdt.core-3.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/ecj/3.44.0/ecj-3.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/org.eclipse.jdt.launching/3.24.0/org.eclipse.jdt.launching-3.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/org.eclipse.jdt.launching.macosx/3.6.300/org.eclipse.jdt.launching.macosx-3.6.300.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.ide/2.44.0/org.eclipse.xtext.ide-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.ecore.change/2.16.0/org.eclipse.emf.ecore.change-2.16.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/lsp4j/org.eclipse.lsp4j/1.0.0/org.eclipse.lsp4j-1.0.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/lsp4j/org.eclipse.lsp4j.jsonrpc/1.0.0/org.eclipse.lsp4j.jsonrpc-1.0.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe2.launch/2.24.0/org.eclipse.emf.mwe2.launch-2.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe2.runtime/2.24.0/org.eclipse.emf.mwe2.runtime-2.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe2.language/2.24.0/org.eclipse.emf.mwe2.language-2.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/commons-cli/commons-cli/1.11.0/commons-cli-1.11.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/ch/qos/reload4j/reload4j/1.2.26/reload4j-1.2.26.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/code/gson/gson/2.13.2/gson-2.13.2.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/errorprone/error_prone_annotations/2.41.0/error_prone_annotations-2.41.0.jar",
+          "-d",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/phase5c-toolchains/java-upgrade-out",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/core-runtime/Canonical.java",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/core-runtime/FaultCore.java"
+        ],
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 0
+      },
+      "sameFaultCorpus": true,
+      "canonicalCorpus": {
+        "command": [
+          "/opt/android-studio/jbr/bin/java",
+          "-cp",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/phase5c-toolchains/java-upgrade-out:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.common.types/2.44.0/org.eclipse.xtext.common.types-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext/2.44.0/org.eclipse.xtext-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtend.lib/2.44.0/org.eclipse.xtend.lib-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.xbase.lib/2.44.0/org.eclipse.xtext.xbase.lib-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtend.lib.macro/2.44.0/org.eclipse.xtend.lib.macro-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.util/2.44.0/org.eclipse.xtext.util-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/inject/guice/7.0.0/guice-7.0.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/io/github/classgraph/classgraph/4.8.192/classgraph-4.8.192.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.xtext.generator/2.44.0/org.eclipse.xtext.xtext.generator-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.ecore/2.44.0/org.eclipse.xtext.ecore-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.ecore/2.36.0/org.eclipse.emf.ecore-2.36.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.37.0/org.eclipse.emf.ecore.xmi-2.37.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.common/2.30.0/org.eclipse.emf.common-2.30.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.codegen/2.23.0/org.eclipse.emf.codegen-2.23.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.codegen.ecore/2.37.0/org.eclipse.emf.codegen.ecore-2.37.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe.utils/1.21.0/org.eclipse.emf.mwe.utils-1.21.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe.core/1.21.0/org.eclipse.emf.mwe.core-1.21.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/commons-logging/commons-logging/1.3.4/commons-logging-1.3.4.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.27.0/org.eclipse.emf.mwe2.lib-2.27.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.equinox.common/3.20.300/org.eclipse.equinox.common-3.20.300.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.runtime/3.34.100/org.eclipse.core.runtime-3.34.100.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.osgi/3.24.0/org.eclipse.osgi-3.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.jobs/3.15.700/org.eclipse.core.jobs-3.15.700.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.600/org.eclipse.equinox.registry-3.12.600.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.equinox.preferences/3.12.100/org.eclipse.equinox.preferences-3.12.100.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.800/org.eclipse.core.contenttype-3.9.800.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.equinox.app/1.7.500/org.eclipse.equinox.app-1.7.500.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.expressions/3.9.500/org.eclipse.core.expressions-3.9.500.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.filesystem/1.11.400/org.eclipse.core.filesystem-1.11.400.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/net/java/dev/jna/jna/5.18.1/jna-5.18.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/net/java/dev/jna/jna-platform/5.18.1/jna-platform-5.18.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.commands/3.12.500/org.eclipse.core.commands-3.12.500.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.text/3.14.500/org.eclipse.text-3.14.500.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.variables/3.6.700/org.eclipse.core.variables-3.6.700.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/org.eclipse.jdt.debug/3.25.0/org.eclipse.jdt.debug-3.25.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.debug.core/3.23.200/org.eclipse.debug.core-3.23.200.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/platform/org.eclipse.core.resources/3.23.100/org.eclipse.core.resources-3.23.100.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/org.eclipse.jdt.core/3.44.0/org.eclipse.jdt.core-3.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/ecj/3.44.0/ecj-3.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/org.eclipse.jdt.launching/3.24.0/org.eclipse.jdt.launching-3.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/jdt/org.eclipse.jdt.launching.macosx/3.6.300/org.eclipse.jdt.launching.macosx-3.6.300.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/xtext/org.eclipse.xtext.ide/2.44.0/org.eclipse.xtext.ide-2.44.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.ecore.change/2.16.0/org.eclipse.emf.ecore.change-2.16.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/lsp4j/org.eclipse.lsp4j/1.0.0/org.eclipse.lsp4j-1.0.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/lsp4j/org.eclipse.lsp4j.jsonrpc/1.0.0/org.eclipse.lsp4j.jsonrpc-1.0.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe2.launch/2.24.0/org.eclipse.emf.mwe2.launch-2.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe2.runtime/2.24.0/org.eclipse.emf.mwe2.runtime-2.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/eclipse/emf/org.eclipse.emf.mwe2.language/2.24.0/org.eclipse.emf.mwe2.language-2.24.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/guava/guava/33.5.0-jre/guava-33.5.0-jre.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/commons-cli/commons-cli/1.11.0/commons-cli-1.11.0.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/ch/qos/reload4j/reload4j/1.2.26/reload4j-1.2.26.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/code/gson/gson/2.13.2/gson-2.13.2.jar:/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/m2/com/google/errorprone/error_prone_annotations/2.41.0/error_prone_annotations-2.41.0.jar",
+          "Canonical",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/test-corpus/canonical"
+        ],
+        "stdout": "{\"candidate\":\"Java 21 / Gson 2.13.2 strict adapter\",\"status\":\"PASS\",\"positive\":9,\"negative\":13,\"snapshotHashes\":2}\n",
+        "stderr": "",
+        "exitCode": 0
+      },
+      "vendorChange": "Local comparison also changes Temurin to JetBrains Runtime; cannot attribute timing to version alone. CI uses alternate Temurin explicitly.",
+      "generatedDiff": [],
+      "rollback": "Original javac/java and production pin unchanged."
+    },
+    "node": {
+      "status": "PASS",
+      "from": {
+        "command": [
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/phase5c-toolchains/node-v22.20.0-linux-x64/bin/node",
+          "--version"
+        ],
+        "stdout": "v22.20.0\n",
+        "stderr": "",
+        "exitCode": 0
+      },
+      "to": {
+        "command": [
+          "node",
+          "--version"
+        ],
+        "stdout": "v24.21.0\n",
+        "stderr": "",
+        "exitCode": 0
+      },
+      "sameFaultCorpus": true,
+      "canonicalCorpus": {
+        "command": [
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/phase5c-toolchains/node-v22.20.0-linux-x64/bin/node",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/tooling/check_canonical_vectors.mjs"
+        ],
+        "stdout": "Canonical byte profile PASS: 9 positive, 13 negative, 2 snapshot hashes; v22.20.0\n",
+        "stderr": "",
+        "exitCode": 0
+      },
+      "native": null,
+      "archiveSha256": "00bbd05e306ea68b6e13e17360d0e2f680b493ef95f2fea1c4296ff7437530bc",
+      "source": "https://nodejs.org/dist/v22.20.0/SHASUMS256.txt",
+      "generatedDiff": [],
+      "rollback": "Alternate executable only; Node 24.21.0 stays pinned."
+    },
+    "rust": {
+      "status": "PASS",
+      "from": "1.89.0 (29483883e 2025-08-04)",
+      "to": "1.90.0",
+      "build": {
+        "command": [
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/cargo/bin/cargo",
+          "+1.89.0",
+          "build",
+          "--offline",
+          "--locked",
+          "--release",
+          "--manifest-path",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/core-runtime/Cargo.toml",
+          "--target-dir",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/phase5c-toolchains/rust-previous"
+        ],
+        "stdout": "",
+        "stderr": "   Compiling acp-phase5-canonical-probe v0.1.0 (/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/core-runtime)\n    Finished `release` profile [optimized] target(s) in 1.84s\n",
+        "exitCode": 0
+      },
+      "sameFaultCorpus": true,
+      "canonicalCorpus": {
+        "command": [
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/experiments/phase5/.cache/phase5c-toolchains/rust-previous/release/canonical-probe",
+          "/home/aiko-jerry/Projects/Application-Compiler-Platform/test-corpus/canonical"
+        ],
+        "stdout": "{\"candidate\":\"Rust 1.90.0 / serde_json 1.0.145 / sha2 0.10.9\",\"positive\":9,\"negative\":13,\"snapshotHashes\":2,\"status\":\"PASS\"}\n",
+        "stderr": "",
+        "exitCode": 0
+      },
+      "generatedDiff": [],
+      "rollback": "Isolated target directory; lock and default toolchain unchanged."
+    }
+  },
+  "rollback": "Production pins and locks unchanged; alternate tools/output directories isolated under ignored .cache. Generated grammar sources unchanged by core-toolchain tests.",
+  "licensingScope": "Restored metadata and notices are engineering supply-chain evidence, not a legal clearance claim."
+}

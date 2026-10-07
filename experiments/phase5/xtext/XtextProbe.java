@@ -27,12 +27,14 @@ public final class XtextProbe {
    default:throw new IllegalArgumentException(o.eClass().getName());
   }
  }
- public static void main(String[] args)throws Exception{
-  long startup=System.nanoTime();var setup=new org.acp.experiment.AcpStandaloneSetup(){
+ static final long STARTED=System.nanoTime();
+ static final com.google.inject.Injector INJECTOR=initialize();
+ static com.google.inject.Injector initialize(){var setup=new org.acp.experiment.AcpStandaloneSetup(){
    @Override public com.google.inject.Injector createInjector(){return com.google.inject.Guice.createInjector(org.eclipse.xtext.util.Modules2.mixin(new org.acp.experiment.AcpRuntimeModule(),new org.acp.experiment.ide.AcpIdeModule()));}
-  };var injector=setup.createInjectorAndDoEMFRegistration();double startupMs=(System.nanoTime()-startup)/1e6;
-  String text=Files.readString(Path.of(args[0]));var times=new JsonArray();XtextResource resource=null;
-  for(int i=0;i<Integer.parseInt(args.length>1?args[1]:"1");i++){
+  };return setup.createInjectorAndDoEMFRegistration();}
+ public static JsonObject parse(String text,int runs)throws Exception{
+  var injector=INJECTOR;double startupMs=(System.nanoTime()-STARTED)/1e6;var times=new JsonArray();XtextResource resource=null;
+  for(int i=0;i<runs;i++){
    var set=injector.getInstance(XtextResourceSet.class);resource=(XtextResource)set.createResource(URI.createURI("memory:/experiment.acp"));long start=System.nanoTime();resource.load(new ByteArrayInputStream(text.getBytes(java.nio.charset.StandardCharsets.UTF_8)),null);times.add((System.nanoTime()-start)/1e6);
   }
   var output=new JsonObject();output.addProperty("candidate","Xtext 2.44.0 / Java 21");output.addProperty("startupMs",startupMs);output.add("parseMs",times);var errors=new JsonArray();
@@ -54,6 +56,7 @@ public final class XtextProbe {
     if(labelOffset>=7){start=System.nanoTime();resource.update(labelOffset,token.length(),JSON.toJson("Renamed display label"));output.addProperty("nativeLabelRenameMs",(System.nanoTime()-start)/1e6);start=System.nanoTime();var refreshed=injector.getInstance(IResourceValidator.class).validate(resource,CheckMode.ALL,CancelIndicator.NullImpl);output.addProperty("nativeDiagnosticRefreshMs",(System.nanoTime()-start)/1e6);output.addProperty("nativeRefreshedIssueCount",refreshed.size());}
     output.addProperty("rename","ACP body-label edit; stable declaration ID token unchanged. Cross-file edits independently tested by shared adapter.");output.addProperty("imports","Shared bounded ACP module policy, not native Xtext scope customization");
    }
-  }System.out.println(JSON.toJson(output));
+  }return output;
  }
+ public static void main(String[] args)throws Exception{System.out.println(JSON.toJson(parse(Files.readString(Path.of(args[0])),Integer.parseInt(args.length>1?args[1]:"1"))));}
 }
