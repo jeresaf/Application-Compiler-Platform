@@ -1,0 +1,9 @@
+.cache/
+**/node_modules/
+**/target/
+**/out/
+**/generated/
+**/src-gen/
+**/model/
+tools/*
+!tools/.gitkeep

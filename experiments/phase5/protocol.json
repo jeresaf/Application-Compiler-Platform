@@ -1,0 +1,13 @@
+{
+  "protocolVersion": "0.1.0",
+  "registeredBeforeMeasurements": true,
+  "baselineCommit": "cfa9a8b64ab23b6432f5c4593bca93706a98f455",
+  "engineeringPlatform": "Linux; Ubuntu 24.04 hosted CI",
+  "hardGates": ["semantic-fidelity", "stage-isolation", "diagnostic-correctness", "determinism", "source-intelligence-viability", "evolution-maintenance-viability"],
+  "softWeights": {"editor": 25, "performance": 20, "memory": 15, "integration": 20, "ergonomics": 10, "operations": 10},
+  "scoring": "No overall ranking or selection while any hard gate is FAIL, UNKNOWN or NOT_RUN. Missing measurements are not zeroes or passes. Normalize only comparable workloads after hard gates pass; retain raw values.",
+  "workloads": {"domains": ["payment", "case-management"], "scaleNodes": [1000, 10000, 100000], "coldRuns": 3, "warmRuns": 5, "seed": 7351},
+  "budgets": {"workerMemoryMiB": 1024, "workerTimeoutSeconds": 90, "messageBytes": 1048576, "dependencyBuildTimeoutSeconds": 600, "concurrentHeavyWorkers": 1},
+  "scope": "Experiment syntax and representative core slices only. Structured frontend remains supported. No production target or Phase 6. No PEG candidate without demonstrated gap.",
+  "scaleInterpretation": "Frontend parsing and core graph workloads are separate from existing bounded 1 MiB/2000-node Phase 4 reference validation. Report NOT_SUPPORTED beyond that existing semantic validation bound; never increase it for favorable results."
+}
