@@ -10,7 +10,7 @@ The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 throu
 | 3 Change/provenance | Atomic changes, semantic diff/impact, proposals, authenticated approval, journal/history and crash/race tests | **COMPLETE: bounded Change and Provenance 0.1.0, closed and green.** Bounded P-06 and semantic-history P-09 resolved in [ADR-0012](adr/0012-change-history.md); [report](phase3-completion-report.md) |
 | 4 Compiler core | Independently testable compiler stages, ports, diagnostics and mappings | **COMPLETE: bounded Compiler Core 0.1.0, closed and green**; 92 regression tests and Ubuntu CI; eight-stage reference compiler; [report](phase4-completion-report.md); production runtime unselected |
 | 5 DSL/frontend evaluation | Comparative parser/editor/diagnostic/refactor/performance experiments and technology ADR | **CLOSED AND GREEN (bounded evaluation)**; Phase 5C accepts native worker and source-analysis architectures; core runtime/textual frontend independently DEFERRED; Xtext production REJECTED on provenance; [report](phase5-completion-report.md); [ADR-0004](adr/0004-technology-evaluation.md) |
-| 6 First target | Selected production stack, capability negotiation, Target IR, deterministic generation and migration/ownership tests | No target chosen; P-08 open |
+| 6 First target | Selected production stack, capability negotiation, Target IR, deterministic generation and migration/ownership tests | **IN PROGRESS, NOT CLOSED**; Java 21 / Spring Boot / Vue / PostgreSQL target prototype; [status](phase6-completion-report.md); P-08 acceptance outstanding |
 | 7 Source intelligence | Symbol/reference/type graph, completeness, ownership, impact and drift regressions | Port contracts only; P-09/P-10 open |
 | 8 Verification | Isolated build/test/migration/security/traceability/evidence gates | Typed obligations and reference evidence checks only; P-11/P-12 open |
 | 9 MCP adapter | Mature semantic operations with bounded context, approvals and provenance | Deferred |
@@ -40,4 +40,4 @@ Phase 3 executes initial state, stable-ID rename, optional relationship, require
 Phase 4 uses typed contracts, a structured reference frontend and a synthetic test
 target. Its P-08/P-09 scope is compiler orchestration/capability/plan provenance only;
 production plugin ABI, real source regeneration and worker isolation remain later
-work. The separately authorized Phase 5 experiments are recorded in their [report](phase5-completion-report.md). Integration and source-analysis architectures are accepted; production core/frontend remain deferred. Phase 6 is NOT STARTED.
+work. The separately authorized Phase 5 experiments are recorded in their [report](phase5-completion-report.md). Integration and source-analysis architectures are accepted; production core/frontend remain deferred. Phase 6 is IN PROGRESS and NOT CLOSED; Phase 7 is NOT STARTED.

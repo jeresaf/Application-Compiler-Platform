@@ -50,7 +50,8 @@ def wire(value):
     if isinstance(value, StrEnum):
         return str(value)
     if is_dataclass(value):
-        return {f.name: wire(getattr(value, f.name)) for f in fields(value)}
+        return {f.name: wire(getattr(value, f.name)) for f in fields(value)
+                if not (f.name == "target_model" and getattr(value, f.name) is None)}
     if isinstance(value, tuple):
         return [wire(v) for v in value]
     if isinstance(value, bytes):
@@ -283,6 +284,8 @@ class TargetIR:
     obligations: tuple[Obligation, ...]
     source_map: Document = Document.of({})
     version: str = VERSION
+    # Optional versioned target-specific derivative; absent keeps Phase 4 wire bytes.
+    target_model: Document | None = None
 
 
 class Owner(StrEnum):

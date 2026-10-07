@@ -1,0 +1,30 @@
+{
+  "profile": "acp-spring-vue-postgres/0.1.0",
+  "protocol": "acp-target-worker/0.1.0",
+  "generator": "acp-spring-vue-generator/0.1.0",
+  "stack": {
+    "java": "21",
+    "springBoot": "4.1.1",
+    "postgresql": "18.6",
+    "postgresqlDriver": "42.7.13",
+    "flyway": "12.4.0",
+    "vue": "3.5.43",
+    "typescript": "6.0.3",
+    "vite": "8.3.3",
+    "vuePlugin": "6.0.9",
+    "vueTsc": "3.3.12",
+    "vitest": "5.0.3",
+    "vueTestUtils": "2.5.1",
+    "playwright": "1.63.0",
+    "axePlaywright": "4.13.0",
+    "junit": "6.0.3",
+    "mavenCompiler": "3.15.0",
+    "mavenSurefire": "3.5.6",
+    "node": "24.21.0",
+    "happyDom": "20.14.5"
+  },
+  "decisions": {
+    "architecture": "modular-monolith-jdbc/0.1.0",
+    "design": "semantic-task-vue/0.1.0"
+  }
+}

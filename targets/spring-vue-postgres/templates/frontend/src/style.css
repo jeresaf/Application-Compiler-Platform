@@ -1,0 +1,12 @@
+:root { font-family: system-ui, sans-serif; color: #18212b; background: #fff; }
+main { max-width: 65rem; margin: auto; padding: 1rem; }
+label { display: block; font-weight: 600; }
+input, textarea, button { font: inherit; margin-block: .35rem; padding: .6rem; }
+textarea { display: block; width: min(35rem, 95%); min-height: 6rem; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid #075bb5; outline-offset: 3px; }
+table { width: 100%; border-collapse: collapse; margin-block: 1rem; }
+th, td { text-align: left; padding: .6rem; border-bottom: 1px solid #8a8a8a; }
+.error-summary { border: 2px solid #9d1728; padding: 1rem; }
+dialog { max-width: min(30rem, 85vw); }
+@media (max-width: 40rem) { main { padding: .5rem; } th, td { padding: .3rem; overflow-wrap: anywhere; } button { min-height: 44px; } }

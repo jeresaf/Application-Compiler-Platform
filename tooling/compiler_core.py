@@ -495,6 +495,8 @@ def _perform(stage, value, ctx, budget):
             fail("PROVENANCE")
         if result.obligations != value.projections.obligations:
             fail("OBLIGATION")
+        if result.target_model is not None and "target.project-artifacts/1" not in r.required_capabilities:
+            fail("CAPABILITY")
         _check_derived(value.objects, result.objects, stage, ctx)
         return result, 0, 0
     if stage == Stage.GENERATE:
@@ -517,20 +519,34 @@ def _perform(stage, value, ctx, budget):
         _port(ctx, "target")
         if value.target != r.target or not set(r.required_capabilities) <= set(value.capabilities):
             fail("CAPABILITY")
-        result = ctx.target.plan(value, r)
+        if value.target_model is not None and "target.project-artifacts/1" not in r.required_capabilities:
+            fail("CAPABILITY")
+        result = (ctx.target.plan(value, r, inventory=ctx.inventory) if value.target_model is not None
+                  else ctx.target.plan(value, r))
         result = _ownership(result, ctx.inventory)
         validate_plan(result, ctx.inventory, value.obligations, budget)
         source_origins = {o.provenance.origins for o in value.objects}
-        if {a.mappings for a in result.artifacts} != source_origins:
-            fail("PROVENANCE")
+        if value.target_model is None:
+            if {a.mappings for a in result.artifacts} != source_origins:
+                fail("PROVENANCE")
+        else:
+            # Real project artifacts may derive from several semantic objects.
+            # Coverage and per-artifact exact input bindings remain host checked.
+            allowed = {s for origins in source_origins for s in origins}
+            mapped = {s for a in result.artifacts for s in a.mappings}
+            if mapped != allowed or any(len(set(a.mappings)) != len(a.mappings) for a in result.artifacts):
+                fail("PROVENANCE")
         by_origin = {o.provenance.origins: o for o in value.objects}
-        if len(result.artifacts) != len(value.objects):
+        if value.target_model is None and len(result.artifacts) != len(value.objects):
             fail("PROVENANCE")
         for a in result.artifacts:
             expected_locations = tuple(sorted({value.source_map.read()[s.id] for s in a.mappings if s.id in value.source_map.read()}))
             if a.source_locations != expected_locations:
                 fail("PROVENANCE")
-            if a.provenance.inputs != tuple(sorted((fingerprint(by_origin[a.mappings]), fingerprint(r.generator, "generator-manifest")))):
+            inputs = ((fingerprint(by_origin[a.mappings]),) if value.target_model is None else
+                      tuple(fingerprint(by_origin[(s,)]) for s in a.mappings) +
+                      (fingerprint(value.target_model, "target-model"),))
+            if a.provenance.inputs != tuple(sorted((*inputs, fingerprint(r.generator, "generator-manifest")))):
                 fail("PROVENANCE")
             if a.provenance.stage != Stage.GENERATE or a.provenance.compiler != r.compiler or a.provenance.pipeline != r.pipeline or not a.provenance.inputs:
                 fail("PROVENANCE")

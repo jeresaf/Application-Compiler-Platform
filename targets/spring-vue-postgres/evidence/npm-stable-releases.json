@@ -1,0 +1,62 @@
+{
+  "vue": {
+    "version": "3.5.43",
+    "license": "MIT",
+    "integrity": "sha512-o5qZoksdnjIKvW1srZ3ab7pcDNYAerBjRe54D0LBLfRdCYFrSgBHVXokMas35czQc0//lmx4/tuY4ZNQ+Rf2Ng==",
+    "source": "https://registry.npmjs.org/vue/-/vue-3.5.43.tgz"
+  },
+  "typescript": {
+    "version": "6.0.3",
+    "license": "Apache-2.0",
+    "integrity": "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==",
+    "source": "https://registry.npmjs.org/typescript/-/typescript-6.0.3.tgz"
+  },
+  "vite": {
+    "version": "8.3.3",
+    "license": "MIT",
+    "integrity": "sha512-cTAldKPImjg6c+gk48U19POPn3GCBzZwpdsN8ZMEEcbpes+6/wvfqUd0C2y3qYY4wsj8PwgFwrZ/1jBPVttMSg==",
+    "source": "https://registry.npmjs.org/vite/-/vite-8.3.3.tgz"
+  },
+  "@vitejs/plugin-vue": {
+    "version": "6.0.9",
+    "license": "MIT",
+    "integrity": "sha512-rD/MORlhaZMlXWW0rEn4FB4wMinWC0z/D7Ye160S5+Rs1mC8ZDAdcDp4SjKfUhG5t8q1ktcPVw4xuTkPRlzrSA==",
+    "source": "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-6.0.9.tgz"
+  },
+  "vue-tsc": {
+    "version": "3.3.12",
+    "license": "MIT",
+    "integrity": "sha512-kbpaz18O9jPVkXVHD1BEjpUXM6WhXSu+62L1sGGr6Wbzd8GbvkBQWjoj3KZ/C0aq2MZllce7UdtWzwCIYsBMGA==",
+    "source": "https://registry.npmjs.org/vue-tsc/-/vue-tsc-3.3.12.tgz"
+  },
+  "vitest": {
+    "version": "5.0.3",
+    "license": "MIT",
+    "integrity": "sha512-xMw97S3rjdtj5dkVat7jCsqWBpvchs3RlpQctUqwJD0KkERk40vz2fJ77lDwW/Vzh/pk18eItYAzkodhSes3jQ==",
+    "source": "https://registry.npmjs.org/vitest/-/vitest-5.0.3.tgz"
+  },
+  "@vue/test-utils": {
+    "version": "2.5.1",
+    "license": "MIT",
+    "integrity": "sha512-V/4a99odJ7hapr0bRt35XxljGk8hefq31gSOnlKTcEq2fUeoj2qb+FcpJYfQu4qfYhW9Ug+O2+CZ3QmZ7gXDzA==",
+    "source": "https://registry.npmjs.org/@vue/test-utils/-/test-utils-2.5.1.tgz"
+  },
+  "@playwright/test": {
+    "version": "1.63.0",
+    "license": "Apache-2.0",
+    "integrity": "sha512-oxMK4vllB9RK5NQ2l1pq1IfOf2AvnEuj/vYGDj0H2nMtmtZpKtCwt/l00GEO6xjGfpBNAvjovvYdCm50dRQkpQ==",
+    "source": "https://registry.npmjs.org/@playwright/test/-/test-1.63.0.tgz"
+  },
+  "@axe-core/playwright": {
+    "version": "4.13.0",
+    "license": "MPL-2.0",
+    "integrity": "sha512-6YLx+kxXu5GJceG4ozFg+33a2EMTdjYwWGloJ3sb9Kta5pp+ZNS53uxGVog5JetIY8s++P5UrtX+cri+u0VAVg==",
+    "source": "https://registry.npmjs.org/@axe-core/playwright/-/playwright-4.13.0.tgz"
+  },
+  "happy-dom": {
+    "version": "20.14.5",
+    "license": "MIT",
+    "integrity": "sha512-x/RzkpWO40bTjIoT30iQtt64FLLmH/iRcUCN2X//bLx7H3ifkdfPXyqsro/OYtqzIAhiLMMA7mmiOR9C3NOKjQ==",
+    "source": "https://registry.npmjs.org/happy-dom/-/happy-dom-20.14.5.tgz"
+  }
+}

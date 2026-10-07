@@ -50,3 +50,5 @@ This is the same repository-check/full-suite sequence used by the Ubuntu and Win
 through immutable compiler stages and a synthetic test target. The complete Python
 suite automatically discovers `test_compiler.py`; the independent Node canonical
 checker remains unchanged. No production application/target/parser is generated.
+
+Phase 6 adds worker, materialization, provenance and migration-planner boundary tests in `tooling/tests/test_phase6_foundations.py` and `tooling/tests/test_target_migrations.py`. Both complete domains currently fail production-target negotiation on explicit unsupported capabilities. Unnegotiated source-template builds are not acceptance vectors; the [Phase 6 status report](../docs/phase6-completion-report.md) records this limitation.
