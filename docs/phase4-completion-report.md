@@ -1,6 +1,6 @@
 # Phase 4 — Compiler Core 0.1.0 completion report
 
-Status: implementation complete; final local and Ubuntu CI acceptance pending.
+Status: **CLOSED AND GREEN — bounded Compiler Core 0.1.0.**
 Date: 2026-10-07. Phase 5 is NOT STARTED. Phases 1–3 remain closed and green;
 their historical reports and evidence are unchanged.
 
@@ -27,8 +27,31 @@ not compiler architecture. Fixture AI is unnecessary: no AI provider is configur
 
 ## Acceptance evidence
 
-Final complete local regression and exact Ubuntu CI run will be recorded here
-before closure. Development failures are not counted as green acceptance.
+Implementation commit: `842e66cd7365c4c070bca53abd089924df6d1852`.
+
+| Check | Observed result |
+| --- | --- |
+| Complete local Linux regression | **PASS: 92 tests in 284.309 seconds**, including 63 Phase 1–3 tests and 29 compiler tests |
+| Local tooling | CPython 3.14.4, Linux x86_64, SQLite 3.46.1; Node v24.21.0; all pinned Python dependencies unchanged |
+| Dependency/repository/whitespace checks | `pip check`, `check_repository.py`, `git diff --check`: **PASS** |
+| Independent Node canonical verification | **PASS: 9 positive, 13 negative, 2 snapshot hashes** |
+| Ubuntu 24.04 hosted CI | [**GREEN: run 37611841644**](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/37611841644), [contracts job](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/37611841644/job/112760668862); dependency, repository, complete Python suite and independent Node steps all succeeded |
+| Hosted tooling | Workflow pins CPython **3.14.7** and Node **24.21.0**; no CI gate weakened |
+| Prior canonical assets and reports | Git diff confirms canonical schema/code/corpus and Phase 1–3 reports unchanged |
+| Cross-process determinism | Complete small artifact-plan bytes equal across three Python processes, C/C.UTF-8 locales, cwd/tmp directories, hash seeds and irrelevant environment/discovery order |
+
+Full-domain synthetic plans contain 101 payment and 149 case-management records,
+with 40 and 44 outstanding obligations respectively. Their Phase 4 hashes are
+pinned in the [compiler corpus](../test-corpus/compiler/vectors.json), independently
+of the unchanged Phase 2 canonical vectors.
+
+The earlier development run exposed an incomplete source-map constructor while
+files were being edited. It was corrected, the cross-process test rerun, and the
+complete final suite passed on the fixed implementation. Failed development runs
+are not closure evidence. Pip's sandboxed host cache was unwritable, so pip disabled
+caching; dependency consistency still passed. Local `/tmp` logs are ephemeral only;
+the hosted run above is the durable acceptance link. No host tools or services were
+changed. This report's closure/status edits are documentation of that tested code.
 Reproduction commands are in [DEV_LINUX.md](../DEV_LINUX.md) and
 [compiler-core.md](compiler-core.md#reproduction).
 
@@ -54,3 +77,16 @@ are sidecars and reference plans, not source intelligence or real filesystem
 regeneration. No production enforcement/test execution, migration, deployment or
 scale claim is made. All semantic obligations remain OUTSTANDING. Phase closure
 certifies these bounded compiler contracts only, never production readiness.
+
+
+## Required final state
+
+- PHASE 1 = CLOSED AND GREEN
+- PHASE 2 = CLOSED AND GREEN
+- PHASE 3 = CLOSED AND GREEN
+- PHASE 4 = CLOSED AND GREEN
+- PHASE 5 = NOT STARTED
+
+No Phase 5 DSL/parser evaluation, Phase 6 production target generation, Phase 7
+source intelligence, Phase 8 production verification engine or Phase 9 MCP
+implementation was started. Future phase work requires its own continuation.

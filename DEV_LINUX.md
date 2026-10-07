@@ -59,7 +59,9 @@ Commands terminate when complete; there is no service to start or stop.
 
 ## Evidence and phase boundaries
 
-Phase 1, Phase 2 and Phase 3 remain CLOSED AND GREEN. Phase 4 is NOT STARTED.
+Phase 1, Phase 2, Phase 3 and Phase 4 are CLOSED AND GREEN. Phase 5 is NOT STARTED.
+The [Phase 4 report](docs/phase4-completion-report.md) records the current 92-test
+local Linux regression and green Ubuntu 24.04 CI evidence.
 Their completion reports are historical records, including Windows results that
 actually occurred; this environment cleanup does not rewrite them. Future phase
 reports use Linux evidence unless another environment is deliberately added.
