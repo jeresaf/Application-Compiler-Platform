@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-08",
+  "statement": "Approve ADR-0016 and the complete deterministic-v04 fixture decisions, including the F-01 failure bindings.",
+  "status": "APPROVED_REFERENCE_SEMANTICS",
+  "reviewedCommit": "76e7700758454b5cfd00c39a68475439c1a1e6ca",
+  "assets": {
+    "contracts/authoring-0.4.schema.json": "sha256:2e60a19f9683d4515a0bd51fc5b0b964164990eea7fadd6715b50fdf11d25d60",
+    "contracts/canonical-0.3.schema.json": "sha256:104bb574abac5eafd7b8e4e6ea5b030b08b30631f8207437ed6713cf9e3098ea",
+    "contracts/change-0.3.schema.json": "sha256:7424c400b2887eafc5d572f7c55c702daa07956e3d79729bf0d6562fa931f491",
+    "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+  },
+  "versions": {
+    "authoring": "0.4.0",
+    "canonical": "0.3.0",
+    "change": "0.3.0"
+  },
+  "scope": "Complete ADR-0016 and both ACP synthetic reference fixtures, including F-01; not production business requirements or target support",
+  "provenance": "AI proposed; human project authority explicitly approved in user instruction",
+  "authorityRepresentation": "Bounded reference/test authority with public key; no manufactured reviewer identity or production credentials",
+  "referenceClock": 1791417600,
+  "examples": [
+    {
+      "domain": "payment",
+      "proposalSourceDigest": "sha256:fe3918f50bf9662b8714d30f77774b6a87d4d2c95e5668987cee7fed8822656a",
+      "request": {
+        "applicationId": "APP-FIXTURE",
+        "author": "assistant:proposal-author",
+        "planDigest": "sha256:882781981441c2ab50d71617a15edfca88c6b9ebaa25c130cf40f56ea8ce356e",
+        "contentDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "requiredScopes": [
+          "SECURITY",
+          "SEMANTIC"
+        ]
+      },
+      "proof": {
+        "body": {
+          "authority": "reference-hmac-v1",
+          "principal": "reference:explicit-human-project-authority",
+          "request": {
+            "applicationId": "APP-FIXTURE",
+            "author": "assistant:proposal-author",
+            "planDigest": "sha256:882781981441c2ab50d71617a15edfca88c6b9ebaa25c130cf40f56ea8ce356e",
+            "contentDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+            "requiredScopes": [
+              "SECURITY",
+              "SEMANTIC"
+            ]
+          },
+          "issuedAt": 1791417600,
+          "expiresAt": 1791504000
+        },
+        "signature": "d49d5fb659e63e26ece2b119135aec1c3729d2fc2c939b0616db6f166ed8fb4d"
+      }
+    },
+    {
+      "domain": "case-management",
+      "proposalSourceDigest": "sha256:6e41954365f3a1accc7d999591cf5196580292eb6269ae020d0e00cace7abc28",
+      "request": {
+        "applicationId": "APP-CASE-MANAGEMENT",
+        "author": "assistant:proposal-author",
+        "planDigest": "sha256:d904bc51285d778ba66784fbd08842bd151980e8a22f7662c6330e0f3fd51131",
+        "contentDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "requiredScopes": [
+          "SECURITY",
+          "SEMANTIC"
+        ]
+      },
+      "proof": {
+        "body": {
+          "authority": "reference-hmac-v1",
+          "principal": "reference:explicit-human-project-authority",
+          "request": {
+            "applicationId": "APP-CASE-MANAGEMENT",
+            "author": "assistant:proposal-author",
+            "planDigest": "sha256:d904bc51285d778ba66784fbd08842bd151980e8a22f7662c6330e0f3fd51131",
+            "contentDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "requiredScopes": [
+              "SECURITY",
+              "SEMANTIC"
+            ]
+          },
+          "issuedAt": 1791417600,
+          "expiresAt": 1791504000
+        },
+        "signature": "9f108ea6decd6a7ec1c5fdf5f839bb31f533fcb5c143951a20aca7b65e98d0a1"
+      }
+    }
+  ]
+}

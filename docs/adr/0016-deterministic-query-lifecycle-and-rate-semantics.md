@@ -1,6 +1,10 @@
 # ADR-0016 — Deterministic query, lifecycle and invocation semantics
 
-Status: PROPOSED — HUMAN REVIEW REQUIRED. Date: 2026-10-08. AI-authored proposal, not an accepted decision. The human authorized this investigation and proposal; no human approved these new business-visible choices. ADR-0015 remains ACCEPTED and unchanged. Phase 6 is IN PROGRESS; Phase 7 is NOT STARTED.
+Status: ACCEPTED. Explicitly approved by the human project authority on 2026-10-08: `Approve ADR-0016 and the complete deterministic-v04 fixture decisions, including the F-01 failure bindings.`
+
+Approval covers the complete reviewed successor and both synthetic reference fixture decisions at commit `76e7700758454b5cfd00c39a68475439c1a1e6ca`, including F-01. The [exact-content approval record](../../test-corpus/deterministic-v04/human-approval.json) binds the reviewed schemas, canonical content, plans and proposal sources through the bounded reference authority. It represents this explicit instruction, not a manufactured reviewer identity or production credential. AI proposal origins and all reviewed canonical bytes remain unchanged.
+
+The proposal language and earlier review requests in the body below are retained as the reviewed drafting record; **all those decisions are now human-approved**. They do not require a second approval of the same content. Fresh changes require fresh review. This acceptance does not implement target capabilities, apply a production journal, close Phase 6 or start Phase 7. ADR-0015 remains ACCEPTED and unchanged. Phase 6 is IN PROGRESS; Phase 7 is NOT STARTED.
 
 ## Boundary and versions
 
