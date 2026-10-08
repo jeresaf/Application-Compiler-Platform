@@ -4,6 +4,8 @@ An injected read-only port supplies accepted history and approved data bindings.
 The target receives no journal mutation or semantic approval capability.
 """
 import hashlib
+import importlib.util
+from pathlib import Path
 from typing import Protocol
 
 from canonical_ir import validate_snapshot
@@ -55,6 +57,7 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
             raise MigrationBlocked("UNAPPROVED_DATA_BINDINGS")
     except (KeyError, PermissionError):
         raise MigrationBlocked("UNACCEPTED_HISTORY") from None
+    execution = after['content']['schemaVersion'] == '0.2.0'
     old = {node["id"]: node for node in before["content"]["nodes"]}
     new = {node["id"]: node for node in after["content"]["nodes"]}
     revisions = {id: (old[id]["revision"], new[id]["revision"]) for id in set(old) & set(new)}
@@ -75,6 +78,23 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
                 raise MigrationBlocked("STRUCTURAL_UPGRADE_UNSUPPORTED:" + id)
             continue
         if node["kind"] != "Field":
+            if node['kind'] == 'Relation':
+                if not execution or before['content']['schemaVersion'] != '0.2.0':
+                    raise MigrationBlocked('RELATION_STORAGE_VERSION')
+                if any(node['data'][role + 'Cardinality']['min'] != 0 for role in ('source', 'target')):
+                    raise MigrationBlocked('REQUIRED_RELATION_BACKFILL_BINDING')
+                # Reuse the exact target DDL implementation, with no schema or
+                # generic relationship inference in the semantic change model.
+                path = Path(__file__).resolve().parents[1] / 'targets/spring-vue-postgres/worker/relations.py'
+                spec = importlib.util.spec_from_file_location('acp_target_relation_ddl', path)
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                try:
+                    sql.append(module.relation_sql(node, new))
+                except module.RelationError as error:
+                    raise MigrationBlocked(str(error)) from None
+                changed.append({'id': id, 'revision': node['revision'], 'phases': ['EXPAND', 'VERIFY']})
+                continue
             if node["kind"] in {"Entity", "Relation", "TypeDefinition", "ValueObject", "Constraint", "Invariant"}:
                 raise MigrationBlocked("STRUCTURAL_UPGRADE_UNSUPPORTED:" + id)
             continue
@@ -86,10 +106,16 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
         if typ["kind"] == "Nullable":
             typ = typ["item"]
         types = {"String": "text", "Boolean": "boolean", "Integer": "bigint", "Date": "date", "Instant": "timestamptz"}
+        if execution:
+            types = {'String': 'bytea', 'Boolean': 'boolean'}
         if typ["kind"] not in types:
             raise MigrationBlocked("FIELD_TYPE_UPGRADE_UNSUPPORTED")
         table, column = identifier(field["owner"]["id"], "e"), identifier(id, "f")
         sql.append(f"ALTER TABLE {table} ADD COLUMN {column} {types[typ['kind']]};")
+        if execution and field['optional'] and field['type']['kind'] == 'Nullable':
+            presence = identifier(id, 'present')
+            sql.append(f'ALTER TABLE {table} ADD COLUMN {presence} boolean NOT NULL DEFAULT false;')
+            sql.append(f'ALTER TABLE {table} ADD CHECK ({presence} OR {column} IS NULL);')
         phases = ["EXPAND"]
         if not nullable:
             if plan["change"]["migration"]["mode"] != "REQUIRED" or id not in data.get("requiredFieldBackfills", {}):
@@ -99,7 +125,8 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
                     or (typ["kind"] == "Boolean" and type(value) is not bool)
                     or (typ["kind"] == "Integer" and type(value) is not int)):
                 raise MigrationBlocked("BACKFILL_TYPE")
-            sql += [f"UPDATE {table} SET {column}={literal(value)} WHERE {column} IS NULL;",
+            encoded = "decode('" + value.encode('utf-8', 'strict').hex() + "','hex')" if execution and type(value) is str else literal(value)
+            sql += [f"UPDATE {table} SET {column}={encoded} WHERE {column} IS NULL;",
                     f"DO $$ BEGIN IF EXISTS (SELECT 1 FROM {table} WHERE {column} IS NULL) THEN RAISE EXCEPTION 'ACP_REQUIRED_BACKFILL_PRECONDITION'; END IF; END $$;",
                     f"ALTER TABLE {table} ALTER COLUMN {column} SET NOT NULL;"]
             phases += ["BACKFILL", "VERIFY", "SWITCH"]

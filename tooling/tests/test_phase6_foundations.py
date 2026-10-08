@@ -146,7 +146,7 @@ class WorkerTests(unittest.TestCase):
         target = ProductionTarget()
         decisions = tuple(replace(d, choice=Document.of({"choice": PROFILE["decisions"][d.role]})) for d in context.request.decisions)
         request = replace(context.request, target=target.identity, generator=target.generator,
-                          required_capabilities=target.capabilities, decisions=decisions,
+                          required_capabilities=tuple(c for c in target.capabilities if c != 'semantic.execution-dataflow/0.3'), decisions=decisions,
                           decision_digests=tuple(sorted(fingerprint(d, "decision") for d in decisions)))
         snapshot = context.snapshots.read_exact(request.application, request.snapshot_digest)
         authority = FixtureApproval((snapshot,), decisions, request.approval_evidence)
@@ -211,9 +211,9 @@ class WorkerTests(unittest.TestCase):
     def test_use_case_requires_explicit_behavior_bindings(self):
         worker = TargetWorker()
         capability = worker.call("manifest", {})["capabilities"]["UseCase/0.2.0"]
-        self.assertEqual("UNSUPPORTED", capability["status"])
+        self.assertEqual("SUPPORTED_WITH_CONSTRAINT", capability["status"])
         self.assertIn("no inferred mutation semantics", capability["constraints"][0])
-        with self.assertRaisesRegex(TargetWorkerError, "UNSUPPORTED:UseCase/0.2.0"):
+        with self.assertRaisesRegex(TargetWorkerError, "EXPLICIT_EFFECTS_REQUIRED"):
             worker.call("negotiate", {"nodes": [], "required": ["UseCase/0.2.0"], "decisions": PROFILE["decisions"]})
 
     def test_complete_domains_explicitly_block_pending_capabilities(self):

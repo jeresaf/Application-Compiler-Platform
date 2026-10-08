@@ -33,18 +33,18 @@ The executable manifest is authoritative for current negotiation; retrieve it wi
 
 | Family | Current implementation / limitation |
 | --- | --- |
-| primitives, Money, entities | SQL lowering and exact-decimal value boundary; broader refined/nested validation remains incomplete |
-| relations/cardinality | UNSUPPORTED in negotiation; no silent omission permitted |
-| invariants, commands, queries, workflow | Source templates exist; complete executable conformance and idempotency/rate behavior remain outstanding |
-| use cases | UNSUPPORTED until explicit input-to-operation and output-construction bindings are defined and implemented; names are not behavior contracts |
+| primitives, Money, entities | Canonical 0.2 typed records and strict codecs; exact Money precision/currency, bounded String nominal refinements and nested ValueObjects; unsupported types reject negotiation |
+| relations/cardinality | Same-tenant scoped identities; min 0/1, max 1/UNBOUNDED, RESTRICT; deferred PostgreSQL constraints and integration tests; other forms reject negotiation |
+| invariants, commands, queries, workflow | Typed explicit Canonical 0.2 effects, pre-state guards and staged invariants; SQL Unicode substring predicate; idempotency/rate enforcement remains unsupported |
+| use cases | Exact step input/prior result/resource bindings, typed output/event construction, one root instance and atomic STOP transaction; multi-commit/compensation forms reject negotiation |
 | permissions, policies, tenant scope | Server policy and tenant predicates with unit tests; full authorization and isolation integration suite outstanding |
-| authentication/session | UNSUPPORTED canonical assurance/session negotiation until MFA and session semantics are implemented |
+| authentication/session | Bounded signed-issuer pwd/otp MFA; durable tenant/subject/session activity, absolute/idle/reauthentication/revocation checks with PostgreSQL tests |
 | audit/events | Audit/outbox source sites exist; delivery semantics remain UNSUPPORTED |
 | task UI | Task/screen forms, selection, errors, permission visibility and accessible hooks; design-role coverage and cross-stack journeys incomplete |
 | quality obligations | Metadata retained; trusted production evidence and discharge are not claimed |
 | jobs/schedules/retry | UNSUPPORTED |
 | files/blob/distributed transactions | UNSUPPORTED |
-| privacy/data lifecycle | UNSUPPORTED |
+| classification/privacy/data lifecycle | UNSUPPORTED; UTF-8 byte storage is not encryption or export/privacy enforcement |
 
 Unsupported families produce deterministic capability errors. The two complete domains cannot be declared supported while these errors remain.
 
@@ -73,7 +73,7 @@ Fault tests cover concurrent stale writers, process termination before publicati
 
 Fresh schemas use Flyway 12.4.0. [The bounded upgrade planner](../tooling/target_migrations.py) checks exact Phase 3 plan digest, previous/current snapshots, accepted-history lookup and independently approved backfill bindings. Stable-ID display renames emit no DDL. Optional fields expand safely; required supported fields expand, apply explicit backfill, verify preconditions and switch to NOT NULL. It never invents a required-field value. Destructive changes and unsupported structural transformations block, including otherwise accepted semantic changes. No production rollback is claimed.
 
-This planner is not yet connected to the complete six-step target pipeline. Relationship upgrades, new-table upgrades, constraint/security evolution, accepted-history production adapter and reviewed destructive contract artifacts remain outstanding.
+This planner is not yet connected to the complete six-step target pipeline. Bounded optional same-tenant relation expansion is implemented for Canonical 0.2, with no inferred backfill. New-table upgrades, constraint/security evolution, accepted-history production adapter and reviewed destructive contract artifacts remain outstanding.
 
 ## Reproduction and evidence
 
@@ -86,3 +86,5 @@ Generated frontend inputs include an npm lockfile with exact release/integrity v
 Local `/tmp/acp-phase6-build` fixtures were produced directly from pure lowering to test templates while negotiation still rejects complete domains. They are ephemeral, unnegotiated test fixtures and cannot be promoted to Phase 6 completion evidence. See the [status report](phase6-completion-report.md).
 
 The unnegotiated template checks are reproducible with `python3.14 targets/spring-vue-postgres/check_templates.py --output /tmp/acp-phase6-templates-new --acknowledge-unnegotiated-templates --run-builds`, after supplying the three test-database environment handles. The output directory must not exist. The report always records `phase6: NOT_CLOSED` and the complete-domain admission errors, even if template builds pass.
+
+The current approved-execution component runner is `tooling/check_execution_components.py`. The dedicated Ubuntu `phase6-target` job uses `tooling/check_phase6_target.py`, which begins with fresh reference approval and the real negotiated compiler. It currently fails closed for both complete domains. Browser journeys and full target database evolution remain outstanding; no complete target or CI success is claimed.

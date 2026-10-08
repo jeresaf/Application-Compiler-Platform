@@ -14,9 +14,11 @@ import org.springframework.stereotype.Component;
 public final class ApplicationPolicy {
     private final TargetModel model;
     private final Expressions expressions;
-    public ApplicationPolicy(TargetModel model, Expressions expressions) { this.model = model; this.expressions = expressions; }
+    private final SessionGate sessions;
+    public ApplicationPolicy(TargetModel model, Expressions expressions, SessionGate sessions) { this.model = model; this.expressions = expressions; this.sessions = sessions; }
 
     public Map<String, Object> actor(Jwt jwt) {
+        sessions.require(jwt);
         if (jwt == null || jwt.getSubject() == null || jwt.getClaimAsString("tenant") == null) deny();
         var result = new HashMap<String, Object>();
         for (var actor : model.nodes("Actor")) {

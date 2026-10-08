@@ -16,6 +16,10 @@ def schema(model):
         identity = [columns[r["id"]]["name"] for r in data["identity"]]
         tenant = columns[data["tenantField"]["id"]]["name"] if data["tenancy"] == "SCOPED" else None
         definitions = [f'{c["name"]} {c["sqlType"]}' + ("" if c["nullable"] else " NOT NULL") for c in table["columns"]]
+        for c in table['columns']:
+            if 'presence' in c:
+                definitions += [c['presence'] + ' boolean NOT NULL DEFAULT false',
+                                'CHECK (' + c['presence'] + ' OR ' + c['name'] + ' IS NULL)']
         definitions += ["acp_version bigint NOT NULL DEFAULT 0 CHECK (acp_version >= 0)", "acp_state text", "PRIMARY KEY (" + ",".join(identity) + ")"]
         for invariant in (n for n in nodes.values() if n["kind"] == "Invariant" and n["data"]["resource"]["id"] == entity):
             predicate = invariant["data"]["predicate"]
@@ -46,8 +50,12 @@ def schema(model):
                 right.insert(0, identifier(referred["semantic"]["tenantField"]["id"], "f"))
             later.append(f'ALTER TABLE {table["name"]} ADD CONSTRAINT {identifier(c["origin"]["id"], "fk")} FOREIGN KEY ({",".join(left)}) REFERENCES {referred["name"]} ({",".join(right)}) ON DELETE RESTRICT;')
     sql.extend(later)
-    sql += ["CREATE TABLE acp_audit (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, tenant text NOT NULL, subject text NOT NULL, operation text NOT NULL, resource text NOT NULL, occurred_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP);",
-            "CREATE TABLE acp_outbox (id text PRIMARY KEY, tenant text NOT NULL, event text NOT NULL, resource text NOT NULL, aggregate_version bigint NOT NULL, delivered_at timestamptz, UNIQUE(tenant,event,resource,aggregate_version));"]
+    if model.get('canonicalVersion') == '0.2.0':
+        from relations import relation_sql
+        sql.extend(relation_sql(n, nodes) for n in sorted(nodes.values(), key=lambda n: n['id']) if n['kind'] == 'Relation')
+    sql += ["CREATE TABLE acp_audit (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, tenant bytea NOT NULL, subject bytea NOT NULL, operation text NOT NULL, resource bytea NOT NULL, occurred_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP);",
+            "CREATE TABLE acp_sessions (tenant bytea NOT NULL, subject bytea NOT NULL, sid bytea NOT NULL, started_at bigint NOT NULL, last_seen bigint NOT NULL, authenticated_at bigint NOT NULL, revoked boolean NOT NULL, PRIMARY KEY(tenant,subject,sid));",
+            "CREATE TABLE acp_outbox (id text PRIMARY KEY, tenant bytea NOT NULL, event text NOT NULL, resource bytea NOT NULL, aggregate_version bigint NOT NULL, payload bytea NOT NULL DEFAULT '\\x7b7d'::bytea, delivered_at timestamptz, UNIQUE(tenant,event,resource,aggregate_version));"]
     return "\n".join(sql) + "\n"
 
 
@@ -64,8 +72,21 @@ def plan(model, templates, profile, inventory=()):
         artifacts.append({"path": path, "text": text, "role": role, "owner": owner,
                           "origins": origins or all_ids, "verification": ["target-source-integrity"]})
 
+    execution = any(n['kind'] == 'Command' and 'assignments' in n['data'] for n in model['nodes'])
     for path, text in sorted(templates.items()):
+        if execution and path in {'backend/src/main/java/acp/application/TaskService.java', 'backend/src/main/java/acp/api/TaskController.java'}:
+            continue
+        if execution and path == 'frontend/src/App.vue':
+            text = text.replace("import { call } from './api';", "import { queryTasks, submitTask, resourceInputField } from './task-contract';")
+            text = text.replace('!field.data.optional && !input.value[field.id]?.trim()', '!field.data.optional && field.id !== resourceInputField && input.value[field.id] === undefined')
+            text = text.replace('call<Row[]>(`${query.path}?search=${encodeURIComponent(search.value)}`)', 'queryTasks(search.value)')
+            text = text.replace('await call(submitOperation.path, { resourceId: selected.value.resourceId, expectedVersion: selected.value.version, input: input.value });', 'await submitTask(input.value, selected.value.resourceId, selected.value.version);')
+            text = text.replace('node.data.owner.id === task?.data.input.id)', 'node.data.owner.id === task?.data.input.id && node.id !== resourceInputField)')
         add(path, text, "PROJECT_SOURCE", owner="FRAMEWORK_OWNED" if path.endswith(("pom.xml", "package.json")) else "COMPILER_OWNED")
+    if execution:
+        from execution_codegen import ExecutionGenerator
+        for path, text in ExecutionGenerator(model['nodes']).source().items():
+            add(path, text, 'TYPED_EXECUTION_SOURCE')
     add("backend/src/main/resources/acp-model.json", encoded(model), "RUNTIME_MODEL")
     add("contracts/target-ir.json", encoded(model), "TARGET_IR")
     add("acp/profile.json", encoded(profile), "PROFILE")

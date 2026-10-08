@@ -1,6 +1,8 @@
 # ADR-0015 — Explicit operation effects and use-case dataflow
 
-Status: proposed for human review; executable reference contracts and fixtures are test evidence, not business approval.
+Status: ACCEPTED. Explicitly approved by the human project authority on 2026-10-08: `Approve ADR-0015 and the execution-v03 fixture decisions.`
+
+AI proposed the fixture semantics; the human explicitly approved that proposal. Approval applies to the ACP synthetic reference applications/corpora, not production business requirements. The [exact-content reference approval record](../../test-corpus/execution-v03/human-approval.json) binds fresh Canonical 0.2 content and ChangeSet 0.2 plan digests through the bounded reference authority. Its principal represents this instruction for tests; it is not a manufactured reviewer identity or production credential.
 
 ## Problem and authority
 
@@ -40,8 +42,8 @@ Identity and tenant Fields are immutable through assignment. Assignments cannot 
 
 Authoring 0.2 → 0.3 review enumerates missing execution sites and supplies no candidate when behavior decisions are required. For behavior-free input it may preserve content but clears approval and requires new exact-content admission. Names never select assignments. Existing exact IDs are preserved and changed meanings advance revisions; dependency reference revisions advance through the existing closure algorithm.
 
-The new reference fixtures explicitly propose: select the supplied root identity; update summary from operation text only; leave payment amount and case child entities unchanged; flow text through prior command results; return the last result; construct payment amount/case-title events from post-state; bind task query-filter text explicitly and scheduled resource/text literally. These are proposed test decisions authored in source and recorded as AI proposal provenance. They require human review; they are not inferred migrations or inherited human approvals. Synthetic allowlists prove approval binding only. No real business approval is claimed.
+The approved reference fixtures explicitly select the supplied root identity; update summary from operation text only; leave payment amount and case child entities unchanged; flow text through prior command results; return the last result; construct payment amount/case-title events from post-state; bind task query-filter text explicitly and scheduled resource/text literally. Source origins retain AI proposal provenance. The human project authority explicitly approved these reference semantics on 2026-10-08; historical approval is not inherited. Reference proofs represent that approval for executable fixtures only.
 
-Compiler support uses a separately identified structured frontend and feature set. Synthetic records preserve all explicit semantics and exact digest-bound approval. Historical frontend/vector behavior remains unchanged. A target requiring explicit effects must reject old incomplete snapshots; no Spring lowering work is part of this task.
+Compiler support uses a separately identified structured frontend and feature set. Synthetic records preserve all explicit semantics and exact digest-bound approval. Historical frontend/vector behavior remains unchanged. A target requiring explicit effects must reject old incomplete snapshots. Phase 6 target lowering may resume against the newly approved exact content, with support earned through generated enforcement and tests.
 
 Phase 6 remains IN PROGRESS. Phase 7 is NOT STARTED. Historical Phase 1–5 status is not reopened.

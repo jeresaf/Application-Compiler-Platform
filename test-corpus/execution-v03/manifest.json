@@ -1,6 +1,6 @@
 {
   "profile": "acp-jcs-safe-v1",
-  "status": "PROPOSED_TEST_SEMANTICS_REQUIRES_HUMAN_REVIEW",
+  "status": "APPROVED_REFERENCE_SEMANTICS",
   "examples": [
     {
       "file": "payment-canonical.json",
@@ -16,5 +16,6 @@
       "historicalDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
       "planDigest": "sha256:9d79387aa309a5e6b3d979edb2a796c93da2461f6d5d8efd42effca017eefb10"
     }
-  ]
+  ],
+  "approval": "human-approval.json"
 }

@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-08",
+  "statement": "Approve ADR-0015 and the execution-v03 fixture decisions.",
+  "status": "APPROVED_REFERENCE_SEMANTICS",
+  "scope": "ACP synthetic reference applications/corpora only; not production business requirements",
+  "provenance": "AI proposed; human project authority explicitly approved in user instruction",
+  "authorityRepresentation": "Bounded test/reference authority; public test key; no manufactured reviewer identity",
+  "referenceClock": 1791417600,
+  "examples": [
+    {
+      "domain": "payment",
+      "request": {
+        "applicationId": "APP-FIXTURE",
+        "author": "author",
+        "planDigest": "sha256:9f32a52a87ef1faa12daf0a24dbbbb6687d2c59e10cb07ea9f1b6035e5f448a0",
+        "contentDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+        "requiredScopes": [
+          "MIGRATION",
+          "SECURITY",
+          "SEMANTIC"
+        ]
+      },
+      "proof": {
+        "body": {
+          "authority": "reference-hmac-v1",
+          "principal": "reference:explicit-human-project-authority",
+          "request": {
+            "applicationId": "APP-FIXTURE",
+            "author": "author",
+            "planDigest": "sha256:9f32a52a87ef1faa12daf0a24dbbbb6687d2c59e10cb07ea9f1b6035e5f448a0",
+            "contentDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+            "requiredScopes": [
+              "MIGRATION",
+              "SECURITY",
+              "SEMANTIC"
+            ]
+          },
+          "issuedAt": 1791417600,
+          "expiresAt": 1791504000
+        },
+        "signature": "6d0a726a2e18f43eedec035525c784f42951b56ca3f8a1bd638eacc3e336df44"
+      }
+    },
+    {
+      "domain": "case-management",
+      "request": {
+        "applicationId": "APP-CASE-MANAGEMENT",
+        "author": "author",
+        "planDigest": "sha256:9d79387aa309a5e6b3d979edb2a796c93da2461f6d5d8efd42effca017eefb10",
+        "contentDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+        "requiredScopes": [
+          "MIGRATION",
+          "SECURITY",
+          "SEMANTIC"
+        ]
+      },
+      "proof": {
+        "body": {
+          "authority": "reference-hmac-v1",
+          "principal": "reference:explicit-human-project-authority",
+          "request": {
+            "applicationId": "APP-CASE-MANAGEMENT",
+            "author": "author",
+            "planDigest": "sha256:9d79387aa309a5e6b3d979edb2a796c93da2461f6d5d8efd42effca017eefb10",
+            "contentDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+            "requiredScopes": [
+              "MIGRATION",
+              "SECURITY",
+              "SEMANTIC"
+            ]
+          },
+          "issuedAt": 1791417600,
+          "expiresAt": 1791504000
+        },
+        "signature": "b6698720206e3cfcf5e64ee53d1dedbc8a83bbb08a3389a803b7a5e527176a0d"
+      }
+    }
+  ]
+}

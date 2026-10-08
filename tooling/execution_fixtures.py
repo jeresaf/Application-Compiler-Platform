@@ -1,4 +1,8 @@
-"""Explicit proposed reference decisions, never inferred migration or real approval."""
+"""AI-proposed reference semantics, explicitly human-approved on 2026-10-08.
+
+Proposal origins/bytes remain unchanged. Fresh approval is recorded separately
+by execution_approval; fixture lifecycle markers alone never confer authority.
+"""
 import copy
 import json
 from pathlib import Path
@@ -99,7 +103,7 @@ def model(domain):
 
 def main():
     DEST.mkdir(exist_ok=True)
-    manifest = {'profile': PROFILE, 'status': 'PROPOSED_TEST_SEMANTICS_REQUIRES_HUMAN_REVIEW', 'examples': []}
+    manifest = {'profile': PROFILE, 'status': 'APPROVED_REFERENCE_SEMANTICS', 'examples': [], 'approval': 'human-approval.json'}
     for domain in ('payment', 'case-management'):
         old, proposal = evolution(domain)
         plan = prepare(old, proposal)

@@ -10,7 +10,7 @@ permissions:
 jobs:
   contracts:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v7.0.0
@@ -141,3 +141,58 @@ jobs:
           path: experiments/phase5/results/phase5c/
       - name: Verify actual Ubuntu evidence and honest unresolved-gate disposition
         run: python3.14 experiments/phase5/check5c.py
+
+  phase6-target:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    services:
+      postgres:
+        image: postgres:18.6
+        env:
+          POSTGRES_DB: acp_test
+          POSTGRES_USER: acp_test
+          POSTGRES_PASSWORD: ephemeral-test-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U acp_test -d acp_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+      ACP_TEST_DATABASE_USER: acp_test
+      ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+          package-manager-cache: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Install contract dependencies and worker confinement library
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libseccomp2
+          python3.14 -m pip install -r tooling/requirements.txt
+      - name: Compile both complete approved domains through the negotiated target
+        # Deliberately fail closed while complete application capabilities are missing.
+        # Component/template builds never substitute for negotiated admission.
+        run: python3.14 tooling/check_phase6_target.py --output /tmp/acp-phase6-target --run-builds
+      - name: Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries
+        run: python3.14 -m unittest tooling.tests.test_execution_approval tooling.tests.test_execution_v03_evolution -v
+      - name: Preserve negotiated gate and generated build evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase6-target-ubuntu-evidence
+          path: |
+            /tmp/acp-phase6-target/negotiated-report.json
+            /tmp/acp-phase6-target/*.log

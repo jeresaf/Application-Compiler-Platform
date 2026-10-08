@@ -55,4 +55,4 @@ Phase 6 adds worker, materialization, provenance and migration-planner boundary 
 
 ## Versioned execution/dataflow successor
 
-[Execution 0.3 fixtures](execution-v03/README.md) preserve historical corpora and separately define proposed operation effects/dataflow, Canonical 0.2 vectors, explicit upgrade ChangeSets/plans and historical-preservation digests. They are synthetic test semantics requiring human review, not inferred migrations or real approval evidence.
+[Execution 0.3 fixtures](execution-v03/README.md) preserve historical corpora and separately define approved reference operation effects/dataflow, Canonical 0.2 vectors, explicit upgrade ChangeSets/plans and historical-preservation digests. The human project authority explicitly approved these synthetic reference semantics on 2026-10-08. Fresh exact-content proofs represent this instruction through the bounded reference authority; no production business requirements or historical approval are inferred.

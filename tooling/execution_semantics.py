@@ -3,9 +3,11 @@ from datetime import datetime, timezone
 from importlib.resources import files
 import re
 from zoneinfo import ZoneInfo
+from functools import lru_cache
 import tzdata
 
 
+@lru_cache(maxsize=1024)
 def zone(name):
     # Resolve only the pinned package, never the host's possibly different tzdb.
     if not re.fullmatch(r"[A-Za-z0-9_+-]+(?:/[A-Za-z0-9_+-]+)*", name):

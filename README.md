@@ -14,7 +14,7 @@ ACP maintains an authoritative application specification through semantic compil
 
 Authoring and canonical versions have separate roles:
 
-The [explicit execution/dataflow successor](docs/adr/0015-explicit-operation-effects-and-dataflow.md) introduces separately versioned Authoring 0.3.0, Canonical 0.2.0 and ChangeSet 0.2.0. Historical contracts remain preserved. Proposed reference behavior requires human review before Phase 6 target work resumes; see the [dedicated report](docs/execution-v03-completion-report.md).
+The [explicit execution/dataflow successor](docs/adr/0015-explicit-operation-effects-and-dataflow.md) introduces separately versioned Authoring 0.3.0, Canonical 0.2.0 and ChangeSet 0.2.0. Historical contracts remain preserved. Authoring 0.3.0 and Canonical 0.2.0 are APPROVED AND GREEN, ChangeSet 0.2 is GREEN, ADR-0015 is ACCEPTED, and execution-v03 fixture decisions are APPROVED REFERENCE SEMANTICS by explicit human approval on 2026-10-08. Phase 6 target implementation resumes; see the [dedicated report](docs/execution-v03-completion-report.md).
 
 | Contract | Role |
 | --- | --- |

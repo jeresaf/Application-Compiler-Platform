@@ -1,8 +1,8 @@
-# Proposed execution 0.3 reference decisions for human review
+# Approved execution 0.3 synthetic reference-domain decisions
 
-These decisions are explicit proposed test semantics, recorded with AI proposal provenance. They are not human-authored or approved business behavior until reviewed. Stable names are not evidence for any assignment. Exact new approval must bind the complete Canonical 0.2 snapshot, not this prose alone.
+Status: APPROVED REFERENCE SEMANTICS. The human project authority explicitly supplied `Approve ADR-0015 and the execution-v03 fixture decisions.` on 2026-10-08. AI proposed these semantics; human approval is a separate subsequent act. They are authoritative only for ACP reference applications/corpora validating compiler behavior, not production business requirements. Stable names are not evidence for assignments. Fresh exact-content approval for both Canonical 0.2 snapshots and upgrade plans is recorded in [the reference authority record](../test-corpus/execution-v03/human-approval.json); historical Canonical 0.1 approval is not reused.
 
-| Site | Proposed fixture decision |
+| Site | Approved reference fixture decision |
 | --- | --- |
 | Both use cases | Require task text plus an exact root-resource Identifier. The resource must already exist and remain authorized in the actor's tenant. |
 | Payment `CMD-RECORD` | Consume operation text; assign only `FLD-TASK-SUMMARY`; preserve amount, identity, tenant and unrelated fields. Return the resulting summary. Existing positive-amount guard and invariant still apply. |
@@ -15,4 +15,4 @@ These decisions are explicit proposed test semantics, recorded with AI proposal 
 | Both task queries | Bind the String Filter value to Query input `QUERY-TEXT`; apply case-sensitive code-point substring containment against resource summary; retain the existing per-row summary projection and tenant scope. |
 | Both scheduled tasks | Explicitly bind literal text `Explicit scheduled fixture text` and resource identity `fixture-resource`. These are reproducible test invocation values, not production scheduling defaults. |
 
-The general model is broader than the proposed summary-only fixture behavior: tests exercise exact Money assignment, ordered interacting effects, typed query inputs/projections and complete event construction. No implied CRUD, anonymization replacement, closure timestamp or pagination-order behavior is added. See the [inventory](execution-dataflow-inventory.md), [ADR](adr/0015-explicit-operation-effects-and-dataflow.md) and [validation report](execution-v03-completion-report.md).
+The general model is broader than the approved summary-only fixture behavior: tests exercise exact Money assignment, ordered interacting effects, typed query inputs/projections and complete event construction. No implied CRUD, anonymization replacement, closure timestamp or pagination-order behavior is added. See the [inventory](execution-dataflow-inventory.md), [ADR](adr/0015-explicit-operation-effects-and-dataflow.md) and [validation report](execution-v03-completion-report.md).

@@ -24,12 +24,17 @@ class TargetWorkerError(ValueError):
 
 def bundle_digest():
     files = [ROOT / "profile.json", *sorted((ROOT / "worker").glob("*.py")), *sorted((ROOT / "templates").rglob("*"))]
+    # Worker confinement now preloads the closed semantic validator. Bind its
+    # transitive local modules/schemas as well as target source/templates.
+    repository = ROOT.parents[1]
+    files += sorted((repository / 'tooling').glob('*.py'))
+    files += sorted((repository / 'contracts').glob('*.schema.json'))
     digest = hashlib.sha256()
     for path in files:
         if path.is_symlink() or any(p.is_symlink() for p in path.parents if p != ROOT.parent):
             raise TargetWorkerError("BUNDLE_SYMLINK")
         if path.is_file():
-            digest.update(path.relative_to(ROOT).as_posix().encode() + b"\0" + path.read_bytes() + b"\0")
+            digest.update(path.relative_to(repository).as_posix().encode() + b"\0" + path.read_bytes() + b"\0")
     return digest.hexdigest()
 
 
@@ -152,7 +157,7 @@ class TargetWorker:
 class ProductionTarget(SyntheticTarget):
     """Reference host adapter; worker cannot approve snapshots or decisions."""
     identity = PROFILE["profile"]
-    capabilities = ("target.project-artifacts/1", "target.semantic-coverage/1")
+    capabilities = ("target.project-artifacts/1", "target.semantic-coverage/1", "semantic.execution-dataflow/0.3")
 
     def __init__(self):
         self.worker = TargetWorker()
@@ -172,9 +177,17 @@ class ProductionTarget(SyntheticTarget):
     def lower(self, realization, request):
         choices = {d.role: d.choice.read().get("choice") for d in (*realization.architecture, *realization.design)}
         payload = {"nodes": sorted((o.semantic.read() for o in realization.objects), key=lambda n: n["id"]),
-                   "required": [], "decisions": choices}
+                   "required": [c for c in request.required_capabilities if c == 'semantic.execution-dataflow/0.3'], "decisions": choices}
+        if 'acp.execution.0.3' in request.features:
+            payload.update(canonicalVersion='0.2.0', required=['semantic.execution-dataflow/0.3'])
         # Host approved decisions are checked by compiler_core before this port.
-        model = self._call("lower", payload)
+        try:
+            model = self._call("lower", payload)
+        except TargetWorkerError as error:
+            if any(part.startswith('UNSUPPORTED:') for part in str(error).split(';')):
+                from compiler_core import CompilerFault
+                raise CompilerFault('CAPABILITY') from None
+            raise
         expected = payload["nodes"]
         if model.get("nodes") != expected or model.get("profile") != self.identity or model.get("version") != "0.1.0":
             raise TargetWorkerError("LOWER_PROVENANCE")

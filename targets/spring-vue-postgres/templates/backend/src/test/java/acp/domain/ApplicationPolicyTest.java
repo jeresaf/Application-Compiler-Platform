@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ApplicationPolicyTest {
     @Test void tenantPoliciesRequireCanonicalAssignmentAndDenyCrossTenant() throws Exception {
         var model = new TargetModel();
-        var policy = new ApplicationPolicy(model, new Expressions(model));
+        var policy = new ApplicationPolicy(model, new Expressions(model), org.mockito.Mockito.mock(acp.security.SessionGate.class));
         var identity = Jwt.withTokenValue("test-only").header("alg", "none").subject("fixture:operator").claim("tenant", "tenant-one").build();
         for (var query : model.nodes("Query")) {
             String action = query.path("id").asText();

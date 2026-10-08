@@ -7,8 +7,19 @@ import resource
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(1, str(Path(__file__).resolve().parents[3] / 'tooling'))
+from execution_model import validate_execution  # Closed neutral validator, preloaded before seccomp.
+import phase1_semantics, security_semantics, execution_semantics, ui_semantics, quality_semantics, execution_canonical
+from importlib.resources import files
+from datetime import datetime
+datetime.strptime('09:00:00', '%H:%M:%S')
+for _zone in files('tzdata').joinpath('zones').read_text().splitlines():
+    execution_semantics.zone(_zone)  # Only the pinned package; no host tzdb or post-confinement I/O.
+''.encode('utf-16-be')  # JCS key ordering codec must be loaded before open() is denied.
 from model import CapabilityError, encoded, lower, manifest, negotiate
 from generation import plan, validate_plan
+from execution_codegen import ExecutionGenerator  # Preload trusted generator before confinement.
+import relations
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = json.loads((ROOT / "profile.json").read_text())
@@ -47,22 +58,30 @@ def handle(request):
     operation, payload = request["operation"], request["payload"]
     expected = {"handshake": set(), "manifest": set(), "negotiate": {"nodes", "required", "decisions"},
                 "lower": {"nodes", "required", "decisions"}, "plan": {"model", "inventory"}, "validate-plan": {"artifacts"}}
-    if operation not in expected or type(payload) is not dict or set(payload) != expected[operation]:
+    keys = set(payload) if type(payload) is dict else set()
+    if operation in {'negotiate', 'lower'}:
+        keys -= {'canonicalVersion'}
+    if operation not in expected or type(payload) is not dict or keys != expected[operation]:
         raise CapabilityError("PAYLOAD")
     if operation == "handshake":
         return {"protocol": PROFILE["protocol"], "profile": PROFILE["profile"]}
     if operation == "manifest":
         return manifest(PROFILE)
     if operation == "negotiate":
-        return negotiate(payload["nodes"], payload["required"], payload["decisions"], PROFILE)
+        validate_semantics(payload)
+        return negotiate(payload["nodes"], payload["required"], payload["decisions"], PROFILE, payload.get('canonicalVersion', '0.1.0'))
     if operation == "lower":
-        negotiate(payload["nodes"], payload["required"], payload["decisions"], PROFILE)
-        return lower(payload["nodes"], PROFILE)
+        validate_semantics(payload)
+        version = payload.get('canonicalVersion', '0.1.0')
+        negotiate(payload["nodes"], payload["required"], payload["decisions"], PROFILE, version)
+        return lower(payload["nodes"], PROFILE, version)
     if operation == "plan":
         model = payload["model"]
         # A supplied Target IR cannot bypass lowering constraints.
-        negotiate(model["nodes"], [], PROFILE["decisions"], PROFILE)
-        if model != lower(model["nodes"], PROFILE):
+        version = model.get('canonicalVersion', '0.1.0')
+        validate_semantics({'canonicalVersion': version, 'nodes': model['nodes']})
+        negotiate(model["nodes"], model.get('requiredCapabilities', []), PROFILE["decisions"], PROFILE, version)
+        if model != lower(model["nodes"], PROFILE, version):
             raise CapabilityError("TARGET_IR")
         inventory = payload["inventory"]
         paths = set()
@@ -77,6 +96,18 @@ def handle(request):
     if operation == "validate-plan":
         return validate_plan(payload["artifacts"])
     raise CapabilityError("OPERATION")
+
+
+def validate_semantics(payload):
+    if payload.get('canonicalVersion') != '0.2.0':
+        return
+    nodes = payload['nodes']
+    source = {'modelVersion': '0.3.0', 'applicationId': 'worker-validation', 'snapshotId': 'WORKER-STRUCTURAL-CHECK',
+              'nodes': nodes, 'issues': [], 'approvals': [
+                  {'subject': {'id': n['id'], 'revision': n['revision']},
+                   'reviewer': 'structural-check-only', 'evidence': 'host-approval-checked-separately'} for n in nodes]}
+    if validate_execution(source, 'compile'):
+        raise CapabilityError('SEMANTIC_VALIDATION')
 
 
 def main():
