@@ -111,7 +111,7 @@ def run(output, builds, expect_open=False):
     report['result'] = 'BLOCKED' if failed else 'PIPELINE_CHECKS_PASS_PHASE6_EXIT_REVIEW_STILL_REQUIRED'
     if expect_open and manifest.get('releaseStatus') == 'INCOMPLETE':
         try:
-            assert_expected_blocked(report, load(ROOT / 'expected-open-blockers-v2.json'))
+            assert_expected_blocked(report, load(ROOT / 'expected-open-blockers-v3.json'))
             report['openPhaseExpectation'] = 'EXPECTED_BLOCKED_STATE = PASS'
             failed = False
         except ValueError as error:

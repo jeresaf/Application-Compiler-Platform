@@ -19,6 +19,9 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 /** Target invocation profile 1.0. No scheduler, transport or production IAM. */
 @Component
 public final class InvocationCore {
+    private record JobContext(String occurrence,int timeout) {}
+    private static final ThreadLocal<JobContext> JOB=new ThreadLocal<>();
+    public static <T> T job(String occurrence,int timeout,Supplier<T> action){if(JOB.get()!=null)throw new Outcome("NESTED_JOB");JOB.set(new JobContext(occurrence,timeout));try{return action.get();}finally{JOB.remove();}}
     public interface Time { BigInteger now(); void sleep(long seconds); }
     public static final class SystemTime implements Time {
         public BigInteger now() { Instant t=Instant.now(); return BigInteger.valueOf(t.getEpochSecond()).multiply(BILLION).add(BigInteger.valueOf(t.getNano())); }
@@ -83,6 +86,8 @@ public final class InvocationCore {
         if(now.signum()<0)throw new Outcome("SEMANTIC_TIME");
         return isolated.execute(status -> {
             byte[] key=digest(canonical(mapper.valueToTree(List.of(policy,revision,tenant,actor))));
+            JobContext job=JOB.get();
+            if(job!=null && jdbc.queryForObject("SELECT count(*) FROM acp_job_charge WHERE occurrence=? AND rate_identity=?",Long.class,job.occurrence(),key)>0)return true;
             BigInteger denominator=BigInteger.valueOf(seconds).multiply(BILLION), capacity=BigInteger.valueOf(burst).multiply(denominator);
             jdbc.update("INSERT INTO acp_rate(identity,tokens,last_ns) VALUES(?,?,?) ON CONFLICT DO NOTHING",key,new java.math.BigDecimal(capacity),new java.math.BigDecimal(now));
             var row=jdbc.queryForMap("SELECT * FROM acp_rate WHERE identity=? FOR UPDATE",key);
@@ -91,6 +96,7 @@ public final class InvocationCore {
             boolean allowed=tokens.compareTo(denominator)>=0;
             if(allowed)tokens=tokens.subtract(denominator);
             jdbc.update("UPDATE acp_rate SET tokens=?,last_ns=? WHERE identity=?",new java.math.BigDecimal(tokens),new java.math.BigDecimal(now),key);
+            if(allowed && job!=null)jdbc.update("INSERT INTO acp_job_charge(occurrence,rate_identity) VALUES(?,?)",job.occurrence(),key);
             return allowed;
         });
     }
@@ -129,7 +135,7 @@ public final class InvocationCore {
                     if("aborted".equals(fact)) {
                         // Trusted PostgreSQL no-effect proof, not an elapsed lease.
                         jdbc.update("DELETE FROM acp_idempotency WHERE identity=? AND owner=? AND status='IN_FLIGHT'",identity,row.get("owner"));
-                        int inserted=jdbc.update("INSERT INTO acp_idempotency(identity,input_digest,owner,status) VALUES(?,?,?,'IN_FLIGHT') ON CONFLICT DO NOTHING",identity,input,owner);
+                        int inserted=jdbc.update("INSERT INTO acp_idempotency(identity,input_digest,owner,status,job_occurrence) VALUES(?,?,?,'IN_FLIGHT',?) ON CONFLICT DO NOTHING",identity,input,owner,JOB.get()==null?null:JOB.get().occurrence());
                         if(inserted!=1)conflictOrProgress(identity,input);
                         return new Claim(call,identity,owner,null);
                     }
@@ -148,7 +154,7 @@ public final class InvocationCore {
                 jdbc.queryForMap("SELECT * FROM acp_idempotency WHERE identity=? FOR UPDATE",identity);
                 jdbc.update("DELETE FROM acp_idempotency WHERE identity=? AND owner=? AND status='COMMITTED_RESULT'",identity,row.get("owner"));
             }
-            int inserted=jdbc.update("INSERT INTO acp_idempotency(identity,input_digest,owner,status) VALUES(?,?,?,'IN_FLIGHT') ON CONFLICT DO NOTHING",identity,input,owner);
+            int inserted=jdbc.update("INSERT INTO acp_idempotency(identity,input_digest,owner,status,job_occurrence) VALUES(?,?,?,'IN_FLIGHT',?) ON CONFLICT DO NOTHING",identity,input,owner,JOB.get()==null?null:JOB.get().occurrence());
             if(inserted!=1)conflictOrProgress(identity,input);
             return new Claim(call,identity,owner,null);
         });
@@ -173,9 +179,13 @@ public final class InvocationCore {
         for(int attempt=1;;attempt++) {
             Attempt context=new Attempt(calls,claims,jwt);
             boolean[] rollback={false};
+            int ordinal=attempt;
+            Long jobAttempt=JOB.get()==null?null:isolated.execute(s->jdbc.queryForObject("INSERT INTO acp_job_invocation_attempt(occurrence,attempt,started_ns,outcome) VALUES(?,?,?,'STARTED') RETURNING id",Long.class,JOB.get().occurrence(),ordinal,new java.math.BigDecimal(time.now())));
             try {
                 CURRENT.set(context);
-                return boundary.execute(status -> {
+                TransactionTemplate execution=boundary;
+                if(JOB.get()!=null){execution=new TransactionTemplate(boundary.getTransactionManager());execution.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);execution.setTimeout(JOB.get().timeout());}
+                T completed=execution.execute(status -> {
                     TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
                         @Override public void afterCompletion(int completion) { rollback[0]=completion==STATUS_ROLLED_BACK; }
                     });
@@ -188,7 +198,9 @@ public final class InvocationCore {
                     }
                     return result;
                 });
+                recordJobAttempt(jobAttempt,"COMMITTED",null);return completed;
             } catch(RuntimeException error) {
+                recordJobAttempt(jobAttempt,rollback[0]?"ROLLED_BACK":"INDETERMINATE",error instanceof SemanticFailure f?f:null);
                 if(rollback[0] && error instanceof SemanticFailure f && eligible(f,retry) && attempt<max) {
                     BigInteger delay=BigInteger.valueOf(retry.path("initialSeconds").asLong()).multiply(BigInteger.valueOf(retry.path("multiplier").asLong()).pow(attempt-1)).min(BigInteger.valueOf(retry.path("maxDelaySeconds").asLong()));
                     time.sleep(delay.longValueExact()); continue;
@@ -198,6 +210,10 @@ public final class InvocationCore {
                 throw error;
             } finally {CURRENT.remove();}
         }
+    }
+    private void recordJobAttempt(Long id,String outcome,SemanticFailure failure) {
+        if(id==null)return;
+        isolated.execute(s->{jdbc.update("UPDATE acp_job_invocation_attempt SET completed_ns=?,outcome=?,failure_id=?,failure_revision=? WHERE id=?",new java.math.BigDecimal(time.now()),outcome,failure==null?null:failure.envelope().failureId(),failure==null?null:failure.envelope().failureRevision(),id);return null;});
     }
     public boolean eligible(SemanticFailure f,JsonNode retry) {
         if(retry==null || !"TRANSIENT".equals(f.envelope().category()) || !f.envelope().retryable())return false;

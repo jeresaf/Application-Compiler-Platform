@@ -12,3 +12,4 @@
 *.xtext text eol=lf
 *.mwe2 text eol=lf
 *.toml text eol=lf
+*.json text eol=lf

@@ -1,7 +1,7 @@
 {
-  "profile": "acp-spring-vue-postgres/0.2.0",
+  "profile": "acp-spring-vue-postgres/0.1.0",
   "protocol": "acp-target-worker/0.1.0",
-  "generator": "acp-spring-vue-generator/0.2.0",
+  "generator": "acp-spring-vue-generator/0.1.0",
   "stack": {
     "java": "21",
     "springBoot": "4.1.1",
@@ -26,6 +26,5 @@
   "decisions": {
     "architecture": "modular-monolith-jdbc/0.1.0",
     "design": "semantic-task-vue/0.1.0"
-  },
-  "targetIRVersion": "0.2.0"
+  }
 }

@@ -1,0 +1,50 @@
+{
+  "contractVersion": "3.0.0",
+  "target": "acp-spring-vue-postgres/0.2.0",
+  "releaseStatus": "INCOMPLETE",
+  "reviewBasis": "2026-10-08 successor profile 0.2 delivery/job tranche: exact actual worker negotiation; historical 2.0 invocation contract and 0.1 evidence unchanged",
+  "domains": {
+    "payment": {
+      "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "blockers": [
+        "UNSUPPORTED:Action/0.2.0",
+        "UNSUPPORTED:DataClassification/0.2.0",
+        "UNSUPPORTED:DataLifecycle/0.2.0",
+        "UNSUPPORTED:DeletionPolicy/0.2.0",
+        "UNSUPPORTED:Filter/0.2.0",
+        "UNSUPPORTED:Form/0.2.0",
+        "UNSUPPORTED:InputControl/0.2.0",
+        "UNSUPPORTED:LegalHold/0.2.0",
+        "UNSUPPORTED:PermissionBoundary/0.2.0",
+        "UNSUPPORTED:Retention/0.2.0",
+        "UNSUPPORTED:Screen/0.2.0",
+        "UNSUPPORTED:Search/0.2.0",
+        "UNSUPPORTED:Table/0.2.0",
+        "UNSUPPORTED:ViewState/0.2.0",
+        "UNSUPPORTED:Wizard/0.2.0",
+        "UNSUPPORTED:WizardStep/0.2.0"
+      ]
+    },
+    "case-management": {
+      "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "blockers": [
+        "UNSUPPORTED:Action/0.2.0",
+        "UNSUPPORTED:DataClassification/0.2.0",
+        "UNSUPPORTED:DataLifecycle/0.2.0",
+        "UNSUPPORTED:DeletionPolicy/0.2.0",
+        "UNSUPPORTED:Filter/0.2.0",
+        "UNSUPPORTED:Form/0.2.0",
+        "UNSUPPORTED:InputControl/0.2.0",
+        "UNSUPPORTED:LegalHold/0.2.0",
+        "UNSUPPORTED:PermissionBoundary/0.2.0",
+        "UNSUPPORTED:Retention/0.2.0",
+        "UNSUPPORTED:Screen/0.2.0",
+        "UNSUPPORTED:Search/0.2.0",
+        "UNSUPPORTED:Table/0.2.0",
+        "UNSUPPORTED:ViewState/0.2.0",
+        "UNSUPPORTED:Wizard/0.2.0",
+        "UNSUPPORTED:WizardStep/0.2.0"
+      ]
+    }
+  }
+}

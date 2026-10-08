@@ -2,13 +2,19 @@
 
 Phase 6 is IN PROGRESS. This file is not an acceptance or completion claim. Phases 1–5 retain their approved historical status. Phase 7 is NOT STARTED. No generated application is claimed production-ready.
 
-## Current invocation tranche — 2026-10-08
+## Current delivery and Jobs tranche
+
+The [delivery and Jobs tranche](phase6-delivery-jobs.md) uses target profile and generator 0.2.0 and explicitly versioned Target IR 0.2.0. Actual worker negotiation against both unchanged approved Canonical 0.3 snapshots reports 16 blockers per application, bound by [contract 3.0.0](../targets/spring-vue-postgres/expected-open-blockers-v3.json): five privacy/lifecycle families and eleven UI families. DeliveryPolicy, Schedule and Job support is constrained to the exact documented subset. Historical blocker contracts 1.1.0 and 2.0.0 remain unchanged. Strict Phase 6 closure remains BLOCKED; Phase 6 is IN PROGRESS and Phase 7 is NOT STARTED.
+
+See the [bounded implementation and validation report](phase6-delivery-jobs.md).
+
+## Historical approved invocation tranche — 2026-10-08
 
 ADR-0016 is ACCEPTED by the user's subsequent explicit approval on 2026-10-08. Authoring 0.4 is APPROVED REFERENCE SEMANTICS; Canonical 0.3 is APPROVED REFERENCE SNAPSHOTS; ChangeSet 0.3 is GREEN for bounded reference evolution. The exact [approval record](deterministic-v04-approval-record.md) covers both complete fixture decisions, including F-01. Required reference-app canonical gaps are zero. Proposal-time reports preserve their historical status.
 
 The invocation tranche consumes those exact Canonical 0.3 snapshots through the real compiler and worker. Query, Failure, RatePolicy, IdempotencyPolicy and RetryPolicy are SUPPORTED_WITH_CONSTRAINT within the [invocation profile](phase6-invocation-core.md). Actual negotiation yields 19 remaining blockers per application, recorded in successor blocker contract 2.0.0. The historical Canonical 0.2 contract 1.1.0 and evidence are preserved. Strict mode remains BLOCKED; the open-phase CI check accepts only the exact approved applications and exact actual blocked state. Phase 6 remains IN PROGRESS; Phase 7 is NOT STARTED.
 
-The [invocation tranche report](phase6-invocation-core.md) records current validation and exact remaining blockers. Older sections below are historical checkpoints, including proposal-time evidence; their original CI and implementation limitations describe those checkpoints.
+The [invocation tranche report](phase6-invocation-core.md) records validation and remaining blockers at the accepted invocation checkpoint. Older sections below are historical checkpoints, including proposal-time evidence; their original CI and implementation limitations describe those checkpoints.
 
 ## Historical foundation and continuation evidence
 

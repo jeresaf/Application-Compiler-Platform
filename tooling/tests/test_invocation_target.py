@@ -75,7 +75,7 @@ class InvocationTargetTests(unittest.TestCase):
 
     def test_new_contract_accepts_only_real_exact_expected_blocked_state(self):
         from phase6_open_state import assert_expected_blocked
-        contract=load(ROOT/'expected-open-blockers-v2.json')
+        contract=load(ROOT/'expected-open-blockers-v3.json')
         report={'targetManifest':TargetWorker().call('manifest',{}),'mode':'FULL_NEGOTIATED_TARGET_GATE','result':'BLOCKED','domains':{}}
         for domain,snapshot in self.snapshots.items():
             with self.assertRaises(TargetWorkerError) as e:TargetWorker().call('lower',self.payload(snapshot['content']['nodes']))

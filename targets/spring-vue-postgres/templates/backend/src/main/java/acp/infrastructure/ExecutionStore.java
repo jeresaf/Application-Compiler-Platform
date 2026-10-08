@@ -63,6 +63,34 @@ public final class ExecutionStore {
         String id=TargetModel.identifier(tenant+":"+operation+":"+resource+":"+version+":"+event,"event");
         jdbc.update("INSERT INTO acp_outbox(id,tenant,event,resource,aggregate_version,payload) VALUES(?,?,?,?,?,?)", id,bytes(tenant),event,bytes(resource),version,bytes(encode(typedPayload)));
     }
+    private static final Object EVENT_CONTEXT=new Object();
+    private static final class EventContext { int step; final Map<String,Long> sequence=new HashMap<>(); }
+    private EventContext events() {
+        transaction();
+        EventContext c=(EventContext)TransactionSynchronizationManager.getResource(EVENT_CONTEXT);
+        if(c==null) {
+            c=new EventContext();TransactionSynchronizationManager.bindResource(EVENT_CONTEXT,c);
+            TransactionSynchronizationManager.registerSynchronization(new org.springframework.transaction.support.TransactionSynchronization() {
+                @Override public void suspend(){TransactionSynchronizationManager.unbindResourceIfPossible(EVENT_CONTEXT);}
+                @Override public void resume(){TransactionSynchronizationManager.bindResource(EVENT_CONTEXT,captured);}
+                private final EventContext captured=(EventContext)TransactionSynchronizationManager.getResource(EVENT_CONTEXT);
+                @Override public void afterCompletion(int status){TransactionSynchronizationManager.unbindResourceIfPossible(EVENT_CONTEXT);}
+            });
+        }
+        return c;
+    }
+    public void stepOrdinal(int step){events().step=step;}
+    public void event(String operation,int operationRevision,String event,int eventRevision,String aggregate,int aggregateRevision,int emission,String resource,long version,Object payload,Jwt jwt) {
+        EventContext c=events();String tenant=jwt.getClaimAsString("tenant");
+        String group=encode(List.of(tenant,aggregate,aggregateRevision,resource));
+        long sequence=c.sequence.computeIfAbsent(group,k->version);
+        String identity=encode(List.of(tenant,aggregate,aggregateRevision,resource,sequence,operation,operationRevision,event,eventRevision,c.step,emission));
+        String id;
+        try{id=java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(bytes(identity)));}
+        catch(java.security.NoSuchAlgorithmException e){throw new IllegalStateException("SHA256_REQUIRED");}
+        jdbc.update("INSERT INTO acp_outbox(id,tenant,event,resource,aggregate_version,payload,operation,operation_revision,event_revision,aggregate_id,aggregate_revision,commit_sequence,step_ordinal,emission_ordinal,commit_xid,delivery_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,pg_current_xact_id()::text,'PENDING')",
+            id,bytes(tenant),event,bytes(resource),version,bytes(encode(payload)),operation,operationRevision,eventRevision,aggregate,aggregateRevision,sequence,c.step,emission);
+    }
     private static void transaction() {
         if (!TransactionSynchronizationManager.isActualTransactionActive()) throw new IllegalStateException("TRANSACTION_REQUIRED");
     }

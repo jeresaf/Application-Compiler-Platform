@@ -1,0 +1,16 @@
+{
+  "contractVersion": "1.0.0",
+  "policy": "One exact bundle per released target/generator identity; any output-affecting revision requires a new intentional generator version. The 0.2 identity is sealed at this tranche checkpoint. Historical 0.1 evidence is unchanged.",
+  "releases": {
+    "acp-spring-vue-postgres/0.1.0": {
+      "generator": "acp-spring-vue-generator/0.1.0",
+      "bundleDigest": "20ab8a9e2554bed8c17a163eb69ab8a37099a014a5cc4c4803c49afd3e2fd6dd",
+      "observedLocalCRLFBundleDigest": "a718c37c159e9073ea61d3b307599f86ec2e9b9e2376efcccccf1e22ff36f91d",
+      "checkpoint": "bba16c9e64bd0a16e60343d4aaf11060f209e931"
+    },
+    "acp-spring-vue-postgres/0.2.0": {
+      "generator": "acp-spring-vue-generator/0.2.0",
+      "bundleDigest": "d66fc31b74ac3c6ee5d391027b66726bbd8c93b2d624329a0cf3c327b9a9f70b"
+    }
+  }
+}

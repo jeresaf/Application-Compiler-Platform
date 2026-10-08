@@ -163,6 +163,8 @@ class ProductionTarget(SyntheticTarget):
         self.worker = TargetWorker()
         self.last_admission = None
         self.bundle = bundle_digest()
+        from target_release import verify_release
+        verify_release(PROFILE,self.bundle)
         if json.loads((ROOT / "profile.json").read_text()) != PROFILE:
             raise TargetWorkerError("BUNDLE_CHANGED")
         self.generator = PROFILE["generator"] + "+sha256:" + self.bundle
@@ -195,14 +197,14 @@ class ProductionTarget(SyntheticTarget):
                 raise CompilerFault('CAPABILITY') from None
             raise
         expected = payload["nodes"]
-        if model.get("nodes") != expected or model.get("profile") != self.identity or model.get("version") != "0.1.0":
+        if model.get("nodes") != expected or model.get("profile") != self.identity or model.get("version") != PROFILE.get("targetIRVersion", "0.1.0"):
             raise TargetWorkerError("LOWER_PROVENANCE")
         neutral = super().lower(realization, request)
         return replace(neutral, target_model=Document.of(model))
 
     def plan(self, target, request, *, inventory=()):
         model = target.target_model.read()
-        rows = self._call("plan", {"model": model, "inventory": [
+        rows = self._call("plan", {"model": model, "build": {"bundleDigest": "sha256:"+self.bundle, "compiler": request.compiler, "pipeline": request.pipeline, "canonicalSnapshotDigest": request.snapshot_digest, "features": list(request.features)}, "inventory": [
             {"path": item.path, "digest": item.digest, "owner": str(item.owner)} for item in inventory]})
         self._call("validate-plan", {"artifacts": rows})
         by_id = {o.provenance.origins[0].id: o for o in target.objects}

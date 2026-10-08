@@ -1,0 +1,773 @@
+{
+  "mode": "UNNEGOTIATED_DELIVERY_JOB_COMPONENTS_ONLY",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "approval": {
+    "date": "2026-10-08",
+    "statement": "Approve ADR-0016 and the complete deterministic-v04 fixture decisions, including the F-01 failure bindings.",
+    "status": "APPROVED_REFERENCE_SEMANTICS",
+    "reviewedCommit": "76e7700758454b5cfd00c39a68475439c1a1e6ca",
+    "assets": {
+      "contracts/authoring-0.4.schema.json": "sha256:2e60a19f9683d4515a0bd51fc5b0b964164990eea7fadd6715b50fdf11d25d60",
+      "contracts/canonical-0.3.schema.json": "sha256:104bb574abac5eafd7b8e4e6ea5b030b08b30631f8207437ed6713cf9e3098ea",
+      "contracts/change-0.3.schema.json": "sha256:7424c400b2887eafc5d572f7c55c702daa07956e3d79729bf0d6562fa931f491",
+      "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+    },
+    "versions": {
+      "authoring": "0.4.0",
+      "canonical": "0.3.0",
+      "change": "0.3.0"
+    },
+    "scope": "Complete ADR-0016 and both ACP synthetic reference fixtures, including F-01; not production business requirements or target support",
+    "provenance": "AI proposed; human project authority explicitly approved in user instruction",
+    "authorityRepresentation": "Bounded reference/test authority with public key; no manufactured reviewer identity or production credentials",
+    "referenceClock": 1791417600
+  },
+  "environment": {
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4",
+    "node": "v24.21.0",
+    "java": "openjdk version \"21\" 2023-09-19 LTS"
+  },
+  "domains": {
+    "payment": {
+      "profile": "acp-spring-vue-postgres/0.2.0",
+      "generator": "acp-spring-vue-generator/0.2.0",
+      "generatedProvenance": {
+        "bundleDigest": "sha256:d66fc31b74ac3c6ee5d391027b66726bbd8c93b2d624329a0cf3c327b9a9f70b",
+        "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.2.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetProfile": "acp-spring-vue-postgres/0.2.0",
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "fullTargetAdmission": "UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0",
+      "checks": {
+        "generated-postgresql-invocation": "PASS",
+        "frontend-lock": "PASS",
+        "frontend-types": "PASS",
+        "frontend-tests": "PASS",
+        "frontend-build": "PASS"
+      },
+      "postgresqlVersion": "18.6",
+      "generatedTestSuites": [
+        {
+          "suite": "acp.domain.ApplicationPolicyTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "tenantPoliciesRequireCanonicalAssignmentAndDenyCrossTenant",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.ClassificationAuditTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "classificationAuditIsDurableSelectiveTransactionalAndContainsNoFieldValues",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.ExactDecimalTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "rejectsLossyRounding",
+              "status": "PASS"
+            },
+            {
+              "name": "rejectsPrecisionOverflow",
+              "status": "PASS"
+            },
+            {
+              "name": "preservesCurrencyAndExactScale",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.FailureMappingTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "exactSqlStatesAndUnknownExceptionsNeverBecomeBusinessFailures",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.MigrationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "freshSchemaAndRepeatedFlywayExecution",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.ObservabilityNonDisclosureTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "diagnosticResponsesAndEmittedLogsNeverIncludeExceptionValuesOrTraces",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.PortableFaultMappingTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "exactClassesStatesAndWrappersDoNotBroadenOrSelectSemanticFailures",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.PrivacyGuardsTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "auditModesExportAndExactPermissionFailClosed",
+              "status": "PASS"
+            },
+            {
+              "name": "literalTrueHoldCannotBeBypassedByReleaseAuthorization",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.SessionGateTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "unauthenticatedAndFutureCredentialsCannotInitializeASession",
+              "status": "PASS"
+            },
+            {
+              "name": "idleAbsoluteReauthenticationAndRevocationAreIndependentGates",
+              "status": "PASS"
+            },
+            {
+              "name": "multifactorIsRequiredAndActivityIsDurableAndSliding",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.generated.DeliveryJobTest",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "startedOccurrenceIsRecoveredRatherThanSkipped",
+              "status": "PASS"
+            },
+            {
+              "name": "jobCommittedThenLostResultRecoversThroughSameDurableIdempotencyIdentity",
+              "status": "PASS"
+            },
+            {
+              "name": "stalledTransportIsBoundedAndCannotKeepExpiredBarrierClaimed",
+              "status": "PASS"
+            },
+            {
+              "name": "crashAfterSendThenRestartRedeliversExactOccurrence",
+              "status": "PASS"
+            },
+            {
+              "name": "actualDatabaseJobTimeoutKeepsUncertaintyUntilRollbackProofAndRecovery",
+              "status": "PASS"
+            },
+            {
+              "name": "actualInvocationProfileDatabaseUpgradePreservesExistingState",
+              "status": "PASS"
+            },
+            {
+              "name": "principalBindingIsMandatory",
+              "status": "PASS"
+            },
+            {
+              "name": "missedStrictlyBeforeActivationSkipsAndClockReversalRejects",
+              "status": "PASS"
+            },
+            {
+              "name": "consecutiveAggregateCommitsCannotOvertakeAndOtherAggregateProgresses",
+              "status": "PASS"
+            },
+            {
+              "name": "twoSchedulersRaceOneLogicalOccurrenceAndCompletedRestartStaysCompleted",
+              "status": "PASS"
+            },
+            {
+              "name": "pinnedRulesNormalGapOverlapAndRejection",
+              "status": "PASS"
+            },
+            {
+              "name": "deadlineBeforeFirstAttemptNeverSends",
+              "status": "PASS"
+            },
+            {
+              "name": "firstFailureThenAcknowledgementAndBarrier",
+              "status": "PASS"
+            },
+            {
+              "name": "rollbackProducesNoDeliverableOccurrence",
+              "status": "PASS"
+            },
+            {
+              "name": "jobTimeoutRetainsIndeterminateStateAndSameOccurrenceOnRecovery",
+              "status": "PASS"
+            },
+            {
+              "name": "jobUsesExactRetryPolicyWithoutRechargingLogicalInvocation",
+              "status": "PASS"
+            },
+            {
+              "name": "unboundInternalProviderFaultIsTerminalAndNeverJobRetry",
+              "status": "PASS"
+            },
+            {
+              "name": "actualGeneratedBootstrapRejectsMissingPrincipalAdapterAndHandle",
+              "status": "PASS"
+            },
+            {
+              "name": "duplicateWorkersCannotSendSameOccurrenceConcurrently",
+              "status": "PASS"
+            },
+            {
+              "name": "schedulerExactActivationUsesApprovedBindingsAndNormalAuthorization",
+              "status": "PASS"
+            },
+            {
+              "name": "exactDeadlineAndLateAcknowledgementCannotBecomeSuccess",
+              "status": "PASS"
+            },
+            {
+              "name": "repeatedFailureExpiresThenReleasesNextPosition",
+              "status": "PASS"
+            },
+            {
+              "name": "packagedRulesMatchAcceptedReferenceAlgebraVectors",
+              "status": "PASS"
+            },
+            {
+              "name": "committedOccurrencesHaveExactIdentityAndOrderedPositions",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.generated.InvocationCoreTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "durableClaimSurvivesLostProcessAndRecoversOnlyFromDatabaseProof",
+              "status": "PASS"
+            },
+            {
+              "name": "actualProviderFaultBindingRollbackAndRetryTiming",
+              "status": "PASS"
+            },
+            {
+              "name": "actualWorkflowFailureRollsBackAndStopsLaterSteps",
+              "status": "PASS"
+            },
+            {
+              "name": "exactInvariantBindingProducesFailureBeforeAnySqlWrite",
+              "status": "PASS"
+            },
+            {
+              "name": "sameKeyInFlightReturnsImmediatelyAndCommittedReplaySurvivesRestart",
+              "status": "PASS"
+            },
+            {
+              "name": "rateAndReplayShareOneInvocationInstantAtWindowEdge",
+              "status": "PASS"
+            },
+            {
+              "name": "unauthorizedRequestsCreateNoRateOrIdempotencyState",
+              "status": "PASS"
+            },
+            {
+              "name": "exactApprovedInvocationReplayConflictAndAtomicResults",
+              "status": "PASS"
+            },
+            {
+              "name": "exactRationalRateBoundariesAndConcurrentCapacity",
+              "status": "PASS"
+            },
+            {
+              "name": "orderedKeyPrecedenceAndDescendingIdentityAreCompiledExactly",
+              "status": "PASS"
+            },
+            {
+              "name": "unicodeOrderPaginationIsStableAndOffsetPagesHaveNoSnapshotClaim",
+              "status": "PASS"
+            },
+            {
+              "name": "stagedPredicateFailuresAndBoundInvariantRollback",
+              "status": "PASS"
+            },
+            {
+              "name": "inputNormalizationBindsSemanticValuesAndNominalIdentity",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.generated.InvocationHttpTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "exactSemanticFailureEnvelopeUsesVersionedHttpProfile",
+              "status": "PASS"
+            },
+            {
+              "name": "unauthenticatedRequestsAreDeniedAndFilterUsesExplicitQueryMember",
+              "status": "PASS"
+            },
+            {
+              "name": "missingInputAndDuplicateMembersFailBeforeSemanticWrites",
+              "status": "PASS"
+            },
+            {
+              "name": "typedInputBindingAndOutputSerializationUseTheActualMvcCodec",
+              "status": "PASS"
+            },
+            {
+              "name": "typedInputPropertyOrderAndUnicodeKeyReplayExactly",
+              "status": "PASS"
+            }
+          ]
+        }
+      ]
+    },
+    "case-management": {
+      "profile": "acp-spring-vue-postgres/0.2.0",
+      "generator": "acp-spring-vue-generator/0.2.0",
+      "generatedProvenance": {
+        "bundleDigest": "sha256:d66fc31b74ac3c6ee5d391027b66726bbd8c93b2d624329a0cf3c327b9a9f70b",
+        "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.2.0",
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetProfile": "acp-spring-vue-postgres/0.2.0",
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "fullTargetAdmission": "UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0",
+      "checks": {
+        "generated-postgresql-invocation": "PASS",
+        "frontend-lock": "PASS",
+        "frontend-types": "PASS",
+        "frontend-tests": "PASS",
+        "frontend-build": "PASS"
+      },
+      "postgresqlVersion": "18.6",
+      "generatedTestSuites": [
+        {
+          "suite": "acp.domain.ApplicationPolicyTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "tenantPoliciesRequireCanonicalAssignmentAndDenyCrossTenant",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.ClassificationAuditTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "classificationAuditIsDurableSelectiveTransactionalAndContainsNoFieldValues",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.ExactDecimalTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "rejectsLossyRounding",
+              "status": "PASS"
+            },
+            {
+              "name": "rejectsPrecisionOverflow",
+              "status": "PASS"
+            },
+            {
+              "name": "preservesCurrencyAndExactScale",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.FailureMappingTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "exactSqlStatesAndUnknownExceptionsNeverBecomeBusinessFailures",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.MigrationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "freshSchemaAndRepeatedFlywayExecution",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.ObservabilityNonDisclosureTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "diagnosticResponsesAndEmittedLogsNeverIncludeExceptionValuesOrTraces",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.PortableFaultMappingTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "exactClassesStatesAndWrappersDoNotBroadenOrSelectSemanticFailures",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.PrivacyGuardsTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "auditModesExportAndExactPermissionFailClosed",
+              "status": "PASS"
+            },
+            {
+              "name": "literalTrueHoldCannotBeBypassedByReleaseAuthorization",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.domain.SessionGateTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "unauthenticatedAndFutureCredentialsCannotInitializeASession",
+              "status": "PASS"
+            },
+            {
+              "name": "idleAbsoluteReauthenticationAndRevocationAreIndependentGates",
+              "status": "PASS"
+            },
+            {
+              "name": "multifactorIsRequiredAndActivityIsDurableAndSliding",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.generated.DeliveryJobTest",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "startedOccurrenceIsRecoveredRatherThanSkipped",
+              "status": "PASS"
+            },
+            {
+              "name": "jobCommittedThenLostResultRecoversThroughSameDurableIdempotencyIdentity",
+              "status": "PASS"
+            },
+            {
+              "name": "stalledTransportIsBoundedAndCannotKeepExpiredBarrierClaimed",
+              "status": "PASS"
+            },
+            {
+              "name": "crashAfterSendThenRestartRedeliversExactOccurrence",
+              "status": "PASS"
+            },
+            {
+              "name": "actualDatabaseJobTimeoutKeepsUncertaintyUntilRollbackProofAndRecovery",
+              "status": "PASS"
+            },
+            {
+              "name": "actualInvocationProfileDatabaseUpgradePreservesExistingState",
+              "status": "PASS"
+            },
+            {
+              "name": "principalBindingIsMandatory",
+              "status": "PASS"
+            },
+            {
+              "name": "missedStrictlyBeforeActivationSkipsAndClockReversalRejects",
+              "status": "PASS"
+            },
+            {
+              "name": "consecutiveAggregateCommitsCannotOvertakeAndOtherAggregateProgresses",
+              "status": "PASS"
+            },
+            {
+              "name": "twoSchedulersRaceOneLogicalOccurrenceAndCompletedRestartStaysCompleted",
+              "status": "PASS"
+            },
+            {
+              "name": "pinnedRulesNormalGapOverlapAndRejection",
+              "status": "PASS"
+            },
+            {
+              "name": "deadlineBeforeFirstAttemptNeverSends",
+              "status": "PASS"
+            },
+            {
+              "name": "firstFailureThenAcknowledgementAndBarrier",
+              "status": "PASS"
+            },
+            {
+              "name": "rollbackProducesNoDeliverableOccurrence",
+              "status": "PASS"
+            },
+            {
+              "name": "jobTimeoutRetainsIndeterminateStateAndSameOccurrenceOnRecovery",
+              "status": "PASS"
+            },
+            {
+              "name": "jobUsesExactRetryPolicyWithoutRechargingLogicalInvocation",
+              "status": "PASS"
+            },
+            {
+              "name": "unboundInternalProviderFaultIsTerminalAndNeverJobRetry",
+              "status": "PASS"
+            },
+            {
+              "name": "actualGeneratedBootstrapRejectsMissingPrincipalAdapterAndHandle",
+              "status": "PASS"
+            },
+            {
+              "name": "duplicateWorkersCannotSendSameOccurrenceConcurrently",
+              "status": "PASS"
+            },
+            {
+              "name": "schedulerExactActivationUsesApprovedBindingsAndNormalAuthorization",
+              "status": "PASS"
+            },
+            {
+              "name": "exactDeadlineAndLateAcknowledgementCannotBecomeSuccess",
+              "status": "PASS"
+            },
+            {
+              "name": "repeatedFailureExpiresThenReleasesNextPosition",
+              "status": "PASS"
+            },
+            {
+              "name": "packagedRulesMatchAcceptedReferenceAlgebraVectors",
+              "status": "PASS"
+            },
+            {
+              "name": "committedOccurrencesHaveExactIdentityAndOrderedPositions",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.generated.InvocationCoreTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "durableClaimSurvivesLostProcessAndRecoversOnlyFromDatabaseProof",
+              "status": "PASS"
+            },
+            {
+              "name": "actualProviderFaultBindingRollbackAndRetryTiming",
+              "status": "PASS"
+            },
+            {
+              "name": "actualWorkflowFailureRollsBackAndStopsLaterSteps",
+              "status": "PASS"
+            },
+            {
+              "name": "sameKeyInFlightReturnsImmediatelyAndCommittedReplaySurvivesRestart",
+              "status": "PASS"
+            },
+            {
+              "name": "rateAndReplayShareOneInvocationInstantAtWindowEdge",
+              "status": "PASS"
+            },
+            {
+              "name": "unauthorizedRequestsCreateNoRateOrIdempotencyState",
+              "status": "PASS"
+            },
+            {
+              "name": "exactApprovedInvocationReplayConflictAndAtomicResults",
+              "status": "PASS"
+            },
+            {
+              "name": "absenceNullAndValuePlacementRemainDistinctFromDirection",
+              "status": "PASS"
+            },
+            {
+              "name": "exactRationalRateBoundariesAndConcurrentCapacity",
+              "status": "PASS"
+            },
+            {
+              "name": "orderedKeyPrecedenceAndDescendingIdentityAreCompiledExactly",
+              "status": "PASS"
+            },
+            {
+              "name": "eachDeclaredCaseWorkflowBindingProducesItsExactOperationIdentity",
+              "status": "PASS"
+            },
+            {
+              "name": "unicodeOrderPaginationIsStableAndOffsetPagesHaveNoSnapshotClaim",
+              "status": "PASS"
+            },
+            {
+              "name": "stagedPredicateFailuresAndBoundInvariantRollback",
+              "status": "PASS"
+            },
+            {
+              "name": "inputNormalizationBindsSemanticValuesAndNominalIdentity",
+              "status": "PASS"
+            }
+          ]
+        },
+        {
+          "suite": "acp.generated.InvocationHttpTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "exactSemanticFailureEnvelopeUsesVersionedHttpProfile",
+              "status": "PASS"
+            },
+            {
+              "name": "unauthenticatedRequestsAreDeniedAndFilterUsesExplicitQueryMember",
+              "status": "PASS"
+            },
+            {
+              "name": "missingInputAndDuplicateMembersFailBeforeSemanticWrites",
+              "status": "PASS"
+            },
+            {
+              "name": "typedInputBindingAndOutputSerializationUseTheActualMvcCodec",
+              "status": "PASS"
+            },
+            {
+              "name": "typedInputPropertyOrderAndUnicodeKeyReplayExactly",
+              "status": "PASS"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "result": "COMPONENTS_PASS_FULL_TARGET_STILL_BLOCKED"
+}

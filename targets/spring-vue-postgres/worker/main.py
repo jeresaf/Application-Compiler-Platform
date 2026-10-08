@@ -20,13 +20,24 @@ for _zone in files('tzdata').joinpath('zones').read_text().splitlines():
 ''.encode('utf-16-be')  # JCS key ordering codec must be loaded before open() is denied.
 from model import CapabilityError, encoded, lower, manifest, negotiate
 from generation import plan, validate_plan
+from target_worker import bundle_digest
+BUNDLE_DIGEST = "sha256:" + bundle_digest()
+from target_release import verify_release
+# Verified after PROFILE loading below; failure is a structured fail-closed gate.
 from execution_codegen import ExecutionGenerator  # Preload trusted generator before confinement.
-import relations
+import relations, delivery_jobs
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = json.loads((ROOT / "profile.json").read_text())
 TEMPLATES = {p.relative_to(ROOT / "templates").as_posix(): p.read_text(encoding="utf-8")
              for p in sorted((ROOT / "templates").rglob("*")) if p.is_file()}
+
+
+try:
+    verify_release(PROFILE,BUNDLE_DIGEST)
+    RELEASE_ERROR=None
+except (ValueError,FileNotFoundError):
+    RELEASE_ERROR="GENERATOR_VERSION_REUSE"
 
 
 def sandbox():
@@ -55,6 +66,7 @@ def sandbox():
 
 
 def handle(request):
+    if RELEASE_ERROR: raise CapabilityError(RELEASE_ERROR)
     if request.get("protocol") != PROFILE["protocol"] or set(request) != {"protocol", "operation", "payload"}:
         raise CapabilityError("PROTOCOL")
     operation, payload = request["operation"], request["payload"]
@@ -63,6 +75,8 @@ def handle(request):
     keys = set(payload) if type(payload) is dict else set()
     if operation in {'negotiate', 'lower'}:
         keys -= {'canonicalVersion'}
+    if operation=='plan':
+        keys -= {'build'}
     if operation not in expected or type(payload) is not dict or keys != expected[operation]:
         raise CapabilityError("PAYLOAD")
     if operation == "handshake":
@@ -79,6 +93,8 @@ def handle(request):
         return lower(payload["nodes"], PROFILE, version)
     if operation == "plan":
         model = payload["model"]
+        if model.get('version')!=PROFILE.get('targetIRVersion','0.1.0') or model.get('profile')!=PROFILE['profile'] or model.get('generator')!=PROFILE['generator']:
+            raise CapabilityError('TARGET_IR_VERSION')
         # A supplied Target IR cannot bypass lowering constraints.
         version = model.get('canonicalVersion', '0.1.0')
         validate_semantics({'canonicalVersion': version, 'nodes': model['nodes']})
@@ -92,7 +108,9 @@ def handle(request):
                 raise CapabilityError("INVENTORY")
             validate_plan([{"path": item["path"], "owner": item["owner"], "origins": ["inventory"], "verification": ["inventory"], "text": ""}])
             paths.add(item["path"])
-        artifacts = plan(model, TEMPLATES, PROFILE, inventory)
+        build = payload.get("build", {})
+        if build and build.get("bundleDigest") != BUNDLE_DIGEST: raise CapabilityError("BUILD_IDENTITY")
+        artifacts = plan(model, TEMPLATES, PROFILE, inventory, build={**build,"bundleDigest":BUNDLE_DIGEST})
         validate_plan(artifacts)
         return artifacts
     if operation == "validate-plan":

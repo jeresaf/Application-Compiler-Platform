@@ -1,0 +1,1226 @@
+{
+  "approvedInput": {
+    "date": "2026-10-08",
+    "statement": "Approve ADR-0016 and the complete deterministic-v04 fixture decisions, including the F-01 failure bindings.",
+    "status": "APPROVED_REFERENCE_SEMANTICS",
+    "reviewedCommit": "76e7700758454b5cfd00c39a68475439c1a1e6ca",
+    "assets": {
+      "contracts/authoring-0.4.schema.json": "sha256:2e60a19f9683d4515a0bd51fc5b0b964164990eea7fadd6715b50fdf11d25d60",
+      "contracts/canonical-0.3.schema.json": "sha256:104bb574abac5eafd7b8e4e6ea5b030b08b30631f8207437ed6713cf9e3098ea",
+      "contracts/change-0.3.schema.json": "sha256:7424c400b2887eafc5d572f7c55c702daa07956e3d79729bf0d6562fa931f491",
+      "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+    },
+    "versions": {
+      "authoring": "0.4.0",
+      "canonical": "0.3.0",
+      "change": "0.3.0"
+    },
+    "scope": "Complete ADR-0016 and both ACP synthetic reference fixtures, including F-01; not production business requirements or target support",
+    "provenance": "AI proposed; human project authority explicitly approved in user instruction",
+    "authorityRepresentation": "Bounded reference/test authority with public key; no manufactured reviewer identity or production credentials",
+    "referenceClock": 1791417600
+  },
+  "canonicalVersion": "0.3.0",
+  "semanticModelVersion": "0.4.0",
+  "targetManifest": {
+    "capabilities": {
+      "AcceptanceCriterion/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "AccessibilityRequirement/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Action/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Actor/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Aggregate/0.2.0": {
+        "constraints": [
+          "Canonical 0.2 legacy or explicit Canonical 0.3 typed effects; no inferred mutation semantics; single aggregate root, one atomic STOP boundary; expected-version locking; staged ordered assignments/invariants; exact Failure stages in 0.3; no distributed, compensation or multi-commit claim; immutable authorization fields and bounded preflight input dataflow for 0.3 invocation profile"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Applicability/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Assumption/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "AuthenticationModel/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Backup/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Blob/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Command/0.2.0": {
+        "constraints": [
+          "Canonical 0.2 legacy or explicit Canonical 0.3 typed effects; no inferred mutation semantics; single aggregate root, one atomic STOP boundary; expected-version locking; staged ordered assignments/invariants; exact Failure stages in 0.3; no distributed, compensation or multi-commit claim; immutable authorization fields and bounded preflight input dataflow for 0.3 invocation profile"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "CompatibilityRequirement/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Constraint/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "DataClassification/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "DataLifecycle/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Decision/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "DeletionPolicy/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "DeliveryPolicy/0.2.0": {
+        "constraints": [
+          "Canonical 0.3 AT_LEAST_ONCE + PER_AGGREGATE + EVENT_COMMIT + COMMIT_STEP_EMISSION_SEQUENCE; 3600-second window covered by declared idempotency; one-root serialized root-version commit sequence and explicit step/emission ordinals; durable PostgreSQL occurrence/attempt state, actual commit proof, session fencing and half-open expiry; uncertain commits/legacy unproven occurrences block delivery; replaceable transport port with one-second/remaining-window bounded waits, no external availability or exactly-once claim; other forms reject"
+        ],
+        "evidence": [
+          "DeliveryRuntime.java; ExecutionStore.java; generated DeliveryJobTest real PostgreSQL order/deadline/claims/crash"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "DistributedTransaction/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Entity/0.2.0": {
+        "constraints": [
+          "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+        ],
+        "evidence": [
+          "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Event/0.2.0": {
+        "constraints": [
+          "Explicit typed payload construction and transactional durable staging only; event delivery remains UNSUPPORTED; no exactly-once or transport claim"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExecutionStore.event; ExplicitExecutionTest payload/rollback"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "EvidenceRequirement/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "ExecutionStep/0.2.0": {
+        "constraints": [
+          "Canonical 0.2 legacy or explicit Canonical 0.3 typed effects; no inferred mutation semantics; single aggregate root, one atomic STOP boundary; expected-version locking; staged ordered assignments/invariants; exact Failure stages in 0.3; no distributed, compensation or multi-commit claim; immutable authorization fields and bounded preflight input dataflow for 0.3 invocation profile"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Fact/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Failure/0.2.0": {
+        "constraints": [
+          "Canonical 0.3 Commands only: exact ordered PRE_STATE/POST_ASSIGNMENT/INVARIANT/INFRASTRUCTURE bindings; workflow applicability, compiled pure supported predicates, applicable WRITE invariant and exact DEPENDENCY_UNAVAILABLE binding (other infrastructure binding classes reject; platform classifier remains separate); atomic STOP rollback; typed Failure HTTP profile 1.0; no Query-declared Failure or multi-boundary claim"
+        ],
+        "evidence": [
+          "execution_codegen.py; InvocationCore.java; generated InvocationCoreTest and InvocationHttpTest real PostgreSQL/HTTP"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Field/0.2.0": {
+        "constraints": [
+          "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+        ],
+        "evidence": [
+          "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "File/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Filter/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Form/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Goal/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "IdempotencyPolicy/0.2.0": {
+        "constraints": [
+          "Canonical 0.3 COMMITTED_RESULT + RETURN_IN_PROGRESS + RETURN_RESULT + REJECT_DIFFERENT_INPUT; scoped single-identity Commands and atomic STOP UseCases with unique Commands and precomputable input-only result dataflow; String keys, required String/Identifier input fields only; canonical typed digest; PostgreSQL owner fences, atomic domain/result/event commit, actual commit timestamps and transaction-status recovery; missing/uncertain proof stays IN_PROGRESS, no pending lease expiry; require track_commit_timestamp=on"
+        ],
+        "evidence": [
+          "execution_codegen.py; InvocationCore.java; generated InvocationCoreTest and InvocationHttpTest real PostgreSQL/HTTP"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "InputControl/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Invariant/0.2.0": {
+        "constraints": [
+          "WRITE required in resource invariant enforcement; explicitly attached to each mutating command; compiled supported typed expression subset; validation rejects other enforcement-only forms and missing applicable attachments"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExplicitExecutionTest post-state rollback"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Job/0.2.0": {
+        "constraints": [
+          "Canonical 0.3 explicit literal input bindings; admitted LOCAL_DAILY schedule, SKIP missed occurrences only; durable exact Job/Schedule revision + scheduled instant + tenant identity in application-scoped database; required configured principal adapter/opaque handle and normal session/authorization/tenant/rate/idempotency; declared RetryPolicy, 30-second bounded task/JDBC timeout with uncertainty retained; PostgreSQL cursor, skip ranges, per-occurrence claims/fences and proof-based recovery; other forms reject"
+        ],
+        "evidence": [
+          "JobRuntime.java; GeneratedJobs.java; InvocationCore.java; generated DeliveryJobTest PostgreSQL principal/concurrency/recovery/timeout/retry"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "LegalHold/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "ObservabilityRequirement/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Parameter/0.2.0": {
+        "constraints": [
+          "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+        ],
+        "evidence": [
+          "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "PerformanceRequirement/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Permission/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "PermissionBoundary/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Policy/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "PolicySet/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Preference/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Query/0.2.0": {
+        "constraints": [
+          "Canonical 0.3 ordered String/Identifier UTF-8 bytea scalar comparison; explicit identity suffix, ASC/DESC, distinct absent/null placement; offset pagination under per-request READ COMMITTED, no cross-page snapshot; bounded textContains; other ordered types reject"
+        ],
+        "evidence": [
+          "execution_codegen.py; InvocationCore.java; generated InvocationCoreTest and InvocationHttpTest real PostgreSQL/HTTP"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "RatePolicy/0.2.0": {
+        "constraints": [
+          "Canonical 0.3 TOKEN_BUCKET + CONTINUOUS_RATIONAL + FULL + AUTHORIZED_INVOCATION + CHARGE + NONDECREASING; one policy per operation, ACTOR/TENANT partitions; positive signed-32-bit policy bounds; exact PostgreSQL numeric integer token units and row serialization, no process-local admission"
+        ],
+        "evidence": [
+          "execution_codegen.py; InvocationCore.java; generated InvocationCoreTest and InvocationHttpTest real PostgreSQL/HTTP"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Recovery/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Relation/0.2.0": {
+        "constraints": [
+          "SCOPED same-tenant single-identity endpoints; min 0/1, max 1/UNBOUNDED, RESTRICT; deferred SQL cardinality, FK and uniqueness enforcement"
+        ],
+        "evidence": [
+          "relations.py; ExplicitExecutionTest real PostgreSQL relation constraints"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "ReliabilityRequirement/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Requirement/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "ResponsivePolicy/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Retention/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "RetryPolicy/0.2.0": {
+        "constraints": [
+          "Canonical 0.3 INCLUDING_INITIAL + AFTER_FAILURE_COMPLETION + NONE jitter; exact bound approved TRANSIENT retryable occurrences only, capped integer delays and retained logical identity; explicit trusted-host policy selection for operation execution; no inferred Job-to-HTTP retry association; Jobs select their exact declared policy and preserve occurrence identity; HTTP operations do not inherit a Job association"
+        ],
+        "evidence": [
+          "execution_codegen.py; InvocationCore.java; generated InvocationCoreTest and InvocationHttpTest real PostgreSQL/HTTP"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Role/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "RoleAssignment/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Schedule/0.2.0": {
+        "constraints": [
+          "Canonical 0.3 LOCAL_DAILY 09:00:00 Africa/Nairobi, tzdb 2026d, SKIP gap, EARLIER overlap only; packaged digest-verified transitions from pinned tzdata, never host JVM rules; finite 1900-2100 rule horizon rejects outside coverage; injected observation clock; INTERVAL/other modes reject"
+        ],
+        "evidence": [
+          "PinnedSchedule.java; package_target_tzdb.py --check; generated DeliveryJobTest independent accepted reference vectors"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Scope/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Screen/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Search/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Service/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "SessionPolicy/0.2.0": {
+        "constraints": [
+          "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+        ],
+        "evidence": [
+          "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "State/0.2.0": {
+        "constraints": [
+          "One machine per resource; at most one transition per (machine,from,command); compiled guards; atomic state/version changes and denial rollback; no inferred lifecycle closure"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExplicitExecutionTest workflow/guard rollback"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "StateMachine/0.2.0": {
+        "constraints": [
+          "One machine per resource; at most one transition per (machine,from,command); compiled guards; atomic state/version changes and denial rollback; no inferred lifecycle closure"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExplicitExecutionTest workflow/guard rollback"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Table/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "TestRequirement/0.2.0": {
+        "constraints": [
+          "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+        ],
+        "evidence": [
+          "compiler obligation projection; target runtime does not certify this requirement"
+        ],
+        "status": "OBLIGATION_ONLY"
+      },
+      "Transaction/0.2.0": {
+        "constraints": [
+          "Canonical 0.2 legacy or explicit Canonical 0.3 typed effects; no inferred mutation semantics; single aggregate root, one atomic STOP boundary; expected-version locking; staged ordered assignments/invariants; exact Failure stages in 0.3; no distributed, compensation or multi-commit claim; immutable authorization fields and bounded preflight input dataflow for 0.3 invocation profile"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "Transition/0.2.0": {
+        "constraints": [
+          "One machine per resource; at most one transition per (machine,from,command); compiled guards; atomic state/version changes and denial rollback; no inferred lifecycle closure"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExplicitExecutionTest workflow/guard rollback"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "TypeDefinition/0.2.0": {
+        "constraints": [
+          "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+        ],
+        "evidence": [
+          "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "UseCase/0.2.0": {
+        "constraints": [
+          "Canonical 0.2 legacy or explicit Canonical 0.3 typed effects; no inferred mutation semantics; single aggregate root, one atomic STOP boundary; expected-version locking; staged ordered assignments/invariants; exact Failure stages in 0.3; no distributed, compensation or multi-commit claim; immutable authorization fields and bounded preflight input dataflow for 0.3 invocation profile"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "ValueObject/0.2.0": {
+        "constraints": [
+          "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+        ],
+        "evidence": [
+          "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "ViewState/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "Wizard/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "WizardStep/0.2.0": {
+        "constraints": [
+          "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+        ],
+        "evidence": [
+          "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+        ],
+        "status": "UNSUPPORTED"
+      },
+      "acp.deterministic-execution.0.4": {
+        "constraints": [
+          "Canonical 0.3 / semantic model 0.4 closed validation and constrained invocation core; unfinished privacy/lifecycle/UI remain independently blocked; delivery/job/schedule are separately constrained"
+        ],
+        "evidence": [
+          "main.validate_semantics; deterministic_approval.py; InvocationCoreTest; InvocationHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      },
+      "semantic.execution-dataflow/0.3": {
+        "constraints": [
+          "Explicit Canonical 0.2 / semantic model 0.3 legacy subset, or Canonical 0.3 / semantic model 0.4 with acp.deterministic-execution.0.4; independently negotiated node capabilities; typed atomic STOP subset only"
+        ],
+        "evidence": [
+          "execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+        ],
+        "status": "SUPPORTED_WITH_CONSTRAINT"
+      }
+    },
+    "decisions": {
+      "architecture": "modular-monolith-jdbc/0.1.0",
+      "design": "semantic-task-vue/0.1.0"
+    },
+    "generator": "acp-spring-vue-generator/0.2.0",
+    "limits": {
+      "inputBytes": 4000000,
+      "nodes": 4000,
+      "outputBytes": 16000000,
+      "timeoutSeconds": 30
+    },
+    "migrations": [
+      "flyway-versioned",
+      "expand-backfill-switch-contract"
+    ],
+    "nodeCapabilityVersionMeaning": "0.2.0 denotes node-kind interface identity, not Canonical schema compatibility",
+    "ownership": [
+      "COMPILER_OWNED",
+      "FRAMEWORK_OWNED",
+      "AI_MANAGED",
+      "HUMAN_OWNED"
+    ],
+    "profile": "acp-spring-vue-postgres/0.2.0",
+    "protocol": "acp-target-worker/0.1.0",
+    "releaseStatus": "INCOMPLETE",
+    "requiredDecisions": {
+      "architecture": "modular-monolith-jdbc/0.1.0",
+      "design": "semantic-task-vue/0.1.0"
+    },
+    "semanticCompatibility": {
+      "0.1.0": {
+        "policy": "legacy constrained subset",
+        "semanticModel": "0.2.0"
+      },
+      "0.2.0": {
+        "feature": "acp.execution.0.3",
+        "policy": "preserved legacy subset; paginated ordering remains blocked",
+        "semanticModel": "0.3.0"
+      },
+      "0.3.0": {
+        "feature": "acp.deterministic-execution.0.4",
+        "policy": "explicit deterministic invocation subset; unfinished families block full admission",
+        "semanticModel": "0.4.0"
+      }
+    },
+    "stack": {
+      "axePlaywright": "4.13.0",
+      "flyway": "12.4.0",
+      "happyDom": "20.14.5",
+      "java": "21",
+      "junit": "6.0.3",
+      "mavenCompiler": "3.15.0",
+      "mavenSurefire": "3.5.6",
+      "node": "24.21.0",
+      "playwright": "1.63.0",
+      "postgresql": "18.6",
+      "postgresqlDriver": "42.7.13",
+      "springBoot": "4.1.1",
+      "typescript": "6.0.3",
+      "vite": "8.3.3",
+      "vitest": "5.0.3",
+      "vue": "3.5.43",
+      "vuePlugin": "6.0.9",
+      "vueTestUtils": "2.5.1",
+      "vueTsc": "3.3.12"
+    },
+    "targetIRVersion": "0.2.0",
+    "verification": [
+      "IMPLEMENTED_TARGET_SITE",
+      "TEST_PLANNED",
+      "OUTSTANDING"
+    ]
+  },
+  "mode": "FULL_NEGOTIATED_TARGET_GATE",
+  "phase6": "OPEN",
+  "domains": {
+    "payment": {
+      "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "audit": null,
+      "admission": {
+        "operation": "lower",
+        "result": "BLOCKED",
+        "error": "UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0"
+      },
+      "result": "BLOCKED",
+      "diagnostics": [
+        {
+          "code": "ACP-COMPILER-CAPABILITY",
+          "severity": "ERROR",
+          "stage": "NegotiateLower",
+          "subjects": [],
+          "location": null,
+          "related": [],
+          "explanation": "The target does not support every required capability.",
+          "remediation": "Use an exact target manifest supporting every required capability.",
+          "provenance": {
+            "origins": [
+              {
+                "application": "APP-FIXTURE",
+                "id": "A11Y-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "AC-PAYMENT",
+                "revision": 1
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "BACKUP-TASK",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "BOUNDARY-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "CLASS-INTERNAL",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "CLASS-PUBLIC",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "CLASS-SECRET",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "CLASS-SENSITIVE",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "COMPATIBILITY-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "CONSTRAINT-TENANT",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "DELETE-ENT-PAYMENT",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "EVID-A11Y",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "EVID-BACKUP",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "EVID-COMPATIBILITY",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "EVID-OBSERVE",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "EVID-PERF",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "EVID-RECOVERY",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "EVID-RELIABILITY",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "EVID-TEST",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "HOLD-ENT-PAYMENT",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "INV-POSITIVE",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "LIFECYCLE-ENT-PAYMENT",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "OBSERVE-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "PERF-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "PERM-CMD-RECORD",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "PERM-QUERY-TASKS",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "POL-QUERY-TASKS",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "POL-TENANT",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "POLSET-CMD-RECORD",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "POLSET-QUERY-TASKS",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "RECOVERY-TASK",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "RELIABILITY-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "RETENTION-ENT-PAYMENT",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "SCOPE-ENT-PAYMENT",
+                "revision": 2
+              },
+              {
+                "application": "APP-FIXTURE",
+                "id": "TEST-TASK",
+                "revision": 3
+              }
+            ],
+            "stage": "NegotiateLower",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:03005995273707b914fb0dbc734b25e201c14168f1ccbc3db7b26dc3197928a7",
+              "sha256:507b61240f5ef70b569a7c621c2344da1037dd888434af6e4eb6c1755c6daacc"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "UNSPECIFIED"
+        }
+      ],
+      "targetAdmission": "UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0"
+    },
+    "case-management": {
+      "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "audit": null,
+      "admission": {
+        "operation": "lower",
+        "result": "BLOCKED",
+        "error": "UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0"
+      },
+      "result": "BLOCKED",
+      "diagnostics": [
+        {
+          "code": "ACP-COMPILER-CAPABILITY",
+          "severity": "ERROR",
+          "stage": "NegotiateLower",
+          "subjects": [],
+          "location": null,
+          "related": [],
+          "explanation": "The target does not support every required capability.",
+          "remediation": "Use an exact target manifest supporting every required capability.",
+          "provenance": {
+            "origins": [
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "A11Y-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "AC-CASE",
+                "revision": 1
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "BACKUP-TASK",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "BOUNDARY-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "CLASS-INTERNAL",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "CLASS-PUBLIC",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "CLASS-SECRET",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "CLASS-SENSITIVE",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "COMPATIBILITY-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "DELETE-CASE",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "EVID-A11Y",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "EVID-BACKUP",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "EVID-COMPATIBILITY",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "EVID-OBSERVE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "EVID-PERF",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "EVID-RECOVERY",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "EVID-RELIABILITY",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "EVID-TEST",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "HOLD-CASE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "LIFECYCLE-CASE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "OBSERVE-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "PERF-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "PERM-CMD-APPROVE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "PERM-CMD-ARCHIVE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "PERM-CMD-REVIEW",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "PERM-QUERY-TASKS",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "POL-APPROVE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "POL-ARCHIVE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "POL-QUERY-TASKS",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "POL-REVIEW",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "POLSET-CMD-APPROVE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "POLSET-CMD-ARCHIVE",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "POLSET-CMD-REVIEW",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "POLSET-QUERY-TASKS",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "RECOVERY-TASK",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "RELIABILITY-TASK",
+                "revision": 3
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "REQ-CASE",
+                "revision": 1
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "RETENTION-CASE",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "SCOPE-CASE",
+                "revision": 2
+              },
+              {
+                "application": "APP-CASE-MANAGEMENT",
+                "id": "TEST-TASK",
+                "revision": 3
+              }
+            ],
+            "stage": "NegotiateLower",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "inputs": [
+              "sha256:a8e16e3370a55403f01042e89e98023d79484ac1b5fea13add2e08a7cf315e9c",
+              "sha256:f8b773d9f05c3c80c48a1a9b89940267d5dfcb3fcd1f857e179073f50c438188"
+            ]
+          },
+          "related_locations": [],
+          "location_confidence": "UNSPECIFIED"
+        }
+      ],
+      "targetAdmission": "UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0"
+    }
+  },
+  "result": "BLOCKED",
+  "closureMissingEvolutionEvidence": true,
+  "closureGate": "FAIL"
+}

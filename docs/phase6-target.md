@@ -1,6 +1,6 @@
 # Phase 6 target contract — implementation in progress
 
-ADR-0016 and the complete deterministic-v04 fixture decisions are ACCEPTED by subsequent explicit human approval. The [invocation tranche](phase6-invocation-core.md) consumes the exact approved Canonical 0.3 snapshots. Actual full negotiation reports 19 remaining blockers per application, bound by [contract 2.0.0](../targets/spring-vue-postgres/expected-open-blockers-v2.json). Historical contract 1.1.0 and proposal-time evidence remain preserved. Strict mode remains red; exact expected-open CI is not target acceptance.
+The [delivery and Jobs tranche](phase6-delivery-jobs.md) uses target profile and generator 0.2.0 and explicitly versioned Target IR 0.2.0. Actual worker negotiation against both unchanged approved Canonical 0.3 snapshots reports 16 blockers per application, bound by [contract 3.0.0](../targets/spring-vue-postgres/expected-open-blockers-v3.json): five privacy/lifecycle families and eleven UI families. DeliveryPolicy, Schedule and Job support is constrained to the exact documented subset. Historical blocker contracts 1.1.0 and 2.0.0 remain unchanged. Strict Phase 6 closure remains BLOCKED; Phase 6 is IN PROGRESS and Phase 7 is NOT STARTED.
 
 The [profile](../targets/spring-vue-postgres/profile.json) and [ADR](adr/0014-first-production-target.md) describe the first target direction. The worker currently advertises `releaseStatus: INCOMPLETE`. Both complete reference domains fail negotiation on outstanding capabilities. A successful template build is not successful production-target compilation.
 
@@ -14,7 +14,7 @@ The [profile](../targets/spring-vue-postgres/profile.json) and [ADR](adr/0014-fi
 | manifest | `{}` |
 | negotiate | `nodes`, `required`, `decisions`, optional explicit `canonicalVersion` |
 | lower | `nodes`, `required`, `decisions`, optional explicit `canonicalVersion` |
-| plan | `model`, `inventory` |
+| plan | `model`, `inventory`, optional trusted-host `build` identity; exact worker bundle verified |
 | validate-plan | `artifacts` |
 
 The manifest contains profile, protocol, generator, stack versions, per-family versioned capabilities/constraints, required architecture/design decisions, four ownership classes, migration strategies, evidence labels and resource bounds. Input is limited to 4 MB, output to 16 MB, semantic nodes to 4,000, worker CPU to 20 seconds, host timeout to 30 seconds and address space to 512 MB. The host drains pipes concurrently, limits output while streaming, bounds stderr to 8 KB and terminates the worker process group on failure. Malformed responses, timeout, abnormal exits, signals and sandbox setup failures fail closed. Generator bundle identity is checked before and after target operations.
@@ -23,7 +23,7 @@ The host retains snapshot/decision approval and history authority. The worker re
 
 ## Target IR and source layout
 
-Target IR 0.1.0 contains profile/generator/stack, semantic-origin objects, persistence tables/columns, API operations, task screens, design identity and unchanged semantic nodes. Columns record SQL type, semantic type, nullability, optional-update distinction and classification. API operations carry stable paths, method, semantic origin, permission references, structured errors, pagination bounds and optimistic version rules. OpenAPI, backend model and frontend model derive from this IR.
+Target IR 0.2.0 explicitly succeeds 0.1.0; old stored IR is rejected rather than reinterpreted. The successor contains profile/generator/stack, semantic-origin objects, persistence tables/columns, API operations, task screens, design identity and unchanged semantic nodes. Columns record SQL type, semantic type, nullability, optional-update distinction and classification. API operations carry stable paths, method, semantic origin, permission references, structured errors, pagination bounds and optimistic version rules. OpenAPI, backend model and frontend model derive from this IR.
 
 The neutral compiler's optional `target_model` derivative is negotiated through `target.project-artifacts/1`. Its absence preserves Phase 4 serialized identities and synthetic vectors. Multi-artifact plans require complete semantic-origin coverage and exact per-artifact input bindings to contributing semantic objects, target model and generator. Existing synthetic-target one-to-one checks remain active.
 
@@ -41,11 +41,11 @@ The executable manifest is authoritative for current negotiation; retrieve it wi
 | use cases | Exact step input/prior result/resource bindings, typed output/event construction, one root instance and atomic STOP transaction; multi-commit/compensation forms reject negotiation |
 | permissions, policies, tenant scope | Server policy and tenant predicates with unit tests; full authorization and isolation integration suite outstanding |
 | authentication/session | Bounded signed-issuer pwd/otp MFA; durable tenant/subject/session activity, absolute/idle/reauthentication/revocation checks with PostgreSQL tests |
-| audit/events | Audit/outbox source sites exist; delivery semantics remain UNSUPPORTED |
+| audit/events | Atomic committed occurrences; constrained AT_LEAST_ONCE/PER_AGGREGATE delivery with actual commit anchors, durable attempts and ordering barriers |
 | task UI | Task/screen forms, selection, errors, permission visibility and accessible hooks; design-role coverage and cross-stack journeys incomplete |
 | quality obligations | Metadata retained; trusted production evidence and discharge are not claimed |
-| jobs/schedules | UNSUPPORTED |
-| retry | Constrained Canonical 0.3 operation execution with explicitly selected exact policy; no Job/Schedule support or inferred HTTP association |
+| jobs/schedules | Constrained approved LOCAL_DAILY 09:00 Africa/Nairobi, pinned tzdb 2026d, SKIP, explicit inputs/principal, 30-second timeout and durable recovery |
+| retry | Constrained Canonical 0.3 operation execution with explicitly selected exact policy; explicit Job retry selection; no inferred HTTP association |
 | files/blob/distributed transactions | UNSUPPORTED |
 | classification/privacy/data lifecycle | UNSUPPORTED; UTF-8 byte storage is not encryption or export/privacy enforcement |
 
@@ -70,7 +70,7 @@ Fault tests cover concurrent stale writers, process termination before publicati
 
 ## Provenance
 
-`acp/provenance.json` binds actual UTF-8 artifact bytes to generator, role, ownership, target-object IDs and exact semantic IDs/revisions. Current maps deliberately claim `ARTIFACT_ONLY`, with no invented symbol or line positions. [Mapping inspection](../tooling/target_provenance.py) returns stale status and no locations after byte/revision changes. General parsing, symbol reconciliation and reanalysis remain Phase 7.
+`acp/provenance.json` carries exact portable build identity, approved snapshot/features, compiler/pipeline and pinned tzdb digest under the [release contract](../targets/spring-vue-postgres/release-contract.json). It also binds actual UTF-8 artifact bytes to generator, role, ownership, target-object IDs and exact semantic IDs/revisions. Current maps deliberately claim `ARTIFACT_ONLY`, with no invented symbol or line positions. [Mapping inspection](../tooling/target_provenance.py) returns stale status and no locations after byte/revision changes. General parsing, symbol reconciliation and reanalysis remain Phase 7.
 
 ## Migrations
 
@@ -92,4 +92,4 @@ The unnegotiated template checks are reproducible with `python3.14 targets/sprin
 
 The current approved-execution component runner is `tooling/check_execution_components.py`. The dedicated Ubuntu `phase6-target` job uses `tooling/check_phase6_target.py`, which begins with fresh reference approval and the real negotiated compiler. It currently fails closed for both complete domains. Browser journeys and full target database evolution remain outstanding; no complete target or CI success is claimed.
 
-While releaseStatus is INCOMPLETE, CI asserts [the reviewed versioned blocker contract](../targets/spring-vue-postgres/expected-open-blockers.json) using `--expect-open-blockers`. Both disappeared and added blockers fail. The default command remains strict for closure review. A non-INCOMPLETE manifest never receives an expected-blocker allowance. This reports EXPECTED_BLOCKED_STATE, not target acceptance.
+While releaseStatus is INCOMPLETE, CI asserts [the reviewed versioned blocker contract](../targets/spring-vue-postgres/expected-open-blockers-v3.json) using `--expect-open-blockers`. Both disappeared and added blockers fail. The default command remains strict for closure review. A non-INCOMPLETE manifest never receives an expected-blocker allowance. This reports EXPECTED_BLOCKED_STATE, not target acceptance.

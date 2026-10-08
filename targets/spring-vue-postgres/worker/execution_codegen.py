@@ -192,7 +192,7 @@ class ExecutionGenerator:
                 for key in ('assignments', 'outputBindings'):
                     for b in d[key]:
                         self.expression(b['value'])
-                for b in d['eventBindings']:
+                for emission,b in enumerate(d['eventBindings']):
                     for p in b['payload']:
                         self.expression(p['value'])
                 for ref in d['invariants']:
@@ -347,11 +347,14 @@ class ExecutionGenerator:
         lines.append(f'store.audit({quoted(id)}, resourceId.value(), jwt);')
         lines.append(self.classified_audit(id, entity, 'READ', 'resourceId.value()'))
         lines.append(self.classified_audit(id, entity, 'WRITE', 'resourceId.value()', written))
-        for b in d['eventBindings']:
+        for emission,b in enumerate(d['eventBindings']):
             event = b['event']['id']; fields = [self.nodes[r['id']] for r in self.nodes[event]['data']['payload']]
             by = {p['field']['id']: p['value'] for p in b['payload']}
             payload = 'new ' + name(event) + '(' + ','.join(self.expression(by[f['id']]) for f in fields) + ')'
-            lines.append(f'store.event({quoted(id)}, {quoted(event)}, resourceId.value(), row.version()+1, {payload}, jwt);')
+            if self.deterministic:
+                lines.append(f'store.event({quoted(id)}, {n["revision"]}, {quoted(event)}, {self.nodes[event]["revision"]}, {quoted(d["aggregate"]["id"])}, {d["aggregate"]["revision"]}, {emission}, resourceId.value(), row.version()+1, {payload}, jwt);')
+            else:
+                lines.append(f'store.event({quoted(id)}, {quoted(event)}, resourceId.value(), row.version()+1, {payload}, jwt);')
         completion='new ExecutionStore.Completion<>(output, resourceId.value(), row.version()+1, state)'
         lines.append('return '+('acp.infrastructure.InvocationCore.capture('+quoted(id)+',new '+out+'Replay('+completion+')).completion()' if self.deterministic else completion)+';')
         if self.deterministic:
@@ -373,7 +376,7 @@ class ExecutionGenerator:
     def usecase(self, n):
         d = n['data']; inp, out = name(d['input']['id']), name(d['output']['id'])
         lines = ['String boundary = null;', 'long version = expectedVersion;']
-        for ref in d['steps']:
+        for stepOrdinal,ref in enumerate(d['steps']):
             step = self.nodes[ref['id']]; s = step['data']; op = self.nodes[s['operation']['id']]
             resource = self.expression(s['resource'])
             lines += [f'var resource_{member(step["id"])} = {resource};',
@@ -382,6 +385,7 @@ class ExecutionGenerator:
                       f'boundary = selected_{member(step["id"])};']
             constructed = self.construct(op['data']['input']['id'], s['inputBindings'])
             method = member(op['id']) + ('One' if op['kind'] == 'Query' else '')
+            if self.deterministic: lines.append(f'store.stepOrdinal({stepOrdinal});')
             lines.append(f'var {member(step["id"])} = {method}(resource_{member(step["id"])}, version, {constructed}, jwt);')
             lines.append(f'version = {member(step["id"])}.version();')
         lines.append('var output = ' + self.construct(d['output']['id'], d['outputBindings']) + ';')
@@ -436,7 +440,7 @@ class ExecutionGenerator:
         # Contracts source runs last so all decimal types encountered above exist.
         return {'backend/src/main/java/acp/generated/Contracts.java': self.c.source(),
                 'backend/src/main/java/acp/generated/TypedController.java': self.controller(),
-                **({'backend/src/main/java/acp/generated/Invocations.java': self.invocations()} if self.deterministic else {}),
+                **({'backend/src/main/java/acp/generated/Invocations.java': self.invocations(), 'backend/src/main/java/acp/generated/GeneratedJobs.java': __import__('delivery_jobs').generated_jobs(self)} if self.deterministic else {}),
                 'frontend/src/task-contract.ts': self.frontend(),
                 'backend/src/main/java/acp/generated/TypedTasks.java': '''package acp.generated;
 import static acp.generated.Contracts.*;
@@ -547,8 +551,10 @@ public final class TypedController {
                     lines += [preflight(op,resource)]
                     calls.append(call(op,resource,inp))
                     for b in op['data']['outputBindings']:outputs[(step['id'],b['field']['id'])]=expand(b['value'],op,bindings)
-                lines.append('return core.invoke(java.util.List.of('+','.join(calls)+'),null,jwt,()->tasks.'+member(id)+'(expectedVersion,input,jwt));')
-                methods.append('public ExecutionStore.Completion<'+name(d['output']['id'])+'> '+member(id)+'(long expectedVersion,'+name(d['input']['id'])+' input,String key,Jwt jwt) { '+' '.join(lines)+' }')
+                lines.append('return core.invoke(java.util.List.of('+','.join(calls)+'),retryPolicy,jwt,()->tasks.'+member(id)+'(expectedVersion,input,jwt));')
+                signature='public ExecutionStore.Completion<'+name(d['output']['id'])+'> '+member(id)
+                methods.append(signature+'(long expectedVersion,'+name(d['input']['id'])+' input,String key,Jwt jwt) {return '+member(id)+'(expectedVersion,input,key,jwt,null);}')
+                methods.append(signature+'(long expectedVersion,'+name(d['input']['id'])+' input,String key,Jwt jwt,String retryPolicy) { '+' '.join(lines)+' }')
         return '''package acp.generated;
 import static acp.generated.Contracts.*;
 import acp.infrastructure.*;

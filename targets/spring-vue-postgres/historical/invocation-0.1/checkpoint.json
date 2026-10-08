@@ -1,0 +1,8 @@
+{
+  "commit": "bba16c9e64bd0a16e60343d4aaf11060f209e931",
+  "profile": "acp-spring-vue-postgres/0.1.0",
+  "generator": "acp-spring-vue-generator/0.1.0",
+  "observedLocalCRLFBundleDigest": "a718c37c159e9073ea61d3b307599f86ec2e9b9e2376efcccccf1e22ff36f91d",
+  "archivedLFBundleDigest": "20ab8a9e2554bed8c17a163eb69ab8a37099a014a5cc4c4803c49afd3e2fd6dd",
+  "explanation": "Three preexisting schema files had CRLF in the local working tree; Git stores LF. Both historical hashes are reproduced from those exact bytes. No historical evidence is rewritten."
+}

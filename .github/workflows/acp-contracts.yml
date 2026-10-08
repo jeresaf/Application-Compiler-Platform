@@ -190,6 +190,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes libseccomp2
           python3.14 -m pip install -r tooling/requirements.txt
+      - name: Verify successor generator release identity and packaged tzdb
+        run: |
+          python3.14 tooling/check_target_release.py
+          python3.14 tooling/package_target_tzdb.py --check
       - name: Enable authoritative PostgreSQL commit evidence for idempotency
         run: |
           docker exec "${{ job.services.postgres.id }}" psql -U acp_test -d acp_test -c "ALTER SYSTEM SET track_commit_timestamp = on"
@@ -207,8 +211,12 @@ jobs:
         run: python3.14 tooling/check_execution_components.py --output /tmp/acp-phase6-components --run-builds
       - name: Verify approved Canonical 0.3 invocation runtime against PostgreSQL and HTTP
         run: python3.14 tooling/check_invocation_components.py --output /tmp/acp-invocation-components --run-builds
+      - name: Verify durable delivery and scheduling against PostgreSQL
+        run: python3.14 tooling/check_delivery_job_components.py --output /tmp/acp-delivery-job-components --run-builds
+      - name: Upgrade actual accepted invocation applications in place
+        run: python3.14 tooling/check_target_profile_upgrade.py --output /tmp/acp-target-profile-upgrade --new-projects /tmp/acp-delivery-job-components
       - name: Verify approved Canonical 0.3 evolution and exact approval boundaries
-        run: python3.14 -m unittest tooling.tests.test_deterministic_approval tooling.tests.test_invocation_target -v
+        run: python3.14 -m unittest tooling.tests.test_deterministic_approval tooling.tests.test_invocation_target tooling.tests.test_delivery_job_target -v
       - name: Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries
         run: python3.14 -m unittest tooling.tests.test_execution_approval tooling.tests.test_execution_v03_evolution -v
       - name: Preserve negotiated gate and generated build evidence
@@ -224,3 +232,9 @@ jobs:
             /tmp/acp-invocation-components/invocation-report.json
             /tmp/acp-invocation-components/*.log
             /tmp/acp-invocation-components/*/backend/target/surefire-reports/
+            /tmp/acp-delivery-job-components/delivery-job-report.json
+            /tmp/acp-delivery-job-components/*.log
+            /tmp/acp-delivery-job-components/*/backend/target/surefire-reports/
+            /tmp/acp-target-profile-upgrade/target-upgrade-report.json
+            /tmp/acp-target-profile-upgrade/*.log
+            /tmp/acp-target-profile-upgrade/old-projects/*/backend/target/surefire-reports/

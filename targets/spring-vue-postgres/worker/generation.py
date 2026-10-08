@@ -63,7 +63,20 @@ def schema(model):
     return "\n".join(sql) + "\n"
 
 
-def plan(model, templates, profile, inventory=()):
+def plan(model, templates, profile, inventory=(), *, build=None):
+    if build is None:
+        from target_worker import bundle_digest
+        build={"bundleDigest":"sha256:"+bundle_digest()}
+    build={"targetProfile":profile["profile"],"generator":profile["generator"],"protocol":profile["protocol"],
+        "canonicalVersion":model.get("canonicalVersion","0.1.0"),
+        "semanticModelVersion":{"0.1.0":"0.2.0","0.2.0":"0.3.0","0.3.0":"0.4.0"}[model.get("canonicalVersion","0.1.0")],
+        "features":model.get("requiredCapabilities",[]),"compiler":"acp-reference-compiler/0.1.0","pipeline":"acp-reference-pipeline/0.1.0",**build}
+    build.update(targetProfile=profile["profile"],generator=profile["generator"],protocol=profile["protocol"],canonicalVersion=model.get("canonicalVersion","0.1.0"))
+    canonical=model.get("canonicalVersion","0.1.0")
+    build['semanticModelVersion']={"0.1.0":"0.2.0","0.2.0":"0.3.0","0.3.0":"0.4.0"}[canonical]
+    build['features']={"0.1.0":["acp.phase1.0.2"],"0.2.0":["acp.execution.0.3"],"0.3.0":["acp.deterministic-execution.0.4"]}[canonical]
+    if "canonicalSnapshotDigest" not in build:
+        build["canonicalSnapshotDigest"]="UNAPPROVED_COMPONENT_PLAN"
     all_ids = sorted(n["id"] for n in model["nodes"])
     artifacts = []
     human_paths = {item["path"] for item in inventory if item["owner"] == "HUMAN_OWNED"}
@@ -78,6 +91,7 @@ def plan(model, templates, profile, inventory=()):
 
     execution = any(n['kind'] == 'Command' and 'assignments' in n['data'] for n in model['nodes'])
     for path, text in sorted(templates.items()):
+        if model.get('canonicalVersion')!='0.3.0' and path.endswith('/RuntimeBootstrap.java'):continue
         if execution and path in {'backend/src/main/java/acp/application/TaskService.java', 'backend/src/main/java/acp/api/TaskController.java'}:
             continue
         if execution and path == 'frontend/src/App.vue':
@@ -86,6 +100,8 @@ def plan(model, templates, profile, inventory=()):
             text = text.replace('call<Row[]>(`${query.path}?search=${encodeURIComponent(search.value)}`)', 'queryTasks(search.value)')
             text = text.replace('await call(submitOperation.path, { resourceId: selected.value.resourceId, expectedVersion: selected.value.version, input: input.value });', 'await submitTask(input.value, selected.value.resourceId, selected.value.version);')
             text = text.replace('node.data.owner.id === task?.data.input.id)', 'node.data.owner.id === task?.data.input.id && node.id !== resourceInputField)')
+        if model.get('canonicalVersion')=='0.3.0' and path.endswith('/MigrationTest.java'):
+            text=text.replace('assertEquals(1, flyway.migrate().migrationsExecuted)', 'assertEquals(2, flyway.migrate().migrationsExecuted)')
         if model.get('canonicalVersion')=='0.3.0' and path=='frontend/src/App.vue':
             text=text.replace('submitTask(input.value, selected.value.resourceId, selected.value.version)', 'submitTask(input.value, selected.value.resourceId, selected.value.version, crypto.randomUUID())')
         add(path, text, "PROJECT_SOURCE", owner="FRAMEWORK_OWNED" if path.endswith(("pom.xml", "package.json")) else "COMPILER_OWNED")
@@ -99,6 +115,22 @@ def plan(model, templates, profile, inventory=()):
     sql = schema(model)
     add("backend/src/main/resources/db/migration/V1__initial.sql", sql, "MIGRATION")
     add("database/V1__initial.sql", sql, "MIGRATION")
+    if model.get('canonicalVersion')=='0.3.0' and profile.get('targetIRVersion')=='0.2.0':
+        from delivery_jobs import MIGRATION
+        add("backend/src/main/resources/db/migration/V2__delivery_jobs.sql",MIGRATION,"MIGRATION")
+        add("database/V2__delivery_jobs.sql",MIGRATION,"MIGRATION")
+        add("backend/src/main/java/acp/generated/RuntimeConfiguration.java","""package acp.generated;
+@org.springframework.context.annotation.Configuration
+public class RuntimeConfiguration {
+ @org.springframework.context.annotation.Bean(destroyMethod="close")
+ acp.infrastructure.RuntimeBootstrap runtimeBootstrap(org.springframework.jdbc.core.JdbcTemplate jdbc,org.springframework.transaction.PlatformTransactionManager manager,acp.infrastructure.TargetModel model,Invocations invocations,org.springframework.core.env.Environment env,org.springframework.beans.factory.ObjectProvider<acp.infrastructure.JobRuntime.PrincipalPort> principal,org.springframework.beans.factory.ObjectProvider<acp.infrastructure.DeliveryRuntime.Transport> transport) {return new acp.infrastructure.RuntimeBootstrap(jdbc,manager,model,invocations,env,principal,transport);}
+ @org.springframework.context.annotation.Bean
+ org.springframework.boot.ApplicationRunner startRuntime(acp.infrastructure.RuntimeBootstrap runtime,org.springframework.core.env.Environment env){return args->{if(env.getProperty("acp.runtime.poll-enabled",Boolean.class,true))runtime.start();};}
+}
+""","RUNTIME_CONFIGURATION")
+        tz=templates['backend/src/main/resources/acp-tzdb-2026d.json']
+        build['tzdb']={'version':'2026d','artifact':'acp-tzdb-2026d.json','sha256':hashlib.sha256(tz.encode()).hexdigest()}
+        add("acp/target-upgrade.json",encoded({'from':{'profile':'acp-spring-vue-postgres/0.1.0','generator':'acp-spring-vue-generator/0.1.0'},'to':build,'migrations':[{'path':'database/V1__initial.sql','sha256':hashlib.sha256(sql.encode()).hexdigest()},{'path':'database/V2__delivery_jobs.sql','sha256':hashlib.sha256(MIGRATION.encode()).hexdigest()}],'origins':'acp/provenance.json'}),"TARGET_UPGRADE")
     paths = {}
     for op in model["api"]:
         paths.setdefault(op["path"], {})[op["method"].lower()] = {
@@ -114,7 +146,7 @@ def plan(model, templates, profile, inventory=()):
                          "origins": [{"id": n["id"], "revision": n["revision"]} for n in model["nodes"] if n["id"] in a["origins"]],
                          "targetObjects": [identifier(id, "target") for id in a["origins"]],
                          "locations": [], "locationConfidence": "ARTIFACT_ONLY"})
-    add("acp/provenance.json", encoded({"version": "0.1.0", "artifacts": sidecars}), "PROVENANCE")
+    add("acp/provenance.json", encoded({"version": "0.2.0", "build": build, "artifacts": sidecars}), "PROVENANCE")
     return sorted(artifacts, key=lambda a: a["path"])
 
 

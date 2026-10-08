@@ -7,9 +7,9 @@ def assert_expected_blocked(report, contract):
         if not ok:
             raise ValueError(code)
     require(set(contract) == {'contractVersion','target','releaseStatus','reviewBasis','domains'}, 'CONTRACT_SHAPE')
-    require(contract['contractVersion'] in {'1.0.0','1.1.0','2.0.0'} and contract['releaseStatus'] == 'INCOMPLETE', 'CONTRACT_VERSION')
+    require(contract['contractVersion'] in {'1.0.0','1.1.0','2.0.0','3.0.0'} and contract['releaseStatus'] == 'INCOMPLETE', 'CONTRACT_VERSION')
     approved = APPROVED
-    if contract['contractVersion']=='2.0.0':
+    if contract['contractVersion'] in {'2.0.0','3.0.0'}:
         from deterministic_approval import APPROVED as successor
         approved = {k:(v['contentDigest'],v['planDigest']) for k,v in successor.items()}
     manifest = report.get('targetManifest', {})
@@ -29,7 +29,7 @@ def assert_expected_blocked(report, contract):
                 admission['result'] == 'BLOCKED', 'REAL_TARGET_ADMISSION_NOT_REACHED')
         require(actual.get('targetAdmission') == admission['error'], 'ADMISSION_REPORT_MISMATCH')
         blockers = admission['error'].split(';')
-        if contract['contractVersion']=='2.0.0':
+        if contract['contractVersion'] in {'2.0.0','3.0.0'}:
             obsolete=('QUERY_ORDERING_REVIEW_REQUIRED','CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED','ANONYMIZATION_VALUES_REVIEW_REQUIRED')
             require(not any(b.startswith(obsolete) for b in [*blockers,*expected['blockers']]), 'CANONICAL_03_ADOPTION_DEFECT')
         require(type(expected['blockers']) is list and all(type(b) is str and b for b in expected['blockers']), 'BLOCKER_CONTRACT_SHAPE')

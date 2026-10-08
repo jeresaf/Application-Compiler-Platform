@@ -54,6 +54,11 @@ def negotiate(nodes, required, decisions, profile, canonical_version='0.1.0'):
             if any(n['kind'] in {'Command', 'Query', 'UseCase'} and 'input' not in n['data'] for n in nodes):
                 raise CapabilityError('EXPLICIT_EFFECTS_REQUIRED')
             ExecutionGenerator(nodes, canonical_version).validate()
+            if canonical_version=='0.3.0' and profile.get('targetIRVersion')=='0.2.0':
+                from delivery_jobs import validate
+                validate(nodes)
+                from delivery_jobs import generated_jobs
+                generated_jobs(ExecutionGenerator(nodes,canonical_version))
         except (CapabilityError, KeyError, TypeError) as e:
             errors.append(str(e) if isinstance(e, CapabilityError) else 'EXPLICIT_EFFECTS_REQUIRED')
     elif any(n['kind'] == 'Command' and 'assignments' in n['data'] for n in nodes):
@@ -145,7 +150,7 @@ def lower(nodes, profile, canonical_version='0.1.0'):
                     "permissions": permissions, "semantic": n["data"],
                     "errors": [400, 401, 403, 404, 409, 422, 429],
                     "concurrency": "expectedVersion", "pagination": {"maximum": n["data"].get("maximumResults", 100)}})
-    result = {"version": "0.1.0", "profile": profile["profile"], "generator": profile["generator"],
+    result = {"version": profile.get("targetIRVersion", "0.1.0"), "profile": profile["profile"], "generator": profile["generator"],
             "objects": [{"id": identifier(n["id"], "target"), "role": n["kind"],
                          "origin": {"id": n["id"], "revision": n["revision"]}} for n in nodes],
             "tables": tables, "api": api, "screens": grouped("Screen"),
