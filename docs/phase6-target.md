@@ -1,5 +1,7 @@
 # Phase 6 target contract — implementation in progress
 
+The [semantic audit](phase6-semantic-underspecification-audit.md) and [successor proposal report](deterministic-v04-proposal-report.md) distinguish enforced constrained behavior, retained obligations and unsupported families. Blocker contract 1.1 intentionally narrows overclaimed UI/Failure capabilities and requires exactly 27 blockers per approved snapshot. Strict closure mode remains failing until complete negotiated admission, builds and evolution pass. New canonical semantics remain PROPOSED / HUMAN REVIEW REQUIRED.
+
 The [profile](../targets/spring-vue-postgres/profile.json) and [ADR](adr/0014-first-production-target.md) describe the first target direction. The worker currently advertises `releaseStatus: INCOMPLETE`. Both complete reference domains fail negotiation on outstanding capabilities. A successful template build is not successful production-target compilation.
 
 ## Worker protocol

@@ -44,4 +44,6 @@ work. The separately authorized Phase 5 experiments are recorded in their [repor
 
 ## Phase 6 semantic blocker resolution
 
+The approved execution foundation remains incomplete. [ADR-0016](adr/0016-deterministic-query-lifecycle-and-rate-semantics.md) and [successor fixtures](../test-corpus/deterministic-v04/README.md) are PROPOSED / HUMAN REVIEW REQUIRED. The [semantic audit](phase6-semantic-underspecification-audit.md) covers every remaining family and separates canonical choices, target mechanisms and deployment evidence. No dependent lifecycle/rate implementation resumes before review. The versioned expected-open-blocker CI contract asserts incompleteness without waiving admission. Phase 7 is NOT STARTED.
+
 Target capability work resumes against the accepted [explicit execution/dataflow successor](adr/0015-explicit-operation-effects-and-dataflow.md) and its [dedicated report](execution-v03-completion-report.md). Authoring 0.2 / Canonical 0.1 and historical Phase 1–5 closure remain preserved. Authoring 0.3.0 and Canonical 0.2.0 are APPROVED AND GREEN; ChangeSet 0.2 is GREEN; ADR-0015 is ACCEPTED; execution-v03 fixture decisions are APPROVED REFERENCE SEMANTICS (explicit human approval, 2026-10-08). Phase 6 remains IN PROGRESS; Phase 7 remains NOT STARTED. Phase 6 closure still requires negotiated generated enforcement and complete target gates.

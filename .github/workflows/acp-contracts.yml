@@ -13,6 +13,9 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Preservation tests compare approved bytes against the accepted checkpoint.
+          fetch-depth: 0
       - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.14.7'
@@ -34,6 +37,8 @@ jobs:
         run: node tooling/check_canonical_vectors.mjs
       - name: Independently verify Canonical 0.2 execution vectors
         run: node tooling/check_canonical_vectors.mjs test-corpus/execution-v03
+      - name: Independently verify proposed Canonical 0.3 bytes and hashes
+        run: node tooling/check_canonical_vectors.mjs test-corpus/deterministic-v04
   phase5-experiments:
     runs-on: ubuntu-24.04
     timeout-minutes: 40
@@ -187,6 +192,8 @@ jobs:
         # Assert the exact reviewed open-phase state; strict closure mode remains available.
         # Any added or removed blocker, earlier-stage failure or wrong snapshot fails.
         run: python3.14 tooling/check_phase6_target.py --output /tmp/acp-phase6-target --run-builds --expect-open-blockers
+      - name: Verify isolated typed components without claiming target admission
+        run: python3.14 tooling/check_execution_components.py --output /tmp/acp-phase6-components --run-builds
       - name: Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries
         run: python3.14 -m unittest tooling.tests.test_execution_approval tooling.tests.test_execution_v03_evolution -v
       - name: Preserve negotiated gate and generated build evidence
@@ -197,3 +204,5 @@ jobs:
           path: |
             /tmp/acp-phase6-target/negotiated-report.json
             /tmp/acp-phase6-target/*.log
+            /tmp/acp-phase6-components/component-report.json
+            /tmp/acp-phase6-components/*.log

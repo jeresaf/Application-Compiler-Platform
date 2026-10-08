@@ -53,6 +53,7 @@ python3.14 -m venv .venv
 .venv/bin/python3.14 -m unittest discover -s tooling/tests -v
 node tooling/check_canonical_vectors.mjs
 node tooling/check_canonical_vectors.mjs test-corpus/execution-v03
+node tooling/check_canonical_vectors.mjs test-corpus/deterministic-v04
 ```
 
 Node.js 24.21.0 independently checks canonical bytes/hashes as test tooling only. The full Python suite includes all earlier authoring/canonical checks, Phase 4 compiler-stage/determinism/cache/ownership tests and Phase 3 transactions, crash/concurrency, approval, history and two-domain evolution tests. [Corpus documentation](test-corpus/README.md) identifies the fixtures. Run `.venv/bin/python3.14 tooling/history_experiment.py` for synthetic storage-size and reopened-history observations.
@@ -83,3 +84,7 @@ write application source. No AI, production parser or target framework is requir
 
 These commands use explicitly synthetic fixture approvals. See the
 [compiler corpus](test-corpus/compiler/README.md) for vectors and test boundaries.
+
+The next bounded Phase 6 investigation is [ADR-0016](docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md), **PROPOSED / HUMAN REVIEW REQUIRED**. Separate Authoring 0.4, Canonical 0.3 and ChangeSet 0.3 schemas and [reference proposals](test-corpus/deterministic-v04/README.md) preserve all approved older bytes and approvals. Their technical validation grants no authority. The [semantic audit](docs/phase6-semantic-underspecification-audit.md) records additional unresolved questions; Phase 6 remains IN PROGRESS and Phase 7 is NOT STARTED.
+
+CI asserts the exact reviewed open target state using `--expect-open-blockers`; its successful result is `EXPECTED_BLOCKED_STATE = PASS`, while target admission remains BLOCKED. The strict closure command omits that flag and fails until complete negotiated admission and evolution pass. A changed blocker set fails CI unless its versioned expectation is intentionally updated.

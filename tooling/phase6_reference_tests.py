@@ -174,7 +174,7 @@ class ExplicitExecutionTest {{
         var ds=new DriverManagerDataSource(url+(url.contains("?")?"&":"?")+"currentSchema=acp_phase6_execution_test",user,password);
         jdbc=new JdbcTemplate(ds); tx=new TransactionTemplate(new DataSourceTransactionManager(ds));
         var model=new TargetModel(); var policy=new ApplicationPolicy(model,new Expressions(model),new acp.security.SessionGate(model,jdbc,new DataSourceTransactionManager(ds)));
-        store=new ExecutionStore(jdbc,policy); tasks=new TypedTasks(store);
+        store=new ExecutionStore(jdbc,policy,new acp.security.PrivacyGuards(model,policy,new Expressions(model))); tasks=new TypedTasks(store);
         tx.execute(s -> {{ {' '.join('jdbc.execute(' + q(sql) + ');' for sql in seed)} return null; }});
     }}
     Jwt identity(String tenant,String subject) {{
@@ -190,6 +190,8 @@ class ExplicitExecutionTest {{
     @Test void exactEffectsResultsEventsAndUnchangedFields() throws Exception {{
         var output=tx.execute(status -> {{ try {{ return {call}; }} catch(Exception e) {{ throw new RuntimeException(e); }} }});
         assertEquals("new 🦋",output.output().{var('OUTPUT-TASK-TEXT')}());
+        assertTrue(jdbc.queryForObject("SELECT count(*) FROM acp_classification_audit WHERE mode='WRITE'",Integer.class)>0);
+        assertTrue(jdbc.queryForObject("SELECT count(*) FROM acp_classification_audit WHERE mode='READ'",Integer.class)>0);
         assertEquals("fixture-resource",output.resourceId()); assertEquals({events},output.version());
         assertEquals({q(final)},output.state());
         assertEquals("new 🦋",jdbc.queryForObject({q("SELECT convert_from(" + column('FLD-TASK-SUMMARY') + ", 'UTF8') FROM " + table(root))},String.class));
@@ -216,6 +218,7 @@ class ExplicitExecutionTest {{
         assertThrows(IllegalArgumentException.class, () -> {typ('INPUT-TASK')}.read(mapper.readTree("{{\\"INPUT-TASK-TEXT\\":null,\\"INPUT-TASK-RESOURCE\\":\\"fixture-resource\\"}}")));
         assertThrows(IllegalArgumentException.class, () -> {typ('INPUT-TASK')}.read(mapper.readTree("{{\\"INPUT-TASK-TEXT\\":4,\\"INPUT-TASK-RESOURCE\\":\\"fixture-resource\\"}}")));
         assertEquals(0,jdbc.queryForObject("SELECT count(*) FROM acp_audit",Integer.class));
+        assertEquals(0,jdbc.queryForObject("SELECT count(*) FROM acp_classification_audit",Integer.class));
     }}
     @Test void exactTypedContractsAndStrictHttpCodec() throws Exception {{
         {type_tests}

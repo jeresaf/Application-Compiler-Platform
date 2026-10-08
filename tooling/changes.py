@@ -20,6 +20,9 @@ DATA = {"Field", "Entity", "TypeDefinition", "ValueObject", "Parameter", "Relati
 
 
 def valid_change_shape(change):
+    if isinstance(change, dict) and change.get("changeVersion") == "0.3.0":
+        from deterministic_contract import change_schema
+        return Draft202012Validator(change_schema(), registry=Registry()).is_valid(change)
     if isinstance(change, dict) and change.get("changeVersion") == "0.2.0":
         from execution_contract import change_schema
         return Draft202012Validator(change_schema(), registry=Registry()).is_valid(change)
@@ -137,7 +140,7 @@ def request(plan):
 
 def genesis(source, author):
     receipt = migrate_authoring(source)
-    return seal({"planVersion": "0.2.0" if source.get("modelVersion") == "0.3.0" else "0.1.0", "kind": "INITIALIZE", "author": author,
+    return seal({"planVersion": {"0.4.0":"0.3.0","0.3.0":"0.2.0"}.get(source.get("modelVersion"),"0.1.0"), "kind": "INITIALIZE", "author": author,
         "candidate": receipt["candidate"], "sources": [{"source": copy.deepcopy(source), "receipt": receipt}],
         "requiredScopes": ["SEMANTIC", "SECURITY"], "change": None})
 
@@ -163,8 +166,9 @@ def prepare(base, change):
     if not valid:
         raise ChangeError("SHAPE", "ChangeSet violates the closed versioned input contract.")
     validate_snapshot(base)
-    if base["content"]["schemaVersion"] == "0.2.0" and change["changeVersion"] != "0.2.0":
-        raise ChangeError("VERSION", "Canonical 0.2 requires ChangeSet 0.2; downgrade is forbidden.")
+    allowed = {"0.1.0":{"0.1.0","0.2.0"}, "0.2.0":{"0.2.0","0.3.0"}, "0.3.0":{"0.3.0"}}
+    if change["changeVersion"] not in allowed[base["content"]["schemaVersion"]]:
+        raise ChangeError("VERSION", "Explicit adjacent version upgrade required; downgrade is forbidden.")
     if change["base"]["digest"] != base["contentDigest"]:
         raise ChangeError("BASE", "ChangeSet does not bind the supplied base snapshot.")
     check_sources(change["sources"])
@@ -221,6 +225,9 @@ def prepare(base, change):
     nodes = {id: rewrite(n, revisions, replacements) for id, n in nodes.items()}
     content = {**copy.deepcopy(base["content"]), "nodes": list(nodes.values()),
                "issues": rewrite(base["content"]["issues"], revisions, replacements)}
+    if change["changeVersion"] == "0.3.0":
+        from deterministic_contract import FEATURE
+        content.update(schemaVersion="0.3.0",semanticModelVersion="0.4.0",requiredFeatures=[FEATURE])
     if change["changeVersion"] == "0.2.0":
         content.update(schemaVersion="0.2.0", semanticModelVersion="0.3.0", requiredFeatures=["acp.execution.0.3"])
     candidate = normalize_content(content)
@@ -273,7 +280,7 @@ def prepare(base, change):
     provenance = [{"concept": {"id": id, "revision": n["revision"]}, "basis": n["basis"],
                    "origins": n["origins"], "changeId": change["id"], "snapshotDigest": candidate["contentDigest"]}
                   for id, n in sorted(actual.items()) if id in write_ids]
-    return seal({"planVersion": "0.2.0" if change["changeVersion"] == "0.2.0" else "0.1.0", "kind": "CHANGE", "author": change["author"], "change": copy.deepcopy(change),
+    return seal({"planVersion": change["changeVersion"], "kind": "CHANGE", "author": change["author"], "change": copy.deepcopy(change),
         "candidate": candidate, "readSet": read_set, "writeSet": sorted(write_ids), "diff": diff,
         "impact": {"semanticIds": impact, "external": "NOT_ANALYZED", "method": "exact-reference-closure-v1"},
         "risk": risk, "compatibility": compatible, "requiredScopes": sorted(scopes), "tombstones": tombstones,

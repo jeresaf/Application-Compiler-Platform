@@ -129,6 +129,9 @@ def _check_input(value):
 def normalize_candidate(authoring):
     """Import compile-eligible authoring content, never authenticate its attestations."""
     _check_input(authoring)
+    if isinstance(authoring, dict) and authoring.get("modelVersion") == "0.4.0":
+        from deterministic_canonical import normalize
+        return normalize(authoring)
     if isinstance(authoring, dict) and authoring.get("modelVersion") == "0.3.0":
         from execution_canonical import normalize
         return normalize(authoring)
@@ -149,6 +152,9 @@ def normalize_candidate(authoring):
 def validate_snapshot(snapshot):
     """Validate content, normalized form and digest. Does not establish approval."""
     _check_input(snapshot)
+    if isinstance(snapshot, dict) and isinstance(snapshot.get("content"), dict) and snapshot["content"].get("schemaVersion") == "0.3.0":
+        from deterministic_canonical import validate as validate_deterministic
+        return validate_deterministic(snapshot)
     if isinstance(snapshot, dict) and isinstance(snapshot.get("content"), dict) and snapshot["content"].get("schemaVersion") == "0.2.0":
         from execution_canonical import validate as validate_successor
         return validate_successor(snapshot)
@@ -208,6 +214,14 @@ def admit(snapshot, authority=None):
 
 def migrate_authoring(source, target_version=None):
     """Only registered migration: authoring 0.2.0 -> canonical candidate 0.1.0."""
+    if isinstance(source, dict) and source.get("modelVersion") == "0.4.0":
+        if target_version not in {None,"0.3.0"}:
+            raise CanonicalError("VERSION", "No migration is registered for this target version.")
+        snapshot = normalize_candidate(source)
+        return {"migration":"authoring-0.4-to-canonical-0.3-v1", "sourceDigest":digest(source,"authoring"),
+            "targetDigest":snapshot["contentDigest"], "requiresApproval":True,
+            "preservedSubjects":[{"id":n["id"],"revision":n["revision"]} for n in snapshot["content"]["nodes"]],
+            "candidate":snapshot}
     successor = isinstance(source, dict) and source.get("modelVersion") == "0.3.0"
     target_version = target_version or ("0.2.0" if successor else "0.1.0")
     if target_version != ("0.2.0" if successor else "0.1.0"):

@@ -34,3 +34,5 @@ ADR-0012 now implements bounded P-06 and semantic-history P-09. The remainder of
 [ADR-0014](0014-first-production-target.md) records the first target stack and engineering direction. Its implementation and P-08/generated-source P-09 acceptance are incomplete; see the [Phase 6 status report](../phase6-completion-report.md).
 
 [ADR-0015](0015-explicit-operation-effects-and-dataflow.md), ACCEPTED by explicit human project-authority approval on 2026-10-08, defines explicit operation effects and use-case dataflow in Authoring 0.3 / Canonical 0.2. It rejects the target realization sidecar as an authority for application behavior. Historical Phase 1–5 approvals remain bounded to their accepted versions.
+
+[ADR-0016](0016-deterministic-query-lifecycle-and-rate-semantics.md) is **PROPOSED / HUMAN REVIEW REQUIRED**. It proposes explicit query order, committed closure anchors, typed constant anonymization, exact token-bucket rate semantics, INTERVAL anchoring and retry timing in separate successor versions. The [complete audit](../phase6-semantic-underspecification-audit.md) records additional unresolved gaps. No new human approval has been issued.

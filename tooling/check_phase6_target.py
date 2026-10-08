@@ -110,7 +110,7 @@ def run(output, builds, expect_open=False):
         except ValueError as error:
             report['openPhaseExpectation'] = 'FAIL:' + str(error)
             failed = True
-    elif expect_open:
+    else:
         # No expected-blocker allowance at any release state other than INCOMPLETE.
         evolution_pass = all(v.get('fullNegotiatedEvolution') == 'PASS' for v in report['domains'].values())
         if failed or not builds or not evolution_pass:

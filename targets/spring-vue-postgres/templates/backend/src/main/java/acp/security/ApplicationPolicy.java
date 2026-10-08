@@ -30,6 +30,14 @@ public final class ApplicationPolicy {
     }
 
     public void require(String action, Map<String, Object> resource, Jwt jwt) {
+        require(action,null,resource,jwt);
+    }
+    public void requirePermission(String permission, Map<String,Object> resource, Jwt jwt) {
+        var node=model.node(permission);
+        if (!node.path("kind").asText().equals("Permission")) deny();
+        require(node.path("data").path("action").path("id").asText(),permission,resource,jwt);
+    }
+    private void require(String action, String permissionId, Map<String, Object> resource, Jwt jwt) {
         var actor = actor(jwt);
         Set<String> roles = new HashSet<>();
         for (var assignment : model.nodes("RoleAssignment")) {
@@ -40,6 +48,7 @@ public final class ApplicationPolicy {
         for (var policy : model.nodes("Policy")) {
             var data = policy.path("data");
             if (!data.path("action").path("id").asText().equals(action)) continue;
+            if (permissionId!=null && !data.path("permission").path("id").asText().equals(permissionId)) continue;
             boolean roleAllowed = false;
             for (var role : data.path("roles")) {
                 String roleId = role.path("id").asText();

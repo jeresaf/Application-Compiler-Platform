@@ -1,0 +1,11 @@
+# PROPOSED deterministic execution 0.4 reference fixtures
+
+**HUMAN REVIEW REQUIRED. No approval is issued or claimed.** See [ADR-0016](../../docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md) and the [complete audit](../../docs/phase6-semantic-underspecification-audit.md). These AI-authored values are proposed synthetic ACP reference-domain semantics, never production business requirements.
+
+Authoring files explicitly use lifecycle PROPOSED for all records and contain no attestations. They validate in draft mode and cannot normalize as compile-eligible authoring. Separate ChangeSet 0.3 plans and Canonical 0.3 candidates use the existing planner's active-candidate structural convention. Planning/normalization, internal structural witnesses and byte/hash verification confer no human approval, publish no history and cannot reuse the execution-v03 authority proof. No human-reference approval JSON is generated for this corpus.
+
+Payment proposes identity ASC ordering, `WF-PAYMENT` / `STATE-POSTED` closure at successful committed entry, and an explicit fixed exact Money UGX `1.00` anonymization replacement. The value preserves precision/scale and the positive WRITE invariant; it is a reviewable proposal, not a generator default. Case proposes identity ASC ordering, `WF-CASE` / `STATE-ARCHIVED` commit closure, and removal of optional `FLD-NOTE` as absence. Both propose exact rational token-bucket 100/60/burst10 ACTOR semantics and explicit retry timing. Both keep their existing LOCAL_DAILY schedule declarations; no INTERVAL fixture is introduced.
+
+Stable IDs persist, semantic revisions advance through explicit REVISE operations and dependency revision closure is reflected in plans. Fresh exact-content approval is mandatory before any admission or dependent target implementation. Additional audited semantic gaps remain open; this corpus does not establish complete target support. Phase 6 remains IN PROGRESS. Phase 7 is NOT STARTED.
+
+Reproduce proposals with `python3.14 tooling/deterministic_fixtures.py`. Check independent bytes/hashes with `node tooling/check_canonical_vectors.mjs test-corpus/deterministic-v04`. All historical vector directories and approval records remain unchanged. A positive technical result means proposal consistency only.

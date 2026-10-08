@@ -1,5 +1,7 @@
 # Phase 1 semantic corpus
 
+The [deterministic-v04 successor corpus](deterministic-v04/README.md) contains PROPOSED Authoring 0.4 / Canonical 0.3 / ChangeSet 0.3 artifacts and independent byte/hash vectors. No human approval is issued or implied. It preserves all historical corpora and their approvals.
+
 Phase 3's [change corpus](change/README.md) adds deterministic evolution vectors, storage observations and transaction/authority/history tests for both existing domains. No authoring or canonical regression vectors are replaced.
 
 Phase 2's separate [canonical corpus](canonical/README.md) adds normalized versions of both domains, expected hashes, portable byte vectors and migration/approval-boundary tests. The authoring regression assets below remain unchanged.

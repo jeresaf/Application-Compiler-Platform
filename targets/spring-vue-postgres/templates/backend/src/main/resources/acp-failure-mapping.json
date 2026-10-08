@@ -1,0 +1,20 @@
+{
+  "contractVersion": "1.0.0",
+  "scope": "TARGET_INFRASTRUCTURE_ONLY",
+  "semanticBusinessFailures": "EXPLICIT_DECLARATION_ONLY; never inferred from exceptions",
+  "sqlStates": {
+    "40001": {"code": "DEPENDENCY_UNAVAILABLE", "category": "TRANSIENT", "status": 503},
+    "40P01": {"code": "DEPENDENCY_UNAVAILABLE", "category": "TRANSIENT", "status": 503},
+    "23503": {"code": "PERSISTENCE_CONFLICT", "category": "INTERNAL", "status": 409},
+    "23505": {"code": "PERSISTENCE_CONFLICT", "category": "INTERNAL", "status": 409},
+    "23514": {"code": "PERSISTENCE_CONFLICT", "category": "INTERNAL", "status": 409}
+  },
+  "exceptions": {
+    "org.springframework.security.access.AccessDeniedException": {"code": "POLICY_DENIED", "category": "SECURITY", "status": 403},
+    "java.lang.IllegalArgumentException": {"code": "VALIDATION_FAILED", "category": "INTERNAL", "status": 422},
+    "java.lang.IllegalStateException": {"code": "STATE_CONFLICT", "category": "INTERNAL", "status": 409},
+    "org.springframework.http.converter.HttpMessageNotReadableException": {"code": "VALIDATION_FAILED", "category": "INTERNAL", "status": 422}
+  },
+  "unknown": {"code": "INTERNAL_ERROR", "category": "INTERNAL", "status": 500},
+  "retry": "A mapping alone never grants retry; an exact operation-declared retryable TRANSIENT Failure must also match code/category. No live retry runtime is admitted."
+}

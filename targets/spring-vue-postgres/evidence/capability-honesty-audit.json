@@ -1,0 +1,666 @@
+{
+  "auditVersion": "1.0.0",
+  "baseline": "101205d576aa690381c34dca480fe8053780367d",
+  "capabilities": {
+    "AcceptanceCriterion/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "AccessibilityRequirement/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Action/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Actor/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Aggregate/0.2.0": {
+      "constraints": [
+        "Canonical 0.2 explicit typed bindings/effects only; no inferred mutation semantics; one root and one atomic STOP boundary; expected-version locking; declared ordered assignments and post-state invariants; ordered comparisons only Integer/Duration/Money/Decimal/Percentage with explicit coalesce for null; other comparator types reject; no compensation/distributed/multi-commit effects"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Applicability/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Assumption/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "AuthenticationModel/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Backup/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Blob/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Command/0.2.0": {
+      "constraints": [
+        "Canonical 0.2 explicit typed bindings/effects only; no inferred mutation semantics; one root and one atomic STOP boundary; expected-version locking; declared ordered assignments and post-state invariants; ordered comparisons only Integer/Duration/Money/Decimal/Percentage with explicit coalesce for null; other comparator types reject; no compensation/distributed/multi-commit effects"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "CompatibilityRequirement/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Constraint/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "DataClassification/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "DataLifecycle/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Decision/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "DeletionPolicy/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "DeliveryPolicy/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "DistributedTransaction/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Entity/0.2.0": {
+      "constraints": [
+        "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+      ],
+      "evidence": [
+        "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Event/0.2.0": {
+      "constraints": [
+        "Explicit typed payload construction and transactional durable staging only; event delivery remains UNSUPPORTED; no exactly-once or transport claim"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExecutionStore.event; ExplicitExecutionTest payload/rollback"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "EvidenceRequirement/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "ExecutionStep/0.2.0": {
+      "constraints": [
+        "Canonical 0.2 explicit typed bindings/effects only; no inferred mutation semantics; one root and one atomic STOP boundary; expected-version locking; declared ordered assignments and post-state invariants; ordered comparisons only Integer/Duration/Money/Decimal/Percentage with explicit coalesce for null; other comparator types reject; no compensation/distributed/multi-commit effects"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Fact/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Failure/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Field/0.2.0": {
+      "constraints": [
+        "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+      ],
+      "evidence": [
+        "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "File/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Filter/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Form/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Goal/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "IdempotencyPolicy/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "InputControl/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Invariant/0.2.0": {
+      "constraints": [
+        "WRITE required in resource invariant enforcement; explicitly attached to each mutating command; compiled supported typed expression subset; validation rejects other enforcement-only forms and missing applicable attachments"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExplicitExecutionTest post-state rollback"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Job/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "LegalHold/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "ObservabilityRequirement/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Parameter/0.2.0": {
+      "constraints": [
+        "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+      ],
+      "evidence": [
+        "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "PerformanceRequirement/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Permission/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "PermissionBoundary/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Policy/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "PolicySet/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Preference/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Query/0.2.0": {
+      "constraints": [
+        "Explicit typed projections and bounded textContains predicates; exact maximum/offset; tenant authorization; paginated admission BLOCKED until canonical total order is approved"
+      ],
+      "evidence": [
+        "execution_codegen.py; TypedHttpTest; QUERY_ORDERING_REVIEW_REQUIRED"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "RatePolicy/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Recovery/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Relation/0.2.0": {
+      "constraints": [
+        "SCOPED same-tenant single-identity endpoints; min 0/1, max 1/UNBOUNDED, RESTRICT; deferred SQL cardinality, FK and uniqueness enforcement"
+      ],
+      "evidence": [
+        "relations.py; ExplicitExecutionTest real PostgreSQL relation constraints"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "ReliabilityRequirement/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Requirement/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "ResponsivePolicy/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Retention/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "RetryPolicy/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Role/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "RoleAssignment/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Schedule/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Scope/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Screen/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Search/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Service/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "SessionPolicy/0.2.0": {
+      "constraints": [
+        "One authentication actor with SCOPED single-identity subject; actor expressions use identity/tenant only; signed issuer pwd/otp MFA claims; durable session idle/absolute/reauth/revocation; SAME_TENANT scopes; exact assignment/permission/action; DENY_OVERRIDES default DENY; policy literals/parameters/required fields, and/or, String/Identifier/Boolean equality and Integer/Duration/Money/Decimal/Percentage gt/gte only; optional/nullable/compound/nominal comparisons reject"
+      ],
+      "evidence": [
+        "ApplicationPolicy.java; SessionGate.java; ApplicationPolicyTest; SessionGateTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "State/0.2.0": {
+      "constraints": [
+        "One machine per resource; at most one transition per (machine,from,command); compiled guards; atomic state/version changes and denial rollback; no inferred lifecycle closure"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExplicitExecutionTest workflow/guard rollback"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "StateMachine/0.2.0": {
+      "constraints": [
+        "One machine per resource; at most one transition per (machine,from,command); compiled guards; atomic state/version changes and denial rollback; no inferred lifecycle closure"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExplicitExecutionTest workflow/guard rollback"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Table/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "TestRequirement/0.2.0": {
+      "constraints": [
+        "Retained provenance/requirement; satisfaction OUTSTANDING; no runtime capability claimed"
+      ],
+      "evidence": [
+        "compiler obligation projection; target runtime does not certify this requirement"
+      ],
+      "status": "OBLIGATION_ONLY"
+    },
+    "Transaction/0.2.0": {
+      "constraints": [
+        "Canonical 0.2 explicit typed bindings/effects only; no inferred mutation semantics; one root and one atomic STOP boundary; expected-version locking; declared ordered assignments and post-state invariants; ordered comparisons only Integer/Duration/Money/Decimal/Percentage with explicit coalesce for null; other comparator types reject; no compensation/distributed/multi-commit effects"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "Transition/0.2.0": {
+      "constraints": [
+        "One machine per resource; at most one transition per (machine,from,command); compiled guards; atomic state/version changes and denial rollback; no inferred lifecycle closure"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExplicitExecutionTest workflow/guard rollback"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "TypeDefinition/0.2.0": {
+      "constraints": [
+        "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+      ],
+      "evidence": [
+        "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "UseCase/0.2.0": {
+      "constraints": [
+        "Canonical 0.2 explicit typed bindings/effects only; no inferred mutation semantics; one root and one atomic STOP boundary; expected-version locking; declared ordered assignments and post-state invariants; ordered comparisons only Integer/Duration/Money/Decimal/Percentage with explicit coalesce for null; other comparator types reject; no compensation/distributed/multi-commit effects"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExecutionStore.java; ExplicitExecutionTest rollback/effects/coordination"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "ValueObject/0.2.0": {
+      "constraints": [
+        "Closed typed records; explicit absence/null; scalar-preserving UTF-8 bytea; exact decimals; NONE/String LENGTH nominal refinements; operation resources SCOPED with one identity; unsupported row/DTO forms reject negotiation"
+      ],
+      "evidence": [
+        "typed_contracts.py; execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    },
+    "ViewState/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "Wizard/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "WizardStep/0.2.0": {
+      "constraints": [
+        "Runtime semantics/enforcement or exact generated evidence incomplete; no admission based on representation alone"
+      ],
+      "evidence": [
+        "docs/phase6-semantic-underspecification-audit.md; capability honesty review"
+      ],
+      "status": "UNSUPPORTED"
+    },
+    "semantic.execution-dataflow/0.3": {
+      "constraints": [
+        "Canonical 0.2 only; typed explicit root effects/results/payloads; atomic STOP; constrained expressions/types; unsupported forms reject negotiation"
+      ],
+      "evidence": [
+        "execution_codegen.py; ExplicitExecutionTest; TypedHttpTest"
+      ],
+      "status": "SUPPORTED_WITH_CONSTRAINT"
+    }
+  },
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "scope": "Every manifest entry; obligation retention does not certify satisfaction; component evidence is not full negotiated acceptance"
+}

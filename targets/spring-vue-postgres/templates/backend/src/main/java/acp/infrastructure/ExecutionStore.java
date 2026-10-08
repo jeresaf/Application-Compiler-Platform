@@ -1,6 +1,7 @@
 package acp.infrastructure;
 
 import acp.security.ApplicationPolicy;
+import acp.security.PrivacyGuards;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
@@ -18,9 +19,10 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 public final class ExecutionStore {
     private final JdbcTemplate jdbc;
     private final ApplicationPolicy policy;
+    private final PrivacyGuards privacy;
     private final ObjectMapper mapper = new ObjectMapper();
-    public ExecutionStore(JdbcTemplate jdbc, ApplicationPolicy policy) {
-        this.jdbc=jdbc; this.policy=policy;
+    public ExecutionStore(JdbcTemplate jdbc, ApplicationPolicy policy, PrivacyGuards privacy) {
+        this.jdbc=jdbc; this.policy=policy; this.privacy=privacy;
         if (!"UTF8".equals(jdbc.queryForObject("SHOW server_encoding",String.class))) throw new IllegalStateException("POSTGRESQL_UTF8_REQUIRED");
         String version=jdbc.queryForObject("SHOW server_version",String.class);
         if (version==null || !version.matches("18\\.6(?:\\s.*)?")) throw new IllegalStateException("POSTGRESQL_18_6_REQUIRED");
@@ -48,6 +50,12 @@ public final class ExecutionStore {
     public void audit(String operation, String resource, Jwt jwt) {
         transaction();
         jdbc.update("INSERT INTO acp_audit(tenant,subject,operation,resource) VALUES(?,?,?,?)", bytes(jwt.getClaimAsString("tenant")), bytes(jwt.getSubject()), operation, bytes(resource));
+    }
+    public void classifiedAudit(String operation, String resource, String mode, String[] fields, Jwt jwt) {
+        transaction();
+        for (String field:fields) if (privacy.audit(field,mode))
+            jdbc.update("INSERT INTO acp_classification_audit(tenant,subject,operation,resource,field,mode) VALUES(?,?,?,?,?,?)",
+                bytes(jwt.getClaimAsString("tenant")),bytes(jwt.getSubject()),operation,bytes(resource),field,mode);
     }
     public void event(String operation, String event, String resource, long version, Object typedPayload, Jwt jwt) {
         transaction();

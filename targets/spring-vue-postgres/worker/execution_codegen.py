@@ -45,6 +45,14 @@ class ExecutionGenerator:
             if op in ('and', 'or'):
                 return f'(Boolean.TRUE.equals({l}) {"&&" if op == "and" else "||"} Boolean.TRUE.equals({r}))'
             if op in ('gt', 'gte', 'lt', 'lte'):
+                def operand_kind(value):
+                    if value['tag']=='literal':return value['type']['kind']
+                    if value['tag'] in {'parameter','field'}:return self.nodes[value['ref']['id']]['data']['type']['kind']
+                    if value['tag'] in {'input','postField','stepResult'}:return self.nodes[value['field']['id']]['data']['type']['kind']
+                    if value['tag']=='coalesce':return operand_kind(value['fallback'])
+                    return None
+                if any(operand_kind(v) not in {'Integer','Duration','Money','Decimal','Percentage'} for v in (e['left'],e['right'])):
+                    raise CapabilityError('COMPILED_NUMERIC_COMPARISON_REQUIRED')
                 symbol = {'gt': '>', 'gte': '>=', 'lt': '<', 'lte': '<='}[op]
                 return f'(ExecutionStore.number({l}).compareTo(ExecutionStore.number({r})) {symbol} 0)'
         if tag == 'coalesce':
@@ -90,8 +98,43 @@ class ExecutionGenerator:
         raise CapabilityError('SQL_PREDICATE_REQUIRED:' + tag)
 
     def validate(self):
+        def policy_type(e):
+            if e['tag']=='field':
+                field=self.nodes[e['ref']['id']]
+                if field['data']['optional']:raise CapabilityError('OPTIONAL_POLICY_FIELD_UNSUPPORTED')
+                return field['data']['type']['kind']
+            if e['tag']=='parameter':return self.nodes[e['ref']['id']]['data']['type']['kind']
+            if e['tag']=='literal':return e['type']['kind']
+            return 'Boolean'
+        def policy_expression(e):
+            tag=e['tag']
+            if tag=='field':
+                field=self.nodes[e['ref']['id']]
+                if e['binding']=='actor':
+                    subject=self.nodes[next(n for n in self.nodes.values() if n['kind']=='Actor')['data']['subject']['id']]['data']
+                    if e['ref'] not in [*subject['identity'],subject.get('tenantField')]:
+                        raise CapabilityError('ACTOR_ATTRIBUTE_POLICY_UNSUPPORTED')
+                policy_type(e);return
+            if tag in {'literal','parameter'}: return
+            if tag=='binary' and e['op'] in {'eq','identityEq','and','or','gt','gte'}:
+                policy_expression(e['left']); policy_expression(e['right'])
+                if e['op'] in {'eq','identityEq','gt','gte'}:
+                    allowed={'String','Identifier','Boolean'} if e['op'] in {'eq','identityEq'} else {'Integer','Duration','Money','Decimal','Percentage'}
+                    if any(policy_type(e[k]) not in allowed for k in ('left','right')):
+                        raise CapabilityError('POLICY_COMPARISON_TYPE_UNSUPPORTED')
+                return
+            raise CapabilityError('POLICY_EXPRESSION_UNSUPPORTED:' + tag)
+        if sum(n['kind']=='Actor' for n in self.nodes.values())!=1:
+            raise CapabilityError('SINGLE_AUTHENTICATED_ACTOR_REQUIRED')
         for n in self.nodes.values():
             d, k = n['data'], n['kind']
+            if k=='Policy': policy_expression(d['predicate'])
+            if k=='Actor':
+                subject=self.nodes[d['subject']['id']]['data']
+                if subject['tenancy']!='SCOPED' or len(subject['identity'])!=1:
+                    raise CapabilityError('SCOPED_SINGLE_IDENTITY_ACTOR:' + n['id'])
+            if k=='Invariant' and 'WRITE' not in d['enforcement']:
+                raise CapabilityError('INVARIANT_ENFORCEMENT_UNSUPPORTED:' + n['id'])
             if k == 'UseCase':
                 steps = [self.nodes[r['id']]['data'] for r in d['steps']]
                 if any(s['onFailure'] != 'STOP' for s in steps):
@@ -106,6 +149,9 @@ class ExecutionGenerator:
                 for b in d['outputBindings']:
                     self.expression(b['value'])
             elif k == 'Command':
+                applicable={i['id'] for i in self.nodes.values() if i['kind']=='Invariant' and i['data']['resource']==d['resource'] and 'WRITE' in i['data']['enforcement']}
+                if not applicable.issubset({r['id'] for r in d['invariants']}):
+                    raise CapabilityError('UNENFORCED_RESOURCE_INVARIANT:' + n['id'])
                 for key in ('assignments', 'outputBindings'):
                     for b in d[key]:
                         self.expression(b['value'])
@@ -120,6 +166,25 @@ class ExecutionGenerator:
                     self.expression(b['value'])
             elif k == 'Transition':
                 self.expression(d['guard'])
+        machines={}
+        transitions=set()
+        for n in self.nodes.values():
+            d=n['data']
+            if n['kind']=='StateMachine':
+                resource=d['resource']['id']
+                if resource in machines: raise CapabilityError('MULTIPLE_RESOURCE_MACHINES:' + resource)
+                machines[resource]=n['id']
+            if n['kind']=='Transition':
+                key=(d['machine']['id'],d['from']['id'],d['command']['id'])
+                if key in transitions: raise CapabilityError('COMPETING_TRANSITIONS:' + n['id'])
+                transitions.add(key)
+            if n['kind'] in {'Command','Query'}:
+                e=self.nodes[d['resource']['id']]['data']
+                if e['tenancy']!='SCOPED' or len(e['identity'])!=1:
+                    raise CapabilityError('SCOPED_SINGLE_IDENTITY_OPERATION:' + n['id'])
+                self.command(n) if n['kind']=='Command' else self.query(n)
+            if n['kind']=='Scope' and d['mode']!='SAME_TENANT':
+                raise CapabilityError('SAME_TENANT_SCOPE_REQUIRED:' + n['id'])
         self.c.source()  # Resolve every persisted/DTO field and refinement.
         self.controller()
         self.frontend()
@@ -171,6 +236,10 @@ class ExecutionGenerator:
             return 'ExecutionStore.bytes(' + value + ')'
         return value
 
+    def classified_audit(self, operation, entity, mode, resource, fields=None):
+        fields = sorted(fields if fields is not None else (f['id'] for f in self.c.fields(entity)))
+        return f'store.classifiedAudit({quoted(operation)}, {resource}, {quoted(mode)}, new String[]{{' + ','.join(map(quoted, fields)) + '}, jwt);'
+
     def command(self, n):
         d, id = n['data'], n['id']; entity = d['resource']['id']; e = self.nodes[entity]['data']
         inp, out = name(d['input']['id']), name(d['output']['id'])
@@ -209,6 +278,8 @@ class ExecutionGenerator:
         update = f'UPDATE {table} SET ' + ','.join([*setters, 'acp_state=?', 'acp_version=acp_version+1']) + f' WHERE {identity}=? AND {tenant}=? AND acp_version=?'
         lines.append(f'store.update({quoted(update)}, ' + ','.join([*values, 'state', 'ExecutionStore.bytes(resourceId.value())', 'ExecutionStore.bytes(jwt.getClaimAsString("tenant"))', 'row.version()']) + ');')
         lines.append(f'store.audit({quoted(id)}, resourceId.value(), jwt);')
+        lines.append(self.classified_audit(id, entity, 'READ', 'resourceId.value()'))
+        lines.append(self.classified_audit(id, entity, 'WRITE', 'resourceId.value()', written))
         for b in d['eventBindings']:
             event = b['event']['id']; fields = [self.nodes[r['id']] for r in self.nodes[event]['data']['payload']]
             by = {p['field']['id']: p['value'] for p in b['payload']}
@@ -253,7 +324,7 @@ class ExecutionGenerator:
         # Full paginated admission remains blocked pending authoritative order.
         sql = f'SELECT * FROM {table} WHERE {tenant}=? AND {predicate} LIMIT ? OFFSET ?'
         return f'''
-    @org.springframework.transaction.annotation.Transactional(readOnly=true)
+    @org.springframework.transaction.annotation.Transactional
     public java.util.List<ExecutionStore.Completion<{out}>> {member(id)}({inp} input, int offset, int limit, org.springframework.security.oauth2.jwt.Jwt jwt) {{
         java.util.Objects.requireNonNull(input);
         store.authenticate(jwt);
@@ -261,13 +332,15 @@ class ExecutionGenerator:
         var rows = store.query({quoted(sql)}, {self.row_reader(entity)}, ExecutionStore.bytes(jwt.getClaimAsString("tenant")), {', '.join(params)}, limit, offset);
         var result = new java.util.ArrayList<ExecutionStore.Completion<{out}>>();
         for (var row : rows) {{ var pre=row.value(); store.authorize({quoted(id)}, {self.semantic(entity, 'pre')}, jwt);
+            {self.classified_audit(id, entity, 'READ', self.field('pre', e['identity'][0]['id'])+'.value()')}
             result.add(new ExecutionStore.Completion<>({projection}, {self.field('pre', e['identity'][0]['id'])}.value(), row.version(), row.state())); }}
         return java.util.List.copyOf(result);
     }}
-    @org.springframework.transaction.annotation.Transactional(readOnly=true)
+    @org.springframework.transaction.annotation.Transactional
     public ExecutionStore.Completion<{out}> {member(id)}One({name(entity)}Id resourceId, long expectedVersion, {inp} input, org.springframework.security.oauth2.jwt.Jwt jwt) {{
         var row=store.lock({quoted(table)}, {quoted(identity)}, {quoted(tenant)}, resourceId.value(), jwt, {self.row_reader(entity)});
         var pre=row.value(); store.authorize({quoted(id)}, {self.semantic(entity, 'pre')}, jwt);
+        {self.classified_audit(id, entity, 'READ', 'resourceId.value()')}
         if (!Boolean.TRUE.equals({self.expression(d['predicate'])})) throw new IllegalArgumentException("QUERY_NO_RESULT");
         return new ExecutionStore.Completion<>({projection}, resourceId.value(), row.version(), row.state());
     }}'''

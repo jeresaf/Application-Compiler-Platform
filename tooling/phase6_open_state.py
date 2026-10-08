@@ -7,7 +7,7 @@ def assert_expected_blocked(report, contract):
         if not ok:
             raise ValueError(code)
     require(set(contract) == {'contractVersion','target','releaseStatus','reviewBasis','domains'}, 'CONTRACT_SHAPE')
-    require(contract['contractVersion'] == '1.0.0' and contract['releaseStatus'] == 'INCOMPLETE', 'CONTRACT_VERSION')
+    require(contract['contractVersion'] in {'1.0.0','1.1.0'} and contract['releaseStatus'] == 'INCOMPLETE', 'CONTRACT_VERSION')
     manifest = report.get('targetManifest', {})
     require(manifest.get('releaseStatus') == 'INCOMPLETE' and manifest.get('profile') == contract['target'], 'TARGET_STATE')
     require(report.get('mode') == 'FULL_NEGOTIATED_TARGET_GATE' and report.get('result') == 'BLOCKED', 'EXPECTED_BLOCKED_RESULT')

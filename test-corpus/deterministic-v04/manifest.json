@@ -1,0 +1,24 @@
+{
+  "profile": "acp-jcs-safe-v1",
+  "status": "PROPOSED_HUMAN_REVIEW_REQUIRED",
+  "authority": "NONE; no human/reference approval proof generated",
+  "authoringVersion": "0.4.0",
+  "canonicalVersion": "0.3.0",
+  "changeVersion": "0.3.0",
+  "examples": [
+    {
+      "file": "payment-canonical-candidate.json",
+      "contentDigest": "sha256:036e4607deaf43a5b393082d0bc0207242b3c8ff6cdd4bda4031cb5f152fb1c6",
+      "baseContentDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+      "planDigest": "sha256:fba9867063d157e0c0ac0a59dc021637c6179896a397b8923e09402c6f9ceccb",
+      "proposalSourceDigest": "sha256:0efa865e8e8cca60df0c25f9da610405957c9593e49c7e3163e9b1e25948eb91"
+    },
+    {
+      "file": "case-management-canonical-candidate.json",
+      "contentDigest": "sha256:0ba271e5e69b620a35765209b84d3e5bd2ee42fdf34440b369f9434bd1b9b819",
+      "baseContentDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+      "planDigest": "sha256:bc8d22767c47fd2d0916438baef683aab380ffb6545f3022fd2f00c257fce61a",
+      "proposalSourceDigest": "sha256:4b21574d21bfb0ad4912711942120b3cd586dc228a6f1e0434a8260adae32eb3"
+    }
+  ]
+}

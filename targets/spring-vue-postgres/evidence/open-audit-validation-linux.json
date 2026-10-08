@@ -1,0 +1,35 @@
+{
+  "evidenceVersion": "1.0.0",
+  "status": "LOCAL_CHECKS_GREEN; successor PROPOSED; no approval",
+  "sourceBranch": "codex/phase6-open-state-successor-audit",
+  "sourceState": "Uncommitted successor investigation on published Part A checkpoint eb3e18b",
+  "toolingTargetBundleDigest": "fff60ed666cf7d751651e3ff0fe52a212fc6952fbb23ba080c12df6ee9a76397",
+  "python": "3.14.4",
+  "fullRegression": {
+    "tests": 183,
+    "elapsedSeconds": 1184.105,
+    "result": "PASS",
+    "command": ".venv/bin/python3.14 -m unittest discover -s tooling/tests -v"
+  },
+  "subsequentRestrictions": "Final numeric/policy negotiation restrictions receive focused capability/lowering revalidation; recorded separately",
+  "vectors": {
+    "historicalCanonical01": "PASS / UNCHANGED",
+    "approvedCanonical02": "PASS / UNCHANGED",
+    "proposedCanonical03": "PASS / NOT APPROVED",
+    "each": "9 positive, 13 negative, 2 snapshot hashes; Node 24.21.0"
+  },
+  "targetAdmission": "BLOCKED; exactly 27 blockers per approved snapshot",
+  "openPhaseExpectation": "EXPECTED_BLOCKED_STATE = PASS",
+  "strictMode": "Exit 1; BLOCKED; closureGate FAIL; full negotiated evolution absent",
+  "migration": "Exit 1; REVIEW_REQUIRED; candidate null; no invented meaning",
+  "backendPostgresql": {
+    "payment": "27 PASS; 0 skipped",
+    "case-management": "26 PASS; 0 skipped",
+    "database": "PostgreSQL 18.6 / UTF8 / fresh ephemeral schemas"
+  },
+  "frontend": "Each domain: 4 tests PASS, typecheck PASS, production build PASS",
+  "hostedCI": "Published main Part A run 37727690080 SUCCESS. Uncommitted successor branch has not run hosted CI.",
+  "phase6": "IN_PROGRESS_NOT_CLOSED",
+  "phase7": "NOT_STARTED",
+  "humanApprovalIssued": false
+}

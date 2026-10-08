@@ -1,0 +1,483 @@
+{
+  "changeVersion": "0.3.0",
+  "id": "CHANGE-DETERMINISTIC-V04",
+  "author": "assistant:proposal-author",
+  "intent": "PROPOSED reference-only deterministic semantics; HUMAN REVIEW REQUIRED",
+  "branch": "BRANCH-CHANGE-DETERMINISTIC-V04",
+  "base": {
+    "sequence": 0,
+    "digest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+    "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "operations": [
+    {
+      "op": "ADD",
+      "node": {
+        "id": "DEC-DETERMINISTIC-V04",
+        "revision": 1,
+        "kind": "Decision",
+        "name": "Proposed deterministic execution reference semantics",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "payment",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants and deterministic token-bucket admission.",
+          "strength": "REQUIRED",
+          "rationale": "HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.",
+          "alternatives": [
+            "Retain approved 0.3/0.2 meaning and reject incomplete target capabilities"
+          ]
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "DELETE-ENT-PAYMENT",
+      "expectedRevision": 1,
+      "node": {
+        "id": "DELETE-ENT-PAYMENT",
+        "revision": 2,
+        "kind": "DeletionPolicy",
+        "name": "DELETE-ENT-PAYMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELETE-ENT-PAYMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELETE-ENT-PAYMENT",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "ENT-PAYMENT",
+            "revision": 1
+          },
+          "trigger": "CLOSED",
+          "mode": "ANONYMIZE",
+          "afterSeconds": 172800,
+          "fields": [
+            {
+              "id": "FLD-AMOUNT",
+              "revision": 1
+            }
+          ],
+          "holdBehavior": "BLOCK",
+          "anonymizationEffects": [
+            {
+              "field": {
+                "id": "FLD-AMOUNT",
+                "revision": 1
+              },
+              "action": "REPLACE",
+              "replacement": {
+                "type": {
+                  "kind": "Money",
+                  "currency": "UGX",
+                  "precision": 18,
+                  "scale": 2,
+                  "rounding": "REJECT"
+                },
+                "value": "1.00"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "LIFECYCLE-ENT-PAYMENT",
+      "expectedRevision": 2,
+      "node": {
+        "id": "LIFECYCLE-ENT-PAYMENT",
+        "revision": 3,
+        "kind": "DataLifecycle",
+        "name": "LIFECYCLE-ENT-PAYMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "LIFECYCLE-ENT-PAYMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "LIFECYCLE-ENT-PAYMENT",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "ENT-PAYMENT",
+            "revision": 1
+          },
+          "retention": {
+            "id": "RETENTION-ENT-PAYMENT",
+            "revision": 1
+          },
+          "deletion": {
+            "id": "DELETE-ENT-PAYMENT",
+            "revision": 1
+          },
+          "holds": [
+            {
+              "id": "HOLD-ENT-PAYMENT",
+              "revision": 2
+            }
+          ],
+          "anchor": {
+            "kind": "CLOSED_COMMIT",
+            "machine": {
+              "id": "WF-PAYMENT",
+              "revision": 1
+            },
+            "states": [
+              {
+                "id": "STATE-POSTED",
+                "revision": 1
+              }
+            ],
+            "instant": "COMMITTED_ENTRY",
+            "terminal": true
+          }
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "QUERY-TASKS",
+      "expectedRevision": 2,
+      "node": {
+        "id": "QUERY-TASKS",
+        "revision": 3,
+        "kind": "Query",
+        "name": "QUERY-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "QUERY-TASKS",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "QUERY-TASKS",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "ENT-PAYMENT",
+            "revision": 1
+          },
+          "scope": {
+            "id": "SCOPE-ENT-PAYMENT",
+            "revision": 1
+          },
+          "result": {
+            "kind": "Value",
+            "definition": {
+              "id": "OUTPUT-TASK",
+              "revision": 1
+            }
+          },
+          "projection": [
+            {
+              "field": {
+                "id": "OUTPUT-TASK-TEXT",
+                "revision": 1
+              },
+              "value": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-TASK-SUMMARY",
+                  "revision": 1
+                }
+              }
+            }
+          ],
+          "paginated": true,
+          "maximumResults": 100,
+          "input": {
+            "id": "QUERY-INPUT",
+            "revision": 1
+          },
+          "predicate": {
+            "tag": "textContains",
+            "value": {
+              "tag": "field",
+              "binding": "resource",
+              "ref": {
+                "id": "FLD-TASK-SUMMARY",
+                "revision": 1
+              }
+            },
+            "pattern": {
+              "tag": "input",
+              "scope": "OPERATION",
+              "field": {
+                "id": "QUERY-TEXT",
+                "revision": 1
+              }
+            }
+          },
+          "orderBy": [
+            {
+              "field": {
+                "id": "FLD-PAYMENT-ID",
+                "revision": 1
+              },
+              "direction": "ASC"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "RATE-CMD-RECORD",
+      "expectedRevision": 2,
+      "node": {
+        "id": "RATE-CMD-RECORD",
+        "revision": 3,
+        "kind": "RatePolicy",
+        "name": "RATE-CMD-RECORD",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RATE-CMD-RECORD",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "RATE-CMD-RECORD",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "permission": {
+            "id": "PERM-CMD-RECORD",
+            "revision": 2
+          },
+          "requests": 100,
+          "windowSeconds": 60,
+          "burst": 10,
+          "partition": "ACTOR",
+          "algorithm": {
+            "kind": "TOKEN_BUCKET",
+            "refill": "CONTINUOUS_RATIONAL",
+            "initial": "FULL",
+            "charge": "AUTHORIZED_INVOCATION",
+            "replay": "CHARGE",
+            "clock": "NONDECREASING"
+          }
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "RATE-QUERY-TASKS",
+      "expectedRevision": 2,
+      "node": {
+        "id": "RATE-QUERY-TASKS",
+        "revision": 3,
+        "kind": "RatePolicy",
+        "name": "RATE-QUERY-TASKS",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RATE-QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "RATE-QUERY-TASKS",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "permission": {
+            "id": "PERM-QUERY-TASKS",
+            "revision": 2
+          },
+          "requests": 100,
+          "windowSeconds": 60,
+          "burst": 10,
+          "partition": "ACTOR",
+          "algorithm": {
+            "kind": "TOKEN_BUCKET",
+            "refill": "CONTINUOUS_RATIONAL",
+            "initial": "FULL",
+            "charge": "AUTHORIZED_INVOCATION",
+            "replay": "CHARGE",
+            "clock": "NONDECREASING"
+          }
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "RETRY-TASK",
+      "expectedRevision": 1,
+      "node": {
+        "id": "RETRY-TASK",
+        "revision": 2,
+        "kind": "RetryPolicy",
+        "name": "RETRY-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RETRY-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "RETRY-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "failures": [
+            {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            }
+          ],
+          "maxAttempts": 3,
+          "initialSeconds": 1,
+          "maxDelaySeconds": 10,
+          "multiplier": 2,
+          "delayBasis": "AFTER_FAILURE_COMPLETION",
+          "jitter": "NONE",
+          "attemptCounting": "INCLUDING_INITIAL"
+        }
+      }
+    }
+  ],
+  "reads": [],
+  "migration": {
+    "id": "MIG-NONE",
+    "mode": "NONE",
+    "compatibility": "BACKWARD",
+    "irreversible": false,
+    "steps": [],
+    "preconditions": [],
+    "verification": [],
+    "recovery": "No data operation",
+    "observations": []
+  },
+  "sources": [],
+  "parents": [],
+  "rollbackOf": null,
+  "canonicalVersion": "0.3.0"
+}

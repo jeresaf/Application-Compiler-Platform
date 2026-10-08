@@ -56,6 +56,7 @@ def schema(model):
     sql += ["CREATE TABLE acp_audit (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, tenant bytea NOT NULL, subject bytea NOT NULL, operation text NOT NULL, resource bytea NOT NULL, occurred_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP);",
             "CREATE TABLE acp_sessions (tenant bytea NOT NULL, subject bytea NOT NULL, sid bytea NOT NULL, started_at bigint NOT NULL, last_seen bigint NOT NULL, authenticated_at bigint NOT NULL, revoked boolean NOT NULL, PRIMARY KEY(tenant,subject,sid));",
             "CREATE TABLE acp_outbox (id text PRIMARY KEY, tenant bytea NOT NULL, event text NOT NULL, resource bytea NOT NULL, aggregate_version bigint NOT NULL, payload bytea NOT NULL DEFAULT '\\x7b7d'::bytea, delivered_at timestamptz, UNIQUE(tenant,event,resource,aggregate_version));"]
+    sql.append("CREATE TABLE acp_classification_audit (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, tenant bytea NOT NULL, subject bytea NOT NULL, operation text NOT NULL, resource bytea NOT NULL, field text NOT NULL, mode text NOT NULL CHECK(mode IN ('READ','WRITE')), occurred_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP);")
     return "\n".join(sql) + "\n"
 
 

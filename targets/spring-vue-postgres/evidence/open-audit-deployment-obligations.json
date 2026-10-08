@@ -1,0 +1,161 @@
+{
+  "contractVersion": "1.0.0",
+  "status": "OUTSTANDING",
+  "scope": "Requirements only; no Java/unit test proves deployed encryption, TLS or privacy destruction",
+  "domains": {
+    "payment": {
+      "canonicalDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+      "requirements": [
+        {
+          "subject": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          },
+          "requirement": "encryptAtRest",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          },
+          "requirement": "encryptInTransit",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-PUBLIC",
+            "revision": 1
+          },
+          "requirement": "encryptAtRest",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-PUBLIC",
+            "revision": 1
+          },
+          "requirement": "encryptInTransit",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-SECRET",
+            "revision": 1
+          },
+          "requirement": "encryptAtRest",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-SECRET",
+            "revision": 1
+          },
+          "requirement": "encryptInTransit",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 1
+          },
+          "requirement": "encryptAtRest",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 1
+          },
+          "requirement": "encryptInTransit",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        }
+      ]
+    },
+    "case-management": {
+      "canonicalDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+      "requirements": [
+        {
+          "subject": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          },
+          "requirement": "encryptAtRest",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-INTERNAL",
+            "revision": 1
+          },
+          "requirement": "encryptInTransit",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-PUBLIC",
+            "revision": 1
+          },
+          "requirement": "encryptAtRest",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-PUBLIC",
+            "revision": 1
+          },
+          "requirement": "encryptInTransit",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-SECRET",
+            "revision": 1
+          },
+          "requirement": "encryptAtRest",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-SECRET",
+            "revision": 1
+          },
+          "requirement": "encryptInTransit",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 1
+          },
+          "requirement": "encryptAtRest",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        },
+        {
+          "subject": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 1
+          },
+          "requirement": "encryptInTransit",
+          "verification": "OUTSTANDING",
+          "trustedDeploymentEvidence": null
+        }
+      ]
+    }
+  }
+}

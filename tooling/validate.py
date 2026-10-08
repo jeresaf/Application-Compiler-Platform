@@ -129,6 +129,9 @@ def validate(document, mode="draft"):
     """
     if mode not in {"draft", "compile"}:
         raise ValueError("Unknown validation mode.")
+    if isinstance(document, dict) and document.get("modelVersion") == "0.4.0":
+        from deterministic_model import validate_deterministic
+        return validate_deterministic(document, mode)
     if isinstance(document, dict) and document.get("modelVersion") == "0.3.0":
         from execution_model import validate_execution
         return validate_execution(document, mode)

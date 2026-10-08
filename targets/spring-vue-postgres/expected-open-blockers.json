@@ -1,8 +1,8 @@
 {
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "target": "acp-spring-vue-postgres/0.1.0",
   "releaseStatus": "INCOMPLETE",
-  "reviewBasis": "Explicit human acceptance of incomplete checkpoint 101205d576aa690381c34dca480fe8053780367d and instruction to assert its exact open blockers. Changes to this contract require intentional review.",
+  "reviewBasis": "Explicit human acceptance of incomplete checkpoint 101205d576aa690381c34dca480fe8053780367d and instruction to assert its exact open blockers. Changes to this contract require intentional review. Intentional capability-honesty audit revision: general UI enforcement and declared semantic Failure execution were overclaimed at the checkpoint; add exact blockers for the 11 UI families and Failure. Retained requirement/evidence nodes are OBLIGATION_ONLY, never runtime satisfaction. See docs/phase6-semantic-underspecification-audit.md. No canonical business meaning or approval changes.",
   "domains": {
     "payment": {
       "canonicalDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
@@ -11,17 +11,29 @@
         "CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:DELETE-ENT-PAYMENT",
         "CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:RETENTION-ENT-PAYMENT",
         "QUERY_ORDERING_REVIEW_REQUIRED:QUERY-TASKS",
+        "UNSUPPORTED:Action/0.2.0",
         "UNSUPPORTED:DataClassification/0.2.0",
         "UNSUPPORTED:DataLifecycle/0.2.0",
         "UNSUPPORTED:DeletionPolicy/0.2.0",
         "UNSUPPORTED:DeliveryPolicy/0.2.0",
+        "UNSUPPORTED:Failure/0.2.0",
+        "UNSUPPORTED:Filter/0.2.0",
+        "UNSUPPORTED:Form/0.2.0",
         "UNSUPPORTED:IdempotencyPolicy/0.2.0",
+        "UNSUPPORTED:InputControl/0.2.0",
         "UNSUPPORTED:Job/0.2.0",
         "UNSUPPORTED:LegalHold/0.2.0",
+        "UNSUPPORTED:PermissionBoundary/0.2.0",
         "UNSUPPORTED:RatePolicy/0.2.0",
         "UNSUPPORTED:Retention/0.2.0",
         "UNSUPPORTED:RetryPolicy/0.2.0",
-        "UNSUPPORTED:Schedule/0.2.0"
+        "UNSUPPORTED:Schedule/0.2.0",
+        "UNSUPPORTED:Screen/0.2.0",
+        "UNSUPPORTED:Search/0.2.0",
+        "UNSUPPORTED:Table/0.2.0",
+        "UNSUPPORTED:ViewState/0.2.0",
+        "UNSUPPORTED:Wizard/0.2.0",
+        "UNSUPPORTED:WizardStep/0.2.0"
       ]
     },
     "case-management": {
@@ -31,17 +43,29 @@
         "CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:DELETE-CASE",
         "CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:RETENTION-CASE",
         "QUERY_ORDERING_REVIEW_REQUIRED:QUERY-TASKS",
+        "UNSUPPORTED:Action/0.2.0",
         "UNSUPPORTED:DataClassification/0.2.0",
         "UNSUPPORTED:DataLifecycle/0.2.0",
         "UNSUPPORTED:DeletionPolicy/0.2.0",
         "UNSUPPORTED:DeliveryPolicy/0.2.0",
+        "UNSUPPORTED:Failure/0.2.0",
+        "UNSUPPORTED:Filter/0.2.0",
+        "UNSUPPORTED:Form/0.2.0",
         "UNSUPPORTED:IdempotencyPolicy/0.2.0",
+        "UNSUPPORTED:InputControl/0.2.0",
         "UNSUPPORTED:Job/0.2.0",
         "UNSUPPORTED:LegalHold/0.2.0",
+        "UNSUPPORTED:PermissionBoundary/0.2.0",
         "UNSUPPORTED:RatePolicy/0.2.0",
         "UNSUPPORTED:Retention/0.2.0",
         "UNSUPPORTED:RetryPolicy/0.2.0",
-        "UNSUPPORTED:Schedule/0.2.0"
+        "UNSUPPORTED:Schedule/0.2.0",
+        "UNSUPPORTED:Screen/0.2.0",
+        "UNSUPPORTED:Search/0.2.0",
+        "UNSUPPORTED:Table/0.2.0",
+        "UNSUPPORTED:ViewState/0.2.0",
+        "UNSUPPORTED:Wizard/0.2.0",
+        "UNSUPPORTED:WizardStep/0.2.0"
       ]
     }
   }

@@ -1,6 +1,7 @@
 """Pure lowering. Stable semantic identity drives SQL/API identifiers."""
 import hashlib
 import json
+from capability_contract import capabilities, OBLIGATIONS, PENDING
 
 
 def identifier(origin, role):
@@ -15,29 +16,12 @@ class CapabilityError(ValueError):
     pass
 
 
-METADATA = set("Requirement Decision Fact Goal Assumption Preference AcceptanceCriterion Applicability EvidenceRequirement TestRequirement Backup Recovery PerformanceRequirement ReliabilityRequirement CompatibilityRequirement".split())
-SUPPORTED = set("Entity Field ValueObject TypeDefinition Parameter Aggregate Relation Constraint Invariant Actor AuthenticationModel SessionPolicy Role RoleAssignment Permission Scope Policy PolicySet DataClassification Command Query UseCase ExecutionStep Service Transaction StateMachine State Transition Failure RatePolicy IdempotencyPolicy Event DeliveryPolicy Screen Form InputControl Table Filter Search Wizard WizardStep Action ViewState PermissionBoundary ResponsivePolicy AccessibilityRequirement ObservabilityRequirement".split())
-# Negotiation stays fail-closed while these runtime capabilities are implemented.
-PENDING = set("DataClassification Job Schedule RetryPolicy DataLifecycle Retention DeletionPolicy LegalHold RatePolicy IdempotencyPolicy DeliveryPolicy".split())
-SUPPORTED -= PENDING
+METADATA = OBLIGATIONS
+SUPPORTED = {k.split('/')[0] for k,v in capabilities().items() if v['status']=='SUPPORTED_WITH_CONSTRAINT' and k.endswith('/0.2.0')}
 
 
 def manifest(profile):
-    capabilities = {kind + "/0.2.0": {"status": "SUPPORTED_WITH_CONSTRAINT", "constraints":
-                    ["bounded model 0.2; executable constraint checks during negotiation"]}
-                    for kind in sorted(SUPPORTED | METADATA)}
-    capabilities.update({kind + "/0.2.0": {"status": "UNSUPPORTED", "constraints": ["runtime lowering not yet implemented"]}
-                         for kind in sorted(PENDING | {"File", "Blob", "DistributedTransaction"})})
-    capabilities["UseCase/0.2.0"]["constraints"] = [
-        "Canonical 0.2 explicit input/effects/output bindings; atomic STOP coordination; no inferred mutation semantics"]
-    capabilities['semantic.execution-dataflow/0.3'] = {'status': 'SUPPORTED_WITH_CONSTRAINT',
-        'constraints': ['Canonical 0.2 only; compiled typed root effects, results and payloads; one atomic STOP boundary; unsupported expressions/types reject negotiation']}
-    capabilities['ValueObject/0.2.0']['constraints'] = ['Closed typed records; separate absence/null; String, Boolean, Identifier, exact decimal/Money, nested Value and bounded Named types']
-    capabilities['TypeDefinition/0.2.0']['constraints'] = ['Distinct nominal records; NONE or String LENGTH refinement; other refinements reject negotiation']
-    capabilities['AuthenticationModel/0.2.0']['constraints'] = ['Single actor model; MULTI_FACTOR with KNOWLEDGE/POSSESSION; trusted signed issuer amr=pwd,otp and auth_time claims; no generated credentials']
-    capabilities['SessionPolicy/0.2.0']['constraints'] = ['Durable server-side idle/absolute/reauthentication/revocation checks; required issuer sid and exp; tenant/subject partitioned activity']
-    capabilities['Relation/0.2.0']['constraints'] = ['Same-tenant scoped single-identity endpoints; min 0/1, max 1/UNBOUNDED; RESTRICT; deferred cardinality/FK enforcement']
-    return {**profile, "releaseStatus": "INCOMPLETE", "capabilities": capabilities,
+    return {**profile, "releaseStatus": "INCOMPLETE", "capabilities": capabilities(),
             "requiredDecisions": profile["decisions"],
             "ownership": ["COMPILER_OWNED", "FRAMEWORK_OWNED", "AI_MANAGED", "HUMAN_OWNED"],
             "migrations": ["flyway-versioned", "expand-backfill-switch-contract"],
