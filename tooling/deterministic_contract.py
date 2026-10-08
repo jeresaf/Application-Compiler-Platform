@@ -7,8 +7,17 @@ from phase1_contract import ROOT, record, link, links, array, use, enum
 FEATURE = 'acp.deterministic-execution.0.4'
 RATE = {'kind': 'TOKEN_BUCKET', 'refill': 'CONTINUOUS_RATIONAL', 'initial': 'FULL',
         'charge': 'AUTHORIZED_INVOCATION', 'replay': 'CHARGE', 'clock': 'NONDECREASING'}
+INVOCATION = 'AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY'
 EXTENSIONS = {
-    'Query': {'orderBy': array(record({'field': link('Field'), 'direction': enum('ASC','DESC')},
+    'Command': {'emissionOrder': {'const':'DECLARED_BINDING_SEQUENCE'}, 'invocationOrder': {'const':INVOCATION}},
+    'UseCase': {'invocationOrder': {'const':INVOCATION}},
+    'IdempotencyPolicy': {'windowAnchor': {'const':'COMMITTED_RESULT'}, 'inFlight': {'const':'RETURN_IN_PROGRESS'}},
+    'DeliveryPolicy': {'windowAnchor': {'const':'EVENT_COMMIT'}, 'occurrenceOrder': {'const':'COMMIT_STEP_EMISSION_SEQUENCE'}},
+    'Job': {'missedOccurrences': enum('SKIP','RUN_LATEST','CATCH_UP'),
+            'catchUp': {'oneOf': [ {'type':'null'}, record({'maxOccurrences': {'type':'integer','minimum':1,'maximum':10000}, 'overflow': enum('REJECT','DROP_OLDEST')}) ]}},
+    'LegalHold': {'releaseMode': {'const':'CURRENT_LIFECYCLE_ACTION'}},
+    'DataClassification': {'redactionScope': {'const':'NON_DOMAIN_OBSERVABILITY'}},
+    'Query': {'invocationOrder': {'const':INVOCATION}, 'orderBy': array(record({'field': link('Field'), 'direction': enum('ASC','DESC')},
                                    {'nulls': enum('FIRST','LAST'), 'absent': enum('FIRST','LAST')}))},
     'DataLifecycle': {'anchor': {'oneOf': [record({'kind': enum('CREATED_COMMIT')}),
         record({'kind': enum('CLOSED_COMMIT'), 'machine': link('StateMachine'), 'states': links('State',minimum=1),

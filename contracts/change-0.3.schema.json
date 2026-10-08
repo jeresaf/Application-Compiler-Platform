@@ -2230,7 +2230,9 @@
         "writeFields",
         "assignments",
         "outputBindings",
-        "eventBindings"
+        "eventBindings",
+        "emissionOrder",
+        "invocationOrder"
       ],
       "properties": {
         "resource": {
@@ -2335,6 +2337,12 @@
         },
         "eventBindings": {
           "$ref": "#/$defs/emissions"
+        },
+        "emissionOrder": {
+          "const": "DECLARED_BINDING_SEQUENCE"
+        },
+        "invocationOrder": {
+          "const": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       }
     },
@@ -2978,7 +2986,8 @@
         "encryptAtRest",
         "encryptInTransit",
         "export",
-        "redaction"
+        "redaction",
+        "redactionScope"
       ],
       "properties": {
         "level": {
@@ -3014,6 +3023,9 @@
             "MASK",
             "OMIT"
           ]
+        },
+        "redactionScope": {
+          "const": "NON_DOMAIN_OBSERVABILITY"
         }
       }
     },
@@ -3257,7 +3269,8 @@
       "required": [
         "resource",
         "condition",
-        "release"
+        "release",
+        "releaseMode"
       ],
       "properties": {
         "resource": {
@@ -3274,6 +3287,9 @@
           "x-acp-targetKinds": [
             "Permission"
           ]
+        },
+        "releaseMode": {
+          "const": "CURRENT_LIFECYCLE_ACTION"
         }
       }
     },
@@ -3411,6 +3427,7 @@
         "maximumResults",
         "input",
         "predicate",
+        "invocationOrder",
         "orderBy"
       ],
       "properties": {
@@ -3470,6 +3487,9 @@
         "predicate": {
           "$ref": "#/$defs/expression"
         },
+        "invocationOrder": {
+          "const": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
+        },
         "orderBy": {
           "type": "array",
           "items": {
@@ -3519,7 +3539,8 @@
         "steps",
         "input",
         "output",
-        "outputBindings"
+        "outputBindings",
+        "invocationOrder"
       ],
       "properties": {
         "service": {
@@ -3553,6 +3574,9 @@
         },
         "outputBindings": {
           "$ref": "#/$defs/bindings"
+        },
+        "invocationOrder": {
+          "const": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       }
     },
@@ -3736,7 +3760,9 @@
         "keyType",
         "windowSeconds",
         "replay",
-        "conflict"
+        "conflict",
+        "windowAnchor",
+        "inFlight"
       ],
       "properties": {
         "scope": {
@@ -3762,6 +3788,12 @@
           "enum": [
             "REJECT_DIFFERENT_INPUT"
           ]
+        },
+        "windowAnchor": {
+          "const": "COMMITTED_RESULT"
+        },
+        "inFlight": {
+          "const": "RETURN_IN_PROGRESS"
         }
       }
     },
@@ -3772,7 +3804,9 @@
         "event",
         "guarantee",
         "ordering",
-        "windowSeconds"
+        "windowSeconds",
+        "windowAnchor",
+        "occurrenceOrder"
       ],
       "properties": {
         "event": {
@@ -3803,6 +3837,12 @@
           "x-acp-targetKinds": [
             "IdempotencyPolicy"
           ]
+        },
+        "windowAnchor": {
+          "const": "EVENT_COMMIT"
+        },
+        "occurrenceOrder": {
+          "const": "COMMIT_STEP_EMISSION_SEQUENCE"
         }
       }
     },
@@ -3884,7 +3924,9 @@
         "retry",
         "idempotency",
         "timeoutSeconds",
-        "inputBindings"
+        "inputBindings",
+        "missedOccurrences",
+        "catchUp"
       ],
       "properties": {
         "useCase": {
@@ -3918,6 +3960,41 @@
         },
         "inputBindings": {
           "$ref": "#/$defs/bindings"
+        },
+        "missedOccurrences": {
+          "enum": [
+            "SKIP",
+            "RUN_LATEST",
+            "CATCH_UP"
+          ]
+        },
+        "catchUp": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "maxOccurrences",
+                "overflow"
+              ],
+              "properties": {
+                "maxOccurrences": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10000
+                },
+                "overflow": {
+                  "enum": [
+                    "REJECT",
+                    "DROP_OLDEST"
+                  ]
+                }
+              }
+            }
+          ]
         }
       }
     },
@@ -5113,7 +5190,9 @@
         "writeFields",
         "assignments",
         "outputBindings",
-        "eventBindings"
+        "eventBindings",
+        "emissionOrder",
+        "invocationOrder"
       ],
       "properties": {
         "resource": {
@@ -5218,6 +5297,12 @@
         },
         "eventBindings": {
           "$ref": "#/$defs/emissions"
+        },
+        "emissionOrder": {
+          "const": "DECLARED_BINDING_SEQUENCE"
+        },
+        "invocationOrder": {
+          "const": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       }
     },

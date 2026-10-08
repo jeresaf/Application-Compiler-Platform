@@ -39,7 +39,18 @@ def validate_deterministic(document, mode='draft'):
         return t
     for n in document['nodes']:
         k,d=n['kind'],n['data']
-        if k=='Query':
+        if k=='Job':
+            if (d['missedOccurrences']=='CATCH_UP') != (d['catchUp'] is not None):
+                emit('JOB_CATCH_UP',n,'Only CATCH_UP requires a bounded maximum and explicit overflow; other modes require null.')
+        elif k=='DeliveryPolicy' and 'deduplication' in d:
+            idem=target(d['deduplication'],'IdempotencyPolicy',n)
+            if idem and idem['data']['windowSeconds'] < d['windowSeconds']:
+                emit('DELIVERY_DEDUP',n,'Deduplication retention must cover the entire event delivery window.')
+        elif k=='Command':
+            events=[b['event']['id'] for b in d['eventBindings']]
+            if len(events)!=len(set(events)):
+                emit('EMISSION_AMBIGUITY',n,'One binding per event semantic identity; IDs detect ambiguity and never sort emissions.')
+        elif k=='Query':
             resource=by[d['resource']['id']]; seen=[]
             for order in d['orderBy']:
                 f=target(order['field'],'Field',n)

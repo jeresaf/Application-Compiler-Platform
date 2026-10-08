@@ -1,0 +1,10 @@
+{
+  "id": 37731743956,
+  "head_sha": "0a5775d8b2a484b2e1f7290a2be78283c6eaed90",
+  "path": ".github/workflows/acp-contracts.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/37731743956",
+  "scope": "Existing published main checkpoint; not CI evidence for uncommitted proposal extension",
+  "authority": "Engineering CI evidence only; no semantic approval"
+}

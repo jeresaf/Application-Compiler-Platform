@@ -19,7 +19,7 @@ def data(value,index,kind,path=()):
     if isinstance(value,list):
         items=[data(v,index,kind,path+(i,)) for i,v in enumerate(value)]
         key=(kind,path[0]) if len(path)==1 else None
-        if key in ORDERED_REFS|ORDERED_ARRAYS or path in {('assignments',),('orderBy',)}: return items
+        if key in ORDERED_REFS|ORDERED_ARRAYS or path in {('assignments',),('orderBy',),('eventBindings',)}: return items
         if key in SET_ARRAYS|MAP_ARRAYS or (path and path[-1] in {'inputBindings','outputBindings','compensationBindings','eventBindings','payload','writeFields','anonymizationEffects'}) or all(isinstance(v,dict) and set(v)=={'id','revision'} for v in value): return ordered(items)
         raise CanonicalError('NORMAL','Array has no proposed deterministic ordering policy.')
     return copy.deepcopy(value)

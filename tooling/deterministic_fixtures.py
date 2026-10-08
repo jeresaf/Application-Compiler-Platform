@@ -10,7 +10,7 @@ from canonical_json import load, digest, PROFILE
 from canonical_fixtures import byte_vectors
 from changes import prepare, index
 from change_fixtures import change, revise
-from deterministic_contract import RATE
+from deterministic_contract import RATE, INVOCATION
 from validate import ROOT
 
 DEST=ROOT/'test-corpus/deterministic-v04'
@@ -27,13 +27,20 @@ def proposal(domain):
     decision={'id':'DEC-DETERMINISTIC-V04','revision':1,'kind':'Decision','name':'Proposed deterministic execution reference semantics',
         'lifecycle':'APPROVED','steward':'fixture:authors','origins':[{'source':'fixture:deterministic-v04-proposal','locator':domain,
         'actor':'assistant:proposal-author','actorType':'AI'}], 'basis':[r(requirement['id'])],
-        'data':{'statement':'PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants and deterministic token-bucket admission.',
+        'data':{'statement':'PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release and observability redaction.',
         'strength':'REQUIRED','rationale':'HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.',
         'alternatives':['Retain approved 0.3/0.2 meaning and reject incomplete target capabilities']}}
     ops=[{'op':'ADD','node':decision}]
     for n in by.values():
         d=copy.deepcopy(n['data']); changed=True
-        if n['kind']=='Query': d['orderBy']=[{'field':r(identity),'direction':'ASC'}]
+        if n['kind']=='Query': d.update(orderBy=[{'field':r(identity),'direction':'ASC'}],invocationOrder=INVOCATION)
+        elif n['kind']=='Command': d.update(emissionOrder='DECLARED_BINDING_SEQUENCE',invocationOrder=INVOCATION)
+        elif n['kind']=='UseCase': d['invocationOrder']=INVOCATION
+        elif n['kind']=='IdempotencyPolicy': d.update(windowAnchor='COMMITTED_RESULT',inFlight='RETURN_IN_PROGRESS')
+        elif n['kind']=='DeliveryPolicy': d.update(windowAnchor='EVENT_COMMIT',occurrenceOrder='COMMIT_STEP_EMISSION_SEQUENCE')
+        elif n['kind']=='Job': d.update(missedOccurrences='SKIP',catchUp=None)
+        elif n['kind']=='LegalHold': d['releaseMode']='CURRENT_LIFECYCLE_ACTION'
+        elif n['kind']=='DataClassification': d['redactionScope']='NON_DOMAIN_OBSERVABILITY'
         elif n['kind']=='DataLifecycle': d['anchor']={'kind':'CLOSED_COMMIT','machine':r(machine),'states':[r(closed)],'instant':'COMMITTED_ENTRY','terminal':True}
         elif n['kind']=='DeletionPolicy':
             d['anonymizationEffects']=([{'field':r('FLD-AMOUNT'),'action':'REPLACE','replacement':{'type':copy.deepcopy(by['FLD-AMOUNT']['data']['type']),'value':'1.00'}}] if payment else

@@ -1,0 +1,418 @@
+{
+  "payment": {
+    "sourceDigest": "sha256:43955a083fe3a919f58e81a26af998c2082879e90083a2edbb6bc20dd348d022",
+    "targetModelVersion": "0.4.0",
+    "status": "REVIEW_REQUIRED",
+    "blockers": [
+      {
+        "subject": {
+          "id": "CLASS-INTERNAL",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "redactionScope"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CLASS-PUBLIC",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "redactionScope"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CLASS-SECRET",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "redactionScope"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CLASS-SENSITIVE",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "redactionScope"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CMD-RECORD",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "emissionOrder",
+          "invocationOrder"
+        ]
+      },
+      {
+        "subject": {
+          "id": "DELETE-ENT-PAYMENT",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "anonymizationEffects"
+        ]
+      },
+      {
+        "subject": {
+          "id": "DELIVERY-EVT-RECORDED",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "occurrenceOrder",
+          "windowAnchor"
+        ]
+      },
+      {
+        "subject": {
+          "id": "HOLD-ENT-PAYMENT",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "releaseMode"
+        ]
+      },
+      {
+        "subject": {
+          "id": "IDEM-OPERATION",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "inFlight",
+          "windowAnchor"
+        ]
+      },
+      {
+        "subject": {
+          "id": "JOB-TASK",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "catchUp",
+          "missedOccurrences"
+        ]
+      },
+      {
+        "subject": {
+          "id": "LIFECYCLE-ENT-PAYMENT",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "anchor"
+        ]
+      },
+      {
+        "subject": {
+          "id": "QUERY-TASKS",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "invocationOrder",
+          "orderBy"
+        ]
+      },
+      {
+        "subject": {
+          "id": "RATE-CMD-RECORD",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "algorithm"
+        ]
+      },
+      {
+        "subject": {
+          "id": "RATE-QUERY-TASKS",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "algorithm"
+        ]
+      },
+      {
+        "subject": {
+          "id": "RETRY-TASK",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "attemptCounting",
+          "delayBasis",
+          "jitter"
+        ]
+      },
+      {
+        "subject": {
+          "id": "UC-TASK",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "invocationOrder"
+        ]
+      }
+    ],
+    "candidate": null,
+    "requiresFreshExactContentApproval": true
+  },
+  "case-management": {
+    "sourceDigest": "sha256:943f3921587b5f6d4287ee3f6ecaad2eb0ac7476a4a617e75a7a858f1df30445",
+    "targetModelVersion": "0.4.0",
+    "status": "REVIEW_REQUIRED",
+    "blockers": [
+      {
+        "subject": {
+          "id": "CLASS-INTERNAL",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "redactionScope"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CLASS-PUBLIC",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "redactionScope"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CLASS-SECRET",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "redactionScope"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CLASS-SENSITIVE",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "redactionScope"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CMD-APPROVE",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "emissionOrder",
+          "invocationOrder"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CMD-ARCHIVE",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "emissionOrder",
+          "invocationOrder"
+        ]
+      },
+      {
+        "subject": {
+          "id": "CMD-REVIEW",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "emissionOrder",
+          "invocationOrder"
+        ]
+      },
+      {
+        "subject": {
+          "id": "DELETE-CASE",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "anonymizationEffects"
+        ]
+      },
+      {
+        "subject": {
+          "id": "DELIVERY-EVT-APPROVE",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "occurrenceOrder",
+          "windowAnchor"
+        ]
+      },
+      {
+        "subject": {
+          "id": "DELIVERY-EVT-ARCHIVE",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "occurrenceOrder",
+          "windowAnchor"
+        ]
+      },
+      {
+        "subject": {
+          "id": "DELIVERY-EVT-REVIEW",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "occurrenceOrder",
+          "windowAnchor"
+        ]
+      },
+      {
+        "subject": {
+          "id": "HOLD-CASE",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "releaseMode"
+        ]
+      },
+      {
+        "subject": {
+          "id": "IDEM-OPERATION",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "inFlight",
+          "windowAnchor"
+        ]
+      },
+      {
+        "subject": {
+          "id": "JOB-TASK",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "catchUp",
+          "missedOccurrences"
+        ]
+      },
+      {
+        "subject": {
+          "id": "LIFECYCLE-CASE",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "anchor"
+        ]
+      },
+      {
+        "subject": {
+          "id": "QUERY-TASKS",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "invocationOrder",
+          "orderBy"
+        ]
+      },
+      {
+        "subject": {
+          "id": "RATE-CMD-APPROVE",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "algorithm"
+        ]
+      },
+      {
+        "subject": {
+          "id": "RATE-CMD-ARCHIVE",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "algorithm"
+        ]
+      },
+      {
+        "subject": {
+          "id": "RATE-CMD-REVIEW",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "algorithm"
+        ]
+      },
+      {
+        "subject": {
+          "id": "RATE-QUERY-TASKS",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "algorithm"
+        ]
+      },
+      {
+        "subject": {
+          "id": "RETRY-TASK",
+          "revision": 1
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "attemptCounting",
+          "delayBasis",
+          "jitter"
+        ]
+      },
+      {
+        "subject": {
+          "id": "UC-TASK",
+          "revision": 2
+        },
+        "status": "REVIEW_REQUIRED",
+        "missing": [
+          "invocationOrder"
+        ]
+      }
+    ],
+    "candidate": null,
+    "requiresFreshExactContentApproval": true
+  }
+}

@@ -107,7 +107,7 @@
       },
       {
         "id": "ACT-REVIEWER",
-        "revision": 1,
+        "revision": 2,
         "kind": "Actor",
         "name": "ACT-REVIEWER",
         "lifecycle": "APPROVED",
@@ -129,11 +129,11 @@
         "data": {
           "subject": {
             "id": "USER",
-            "revision": 1
+            "revision": 2
           },
           "authentication": {
             "id": "AUTH-ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -166,15 +166,15 @@
           "permissions": [
             {
               "id": "PERM-CMD-APPROVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "PERM-CMD-ARCHIVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "PERM-CMD-REVIEW",
-              "revision": 2
+              "revision": 3
             }
           ],
           "label": "Complete task",
@@ -183,7 +183,7 @@
       },
       {
         "id": "AGG-CASE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Aggregate",
         "name": "AGG-CASE",
         "lifecycle": "APPROVED",
@@ -205,32 +205,32 @@
         "data": {
           "root": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "members": [
             {
               "id": "APPROVAL",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "ASSIGNMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "COMMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "DOCUMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "REVIEW",
-              "revision": 1
+              "revision": 2
             }
           ],
           "invariants": [],
@@ -239,7 +239,7 @@
       },
       {
         "id": "AGG-ORG",
-        "revision": 1,
+        "revision": 2,
         "kind": "Aggregate",
         "name": "AGG-ORG",
         "lifecycle": "APPROVED",
@@ -261,12 +261,12 @@
         "data": {
           "root": {
             "id": "ORG",
-            "revision": 1
+            "revision": 2
           },
           "members": [
             {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           ],
           "invariants": [],
@@ -275,7 +275,7 @@
       },
       {
         "id": "AGG-USER",
-        "revision": 1,
+        "revision": 2,
         "kind": "Aggregate",
         "name": "AGG-USER",
         "lifecycle": "APPROVED",
@@ -297,12 +297,12 @@
         "data": {
           "root": {
             "id": "USER",
-            "revision": 1
+            "revision": 2
           },
           "members": [
             {
               "id": "USER",
-              "revision": 1
+              "revision": 2
             }
           ],
           "invariants": [],
@@ -347,7 +347,7 @@
       },
       {
         "id": "APPROVAL",
-        "revision": 1,
+        "revision": 2,
         "kind": "Entity",
         "name": "APPROVAL",
         "lifecycle": "APPROVED",
@@ -370,19 +370,19 @@
           "identity": [
             {
               "id": "APPROVAL-ID",
-              "revision": 1
+              "revision": 2
             }
           ],
           "tenantField": {
             "id": "APPROVAL-TENANT",
-            "revision": 1
+            "revision": 2
           },
           "tenancy": "SCOPED"
         }
       },
       {
         "id": "APPROVAL-ID",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "APPROVAL-ID",
         "lifecycle": "APPROVED",
@@ -404,26 +404,26 @@
         "data": {
           "owner": {
             "id": "APPROVAL",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "APPROVAL",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "APPROVAL-TENANT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "APPROVAL-TENANT",
         "lifecycle": "APPROVED",
@@ -445,26 +445,26 @@
         "data": {
           "owner": {
             "id": "APPROVAL",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "APPROVAL-reason",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "APPROVAL-reason",
         "lifecycle": "APPROVED",
@@ -486,7 +486,7 @@
         "data": {
           "owner": {
             "id": "APPROVAL",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "String"
@@ -495,7 +495,7 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -527,18 +527,18 @@
           },
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "scope": {
             "id": "SCOPE-CASE",
-            "revision": 1
+            "revision": 2
           },
           "principal": "fixture:operator"
         }
       },
       {
         "id": "ASSIGNMENT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Entity",
         "name": "ASSIGNMENT",
         "lifecycle": "APPROVED",
@@ -561,19 +561,19 @@
           "identity": [
             {
               "id": "ASSIGNMENT-ID",
-              "revision": 1
+              "revision": 2
             }
           ],
           "tenantField": {
             "id": "ASSIGNMENT-TENANT",
-            "revision": 1
+            "revision": 2
           },
           "tenancy": "SCOPED"
         }
       },
       {
         "id": "ASSIGNMENT-ID",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "ASSIGNMENT-ID",
         "lifecycle": "APPROVED",
@@ -595,26 +595,26 @@
         "data": {
           "owner": {
             "id": "ASSIGNMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ASSIGNMENT",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "ASSIGNMENT-TENANT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "ASSIGNMENT-TENANT",
         "lifecycle": "APPROVED",
@@ -636,26 +636,26 @@
         "data": {
           "owner": {
             "id": "ASSIGNMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "ASSIGNMENT-task",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "ASSIGNMENT-task",
         "lifecycle": "APPROVED",
@@ -677,7 +677,7 @@
         "data": {
           "owner": {
             "id": "ASSIGNMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "String"
@@ -686,13 +686,13 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "AUTH-ACT-REVIEWER",
-        "revision": 1,
+        "revision": 2,
         "kind": "AuthenticationModel",
         "name": "AUTH-ACT-REVIEWER",
         "lifecycle": "APPROVED",
@@ -714,7 +714,7 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "assurance": "MULTI_FACTOR",
           "mechanisms": [
@@ -725,7 +725,7 @@
       },
       {
         "id": "BACKUP-TASK",
-        "revision": 1,
+        "revision": 2,
         "kind": "Backup",
         "name": "BACKUP-TASK",
         "lifecycle": "APPROVED",
@@ -748,7 +748,7 @@
           "resources": [
             {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "intervalSeconds": 3600,
@@ -756,7 +756,7 @@
           "encrypted": true,
           "evidence": {
             "id": "EVID-BACKUP",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -784,20 +784,20 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "permissions": [
             {
               "id": "PERM-CMD-APPROVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "PERM-CMD-ARCHIVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "PERM-CMD-REVIEW",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "PERM-QUERY-TASKS",
@@ -812,7 +812,7 @@
       },
       {
         "id": "CASE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Entity",
         "name": "CASE",
         "lifecycle": "APPROVED",
@@ -835,19 +835,19 @@
           "identity": [
             {
               "id": "CASE-ID",
-              "revision": 1
+              "revision": 2
             }
           ],
           "tenantField": {
             "id": "CASE-TENANT",
-            "revision": 1
+            "revision": 2
           },
           "tenancy": "SCOPED"
         }
       },
       {
         "id": "CASE-ASSIGNEE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "CASE-ASSIGNEE",
         "lifecycle": "APPROVED",
@@ -869,26 +869,26 @@
         "data": {
           "owner": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "USER",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "CASE-ID",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "CASE-ID",
         "lifecycle": "APPROVED",
@@ -910,26 +910,26 @@
         "data": {
           "owner": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "CASE-TENANT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "CASE-TENANT",
         "lifecycle": "APPROVED",
@@ -951,31 +951,37 @@
         "data": {
           "owner": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "CLASS-INTERNAL",
-        "revision": 1,
+        "revision": 2,
         "kind": "DataClassification",
         "name": "CLASS-INTERNAL",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-INTERNAL",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "CLASS-INTERNAL",
@@ -984,6 +990,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "REQ-CASE",
             "revision": 1
@@ -995,17 +1005,24 @@
           "encryptAtRest": true,
           "encryptInTransit": true,
           "export": "DENY",
-          "redaction": "NONE"
+          "redaction": "NONE",
+          "redactionScope": "NON_DOMAIN_OBSERVABILITY"
         }
       },
       {
         "id": "CLASS-PUBLIC",
-        "revision": 1,
+        "revision": 2,
         "kind": "DataClassification",
         "name": "CLASS-PUBLIC",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-PUBLIC",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "CLASS-PUBLIC",
@@ -1014,6 +1031,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "REQ-CASE",
             "revision": 1
@@ -1025,17 +1046,24 @@
           "encryptAtRest": true,
           "encryptInTransit": true,
           "export": "DENY",
-          "redaction": "NONE"
+          "redaction": "NONE",
+          "redactionScope": "NON_DOMAIN_OBSERVABILITY"
         }
       },
       {
         "id": "CLASS-SECRET",
-        "revision": 1,
+        "revision": 2,
         "kind": "DataClassification",
         "name": "CLASS-SECRET",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-SECRET",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "CLASS-SECRET",
@@ -1044,6 +1072,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "REQ-CASE",
             "revision": 1
@@ -1055,17 +1087,24 @@
           "encryptAtRest": true,
           "encryptInTransit": true,
           "export": "DENY",
-          "redaction": "OMIT"
+          "redaction": "OMIT",
+          "redactionScope": "NON_DOMAIN_OBSERVABILITY"
         }
       },
       {
         "id": "CLASS-SENSITIVE",
-        "revision": 1,
+        "revision": 2,
         "kind": "DataClassification",
         "name": "CLASS-SENSITIVE",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-SENSITIVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "CLASS-SENSITIVE",
@@ -1074,6 +1113,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "REQ-CASE",
             "revision": 1
@@ -1085,12 +1128,13 @@
           "encryptAtRest": true,
           "encryptInTransit": true,
           "export": "DENY",
-          "redaction": "MASK"
+          "redaction": "MASK",
+          "redactionScope": "NON_DOMAIN_OBSERVABILITY"
         }
       },
       {
         "id": "CMD-APPROVE",
-        "revision": 2,
+        "revision": 3,
         "kind": "Command",
         "name": "CMD-APPROVE",
         "lifecycle": "APPROVED",
@@ -1103,6 +1147,12 @@
             "actorType": "AI"
           },
           {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CMD-APPROVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
             "source": "fixture:synthetic",
             "locator": "CMD-APPROVE",
             "actor": "fixture:author",
@@ -1110,6 +1160,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "DEC-EXECUTION-V03",
             "revision": 1
@@ -1122,43 +1176,43 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "invariants": [],
           "emits": [
             {
               "id": "EVT-APPROVE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "aggregate": {
             "id": "AGG-CASE",
-            "revision": 1
+            "revision": 2
           },
           "writes": [
             {
               "id": "APPROVAL",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "ASSIGNMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "COMMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "DOCUMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "REVIEW",
-              "revision": 1
+              "revision": 2
             }
           ],
           "failures": [
@@ -1173,7 +1227,7 @@
           ],
           "idempotency": {
             "id": "IDEM-OPERATION",
-            "revision": 1
+            "revision": 2
           },
           "input": {
             "id": "OPERATION-INPUT",
@@ -1186,25 +1240,25 @@
           "writeFields": [
             {
               "id": "FLD-TASK-SUMMARY",
-              "revision": 1
+              "revision": 2
             }
           ],
           "assignments": [
             {
               "resource": {
                 "id": "CASE",
-                "revision": 1
+                "revision": 2
               },
               "field": {
                 "id": "FLD-TASK-SUMMARY",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "input",
                 "scope": "OPERATION",
                 "field": {
                   "id": "OPERATION-TEXT",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -1213,13 +1267,13 @@
             {
               "field": {
                 "id": "RESULT-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "postField",
                 "field": {
                   "id": "FLD-TASK-SUMMARY",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -1228,30 +1282,32 @@
             {
               "event": {
                 "id": "EVT-APPROVE",
-                "revision": 1
+                "revision": 2
               },
               "payload": [
                 {
                   "field": {
                     "id": "FLD-CASE-TITLE",
-                    "revision": 1
+                    "revision": 2
                   },
                   "value": {
                     "tag": "postField",
                     "field": {
                       "id": "FLD-CASE-TITLE",
-                      "revision": 1
+                      "revision": 2
                     }
                   }
                 }
               ]
             }
-          ]
+          ],
+          "emissionOrder": "DECLARED_BINDING_SEQUENCE",
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       },
       {
         "id": "CMD-ARCHIVE",
-        "revision": 2,
+        "revision": 3,
         "kind": "Command",
         "name": "CMD-ARCHIVE",
         "lifecycle": "APPROVED",
@@ -1264,6 +1320,12 @@
             "actorType": "AI"
           },
           {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CMD-ARCHIVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
             "source": "fixture:synthetic",
             "locator": "CMD-ARCHIVE",
             "actor": "fixture:author",
@@ -1271,6 +1333,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "DEC-EXECUTION-V03",
             "revision": 1
@@ -1283,43 +1349,43 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "invariants": [],
           "emits": [
             {
               "id": "EVT-ARCHIVE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "aggregate": {
             "id": "AGG-CASE",
-            "revision": 1
+            "revision": 2
           },
           "writes": [
             {
               "id": "APPROVAL",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "ASSIGNMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "COMMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "DOCUMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "REVIEW",
-              "revision": 1
+              "revision": 2
             }
           ],
           "failures": [
@@ -1334,7 +1400,7 @@
           ],
           "idempotency": {
             "id": "IDEM-OPERATION",
-            "revision": 1
+            "revision": 2
           },
           "input": {
             "id": "OPERATION-INPUT",
@@ -1347,25 +1413,25 @@
           "writeFields": [
             {
               "id": "FLD-TASK-SUMMARY",
-              "revision": 1
+              "revision": 2
             }
           ],
           "assignments": [
             {
               "resource": {
                 "id": "CASE",
-                "revision": 1
+                "revision": 2
               },
               "field": {
                 "id": "FLD-TASK-SUMMARY",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "input",
                 "scope": "OPERATION",
                 "field": {
                   "id": "OPERATION-TEXT",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -1374,13 +1440,13 @@
             {
               "field": {
                 "id": "RESULT-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "postField",
                 "field": {
                   "id": "FLD-TASK-SUMMARY",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -1389,30 +1455,32 @@
             {
               "event": {
                 "id": "EVT-ARCHIVE",
-                "revision": 1
+                "revision": 2
               },
               "payload": [
                 {
                   "field": {
                     "id": "FLD-CASE-TITLE",
-                    "revision": 1
+                    "revision": 2
                   },
                   "value": {
                     "tag": "postField",
                     "field": {
                       "id": "FLD-CASE-TITLE",
-                      "revision": 1
+                      "revision": 2
                     }
                   }
                 }
               ]
             }
-          ]
+          ],
+          "emissionOrder": "DECLARED_BINDING_SEQUENCE",
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       },
       {
         "id": "CMD-REVIEW",
-        "revision": 2,
+        "revision": 3,
         "kind": "Command",
         "name": "CMD-REVIEW",
         "lifecycle": "APPROVED",
@@ -1425,6 +1493,12 @@
             "actorType": "AI"
           },
           {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CMD-REVIEW",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
             "source": "fixture:synthetic",
             "locator": "CMD-REVIEW",
             "actor": "fixture:author",
@@ -1432,6 +1506,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "DEC-EXECUTION-V03",
             "revision": 1
@@ -1444,43 +1522,43 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "invariants": [],
           "emits": [
             {
               "id": "EVT-REVIEW",
-              "revision": 1
+              "revision": 2
             }
           ],
           "aggregate": {
             "id": "AGG-CASE",
-            "revision": 1
+            "revision": 2
           },
           "writes": [
             {
               "id": "APPROVAL",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "ASSIGNMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "COMMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "DOCUMENT",
-              "revision": 1
+              "revision": 2
             },
             {
               "id": "REVIEW",
-              "revision": 1
+              "revision": 2
             }
           ],
           "failures": [
@@ -1495,7 +1573,7 @@
           ],
           "idempotency": {
             "id": "IDEM-OPERATION",
-            "revision": 1
+            "revision": 2
           },
           "input": {
             "id": "OPERATION-INPUT",
@@ -1508,25 +1586,25 @@
           "writeFields": [
             {
               "id": "FLD-TASK-SUMMARY",
-              "revision": 1
+              "revision": 2
             }
           ],
           "assignments": [
             {
               "resource": {
                 "id": "CASE",
-                "revision": 1
+                "revision": 2
               },
               "field": {
                 "id": "FLD-TASK-SUMMARY",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "input",
                 "scope": "OPERATION",
                 "field": {
                   "id": "OPERATION-TEXT",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -1535,13 +1613,13 @@
             {
               "field": {
                 "id": "RESULT-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "postField",
                 "field": {
                   "id": "FLD-TASK-SUMMARY",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -1550,30 +1628,32 @@
             {
               "event": {
                 "id": "EVT-REVIEW",
-                "revision": 1
+                "revision": 2
               },
               "payload": [
                 {
                   "field": {
                     "id": "FLD-CASE-TITLE",
-                    "revision": 1
+                    "revision": 2
                   },
                   "value": {
                     "tag": "postField",
                     "field": {
                       "id": "FLD-CASE-TITLE",
-                      "revision": 1
+                      "revision": 2
                     }
                   }
                 }
               ]
             }
-          ]
+          ],
+          "emissionOrder": "DECLARED_BINDING_SEQUENCE",
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       },
       {
         "id": "COMMENT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Entity",
         "name": "COMMENT",
         "lifecycle": "APPROVED",
@@ -1596,19 +1676,19 @@
           "identity": [
             {
               "id": "COMMENT-ID",
-              "revision": 1
+              "revision": 2
             }
           ],
           "tenantField": {
             "id": "COMMENT-TENANT",
-            "revision": 1
+            "revision": 2
           },
           "tenancy": "SCOPED"
         }
       },
       {
         "id": "COMMENT-ID",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "COMMENT-ID",
         "lifecycle": "APPROVED",
@@ -1630,26 +1710,26 @@
         "data": {
           "owner": {
             "id": "COMMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "COMMENT",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "COMMENT-TENANT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "COMMENT-TENANT",
         "lifecycle": "APPROVED",
@@ -1671,26 +1751,26 @@
         "data": {
           "owner": {
             "id": "COMMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "COMMENT-body",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "COMMENT-body",
         "lifecycle": "APPROVED",
@@ -1712,7 +1792,7 @@
         "data": {
           "owner": {
             "id": "COMMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "String"
@@ -1721,7 +1801,7 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -1796,7 +1876,7 @@
           },
           "field": {
             "id": "INPUT-TASK-RESOURCE",
-            "revision": 1
+            "revision": 2
           },
           "label": "Resource identity",
           "errorMessage": "Select the authorized resource identity.",
@@ -1832,7 +1912,7 @@
           },
           "field": {
             "id": "INPUT-TASK-TEXT",
-            "revision": 1
+            "revision": 2
           },
           "label": "Task note",
           "errorMessage": "Enter a task note.",
@@ -1892,7 +1972,7 @@
           }
         ],
         "data": {
-          "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants and deterministic token-bucket admission.",
+          "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release and observability redaction.",
           "strength": "REQUIRED",
           "rationale": "HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.",
           "alternatives": [
@@ -1964,7 +2044,7 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "trigger": "CLOSED",
           "mode": "ANONYMIZE",
@@ -1972,7 +2052,7 @@
           "fields": [
             {
               "id": "FLD-NOTE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "holdBehavior": "BLOCK",
@@ -1980,7 +2060,7 @@
             {
               "field": {
                 "id": "FLD-NOTE",
-                "revision": 1
+                "revision": 2
               },
               "action": "REMOVE"
             }
@@ -1989,12 +2069,18 @@
       },
       {
         "id": "DELIVERY-EVT-APPROVE",
-        "revision": 1,
+        "revision": 2,
         "kind": "DeliveryPolicy",
         "name": "DELIVERY-EVT-APPROVE",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELIVERY-EVT-APPROVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "DELIVERY-EVT-APPROVE",
@@ -2004,6 +2090,10 @@
         ],
         "basis": [
           {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
             "id": "REQ-CASE",
             "revision": 1
           }
@@ -2011,25 +2101,33 @@
         "data": {
           "event": {
             "id": "EVT-APPROVE",
-            "revision": 1
+            "revision": 2
           },
           "guarantee": "AT_LEAST_ONCE",
           "ordering": "PER_AGGREGATE",
           "windowSeconds": 3600,
           "deduplication": {
             "id": "IDEM-OPERATION",
-            "revision": 1
-          }
+            "revision": 2
+          },
+          "windowAnchor": "EVENT_COMMIT",
+          "occurrenceOrder": "COMMIT_STEP_EMISSION_SEQUENCE"
         }
       },
       {
         "id": "DELIVERY-EVT-ARCHIVE",
-        "revision": 1,
+        "revision": 2,
         "kind": "DeliveryPolicy",
         "name": "DELIVERY-EVT-ARCHIVE",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELIVERY-EVT-ARCHIVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "DELIVERY-EVT-ARCHIVE",
@@ -2039,6 +2137,10 @@
         ],
         "basis": [
           {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
             "id": "REQ-CASE",
             "revision": 1
           }
@@ -2046,25 +2148,33 @@
         "data": {
           "event": {
             "id": "EVT-ARCHIVE",
-            "revision": 1
+            "revision": 2
           },
           "guarantee": "AT_LEAST_ONCE",
           "ordering": "PER_AGGREGATE",
           "windowSeconds": 3600,
           "deduplication": {
             "id": "IDEM-OPERATION",
-            "revision": 1
-          }
+            "revision": 2
+          },
+          "windowAnchor": "EVENT_COMMIT",
+          "occurrenceOrder": "COMMIT_STEP_EMISSION_SEQUENCE"
         }
       },
       {
         "id": "DELIVERY-EVT-REVIEW",
-        "revision": 1,
+        "revision": 2,
         "kind": "DeliveryPolicy",
         "name": "DELIVERY-EVT-REVIEW",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELIVERY-EVT-REVIEW",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "DELIVERY-EVT-REVIEW",
@@ -2074,6 +2184,10 @@
         ],
         "basis": [
           {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
             "id": "REQ-CASE",
             "revision": 1
           }
@@ -2081,20 +2195,22 @@
         "data": {
           "event": {
             "id": "EVT-REVIEW",
-            "revision": 1
+            "revision": 2
           },
           "guarantee": "AT_LEAST_ONCE",
           "ordering": "PER_AGGREGATE",
           "windowSeconds": 3600,
           "deduplication": {
             "id": "IDEM-OPERATION",
-            "revision": 1
-          }
+            "revision": 2
+          },
+          "windowAnchor": "EVENT_COMMIT",
+          "occurrenceOrder": "COMMIT_STEP_EMISSION_SEQUENCE"
         }
       },
       {
         "id": "DOCUMENT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Entity",
         "name": "DOCUMENT",
         "lifecycle": "APPROVED",
@@ -2117,19 +2233,19 @@
           "identity": [
             {
               "id": "DOCUMENT-ID",
-              "revision": 1
+              "revision": 2
             }
           ],
           "tenantField": {
             "id": "DOCUMENT-TENANT",
-            "revision": 1
+            "revision": 2
           },
           "tenancy": "SCOPED"
         }
       },
       {
         "id": "DOCUMENT-ID",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "DOCUMENT-ID",
         "lifecycle": "APPROVED",
@@ -2151,26 +2267,26 @@
         "data": {
           "owner": {
             "id": "DOCUMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "DOCUMENT",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "DOCUMENT-TENANT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "DOCUMENT-TENANT",
         "lifecycle": "APPROVED",
@@ -2192,26 +2308,26 @@
         "data": {
           "owner": {
             "id": "DOCUMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "DOCUMENT-title",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "DOCUMENT-title",
         "lifecycle": "APPROVED",
@@ -2233,7 +2349,7 @@
         "data": {
           "owner": {
             "id": "DOCUMENT",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "String"
@@ -2242,7 +2358,7 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -2313,7 +2429,7 @@
       },
       {
         "id": "EVID-BACKUP",
-        "revision": 1,
+        "revision": 2,
         "kind": "EvidenceRequirement",
         "name": "EVID-BACKUP",
         "lifecycle": "APPROVED",
@@ -2336,7 +2452,7 @@
           "subjects": [
             {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "methods": [
@@ -2469,7 +2585,7 @@
       },
       {
         "id": "EVID-RECOVERY",
-        "revision": 1,
+        "revision": 2,
         "kind": "EvidenceRequirement",
         "name": "EVID-RECOVERY",
         "lifecycle": "APPROVED",
@@ -2492,7 +2608,7 @@
           "subjects": [
             {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "methods": [
@@ -2583,7 +2699,7 @@
       },
       {
         "id": "EVT-APPROVE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Event",
         "name": "EVT-APPROVE",
         "lifecycle": "APPROVED",
@@ -2605,23 +2721,23 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "payload": [
             {
               "id": "FLD-CASE-TITLE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "delivery": {
             "id": "DELIVERY-EVT-APPROVE",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "EVT-ARCHIVE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Event",
         "name": "EVT-ARCHIVE",
         "lifecycle": "APPROVED",
@@ -2643,23 +2759,23 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "payload": [
             {
               "id": "FLD-CASE-TITLE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "delivery": {
             "id": "DELIVERY-EVT-ARCHIVE",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "EVT-REVIEW",
-        "revision": 1,
+        "revision": 2,
         "kind": "Event",
         "name": "EVT-REVIEW",
         "lifecycle": "APPROVED",
@@ -2681,17 +2797,17 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "payload": [
             {
               "id": "FLD-CASE-TITLE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "delivery": {
             "id": "DELIVERY-EVT-REVIEW",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -2787,7 +2903,7 @@
           },
           "field": {
             "id": "OUTPUT-TASK-TEXT",
-            "revision": 1
+            "revision": 2
           },
           "operator": "CONTAINS",
           "inputType": {
@@ -2795,13 +2911,13 @@
           },
           "inputField": {
             "id": "QUERY-TEXT",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "FLD-CASE-TITLE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "FLD-CASE-TITLE",
         "lifecycle": "APPROVED",
@@ -2823,7 +2939,7 @@
         "data": {
           "owner": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Value",
@@ -2836,13 +2952,13 @@
           "classification": "PUBLIC",
           "classificationRef": {
             "id": "CLASS-PUBLIC",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "FLD-NOTE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "FLD-NOTE",
         "lifecycle": "APPROVED",
@@ -2864,7 +2980,7 @@
         "data": {
           "owner": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Nullable",
@@ -2876,13 +2992,13 @@
           "classification": "SENSITIVE",
           "classificationRef": {
             "id": "CLASS-SENSITIVE",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "FLD-TASK-SUMMARY",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "FLD-TASK-SUMMARY",
         "lifecycle": "APPROVED",
@@ -2904,7 +3020,7 @@
         "data": {
           "owner": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "String"
@@ -2913,13 +3029,13 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "FLD-TITLE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "FLD-TITLE",
         "lifecycle": "APPROVED",
@@ -2950,7 +3066,7 @@
           "classification": "PUBLIC",
           "classificationRef": {
             "id": "CLASS-PUBLIC",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -3008,12 +3124,18 @@
       },
       {
         "id": "HOLD-CASE",
-        "revision": 2,
+        "revision": 3,
         "kind": "LegalHold",
         "name": "HOLD-CASE",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "HOLD-CASE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "HOLD-CASE",
@@ -3023,6 +3145,10 @@
         ],
         "basis": [
           {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
             "id": "REQ-CASE",
             "revision": 1
           }
@@ -3030,7 +3156,7 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "condition": {
             "tag": "literal",
@@ -3041,18 +3167,25 @@
           },
           "release": {
             "id": "PERM-CMD-REVIEW",
-            "revision": 2
-          }
+            "revision": 3
+          },
+          "releaseMode": "CURRENT_LIFECYCLE_ACTION"
         }
       },
       {
         "id": "IDEM-OPERATION",
-        "revision": 1,
+        "revision": 2,
         "kind": "IdempotencyPolicy",
         "name": "IDEM-OPERATION",
         "lifecycle": "APPROVED",
         "steward": "fixture:authors",
         "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "IDEM-OPERATION",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
           {
             "source": "fixture:synthetic",
             "locator": "IDEM-OPERATION",
@@ -3062,6 +3195,10 @@
         ],
         "basis": [
           {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
             "id": "REQ-CASE",
             "revision": 1
           }
@@ -3069,14 +3206,16 @@
         "data": {
           "scope": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "keyType": {
             "kind": "String"
           },
           "windowSeconds": 86400,
           "replay": "RETURN_RESULT",
-          "conflict": "REJECT_DIFFERENT_INPUT"
+          "conflict": "REJECT_DIFFERENT_INPUT",
+          "windowAnchor": "COMMITTED_RESULT",
+          "inFlight": "RETURN_IN_PROGRESS"
         }
       },
       {
@@ -3106,7 +3245,7 @@
       },
       {
         "id": "INPUT-TASK-RESOURCE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "INPUT-TASK-RESOURCE",
         "lifecycle": "APPROVED",
@@ -3138,20 +3277,20 @@
             "kind": "Identifier",
             "entity": {
               "id": "CASE",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "INPUT-TASK-TEXT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "INPUT-TASK-TEXT",
         "lifecycle": "APPROVED",
@@ -3182,7 +3321,7 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -3201,6 +3340,12 @@
             "actorType": "AI"
           },
           {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "JOB-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
             "source": "fixture:synthetic",
             "locator": "JOB-TASK",
             "actor": "fixture:author",
@@ -3208,6 +3353,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "DEC-EXECUTION-V03",
             "revision": 1
@@ -3232,14 +3381,14 @@
           },
           "idempotency": {
             "id": "IDEM-OPERATION",
-            "revision": 1
+            "revision": 2
           },
           "timeoutSeconds": 30,
           "inputBindings": [
             {
               "field": {
                 "id": "INPUT-TASK-RESOURCE",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "literal",
@@ -3247,7 +3396,7 @@
                   "kind": "Identifier",
                   "entity": {
                     "id": "CASE",
-                    "revision": 1
+                    "revision": 2
                   }
                 },
                 "value": "fixture-resource"
@@ -3256,7 +3405,7 @@
             {
               "field": {
                 "id": "INPUT-TASK-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "literal",
@@ -3266,7 +3415,9 @@
                 "value": "Explicit scheduled fixture text"
               }
             }
-          ]
+          ],
+          "missedOccurrences": "SKIP",
+          "catchUp": null
         }
       },
       {
@@ -3303,11 +3454,11 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "retention": {
             "id": "RETENTION-CASE",
-            "revision": 1
+            "revision": 2
           },
           "deletion": {
             "id": "DELETE-CASE",
@@ -3316,19 +3467,19 @@
           "holds": [
             {
               "id": "HOLD-CASE",
-              "revision": 2
+              "revision": 3
             }
           ],
           "anchor": {
             "kind": "CLOSED_COMMIT",
             "machine": {
               "id": "WF-CASE",
-              "revision": 1
+              "revision": 2
             },
             "states": [
               {
                 "id": "STATE-ARCHIVED",
-                "revision": 1
+                "revision": 2
               }
             ],
             "instant": "COMMITTED_ENTRY",
@@ -3444,7 +3595,7 @@
       },
       {
         "id": "OPERATION-TEXT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "OPERATION-TEXT",
         "lifecycle": "APPROVED",
@@ -3479,13 +3630,13 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "ORG",
-        "revision": 1,
+        "revision": 2,
         "kind": "Entity",
         "name": "ORG",
         "lifecycle": "APPROVED",
@@ -3508,7 +3659,7 @@
           "identity": [
             {
               "id": "ORG-ID",
-              "revision": 1
+              "revision": 2
             }
           ],
           "tenancy": "TENANT_ROOT"
@@ -3516,7 +3667,7 @@
       },
       {
         "id": "ORG-ID",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "ORG-ID",
         "lifecycle": "APPROVED",
@@ -3538,20 +3689,20 @@
         "data": {
           "owner": {
             "id": "ORG",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -3582,7 +3733,7 @@
       },
       {
         "id": "OUTPUT-TASK-TEXT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "OUTPUT-TASK-TEXT",
         "lifecycle": "APPROVED",
@@ -3613,7 +3764,7 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -3849,7 +4000,7 @@
       },
       {
         "id": "PERM-CMD-APPROVE",
-        "revision": 2,
+        "revision": 3,
         "kind": "Permission",
         "name": "PERM-CMD-APPROVE",
         "lifecycle": "APPROVED",
@@ -3871,21 +4022,21 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-APPROVE",
-            "revision": 2
+            "revision": 3
           }
         }
       },
       {
         "id": "PERM-CMD-ARCHIVE",
-        "revision": 2,
+        "revision": 3,
         "kind": "Permission",
         "name": "PERM-CMD-ARCHIVE",
         "lifecycle": "APPROVED",
@@ -3907,21 +4058,21 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-ARCHIVE",
-            "revision": 2
+            "revision": 3
           }
         }
       },
       {
         "id": "PERM-CMD-REVIEW",
-        "revision": 2,
+        "revision": 3,
         "kind": "Permission",
         "name": "PERM-CMD-REVIEW",
         "lifecycle": "APPROVED",
@@ -3943,15 +4094,15 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-REVIEW",
-            "revision": 2
+            "revision": 3
           }
         }
       },
@@ -3979,11 +4130,11 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "QUERY-TASKS",
@@ -4015,7 +4166,7 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "roles": [
             {
@@ -4025,11 +4176,11 @@
           ],
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-APPROVE",
-            "revision": 2
+            "revision": 3
           },
           "effect": "ALLOW",
           "predicate": {
@@ -4040,7 +4191,7 @@
               "binding": "resource",
               "ref": {
                 "id": "CASE-TENANT",
-                "revision": 1
+                "revision": 2
               }
             },
             "right": {
@@ -4048,17 +4199,17 @@
               "binding": "actor",
               "ref": {
                 "id": "USER-TENANT",
-                "revision": 1
+                "revision": 2
               }
             }
           },
           "permission": {
             "id": "PERM-CMD-APPROVE",
-            "revision": 2
+            "revision": 3
           },
           "scope": {
             "id": "SCOPE-CASE",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -4086,7 +4237,7 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "roles": [
             {
@@ -4096,11 +4247,11 @@
           ],
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-ARCHIVE",
-            "revision": 2
+            "revision": 3
           },
           "effect": "ALLOW",
           "predicate": {
@@ -4111,7 +4262,7 @@
               "binding": "resource",
               "ref": {
                 "id": "CASE-TENANT",
-                "revision": 1
+                "revision": 2
               }
             },
             "right": {
@@ -4119,17 +4270,17 @@
               "binding": "actor",
               "ref": {
                 "id": "USER-TENANT",
-                "revision": 1
+                "revision": 2
               }
             }
           },
           "permission": {
             "id": "PERM-CMD-ARCHIVE",
-            "revision": 2
+            "revision": 3
           },
           "scope": {
             "id": "SCOPE-CASE",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -4157,7 +4308,7 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "roles": [
             {
@@ -4167,7 +4318,7 @@
           ],
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "QUERY-TASKS",
@@ -4187,7 +4338,7 @@
           },
           "scope": {
             "id": "SCOPE-CASE",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -4215,7 +4366,7 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "roles": [
             {
@@ -4225,11 +4376,11 @@
           ],
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-REVIEW",
-            "revision": 2
+            "revision": 3
           },
           "effect": "ALLOW",
           "predicate": {
@@ -4243,7 +4394,7 @@
                 "binding": "resource",
                 "ref": {
                   "id": "CASE-TENANT",
-                  "revision": 1
+                  "revision": 2
                 }
               },
               "right": {
@@ -4251,7 +4402,7 @@
                 "binding": "actor",
                 "ref": {
                   "id": "USER-TENANT",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             },
@@ -4263,7 +4414,7 @@
                 "binding": "resource",
                 "ref": {
                   "id": "CASE-ASSIGNEE",
-                  "revision": 1
+                  "revision": 2
                 }
               },
               "right": {
@@ -4271,18 +4422,18 @@
                 "binding": "actor",
                 "ref": {
                   "id": "USER-ID",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
           },
           "permission": {
             "id": "PERM-CMD-REVIEW",
-            "revision": 2
+            "revision": 3
           },
           "scope": {
             "id": "SCOPE-CASE",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -4310,11 +4461,11 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-APPROVE",
-            "revision": 2
+            "revision": 3
           },
           "policies": [
             {
@@ -4350,11 +4501,11 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-ARCHIVE",
-            "revision": 2
+            "revision": 3
           },
           "policies": [
             {
@@ -4390,11 +4541,11 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "CMD-REVIEW",
-            "revision": 2
+            "revision": 3
           },
           "policies": [
             {
@@ -4430,7 +4581,7 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "action": {
             "id": "QUERY-TASKS",
@@ -4519,11 +4670,11 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "scope": {
             "id": "SCOPE-CASE",
-            "revision": 1
+            "revision": 2
           },
           "result": {
             "kind": "Value",
@@ -4536,14 +4687,14 @@
             {
               "field": {
                 "id": "OUTPUT-TASK-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "field",
                 "binding": "resource",
                 "ref": {
                   "id": "FLD-TASK-SUMMARY",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -4561,7 +4712,7 @@
               "binding": "resource",
               "ref": {
                 "id": "FLD-TASK-SUMMARY",
-                "revision": 1
+                "revision": 2
               }
             },
             "pattern": {
@@ -4569,7 +4720,7 @@
               "scope": "OPERATION",
               "field": {
                 "id": "QUERY-TEXT",
-                "revision": 1
+                "revision": 2
               }
             }
           },
@@ -4577,16 +4728,17 @@
             {
               "field": {
                 "id": "CASE-ID",
-                "revision": 1
+                "revision": 2
               },
               "direction": "ASC"
             }
-          ]
+          ],
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       },
       {
         "id": "QUERY-TEXT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "QUERY-TEXT",
         "lifecycle": "APPROVED",
@@ -4621,7 +4773,7 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -4659,7 +4811,7 @@
         "data": {
           "permission": {
             "id": "PERM-CMD-APPROVE",
-            "revision": 2
+            "revision": 3
           },
           "requests": 100,
           "windowSeconds": 60,
@@ -4709,7 +4861,7 @@
         "data": {
           "permission": {
             "id": "PERM-CMD-ARCHIVE",
-            "revision": 2
+            "revision": 3
           },
           "requests": 100,
           "windowSeconds": 60,
@@ -4759,7 +4911,7 @@
         "data": {
           "permission": {
             "id": "PERM-CMD-REVIEW",
-            "revision": 2
+            "revision": 3
           },
           "requests": 100,
           "windowSeconds": 60,
@@ -4827,7 +4979,7 @@
       },
       {
         "id": "RECOVERY-TASK",
-        "revision": 1,
+        "revision": 2,
         "kind": "Recovery",
         "name": "RECOVERY-TASK",
         "lifecycle": "APPROVED",
@@ -4849,20 +5001,20 @@
         "data": {
           "backup": {
             "id": "BACKUP-TASK",
-            "revision": 1
+            "revision": 2
           },
           "rpoSeconds": 3600,
           "rtoSeconds": 1800,
           "restoreTestIntervalSeconds": 86400,
           "evidence": {
             "id": "EVID-RECOVERY",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "REL-ASSIGNEE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Relation",
         "name": "REL-ASSIGNEE",
         "lifecycle": "APPROVED",
@@ -4884,11 +5036,11 @@
         "data": {
           "source": {
             "id": "USER",
-            "revision": 1
+            "revision": 2
           },
           "target": {
             "id": "ASSIGNMENT",
-            "revision": 1
+            "revision": 2
           },
           "sourceCardinality": {
             "min": 1,
@@ -4904,7 +5056,7 @@
       },
       {
         "id": "REL-CASE-APPROVAL",
-        "revision": 1,
+        "revision": 2,
         "kind": "Relation",
         "name": "REL-CASE-APPROVAL",
         "lifecycle": "APPROVED",
@@ -4926,11 +5078,11 @@
         "data": {
           "source": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "target": {
             "id": "APPROVAL",
-            "revision": 1
+            "revision": 2
           },
           "sourceCardinality": {
             "min": 1,
@@ -4946,7 +5098,7 @@
       },
       {
         "id": "REL-CASE-ASSIGNMENT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Relation",
         "name": "REL-CASE-ASSIGNMENT",
         "lifecycle": "APPROVED",
@@ -4968,11 +5120,11 @@
         "data": {
           "source": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "target": {
             "id": "ASSIGNMENT",
-            "revision": 1
+            "revision": 2
           },
           "sourceCardinality": {
             "min": 1,
@@ -4988,7 +5140,7 @@
       },
       {
         "id": "REL-CASE-COMMENT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Relation",
         "name": "REL-CASE-COMMENT",
         "lifecycle": "APPROVED",
@@ -5010,11 +5162,11 @@
         "data": {
           "source": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "target": {
             "id": "COMMENT",
-            "revision": 1
+            "revision": 2
           },
           "sourceCardinality": {
             "min": 1,
@@ -5030,7 +5182,7 @@
       },
       {
         "id": "REL-CASE-DOCUMENT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Relation",
         "name": "REL-CASE-DOCUMENT",
         "lifecycle": "APPROVED",
@@ -5052,11 +5204,11 @@
         "data": {
           "source": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "target": {
             "id": "DOCUMENT",
-            "revision": 1
+            "revision": 2
           },
           "sourceCardinality": {
             "min": 1,
@@ -5072,7 +5224,7 @@
       },
       {
         "id": "REL-CASE-REVIEW",
-        "revision": 1,
+        "revision": 2,
         "kind": "Relation",
         "name": "REL-CASE-REVIEW",
         "lifecycle": "APPROVED",
@@ -5094,11 +5246,11 @@
         "data": {
           "source": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "target": {
             "id": "REVIEW",
-            "revision": 1
+            "revision": 2
           },
           "sourceCardinality": {
             "min": 1,
@@ -5210,7 +5362,7 @@
       },
       {
         "id": "RESULT-TEXT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "RESULT-TEXT",
         "lifecycle": "APPROVED",
@@ -5245,13 +5397,13 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "RETENTION-CASE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Retention",
         "name": "RETENTION-CASE",
         "lifecycle": "APPROVED",
@@ -5273,7 +5425,7 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "trigger": "CLOSED",
           "minimumSeconds": 86400
@@ -5328,7 +5480,7 @@
       },
       {
         "id": "REVIEW",
-        "revision": 1,
+        "revision": 2,
         "kind": "Entity",
         "name": "REVIEW",
         "lifecycle": "APPROVED",
@@ -5351,19 +5503,19 @@
           "identity": [
             {
               "id": "REVIEW-ID",
-              "revision": 1
+              "revision": 2
             }
           ],
           "tenantField": {
             "id": "REVIEW-TENANT",
-            "revision": 1
+            "revision": 2
           },
           "tenancy": "SCOPED"
         }
       },
       {
         "id": "REVIEW-ID",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "REVIEW-ID",
         "lifecycle": "APPROVED",
@@ -5385,26 +5537,26 @@
         "data": {
           "owner": {
             "id": "REVIEW",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "REVIEW",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "REVIEW-TENANT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "REVIEW-TENANT",
         "lifecycle": "APPROVED",
@@ -5426,26 +5578,26 @@
         "data": {
           "owner": {
             "id": "REVIEW",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "REVIEW-outcome",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "REVIEW-outcome",
         "lifecycle": "APPROVED",
@@ -5467,7 +5619,7 @@
         "data": {
           "owner": {
             "id": "REVIEW",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "String"
@@ -5476,7 +5628,7 @@
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -5504,20 +5656,20 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "permissions": [
             {
               "id": "PERM-CMD-APPROVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "PERM-CMD-ARCHIVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "PERM-CMD-REVIEW",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "PERM-QUERY-TASKS",
@@ -5558,7 +5710,7 @@
       },
       {
         "id": "SCOPE-CASE",
-        "revision": 1,
+        "revision": 2,
         "kind": "Scope",
         "name": "SCOPE-CASE",
         "lifecycle": "APPROVED",
@@ -5580,20 +5732,20 @@
         "data": {
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "mode": "SAME_TENANT",
           "actorTenant": {
             "id": "USER-TENANT",
-            "revision": 1
+            "revision": 2
           },
           "resourceTenant": {
             "id": "CASE-TENANT",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -5735,15 +5887,15 @@
           "operations": [
             {
               "id": "CMD-APPROVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "CMD-ARCHIVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "CMD-REVIEW",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "QUERY-TASKS",
@@ -5754,7 +5906,7 @@
       },
       {
         "id": "SESSION-ACT-REVIEWER",
-        "revision": 1,
+        "revision": 2,
         "kind": "SessionPolicy",
         "name": "SESSION-ACT-REVIEWER",
         "lifecycle": "APPROVED",
@@ -5776,7 +5928,7 @@
         "data": {
           "authentication": {
             "id": "AUTH-ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "idleSeconds": 900,
           "absoluteSeconds": 28800,
@@ -5785,7 +5937,7 @@
       },
       {
         "id": "STATE-APPROVED",
-        "revision": 1,
+        "revision": 2,
         "kind": "State",
         "name": "STATE-APPROVED",
         "lifecycle": "APPROVED",
@@ -5807,14 +5959,14 @@
         "data": {
           "machine": {
             "id": "WF-CASE",
-            "revision": 1
+            "revision": 2
           },
           "terminal": false
         }
       },
       {
         "id": "STATE-ARCHIVED",
-        "revision": 1,
+        "revision": 2,
         "kind": "State",
         "name": "STATE-ARCHIVED",
         "lifecycle": "APPROVED",
@@ -5836,14 +5988,14 @@
         "data": {
           "machine": {
             "id": "WF-CASE",
-            "revision": 1
+            "revision": 2
           },
           "terminal": true
         }
       },
       {
         "id": "STATE-OPEN",
-        "revision": 1,
+        "revision": 2,
         "kind": "State",
         "name": "STATE-OPEN",
         "lifecycle": "APPROVED",
@@ -5865,14 +6017,14 @@
         "data": {
           "machine": {
             "id": "WF-CASE",
-            "revision": 1
+            "revision": 2
           },
           "terminal": false
         }
       },
       {
         "id": "STATE-REVIEWED",
-        "revision": 1,
+        "revision": 2,
         "kind": "State",
         "name": "STATE-REVIEWED",
         "lifecycle": "APPROVED",
@@ -5894,7 +6046,7 @@
         "data": {
           "machine": {
             "id": "WF-CASE",
-            "revision": 1
+            "revision": 2
           },
           "terminal": false
         }
@@ -5937,26 +6089,26 @@
           },
           "operation": {
             "id": "CMD-APPROVE",
-            "revision": 2
+            "revision": 3
           },
           "onFailure": "STOP",
           "transaction": {
             "id": "TX-TASK",
-            "revision": 2
+            "revision": 3
           },
           "resource": {
             "tag": "input",
             "scope": "USE_CASE",
             "field": {
               "id": "INPUT-TASK-RESOURCE",
-              "revision": 1
+              "revision": 2
             }
           },
           "inputBindings": [
             {
               "field": {
                 "id": "OPERATION-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "stepResult",
@@ -5966,7 +6118,7 @@
                 },
                 "field": {
                   "id": "RESULT-TEXT",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -6011,26 +6163,26 @@
           },
           "operation": {
             "id": "CMD-ARCHIVE",
-            "revision": 2
+            "revision": 3
           },
           "onFailure": "STOP",
           "transaction": {
             "id": "TX-TASK",
-            "revision": 2
+            "revision": 3
           },
           "resource": {
             "tag": "input",
             "scope": "USE_CASE",
             "field": {
               "id": "INPUT-TASK-RESOURCE",
-              "revision": 1
+              "revision": 2
             }
           },
           "inputBindings": [
             {
               "field": {
                 "id": "OPERATION-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "stepResult",
@@ -6040,7 +6192,7 @@
                 },
                 "field": {
                   "id": "RESULT-TEXT",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -6085,33 +6237,33 @@
           },
           "operation": {
             "id": "CMD-REVIEW",
-            "revision": 2
+            "revision": 3
           },
           "onFailure": "STOP",
           "transaction": {
             "id": "TX-TASK",
-            "revision": 2
+            "revision": 3
           },
           "resource": {
             "tag": "input",
             "scope": "USE_CASE",
             "field": {
               "id": "INPUT-TASK-RESOURCE",
-              "revision": 1
+              "revision": 2
             }
           },
           "inputBindings": [
             {
               "field": {
                 "id": "OPERATION-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "input",
                 "scope": "USE_CASE",
                 "field": {
                   "id": "INPUT-TASK-TEXT",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
@@ -6147,7 +6299,7 @@
           "columns": [
             {
               "id": "OUTPUT-TASK-TEXT",
-              "revision": 1
+              "revision": 2
             }
           ],
           "emptyMessage": "No tasks are available."
@@ -6194,7 +6346,7 @@
       },
       {
         "id": "TRANS-APPROVE",
-        "revision": 2,
+        "revision": 3,
         "kind": "Transition",
         "name": "TRANS-APPROVE",
         "lifecycle": "APPROVED",
@@ -6226,23 +6378,23 @@
         "data": {
           "machine": {
             "id": "WF-CASE",
-            "revision": 1
+            "revision": 2
           },
           "from": {
             "id": "STATE-REVIEWED",
-            "revision": 1
+            "revision": 2
           },
           "to": {
             "id": "STATE-APPROVED",
-            "revision": 1
+            "revision": 2
           },
           "command": {
             "id": "CMD-APPROVE",
-            "revision": 2
+            "revision": 3
           },
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "guard": {
             "tag": "literal",
@@ -6254,26 +6406,26 @@
           "effects": [
             {
               "id": "EVT-APPROVE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "eventBindings": [
             {
               "event": {
                 "id": "EVT-APPROVE",
-                "revision": 1
+                "revision": 2
               },
               "payload": [
                 {
                   "field": {
                     "id": "FLD-CASE-TITLE",
-                    "revision": 1
+                    "revision": 2
                   },
                   "value": {
                     "tag": "postField",
                     "field": {
                       "id": "FLD-CASE-TITLE",
-                      "revision": 1
+                      "revision": 2
                     }
                   }
                 }
@@ -6284,7 +6436,7 @@
       },
       {
         "id": "TRANS-ARCHIVE",
-        "revision": 2,
+        "revision": 3,
         "kind": "Transition",
         "name": "TRANS-ARCHIVE",
         "lifecycle": "APPROVED",
@@ -6316,23 +6468,23 @@
         "data": {
           "machine": {
             "id": "WF-CASE",
-            "revision": 1
+            "revision": 2
           },
           "from": {
             "id": "STATE-APPROVED",
-            "revision": 1
+            "revision": 2
           },
           "to": {
             "id": "STATE-ARCHIVED",
-            "revision": 1
+            "revision": 2
           },
           "command": {
             "id": "CMD-ARCHIVE",
-            "revision": 2
+            "revision": 3
           },
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "guard": {
             "tag": "literal",
@@ -6344,26 +6496,26 @@
           "effects": [
             {
               "id": "EVT-ARCHIVE",
-              "revision": 1
+              "revision": 2
             }
           ],
           "eventBindings": [
             {
               "event": {
                 "id": "EVT-ARCHIVE",
-                "revision": 1
+                "revision": 2
               },
               "payload": [
                 {
                   "field": {
                     "id": "FLD-CASE-TITLE",
-                    "revision": 1
+                    "revision": 2
                   },
                   "value": {
                     "tag": "postField",
                     "field": {
                       "id": "FLD-CASE-TITLE",
-                      "revision": 1
+                      "revision": 2
                     }
                   }
                 }
@@ -6374,7 +6526,7 @@
       },
       {
         "id": "TRANS-REVIEW",
-        "revision": 2,
+        "revision": 3,
         "kind": "Transition",
         "name": "TRANS-REVIEW",
         "lifecycle": "APPROVED",
@@ -6406,23 +6558,23 @@
         "data": {
           "machine": {
             "id": "WF-CASE",
-            "revision": 1
+            "revision": 2
           },
           "from": {
             "id": "STATE-OPEN",
-            "revision": 1
+            "revision": 2
           },
           "to": {
             "id": "STATE-REVIEWED",
-            "revision": 1
+            "revision": 2
           },
           "command": {
             "id": "CMD-REVIEW",
-            "revision": 2
+            "revision": 3
           },
           "actor": {
             "id": "ACT-REVIEWER",
-            "revision": 1
+            "revision": 2
           },
           "guard": {
             "tag": "literal",
@@ -6434,26 +6586,26 @@
           "effects": [
             {
               "id": "EVT-REVIEW",
-              "revision": 1
+              "revision": 2
             }
           ],
           "eventBindings": [
             {
               "event": {
                 "id": "EVT-REVIEW",
-                "revision": 1
+                "revision": 2
               },
               "payload": [
                 {
                   "field": {
                     "id": "FLD-CASE-TITLE",
-                    "revision": 1
+                    "revision": 2
                   },
                   "value": {
                     "tag": "postField",
                     "field": {
                       "id": "FLD-CASE-TITLE",
-                      "revision": 1
+                      "revision": 2
                     }
                   }
                 }
@@ -6464,7 +6616,7 @@
       },
       {
         "id": "TX-TASK",
-        "revision": 2,
+        "revision": 3,
         "kind": "Transaction",
         "name": "TX-TASK",
         "lifecycle": "APPROVED",
@@ -6486,20 +6638,20 @@
         "data": {
           "aggregate": {
             "id": "AGG-CASE",
-            "revision": 1
+            "revision": 2
           },
           "commands": [
             {
               "id": "CMD-APPROVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "CMD-ARCHIVE",
-              "revision": 2
+              "revision": 3
             },
             {
               "id": "CMD-REVIEW",
-              "revision": 2
+              "revision": 3
             }
           ],
           "consistency": "ATOMIC",
@@ -6554,6 +6706,12 @@
             "actorType": "AI"
           },
           {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "UC-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
             "source": "fixture:synthetic",
             "locator": "UC-TASK",
             "actor": "fixture:author",
@@ -6561,6 +6719,10 @@
           }
         ],
         "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
           {
             "id": "DEC-EXECUTION-V03",
             "revision": 1
@@ -6601,7 +6763,7 @@
             {
               "field": {
                 "id": "OUTPUT-TASK-TEXT",
-                "revision": 1
+                "revision": 2
               },
               "value": {
                 "tag": "stepResult",
@@ -6611,16 +6773,17 @@
                 },
                 "field": {
                   "id": "RESULT-TEXT",
-                  "revision": 1
+                  "revision": 2
                 }
               }
             }
-          ]
+          ],
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       },
       {
         "id": "USER",
-        "revision": 1,
+        "revision": 2,
         "kind": "Entity",
         "name": "USER",
         "lifecycle": "APPROVED",
@@ -6643,19 +6806,19 @@
           "identity": [
             {
               "id": "USER-ID",
-              "revision": 1
+              "revision": 2
             }
           ],
           "tenantField": {
             "id": "USER-TENANT",
-            "revision": 1
+            "revision": 2
           },
           "tenancy": "SCOPED"
         }
       },
       {
         "id": "USER-ID",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "USER-ID",
         "lifecycle": "APPROVED",
@@ -6677,26 +6840,26 @@
         "data": {
           "owner": {
             "id": "USER",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "USER",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
       {
         "id": "USER-TENANT",
-        "revision": 1,
+        "revision": 2,
         "kind": "Field",
         "name": "USER-TENANT",
         "lifecycle": "APPROVED",
@@ -6718,20 +6881,20 @@
         "data": {
           "owner": {
             "id": "USER",
-            "revision": 1
+            "revision": 2
           },
           "type": {
             "kind": "Identifier",
             "entity": {
               "id": "ORG",
-              "revision": 1
+              "revision": 2
             }
           },
           "optional": false,
           "classification": "INTERNAL",
           "classificationRef": {
             "id": "CLASS-INTERNAL",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -6886,7 +7049,7 @@
       },
       {
         "id": "WF-CASE",
-        "revision": 1,
+        "revision": 2,
         "kind": "StateMachine",
         "name": "WF-CASE",
         "lifecycle": "APPROVED",
@@ -6908,11 +7071,11 @@
         "data": {
           "resource": {
             "id": "CASE",
-            "revision": 1
+            "revision": 2
           },
           "initial": {
             "id": "STATE-OPEN",
-            "revision": 1
+            "revision": 2
           }
         }
       },
@@ -6986,5 +7149,5 @@
     ],
     "issues": []
   },
-  "contentDigest": "sha256:0ba271e5e69b620a35765209b84d3e5bd2ee42fdf34440b369f9434bd1b9b819"
+  "contentDigest": "sha256:33c49f6cc815eba73a67e5b797a0b188bdfb1c7ded786a10e7824bd71352f923"
 }

@@ -101,7 +101,7 @@
     },
     {
       "id": "ACT-USER",
-      "revision": 1,
+      "revision": 2,
       "kind": "Actor",
       "name": "ACT-USER",
       "lifecycle": "PROPOSED",
@@ -123,11 +123,11 @@
       "data": {
         "subject": {
           "id": "ENT-MEMBER",
-          "revision": 1
+          "revision": 2
         },
         "authentication": {
           "id": "AUTH-ACT-USER",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -160,7 +160,7 @@
         "permissions": [
           {
             "id": "PERM-CMD-RECORD",
-            "revision": 2
+            "revision": 3
           }
         ],
         "label": "Complete task",
@@ -169,7 +169,7 @@
     },
     {
       "id": "AGG-ENT-MEMBER",
-      "revision": 1,
+      "revision": 2,
       "kind": "Aggregate",
       "name": "AGG-ENT-MEMBER",
       "lifecycle": "PROPOSED",
@@ -191,12 +191,12 @@
       "data": {
         "root": {
           "id": "ENT-MEMBER",
-          "revision": 1
+          "revision": 2
         },
         "members": [
           {
             "id": "ENT-MEMBER",
-            "revision": 1
+            "revision": 2
           }
         ],
         "invariants": [],
@@ -205,7 +205,7 @@
     },
     {
       "id": "AGG-ENT-PAYMENT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Aggregate",
       "name": "AGG-ENT-PAYMENT",
       "lifecycle": "PROPOSED",
@@ -227,18 +227,18 @@
       "data": {
         "root": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "members": [
           {
             "id": "ENT-PAYMENT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "invariants": [
           {
             "id": "INV-POSITIVE",
-            "revision": 1
+            "revision": 2
           }
         ],
         "consistency": "ATOMIC"
@@ -246,7 +246,7 @@
     },
     {
       "id": "AGG-ENT-TENANT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Aggregate",
       "name": "AGG-ENT-TENANT",
       "lifecycle": "PROPOSED",
@@ -268,12 +268,12 @@
       "data": {
         "root": {
           "id": "ENT-TENANT",
-          "revision": 1
+          "revision": 2
         },
         "members": [
           {
             "id": "ENT-TENANT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "invariants": [],
@@ -344,11 +344,11 @@
         },
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "scope": {
           "id": "SCOPE-ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "principal": "fixture:operator"
       }
@@ -376,7 +376,7 @@
     },
     {
       "id": "AUTH-ACT-USER",
-      "revision": 1,
+      "revision": 2,
       "kind": "AuthenticationModel",
       "name": "AUTH-ACT-USER",
       "lifecycle": "PROPOSED",
@@ -398,7 +398,7 @@
       "data": {
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "assurance": "MULTI_FACTOR",
         "mechanisms": [
@@ -409,7 +409,7 @@
     },
     {
       "id": "BACKUP-TASK",
-      "revision": 1,
+      "revision": 2,
       "kind": "Backup",
       "name": "BACKUP-TASK",
       "lifecycle": "PROPOSED",
@@ -432,7 +432,7 @@
         "resources": [
           {
             "id": "ENT-PAYMENT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "intervalSeconds": 3600,
@@ -440,7 +440,7 @@
         "encrypted": true,
         "evidence": {
           "id": "EVID-BACKUP",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -468,12 +468,12 @@
       "data": {
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "permissions": [
           {
             "id": "PERM-CMD-RECORD",
-            "revision": 2
+            "revision": 3
           },
           {
             "id": "PERM-QUERY-TASKS",
@@ -488,12 +488,18 @@
     },
     {
       "id": "CLASS-INTERNAL",
-      "revision": 1,
+      "revision": 2,
       "kind": "DataClassification",
       "name": "CLASS-INTERNAL",
       "lifecycle": "PROPOSED",
       "steward": "fixture:authors",
       "origins": [
+        {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "CLASS-INTERNAL",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
         {
           "source": "fixture:synthetic",
           "locator": "CLASS-INTERNAL",
@@ -502,6 +508,10 @@
         }
       ],
       "basis": [
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
         {
           "id": "REQ-PAYMENT",
           "revision": 1
@@ -513,17 +523,24 @@
         "encryptAtRest": true,
         "encryptInTransit": true,
         "export": "DENY",
-        "redaction": "NONE"
+        "redaction": "NONE",
+        "redactionScope": "NON_DOMAIN_OBSERVABILITY"
       }
     },
     {
       "id": "CLASS-PUBLIC",
-      "revision": 1,
+      "revision": 2,
       "kind": "DataClassification",
       "name": "CLASS-PUBLIC",
       "lifecycle": "PROPOSED",
       "steward": "fixture:authors",
       "origins": [
+        {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "CLASS-PUBLIC",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
         {
           "source": "fixture:synthetic",
           "locator": "CLASS-PUBLIC",
@@ -532,6 +549,10 @@
         }
       ],
       "basis": [
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
         {
           "id": "REQ-PAYMENT",
           "revision": 1
@@ -543,17 +564,24 @@
         "encryptAtRest": true,
         "encryptInTransit": true,
         "export": "DENY",
-        "redaction": "NONE"
+        "redaction": "NONE",
+        "redactionScope": "NON_DOMAIN_OBSERVABILITY"
       }
     },
     {
       "id": "CLASS-SECRET",
-      "revision": 1,
+      "revision": 2,
       "kind": "DataClassification",
       "name": "CLASS-SECRET",
       "lifecycle": "PROPOSED",
       "steward": "fixture:authors",
       "origins": [
+        {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "CLASS-SECRET",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
         {
           "source": "fixture:synthetic",
           "locator": "CLASS-SECRET",
@@ -562,6 +590,10 @@
         }
       ],
       "basis": [
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
         {
           "id": "REQ-PAYMENT",
           "revision": 1
@@ -573,17 +605,24 @@
         "encryptAtRest": true,
         "encryptInTransit": true,
         "export": "DENY",
-        "redaction": "OMIT"
+        "redaction": "OMIT",
+        "redactionScope": "NON_DOMAIN_OBSERVABILITY"
       }
     },
     {
       "id": "CLASS-SENSITIVE",
-      "revision": 1,
+      "revision": 2,
       "kind": "DataClassification",
       "name": "CLASS-SENSITIVE",
       "lifecycle": "PROPOSED",
       "steward": "fixture:authors",
       "origins": [
+        {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "CLASS-SENSITIVE",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
         {
           "source": "fixture:synthetic",
           "locator": "CLASS-SENSITIVE",
@@ -592,6 +631,10 @@
         }
       ],
       "basis": [
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
         {
           "id": "REQ-PAYMENT",
           "revision": 1
@@ -603,12 +646,13 @@
         "encryptAtRest": true,
         "encryptInTransit": true,
         "export": "DENY",
-        "redaction": "MASK"
+        "redaction": "MASK",
+        "redactionScope": "NON_DOMAIN_OBSERVABILITY"
       }
     },
     {
       "id": "CMD-RECORD",
-      "revision": 2,
+      "revision": 3,
       "kind": "Command",
       "name": "CMD-RECORD",
       "lifecycle": "PROPOSED",
@@ -621,6 +665,12 @@
           "actorType": "AI"
         },
         {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "CMD-RECORD",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
+        {
           "source": "fixture:synthetic",
           "locator": "CMD-RECORD",
           "actor": "fixture:author",
@@ -628,6 +678,10 @@
         }
       ],
       "basis": [
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
         {
           "id": "DEC-EXECUTION-V03",
           "revision": 1
@@ -640,28 +694,28 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "invariants": [
           {
             "id": "INV-POSITIVE",
-            "revision": 1
+            "revision": 2
           }
         ],
         "emits": [
           {
             "id": "EVT-RECORDED",
-            "revision": 1
+            "revision": 2
           }
         ],
         "aggregate": {
           "id": "AGG-ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "writes": [
           {
             "id": "ENT-PAYMENT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "failures": [
@@ -676,7 +730,7 @@
         ],
         "idempotency": {
           "id": "IDEM-OPERATION",
-          "revision": 1
+          "revision": 2
         },
         "input": {
           "id": "OPERATION-INPUT",
@@ -689,25 +743,25 @@
         "writeFields": [
           {
             "id": "FLD-TASK-SUMMARY",
-            "revision": 1
+            "revision": 2
           }
         ],
         "assignments": [
           {
             "resource": {
               "id": "ENT-PAYMENT",
-              "revision": 1
+              "revision": 2
             },
             "field": {
               "id": "FLD-TASK-SUMMARY",
-              "revision": 1
+              "revision": 2
             },
             "value": {
               "tag": "input",
               "scope": "OPERATION",
               "field": {
                 "id": "OPERATION-TEXT",
-                "revision": 1
+                "revision": 2
               }
             }
           }
@@ -716,13 +770,13 @@
           {
             "field": {
               "id": "RESULT-TEXT",
-              "revision": 1
+              "revision": 2
             },
             "value": {
               "tag": "postField",
               "field": {
                 "id": "FLD-TASK-SUMMARY",
-                "revision": 1
+                "revision": 2
               }
             }
           }
@@ -731,25 +785,27 @@
           {
             "event": {
               "id": "EVT-RECORDED",
-              "revision": 1
+              "revision": 2
             },
             "payload": [
               {
                 "field": {
                   "id": "FLD-AMOUNT",
-                  "revision": 1
+                  "revision": 2
                 },
                 "value": {
                   "tag": "postField",
                   "field": {
                     "id": "FLD-AMOUNT",
-                    "revision": 1
+                    "revision": 2
                   }
                 }
               }
             ]
           }
-        ]
+        ],
+        "emissionOrder": "DECLARED_BINDING_SEQUENCE",
+        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
       }
     },
     {
@@ -849,7 +905,7 @@
         },
         "field": {
           "id": "INPUT-TASK-RESOURCE",
-          "revision": 1
+          "revision": 2
         },
         "label": "Resource identity",
         "errorMessage": "Select the authorized resource identity.",
@@ -885,7 +941,7 @@
         },
         "field": {
           "id": "INPUT-TASK-TEXT",
-          "revision": 1
+          "revision": 2
         },
         "label": "Task note",
         "errorMessage": "Enter a task note.",
@@ -945,7 +1001,7 @@
         }
       ],
       "data": {
-        "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants and deterministic token-bucket admission.",
+        "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release and observability redaction.",
         "strength": "REQUIRED",
         "rationale": "HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.",
         "alternatives": [
@@ -1042,7 +1098,7 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "trigger": "CLOSED",
         "mode": "ANONYMIZE",
@@ -1050,7 +1106,7 @@
         "fields": [
           {
             "id": "FLD-AMOUNT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "holdBehavior": "BLOCK",
@@ -1058,7 +1114,7 @@
           {
             "field": {
               "id": "FLD-AMOUNT",
-              "revision": 1
+              "revision": 2
             },
             "action": "REPLACE",
             "replacement": {
@@ -1077,12 +1133,18 @@
     },
     {
       "id": "DELIVERY-EVT-RECORDED",
-      "revision": 1,
+      "revision": 2,
       "kind": "DeliveryPolicy",
       "name": "DELIVERY-EVT-RECORDED",
       "lifecycle": "PROPOSED",
       "steward": "fixture:authors",
       "origins": [
+        {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "DELIVERY-EVT-RECORDED",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
         {
           "source": "fixture:synthetic",
           "locator": "DELIVERY-EVT-RECORDED",
@@ -1092,6 +1154,10 @@
       ],
       "basis": [
         {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
+        {
           "id": "REQ-PAYMENT",
           "revision": 1
         }
@@ -1099,20 +1165,22 @@
       "data": {
         "event": {
           "id": "EVT-RECORDED",
-          "revision": 1
+          "revision": 2
         },
         "guarantee": "AT_LEAST_ONCE",
         "ordering": "PER_AGGREGATE",
         "windowSeconds": 3600,
         "deduplication": {
           "id": "IDEM-OPERATION",
-          "revision": 1
-        }
+          "revision": 2
+        },
+        "windowAnchor": "EVENT_COMMIT",
+        "occurrenceOrder": "COMMIT_STEP_EMISSION_SEQUENCE"
       }
     },
     {
       "id": "ENT-MEMBER",
-      "revision": 1,
+      "revision": 2,
       "kind": "Entity",
       "name": "ENT-MEMBER",
       "lifecycle": "PROPOSED",
@@ -1135,19 +1203,19 @@
         "identity": [
           {
             "id": "FLD-MEMBER-ID",
-            "revision": 1
+            "revision": 2
           }
         ],
         "tenantField": {
           "id": "FLD-MEMBER-TENANT",
-          "revision": 1
+          "revision": 2
         },
         "tenancy": "SCOPED"
       }
     },
     {
       "id": "ENT-PAYMENT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Entity",
       "name": "ENT-PAYMENT",
       "lifecycle": "PROPOSED",
@@ -1170,19 +1238,19 @@
         "identity": [
           {
             "id": "FLD-PAYMENT-ID",
-            "revision": 1
+            "revision": 2
           }
         ],
         "tenantField": {
           "id": "FLD-PAYMENT-TENANT",
-          "revision": 1
+          "revision": 2
         },
         "tenancy": "SCOPED"
       }
     },
     {
       "id": "ENT-TENANT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Entity",
       "name": "ENT-TENANT",
       "lifecycle": "PROPOSED",
@@ -1205,7 +1273,7 @@
         "identity": [
           {
             "id": "FLD-TENANT-ID",
-            "revision": 1
+            "revision": 2
           }
         ],
         "tenancy": "TENANT_ROOT"
@@ -1278,7 +1346,7 @@
     },
     {
       "id": "EVID-BACKUP",
-      "revision": 1,
+      "revision": 2,
       "kind": "EvidenceRequirement",
       "name": "EVID-BACKUP",
       "lifecycle": "PROPOSED",
@@ -1301,7 +1369,7 @@
         "subjects": [
           {
             "id": "ENT-PAYMENT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "methods": [
@@ -1434,7 +1502,7 @@
     },
     {
       "id": "EVID-RECOVERY",
-      "revision": 1,
+      "revision": 2,
       "kind": "EvidenceRequirement",
       "name": "EVID-RECOVERY",
       "lifecycle": "PROPOSED",
@@ -1457,7 +1525,7 @@
         "subjects": [
           {
             "id": "ENT-PAYMENT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "methods": [
@@ -1548,7 +1616,7 @@
     },
     {
       "id": "EVT-RECORDED",
-      "revision": 1,
+      "revision": 2,
       "kind": "Event",
       "name": "EVT-RECORDED",
       "lifecycle": "PROPOSED",
@@ -1570,17 +1638,17 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "payload": [
           {
             "id": "FLD-AMOUNT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "delivery": {
           "id": "DELIVERY-EVT-RECORDED",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -1697,7 +1765,7 @@
         },
         "field": {
           "id": "OUTPUT-TASK-TEXT",
-          "revision": 1
+          "revision": 2
         },
         "operator": "CONTAINS",
         "inputType": {
@@ -1705,13 +1773,13 @@
         },
         "inputField": {
           "id": "QUERY-TEXT",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "FLD-AMOUNT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "FLD-AMOUNT",
       "lifecycle": "PROPOSED",
@@ -1733,7 +1801,7 @@
       "data": {
         "owner": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "type": {
           "kind": "Money",
@@ -1746,13 +1814,13 @@
         "classification": "SENSITIVE",
         "classificationRef": {
           "id": "CLASS-SENSITIVE",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "FLD-MEMBER-ID",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "FLD-MEMBER-ID",
       "lifecycle": "PROPOSED",
@@ -1774,26 +1842,26 @@
       "data": {
         "owner": {
           "id": "ENT-MEMBER",
-          "revision": 1
+          "revision": 2
         },
         "type": {
           "kind": "Identifier",
           "entity": {
             "id": "ENT-MEMBER",
-            "revision": 1
+            "revision": 2
           }
         },
         "optional": false,
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "FLD-MEMBER-TENANT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "FLD-MEMBER-TENANT",
       "lifecycle": "PROPOSED",
@@ -1815,26 +1883,26 @@
       "data": {
         "owner": {
           "id": "ENT-MEMBER",
-          "revision": 1
+          "revision": 2
         },
         "type": {
           "kind": "Identifier",
           "entity": {
             "id": "ENT-TENANT",
-            "revision": 1
+            "revision": 2
           }
         },
         "optional": false,
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "FLD-PAYMENT-ID",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "FLD-PAYMENT-ID",
       "lifecycle": "PROPOSED",
@@ -1856,26 +1924,26 @@
       "data": {
         "owner": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "type": {
           "kind": "Identifier",
           "entity": {
             "id": "ENT-PAYMENT",
-            "revision": 1
+            "revision": 2
           }
         },
         "optional": false,
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "FLD-PAYMENT-TENANT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "FLD-PAYMENT-TENANT",
       "lifecycle": "PROPOSED",
@@ -1897,26 +1965,26 @@
       "data": {
         "owner": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "type": {
           "kind": "Identifier",
           "entity": {
             "id": "ENT-TENANT",
-            "revision": 1
+            "revision": 2
           }
         },
         "optional": false,
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "FLD-TASK-SUMMARY",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "FLD-TASK-SUMMARY",
       "lifecycle": "PROPOSED",
@@ -1938,7 +2006,7 @@
       "data": {
         "owner": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "type": {
           "kind": "String"
@@ -1947,13 +2015,13 @@
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "FLD-TENANT-ID",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "FLD-TENANT-ID",
       "lifecycle": "PROPOSED",
@@ -1975,20 +2043,20 @@
       "data": {
         "owner": {
           "id": "ENT-TENANT",
-          "revision": 1
+          "revision": 2
         },
         "type": {
           "kind": "Identifier",
           "entity": {
             "id": "ENT-TENANT",
-            "revision": 1
+            "revision": 2
           }
         },
         "optional": false,
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -2067,12 +2135,18 @@
     },
     {
       "id": "HOLD-ENT-PAYMENT",
-      "revision": 2,
+      "revision": 3,
       "kind": "LegalHold",
       "name": "HOLD-ENT-PAYMENT",
       "lifecycle": "PROPOSED",
       "steward": "fixture:authors",
       "origins": [
+        {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "HOLD-ENT-PAYMENT",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
         {
           "source": "fixture:synthetic",
           "locator": "HOLD-ENT-PAYMENT",
@@ -2082,6 +2156,10 @@
       ],
       "basis": [
         {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
+        {
           "id": "REQ-PAYMENT",
           "revision": 1
         }
@@ -2089,7 +2167,7 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "condition": {
           "tag": "literal",
@@ -2100,18 +2178,25 @@
         },
         "release": {
           "id": "PERM-CMD-RECORD",
-          "revision": 2
-        }
+          "revision": 3
+        },
+        "releaseMode": "CURRENT_LIFECYCLE_ACTION"
       }
     },
     {
       "id": "IDEM-OPERATION",
-      "revision": 1,
+      "revision": 2,
       "kind": "IdempotencyPolicy",
       "name": "IDEM-OPERATION",
       "lifecycle": "PROPOSED",
       "steward": "fixture:authors",
       "origins": [
+        {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "IDEM-OPERATION",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
         {
           "source": "fixture:synthetic",
           "locator": "IDEM-OPERATION",
@@ -2121,6 +2206,10 @@
       ],
       "basis": [
         {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
+        {
           "id": "REQ-PAYMENT",
           "revision": 1
         }
@@ -2128,14 +2217,16 @@
       "data": {
         "scope": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "keyType": {
           "kind": "String"
         },
         "windowSeconds": 86400,
         "replay": "RETURN_RESULT",
-        "conflict": "REJECT_DIFFERENT_INPUT"
+        "conflict": "REJECT_DIFFERENT_INPUT",
+        "windowAnchor": "COMMITTED_RESULT",
+        "inFlight": "RETURN_IN_PROGRESS"
       }
     },
     {
@@ -2165,7 +2256,7 @@
     },
     {
       "id": "INPUT-TASK-RESOURCE",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "INPUT-TASK-RESOURCE",
       "lifecycle": "PROPOSED",
@@ -2197,20 +2288,20 @@
           "kind": "Identifier",
           "entity": {
             "id": "ENT-PAYMENT",
-            "revision": 1
+            "revision": 2
           }
         },
         "optional": false,
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "INPUT-TASK-TEXT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "INPUT-TASK-TEXT",
       "lifecycle": "PROPOSED",
@@ -2241,13 +2332,13 @@
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "INV-POSITIVE",
-      "revision": 1,
+      "revision": 2,
       "kind": "Invariant",
       "name": "INV-POSITIVE",
       "lifecycle": "PROPOSED",
@@ -2269,7 +2360,7 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "predicate": {
           "tag": "binary",
@@ -2279,7 +2370,7 @@
             "binding": "resource",
             "ref": {
               "id": "FLD-AMOUNT",
-              "revision": 1
+              "revision": 2
             }
           },
           "right": {
@@ -2311,6 +2402,12 @@
           "actorType": "AI"
         },
         {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "JOB-TASK",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
+        {
           "source": "fixture:synthetic",
           "locator": "JOB-TASK",
           "actor": "fixture:author",
@@ -2318,6 +2415,10 @@
         }
       ],
       "basis": [
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
         {
           "id": "DEC-EXECUTION-V03",
           "revision": 1
@@ -2342,14 +2443,14 @@
         },
         "idempotency": {
           "id": "IDEM-OPERATION",
-          "revision": 1
+          "revision": 2
         },
         "timeoutSeconds": 30,
         "inputBindings": [
           {
             "field": {
               "id": "INPUT-TASK-RESOURCE",
-              "revision": 1
+              "revision": 2
             },
             "value": {
               "tag": "literal",
@@ -2357,7 +2458,7 @@
                 "kind": "Identifier",
                 "entity": {
                   "id": "ENT-PAYMENT",
-                  "revision": 1
+                  "revision": 2
                 }
               },
               "value": "fixture-resource"
@@ -2366,7 +2467,7 @@
           {
             "field": {
               "id": "INPUT-TASK-TEXT",
-              "revision": 1
+              "revision": 2
             },
             "value": {
               "tag": "literal",
@@ -2376,7 +2477,9 @@
               "value": "Explicit scheduled fixture text"
             }
           }
-        ]
+        ],
+        "missedOccurrences": "SKIP",
+        "catchUp": null
       }
     },
     {
@@ -2413,11 +2516,11 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "retention": {
           "id": "RETENTION-ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "deletion": {
           "id": "DELETE-ENT-PAYMENT",
@@ -2426,19 +2529,19 @@
         "holds": [
           {
             "id": "HOLD-ENT-PAYMENT",
-            "revision": 2
+            "revision": 3
           }
         ],
         "anchor": {
           "kind": "CLOSED_COMMIT",
           "machine": {
             "id": "WF-PAYMENT",
-            "revision": 1
+            "revision": 2
           },
           "states": [
             {
               "id": "STATE-POSTED",
-              "revision": 1
+              "revision": 2
             }
           ],
           "instant": "COMMITTED_ENTRY",
@@ -2554,7 +2657,7 @@
     },
     {
       "id": "OPERATION-TEXT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "OPERATION-TEXT",
       "lifecycle": "PROPOSED",
@@ -2589,7 +2692,7 @@
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -2620,7 +2723,7 @@
     },
     {
       "id": "OUTPUT-TASK-TEXT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "OUTPUT-TASK-TEXT",
       "lifecycle": "PROPOSED",
@@ -2651,7 +2754,7 @@
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -2730,7 +2833,7 @@
     },
     {
       "id": "PERM-CMD-RECORD",
-      "revision": 2,
+      "revision": 3,
       "kind": "Permission",
       "name": "PERM-CMD-RECORD",
       "lifecycle": "PROPOSED",
@@ -2752,15 +2855,15 @@
       "data": {
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "action": {
           "id": "CMD-RECORD",
-          "revision": 2
+          "revision": 3
         }
       }
     },
@@ -2788,11 +2891,11 @@
       "data": {
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "action": {
           "id": "QUERY-TASKS",
@@ -2824,7 +2927,7 @@
       "data": {
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "roles": [
           {
@@ -2834,7 +2937,7 @@
         ],
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "action": {
           "id": "QUERY-TASKS",
@@ -2854,7 +2957,7 @@
         },
         "scope": {
           "id": "SCOPE-ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -2882,7 +2985,7 @@
       "data": {
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "roles": [
           {
@@ -2892,11 +2995,11 @@
         ],
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "action": {
           "id": "CMD-RECORD",
-          "revision": 2
+          "revision": 3
         },
         "effect": "ALLOW",
         "predicate": {
@@ -2907,7 +3010,7 @@
             "binding": "resource",
             "ref": {
               "id": "FLD-PAYMENT-TENANT",
-              "revision": 1
+              "revision": 2
             }
           },
           "right": {
@@ -2915,17 +3018,17 @@
             "binding": "actor",
             "ref": {
               "id": "FLD-MEMBER-TENANT",
-              "revision": 1
+              "revision": 2
             }
           }
         },
         "permission": {
           "id": "PERM-CMD-RECORD",
-          "revision": 2
+          "revision": 3
         },
         "scope": {
           "id": "SCOPE-ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -2953,11 +3056,11 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "action": {
           "id": "CMD-RECORD",
-          "revision": 2
+          "revision": 3
         },
         "policies": [
           {
@@ -2993,7 +3096,7 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "action": {
           "id": "QUERY-TASKS",
@@ -3103,11 +3206,11 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "scope": {
           "id": "SCOPE-ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "result": {
           "kind": "Value",
@@ -3120,14 +3223,14 @@
           {
             "field": {
               "id": "OUTPUT-TASK-TEXT",
-              "revision": 1
+              "revision": 2
             },
             "value": {
               "tag": "field",
               "binding": "resource",
               "ref": {
                 "id": "FLD-TASK-SUMMARY",
-                "revision": 1
+                "revision": 2
               }
             }
           }
@@ -3145,7 +3248,7 @@
             "binding": "resource",
             "ref": {
               "id": "FLD-TASK-SUMMARY",
-              "revision": 1
+              "revision": 2
             }
           },
           "pattern": {
@@ -3153,7 +3256,7 @@
             "scope": "OPERATION",
             "field": {
               "id": "QUERY-TEXT",
-              "revision": 1
+              "revision": 2
             }
           }
         },
@@ -3161,16 +3264,17 @@
           {
             "field": {
               "id": "FLD-PAYMENT-ID",
-              "revision": 1
+              "revision": 2
             },
             "direction": "ASC"
           }
-        ]
+        ],
+        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
       }
     },
     {
       "id": "QUERY-TEXT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "QUERY-TEXT",
       "lifecycle": "PROPOSED",
@@ -3205,7 +3309,7 @@
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -3243,7 +3347,7 @@
       "data": {
         "permission": {
           "id": "PERM-CMD-RECORD",
-          "revision": 2
+          "revision": 3
         },
         "requests": 100,
         "windowSeconds": 60,
@@ -3311,7 +3415,7 @@
     },
     {
       "id": "RECOVERY-TASK",
-      "revision": 1,
+      "revision": 2,
       "kind": "Recovery",
       "name": "RECOVERY-TASK",
       "lifecycle": "PROPOSED",
@@ -3333,20 +3437,20 @@
       "data": {
         "backup": {
           "id": "BACKUP-TASK",
-          "revision": 1
+          "revision": 2
         },
         "rpoSeconds": 3600,
         "rtoSeconds": 1800,
         "restoreTestIntervalSeconds": 86400,
         "evidence": {
           "id": "EVID-RECOVERY",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "REL-MEMBER-PAYMENT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Relation",
       "name": "REL-MEMBER-PAYMENT",
       "lifecycle": "PROPOSED",
@@ -3368,11 +3472,11 @@
       "data": {
         "source": {
           "id": "ENT-MEMBER",
-          "revision": 1
+          "revision": 2
         },
         "target": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "sourceCardinality": {
           "min": 1,
@@ -3484,7 +3588,7 @@
     },
     {
       "id": "RESULT-TEXT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Field",
       "name": "RESULT-TEXT",
       "lifecycle": "PROPOSED",
@@ -3519,13 +3623,13 @@
         "classification": "INTERNAL",
         "classificationRef": {
           "id": "CLASS-INTERNAL",
-          "revision": 1
+          "revision": 2
         }
       }
     },
     {
       "id": "RETENTION-ENT-PAYMENT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Retention",
       "name": "RETENTION-ENT-PAYMENT",
       "lifecycle": "PROPOSED",
@@ -3547,7 +3651,7 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "trigger": "CLOSED",
         "minimumSeconds": 86400
@@ -3624,12 +3728,12 @@
       "data": {
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "permissions": [
           {
             "id": "PERM-CMD-RECORD",
-            "revision": 2
+            "revision": 3
           },
           {
             "id": "PERM-QUERY-TASKS",
@@ -3670,7 +3774,7 @@
     },
     {
       "id": "SCOPE-ENT-PAYMENT",
-      "revision": 1,
+      "revision": 2,
       "kind": "Scope",
       "name": "SCOPE-ENT-PAYMENT",
       "lifecycle": "PROPOSED",
@@ -3692,20 +3796,20 @@
       "data": {
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "mode": "SAME_TENANT",
         "actorTenant": {
           "id": "FLD-MEMBER-TENANT",
-          "revision": 1
+          "revision": 2
         },
         "resourceTenant": {
           "id": "FLD-PAYMENT-TENANT",
-          "revision": 1
+          "revision": 2
         }
       }
     },
@@ -3847,7 +3951,7 @@
         "operations": [
           {
             "id": "CMD-RECORD",
-            "revision": 2
+            "revision": 3
           },
           {
             "id": "QUERY-TASKS",
@@ -3858,7 +3962,7 @@
     },
     {
       "id": "SESSION-ACT-USER",
-      "revision": 1,
+      "revision": 2,
       "kind": "SessionPolicy",
       "name": "SESSION-ACT-USER",
       "lifecycle": "PROPOSED",
@@ -3880,7 +3984,7 @@
       "data": {
         "authentication": {
           "id": "AUTH-ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "idleSeconds": 900,
         "absoluteSeconds": 28800,
@@ -3889,7 +3993,7 @@
     },
     {
       "id": "STATE-DRAFT",
-      "revision": 1,
+      "revision": 2,
       "kind": "State",
       "name": "STATE-DRAFT",
       "lifecycle": "PROPOSED",
@@ -3911,14 +4015,14 @@
       "data": {
         "machine": {
           "id": "WF-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "terminal": false
       }
     },
     {
       "id": "STATE-POSTED",
-      "revision": 1,
+      "revision": 2,
       "kind": "State",
       "name": "STATE-POSTED",
       "lifecycle": "PROPOSED",
@@ -3940,7 +4044,7 @@
       "data": {
         "machine": {
           "id": "WF-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "terminal": true
       }
@@ -3983,33 +4087,33 @@
         },
         "operation": {
           "id": "CMD-RECORD",
-          "revision": 2
+          "revision": 3
         },
         "onFailure": "STOP",
         "transaction": {
           "id": "TX-TASK",
-          "revision": 2
+          "revision": 3
         },
         "resource": {
           "tag": "input",
           "scope": "USE_CASE",
           "field": {
             "id": "INPUT-TASK-RESOURCE",
-            "revision": 1
+            "revision": 2
           }
         },
         "inputBindings": [
           {
             "field": {
               "id": "OPERATION-TEXT",
-              "revision": 1
+              "revision": 2
             },
             "value": {
               "tag": "input",
               "scope": "USE_CASE",
               "field": {
                 "id": "INPUT-TASK-TEXT",
-                "revision": 1
+                "revision": 2
               }
             }
           }
@@ -4045,7 +4149,7 @@
         "columns": [
           {
             "id": "OUTPUT-TASK-TEXT",
-            "revision": 1
+            "revision": 2
           }
         ],
         "emptyMessage": "No tasks are available."
@@ -4092,7 +4196,7 @@
     },
     {
       "id": "TRANS-RECORD",
-      "revision": 2,
+      "revision": 3,
       "kind": "Transition",
       "name": "TRANS-RECORD",
       "lifecycle": "PROPOSED",
@@ -4124,23 +4228,23 @@
       "data": {
         "machine": {
           "id": "WF-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "from": {
           "id": "STATE-DRAFT",
-          "revision": 1
+          "revision": 2
         },
         "to": {
           "id": "STATE-POSTED",
-          "revision": 1
+          "revision": 2
         },
         "command": {
           "id": "CMD-RECORD",
-          "revision": 2
+          "revision": 3
         },
         "actor": {
           "id": "ACT-USER",
-          "revision": 1
+          "revision": 2
         },
         "guard": {
           "tag": "binary",
@@ -4150,7 +4254,7 @@
             "binding": "resource",
             "ref": {
               "id": "FLD-AMOUNT",
-              "revision": 1
+              "revision": 2
             }
           },
           "right": {
@@ -4164,26 +4268,26 @@
         "effects": [
           {
             "id": "EVT-RECORDED",
-            "revision": 1
+            "revision": 2
           }
         ],
         "eventBindings": [
           {
             "event": {
               "id": "EVT-RECORDED",
-              "revision": 1
+              "revision": 2
             },
             "payload": [
               {
                 "field": {
                   "id": "FLD-AMOUNT",
-                  "revision": 1
+                  "revision": 2
                 },
                 "value": {
                   "tag": "postField",
                   "field": {
                     "id": "FLD-AMOUNT",
-                    "revision": 1
+                    "revision": 2
                   }
                 }
               }
@@ -4194,7 +4298,7 @@
     },
     {
       "id": "TX-TASK",
-      "revision": 2,
+      "revision": 3,
       "kind": "Transaction",
       "name": "TX-TASK",
       "lifecycle": "PROPOSED",
@@ -4216,12 +4320,12 @@
       "data": {
         "aggregate": {
           "id": "AGG-ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "commands": [
           {
             "id": "CMD-RECORD",
-            "revision": 2
+            "revision": 3
           }
         ],
         "consistency": "ATOMIC",
@@ -4243,6 +4347,12 @@
           "actorType": "AI"
         },
         {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "UC-TASK",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
+        {
           "source": "fixture:synthetic",
           "locator": "UC-TASK",
           "actor": "fixture:author",
@@ -4250,6 +4360,10 @@
         }
       ],
       "basis": [
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
         {
           "id": "DEC-EXECUTION-V03",
           "revision": 1
@@ -4282,7 +4396,7 @@
           {
             "field": {
               "id": "OUTPUT-TASK-TEXT",
-              "revision": 1
+              "revision": 2
             },
             "value": {
               "tag": "stepResult",
@@ -4292,11 +4406,12 @@
               },
               "field": {
                 "id": "RESULT-TEXT",
-                "revision": 1
+                "revision": 2
               }
             }
           }
-        ]
+        ],
+        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
       }
     },
     {
@@ -4425,7 +4540,7 @@
     },
     {
       "id": "WF-PAYMENT",
-      "revision": 1,
+      "revision": 2,
       "kind": "StateMachine",
       "name": "WF-PAYMENT",
       "lifecycle": "PROPOSED",
@@ -4447,11 +4562,11 @@
       "data": {
         "resource": {
           "id": "ENT-PAYMENT",
-          "revision": 1
+          "revision": 2
         },
         "initial": {
           "id": "STATE-DRAFT",
-          "revision": 1
+          "revision": 2
         }
       }
     },

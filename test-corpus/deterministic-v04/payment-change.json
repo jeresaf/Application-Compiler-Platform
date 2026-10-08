@@ -34,12 +34,359 @@
           }
         ],
         "data": {
-          "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants and deterministic token-bucket admission.",
+          "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release and observability redaction.",
           "strength": "REQUIRED",
           "rationale": "HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.",
           "alternatives": [
             "Retain approved 0.3/0.2 meaning and reject incomplete target capabilities"
           ]
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "CLASS-INTERNAL",
+      "expectedRevision": 1,
+      "node": {
+        "id": "CLASS-INTERNAL",
+        "revision": 2,
+        "kind": "DataClassification",
+        "name": "CLASS-INTERNAL",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-INTERNAL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-INTERNAL",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "level": "INTERNAL",
+          "audit": "WRITE",
+          "encryptAtRest": true,
+          "encryptInTransit": true,
+          "export": "DENY",
+          "redaction": "NONE",
+          "redactionScope": "NON_DOMAIN_OBSERVABILITY"
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "CLASS-PUBLIC",
+      "expectedRevision": 1,
+      "node": {
+        "id": "CLASS-PUBLIC",
+        "revision": 2,
+        "kind": "DataClassification",
+        "name": "CLASS-PUBLIC",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-PUBLIC",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-PUBLIC",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "level": "PUBLIC",
+          "audit": "WRITE",
+          "encryptAtRest": true,
+          "encryptInTransit": true,
+          "export": "DENY",
+          "redaction": "NONE",
+          "redactionScope": "NON_DOMAIN_OBSERVABILITY"
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "CLASS-SECRET",
+      "expectedRevision": 1,
+      "node": {
+        "id": "CLASS-SECRET",
+        "revision": 2,
+        "kind": "DataClassification",
+        "name": "CLASS-SECRET",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-SECRET",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-SECRET",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "level": "SECRET",
+          "audit": "READ_WRITE",
+          "encryptAtRest": true,
+          "encryptInTransit": true,
+          "export": "DENY",
+          "redaction": "OMIT",
+          "redactionScope": "NON_DOMAIN_OBSERVABILITY"
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "CLASS-SENSITIVE",
+      "expectedRevision": 1,
+      "node": {
+        "id": "CLASS-SENSITIVE",
+        "revision": 2,
+        "kind": "DataClassification",
+        "name": "CLASS-SENSITIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-SENSITIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-SENSITIVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "level": "SENSITIVE",
+          "audit": "READ_WRITE",
+          "encryptAtRest": true,
+          "encryptInTransit": true,
+          "export": "DENY",
+          "redaction": "MASK",
+          "redactionScope": "NON_DOMAIN_OBSERVABILITY"
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "CMD-RECORD",
+      "expectedRevision": 2,
+      "node": {
+        "id": "CMD-RECORD",
+        "revision": 3,
+        "kind": "Command",
+        "name": "CMD-RECORD",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "CMD-RECORD",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "CMD-RECORD",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CMD-RECORD",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "ENT-PAYMENT",
+            "revision": 1
+          },
+          "invariants": [
+            {
+              "id": "INV-POSITIVE",
+              "revision": 1
+            }
+          ],
+          "emits": [
+            {
+              "id": "EVT-RECORDED",
+              "revision": 1
+            }
+          ],
+          "aggregate": {
+            "id": "AGG-ENT-PAYMENT",
+            "revision": 1
+          },
+          "writes": [
+            {
+              "id": "ENT-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "failures": [
+            {
+              "id": "FAIL-BUSINESS",
+              "revision": 1
+            },
+            {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            }
+          ],
+          "idempotency": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          },
+          "input": {
+            "id": "OPERATION-INPUT",
+            "revision": 1
+          },
+          "output": {
+            "id": "OPERATION-RESULT",
+            "revision": 1
+          },
+          "writeFields": [
+            {
+              "id": "FLD-TASK-SUMMARY",
+              "revision": 1
+            }
+          ],
+          "assignments": [
+            {
+              "resource": {
+                "id": "ENT-PAYMENT",
+                "revision": 1
+              },
+              "field": {
+                "id": "FLD-TASK-SUMMARY",
+                "revision": 1
+              },
+              "value": {
+                "tag": "input",
+                "scope": "OPERATION",
+                "field": {
+                  "id": "OPERATION-TEXT",
+                  "revision": 1
+                }
+              }
+            }
+          ],
+          "outputBindings": [
+            {
+              "field": {
+                "id": "RESULT-TEXT",
+                "revision": 1
+              },
+              "value": {
+                "tag": "postField",
+                "field": {
+                  "id": "FLD-TASK-SUMMARY",
+                  "revision": 1
+                }
+              }
+            }
+          ],
+          "eventBindings": [
+            {
+              "event": {
+                "id": "EVT-RECORDED",
+                "revision": 1
+              },
+              "payload": [
+                {
+                  "field": {
+                    "id": "FLD-AMOUNT",
+                    "revision": 1
+                  },
+                  "value": {
+                    "tag": "postField",
+                    "field": {
+                      "id": "FLD-AMOUNT",
+                      "revision": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "emissionOrder": "DECLARED_BINDING_SEQUENCE",
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       }
     },
@@ -112,6 +459,264 @@
               }
             }
           ]
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "DELIVERY-EVT-RECORDED",
+      "expectedRevision": 1,
+      "node": {
+        "id": "DELIVERY-EVT-RECORDED",
+        "revision": 2,
+        "kind": "DeliveryPolicy",
+        "name": "DELIVERY-EVT-RECORDED",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELIVERY-EVT-RECORDED",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELIVERY-EVT-RECORDED",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "event": {
+            "id": "EVT-RECORDED",
+            "revision": 1
+          },
+          "guarantee": "AT_LEAST_ONCE",
+          "ordering": "PER_AGGREGATE",
+          "windowSeconds": 3600,
+          "deduplication": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          },
+          "windowAnchor": "EVENT_COMMIT",
+          "occurrenceOrder": "COMMIT_STEP_EMISSION_SEQUENCE"
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "HOLD-ENT-PAYMENT",
+      "expectedRevision": 2,
+      "node": {
+        "id": "HOLD-ENT-PAYMENT",
+        "revision": 3,
+        "kind": "LegalHold",
+        "name": "HOLD-ENT-PAYMENT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "HOLD-ENT-PAYMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "HOLD-ENT-PAYMENT",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "resource": {
+            "id": "ENT-PAYMENT",
+            "revision": 1
+          },
+          "condition": {
+            "tag": "literal",
+            "type": {
+              "kind": "Boolean"
+            },
+            "value": true
+          },
+          "release": {
+            "id": "PERM-CMD-RECORD",
+            "revision": 2
+          },
+          "releaseMode": "CURRENT_LIFECYCLE_ACTION"
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "IDEM-OPERATION",
+      "expectedRevision": 1,
+      "node": {
+        "id": "IDEM-OPERATION",
+        "revision": 2,
+        "kind": "IdempotencyPolicy",
+        "name": "IDEM-OPERATION",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "IDEM-OPERATION",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "IDEM-OPERATION",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "scope": {
+            "id": "ENT-PAYMENT",
+            "revision": 1
+          },
+          "keyType": {
+            "kind": "String"
+          },
+          "windowSeconds": 86400,
+          "replay": "RETURN_RESULT",
+          "conflict": "REJECT_DIFFERENT_INPUT",
+          "windowAnchor": "COMMITTED_RESULT",
+          "inFlight": "RETURN_IN_PROGRESS"
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "JOB-TASK",
+      "expectedRevision": 2,
+      "node": {
+        "id": "JOB-TASK",
+        "revision": 3,
+        "kind": "Job",
+        "name": "JOB-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "JOB-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "JOB-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "JOB-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "useCase": {
+            "id": "UC-TASK",
+            "revision": 2
+          },
+          "schedule": {
+            "id": "SCHEDULE-TASK",
+            "revision": 1
+          },
+          "retry": {
+            "id": "RETRY-TASK",
+            "revision": 1
+          },
+          "idempotency": {
+            "id": "IDEM-OPERATION",
+            "revision": 1
+          },
+          "timeoutSeconds": 30,
+          "inputBindings": [
+            {
+              "field": {
+                "id": "INPUT-TASK-RESOURCE",
+                "revision": 1
+              },
+              "value": {
+                "tag": "literal",
+                "type": {
+                  "kind": "Identifier",
+                  "entity": {
+                    "id": "ENT-PAYMENT",
+                    "revision": 1
+                  }
+                },
+                "value": "fixture-resource"
+              }
+            },
+            {
+              "field": {
+                "id": "INPUT-TASK-TEXT",
+                "revision": 1
+              },
+              "value": {
+                "tag": "literal",
+                "type": {
+                  "kind": "String"
+                },
+                "value": "Explicit scheduled fixture text"
+              }
+            }
+          ],
+          "missedOccurrences": "SKIP",
+          "catchUp": null
         }
       }
     },
@@ -297,7 +902,8 @@
               },
               "direction": "ASC"
             }
-          ]
+          ],
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       }
     },
@@ -460,6 +1066,93 @@
           "delayBasis": "AFTER_FAILURE_COMPLETION",
           "jitter": "NONE",
           "attemptCounting": "INCLUDING_INITIAL"
+        }
+      }
+    },
+    {
+      "op": "REVISE",
+      "id": "UC-TASK",
+      "expectedRevision": 2,
+      "node": {
+        "id": "UC-TASK",
+        "revision": 3,
+        "kind": "UseCase",
+        "name": "UC-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "UC-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "UC-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "UC-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "service": {
+            "id": "SERVICE-TASKS",
+            "revision": 2
+          },
+          "steps": [
+            {
+              "id": "STEP-CMD-RECORD",
+              "revision": 2
+            }
+          ],
+          "input": {
+            "id": "INPUT-TASK",
+            "revision": 1
+          },
+          "output": {
+            "id": "OUTPUT-TASK",
+            "revision": 1
+          },
+          "outputBindings": [
+            {
+              "field": {
+                "id": "OUTPUT-TASK-TEXT",
+                "revision": 1
+              },
+              "value": {
+                "tag": "stepResult",
+                "step": {
+                  "id": "STEP-CMD-RECORD",
+                  "revision": 2
+                },
+                "field": {
+                  "id": "RESULT-TEXT",
+                  "revision": 1
+                }
+              }
+            }
+          ],
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
         }
       }
     }
