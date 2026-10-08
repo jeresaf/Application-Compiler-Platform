@@ -6,13 +6,16 @@ from validate import semantic_walk
 from phase1_semantics import typed_references
 from deterministic_contract import FAILURE_BINDING, authoring_schema
 
+# Immutable schema definitions loaded before a confined target denies file I/O.
+DEFS=authoring_schema()['$defs']
+
 STAGES={'PRE_STATE':0,'POST_ASSIGNMENT':1,'INVARIANT':2,'INFRASTRUCTURE':3}
 FAULTS={'DEPENDENCY_UNAVAILABLE','SERIALIZATION_CONFLICT','TIMEOUT'}
 
 
 def validate_bindings(document, emit):
     by={n['id']:n for n in document['nodes']}
-    defs=authoring_schema()['$defs']
+    defs=DEFS
     for op in document['nodes']:
         if op['kind']!='Command':continue
         d=op['data']; bindings=d['failureBindings'];seen=set();covered=set();last=-1

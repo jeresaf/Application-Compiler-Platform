@@ -22,6 +22,8 @@ SUPPORTED = {k.split('/')[0] for k,v in capabilities().items() if v['status']=='
 
 def manifest(profile):
     return {**profile, "releaseStatus": "INCOMPLETE", "capabilities": capabilities(),
+            "semanticCompatibility": {"0.1.0": {"semanticModel":"0.2.0","policy":"legacy constrained subset"}, "0.2.0": {"semanticModel":"0.3.0","feature":"acp.execution.0.3","policy":"preserved legacy subset; paginated ordering remains blocked"}, "0.3.0": {"semanticModel":"0.4.0","feature":"acp.deterministic-execution.0.4","policy":"explicit deterministic invocation subset; unfinished families block full admission"}},
+            "nodeCapabilityVersionMeaning":"0.2.0 denotes node-kind interface identity, not Canonical schema compatibility",
             "requiredDecisions": profile["decisions"],
             "ownership": ["COMPILER_OWNED", "FRAMEWORK_OWNED", "AI_MANAGED", "HUMAN_OWNED"],
             "migrations": ["flyway-versioned", "expand-backfill-switch-contract"],
@@ -36,23 +38,27 @@ def negotiate(nodes, required, decisions, profile, canonical_version='0.1.0'):
                    or type(n.get("revision")) is not int or n["revision"] < 1 for n in nodes)
             or len({n["id"] for n in nodes}) != len(nodes)):
         raise CapabilityError("SEMANTIC_INPUT")
-    known = manifest(profile)["capabilities"]
+    known = capabilities(canonical_version)
     errors = []
-    if canonical_version not in {'0.1.0', '0.2.0'}:
+    if canonical_version not in {'0.1.0', '0.2.0', '0.3.0'}:
         errors.append('CANONICAL_VERSION')
-    if canonical_version == '0.2.0':
+    if canonical_version!='0.3.0' and 'acp.deterministic-execution.0.4' in required:
+        errors.append('CANONICAL_FEATURE_MISMATCH')
+    if canonical_version=='0.3.0' and 'acp.deterministic-execution.0.4' not in required:
+        errors.append('DETERMINISTIC_FEATURE_REQUIRED')
+    if canonical_version in {'0.2.0', '0.3.0'}:
         if 'semantic.execution-dataflow/0.3' not in required:
             errors.append('EXPLICIT_EXECUTION_CAPABILITY_REQUIRED')
         from execution_codegen import ExecutionGenerator
         try:
             if any(n['kind'] in {'Command', 'Query', 'UseCase'} and 'input' not in n['data'] for n in nodes):
                 raise CapabilityError('EXPLICIT_EFFECTS_REQUIRED')
-            ExecutionGenerator(nodes).validate()
+            ExecutionGenerator(nodes, canonical_version).validate()
         except (CapabilityError, KeyError, TypeError) as e:
             errors.append(str(e) if isinstance(e, CapabilityError) else 'EXPLICIT_EFFECTS_REQUIRED')
     elif any(n['kind'] == 'Command' and 'assignments' in n['data'] for n in nodes):
         errors.append('CANONICAL_VERSION')
-    if canonical_version != '0.2.0' and (any(n['kind'] in {'Command', 'UseCase'} for n in nodes)
+    if canonical_version not in {'0.2.0', '0.3.0'} and (any(n['kind'] in {'Command', 'UseCase'} for n in nodes)
             or 'UseCase/0.2.0' in required or 'semantic.execution-dataflow/0.3' in required):
         errors.append('EXPLICIT_EFFECTS_REQUIRED')
     for capability in sorted(set(required) | {n["kind"] + "/0.2.0" for n in nodes}):
@@ -60,13 +66,13 @@ def negotiate(nodes, required, decisions, profile, canonical_version='0.1.0'):
             errors.append("UNSUPPORTED:" + capability)
     if decisions != profile["decisions"]:
         errors.append("REQUIRED_DECISIONS")
-    if canonical_version == '0.2.0' and sum(n['kind'] == 'AuthenticationModel' for n in nodes) != 1:
+    if canonical_version in {'0.2.0', '0.3.0'} and sum(n['kind'] == 'AuthenticationModel' for n in nodes) != 1:
         errors.append('AUTHENTICATION_ACTOR_CONSTRAINT')
     for n in nodes:
-        if canonical_version == '0.2.0' and n['kind'] == 'AuthenticationModel':
+        if canonical_version in {'0.2.0', '0.3.0'} and n['kind'] == 'AuthenticationModel':
             if n['data'].get('assurance') != 'MULTI_FACTOR' or set(n['data'].get('mechanisms', [])) != {'KNOWLEDGE', 'POSSESSION'}:
                 errors.append('AUTHENTICATION_ASSURANCE_CONSTRAINT:' + n['id'])
-        if canonical_version == '0.2.0' and n['kind'] == 'Relation':
+        if canonical_version in {'0.2.0', '0.3.0'} and n['kind'] == 'Relation':
             from relations import relation_sql, RelationError
             try:
                 relation_sql(n, {node['id']: node for node in nodes})
@@ -124,10 +130,10 @@ def lower(nodes, profile, canonical_version='0.1.0'):
         for f in fields:
             t = f["data"]["type"]
             columns.append({"origin": {"id": f["id"], "revision": f["revision"]}, "name": identifier(f["id"], "f"),
-                            "sqlType": sql_type(t, by_id, execution=canonical_version == '0.2.0'), "type": t,
+                            "sqlType": sql_type(t, by_id, execution=canonical_version in {'0.2.0', '0.3.0'}), "type": t,
                             "nullable": bool(f["data"]["optional"] or t["kind"] == "Nullable"),
                             "optionalUpdate": bool(f["data"]["optional"]), "classification": f["data"]["classification"]})
-            if canonical_version == '0.2.0' and f['data']['optional'] and t['kind'] == 'Nullable':
+            if canonical_version in {'0.2.0', '0.3.0'} and f['data']['optional'] and t['kind'] == 'Nullable':
                 columns[-1]['presence'] = identifier(f['id'], 'present')
         tables.append({"origin": {"id": entity["id"], "revision": entity["revision"]},
                        "name": identifier(entity["id"], "e"), "columns": columns, "semantic": entity["data"]})
@@ -135,7 +141,7 @@ def lower(nodes, profile, canonical_version='0.1.0'):
     for n in grouped("Command") + grouped("Query") + grouped("UseCase"):
         permissions = [p["id"] for p in grouped("Permission") if p["data"]["action"]["id"] == n["id"]]
         api.append({"origin": {"id": n["id"], "revision": n["revision"]}, "path": "/api/" + identifier(n["id"], "op"),
-                    "method": "GET" if n["kind"] == "Query" and canonical_version != '0.2.0' else "POST", "role": n["kind"],
+                    "method": "GET" if n["kind"] == "Query" and canonical_version not in {'0.2.0', '0.3.0'} else "POST", "role": n["kind"],
                     "permissions": permissions, "semantic": n["data"],
                     "errors": [400, 401, 403, 404, 409, 422, 429],
                     "concurrency": "expectedVersion", "pagination": {"maximum": n["data"].get("maximumResults", 100)}})
@@ -144,7 +150,7 @@ def lower(nodes, profile, canonical_version='0.1.0'):
                          "origin": {"id": n["id"], "revision": n["revision"]}} for n in nodes],
             "tables": tables, "api": api, "screens": grouped("Screen"),
             "nodes": nodes, "stack": profile["stack"], "design": profile["decisions"]["design"]}
-    if canonical_version == '0.2.0':
+    if canonical_version in {'0.2.0', '0.3.0'}:
         result['canonicalVersion'] = canonical_version
-        result['requiredCapabilities'] = ['semantic.execution-dataflow/0.3']
+        result['requiredCapabilities'] = ['semantic.execution-dataflow/0.3'] + (['acp.deterministic-execution.0.4'] if canonical_version=='0.3.0' else [])
     return result

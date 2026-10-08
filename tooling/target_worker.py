@@ -179,7 +179,9 @@ class ProductionTarget(SyntheticTarget):
         choices = {d.role: d.choice.read().get("choice") for d in (*realization.architecture, *realization.design)}
         payload = {"nodes": sorted((o.semantic.read() for o in realization.objects), key=lambda n: n["id"]),
                    "required": [c for c in request.required_capabilities if c == 'semantic.execution-dataflow/0.3'], "decisions": choices}
-        if 'acp.execution.0.3' in request.features:
+        if 'acp.deterministic-execution.0.4' in request.features:
+            payload.update(canonicalVersion='0.3.0', required=['semantic.execution-dataflow/0.3', 'acp.deterministic-execution.0.4'])
+        elif 'acp.execution.0.3' in request.features:
             payload.update(canonicalVersion='0.2.0', required=['semantic.execution-dataflow/0.3'])
         # Host approved decisions are checked by compiler_core before this port.
         self.last_admission = {"operation": "lower", "result": "PENDING"}

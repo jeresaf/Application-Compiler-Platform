@@ -1,6 +1,6 @@
 # Phase 6 target contract — implementation in progress
 
-The [semantic audit](phase6-semantic-underspecification-audit.md) and [successor proposal report](deterministic-v04-proposal-report.md) distinguish enforced constrained behavior, retained obligations and unsupported families. Blocker contract 1.1 intentionally narrows overclaimed UI/Failure capabilities and requires exactly 27 blockers per approved snapshot. Strict closure mode remains failing until complete negotiated admission, builds and evolution pass. New canonical semantics remain PROPOSED / HUMAN REVIEW REQUIRED.
+ADR-0016 and the complete deterministic-v04 fixture decisions are ACCEPTED by subsequent explicit human approval. The [invocation tranche](phase6-invocation-core.md) consumes the exact approved Canonical 0.3 snapshots. Actual full negotiation reports 19 remaining blockers per application, bound by [contract 2.0.0](../targets/spring-vue-postgres/expected-open-blockers-v2.json). Historical contract 1.1.0 and proposal-time evidence remain preserved. Strict mode remains red; exact expected-open CI is not target acceptance.
 
 The [profile](../targets/spring-vue-postgres/profile.json) and [ADR](adr/0014-first-production-target.md) describe the first target direction. The worker currently advertises `releaseStatus: INCOMPLETE`. Both complete reference domains fail negotiation on outstanding capabilities. A successful template build is not successful production-target compilation.
 
@@ -12,8 +12,8 @@ The [profile](../targets/spring-vue-postgres/profile.json) and [ADR](adr/0014-fi
 | --- | --- |
 | handshake | `{}` |
 | manifest | `{}` |
-| negotiate | `nodes`, `required`, `decisions` |
-| lower | `nodes`, `required`, `decisions` |
+| negotiate | `nodes`, `required`, `decisions`, optional explicit `canonicalVersion` |
+| lower | `nodes`, `required`, `decisions`, optional explicit `canonicalVersion` |
 | plan | `model`, `inventory` |
 | validate-plan | `artifacts` |
 
@@ -35,16 +35,17 @@ The executable manifest is authoritative for current negotiation; retrieve it wi
 
 | Family | Current implementation / limitation |
 | --- | --- |
-| primitives, Money, entities | Canonical 0.2 typed records and strict codecs; exact Money precision/currency, bounded String nominal refinements and nested ValueObjects; unsupported types reject negotiation |
+| primitives, Money, entities | Canonical 0.2 legacy and Canonical 0.3 typed records and strict codecs; exact Money precision/currency, bounded String nominal refinements and nested ValueObjects; unsupported types reject negotiation |
 | relations/cardinality | Same-tenant scoped identities; min 0/1, max 1/UNBOUNDED, RESTRICT; deferred PostgreSQL constraints and integration tests; other forms reject negotiation |
-| invariants, commands, queries, workflow | Typed explicit Canonical 0.2 effects, pre-state guards and staged invariants; SQL Unicode substring predicate; idempotency/rate enforcement remains unsupported |
+| invariants, commands, queries, workflow | Typed explicit effects, pre-state guards and staged invariants; Canonical 0.3 ordered Unicode bytea queries and exact staged Failure bindings; durable rate/idempotency invocation profile |
 | use cases | Exact step input/prior result/resource bindings, typed output/event construction, one root instance and atomic STOP transaction; multi-commit/compensation forms reject negotiation |
 | permissions, policies, tenant scope | Server policy and tenant predicates with unit tests; full authorization and isolation integration suite outstanding |
 | authentication/session | Bounded signed-issuer pwd/otp MFA; durable tenant/subject/session activity, absolute/idle/reauthentication/revocation checks with PostgreSQL tests |
 | audit/events | Audit/outbox source sites exist; delivery semantics remain UNSUPPORTED |
 | task UI | Task/screen forms, selection, errors, permission visibility and accessible hooks; design-role coverage and cross-stack journeys incomplete |
 | quality obligations | Metadata retained; trusted production evidence and discharge are not claimed |
-| jobs/schedules/retry | UNSUPPORTED |
+| jobs/schedules | UNSUPPORTED |
+| retry | Constrained Canonical 0.3 operation execution with explicitly selected exact policy; no Job/Schedule support or inferred HTTP association |
 | files/blob/distributed transactions | UNSUPPORTED |
 | classification/privacy/data lifecycle | UNSUPPORTED; UTF-8 byte storage is not encryption or export/privacy enforcement |
 

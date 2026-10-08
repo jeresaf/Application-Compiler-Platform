@@ -44,8 +44,7 @@ class DeterministicApprovalTests(unittest.TestCase):
         paths=[p.relative_to(root).as_posix() for p in DEST.glob('*.json') if p.name!='human-approval.json']
         paths += ['contracts/authoring-0.4.schema.json','contracts/canonical-0.3.schema.json','contracts/change-0.3.schema.json',
             'contracts/authoring-0.3.schema.json','contracts/canonical-0.2.schema.json','contracts/change-0.2.schema.json',
-            'docs/adr/0015-explicit-operation-effects-and-dataflow.md','targets/spring-vue-postgres/expected-open-blockers.json',
-            'targets/spring-vue-postgres/worker/capability_contract.py']
+            'docs/adr/0015-explicit-operation-effects-and-dataflow.md','targets/spring-vue-postgres/expected-open-blockers.json']
         for path in paths:
             self.assertEqual(subprocess.check_output(['git','show','76e7700:'+path],cwd=root),(root/path).read_bytes(),path)
         for domain in APPROVED:

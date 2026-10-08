@@ -9,6 +9,8 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(1, str(Path(__file__).resolve().parents[3] / 'tooling'))
 from execution_model import validate_execution  # Closed neutral validator, preloaded before seccomp.
+from deterministic_model import validate_deterministic
+import deterministic_reference, deterministic_failures, deterministic_invocation
 import phase1_semantics, security_semantics, execution_semantics, ui_semantics, quality_semantics, execution_canonical
 from importlib.resources import files
 from datetime import datetime
@@ -99,14 +101,15 @@ def handle(request):
 
 
 def validate_semantics(payload):
-    if payload.get('canonicalVersion') != '0.2.0':
+    if payload.get('canonicalVersion') not in {'0.2.0', '0.3.0'}:
         return
     nodes = payload['nodes']
-    source = {'modelVersion': '0.3.0', 'applicationId': 'worker-validation', 'snapshotId': 'WORKER-STRUCTURAL-CHECK',
+    source = {'modelVersion': '0.4.0' if payload['canonicalVersion']=='0.3.0' else '0.3.0', 'applicationId': 'worker-validation', 'snapshotId': 'WORKER-STRUCTURAL-CHECK',
               'nodes': nodes, 'issues': [], 'approvals': [
                   {'subject': {'id': n['id'], 'revision': n['revision']},
                    'reviewer': 'structural-check-only', 'evidence': 'host-approval-checked-separately'} for n in nodes]}
-    if validate_execution(source, 'compile'):
+    validator = validate_deterministic if payload['canonicalVersion']=='0.3.0' else validate_execution
+    if validator(source, 'compile'):
         raise CapabilityError('SEMANTIC_VALIDATION')
 
 

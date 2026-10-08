@@ -8,9 +8,46 @@ from typed_contracts import Contracts, member, name, quoted
 
 
 class ExecutionGenerator:
-    def __init__(self, nodes):
+    def __init__(self, nodes, canonical_version='0.2.0'):
         self.c = Contracts(nodes)
         self.nodes = self.c.nodes
+        self.deterministic = canonical_version == '0.3.0'
+
+    def order_sql(self, d):
+        if not self.deterministic:
+            return ''
+        result = []
+        for key in d['orderBy']:
+            f = self.nodes[key['field']['id']]['data']
+            t = f['type']; column = identifier(key['field']['id'], 'f')
+            if f['optional']:
+                presence = identifier(key['field']['id'], 'present') if t['kind']=='Nullable' else column+' IS NOT NULL'
+                result.append('('+presence+') '+('ASC' if key['absent']=='FIRST' else 'DESC'))
+            if t['kind']=='Nullable':
+                result.append('('+column+' IS NULL) '+('DESC' if key['nulls']=='FIRST' else 'ASC'))
+                t=t['item']
+            # UTF-8 lexicographic bytea order equals Unicode scalar order,
+            # including supplementary scalars and U+0000, independent of collation.
+            if t['kind'] not in {'String','Identifier'}:
+                raise CapabilityError('ORDERED_TYPE_UNSUPPORTED:'+t['kind'])
+            result.append(column+' '+key['direction'])
+        return ' ORDER BY '+','.join(result) if result else ''
+
+    def fail(self, n, binding):
+        f=self.nodes[binding['failure']['id']];d=f['data']
+        return 'throw acp.infrastructure.SemanticFailure.bound('+','.join([quoted(f['id']),str(f['revision']),quoted(d['code']),quoted(d['category']),str(d['retryable']).lower(),quoted(n['id']),str(n['revision']),quoted(binding['stage'])])+');'
+
+    def failure_checks(self, n, stage):
+        lines=[]
+        for b in n['data'].get('failureBindings',[]):
+            if b['stage']!=stage:continue
+            t=b['trigger'];kind=t['kind']
+            if kind=='PREDICATE': condition='Boolean.TRUE.equals('+self.expression(t['condition'])+')'
+            elif kind=='WORKFLOW_NO_APPLICABLE_TRANSITION':condition='!transitionFound'
+            elif kind=='INVARIANT_FAILURE':condition='!Boolean.TRUE.equals('+self.expression(self.nodes[t['invariant']['id']]['data']['predicate'],pre='staged')+')'
+            else:continue
+            lines.append('if ('+condition+') '+self.fail(n,b))
+        return lines
 
     def field(self, source, id):
         f = self.nodes[id]
@@ -161,6 +198,7 @@ class ExecutionGenerator:
                 for ref in d['invariants']:
                     self.expression(self.nodes[ref['id']]['data']['predicate'], pre='staged')
             elif k == 'Query':
+                self.order_sql(d)
                 self.query_sql(d['predicate'])
                 for b in d['projection']:
                     self.expression(b['value'])
@@ -187,6 +225,28 @@ class ExecutionGenerator:
                 raise CapabilityError('SAME_TENANT_SCOPE_REQUIRED:' + n['id'])
         self.c.source()  # Resolve every persisted/DTO field and refinement.
         self.controller()
+        if self.deterministic:
+            from deterministic_contract import RATE
+            rates={}
+            for node in self.nodes.values():
+                d=node['data'];kind=node['kind']
+                if kind=='RatePolicy':
+                    action=self.nodes[d['permission']['id']]['data']['action']['id']
+                    rates[action]=rates.get(action,0)+1
+                    if rates[action]>1 or d['algorithm']!=RATE or d['partition'] not in {'ACTOR','TENANT'} or any(not 0<d[k]<2**31 for k in ('requests','windowSeconds','burst')):
+                        raise CapabilityError('RATE_SUBSET_REQUIRED')
+                if kind=='IdempotencyPolicy' and (d['keyType']!={'kind':'String'} or d['windowSeconds']>=2**31):
+                    raise CapabilityError('IDEMPOTENCY_SUBSET_REQUIRED')
+                if kind=='Policy':
+                    operation=self.nodes[d['action']['id']]
+                    if operation['kind']=='Command':
+                        written={a['field']['id'] for command in self.nodes.values() if command['kind']=='Command' and command['data']['resource']==operation['data']['resource'] for a in command['data']['assignments']}
+                        def check(e):
+                            if e.get('tag')=='field' and e['binding']=='resource' and e['ref']['id'] in written:raise CapabilityError('INVOCATION_PREFLIGHT_POLICY_UNSUPPORTED')
+                            for value in e.values():
+                                if isinstance(value,dict):check(value)
+                        check(d['predicate'])
+            self.invocations()
         self.frontend()
 
     def row_reader(self, entity):
@@ -250,11 +310,15 @@ class ExecutionGenerator:
                  f'store.authorize({quoted(id)}, {self.semantic(entity, "pre")}, jwt);',
                  'if (row.version() != expectedVersion) throw new IllegalStateException("VERSION_CONFLICT");',
                  'String state = row.state();']
-        if transitions:
+        if transitions or self.deterministic:
             lines.append('boolean transitionFound = false;')
+        if transitions:
             for t in transitions:
                 td = t['data']; machine = self.nodes[td['machine']['id']]['data']
                 lines.append(f'if (!transitionFound && {quoted(td["from"]["id"])}.equals(state == null ? {quoted(machine["initial"]["id"])} : state) && Boolean.TRUE.equals({self.expression(td["guard"])})) {{ state={quoted(td["to"]["id"])}; transitionFound=true; }}')
+        if self.deterministic:
+            lines.extend(self.failure_checks(n,'PRE_STATE'))
+        if transitions:
             lines.append('if (!transitionFound) throw new IllegalStateException("TRANSITION_DENIED");')
         written = set()
         for a in d['assignments']:
@@ -263,6 +327,9 @@ class ExecutionGenerator:
             if self.nodes[target]['data']['optional']:
                 args = ['Slot.of(' + self.expression(a['value']) + ')' if f['id'] == target else 'staged.' + member(f['id']) + '()' for f in self.c.fields(entity)]
             lines.append(f'staged = new {name(entity)}(' + ','.join(args) + ');')
+        if self.deterministic:
+            lines.extend(self.failure_checks(n,'POST_ASSIGNMENT'))
+            lines.extend(self.failure_checks(n,'INVARIANT'))
         for inv in d['invariants']:
             expr = self.nodes[inv['id']]['data']['predicate']
             lines.append(f'if (!Boolean.TRUE.equals({self.expression(expr, pre="staged")})) throw new IllegalArgumentException("INVARIANT");')
@@ -285,7 +352,18 @@ class ExecutionGenerator:
             by = {p['field']['id']: p['value'] for p in b['payload']}
             payload = 'new ' + name(event) + '(' + ','.join(self.expression(by[f['id']]) for f in fields) + ')'
             lines.append(f'store.event({quoted(id)}, {quoted(event)}, resourceId.value(), row.version()+1, {payload}, jwt);')
-        lines.append('return new ExecutionStore.Completion<>(output, resourceId.value(), row.version()+1, state);')
+        completion='new ExecutionStore.Completion<>(output, resourceId.value(), row.version()+1, state)'
+        lines.append('return '+('acp.infrastructure.InvocationCore.capture('+quoted(id)+',new '+out+'Replay('+completion+')).completion()' if self.deterministic else completion)+';')
+        if self.deterministic:
+            if any(b['trigger']['kind']=='INFRASTRUCTURE_CLASS' and b['trigger']['faultClass']!='DEPENDENCY_UNAVAILABLE' for b in d['failureBindings']):
+                raise CapabilityError('FAILURE_INFRASTRUCTURE_SUBSET_REQUIRED')
+            # Concrete result records preserve typed replay, avoiding erased Object DTOs.
+            replay='var replay = acp.infrastructure.InvocationCore.replay('+quoted(id)+', '+out+'Replay.class); if (replay!=null) return replay.completion();'
+            catches=[]
+            for b in d['failureBindings']:
+                if b['trigger']['kind']=='INFRASTRUCTURE_CLASS':
+                    catches.append('if ('+quoted(b['trigger']['faultClass'])+'.equals(fault)) '+self.fail(n,b))
+            lines=[replay,'try {',*lines,'} catch (RuntimeException error) { if (error instanceof acp.infrastructure.SemanticFailure) throw error; String fault=acp.infrastructure.InvocationCore.portable(error);',*catches,'throw error; }']
         return f'''@org.springframework.transaction.annotation.Transactional
     public ExecutionStore.Completion<{out}> {member(id)}({name(entity)}Id resourceId, long expectedVersion, {inp} input, org.springframework.security.oauth2.jwt.Jwt jwt) {{
         java.util.Objects.requireNonNull(input); java.util.Objects.requireNonNull(resourceId);
@@ -322,7 +400,7 @@ class ExecutionGenerator:
         projection = self.construct(d['result']['definition']['id'], d['projection'])
         # Ordering is not declared by the approved model. Do not invent it.
         # Full paginated admission remains blocked pending authoritative order.
-        sql = f'SELECT * FROM {table} WHERE {tenant}=? AND {predicate} LIMIT ? OFFSET ?'
+        sql = f'SELECT * FROM {table} WHERE {tenant}=? AND {predicate}' + self.order_sql(d) + ' LIMIT ? OFFSET ?'
         return f'''
     @org.springframework.transaction.annotation.Transactional
     public java.util.List<ExecutionStore.Completion<{out}>> {member(id)}({inp} input, int offset, int limit, org.springframework.security.oauth2.jwt.Jwt jwt) {{
@@ -352,9 +430,13 @@ class ExecutionGenerator:
             if n['kind'] == 'Command': methods.append(self.command(n))
             elif n['kind'] == 'UseCase': methods.append(self.usecase(n))
             elif n['kind'] == 'Query': methods.append(self.query(n))
+        if self.deterministic:
+            for out in sorted({name(n['data']['output']['id']) for n in self.nodes.values() if n['kind']=='Command'}):
+                methods.append('public record '+out+'Replay(ExecutionStore.Completion<'+out+'> completion) {}')
         # Contracts source runs last so all decimal types encountered above exist.
         return {'backend/src/main/java/acp/generated/Contracts.java': self.c.source(),
                 'backend/src/main/java/acp/generated/TypedController.java': self.controller(),
+                **({'backend/src/main/java/acp/generated/Invocations.java': self.invocations()} if self.deterministic else {}),
                 'frontend/src/task-contract.ts': self.frontend(),
                 'backend/src/main/java/acp/generated/TypedTasks.java': '''package acp.generated;
 import static acp.generated.Contracts.*;
@@ -391,7 +473,7 @@ public class TypedTasks {
     public ExecutionStore.Completion<{out}> {method}(@RequestBody {request} request, @AuthenticationPrincipal Jwt jwt) {{
         return tasks.{method}({call}request.expectedVersion(), request.input(), jwt);
     }}''')
-        return '''package acp.generated;
+        controller = '''package acp.generated;
 import static acp.generated.Contracts.*;
 import acp.infrastructure.ExecutionStore;
 import org.springframework.web.bind.annotation.*;
@@ -402,6 +484,80 @@ public final class TypedController {
     private final TypedTasks tasks;
     public TypedController(TypedTasks tasks) { this.tasks=tasks; }
 ''' + '\n'.join(methods) + '\n}\n'
+        if self.deterministic:
+            controller=controller.replace('TypedTasks tasks','Invocations tasks').replace('TypedTasks tasks)', 'Invocations tasks)')
+            controller=controller.replace('long expectedVersion, ', 'long expectedVersion, @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using=StringKey.class) String idempotencyKey, ')
+            controller=controller.replace('    private final Invocations tasks;', '    public static final class StringKey extends com.fasterxml.jackson.databind.JsonDeserializer<String> {\n        @Override public String deserialize(com.fasterxml.jackson.core.JsonParser parser, com.fasterxml.jackson.databind.DeserializationContext context) throws java.io.IOException {\n            if(parser.currentToken()!=com.fasterxml.jackson.core.JsonToken.VALUE_STRING) throw new IllegalArgumentException("IDEMPOTENCY_KEY_TYPE");\n            String value=parser.getText(); ExecutionStore.bytes(value); return value;\n        }\n    }\n    private final Invocations tasks;')
+            controller=controller.replace('request.input(), jwt);','request.input(), request.idempotencyKey(), jwt);')
+        return controller
+
+    def invocations(self):
+        import json
+        methods=[]
+        def input_type(op):
+            owner=op['data']['input'];return json.dumps({'kind':'Value','definition':owner},sort_keys=True,separators=(',',':'))
+        def call(op,resource,inp):
+            d=op['data'];p=self.nodes[d['idempotency']['id']];pd=p['data']
+            if pd['keyType']!={'kind':'String'}:raise CapabilityError('IDEMPOTENCY_KEY_SUBSET_REQUIRED')
+            if any(f['data']['optional'] or f['data']['type']['kind'] not in {'String','Identifier'} for f in self.c.fields(d['input']['id'])):
+                raise CapabilityError('IDEMPOTENCY_INPUT_SUBSET_REQUIRED')
+            return 'new InvocationCore.Call('+','.join([quoted(op['id']),str(op['revision']),quoted(p['id']),str(p['revision']),resource+'.value()', 'InvocationCore.typed("{\\\"kind\\\":\\\"String\\\"}",key)', 'InvocationCore.typed('+quoted(input_type(op))+','+inp+')',str(pd['windowSeconds'])])+')'
+        def preflight(op,resource):
+            entity=op['data']['resource']['id'];d=self.nodes[entity]['data']
+            sql='SELECT * FROM '+identifier(entity,'e')+' WHERE '+identifier(d['identity'][0]['id'],'f')+'=? AND '+identifier(d['tenantField']['id'],'f')+'=?'
+            return '{ var rows=store.query('+quoted(sql)+','+self.row_reader(entity)+',ExecutionStore.bytes('+resource+'.value()),ExecutionStore.bytes(jwt.getClaimAsString("tenant"))); if(rows.size()!=1)throw new IllegalArgumentException("RESOURCE_NOT_FOUND"); var pre=rows.getFirst().value();store.authorize('+quoted(op['id'])+','+self.semantic(entity,'pre')+',jwt); }'
+        for n in sorted(self.nodes.values(),key=lambda n:n['id']):
+            k=n['kind'];d=n['data'];id=n['id']
+            if k=='Query':
+                entity=self.nodes[d['resource']['id']]['data']
+                # Whole-query admission requires an operation policy independent
+                # of individual result rows. No unauthorized empty result bypass.
+                for policy in self.nodes.values():
+                    if policy['kind']=='Policy' and policy['data']['action']['id']==id:
+                        def check(e):
+                            if e.get('tag')=='field' and e['binding']=='resource' and e['ref']!=entity['tenantField']:raise CapabilityError('QUERY_RESOURCE_POLICY_UNSUPPORTED')
+                            for v in e.values():
+                                if isinstance(v,dict):check(v)
+                        check(policy['data']['predicate'])
+                methods.append('public java.util.List<ExecutionStore.Completion<'+name(d['result']['definition']['id'])+'>> '+member(id)+'('+name(d['input']['id'])+' input,int offset,int limit,Jwt jwt) { store.authenticate(jwt); store.authorize('+quoted(id)+',java.util.Map.of('+quoted(entity['tenantField']['id'])+',jwt.getClaimAsString("tenant")),jwt);core.charge('+quoted(id)+',jwt);return tasks.'+member(id)+'(input,offset,limit,jwt); }')
+            elif k=='Command':
+                methods.append('public ExecutionStore.Completion<'+name(d['output']['id'])+'> '+member(id)+'('+name(d['resource']['id'])+'Id resourceId,long expectedVersion,'+name(d['input']['id'])+' input,String key,Jwt jwt) { if(key==null)throw new InvocationCore.Outcome("IDEMPOTENCY_KEY_REQUIRED");store.authenticate(jwt);'+preflight(n,'resourceId')+'return core.invoke(java.util.List.of('+call(n,'resourceId','input')+'),null,jwt,()->tasks.'+member(id)+'(resourceId,expectedVersion,input,jwt)); }')
+            elif k=='UseCase':
+                lines=['if(key==null)throw new InvocationCore.Outcome("IDEMPOTENCY_KEY_REQUIRED");store.authenticate(jwt);'];calls=[];outputs={}
+                def expand(e,op=None,bindings=None):
+                    if e['tag']=='stepResult':return expand(outputs[(e['step']['id'],e['field']['id'])])
+                    if e['tag']=='postField':
+                        assignments=[a for a in op['data']['assignments'] if a['field']==e['field']]
+                        if not assignments:raise CapabilityError('IDEMPOTENCY_PREFLIGHT_DATAFLOW_UNSUPPORTED')
+                        value=assignments[-1]['value']
+                        if value['tag'] not in {'input','literal','parameter'}:raise CapabilityError('IDEMPOTENCY_PREFLIGHT_DATAFLOW_UNSUPPORTED')
+                        return expand(value,op,bindings)
+                    if e['tag']=='input' and e['scope']=='OPERATION':return expand(bindings[e['field']['id']])
+                    if e['tag'] not in {'input','literal','parameter'}:raise CapabilityError('IDEMPOTENCY_PREFLIGHT_DATAFLOW_UNSUPPORTED')
+                    return e
+                for ref in d['steps']:
+                    step=self.nodes[ref['id']];sd=step['data'];op=self.nodes[sd['operation']['id']]
+                    if sum(self.nodes[r['id']]['data']['operation']==sd['operation'] for r in d['steps'])!=1:raise CapabilityError('DUPLICATE_OPERATION_IN_BOUNDARY_UNSUPPORTED')
+                    if op['kind']!='Command':raise CapabilityError('IDEMPOTENCY_COORDINATED_QUERY_UNSUPPORTED')
+                    suffix=member(step['id']);resource='resource_'+suffix;inp='input_'+suffix
+                    lines.append('var '+resource+'='+self.expression(expand(sd['resource']),usecase='input')+';')
+                    bindings={b['field']['id']:expand(b['value']) for b in sd['inputBindings']}
+                    expanded=[{'field':b['field'],'value':bindings[b['field']['id']]} for b in sd['inputBindings']]
+                    lines.append('var '+inp+'='+self.construct(op['data']['input']['id'],expanded,usecase='input')+';')
+                    lines += [preflight(op,resource)]
+                    calls.append(call(op,resource,inp))
+                    for b in op['data']['outputBindings']:outputs[(step['id'],b['field']['id'])]=expand(b['value'],op,bindings)
+                lines.append('return core.invoke(java.util.List.of('+','.join(calls)+'),null,jwt,()->tasks.'+member(id)+'(expectedVersion,input,jwt));')
+                methods.append('public ExecutionStore.Completion<'+name(d['output']['id'])+'> '+member(id)+'(long expectedVersion,'+name(d['input']['id'])+' input,String key,Jwt jwt) { '+' '.join(lines)+' }')
+        return '''package acp.generated;
+import static acp.generated.Contracts.*;
+import acp.infrastructure.*;
+import org.springframework.security.oauth2.jwt.Jwt;
+@org.springframework.stereotype.Service
+public final class Invocations {
+    private final TypedTasks tasks;private final ExecutionStore store;private final InvocationCore core;
+    public Invocations(TypedTasks tasks,ExecutionStore store,InvocationCore core) {this.tasks=tasks;this.store=store;this.core=core;}
+'''+ '\n'.join(methods)+'\n}\n'
 
     def frontend(self):
         screens = [n for n in self.nodes.values() if n['kind'] == 'Screen']
@@ -435,7 +591,7 @@ public final class TypedController {
         output = self.c.fields(task['data']['output']['id'])
         if any(f['data']['type']['kind'] != 'String' or f['data']['optional'] for f in output):
             raise CapabilityError('TASK_OUTPUT_CONSTRAINT')
-        return '''import { call } from './api';
+        result = '''import { call } from './api';
 export type TaskInput = { ''' + ' '.join(props) + ''' };
 export type TaskOutput = { ''' + ' '.join(quoted(f['id']) + ': string;' for f in output) + ''' };
 export type TaskCompletion = { output: TaskOutput; resourceId: string; version: number; state: string | null };
@@ -451,3 +607,8 @@ export async function submitTask(values: Record<string,string>, resourceId: stri
     return call<TaskCompletion>(''' + quoted('/api/' + identifier(task['id'], 'op')) + ''', { expectedVersion, input: taskInput(values,resourceId) });
 }
 '''
+
+        if self.deterministic:
+            result=result.replace('expectedVersion: number): Promise<TaskCompletion>', 'expectedVersion: number, idempotencyKey: string): Promise<TaskCompletion>')
+            result=result.replace('{ expectedVersion, input: taskInput', '{ expectedVersion, idempotencyKey, input: taskInput')
+        return result

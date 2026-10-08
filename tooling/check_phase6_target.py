@@ -15,8 +15,8 @@ from canonical_json import load
 from compiler_contracts import Document, Success, fingerprint, wire
 from compiler_core import compile_pipeline
 from compiler_reference import FixtureApproval, fixture_context
-from execution_approval import approved_snapshot, header
-from execution_fixtures import DEST
+from deterministic_approval import approved_snapshot, header
+from deterministic_fixtures import DEST
 from filesystem_artifacts import FilesystemArtifactStore
 from phase6_reference_tests import source as test_source, http_source, variants
 from target_worker import ROOT, PROFILE, ProductionTarget, TargetWorkerError
@@ -28,7 +28,14 @@ from phase6_open_state import assert_expected_blocked
 def context_for(domain):
     # Verifies the fresh human-reference proof before exposing host approval.
     approved = Document.of(approved_snapshot(domain))
-    source, context = fixture_context(load(DEST / (domain + '-authoring.json')))
+    # These structural witnesses are internal compiler input, never persisted
+    # reviewer assertions. Exact authority comes only from the checked record.
+    content = approved.read()['content']
+    model = {'modelVersion':'0.4.0','applicationId':content['applicationId'],
+        'snapshotId':'APPROVED-CANONICAL-COMPILER-INPUT','nodes':content['nodes'],'issues':content['issues'],
+        'approvals':[{'subject':{'id':n['id'],'revision':n['revision']},
+            'reviewer':'structural-check-only','evidence':'host-exact-approval-checked-separately'} for n in content['nodes']]}
+    source, context = fixture_context(model)
     target = ProductionTarget()
     decisions = tuple(replace(d, choice=Document.of({'choice': PROFILE['decisions'][d.role]})) for d in context.request.decisions)
     evidence = Document.of(header())
@@ -43,7 +50,7 @@ def context_for(domain):
 def run(output, builds, expect_open=False):
     output.mkdir(parents=True, exist_ok=False)
     manifest = ProductionTarget().worker.call('manifest', {})
-    report = {'targetManifest': manifest, 'mode': 'FULL_NEGOTIATED_TARGET_GATE', 'phase6': 'OPEN', 'domains': {}}
+    report = {'approvedInput': header(), 'canonicalVersion':'0.3.0', 'semanticModelVersion':'0.4.0', 'targetManifest': manifest, 'mode': 'FULL_NEGOTIATED_TARGET_GATE', 'phase6': 'OPEN', 'domains': {}}
     failed = False
     for domain in ('payment', 'case-management'):
         source, context = context_for(domain)
@@ -104,7 +111,7 @@ def run(output, builds, expect_open=False):
     report['result'] = 'BLOCKED' if failed else 'PIPELINE_CHECKS_PASS_PHASE6_EXIT_REVIEW_STILL_REQUIRED'
     if expect_open and manifest.get('releaseStatus') == 'INCOMPLETE':
         try:
-            assert_expected_blocked(report, load(ROOT / 'expected-open-blockers.json'))
+            assert_expected_blocked(report, load(ROOT / 'expected-open-blockers-v2.json'))
             report['openPhaseExpectation'] = 'EXPECTED_BLOCKED_STATE = PASS'
             failed = False
         except ValueError as error:

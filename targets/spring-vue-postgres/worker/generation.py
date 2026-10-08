@@ -50,13 +50,16 @@ def schema(model):
                 right.insert(0, identifier(referred["semantic"]["tenantField"]["id"], "f"))
             later.append(f'ALTER TABLE {table["name"]} ADD CONSTRAINT {identifier(c["origin"]["id"], "fk")} FOREIGN KEY ({",".join(left)}) REFERENCES {referred["name"]} ({",".join(right)}) ON DELETE RESTRICT;')
     sql.extend(later)
-    if model.get('canonicalVersion') == '0.2.0':
+    if model.get('canonicalVersion') in {'0.2.0', '0.3.0'}:
         from relations import relation_sql
         sql.extend(relation_sql(n, nodes) for n in sorted(nodes.values(), key=lambda n: n['id']) if n['kind'] == 'Relation')
     sql += ["CREATE TABLE acp_audit (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, tenant bytea NOT NULL, subject bytea NOT NULL, operation text NOT NULL, resource bytea NOT NULL, occurred_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP);",
             "CREATE TABLE acp_sessions (tenant bytea NOT NULL, subject bytea NOT NULL, sid bytea NOT NULL, started_at bigint NOT NULL, last_seen bigint NOT NULL, authenticated_at bigint NOT NULL, revoked boolean NOT NULL, PRIMARY KEY(tenant,subject,sid));",
             "CREATE TABLE acp_outbox (id text PRIMARY KEY, tenant bytea NOT NULL, event text NOT NULL, resource bytea NOT NULL, aggregate_version bigint NOT NULL, payload bytea NOT NULL DEFAULT '\\x7b7d'::bytea, delivered_at timestamptz, UNIQUE(tenant,event,resource,aggregate_version));"]
     sql.append("CREATE TABLE acp_classification_audit (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, tenant bytea NOT NULL, subject bytea NOT NULL, operation text NOT NULL, resource bytea NOT NULL, field text NOT NULL, mode text NOT NULL CHECK(mode IN ('READ','WRITE')), occurred_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP);")
+    if model.get('canonicalVersion')=='0.3.0':
+        sql += ["CREATE TABLE acp_rate(identity bytea PRIMARY KEY,tokens numeric NOT NULL CHECK(tokens>=0),last_ns numeric NOT NULL);",
+            "CREATE TABLE acp_idempotency(identity bytea PRIMARY KEY,input_digest bytea NOT NULL,owner text NOT NULL,status text NOT NULL CHECK(status IN ('IN_FLIGHT','INDETERMINATE','COMMITTED_RESULT')),result bytea,commit_xid text,commit_ns numeric,attempt_xid text,CHECK((status='COMMITTED_RESULT')=(result IS NOT NULL AND commit_xid IS NOT NULL)));" ]
     return "\n".join(sql) + "\n"
 
 
@@ -83,10 +86,12 @@ def plan(model, templates, profile, inventory=()):
             text = text.replace('call<Row[]>(`${query.path}?search=${encodeURIComponent(search.value)}`)', 'queryTasks(search.value)')
             text = text.replace('await call(submitOperation.path, { resourceId: selected.value.resourceId, expectedVersion: selected.value.version, input: input.value });', 'await submitTask(input.value, selected.value.resourceId, selected.value.version);')
             text = text.replace('node.data.owner.id === task?.data.input.id)', 'node.data.owner.id === task?.data.input.id && node.id !== resourceInputField)')
+        if model.get('canonicalVersion')=='0.3.0' and path=='frontend/src/App.vue':
+            text=text.replace('submitTask(input.value, selected.value.resourceId, selected.value.version)', 'submitTask(input.value, selected.value.resourceId, selected.value.version, crypto.randomUUID())')
         add(path, text, "PROJECT_SOURCE", owner="FRAMEWORK_OWNED" if path.endswith(("pom.xml", "package.json")) else "COMPILER_OWNED")
     if execution:
         from execution_codegen import ExecutionGenerator
-        for path, text in ExecutionGenerator(model['nodes']).source().items():
+        for path, text in ExecutionGenerator(model['nodes'], model.get('canonicalVersion', '0.2.0')).source().items():
             add(path, text, 'TYPED_EXECUTION_SOURCE')
     add("backend/src/main/resources/acp-model.json", encoded(model), "RUNTIME_MODEL")
     add("contracts/target-ir.json", encoded(model), "TARGET_IR")

@@ -34,6 +34,10 @@ class StructuredFrontendV03(StructuredFrontend):
         return Ingested(source.document, source.source_map, self.identity)
 
 
+class StructuredFrontendV04(StructuredFrontendV03):
+    identity = "acp-structured-reference/0.3.0"
+
+
 class FixtureApproval:
     """Host-injected allowlist, bound to exact bytes/decisions/evidence. NOT production IAM."""
     identity = "acp-fixture-approval/0.1.0"
@@ -136,10 +140,10 @@ def fixture_context(model, *, cache=None, inventory=(), dependencies=(), depende
         fingerprint(source, "source"), evidence, decisions,
         tuple(sorted(fingerprint(d, "decision") for d in decisions)), tuple(dependencies))
     frontend = StructuredFrontend()
-    if model["modelVersion"] == "0.3.0":
+    if model["modelVersion"] in {"0.3.0", "0.4.0"}:
         from dataclasses import replace
-        frontend = StructuredFrontendV03()
-        request = replace(request, frontend=frontend.identity, features=("acp.execution.0.3",),
+        frontend = StructuredFrontendV04() if model["modelVersion"] == "0.4.0" else StructuredFrontendV03()
+        request = replace(request, frontend=frontend.identity, features=(("acp.deterministic-execution.0.4",) if model["modelVersion"] == "0.4.0" else ("acp.execution.0.3",)),
                           required_capabilities=tuple(sorted((*request.required_capabilities, "semantic.execution-dataflow/0.3"))))
     authority = FixtureApproval((snapshot, *dependency_snapshots), decisions, evidence)
     return source, CompilationContext(request, MemorySnapshots((snapshot, *dependency_snapshots)),

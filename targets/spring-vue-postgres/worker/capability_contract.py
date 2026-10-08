@@ -33,7 +33,7 @@ GROUPS = [
 ]
 
 
-def capabilities():
+def capabilities(canonical_version="0.3.0"):
     result = {}
     for kinds, constraint, evidence in GROUPS:
         for kind in kinds.split():
@@ -46,4 +46,20 @@ def capabilities():
     result['semantic.execution-dataflow/0.3']={'status':'SUPPORTED_WITH_CONSTRAINT',
         'constraints':['Canonical 0.2 only; typed explicit root effects/results/payloads; atomic STOP; constrained expressions/types; unsupported forms reject negotiation'],
         'evidence':['execution_codegen.py; ExplicitExecutionTest; TypedHttpTest']}
+    if canonical_version!='0.3.0':
+        return result
+    scopes={
+        'Query':'Canonical 0.3 ordered String/Identifier UTF-8 bytea scalar comparison; explicit identity suffix, ASC/DESC, distinct absent/null placement; offset pagination under per-request READ COMMITTED, no cross-page snapshot; bounded textContains; other ordered types reject',
+        'Failure':'Canonical 0.3 Commands only: exact ordered PRE_STATE/POST_ASSIGNMENT/INVARIANT/INFRASTRUCTURE bindings; workflow applicability, compiled pure supported predicates, applicable WRITE invariant and exact DEPENDENCY_UNAVAILABLE binding (other infrastructure binding classes reject; platform classifier remains separate); atomic STOP rollback; typed Failure HTTP profile 1.0; no Query-declared Failure or multi-boundary claim',
+        'RatePolicy':'Canonical 0.3 TOKEN_BUCKET + CONTINUOUS_RATIONAL + FULL + AUTHORIZED_INVOCATION + CHARGE + NONDECREASING; one policy per operation, ACTOR/TENANT partitions; positive signed-32-bit policy bounds; exact PostgreSQL numeric integer token units and row serialization, no process-local admission',
+        'IdempotencyPolicy':'Canonical 0.3 COMMITTED_RESULT + RETURN_IN_PROGRESS + RETURN_RESULT + REJECT_DIFFERENT_INPUT; scoped single-identity Commands and atomic STOP UseCases with unique Commands and precomputable input-only result dataflow; String keys, required String/Identifier input fields only; canonical typed digest; PostgreSQL owner fences, atomic domain/result/event commit, actual commit timestamps and transaction-status recovery; missing/uncertain proof stays IN_PROGRESS, no pending lease expiry; require track_commit_timestamp=on',
+        'RetryPolicy':'Canonical 0.3 INCLUDING_INITIAL + AFTER_FAILURE_COMPLETION + NONE jitter; exact bound approved TRANSIENT retryable occurrences only, capped integer delays and retained logical identity; explicit trusted-host policy selection for operation execution; no inferred Job-to-HTTP retry association; Job/Schedule remain UNSUPPORTED',
+    }
+    for kind,constraint in scopes.items():
+        result[kind+'/0.2.0']={'status':'SUPPORTED_WITH_CONSTRAINT','constraints':[constraint],
+            'evidence':['execution_codegen.py; InvocationCore.java; generated InvocationCoreTest and InvocationHttpTest real PostgreSQL/HTTP']}
+    for kind in ('Command','UseCase','ExecutionStep','Transaction','Aggregate'):
+        result[kind+'/0.2.0']['constraints']=['Canonical 0.2 legacy or explicit Canonical 0.3 typed effects; no inferred mutation semantics; single aggregate root, one atomic STOP boundary; expected-version locking; staged ordered assignments/invariants; exact Failure stages in 0.3; no distributed, compensation or multi-commit claim; immutable authorization fields and bounded preflight input dataflow for 0.3 invocation profile']
+    result['semantic.execution-dataflow/0.3']['constraints']=['Explicit Canonical 0.2 / semantic model 0.3 legacy subset, or Canonical 0.3 / semantic model 0.4 with acp.deterministic-execution.0.4; independently negotiated node capabilities; typed atomic STOP subset only']
+    result['acp.deterministic-execution.0.4']={'status':'SUPPORTED_WITH_CONSTRAINT', 'constraints':['Canonical 0.3 / semantic model 0.4 closed validation and constrained invocation core; unfinished lifecycle/delivery/scheduling/UI remain independently blocked'], 'evidence':['main.validate_semantics; deterministic_approval.py; InvocationCoreTest; InvocationHttpTest']}
     return result

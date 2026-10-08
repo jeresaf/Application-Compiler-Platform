@@ -2,6 +2,16 @@
 
 Phase 6 is IN PROGRESS. This file is not an acceptance or completion claim. Phases 1–5 retain their approved historical status. Phase 7 is NOT STARTED. No generated application is claimed production-ready.
 
+## Current invocation tranche — 2026-10-08
+
+ADR-0016 is ACCEPTED by the user's subsequent explicit approval on 2026-10-08. Authoring 0.4 is APPROVED REFERENCE SEMANTICS; Canonical 0.3 is APPROVED REFERENCE SNAPSHOTS; ChangeSet 0.3 is GREEN for bounded reference evolution. The exact [approval record](deterministic-v04-approval-record.md) covers both complete fixture decisions, including F-01. Required reference-app canonical gaps are zero. Proposal-time reports preserve their historical status.
+
+The invocation tranche consumes those exact Canonical 0.3 snapshots through the real compiler and worker. Query, Failure, RatePolicy, IdempotencyPolicy and RetryPolicy are SUPPORTED_WITH_CONSTRAINT within the [invocation profile](phase6-invocation-core.md). Actual negotiation yields 19 remaining blockers per application, recorded in successor blocker contract 2.0.0. The historical Canonical 0.2 contract 1.1.0 and evidence are preserved. Strict mode remains BLOCKED; the open-phase CI check accepts only the exact approved applications and exact actual blocked state. Phase 6 remains IN PROGRESS; Phase 7 is NOT STARTED.
+
+The [invocation tranche report](phase6-invocation-core.md) records current validation and exact remaining blockers. Older sections below are historical checkpoints, including proposal-time evidence; their original CI and implementation limitations describe those checkpoints.
+
+## Historical foundation and continuation evidence
+
 The approved incomplete foundation is commit `65d1694a553dc3b08cd33a4c6909fbd86da258f9`. The earlier continuation used `codex/phase6-negotiated-target`; the approved-execution continuation is recorded separately below. The [target contract](phase6-target.md) records exact implementation boundaries and [ADR-0014](adr/0014-first-production-target.md) records the engineering direction.
 
 Local Linux evidence collected on 2026-10-07: Ubuntu 26.04.1 LTS, CPython 3.14.4, Node 24.21.0, Temurin Java 21+35, Maven 3.10.0 and libseccomp 2.6.0-2ubuntu5. Official Ubuntu 24.04 / CPython 3.14.7 CI is still outstanding. The [reproducible template report](../targets/spring-vue-postgres/evidence/template-checks-linux.json) records both domains and their explicit admission failures.
@@ -62,4 +72,4 @@ The Ubuntu target job now uses `--expect-open-blockers` and depends on all histo
 
 ## Deterministic successor investigation
 
-The approved execution checkpoint remains incomplete. The [successor proposal report](deterministic-v04-proposal-report.md) records the semantic audit, proposed separate contracts, capability-honesty corrections and safe partial runtime mechanisms. ADR-0016 remains PROPOSED / HUMAN REVIEW REQUIRED. Historical approved bytes and reports remain preserved. Phase 6 stays IN PROGRESS; Phase 7 is NOT STARTED.
+The approved execution checkpoint remains incomplete. The [successor proposal report](deterministic-v04-proposal-report.md) records the semantic audit, proposed separate contracts, capability-honesty corrections and safe partial runtime mechanisms. At that proposal-time checkpoint, ADR-0016 was PROPOSED / HUMAN REVIEW REQUIRED; the subsequent approval and current implementation are recorded above. Historical approved bytes and reports remain preserved. Phase 6 stays IN PROGRESS; Phase 7 is NOT STARTED.
