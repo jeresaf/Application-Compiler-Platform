@@ -107,4 +107,6 @@ def validate_deterministic(document, mode='draft'):
         elif k=='Schedule' and d['mode']=='INTERVAL':
             if not types.valid_value({'kind':'Instant'},d['anchorInstant']):
                 emit('INTERVAL_ANCHOR',n,'Interval anchor must be an exact valid UTC Instant.')
+    from deterministic_failures import validate_bindings
+    validate_bindings(document,emit)
     return sorted(errors,key=lambda e:(e['subject'],e['code'],e['path']))

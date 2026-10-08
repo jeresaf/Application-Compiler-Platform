@@ -811,7 +811,34 @@
             }
           ],
           "emissionOrder": "DECLARED_BINDING_SEQUENCE",
-          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
+          "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+          "failureBindings": [
+            {
+              "failure": {
+                "id": "FAIL-BUSINESS",
+                "revision": 1
+              },
+              "stage": "PRE_STATE",
+              "trigger": {
+                "kind": "WORKFLOW_NO_APPLICABLE_TRANSITION",
+                "machine": {
+                  "id": "WF-PAYMENT",
+                  "revision": 2
+                }
+              }
+            },
+            {
+              "failure": {
+                "id": "FAIL-TRANSIENT",
+                "revision": 1
+              },
+              "stage": "INFRASTRUCTURE",
+              "trigger": {
+                "kind": "INFRASTRUCTURE_CLASS",
+                "faultClass": "DEPENDENCY_UNAVAILABLE"
+              }
+            }
+          ]
         }
       },
       {
@@ -1007,7 +1034,7 @@
           }
         ],
         "data": {
-          "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release and observability redaction.",
+          "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release observability redaction, and explicit ordered workflow/dependency Failure bindings.",
           "strength": "REQUIRED",
           "rationale": "HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.",
           "alternatives": [
@@ -4646,5 +4673,5 @@
     ],
     "issues": []
   },
-  "contentDigest": "sha256:d50fe98152a3ac4fc17cc4259ba0636558bacc7ab3895dcd61b5f5bafae061e5"
+  "contentDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
 }

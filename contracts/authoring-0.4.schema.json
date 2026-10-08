@@ -2192,6 +2192,7 @@
         "assignments",
         "outputBindings",
         "eventBindings",
+        "failureBindings",
         "emissionOrder",
         "invocationOrder"
       ],
@@ -2298,6 +2299,114 @@
         },
         "eventBindings": {
           "$ref": "#/$defs/emissions"
+        },
+        "failureBindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "failure",
+              "stage",
+              "trigger"
+            ],
+            "properties": {
+              "failure": {
+                "$ref": "#/$defs/ref",
+                "x-acp-targetKinds": [
+                  "Failure"
+                ]
+              },
+              "stage": {
+                "enum": [
+                  "PRE_STATE",
+                  "POST_ASSIGNMENT",
+                  "INVARIANT",
+                  "INFRASTRUCTURE"
+                ]
+              },
+              "trigger": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "machine"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "WORKFLOW_NO_APPLICABLE_TRANSITION"
+                      },
+                      "machine": {
+                        "$ref": "#/$defs/ref",
+                        "x-acp-targetKinds": [
+                          "StateMachine"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "condition"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "PREDICATE"
+                      },
+                      "condition": {
+                        "$ref": "#/$defs/expression"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "invariant"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "INVARIANT_FAILURE"
+                      },
+                      "invariant": {
+                        "$ref": "#/$defs/ref",
+                        "x-acp-targetKinds": [
+                          "Invariant"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "faultClass"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "INFRASTRUCTURE_CLASS"
+                      },
+                      "faultClass": {
+                        "enum": [
+                          "DEPENDENCY_UNAVAILABLE",
+                          "SERIALIZATION_CONFLICT",
+                          "TIMEOUT"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "minItems": 1,
+          "uniqueItems": true
         },
         "emissionOrder": {
           "const": "DECLARED_BINDING_SEQUENCE"
@@ -5152,6 +5261,7 @@
         "assignments",
         "outputBindings",
         "eventBindings",
+        "failureBindings",
         "emissionOrder",
         "invocationOrder"
       ],
@@ -5258,6 +5368,114 @@
         },
         "eventBindings": {
           "$ref": "#/$defs/emissions"
+        },
+        "failureBindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "failure",
+              "stage",
+              "trigger"
+            ],
+            "properties": {
+              "failure": {
+                "$ref": "#/$defs/ref",
+                "x-acp-targetKinds": [
+                  "Failure"
+                ]
+              },
+              "stage": {
+                "enum": [
+                  "PRE_STATE",
+                  "POST_ASSIGNMENT",
+                  "INVARIANT",
+                  "INFRASTRUCTURE"
+                ]
+              },
+              "trigger": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "machine"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "WORKFLOW_NO_APPLICABLE_TRANSITION"
+                      },
+                      "machine": {
+                        "$ref": "#/$defs/ref",
+                        "x-acp-targetKinds": [
+                          "StateMachine"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "condition"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "PREDICATE"
+                      },
+                      "condition": {
+                        "$ref": "#/$defs/expression"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "invariant"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "INVARIANT_FAILURE"
+                      },
+                      "invariant": {
+                        "$ref": "#/$defs/ref",
+                        "x-acp-targetKinds": [
+                          "Invariant"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "faultClass"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "const": "INFRASTRUCTURE_CLASS"
+                      },
+                      "faultClass": {
+                        "enum": [
+                          "DEPENDENCY_UNAVAILABLE",
+                          "SERIALIZATION_CONFLICT",
+                          "TIMEOUT"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "minItems": 1,
+          "uniqueItems": true
         },
         "emissionOrder": {
           "const": "DECLARED_BINDING_SEQUENCE"

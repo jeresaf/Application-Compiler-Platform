@@ -1296,7 +1296,34 @@
           }
         ],
         "emissionOrder": "DECLARED_BINDING_SEQUENCE",
-        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
+        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+        "failureBindings": [
+          {
+            "failure": {
+              "id": "FAIL-BUSINESS",
+              "revision": 1
+            },
+            "stage": "PRE_STATE",
+            "trigger": {
+              "kind": "WORKFLOW_NO_APPLICABLE_TRANSITION",
+              "machine": {
+                "id": "WF-CASE",
+                "revision": 2
+              }
+            }
+          },
+          {
+            "failure": {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            },
+            "stage": "INFRASTRUCTURE",
+            "trigger": {
+              "kind": "INFRASTRUCTURE_CLASS",
+              "faultClass": "DEPENDENCY_UNAVAILABLE"
+            }
+          }
+        ]
       }
     },
     {
@@ -1469,7 +1496,34 @@
           }
         ],
         "emissionOrder": "DECLARED_BINDING_SEQUENCE",
-        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
+        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+        "failureBindings": [
+          {
+            "failure": {
+              "id": "FAIL-BUSINESS",
+              "revision": 1
+            },
+            "stage": "PRE_STATE",
+            "trigger": {
+              "kind": "WORKFLOW_NO_APPLICABLE_TRANSITION",
+              "machine": {
+                "id": "WF-CASE",
+                "revision": 2
+              }
+            }
+          },
+          {
+            "failure": {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            },
+            "stage": "INFRASTRUCTURE",
+            "trigger": {
+              "kind": "INFRASTRUCTURE_CLASS",
+              "faultClass": "DEPENDENCY_UNAVAILABLE"
+            }
+          }
+        ]
       }
     },
     {
@@ -1642,7 +1696,34 @@
           }
         ],
         "emissionOrder": "DECLARED_BINDING_SEQUENCE",
-        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
+        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+        "failureBindings": [
+          {
+            "failure": {
+              "id": "FAIL-BUSINESS",
+              "revision": 1
+            },
+            "stage": "PRE_STATE",
+            "trigger": {
+              "kind": "WORKFLOW_NO_APPLICABLE_TRANSITION",
+              "machine": {
+                "id": "WF-CASE",
+                "revision": 2
+              }
+            }
+          },
+          {
+            "failure": {
+              "id": "FAIL-TRANSIENT",
+              "revision": 1
+            },
+            "stage": "INFRASTRUCTURE",
+            "trigger": {
+              "kind": "INFRASTRUCTURE_CLASS",
+              "faultClass": "DEPENDENCY_UNAVAILABLE"
+            }
+          }
+        ]
       }
     },
     {
@@ -1966,7 +2047,7 @@
         }
       ],
       "data": {
-        "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release and observability redaction.",
+        "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release observability redaction, and explicit ordered workflow/dependency Failure bindings.",
         "strength": "REQUIRED",
         "rationale": "HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.",
         "alternatives": [

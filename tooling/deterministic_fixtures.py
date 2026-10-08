@@ -27,14 +27,19 @@ def proposal(domain):
     decision={'id':'DEC-DETERMINISTIC-V04','revision':1,'kind':'Decision','name':'Proposed deterministic execution reference semantics',
         'lifecycle':'APPROVED','steward':'fixture:authors','origins':[{'source':'fixture:deterministic-v04-proposal','locator':domain,
         'actor':'assistant:proposal-author','actorType':'AI'}], 'basis':[r(requirement['id'])],
-        'data':{'statement':'PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release and observability redaction.',
+        'data':{'statement':'PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release observability redaction, and explicit ordered workflow/dependency Failure bindings.',
         'strength':'REQUIRED','rationale':'HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.',
         'alternatives':['Retain approved 0.3/0.2 meaning and reject incomplete target capabilities']}}
     ops=[{'op':'ADD','node':decision}]
     for n in by.values():
         d=copy.deepcopy(n['data']); changed=True
         if n['kind']=='Query': d.update(orderBy=[{'field':r(identity),'direction':'ASC'}],invocationOrder=INVOCATION)
-        elif n['kind']=='Command': d.update(emissionOrder='DECLARED_BINDING_SEQUENCE',invocationOrder=INVOCATION)
+        elif n['kind']=='Command':
+            d.update(emissionOrder='DECLARED_BINDING_SEQUENCE',invocationOrder=INVOCATION,
+                failureBindings=[{'failure':r('FAIL-BUSINESS'),'stage':'PRE_STATE',
+                    'trigger':{'kind':'WORKFLOW_NO_APPLICABLE_TRANSITION','machine':r(machine)}},
+                    {'failure':r('FAIL-TRANSIENT'),'stage':'INFRASTRUCTURE',
+                    'trigger':{'kind':'INFRASTRUCTURE_CLASS','faultClass':'DEPENDENCY_UNAVAILABLE'}}])
         elif n['kind']=='UseCase': d['invocationOrder']=INVOCATION
         elif n['kind']=='IdempotencyPolicy': d.update(windowAnchor='COMMITTED_RESULT',inFlight='RETURN_IN_PROGRESS')
         elif n['kind']=='DeliveryPolicy': d.update(windowAnchor='EVENT_COMMIT',occurrenceOrder='COMMIT_STEP_EMISSION_SEQUENCE')

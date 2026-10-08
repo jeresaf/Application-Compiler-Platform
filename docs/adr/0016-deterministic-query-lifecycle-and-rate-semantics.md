@@ -4,7 +4,7 @@ Status: PROPOSED — HUMAN REVIEW REQUIRED. Date: 2026-10-08. AI-authored propos
 
 ## Boundary and versions
 
-The [complete audit](../phase6-semantic-underspecification-audit.md) separates canonical meaning, target-profile implementation and deployment evidence. This successor addresses Q-01, C-01, A-01, R-01, S-01 and retry timing clarification. The complete successor extension below resolves I-01, D-01, J-01, H-01 and DC-01 at the proposal level and records newly discovered F-01. This ADR does not declare the entire application executable.
+The [complete audit](../phase6-semantic-underspecification-audit.md) separates canonical meaning, target-profile implementation and deployment evidence. This successor addresses Q-01, C-01, A-01, R-01, S-01 and retry timing clarification. The complete successor extension below resolves I-01, D-01, J-01, H-01 and DC-01 at the proposal level and resolves F-01 in the complete binding extension below. This ADR does not declare the entire application executable.
 
 Propose Authoring **0.4.0**, Canonical Application **0.3.0**, ChangeSet **0.3.0**, semantic model 0.4.0 and feature `acp.deterministic-execution.0.4`. Preserve Authoring 0.3, Canonical 0.2, ChangeSet 0.2, ADR-0015, their approval records and all historical byte/hash vectors byte-for-byte. The `acp-jcs-safe-v1` byte profile is unchanged. New schemas are separate closed exact-version files. Framework/platform/storage/provider names do not enter the new canonical fields.
 
@@ -38,7 +38,7 @@ Authoring 0.3 → 0.4 migration reports REVIEW_REQUIRED for missing Query orderi
 
 ## Target profile and deployment evidence
 
-A versioned target failure-mapping contract owns SQLState/runtime/HTTP representation, not canonical business vocabulary. It may map known infrastructure faults to a separately declared retryable TRANSIENT failure only when exact operation declaration/category permits it. Unknown infrastructure faults remain safe INTERNAL and never masquerade as BUSINESS. Provider selection, transport/header shape, SQL locks, clocks, outbox storage, scheduler ownership and pinned-tzdb packaging belong to target-profile decisions only where they preserve canonical outcomes.
+A versioned target failure-mapping contract owns SQLState/runtime/HTTP representation, not canonical business vocabulary. It may classify a proven infrastructure fault into a portable class; only an exact canonical operation binding may select a declared TRANSIENT Failure. Unknown infrastructure faults remain safe INTERNAL and never masquerade as BUSINESS. Provider selection, transport/header shape, SQL locks, clocks, outbox storage, scheduler ownership and pinned-tzdb packaging belong to target-profile decisions only where they preserve canonical outcomes.
 
 READ/WRITE audit and export/permission enforcement can be application code. Observability redaction, hold-release lifetime, idempotency expiry, delivery expiry/tie ordering and Job catch-up are proposed canonical rules below; no target default fills them. Encryption at rest, deployed TLS/storage, transport availability and proof of privacy destruction remain explicit OUTSTANDING deployment evidence. No Java component test proves volume encryption. No dependent DataLifecycle, Retention, DeletionPolicy or RatePolicy target implementation resumes before this proposal is explicitly approved.
 
@@ -98,4 +98,65 @@ A UseCase is the coordinator and does not charge an undeclared extra bucket. Pri
 
 Migration additionally marks missing idempotency anchor/in-flight policy, delivery anchor/order, ordered emission construction, invocation protocol, Job recovery, hold release and redaction scope REVIEW_REQUIRED, with no guessed candidate. All proposed fixture changes carry the same explicit review decision and AI provenance. Historical approval never admits their new digests.
 
-The [UI implementation plan](../phase6-ui-implementation-plan.md) uses accepted task-interface semantics only. The [declared Failure implementation contract](../phase6-declared-failure-contract.md) records newly discovered **F-01**, the absence of exact runtime trigger-to-Failure binding. F-01 remains a canonical question requiring a separate explicit human choice before semantic Failure implementation; this proposal does not invent triggers. Thus the original five gaps are resolved in this proposal, while F-01 is explicitly recorded. Review this complete ADR as one coherent proposed decision; technical green is neither human acceptance nor Phase 6 closure.
+The [UI implementation plan](../phase6-ui-implementation-plan.md) uses accepted task-interface semantics only. The [declared Failure implementation contract](../phase6-declared-failure-contract.md) tracks **F-01**, its original missing runtime trigger binding and the complete proposed resolution. F-01 was discovered in the earlier investigation; the complete binding extension below now proposes its exact resolution. All fixture trigger choices are explicit and require human review. Review this complete ADR as one coherent proposed decision; technical green is neither human acceptance nor Phase 6 closure.
+
+## F-01 complete proposal: explicit ordered Failure bindings
+
+Status remains **PROPOSED / HUMAN REVIEW REQUIRED**. This section resolves F-01 within the same Authoring 0.4 / Canonical 0.3 / ChangeSet 0.3 successor. Earlier discovery descriptions explain why this addition was needed; they are not the current disposition. No target Failure capability is promoted.
+
+### Closed binding contract
+
+Command requires a nonempty, semantically ordered `failureBindings` array. Each closed binding contains an exact `failure` reference already present in that Command's `failures`, an explicit `stage`, and a closed `trigger`. Every declared Failure requires at least one binding; potential operational conditions may be declared without asserting they occur in every deployment or successful execution. No declaration itself raises a failure. Exact revisions, reference kinds, applicability, types, categories and stages are validated. There is no inferred mapping from names, codes, exception text, declaration order or a nearby invariant.
+
+| Trigger | Required exact construction | Stage | Compatible Failure category |
+| --- | --- | --- | --- |
+| WORKFLOW_NO_APPLICABLE_TRANSITION | `machine`: exact StateMachine governing this Command's resource and declaring a transition for this exact Command | PRE_STATE | BUSINESS |
+| PREDICATE | `condition`: pure typed canonical Boolean expression | PRE_STATE or POST_ASSIGNMENT | BUSINESS or SECURITY |
+| INVARIANT_FAILURE | `invariant`: exact applicable resource Invariant with WRITE enforcement | INVARIANT | BUSINESS |
+| INFRASTRUCTURE_CLASS | `faultClass`: DEPENDENCY_UNAVAILABLE, SERIALIZATION_CONFLICT or TIMEOUT | INFRASTRUCTURE | TRANSIENT |
+
+Workflow failure means no declared transition for this Command on the specified machine is applicable to the current valid resource state after evaluating its declared guard against pre-command state. It does not mean failed authentication, authorization, input decoding, invariants or infrastructure. Invalid/corrupt stored state is an internal mechanism error, not proof of a declared workflow condition. Accepted uniqueness of `(machine, from, command)` remains enforced; a target never chooses among competing transitions by lexical ID.
+
+PREDICATE raises its exact Failure when its condition is true. PRE_STATE can read the pre-command resource, exact OPERATION input, Parameters and authorized actor context. It cannot read `postField`, USE_CASE input or stepResult. POST_ASSIGNMENT additionally permits `postField` against staged state after the complete assignment list; ordinary `field/resource` still denotes pre-state. Existing exact type, nominal identity, presence and pure-expression rules apply. No scripts or host-language predicates are introduced. A SECURITY predicate is a semantic task condition evaluated only after ordinary authorization; it never substitutes for session, tenant or permission enforcement.
+
+INVARIANT_FAILURE explicitly binds a particular false WRITE invariant to a particular Failure. Evaluate that invariant against the staged post-assignment resource, using its accepted invariant context. Other unbound invariant violations still abort the boundary as an internal/platform outcome; they do not select the first BUSINESS declaration. A target must not weaken any invariant because it lacks a binding.
+
+Portable fault classes have closed meanings: DEPENDENCY_UNAVAILABLE is inability to establish or use the required dependency for a reached semantic operation; SERIALIZATION_CONFLICT is an aborted atomic execution due to concurrency serialization/deadlock conflict; TIMEOUT is failure to complete a reached operation within its declared execution deadline. None means arbitrary exception or speculative future failure. Provider mechanisms must prove the class and retain the commit/rollback fact. Unknown or unproven faults remain INTERNAL. An indeterminate commit is **not** a completed rollback/failure and cannot release idempotency or grant retry: retain IN_PROGRESS until recovery proves the outcome, as defined above.
+
+### Precedence and execution sites
+
+Array position determines precedence within a stage and survives canonicalization. Bindings must appear in nondecreasing stage groups PRE_STATE → POST_ASSIGNMENT → INVARIANT → INFRASTRUCTURE; interleaving/reversing groups rejects. Duplicate trigger construction at the same stage, including normalized equivalent literal spellings, rejects even if the Failure differs. Overlapping distinct predicates are valid: the first satisfied binding wins. Failure semantic IDs never break ties.
+
+Within the existing authentication/session → authorization/tenant → rate → idempotency → semantic execution → atomic commit → delivery protocol:
+
+1. Validate typed input and the trusted valid resource/state; authorization and tenant boundaries have already been established for this invocation.
+2. Resolve workflow applicability by evaluating guards against pre-command state. Evaluate PRE_STATE bindings in authored order, including workflow-no-applicable and pre-state predicates. If no binding matches but workflow applicability fails, abort with the existing safe internal/platform outcome. A later stage is never reached after rejection.
+3. Apply ordered assignments to a staged copy with exact type checks and accepted pre/post read semantics.
+4. Evaluate POST_ASSIGNMENT predicate bindings in authored order.
+5. Evaluate INVARIANT bindings in authored order, then enforce all remaining applicable invariants. Binding an invariant never disables its enforcement.
+6. Apply the selected workflow state change; guards are not reevaluated against post-state. Construct exact typed output and event payloads. Preserve ADR-0015's shared Command/Transition construction rule: identical shared declarations produce one event, not two. Preserve the successor's declared operation emission sequence.
+7. Commit the boundary's writes, successful result, event occurrences and idempotency result atomically, then establish delivery eligibility.
+
+INFRASTRUCTURE bindings are handlers at an actually reached semantic execution/storage site, not a speculative last execution stage. A single proven portable fault selects its one exact matching binding; duplicate class bindings reject. It cannot replace an earlier semantic failure that already stopped execution, and it cannot convert a fault outside the semantic invocation into a declared Failure. The stage field explicitly distinguishes this fault handling context from pure evaluation stages. Concrete provider exceptions never enter canonical meaning.
+
+Any produced Failure aborts its applicable semantic transaction. Tentative writes, outputs, event intents and successful idempotency finalization do not commit. Definitive no-effect rollback may release the reservation; indeterminate outcome follows the nonexpiring recovery rule. Prior already committed UseCase boundaries retain ADR-0015 behavior. STOP executes no subsequent steps; compensation remains an explicit separately authorized business operation, not implicit reversal. The reference interpreter proves the fixture single-boundary STOP subset and rejects unsupported multi-boundary/compensation execution rather than claiming it.
+
+### Reference decisions, Query scope and retries
+
+Payment CMD-RECORD binds FAIL-BUSINESS / INVALID_STATE to WORKFLOW_NO_APPLICABLE_TRANSITION on WF-PAYMENT. Case CMD-REVIEW, CMD-APPROVE and CMD-ARCHIVE bind that same Failure declaration to the corresponding condition on WF-CASE. Each Command explicitly binds FAIL-TRANSIENT to DEPENDENCY_UNAVAILABLE. These are authored **HUMAN REVIEW REQUIRED** decisions, never code/name inference. A dependency fault is a potential condition; the fixture does not require deliberately breaking a database to make the declaration reachable. Serialization conflict or timeout cannot select FAIL-TRANSIENT merely because it is transient: these fixtures do not bind those classes, so they remain INTERNAL there.
+
+No Query binding is added for symmetry. The reference Queries are table/search/filter projections and are not ExecutionSteps; empty/filtered results retain their existing result/absence semantics. This addition makes no claim of a Query-declared semantic Failure. The accepted single-resource Query-as-ExecutionStep mechanism and its no-result outcome remain separate; any future declared Query Failure subset requires an explicit contract rather than guessing a code from absence. It is not required by either current reference application.
+
+Retry eligibility requires a trusted occurrence produced through an exact **approved** operation binding, an exact Failure listed in the RetryPolicy, category TRANSIENT and retryable true. Retry preserves Job occurrence, idempotency identity, operation ID/revision and exact typed input, with the existing bounded attempts/delays/horizon. INTERNAL, unbound portable faults, BUSINESS and SECURITY never gain retry because a policy exists. Current pure reference occurrences demonstrate the proposed rule and confer no approval; production use additionally requires fresh Canonical 0.3 authority. Transport clients cannot mint trusted occurrence evidence by sending an envelope.
+
+### Target mapping and transport envelope
+
+Canonical binding selects `portable condition → exact Failure ID/revision`. The versioned target profile separately recognizes `exact runtime condition → at most one portable fault class`; it cannot select the final application Failure. Target mapping 1.1.0 lists exact SQLException/PSQLException classes and exact SQLStates, exact ordinary RuntimeException wrapper traversal, and an exact TimeoutException class. Serialization/deadlock states map to SERIALIZATION_CONFLICT, never dependency unavailable. Unknown states/classes, unlisted subclasses and arbitrary wrappers remain INTERNAL; messages cannot affect the result. Classification alone grants neither retry nor a committed rollback fact; a future executor also verifies the actual reached fault site and declared deadline context before selecting a semantic occurrence. The target still exposes only safe platform diagnostics, not semantic Failure execution.
+
+A future generated typed semantic Failure envelope must carry exact Failure ID/revision, declared code/category/retryable, exact operation ID/revision and a generated opaque correlation identifier. It carries no raw resource/input values, exception messages, causes, traces or sensitive derived metadata. HTTP status/body/header representation belongs to a closed versioned target transport contract; all transports preserve the same semantic identity. Internal reference binding-index evidence is not a public authority claim. Ordinary server authentication/authorization responses remain platform security protocol outcomes without an exact semantic binding.
+
+### Migration, audit and authority
+
+Approved Authoring 0.3 migration reports REVIEW_REQUIRED for every Command missing failureBindings, with no guessed candidate. Proposed fixtures explicitly author the decisions above and regenerate only proposed bytes. No accepted schema, ADR-0015, execution-v03 approval or historical vector changes.
+
+The [repeated reference-domain audit](../phase6-f01-semantic-reaudit.md) classifies the remaining work as target implementation or deployment evidence. **KNOWN_CANONICAL_GAPS_FOR_PHASE6_REFERENCE_DOMAINS = 0** at the complete proposal level; the meaning is not human-approved yet. Failure and all previously blocked dependent capabilities remain UNSUPPORTED, target INCOMPLETE, Phase 6 IN PROGRESS, Phase 7 NOT STARTED. One final explicit human approval must cover this complete ADR and all deterministic-v04 fixture decisions before fresh snapshot approval and dependent target execution.

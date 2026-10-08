@@ -1,0 +1,10 @@
+{
+  "id": 37737968707,
+  "head_sha": "b85be70a00c8edd0bef78179ece594775a92fd62",
+  "path": ".github/workflows/acp-contracts.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/37737968707",
+  "scope": "Published main checkpoint; not hosted evidence for the uncommitted F-01 extension",
+  "authority": "Engineering CI evidence only, no semantic approval"
+}

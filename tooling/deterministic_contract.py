@@ -8,8 +8,14 @@ FEATURE = 'acp.deterministic-execution.0.4'
 RATE = {'kind': 'TOKEN_BUCKET', 'refill': 'CONTINUOUS_RATIONAL', 'initial': 'FULL',
         'charge': 'AUTHORIZED_INVOCATION', 'replay': 'CHARGE', 'clock': 'NONDECREASING'}
 INVOCATION = 'AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY'
+FAILURE_BINDING = record({'failure': link('Failure'), 'stage': enum('PRE_STATE','POST_ASSIGNMENT','INVARIANT','INFRASTRUCTURE'),
+    'trigger': {'oneOf': [
+        record({'kind': {'const':'WORKFLOW_NO_APPLICABLE_TRANSITION'}, 'machine': link('StateMachine')}),
+        record({'kind': {'const':'PREDICATE'}, 'condition': use('expression')}),
+        record({'kind': {'const':'INVARIANT_FAILURE'}, 'invariant': link('Invariant')}),
+        record({'kind': {'const':'INFRASTRUCTURE_CLASS'}, 'faultClass': enum('DEPENDENCY_UNAVAILABLE','SERIALIZATION_CONFLICT','TIMEOUT')})]}})
 EXTENSIONS = {
-    'Command': {'emissionOrder': {'const':'DECLARED_BINDING_SEQUENCE'}, 'invocationOrder': {'const':INVOCATION}},
+    'Command': {'failureBindings': array(FAILURE_BINDING, minimum=1), 'emissionOrder': {'const':'DECLARED_BINDING_SEQUENCE'}, 'invocationOrder': {'const':INVOCATION}},
     'UseCase': {'invocationOrder': {'const':INVOCATION}},
     'IdempotencyPolicy': {'windowAnchor': {'const':'COMMITTED_RESULT'}, 'inFlight': {'const':'RETURN_IN_PROGRESS'}},
     'DeliveryPolicy': {'windowAnchor': {'const':'EVENT_COMMIT'}, 'occurrenceOrder': {'const':'COMMIT_STEP_EMISSION_SEQUENCE'}},

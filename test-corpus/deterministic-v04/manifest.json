@@ -8,17 +8,17 @@
   "examples": [
     {
       "file": "payment-canonical-candidate.json",
-      "contentDigest": "sha256:d50fe98152a3ac4fc17cc4259ba0636558bacc7ab3895dcd61b5f5bafae061e5",
+      "contentDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
       "baseContentDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
-      "planDigest": "sha256:96761005e1a26e64cea1d16eb255178b4ebdf79d9e98c40aa7b26d18ca1a2f9f",
-      "proposalSourceDigest": "sha256:c80f294f7c2b98b52de3168e53aa7991a0e989816b4f504120792282c5144328"
+      "planDigest": "sha256:882781981441c2ab50d71617a15edfca88c6b9ebaa25c130cf40f56ea8ce356e",
+      "proposalSourceDigest": "sha256:fe3918f50bf9662b8714d30f77774b6a87d4d2c95e5668987cee7fed8822656a"
     },
     {
       "file": "case-management-canonical-candidate.json",
-      "contentDigest": "sha256:33c49f6cc815eba73a67e5b797a0b188bdfb1c7ded786a10e7824bd71352f923",
+      "contentDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
       "baseContentDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
-      "planDigest": "sha256:509618ff1c21616fe8cc60c889569671de9dc4908313ff4ad4cbc555fe3537ac",
-      "proposalSourceDigest": "sha256:8fd849d5d6dc496afeb909d764694a90d4d529641ab3d85f7fa120543bcf3451"
+      "planDigest": "sha256:d904bc51285d778ba66784fbd08842bd151980e8a22f7662c6330e0f3fd51131",
+      "proposalSourceDigest": "sha256:6e41954365f3a1accc7d999591cf5196580292eb6269ae020d0e00cace7abc28"
     }
   ]
 }
