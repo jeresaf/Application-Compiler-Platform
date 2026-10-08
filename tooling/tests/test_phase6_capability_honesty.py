@@ -11,7 +11,7 @@ from execution_approval import approved_snapshot
 class CapabilityHonestyTests(unittest.TestCase):
     def test_inventory_covers_every_manifest_claim_and_expected_narrowing(self):
         manifest=TargetWorker().call('manifest',{})
-        audit=load(ROOT/'evidence/delivery-job-capability-audit.json')
+        audit=load(ROOT/'evidence/privacy-lifecycle-capability-audit.json')
         self.assertEqual(audit['capabilities'],manifest['capabilities'])
         self.assertEqual('INCOMPLETE',manifest['releaseStatus'])
         for capability,entry in manifest['capabilities'].items():

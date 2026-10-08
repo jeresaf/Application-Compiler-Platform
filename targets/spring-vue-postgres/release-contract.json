@@ -11,6 +11,10 @@
     "acp-spring-vue-postgres/0.2.0": {
       "generator": "acp-spring-vue-generator/0.2.0",
       "bundleDigest": "d66fc31b74ac3c6ee5d391027b66726bbd8c93b2d624329a0cf3c327b9a9f70b"
+    },
+    "acp-spring-vue-postgres/0.3.0": {
+      "generator": "acp-spring-vue-generator/0.3.0",
+      "bundleDigest": "6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc"
     }
   }
 }

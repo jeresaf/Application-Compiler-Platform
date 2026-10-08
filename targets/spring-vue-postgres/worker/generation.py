@@ -91,7 +91,7 @@ def plan(model, templates, profile, inventory=(), *, build=None):
 
     execution = any(n['kind'] == 'Command' and 'assignments' in n['data'] for n in model['nodes'])
     for path, text in sorted(templates.items()):
-        if model.get('canonicalVersion')!='0.3.0' and path.endswith('/RuntimeBootstrap.java'):continue
+        if model.get('canonicalVersion')!='0.3.0' and path.endswith(('/RuntimeBootstrap.java','/LifecycleRuntime.java')):continue
         if execution and path in {'backend/src/main/java/acp/application/TaskService.java', 'backend/src/main/java/acp/api/TaskController.java'}:
             continue
         if execution and path == 'frontend/src/App.vue':
@@ -101,7 +101,7 @@ def plan(model, templates, profile, inventory=(), *, build=None):
             text = text.replace('await call(submitOperation.path, { resourceId: selected.value.resourceId, expectedVersion: selected.value.version, input: input.value });', 'await submitTask(input.value, selected.value.resourceId, selected.value.version);')
             text = text.replace('node.data.owner.id === task?.data.input.id)', 'node.data.owner.id === task?.data.input.id && node.id !== resourceInputField)')
         if model.get('canonicalVersion')=='0.3.0' and path.endswith('/MigrationTest.java'):
-            text=text.replace('assertEquals(1, flyway.migrate().migrationsExecuted)', 'assertEquals(2, flyway.migrate().migrationsExecuted)')
+            text=text.replace('assertEquals(1, flyway.migrate().migrationsExecuted)', 'assertEquals(3, flyway.migrate().migrationsExecuted)')
         if model.get('canonicalVersion')=='0.3.0' and path=='frontend/src/App.vue':
             text=text.replace('submitTask(input.value, selected.value.resourceId, selected.value.version)', 'submitTask(input.value, selected.value.resourceId, selected.value.version, crypto.randomUUID())')
         add(path, text, "PROJECT_SOURCE", owner="FRAMEWORK_OWNED" if path.endswith(("pom.xml", "package.json")) else "COMPILER_OWNED")
@@ -128,9 +128,20 @@ public class RuntimeConfiguration {
  org.springframework.boot.ApplicationRunner startRuntime(acp.infrastructure.RuntimeBootstrap runtime,org.springframework.core.env.Environment env){return args->{if(env.getProperty("acp.runtime.poll-enabled",Boolean.class,true))runtime.start();};}
 }
 ""","RUNTIME_CONFIGURATION")
+        from privacy_lifecycle import migration,requirements,actions
+        privacy_sql=migration(model['nodes'])
+        add("backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",privacy_sql,"PRIVACY_MIGRATION")
+        add("database/V3__privacy_lifecycle.sql",privacy_sql,"PRIVACY_MIGRATION")
+        from execution_codegen import ExecutionGenerator
+        add("backend/src/main/java/acp/generated/LifecycleActions.java",actions(ExecutionGenerator(model['nodes'],'0.3.0')),"LIFECYCLE_ACTIONS")
+        deployment=encoded(requirements(model['nodes']))
+        add("acp/deployment-requirements.json",deployment,"DEPLOYMENT_OBLIGATIONS")
+        build['targetIRVersion']=model['version']
+        build['deploymentRequirements']={'path':'acp/deployment-requirements.json','sha256':hashlib.sha256(deployment.encode()).hexdigest()}
+        build['migrationDigests']={p:hashlib.sha256(t.encode()).hexdigest() for p,t in [('database/V1__initial.sql',sql),('database/V2__delivery_jobs.sql',MIGRATION),('database/V3__privacy_lifecycle.sql',privacy_sql)]}
         tz=templates['backend/src/main/resources/acp-tzdb-2026d.json']
         build['tzdb']={'version':'2026d','artifact':'acp-tzdb-2026d.json','sha256':hashlib.sha256(tz.encode()).hexdigest()}
-        add("acp/target-upgrade.json",encoded({'from':{'profile':'acp-spring-vue-postgres/0.1.0','generator':'acp-spring-vue-generator/0.1.0'},'to':build,'migrations':[{'path':'database/V1__initial.sql','sha256':hashlib.sha256(sql.encode()).hexdigest()},{'path':'database/V2__delivery_jobs.sql','sha256':hashlib.sha256(MIGRATION.encode()).hexdigest()}],'origins':'acp/provenance.json'}),"TARGET_UPGRADE")
+        add("acp/target-upgrade.json",encoded({'from':{'profile':'acp-spring-vue-postgres/0.2.0','generator':'acp-spring-vue-generator/0.2.0'},'to':build,'migrations':[{'path':'database/V1__initial.sql','sha256':hashlib.sha256(sql.encode()).hexdigest()},{'path':'database/V2__delivery_jobs.sql','sha256':hashlib.sha256(MIGRATION.encode()).hexdigest()},{'path':'database/V3__privacy_lifecycle.sql','sha256':hashlib.sha256(privacy_sql.encode()).hexdigest()}],'origins':'acp/provenance.json'}),"TARGET_UPGRADE")
     paths = {}
     for op in model["api"]:
         paths.setdefault(op["path"], {})[op["method"].lower()] = {

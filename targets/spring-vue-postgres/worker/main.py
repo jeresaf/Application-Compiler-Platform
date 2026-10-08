@@ -25,7 +25,7 @@ BUNDLE_DIGEST = "sha256:" + bundle_digest()
 from target_release import verify_release
 # Verified after PROFILE loading below; failure is a structured fail-closed gate.
 from execution_codegen import ExecutionGenerator  # Preload trusted generator before confinement.
-import relations, delivery_jobs
+import relations, delivery_jobs, privacy_lifecycle
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = json.loads((ROOT / "profile.json").read_text())

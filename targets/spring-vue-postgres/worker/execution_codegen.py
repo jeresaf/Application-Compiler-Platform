@@ -344,6 +344,8 @@ class ExecutionGenerator:
                 values.append('staged.' + member(f) + '().present()')
         update = f'UPDATE {table} SET ' + ','.join([*setters, 'acp_state=?', 'acp_version=acp_version+1']) + f' WHERE {identity}=? AND {tenant}=? AND acp_version=?'
         lines.append(f'store.update({quoted(update)}, ' + ','.join([*values, 'state', 'ExecutionStore.bytes(resourceId.value())', 'ExecutionStore.bytes(jwt.getClaimAsString("tenant"))', 'row.version()']) + ');')
+        if self.deterministic:
+            lines.append(f'store.closed({quoted(entity)},resourceId.value(),row.state(),state,row.version()+1,jwt);')
         lines.append(f'store.audit({quoted(id)}, resourceId.value(), jwt);')
         lines.append(self.classified_audit(id, entity, 'READ', 'resourceId.value()'))
         lines.append(self.classified_audit(id, entity, 'WRITE', 'resourceId.value()', written))

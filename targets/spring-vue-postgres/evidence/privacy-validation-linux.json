@@ -1,0 +1,66 @@
+{
+  "result": "PASS",
+  "environment": {
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4",
+    "node": "v24.21.0",
+    "postgresql": "18.6"
+  },
+  "profile": "acp-spring-vue-postgres/0.3.0",
+  "generator": "acp-spring-vue-generator/0.3.0",
+  "targetIRVersion": "0.2.0",
+  "sealedBundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+  "checks": {
+    "completePythonRegression": {
+      "result": "PASS",
+      "tests": 230
+    },
+    "generatedBackendRegression": {
+      "result": "PASS",
+      "tests": 145
+    },
+    "bothFrontendInstallTypeTestBuild": "PASS",
+    "actualTarget02To03Upgrade": "PASS",
+    "preservedTarget01To03Upgrade": "PASS",
+    "legacyCanonical02Components": "PASS",
+    "dependencyConsistency": "PASS",
+    "repositoryContracts": "PASS",
+    "threeIndependentNodeCanonicalByteHashCorpora": "PASS",
+    "approvedSemanticAuthorityAndHistoricalReports": "UNCHANGED",
+    "sealedProductionArtifactBinding": "BYTE_IDENTICAL"
+  },
+  "blockerContract": "4.0.0",
+  "remainingBlockers": {
+    "payment": [
+      "UNSUPPORTED:Action/0.2.0",
+      "UNSUPPORTED:Filter/0.2.0",
+      "UNSUPPORTED:Form/0.2.0",
+      "UNSUPPORTED:InputControl/0.2.0",
+      "UNSUPPORTED:PermissionBoundary/0.2.0",
+      "UNSUPPORTED:Screen/0.2.0",
+      "UNSUPPORTED:Search/0.2.0",
+      "UNSUPPORTED:Table/0.2.0",
+      "UNSUPPORTED:ViewState/0.2.0",
+      "UNSUPPORTED:Wizard/0.2.0",
+      "UNSUPPORTED:WizardStep/0.2.0"
+    ],
+    "case-management": [
+      "UNSUPPORTED:Action/0.2.0",
+      "UNSUPPORTED:Filter/0.2.0",
+      "UNSUPPORTED:Form/0.2.0",
+      "UNSUPPORTED:InputControl/0.2.0",
+      "UNSUPPORTED:PermissionBoundary/0.2.0",
+      "UNSUPPORTED:Screen/0.2.0",
+      "UNSUPPORTED:Search/0.2.0",
+      "UNSUPPORTED:Table/0.2.0",
+      "UNSUPPORTED:ViewState/0.2.0",
+      "UNSUPPORTED:Wizard/0.2.0",
+      "UNSUPPORTED:WizardStep/0.2.0"
+    ]
+  },
+  "deploymentVerification": "OUTSTANDING",
+  "strictPhase6Closure": "BLOCKED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "logs": "/tmp logs are ephemeral local evidence; Ubuntu CI uploads separate hosted evidence"
+}

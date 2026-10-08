@@ -33,7 +33,7 @@ class InvocationTargetTests(unittest.TestCase):
             with self.assertRaises(TargetWorkerError) as e:TargetWorker().call('negotiate',self.payload(snapshot['content']['nodes']))
             blockers=str(e.exception).split(';')
             self.assertTrue(all(b.startswith('UNSUPPORTED:') for b in blockers),str(e.exception))
-            self.assertIn('UNSUPPORTED:DataLifecycle/0.2.0',blockers)
+            self.assertNotIn('UNSUPPORTED:DataLifecycle/0.2.0',blockers)
             self.assertIn('UNSUPPORTED:Screen/0.2.0',blockers)
             for k in ('Query','Failure','RatePolicy','IdempotencyPolicy','RetryPolicy','DeliveryPolicy','Schedule','Job'):
                 self.assertNotIn('UNSUPPORTED:'+k+'/0.2.0',blockers)
@@ -79,7 +79,7 @@ class InvocationTargetTests(unittest.TestCase):
 
     def test_new_contract_accepts_only_real_exact_expected_blocked_state(self):
         from phase6_open_state import assert_expected_blocked
-        contract=load(ROOT/'expected-open-blockers-v3.json')
+        contract=load(ROOT/'expected-open-blockers-v4.json')
         report={'targetManifest':TargetWorker().call('manifest',{}),'mode':'FULL_NEGOTIATED_TARGET_GATE','result':'BLOCKED','domains':{}}
         for domain,snapshot in self.snapshots.items():
             with self.assertRaises(TargetWorkerError) as e:TargetWorker().call('lower',self.payload(snapshot['content']['nodes']))

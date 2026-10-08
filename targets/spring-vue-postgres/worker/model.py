@@ -57,6 +57,8 @@ def negotiate(nodes, required, decisions, profile, canonical_version='0.1.0'):
             if canonical_version=='0.3.0' and profile.get('targetIRVersion')=='0.2.0':
                 from delivery_jobs import validate
                 validate(nodes)
+                from privacy_lifecycle import validate as validate_privacy
+                validate_privacy(nodes)
                 from delivery_jobs import generated_jobs
                 generated_jobs(ExecutionGenerator(nodes,canonical_version))
         except (CapabilityError, KeyError, TypeError) as e:

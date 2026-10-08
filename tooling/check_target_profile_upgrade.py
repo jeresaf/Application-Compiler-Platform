@@ -36,7 +36,7 @@ def after_source(domain):
         var columns=new java.util.LinkedHashMap<String,java.util.List<String>>();var before=new java.util.LinkedHashMap<String,java.util.List<String>>();
         for(String table:tables){{var names=jdbc.queryForList("SELECT column_name FROM information_schema.columns WHERE table_schema='acp_phase6_execution_test' AND table_name=? ORDER BY ordinal_position",String.class,table);assertFalse(names.isEmpty());columns.put(table,names);before.put(table,rows(table,names));}}
         for(String table:java.util.List.of("acp_idempotency","acp_rate","acp_audit","acp_outbox"))assertFalse(before.get(table).isEmpty(),table);
-        var flyway=Flyway.configure().dataSource(url,user,password).schemas("acp_phase6_execution_test").defaultSchema("acp_phase6_execution_test").load();assertEquals(1,flyway.migrate().migrationsExecuted);assertEquals(0,flyway.migrate().migrationsExecuted);assertTrue(flyway.validateWithResult().validationSuccessful);
+        var flyway=Flyway.configure().dataSource(url,user,password).schemas("acp_phase6_execution_test").defaultSchema("acp_phase6_execution_test").load();assertEquals(2,flyway.migrate().migrationsExecuted);assertEquals(0,flyway.migrate().migrationsExecuted);assertTrue(flyway.validateWithResult().validationSuccessful);
         for(String table:tables)assertEquals(before.get(table),rows(table,columns.get(table)),table);
         assertEquals({1 if domain=='payment' else 3},jdbc.queryForObject("SELECT count(*) FROM acp_outbox WHERE delivery_status='LEGACY_UNPROVEN'",Integer.class));
         insert("upgrade-resource");var input=Contracts.{symbol('INPUT-TASK','T')}.read(mapper.createObjectNode().put("INPUT-TASK-RESOURCE","upgrade-resource").put("INPUT-TASK-TEXT","new-profile"));
@@ -56,7 +56,7 @@ def run(output,new_projects):
     old_projects=output/'old-projects'
     with (output/'old-generation.log').open('wb') as log:
         subprocess.run([sys.executable,str(checkout/'tooling/check_invocation_components.py'),'--output',str(old_projects)],cwd=checkout,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=300)
-    report={'mode':'ACTUAL_GENERATED_0.1_TO_0.2_UPGRADE','oldCheckpoint':CHECKPOINT,'oldBundleDigest':'sha256:'+old_bundle,'domains':{}}
+    report={'mode':'ACTUAL_GENERATED_0.1_TO_0.3_UPGRADE','oldCheckpoint':CHECKPOINT,'oldBundleDigest':'sha256:'+old_bundle,'domains':{}}
     for domain in ('payment','case-management'):
         old=old_projects/domain;new=new_projects/domain
         # Compile the accepted old implementation, with one old-runtime seed test.

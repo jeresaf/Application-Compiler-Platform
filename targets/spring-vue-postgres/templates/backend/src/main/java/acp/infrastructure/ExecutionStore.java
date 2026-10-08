@@ -91,6 +91,16 @@ public final class ExecutionStore {
         jdbc.update("INSERT INTO acp_outbox(id,tenant,event,resource,aggregate_version,payload,operation,operation_revision,event_revision,aggregate_id,aggregate_revision,commit_sequence,step_ordinal,emission_ordinal,commit_xid,delivery_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,pg_current_xact_id()::text,'PENDING')",
             id,bytes(tenant),event,bytes(resource),version,bytes(encode(payload)),operation,operationRevision,eventRevision,aggregate,aggregateRevision,sequence,c.step,emission);
     }
+    /** Exact terminal entry fact, captured in the same semantic transaction. */
+    public void closed(String entity,String resource,String previous,String state,long version,Jwt jwt) {
+        transaction();
+        for(var life:privacy.model().nodes("DataLifecycle")) {
+            var data=life.path("data");if(!entity.equals(data.path("resource").path("id").asText()))continue;
+            var anchor=data.path("anchor");if(!"CLOSED_COMMIT".equals(anchor.path("kind").asText()))continue;
+            for(var closing:anchor.path("states"))if(closing.path("id").asText().equals(state) && !java.util.Objects.equals(previous,state))
+                jdbc.update("INSERT INTO acp_lifecycle_anchor(lifecycle,revision,tenant,resource,entity,machine,machine_revision,closing_state,state_revision,anchor_xid,root_version,status) VALUES(?,?,?,?,?,?,?,?,?,pg_current_xact_id()::text,?,'ANCHORED') ON CONFLICT DO NOTHING",life.path("id").asText(),life.path("revision").asInt(),bytes(jwt.getClaimAsString("tenant")),bytes(resource),entity,anchor.path("machine").path("id").asText(),anchor.path("machine").path("revision").asInt(),state,closing.path("revision").asInt(),version);
+        }
+    }
     private static void transaction() {
         if (!TransactionSynchronizationManager.isActualTransactionActive()) throw new IllegalStateException("TRANSACTION_REQUIRED");
     }

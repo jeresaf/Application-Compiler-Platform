@@ -1,0 +1,262 @@
+{
+  "reason": "Only the upgrade harness nonempty-table assertion changed after full local application regressions; all generated production artifacts are verified byte-identical, with release provenance rebound to the final bundle. Ubuntu CI reruns the complete sealed bundle.",
+  "sealedBundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+  "domains": {
+    "payment": {
+      "applicationRuntimeValidationBuild": {
+        "bundleDigest": "sha256:7613b6c332866fc0fe382fab6238d94d4c472a35816bd1c57761a9329e75e83d",
+        "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "6990ebbffd91aa580f341f0fcf7e1fba1bcbdc5b7a38c6da3d54c2209a0f8549"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.3.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.3.0",
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "finalBuild": {
+        "bundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+        "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "6990ebbffd91aa580f341f0fcf7e1fba1bcbdc5b7a38c6da3d54c2209a0f8549"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.3.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.3.0",
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "unchangedProductionArtifacts": {
+        "acp/deployment-requirements.json": "sha256:6990ebbffd91aa580f341f0fcf7e1fba1bcbdc5b7a38c6da3d54c2209a0f8549",
+        "acp/profile.json": "sha256:b69ec0eee46ed0529eb1850dceef2b4585b6f1240d6d9451e0cefb85a6a97ae0",
+        "backend/pom.xml": "sha256:61cb262ffefe80d601fbbb873c94757ff23d7e2c87e0d0eacd0e53f8947e5b73",
+        "backend/src/main/java/acp/Application.java": "sha256:e954b9b5cc482874d51ccecfbc5911e4a9acd260273d6e6e8385ff8f1ffa51a5",
+        "backend/src/main/java/acp/api/Errors.java": "sha256:59f6efb8f9e03b7b298d1a7bf8b022087674670d6a5e75f402f0cd6a5804dc65",
+        "backend/src/main/java/acp/api/FailureMapping.java": "sha256:c0056d6574bbfdbf9452e4475d25a9beae5227b67cb2549b1ac3da7341aa4c44",
+        "backend/src/main/java/acp/api/TypedJsonConfiguration.java": "sha256:ae6f64e5f86e30c627bf44c00ae8070b2c64a68bab8f072c1de5bab5dcf18a56",
+        "backend/src/main/java/acp/domain/ExactDecimal.java": "sha256:9828cec7792024dcccac12b322f2daac14bd2c02e330bac14eaaf00fd9eb2900",
+        "backend/src/main/java/acp/domain/Expressions.java": "sha256:645f45dda01d1a8f9a3239aae88e89904a86d114a71264e196915a99091c14aa",
+        "backend/src/main/java/acp/generated/Contracts.java": "sha256:bda14ffe1742d1fd247857d6987a2975412b135c626385aa2513ee0315e2d220",
+        "backend/src/main/java/acp/generated/GeneratedJobs.java": "sha256:6b32a77c24eac64b01a29cdffbdb0229f1f3e27b38f58b6714bcb74b32722da9",
+        "backend/src/main/java/acp/generated/Invocations.java": "sha256:ebfd668c23749f0421df72363bdccdb0dd8a7f9bd08b574a835304f75250f0a7",
+        "backend/src/main/java/acp/generated/LifecycleActions.java": "sha256:47d05ef3ea397301ccace8607bad104ca4b5da83f9d783f71eace67b2e82d2bb",
+        "backend/src/main/java/acp/generated/RuntimeConfiguration.java": "sha256:b4c580e6370141493ac057fa153198a73fbcc6945a7ca29a7428c458af6194ee",
+        "backend/src/main/java/acp/generated/TypedController.java": "sha256:a8eb5dbe1f6e3947ffbb34e33ec7f525032caed52efecd591f0cb00d368fcf28",
+        "backend/src/main/java/acp/generated/TypedTasks.java": "sha256:8613df8dcc01ce7a448488b87a1d597d3bf354401701b04f0ec1b006af1e5b13",
+        "backend/src/main/java/acp/infrastructure/DeliveryRuntime.java": "sha256:22a92bce08f9a0e4270257705d73eb99c0570b3f10dfde90d4d0d2e17166fa99",
+        "backend/src/main/java/acp/infrastructure/ExecutionStore.java": "sha256:c3916e4866c3aaecbc8b3d3df1b23fdaf625a98961eea35a316740bf2ed2788b",
+        "backend/src/main/java/acp/infrastructure/InvocationCore.java": "sha256:b9145a3f35c32bcd626b71cf51fb2e4df8b2910e041c13f745776e7de51537c8",
+        "backend/src/main/java/acp/infrastructure/JobRuntime.java": "sha256:e6a6736d1e71dffbb47de86bee569b8eae434ed6678da78afce43bbd3485adb3",
+        "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74",
+        "backend/src/main/java/acp/infrastructure/PinnedSchedule.java": "sha256:eeb6475ede8b3107f9d61b37bf85eb56ace8fb07e96dfeab9d70e641ff6de640",
+        "backend/src/main/java/acp/infrastructure/RuntimeBootstrap.java": "sha256:1815b6bd402569579de012100a2e87cf67bcd13a385249ebb5253b7681c86f97",
+        "backend/src/main/java/acp/infrastructure/SemanticFailure.java": "sha256:edf8fe2be830922496532bd353996ef5c4c7a8a9e9680330a72a1348d083d41d",
+        "backend/src/main/java/acp/infrastructure/TargetModel.java": "sha256:f12904a9987a52cfc9c102f47c4ae3ec52378ca4f5bc25f4de8b3c65d58f83d9",
+        "backend/src/main/java/acp/security/ApplicationPolicy.java": "sha256:6aa6044e35efd2bfdf25e76d057a73c4f4b7c2497b872e1b99ff81063a9416dc",
+        "backend/src/main/java/acp/security/Observability.java": "sha256:5ed47cacba7692d2488eb7bf1e2de782305b49ed8e86e0bc1278f3f0ad0fb6b9",
+        "backend/src/main/java/acp/security/PrivacyGuards.java": "sha256:568e389ff8fb12c589c0ced8a5fec7e11813e870af8ebe5d5ad2ae4bba259f54",
+        "backend/src/main/java/acp/security/SecurityConfiguration.java": "sha256:87f53f432af128e610b549c85009421329ad690f3506d076730e769bd2186390",
+        "backend/src/main/java/acp/security/SessionGate.java": "sha256:9692b6b8bde341cc328a9bdf025ee758414aad682ed4c6abe683e109c4802ef0",
+        "backend/src/main/resources/acp-failure-mapping.json": "sha256:caf85c03e2d65f3e2b16d8da303a081b2267598bbc4307bae569abd2870141b5",
+        "backend/src/main/resources/acp-model.json": "sha256:93f91ff1fbf9a7cf84b4beaec004be310ddcce02a5f383a316ecdc9f97c5dbf0",
+        "backend/src/main/resources/acp-tzdb-2026d.json": "sha256:839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+        "backend/src/main/resources/application.properties": "sha256:6627fe98e1aeed8d3c7b3be1277541ff2b46bec7f2da64331c5664b8b65fddf8",
+        "backend/src/main/resources/db/migration/V1__initial.sql": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+        "backend/src/main/resources/db/migration/V2__delivery_jobs.sql": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+        "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9",
+        "backend/src/test/java/acp/domain/ApplicationPolicyTest.java": "sha256:2e2d69a19e32c737b6aa4f25d11081f2cc69124550b375888aa754c86b7e7e83",
+        "backend/src/test/java/acp/domain/ClassificationAuditTest.java": "sha256:91bab4bccd4ee10b3fb2d85d09b097e472ef326e284a14692b1be9a3aadfbdab",
+        "backend/src/test/java/acp/domain/ExactDecimalTest.java": "sha256:f0ed913b1de762d519d3233b822820428f3f6587f7df6303d6fa34f58111f68e",
+        "backend/src/test/java/acp/domain/FailureMappingTest.java": "sha256:a91a9e208e0216ebcfe4ad34251ffa85ed290c75ec65d4b69ed41a3a14a1d524",
+        "backend/src/test/java/acp/domain/MigrationTest.java": "sha256:2231383edb6393399a3ffbe4647c7a1cd996aa483f61b9c84062935c2c6fd7e8",
+        "backend/src/test/java/acp/domain/ObservabilityNonDisclosureTest.java": "sha256:41aa5a7b91c0098ca79b1d87577e2feadb72d99258181ca4c15f565b87dfe586",
+        "backend/src/test/java/acp/domain/PortableFaultMappingTest.java": "sha256:7c3dffa4beb3b8cffb20187fceccf3c1993245e84e6522135c16e5aaad02d322",
+        "backend/src/test/java/acp/domain/PrivacyGuardsTest.java": "sha256:cb40dc745ceb5ea1bd85a6fa09eaa02c91ff2a3a916dabf739529330882c0ba0",
+        "backend/src/test/java/acp/domain/SessionGateTest.java": "sha256:89b61edb60bc8db621525013dedd1985adbb520e58971bd315a2bde917989aee",
+        "contracts/openapi.json": "sha256:ff3b10ff342f01dcff50f0c866211cf1c27c6deefb8c90e0a9c310700bf8cf6b",
+        "contracts/target-ir.json": "sha256:93f91ff1fbf9a7cf84b4beaec004be310ddcce02a5f383a316ecdc9f97c5dbf0",
+        "database/V1__initial.sql": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+        "database/V2__delivery_jobs.sql": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+        "database/V3__privacy_lifecycle.sql": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9",
+        "frontend/index.html": "sha256:769c32ed14d678957f98b48e4dcf51b631c26ee56acee959e541c953bd0c0f46",
+        "frontend/package-lock.json": "sha256:1f3732e03779b65a9194958d92802f0505f7b37469d6f2332bd7d5d91f429153",
+        "frontend/package.json": "sha256:023387e06799b1c22ed4f2e9185a1560802900647e06a999dad824caa34e2c19",
+        "frontend/src/App.test.ts": "sha256:3024d13c9d7c8f38285595027b6e701df07325d7cad1105d4b2c099a1e11da57",
+        "frontend/src/App.vue": "sha256:d6b132a16293166d7a2fd235a5bc23dbd32bd099bdff5c81bffc95c360adb3c7",
+        "frontend/src/api.ts": "sha256:8dc4a7b70d6fe8645d652889ffce987cb845bf0db4fbfe9089696b1bd6953b10",
+        "frontend/src/extensions/identity.ts": "sha256:eb9c440244804867839edeb60ec3c91e628ae4aa071c2a714bee585589f2103f",
+        "frontend/src/extensions/registry.ts": "sha256:aacdea9584ce58d5f6a9d45c9c34abd97bfe0ddef30c2023f154a03d82638ab0",
+        "frontend/src/main.ts": "sha256:5d2f4c0f5d289c2624f3569aea0b5a48e48cb0d22ef5f57a5ba47d64a0ec7969",
+        "frontend/src/model.ts": "sha256:3e34fec40a0254f843fd05dc5afa6140e820e9d9979e84867a3e1a676e3e8a5f",
+        "frontend/src/style.css": "sha256:bbb934a55d8608bc5efdba28df3d1b69ae24aec6b2948c7cc41abcf16db600ec",
+        "frontend/src/task-contract.ts": "sha256:fa731533ae8890d26cb92caf34d03a91ec0e974d8721e54ff0f9d20c0438cb61",
+        "frontend/tsconfig.json": "sha256:61175ce8c8089ef272e7c3ff990f757bdf69fd752c13445c6a842e54d1258fd0",
+        "frontend/vite.config.ts": "sha256:0fc08b461fb59dc6570d2813fe26c49f1ba61b41aedcec14473091076dc5b6a8"
+      },
+      "result": "BYTE_IDENTICAL"
+    },
+    "case-management": {
+      "applicationRuntimeValidationBuild": {
+        "bundleDigest": "sha256:7613b6c332866fc0fe382fab6238d94d4c472a35816bd1c57761a9329e75e83d",
+        "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "6406eab4a0b7656c36073e53ee06493c78335711f4930c8d424e6d9443d5529f"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.3.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.3.0",
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "finalBuild": {
+        "bundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+        "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "6406eab4a0b7656c36073e53ee06493c78335711f4930c8d424e6d9443d5529f"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.3.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.3.0",
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "unchangedProductionArtifacts": {
+        "acp/deployment-requirements.json": "sha256:6406eab4a0b7656c36073e53ee06493c78335711f4930c8d424e6d9443d5529f",
+        "acp/profile.json": "sha256:b69ec0eee46ed0529eb1850dceef2b4585b6f1240d6d9451e0cefb85a6a97ae0",
+        "backend/pom.xml": "sha256:61cb262ffefe80d601fbbb873c94757ff23d7e2c87e0d0eacd0e53f8947e5b73",
+        "backend/src/main/java/acp/Application.java": "sha256:e954b9b5cc482874d51ccecfbc5911e4a9acd260273d6e6e8385ff8f1ffa51a5",
+        "backend/src/main/java/acp/api/Errors.java": "sha256:59f6efb8f9e03b7b298d1a7bf8b022087674670d6a5e75f402f0cd6a5804dc65",
+        "backend/src/main/java/acp/api/FailureMapping.java": "sha256:c0056d6574bbfdbf9452e4475d25a9beae5227b67cb2549b1ac3da7341aa4c44",
+        "backend/src/main/java/acp/api/TypedJsonConfiguration.java": "sha256:ae6f64e5f86e30c627bf44c00ae8070b2c64a68bab8f072c1de5bab5dcf18a56",
+        "backend/src/main/java/acp/domain/ExactDecimal.java": "sha256:9828cec7792024dcccac12b322f2daac14bd2c02e330bac14eaaf00fd9eb2900",
+        "backend/src/main/java/acp/domain/Expressions.java": "sha256:645f45dda01d1a8f9a3239aae88e89904a86d114a71264e196915a99091c14aa",
+        "backend/src/main/java/acp/generated/Contracts.java": "sha256:bf20410231ca106c9984b1f944916d15c3ba0d0eb611d0f34f716a3b32cb6358",
+        "backend/src/main/java/acp/generated/GeneratedJobs.java": "sha256:00d0c3506bfc2c844ce0f47898f2f69b95711776e98219c53b987db7adb71b33",
+        "backend/src/main/java/acp/generated/Invocations.java": "sha256:3de7a472cffa5f31bd713e328df5b9a6cbf384bc1964d12a05ba7710274f33b8",
+        "backend/src/main/java/acp/generated/LifecycleActions.java": "sha256:2cdfc6941a9ce86bff8725059ec602dcedb67b24265a9245cea452cfe325dcf1",
+        "backend/src/main/java/acp/generated/RuntimeConfiguration.java": "sha256:b4c580e6370141493ac057fa153198a73fbcc6945a7ca29a7428c458af6194ee",
+        "backend/src/main/java/acp/generated/TypedController.java": "sha256:c59bd265b647fa67e6e834e676fa9b26c4e5a248028c9a66d7835e71604bd947",
+        "backend/src/main/java/acp/generated/TypedTasks.java": "sha256:aef7a64de96daca6acfd63eacc88064a455922c1338226c2ed8953fa9a497495",
+        "backend/src/main/java/acp/infrastructure/DeliveryRuntime.java": "sha256:22a92bce08f9a0e4270257705d73eb99c0570b3f10dfde90d4d0d2e17166fa99",
+        "backend/src/main/java/acp/infrastructure/ExecutionStore.java": "sha256:c3916e4866c3aaecbc8b3d3df1b23fdaf625a98961eea35a316740bf2ed2788b",
+        "backend/src/main/java/acp/infrastructure/InvocationCore.java": "sha256:b9145a3f35c32bcd626b71cf51fb2e4df8b2910e041c13f745776e7de51537c8",
+        "backend/src/main/java/acp/infrastructure/JobRuntime.java": "sha256:e6a6736d1e71dffbb47de86bee569b8eae434ed6678da78afce43bbd3485adb3",
+        "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74",
+        "backend/src/main/java/acp/infrastructure/PinnedSchedule.java": "sha256:eeb6475ede8b3107f9d61b37bf85eb56ace8fb07e96dfeab9d70e641ff6de640",
+        "backend/src/main/java/acp/infrastructure/RuntimeBootstrap.java": "sha256:1815b6bd402569579de012100a2e87cf67bcd13a385249ebb5253b7681c86f97",
+        "backend/src/main/java/acp/infrastructure/SemanticFailure.java": "sha256:edf8fe2be830922496532bd353996ef5c4c7a8a9e9680330a72a1348d083d41d",
+        "backend/src/main/java/acp/infrastructure/TargetModel.java": "sha256:f12904a9987a52cfc9c102f47c4ae3ec52378ca4f5bc25f4de8b3c65d58f83d9",
+        "backend/src/main/java/acp/security/ApplicationPolicy.java": "sha256:6aa6044e35efd2bfdf25e76d057a73c4f4b7c2497b872e1b99ff81063a9416dc",
+        "backend/src/main/java/acp/security/Observability.java": "sha256:5ed47cacba7692d2488eb7bf1e2de782305b49ed8e86e0bc1278f3f0ad0fb6b9",
+        "backend/src/main/java/acp/security/PrivacyGuards.java": "sha256:568e389ff8fb12c589c0ced8a5fec7e11813e870af8ebe5d5ad2ae4bba259f54",
+        "backend/src/main/java/acp/security/SecurityConfiguration.java": "sha256:87f53f432af128e610b549c85009421329ad690f3506d076730e769bd2186390",
+        "backend/src/main/java/acp/security/SessionGate.java": "sha256:9692b6b8bde341cc328a9bdf025ee758414aad682ed4c6abe683e109c4802ef0",
+        "backend/src/main/resources/acp-failure-mapping.json": "sha256:caf85c03e2d65f3e2b16d8da303a081b2267598bbc4307bae569abd2870141b5",
+        "backend/src/main/resources/acp-model.json": "sha256:e36f6174c5ca8014fb53b385e3cd476aa1416fbdb58262605e77c62dcb9197d6",
+        "backend/src/main/resources/acp-tzdb-2026d.json": "sha256:839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+        "backend/src/main/resources/application.properties": "sha256:6627fe98e1aeed8d3c7b3be1277541ff2b46bec7f2da64331c5664b8b65fddf8",
+        "backend/src/main/resources/db/migration/V1__initial.sql": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+        "backend/src/main/resources/db/migration/V2__delivery_jobs.sql": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+        "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5",
+        "backend/src/test/java/acp/domain/ApplicationPolicyTest.java": "sha256:2e2d69a19e32c737b6aa4f25d11081f2cc69124550b375888aa754c86b7e7e83",
+        "backend/src/test/java/acp/domain/ClassificationAuditTest.java": "sha256:91bab4bccd4ee10b3fb2d85d09b097e472ef326e284a14692b1be9a3aadfbdab",
+        "backend/src/test/java/acp/domain/ExactDecimalTest.java": "sha256:f0ed913b1de762d519d3233b822820428f3f6587f7df6303d6fa34f58111f68e",
+        "backend/src/test/java/acp/domain/FailureMappingTest.java": "sha256:a91a9e208e0216ebcfe4ad34251ffa85ed290c75ec65d4b69ed41a3a14a1d524",
+        "backend/src/test/java/acp/domain/MigrationTest.java": "sha256:2231383edb6393399a3ffbe4647c7a1cd996aa483f61b9c84062935c2c6fd7e8",
+        "backend/src/test/java/acp/domain/ObservabilityNonDisclosureTest.java": "sha256:41aa5a7b91c0098ca79b1d87577e2feadb72d99258181ca4c15f565b87dfe586",
+        "backend/src/test/java/acp/domain/PortableFaultMappingTest.java": "sha256:7c3dffa4beb3b8cffb20187fceccf3c1993245e84e6522135c16e5aaad02d322",
+        "backend/src/test/java/acp/domain/PrivacyGuardsTest.java": "sha256:cb40dc745ceb5ea1bd85a6fa09eaa02c91ff2a3a916dabf739529330882c0ba0",
+        "backend/src/test/java/acp/domain/SessionGateTest.java": "sha256:89b61edb60bc8db621525013dedd1985adbb520e58971bd315a2bde917989aee",
+        "contracts/openapi.json": "sha256:39b3369bed595b9d53403535cc521998c7a2d984b29f56ef25f4a66c3a76c857",
+        "contracts/target-ir.json": "sha256:e36f6174c5ca8014fb53b385e3cd476aa1416fbdb58262605e77c62dcb9197d6",
+        "database/V1__initial.sql": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+        "database/V2__delivery_jobs.sql": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+        "database/V3__privacy_lifecycle.sql": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5",
+        "frontend/index.html": "sha256:769c32ed14d678957f98b48e4dcf51b631c26ee56acee959e541c953bd0c0f46",
+        "frontend/package-lock.json": "sha256:1f3732e03779b65a9194958d92802f0505f7b37469d6f2332bd7d5d91f429153",
+        "frontend/package.json": "sha256:023387e06799b1c22ed4f2e9185a1560802900647e06a999dad824caa34e2c19",
+        "frontend/src/App.test.ts": "sha256:3024d13c9d7c8f38285595027b6e701df07325d7cad1105d4b2c099a1e11da57",
+        "frontend/src/App.vue": "sha256:d6b132a16293166d7a2fd235a5bc23dbd32bd099bdff5c81bffc95c360adb3c7",
+        "frontend/src/api.ts": "sha256:8dc4a7b70d6fe8645d652889ffce987cb845bf0db4fbfe9089696b1bd6953b10",
+        "frontend/src/extensions/identity.ts": "sha256:eb9c440244804867839edeb60ec3c91e628ae4aa071c2a714bee585589f2103f",
+        "frontend/src/extensions/registry.ts": "sha256:aacdea9584ce58d5f6a9d45c9c34abd97bfe0ddef30c2023f154a03d82638ab0",
+        "frontend/src/main.ts": "sha256:5d2f4c0f5d289c2624f3569aea0b5a48e48cb0d22ef5f57a5ba47d64a0ec7969",
+        "frontend/src/model.ts": "sha256:283edba762311c36f19cfbfe2239a4d2fe4eb24c3977197d6ecfed3862018109",
+        "frontend/src/style.css": "sha256:bbb934a55d8608bc5efdba28df3d1b69ae24aec6b2948c7cc41abcf16db600ec",
+        "frontend/src/task-contract.ts": "sha256:fa731533ae8890d26cb92caf34d03a91ec0e974d8721e54ff0f9d20c0438cb61",
+        "frontend/tsconfig.json": "sha256:61175ce8c8089ef272e7c3ff990f757bdf69fd752c13445c6a842e54d1258fd0",
+        "frontend/vite.config.ts": "sha256:0fc08b461fb59dc6570d2813fe26c49f1ba61b41aedcec14473091076dc5b6a8"
+      },
+      "result": "BYTE_IDENTICAL"
+    }
+  }
+}

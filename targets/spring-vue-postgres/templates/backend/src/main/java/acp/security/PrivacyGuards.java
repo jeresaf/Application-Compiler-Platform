@@ -8,7 +8,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 
-/** Partial application mechanisms; not classification/lifecycle capability admission. */
+/** Classified application surfaces; infrastructure encryption remains OUTSTANDING. */
 @Component
 public final class PrivacyGuards {
     private final TargetModel model;
@@ -16,6 +16,22 @@ public final class PrivacyGuards {
     private final Expressions expressions;
     public PrivacyGuards(TargetModel model, ApplicationPolicy policy, Expressions expressions) {
         this.model=model; this.policy=policy; this.expressions=expressions;
+    }
+    public TargetModel model(){return model;}
+    /** Non-domain metadata only; typed domain/API/Event values never pass here. */
+    public Map<String,Object> observability(Map<String,Object> values) {
+        var safe=new java.util.LinkedHashMap<String,Object>();
+        for(var entry:values.entrySet()) {
+            var field=model.node(entry.getKey());if(!field.path("kind").asText().equals("Field"))throw new IllegalArgumentException("CLASSIFIED_FIELD_REQUIRED");
+            var classification=model.node(field.path("data").path("classificationRef").path("id").asText()).path("data");
+            switch(classification.path("redaction").asText()) {
+                case "MASK" -> safe.put(entry.getKey(),"[REDACTED]");
+                case "OMIT" -> {} // No value, hash, length or marker for omitted fields.
+                case "NONE" -> safe.put(entry.getKey(),entry.getValue());
+                default -> throw new IllegalStateException("REDACTION_REQUIRED");
+            }
+        }
+        return java.util.Collections.unmodifiableMap(safe);
     }
     public boolean audit(String field, String mode) {
         if (!Set.of("READ","WRITE").contains(mode)) throw new IllegalArgumentException("AUDIT_MODE");

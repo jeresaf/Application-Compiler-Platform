@@ -213,10 +213,14 @@ jobs:
         run: python3.14 tooling/check_invocation_components.py --output /tmp/acp-invocation-components --run-builds
       - name: Verify durable delivery and scheduling against PostgreSQL
         run: python3.14 tooling/check_delivery_job_components.py --output /tmp/acp-delivery-job-components --run-builds
+      - name: Verify privacy lifecycle, redaction, deployment obligations and concurrent disposal
+        run: python3.14 tooling/check_privacy_lifecycle_components.py --output /tmp/acp-privacy-lifecycle-components --run-builds
+      - name: Upgrade actual accepted target 0.2 applications and exercise lifecycle in place
+        run: python3.14 tooling/check_privacy_profile_upgrade.py --output /tmp/acp-privacy-profile-upgrade --new-projects /tmp/acp-privacy-lifecycle-components
       - name: Upgrade actual accepted invocation applications in place
         run: python3.14 tooling/check_target_profile_upgrade.py --output /tmp/acp-target-profile-upgrade --new-projects /tmp/acp-delivery-job-components
       - name: Verify approved Canonical 0.3 evolution and exact approval boundaries
-        run: python3.14 -m unittest tooling.tests.test_deterministic_approval tooling.tests.test_invocation_target tooling.tests.test_delivery_job_target -v
+        run: python3.14 -m unittest tooling.tests.test_deterministic_approval tooling.tests.test_invocation_target tooling.tests.test_delivery_job_target tooling.tests.test_privacy_lifecycle_target -v
       - name: Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries
         run: python3.14 -m unittest tooling.tests.test_execution_approval tooling.tests.test_execution_v03_evolution -v
       - name: Preserve negotiated gate and generated build evidence
@@ -238,3 +242,10 @@ jobs:
             /tmp/acp-target-profile-upgrade/target-upgrade-report.json
             /tmp/acp-target-profile-upgrade/*.log
             /tmp/acp-target-profile-upgrade/old-projects/*/backend/target/surefire-reports/
+            /tmp/acp-privacy-lifecycle-components/privacy-lifecycle-report.json
+            /tmp/acp-privacy-lifecycle-components/*.log
+            /tmp/acp-privacy-lifecycle-components/*/backend/target/surefire-reports/
+            /tmp/acp-privacy-lifecycle-components/*/acp/deployment-requirements.json
+            /tmp/acp-privacy-profile-upgrade/target-upgrade-report.json
+            /tmp/acp-privacy-profile-upgrade/*.log
+            /tmp/acp-privacy-profile-upgrade/old-projects/*/backend/target/surefire-reports/

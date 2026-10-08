@@ -135,7 +135,7 @@ def source(domain):
             jdbc.update("INSERT INTO acp_outbox(id,tenant,event,resource,aggregate_version,payload) VALUES('old-event',?,?,?,1,?)",ExecutionStore.bytes("tenant-one"),{q('EVT-RECORDED' if domain=='payment' else 'EVT-REVIEWED')},ExecutionStore.bytes("fixture-resource"),ExecutionStore.bytes("{{}}"));
             jdbc.update("INSERT INTO acp_audit(tenant,subject,operation,resource) VALUES(?,?,?,?)",ExecutionStore.bytes("tenant-one"),ExecutionStore.bytes("fixture:operator"),"old-operation",ExecutionStore.bytes("fixture-resource"));return null;}});
         byte[] result=jdbc.queryForObject("SELECT result FROM acp_idempotency",byte[].class);var rate=jdbc.queryForObject("SELECT tokens FROM acp_rate",java.math.BigDecimal.class);
-        clean.migrate();assertEquals(2,java.util.Arrays.stream(clean.info().applied()).filter(m->m.getVersion()!=null).count());
+        clean.migrate();assertEquals(3,java.util.Arrays.stream(clean.info().applied()).filter(m->m.getVersion()!=null).count());
         assertEquals("old",ExecutionStore.text(jdbc.queryForObject({q('SELECT '+symbol('FLD-TASK-SUMMARY','f')+' FROM '+e(root))},byte[].class)));
         assertArrayEquals(result,jdbc.queryForObject("SELECT result FROM acp_idempotency",byte[].class));assertEquals(rate,jdbc.queryForObject("SELECT tokens FROM acp_rate",java.math.BigDecimal.class));
         assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_audit",Integer.class));assertEquals("LEGACY_UNPROVEN",jdbc.queryForObject("SELECT delivery_status FROM acp_outbox",String.class));

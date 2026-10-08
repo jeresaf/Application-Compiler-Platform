@@ -1,0 +1,262 @@
+{
+  "contractVersion": "1.0.0",
+  "requirements": [
+    {
+      "origin": {
+        "id": "CLASS-INTERNAL",
+        "revision": 2
+      },
+      "requirement": "ENCRYPTION_AT_REST",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-INTERNAL",
+        "revision": 2
+      },
+      "requirement": "TLS_IN_TRANSIT",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-INTERNAL",
+        "revision": 2
+      },
+      "requirement": "KEY_MANAGEMENT",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-INTERNAL",
+        "revision": 2
+      },
+      "requirement": "BACKUP_ENCRYPTION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-INTERNAL",
+        "revision": 2
+      },
+      "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-PUBLIC",
+        "revision": 2
+      },
+      "requirement": "ENCRYPTION_AT_REST",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-PUBLIC",
+        "revision": 2
+      },
+      "requirement": "TLS_IN_TRANSIT",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-PUBLIC",
+        "revision": 2
+      },
+      "requirement": "KEY_MANAGEMENT",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-PUBLIC",
+        "revision": 2
+      },
+      "requirement": "BACKUP_ENCRYPTION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-PUBLIC",
+        "revision": 2
+      },
+      "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SECRET",
+        "revision": 2
+      },
+      "requirement": "ENCRYPTION_AT_REST",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SECRET",
+        "revision": 2
+      },
+      "requirement": "TLS_IN_TRANSIT",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SECRET",
+        "revision": 2
+      },
+      "requirement": "KEY_MANAGEMENT",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SECRET",
+        "revision": 2
+      },
+      "requirement": "BACKUP_ENCRYPTION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SECRET",
+        "revision": 2
+      },
+      "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SENSITIVE",
+        "revision": 2
+      },
+      "requirement": "ENCRYPTION_AT_REST",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SENSITIVE",
+        "revision": 2
+      },
+      "requirement": "TLS_IN_TRANSIT",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SENSITIVE",
+        "revision": 2
+      },
+      "requirement": "KEY_MANAGEMENT",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SENSITIVE",
+        "revision": 2
+      },
+      "requirement": "BACKUP_ENCRYPTION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "CLASS-SENSITIVE",
+        "revision": 2
+      },
+      "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "DELETE-ENT-PAYMENT",
+        "revision": 2
+      },
+      "requirement": "BACKUP_LIFECYCLE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "DELETE-ENT-PAYMENT",
+        "revision": 2
+      },
+      "requirement": "WAL_REPLICA_RETENTION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "DELETE-ENT-PAYMENT",
+        "revision": 2
+      },
+      "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "DELETE-ENT-PAYMENT",
+        "revision": 2
+      },
+      "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "LIFECYCLE-ENT-PAYMENT",
+        "revision": 3
+      },
+      "requirement": "BACKUP_LIFECYCLE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "LIFECYCLE-ENT-PAYMENT",
+        "revision": 3
+      },
+      "requirement": "WAL_REPLICA_RETENTION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "LIFECYCLE-ENT-PAYMENT",
+        "revision": 3
+      },
+      "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "LIFECYCLE-ENT-PAYMENT",
+        "revision": 3
+      },
+      "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "RETENTION-ENT-PAYMENT",
+        "revision": 2
+      },
+      "requirement": "BACKUP_LIFECYCLE",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "RETENTION-ENT-PAYMENT",
+        "revision": 2
+      },
+      "requirement": "WAL_REPLICA_RETENTION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "RETENTION-ENT-PAYMENT",
+        "revision": 2
+      },
+      "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+      "status": "OUTSTANDING"
+    },
+    {
+      "origin": {
+        "id": "RETENTION-ENT-PAYMENT",
+        "revision": 2
+      },
+      "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+      "status": "OUTSTANDING"
+    }
+  ],
+  "scope": "Deployment obligations, never evidence of satisfaction; active-state anonymization does not erase backups/WAL/replicas or immutable semantic history"
+}

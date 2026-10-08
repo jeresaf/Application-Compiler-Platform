@@ -11,7 +11,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 /** Explicit credential/transport adapter boundary; no generated secrets or broker. */
 public final class RuntimeBootstrap implements AutoCloseable {
     private final ScheduledExecutorService timer=Executors.newSingleThreadScheduledExecutor(r->{Thread t=new Thread(r,"acp-runtime-poll");t.setDaemon(true);return t;});
-    private final JobRuntime jobs;private final DeliveryRuntime delivery;private final TargetModel model;private final JdbcTemplate jdbc;
+    private final LifecycleRuntime lifecycle;private final JobRuntime jobs;private final DeliveryRuntime delivery;private final TargetModel model;private final JdbcTemplate jdbc;
     private final Map<String,String> tenants=new HashMap<>();
     public RuntimeBootstrap(JdbcTemplate jdbc,PlatformTransactionManager manager,TargetModel model,Invocations invocations,Environment env,ObjectProvider<JobRuntime.PrincipalPort> principalProvider,ObjectProvider<DeliveryRuntime.Transport> transportProvider) {
         this.jdbc=jdbc;this.model=model;var clock=new InvocationCore.SystemTime();
@@ -23,13 +23,17 @@ public final class RuntimeBootstrap implements AutoCloseable {
             if(jwt==null || jwt.getClaimAsString("tenant")==null)throw new IllegalStateException("JOB_PRINCIPAL_SCOPE");tenants.put(id,jwt.getClaimAsString("tenant"));
         }
         jobs=new JobRuntime(jdbc,manager,model,clock,principal,handles,new GeneratedJobs(jdbc,invocations));
+        var sessions=new acp.security.SessionGate(model,jdbc,manager);var expressions=new acp.domain.Expressions(model);var policy=new acp.security.ApplicationPolicy(model,expressions,sessions);var guards=new acp.security.PrivacyGuards(model,policy,expressions);
+        lifecycle=new LifecycleRuntime(jdbc,manager,model,policy,expressions,clock,new LifecycleActions(new ExecutionStore(jdbc,policy,guards)));
         var transport=transportProvider.getIfAvailable();delivery=new DeliveryRuntime(jdbc,manager,model,clock,transport==null?o->{throw new IllegalStateException("TRANSPORT_ADAPTER_REQUIRED");}:transport);
     }
+    public LifecycleRuntime management(){return lifecycle;}
     public void start() {
         var clock=new InvocationCore.SystemTime();tenants.forEach((job,tenant)->jobs.activate(job,tenant,clock.now()));
         timer.scheduleWithFixedDelay(()->{
             try{
                 tenants.forEach((job,tenant)->jobs.poll(job,tenant));
+                lifecycle.poll();
                 if(delivery!=null)for(var row:jdbc.queryForList("SELECT DISTINCT tenant,aggregate_id,resource FROM acp_outbox WHERE delivery_status IN ('PENDING','CLAIMED')"))delivery.poll(ExecutionStore.text((byte[])row.get("tenant")),(String)row.get("aggregate_id"),ExecutionStore.text((byte[])row.get("resource")));
             }catch(RuntimeException e){org.slf4j.LoggerFactory.getLogger(RuntimeBootstrap.class).warn("ACP_RUNTIME_POLL_FAILED");}
         },0,1,TimeUnit.SECONDS);
