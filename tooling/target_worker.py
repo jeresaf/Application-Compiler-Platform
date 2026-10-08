@@ -161,6 +161,7 @@ class ProductionTarget(SyntheticTarget):
 
     def __init__(self):
         self.worker = TargetWorker()
+        self.last_admission = None
         self.bundle = bundle_digest()
         if json.loads((ROOT / "profile.json").read_text()) != PROFILE:
             raise TargetWorkerError("BUNDLE_CHANGED")
@@ -181,9 +182,12 @@ class ProductionTarget(SyntheticTarget):
         if 'acp.execution.0.3' in request.features:
             payload.update(canonicalVersion='0.2.0', required=['semantic.execution-dataflow/0.3'])
         # Host approved decisions are checked by compiler_core before this port.
+        self.last_admission = {"operation": "lower", "result": "PENDING"}
         try:
             model = self._call("lower", payload)
+            self.last_admission = {"operation": "lower", "result": "ACCEPTED"}
         except TargetWorkerError as error:
+            self.last_admission = {"operation": "lower", "result": "BLOCKED", "error": str(error)}
             if any(part.startswith('UNSUPPORTED:') for part in str(error).split(';')):
                 from compiler_core import CompilerFault
                 raise CompilerFault('CAPABILITY') from None

@@ -1,0 +1,48 @@
+{
+  "contractVersion": "1.0.0",
+  "target": "acp-spring-vue-postgres/0.1.0",
+  "releaseStatus": "INCOMPLETE",
+  "reviewBasis": "Explicit human acceptance of incomplete checkpoint 101205d576aa690381c34dca480fe8053780367d and instruction to assert its exact open blockers. Changes to this contract require intentional review.",
+  "domains": {
+    "payment": {
+      "canonicalDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+      "blockers": [
+        "ANONYMIZATION_VALUES_REVIEW_REQUIRED:DELETE-ENT-PAYMENT",
+        "CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:DELETE-ENT-PAYMENT",
+        "CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:RETENTION-ENT-PAYMENT",
+        "QUERY_ORDERING_REVIEW_REQUIRED:QUERY-TASKS",
+        "UNSUPPORTED:DataClassification/0.2.0",
+        "UNSUPPORTED:DataLifecycle/0.2.0",
+        "UNSUPPORTED:DeletionPolicy/0.2.0",
+        "UNSUPPORTED:DeliveryPolicy/0.2.0",
+        "UNSUPPORTED:IdempotencyPolicy/0.2.0",
+        "UNSUPPORTED:Job/0.2.0",
+        "UNSUPPORTED:LegalHold/0.2.0",
+        "UNSUPPORTED:RatePolicy/0.2.0",
+        "UNSUPPORTED:Retention/0.2.0",
+        "UNSUPPORTED:RetryPolicy/0.2.0",
+        "UNSUPPORTED:Schedule/0.2.0"
+      ]
+    },
+    "case-management": {
+      "canonicalDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+      "blockers": [
+        "ANONYMIZATION_VALUES_REVIEW_REQUIRED:DELETE-CASE",
+        "CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:DELETE-CASE",
+        "CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:RETENTION-CASE",
+        "QUERY_ORDERING_REVIEW_REQUIRED:QUERY-TASKS",
+        "UNSUPPORTED:DataClassification/0.2.0",
+        "UNSUPPORTED:DataLifecycle/0.2.0",
+        "UNSUPPORTED:DeletionPolicy/0.2.0",
+        "UNSUPPORTED:DeliveryPolicy/0.2.0",
+        "UNSUPPORTED:IdempotencyPolicy/0.2.0",
+        "UNSUPPORTED:Job/0.2.0",
+        "UNSUPPORTED:LegalHold/0.2.0",
+        "UNSUPPORTED:RatePolicy/0.2.0",
+        "UNSUPPORTED:Retention/0.2.0",
+        "UNSUPPORTED:RetryPolicy/0.2.0",
+        "UNSUPPORTED:Schedule/0.2.0"
+      ]
+    }
+  }
+}

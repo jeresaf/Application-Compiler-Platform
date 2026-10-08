@@ -143,6 +143,7 @@ jobs:
         run: python3.14 experiments/phase5/check5c.py
 
   phase6-target:
+    needs: [contracts, phase5c-hard-gates]
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     services:
@@ -183,9 +184,9 @@ jobs:
           sudo apt-get install --yes libseccomp2
           python3.14 -m pip install -r tooling/requirements.txt
       - name: Compile both complete approved domains through the negotiated target
-        # Deliberately fail closed while complete application capabilities are missing.
-        # Component/template builds never substitute for negotiated admission.
-        run: python3.14 tooling/check_phase6_target.py --output /tmp/acp-phase6-target --run-builds
+        # Assert the exact reviewed open-phase state; strict closure mode remains available.
+        # Any added or removed blocker, earlier-stage failure or wrong snapshot fails.
+        run: python3.14 tooling/check_phase6_target.py --output /tmp/acp-phase6-target --run-builds --expect-open-blockers
       - name: Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries
         run: python3.14 -m unittest tooling.tests.test_execution_approval tooling.tests.test_execution_v03_evolution -v
       - name: Preserve negotiated gate and generated build evidence

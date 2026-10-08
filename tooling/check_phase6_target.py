@@ -22,6 +22,7 @@ from phase6_reference_tests import source as test_source, http_source, variants
 from target_worker import ROOT, PROFILE, ProductionTarget, TargetWorkerError
 sys.path.insert(0, str(ROOT / "worker"))
 from target_provenance import inspect_mapping
+from phase6_open_state import assert_expected_blocked
 
 
 def context_for(domain):
@@ -39,24 +40,22 @@ def context_for(domain):
         approval=FixtureApproval((approved,), decisions, evidence))
 
 
-def run(output, builds):
+def run(output, builds, expect_open=False):
     output.mkdir(parents=True, exist_ok=False)
-    report = {'mode': 'FULL_NEGOTIATED_TARGET_GATE', 'phase6': 'OPEN', 'domains': {}}
+    manifest = ProductionTarget().worker.call('manifest', {})
+    report = {'targetManifest': manifest, 'mode': 'FULL_NEGOTIATED_TARGET_GATE', 'phase6': 'OPEN', 'domains': {}}
     failed = False
     for domain in ('payment', 'case-management'):
         source, context = context_for(domain)
         compilation = compile_pipeline(source, context)
-        evidence = {'canonicalDigest': context.request.snapshot_digest, 'audit': wire(compilation.audit)}
+        evidence = {'canonicalDigest': context.request.snapshot_digest, 'audit': wire(compilation.audit),
+                    'admission': context.target.last_admission}
         report['domains'][domain] = evidence
         if not isinstance(compilation.result, Success):
             evidence['result'] = 'BLOCKED'
             evidence['diagnostics'] = wire(compilation.result.diagnostics)
-            # Preserve worker details in addition to the neutral compiler fault.
-            try:
-                context.target.worker.call('negotiate', {'nodes': approved_snapshot(domain)['content']['nodes'],
-                    'canonicalVersion': '0.2.0', 'required': ['semantic.execution-dataflow/0.3'], 'decisions': PROFILE['decisions']})
-            except TargetWorkerError as error:
-                evidence['targetAdmission'] = str(error)
+            if evidence['admission'] and evidence['admission'].get('error'):
+                evidence['targetAdmission'] = evidence['admission']['error']
             failed = True
             continue
         repeat_source, repeat_context = context_for(domain)
@@ -103,6 +102,24 @@ def run(output, builds):
                     failed = True
                     break
     report['result'] = 'BLOCKED' if failed else 'PIPELINE_CHECKS_PASS_PHASE6_EXIT_REVIEW_STILL_REQUIRED'
+    if expect_open and manifest.get('releaseStatus') == 'INCOMPLETE':
+        try:
+            assert_expected_blocked(report, load(ROOT / 'expected-open-blockers.json'))
+            report['openPhaseExpectation'] = 'EXPECTED_BLOCKED_STATE = PASS'
+            failed = False
+        except ValueError as error:
+            report['openPhaseExpectation'] = 'FAIL:' + str(error)
+            failed = True
+    elif expect_open:
+        # No expected-blocker allowance at any release state other than INCOMPLETE.
+        evolution_pass = all(v.get('fullNegotiatedEvolution') == 'PASS' for v in report['domains'].values())
+        if failed or not builds or not evolution_pass:
+            report['closureMissingEvolutionEvidence'] = not evolution_pass
+            report['closureGate'] = 'FAIL'
+            failed = True
+        else:
+            report['closureGate'] = 'FULL_NEGOTIATED_TARGET_GATE = PASS'
+
     (output / 'negotiated-report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, sort_keys=True))
     return int(failed)
@@ -112,5 +129,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--run-builds', action='store_true')
+    parser.add_argument('--expect-open-blockers', action='store_true', help='Assert the versioned exact blocked state only while manifest is INCOMPLETE; strict by default')
     args = parser.parse_args()
-    raise SystemExit(run(args.output.absolute(), args.run_builds))
+    raise SystemExit(run(args.output.absolute(), args.run_builds, args.expect_open_blockers))
