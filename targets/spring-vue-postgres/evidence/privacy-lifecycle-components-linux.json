@@ -953,5 +953,18 @@
       ]
     }
   },
-  "result": "COMPONENTS_PASS_FULL_TARGET_STILL_BLOCKED"
+  "result": "COMPONENTS_PASS_FULL_TARGET_STILL_BLOCKED",
+  "evidenceStatus": "PRE_SEAL_RUNTIME_VALIDATION",
+  "finalReleaseEvidence": {
+    "sealedBundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+    "authoritativeFinalBundleBinding": "privacy-final-bundle-binding-linux.json",
+    "hostedCI": {
+      "runId": 37809799618,
+      "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/37809799618",
+      "headCommit": "01fe1e905ed97e482a004761a553e2d8b7a1a749",
+      "conclusion": "SUCCESS",
+      "scope": "Complete component suite rerun against final sealed bundle on Ubuntu 24.04"
+    },
+    "note": "Original local test provenance is retained. The development bundle 7613b6c332866fc0fe382fab6238d94d4c472a35816bd1c57761a9329e75e83d is not the released 0.3.0 bundle. Final binding proves generated production artifact byte identity; hosted CI independently validates the sealed release."
+  }
 }

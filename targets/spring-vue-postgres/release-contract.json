@@ -1,6 +1,6 @@
 {
   "contractVersion": "1.0.0",
-  "policy": "One exact bundle per released target/generator identity; any output-affecting revision requires a new intentional generator version. The 0.2 identity is sealed at this tranche checkpoint. Historical 0.1 evidence is unchanged.",
+  "policy": "Each released target/generator identity is permanently bound to one exact bundle. Releases 0.1.0 and 0.2.0 are preserved; 0.3.0 is the current privacy/lifecycle checkpoint. Any output-affecting bundle change requires a new intentional generator/target release identity.",
   "releases": {
     "acp-spring-vue-postgres/0.1.0": {
       "generator": "acp-spring-vue-generator/0.1.0",

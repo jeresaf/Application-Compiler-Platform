@@ -2,7 +2,17 @@
 
 Phase 6 is IN PROGRESS. This file is not an acceptance or completion claim. Phases 1–5 retain their approved historical status. Phase 7 is NOT STARTED. No generated application is claimed production-ready.
 
-## Current delivery and Jobs tranche
+## Current approved privacy/lifecycle checkpoint
+
+The approved privacy/lifecycle implementation is commit `01fe1e905ed97e482a004761a553e2d8b7a1a749`. Target `acp-spring-vue-postgres/0.3.0` and generator `acp-spring-vue-generator/0.3.0` are sealed to bundle `6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc`. Target IR remains `0.2.0`; the [implementation report](phase6-privacy-lifecycle.md) explains why its structure and meaning remain compatible.
+
+Accepted `SUPPORTED_WITH_CONSTRAINT` capabilities are Query, Failure, RatePolicy, IdempotencyPolicy, RetryPolicy, DeliveryPolicy, Schedule, Job, DataClassification, DataLifecycle, Retention, DeletionPolicy and LegalHold, each within its exact documented subset. Deployment encryption/destruction and exporter verification remain `OUTSTANDING`.
+
+Real compiler/worker negotiation against each unchanged approved Canonical 0.3 application reports exactly eleven UI blockers: Action, Filter, Form, InputControl, PermissionBoundary, Screen, Search, Table, ViewState, Wizard and WizardStep (all interface version `0.2.0`). Immutable [blocker contract 4.0.0](../targets/spring-vue-postgres/expected-open-blockers-v4.json) binds this exact state. Historical blocker contracts remain unchanged. Strict Phase 6 closure remains **BLOCKED**. Phase 6 is **IN PROGRESS / NOT CLOSED**; Phase 7 is **NOT STARTED**.
+
+Hosted Ubuntu 24.04 evidence is [CI run 37809799618](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/37809799618), **SUCCESS**, for the approved implementation commit: all four jobs passed, including the complete final-bundle privacy/lifecycle suite and both historical upgrade paths. Local Linux evidence is separate: 230 Python regressions, 145 generated backend tests, frontend checks and upgrades passed. The [local component report](../targets/spring-vue-postgres/evidence/privacy-lifecycle-components-linux.json) is explicitly `PRE_SEAL_RUNTIME_VALIDATION`, retaining its original development bundle provenance; the [final bundle binding](../targets/spring-vue-postgres/evidence/privacy-final-bundle-binding-linux.json) records byte identity of all 65 generated production artifacts per domain against the sealed release. The hosted run independently validates the final sealed bundle.
+
+## Historical delivery and Jobs checkpoint
 
 The [delivery and Jobs tranche](phase6-delivery-jobs.md) uses target profile and generator 0.2.0 and explicitly versioned Target IR 0.2.0. Actual worker negotiation against both unchanged approved Canonical 0.3 snapshots reports 16 blockers per application, bound by [contract 3.0.0](../targets/spring-vue-postgres/expected-open-blockers-v3.json): five privacy/lifecycle families and eleven UI families. DeliveryPolicy, Schedule and Job support is constrained to the exact documented subset. Historical blocker contracts 1.1.0 and 2.0.0 remain unchanged. Strict Phase 6 closure remains BLOCKED; Phase 6 is IN PROGRESS and Phase 7 is NOT STARTED.
 
