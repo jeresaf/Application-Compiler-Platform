@@ -30,6 +30,12 @@ for domain in ('payment','case-management'):
   path=old/domain/'backend/src/test/java/acp/generated/RemediationSeedTest.java';path.parent.mkdir(parents=True,exist_ok=True);path.write_text(seed)
   after=after_source(domain).replace('UpgradeAfterTest','RemediationUpgradeTest').replace('assertEquals("1",jdbc.queryForObject("SELECT max(version)', 'assertEquals("3",jdbc.queryForObject("SELECT max(version)').replace('assertEquals(2,flyway.migrate().migrationsExecuted)','assertEquals(0,flyway.migrate().migrationsExecuted)')
   lines=after.splitlines();after='\n'.join(line for line in lines if 'assertEquals(' not in line or 'count(*) FROM acp_outbox WHERE delivery_status=\'LEGACY_UNPROVEN\'' not in line)+'\n'
+  # Both releases already use delivery-aware outbox rows. Preserve the old
+  # committed rows and verify the successor adds its own rows, rather than
+  # applying the historical 0.1 upgrade's empty-PENDING assumption.
+  pending="SELECT count(*) FROM acp_outbox WHERE commit_xid IS NOT NULL AND delivery_status='PENDING'"
+  after=after.replace('        insert("upgrade-resource");', '        int pendingBefore=jdbc.queryForObject("'+pending+'",Integer.class);\n        insert("upgrade-resource");')
+  after=after.replace('assertEquals('+str(1 if domain=='payment' else 3)+',jdbc.queryForObject("'+pending+'",Integer.class))', 'assertEquals(pendingBefore+'+str(1 if domain=='payment' else 3)+',jdbc.queryForObject("'+pending+'",Integer.class))')
   path=projects/domain/'backend/src/test/java/acp/generated/RemediationUpgradeTest.java';path.write_text(after)
   for label,project,test in [('sealed-04',old/domain,'RemediationSeedTest'),('successor-05',projects/domain,'RemediationUpgradeTest')]:
    with (output/(domain+'-'+label+'.log')).open('wb') as log:subprocess.run(['mvn','-B','-ntp','-Dtest='+test,'test'],cwd=project/'backend',stdout=log,stderr=subprocess.STDOUT,check=True,timeout=900)
