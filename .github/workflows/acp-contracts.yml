@@ -320,6 +320,9 @@ jobs:
       - name: Perform final closure audit without waivers
         # Exit 2 is PHASE6_CLOSURE_BLOCKED; do not hide it or mark Phase 6 closed.
         run: python3.14 tooling/audit/phase6.py --output /tmp/acp-phase6-final-audit
+      - name: Retain dated vulnerability advisory details
+        if: always()
+        run: python3.14 tooling/audit/security_review.py --source /tmp/acp-phase6-final-audit
       - name: Preserve closure recommendation and complete evidence
         if: always()
         uses: actions/upload-artifact@v4

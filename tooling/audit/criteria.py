@@ -38,7 +38,7 @@ def assess(report):
     add(29,'Production OIDC integration','BLOCKED','Required identity()/onIdentityChange()/accessToken()/permissions() contract documented. No accepted non-test provider adapter fixture proving token acquisition/change notification/configuration end-to-end.')
     add(30,'Performance baseline','BLOCKED','Build durations/package sizes are measured; bounded Query/Action/startup/browser-load/concurrent-rate performance measurements are not complete. No synthetic SLO promised.')
     add(31,'Resource scaling','BLOCKED','Approved fixtures within limits pass; no larger valid generated UI fixture/node-limit scaling and provenance-growth curve accepted.')
-    add(32,'Generation/package determinism','PASS' if package_ok else 'BLOCKED','Independent disposable compiler runs compare ArtifactPlan digest; package build twice compares exact archive bytes. Runtime random keys excluded.')
+    add(32,'Generation/package determinism','BLOCKED','Independent compiler contexts compare ArtifactPlan digest and repeated package builds compare exact bytes. Package builds share the same checkout/build cache; two independently materialized clean package builds are still required. Runtime random keys excluded.')
     add(33,'Fresh hosted reproduction','BLOCKED','Dedicated closure CI job added with pinned Ubuntu/Python/Node and Java. Not run while the user instruction forbids pushing. Existing baseline CI success is historical, not current audit evidence.')
     add(34,'Historical contracts','PASS','Protected contract/corpus/release/ADR bytes compared against immutable merged baseline.')
     add(35,'Human closure authority','PASS','Audit recommendation does not mark Phase 6 COMPLETE; stop for explicit human review.')
