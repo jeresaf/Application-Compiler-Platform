@@ -229,7 +229,7 @@ jobs:
       - name: Upgrade actual accepted target 0.2 applications and exercise lifecycle in place
         run: python3.14 tooling/check_privacy_profile_upgrade.py --output /tmp/acp-privacy-profile-upgrade --new-projects /tmp/acp-privacy-lifecycle-components
       - name: Upgrade actual accepted invocation applications in place
-        run: python3.14 tooling/check_target_profile_upgrade.py --output /tmp/acp-target-profile-upgrade --new-projects /tmp/acp-delivery-job-components
+        run: python3.14 tooling/tests/invocation_upgrade.py --output /tmp/acp-target-profile-upgrade --new-projects /tmp/acp-delivery-job-components
       - name: Verify approved Canonical 0.3 evolution and exact approval boundaries
         run: python3.14 -m unittest tooling.tests.test_deterministic_approval tooling.tests.test_invocation_target tooling.tests.test_delivery_job_target tooling.tests.test_privacy_lifecycle_target tooling.tests.test_task_interface -v
       - name: Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries

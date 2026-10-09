@@ -28,6 +28,18 @@ def artifact(path="backend/example.txt", text="initial\n", owner=Owner.COMPILER,
 
 
 class ArtifactStoreTests(unittest.TestCase):
+    def test_historical_inline_provenance_versions_remain_readable(self):
+        from tooling.tests.invocation_upgrade import read_historical_provenance
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "provenance.json"
+            for version in ("0.1.0", "0.2.0"):
+                value = {"version": version, "artifacts": [{"artifact": "old.java", "origins": [{"id": "ENTITY", "revision": 1}]}]}
+                path.write_text(json.dumps(value))
+                self.assertEqual(value, read_historical_provenance(path))
+            path.write_text(json.dumps({"version": "unknown", "artifacts": []}))
+            with self.assertRaisesRegex(ValueError, "PROVENANCE_VERSION"):
+                read_historical_provenance(path)
+
     def test_staging_failure_keeps_old_tree_intact(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "application"
