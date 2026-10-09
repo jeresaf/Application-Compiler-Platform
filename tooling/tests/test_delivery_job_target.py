@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from target_worker import ROOT,PROFILE,ProductionTarget,bundle_digest,TargetWorker,TargetWorkerError
-from target_release import verify_release,verify_preserved_releases
+from target_release import verify_release,verify_preserved_releases,verify_production_upgrade
 from deterministic_approval import approved_snapshot
 sys.path.insert(0,str(ROOT/'worker'))
 from generation import plan,schema
@@ -21,8 +21,8 @@ class DeliveryJobTargetTests(unittest.TestCase):
         cls.snapshots={d:approved_snapshot(d) for d in ('payment','case-management')}
         cls.templates={p.relative_to(ROOT/'templates').as_posix():p.read_text() for p in (ROOT/'templates').rglob('*') if p.is_file()}
     def test_exact_release_identity_and_changed_bundle_requires_new_version(self):
-        self.assertEqual('acp-spring-vue-postgres/0.4.0',PROFILE['profile'])
-        self.assertEqual('acp-spring-vue-generator/0.4.0',PROFILE['generator'])
+        self.assertEqual('acp-spring-vue-postgres/0.5.0',PROFILE['profile'])
+        self.assertEqual('acp-spring-vue-generator/0.5.0',PROFILE['generator'])
         verify_release(PROFILE,bundle_digest())
         with self.assertRaisesRegex(ValueError,'GENERATOR_VERSION_REUSE'):verify_release(PROFILE,'f'*64)
         with patch('target_worker.bundle_digest',return_value='f'*64):
@@ -31,6 +31,14 @@ class DeliveryJobTargetTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'RELEASE_IDENTITY_REWRITE'):verify_preserved_releases(previous,tampered)
         changed=copy.deepcopy(PROFILE);changed['generator']='acp-spring-vue-generator/0.2.1'
         with self.assertRaisesRegex(ValueError,'GENERATOR_VERSION_UNRELEASED'):verify_release(changed,bundle_digest())
+    def test_production_evolution_window_preserves_policy_c(self):
+        for version in ('0.2.0','0.3.0','0.4.0'):
+            self.assertEqual('C',verify_production_upgrade('acp-spring-vue-postgres/'+version,PROFILE['profile'])['policy'])
+        for version in ('0.1.0','0.0.0','9.0.0'):
+            with self.assertRaisesRegex(ValueError,'PRODUCTION_UPGRADE_OUTSIDE_WINDOW'):
+                verify_production_upgrade('acp-spring-vue-postgres/'+version,PROFILE['profile'])
+        registry=json.loads((ROOT/'release-contract.json').read_text())
+        self.assertEqual('61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a',registry['releases']['acp-spring-vue-postgres/0.4.0']['bundleDigest'])
     def test_deterministic_bytes_and_portable_exact_build_provenance(self):
         for domain,snapshot in self.snapshots.items():
             model=lower(snapshot['content']['nodes'],PROFILE,'0.3.0');self.assertEqual('0.2.0',model['version'])

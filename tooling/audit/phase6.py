@@ -233,6 +233,8 @@ def run(args):
             report['sealedBundleAfterAudit']='sha256:'+bundle_digest()
             if bundle_digest()!=BUNDLE:raise RuntimeError('SEALED_BUNDLE_CHANGED_STOP')
             binding=current_binding()
+            binding['evaluationCommit']=binding['executionCommit']
+            if report.get('baseline'):binding['executionCommit']=report['baseline']['auditExecutionCommit']
         except Exception as error:
             report['executionError']=type(error).__name__+':'+str(error)
             binding={'verificationFailure':report['executionError']}
