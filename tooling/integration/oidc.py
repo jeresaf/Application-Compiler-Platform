@@ -50,6 +50,8 @@ def run(projects,output):
  import check_task_interface as gate
  from task_ui_browser import server_source
  output.mkdir(parents=True,exist_ok=False)
+ source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+ source_digest='sha256:'+hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
  with tempfile.TemporaryDirectory(prefix='acp-disposable-oidc-') as temp:
   issuer=Issuer(Path(temp))
   try:
@@ -80,7 +82,7 @@ Object.assign(window,{integrationLogin:login,integrationLogout:clearIdentity});
      finally:identity.write_bytes(original_identity)
    finally:gate.subprocess.Popen=original_popen
    from target_worker import bundle_digest
-   (output/'oidc-integration.json').write_text(json.dumps({'fixture':'AUTHORIZATION_CODE_PKCE_RS256_JWKS','bundleDigest':bundle_digest(),'domains':reports,'productionProviderAcceptance':'OUTSTANDING'},indent=2)+'\n')
+   (output/'oidc-integration.json').write_text(json.dumps({'fixture':'AUTHORIZATION_CODE_PKCE_RS256_JWKS','executionCommit':source_commit,'sourceDigest':source_digest,'adapterDigest':'sha256:'+hashlib.sha256((ROOT/'fixtures/deployment-oidc/identity.ts').read_bytes()).hexdigest(),'bundleDigest':bundle_digest(),'domains':reports,'productionProviderAcceptance':'OUTSTANDING'},indent=2)+'\n')
   finally:issuer.close()
 
 def spec(url,token):
@@ -96,7 +98,7 @@ test('oidcAcquisitionIdentityChangeExpiredAndWrongTenant',async({page})=>{
  await page.getByRole('button',{name:'Select fixture-resource',exact:true}).click();
  await page.getByLabel('Task note').fill('protected draft');
  await page.evaluate(()=>(window as any).integrationLogout());
- await expect(page.locator('table')).toHaveCount(0);await expect(page.getByLabel('Task note')).toHaveValue('');
+ await expect(page.locator('table')).toHaveCount(0);await expect(page.getByLabel('Task note')).toHaveCount(0);
  await page.request.get(issuer+'/fixture/select?tenant=tenant-two');
  const wrong=page.waitForResponse(r=>r.url().includes(ui.queryPath)&&r.request().method()==='POST');
  await page.evaluate(()=>(window as any).integrationLogin());
@@ -109,7 +111,7 @@ test('oidcAcquisitionIdentityChangeExpiredAndWrongTenant',async({page})=>{
  await page.evaluate(()=>(window as any).integrationLogin());
  await expect(page.getByRole('button',{name:'Search',exact:true})).toBeVisible();await page.getByRole('button',{name:'Search',exact:true}).click();
  expect((await expired).status()).toBe(401);
- await expect(page.getByRole('alert')).toBeVisible();await expect(page.locator('table')).toHaveCount(0);
+ await expect(page.getByRole('alert')).toBeVisible();await expect(page.locator('table')).toHaveCount(0);await expect(page.getByLabel('Task note')).toHaveValue('');
 });
 '''.replace('ISSUER',json.dumps(url)).replace('TOKEN',json.dumps(token))
 
