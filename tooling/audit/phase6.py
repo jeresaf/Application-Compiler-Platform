@@ -146,13 +146,16 @@ def evolution_inventory(output):
     for domain in ('payment','case-management'):
         old,_=evolution(domain)
         for snapshot in (old,load(DEST/(domain+'-canonical.json')),approved_snapshot(domain)):
+            version=snapshot['content']['schemaVersion']
+            required=(['semantic.execution-dataflow/0.3'] if version in ('0.2.0','0.3.0') else [])
+            if version=='0.3.0':required.append('acp.deterministic-execution.0.4')
             try:
                 response=TargetWorker().call('negotiate',{'nodes':snapshot['content']['nodes'],'canonicalVersion':snapshot['content']['schemaVersion'],
-                   'required':[],'decisions':PROFILE['decisions']})
+                   'required':required,'decisions':PROFILE['decisions']})
                 status='ACCEPTED'
             except ValueError as error:status=str(error);response=None
             rows.append({'domain':domain,'snapshotDigest':snapshot['contentDigest'],'canonicalVersion':snapshot['content']['schemaVersion'],
-                         'negotiation':status,'response':response,'deployedEvolution':'NOT_PROVEN'})
+                         'requiredFeatures':required,'negotiation':status,'response':response,'deployedEvolution':'NOT_PROVEN'})
     # Synthetic review witness to inspect storage planning; not new human
     # approval and never deployed as an accepted business change.
     from change_fixtures import evolution_change
@@ -194,7 +197,7 @@ def run(args):
         if entry['exitCode']!=0 or digest((output/entry['log']).read_bytes())!=entry['logDigest']:raise RuntimeError('RESUME_ADMISSION_LOG_CHANGED')
         paths=[output/'admission/task-interface-report.json',*sorted((output/'admission').glob('*/backend/target/surefire-reports/TEST-*.xml'))]
         verify_admission({p.relative_to(output).as_posix():p for p in paths},binding)
-        reused={'originalExecutionCommit':old['auditExecutionCommit'],'bundleDigest':old['bundleDigest'],
+        reused={'originalExecutionCommit':previous.get('reusedAdmission',{}).get('originalExecutionCommit',old['auditExecutionCommit']),'bundleDigest':old['bundleDigest'],
             'log':entry,'artifacts':{p.relative_to(output).as_posix():digest(p.read_bytes()) for p in paths},
             'reason':'Immutable generator bundle and exact approved snapshots unchanged; independently revalidated admission report and real JUnit/browser artifacts. This is reuse, not a new admission execution.'}
         archive=output/'attempts'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ');archive.mkdir(parents=True,exist_ok=False)

@@ -97,7 +97,10 @@ def publish(source):
         value['traceabilityEvidence']={'archiveEntry':'traceability-and-provenance.json',
             'sha256':digest(records['traceability-and-provenance.json'])}
     for domain,value in report['admission']['domains'].items():
-        path='admission/'+domain+'/frontend/browser-results.json'
+        # Integration producers reuse the generated frontend directory. The
+        # admission report embeds the original browser result and is immutable
+        # under admission reuse; a later browser-results.json is a different run.
+        path='admission/task-interface-report.json'
         value['browser']={'stats':value['browser']['stats'],
             'rawEvidence':{'archiveEntry':path,'sha256':digest(records[path])}}
     write(evidence/'phase6-remediation-closure.json',report)
