@@ -1,6 +1,6 @@
 {
   "contractVersion": "1.0.0",
-  "policy": "Each released target/generator identity is permanently bound to one exact bundle. Releases 0.1.0 and 0.2.0 are preserved; 0.3.0 is the current privacy/lifecycle checkpoint. Any output-affecting bundle change requires a new intentional generator/target release identity.",
+  "policy": "Each released target/generator identity is permanently bound to one exact bundle. Releases 0.1.0, 0.2.0 and 0.3.0 are preserved; 0.4.0 is the current task-interface checkpoint. Any output-affecting bundle change requires a new intentional generator/target release identity.",
   "releases": {
     "acp-spring-vue-postgres/0.1.0": {
       "generator": "acp-spring-vue-generator/0.1.0",
@@ -15,6 +15,10 @@
     "acp-spring-vue-postgres/0.3.0": {
       "generator": "acp-spring-vue-generator/0.3.0",
       "bundleDigest": "6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc"
+    },
+    "acp-spring-vue-postgres/0.4.0": {
+      "generator": "acp-spring-vue-generator/0.4.0",
+      "bundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a"
     }
   }
 }

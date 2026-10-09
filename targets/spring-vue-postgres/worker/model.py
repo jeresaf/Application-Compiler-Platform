@@ -59,6 +59,8 @@ def negotiate(nodes, required, decisions, profile, canonical_version='0.1.0'):
                 validate(nodes)
                 from privacy_lifecycle import validate as validate_privacy
                 validate_privacy(nodes)
+                from task_ui import validate as validate_ui
+                validate_ui(nodes)
                 from delivery_jobs import generated_jobs
                 generated_jobs(ExecutionGenerator(nodes,canonical_version))
         except (CapabilityError, KeyError, TypeError) as e:

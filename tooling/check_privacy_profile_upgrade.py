@@ -3,6 +3,7 @@
 No clean occurs between the old application's commit and the new migration/check.
 Both generated provenance maps are preserved as upgrade evidence.
 """
+from target_provenance import read_provenance
 import argparse
 import io
 import json
@@ -75,7 +76,7 @@ s=source(sys.argv[1]);s=s[:s.index('    @Test void pinnedRules')].replace('class
             if result.returncode:raise ValueError(domain+'_'+label+'_FAILED')
             xml=ET.parse(project/('backend/target/surefire-reports/TEST-acp.generated.'+test+'.xml')).getroot()
             if any(int(xml.attrib[k]) for k in ('failures','errors','skipped')):raise ValueError('UPGRADE_TEST_NOT_GREEN')
-        old_provenance=json.loads((old/'acp/provenance.json').read_text());new_provenance=json.loads((new/'acp/provenance.json').read_text())
+        old_provenance=read_provenance(old/'acp/provenance.json');new_provenance=read_provenance(new/'acp/provenance.json')
         new_maps={m['artifact']:m for m in new_provenance['artifacts']}
         for mapping in old_provenance['artifacts']:
             new_mapping=new_maps.get(mapping['artifact'])

@@ -81,16 +81,43 @@ def plan(model, templates, profile, inventory=(), *, build=None):
     artifacts = []
     human_paths = {item["path"] for item in inventory if item["owner"] == "HUMAN_OWNED"}
 
+    def artifact_origins(path):
+        if canonical != "0.3.0":return all_ids
+        # Whole-model artifacts cover every exact origin. Shared static tooling
+        # has its application requirement origin; the host also binds the full
+        # Target IR digest into every artifact's provenance inputs.
+        if path in {'contracts/target-ir.json','backend/src/main/resources/acp-model.json','acp/provenance.json','frontend/src/model.ts'}:return all_ids
+        if path in {'acp/task-ui-model.json','frontend/src/task-ui-model.ts','frontend/src/App.vue','frontend/src/task-contract.ts'}:
+            from task_ui import UI_KINDS
+            return [n['id'] for n in model['nodes'] if n['kind'] in UI_KINDS|{'ResponsivePolicy','AccessibilityRequirement','UseCase','Query'}]
+        kinds={'Requirement'}
+        if 'migration' in path or path.startswith('database/'):kinds|={'Entity','Relation','DataLifecycle','Retention','DeletionPolicy','LegalHold'}
+        elif path.endswith('/TypedTasks.java') or path.endswith('/Invocations.java'):kinds|={'Command','UseCase','ExecutionStep','Query'}
+        elif path.endswith('/Types.java'):kinds|={'Entity','ValueObject','TypeDefinition'}
+        elif '/security/' in path:kinds|={'AuthenticationModel','SessionPolicy','Actor','Permission','Policy'}
+        elif 'Lifecycle' in path:kinds|={'DataLifecycle','Retention','DeletionPolicy','LegalHold'}
+        return [n['id'] for n in model['nodes'] if n['kind'] in kinds] or all_ids[:1]
+
     def add(path, text, role, origins=None, owner="COMPILER_OWNED"):
         if path in human_paths:
             return
         if not text.endswith("\n"):
             text += "\n"
         artifacts.append({"path": path, "text": text, "role": role, "owner": owner,
-                          "origins": origins or all_ids, "verification": ["target-source-integrity"]})
+                          "origins": origins or artifact_origins(path), "verification": ["target-source-integrity"]})
 
     execution = any(n['kind'] == 'Command' and 'assignments' in n['data'] for n in model['nodes'])
+    ui = None
+    if canonical=='0.3.0':
+        from task_ui import validate as validate_ui, contracts as ui_contracts, BROWSER
+        ui=validate_ui(model['nodes'])
     for path, text in sorted(templates.items()):
+        if path.startswith('legacy-frontend/'):continue
+        if ui and path in {'frontend/src/App.vue'}:
+            add(path,text,'TASK_UI_SOURCE');continue
+        if not ui and path.startswith('frontend/src/'):
+            legacy='legacy-frontend/'+path.removeprefix('frontend/src/')
+            if legacy in templates:text=templates[legacy]
         if model.get('canonicalVersion')!='0.3.0' and path.endswith(('/RuntimeBootstrap.java','/LifecycleRuntime.java')):continue
         if execution and path in {'backend/src/main/java/acp/application/TaskService.java', 'backend/src/main/java/acp/api/TaskController.java'}:
             continue
@@ -108,6 +135,7 @@ def plan(model, templates, profile, inventory=(), *, build=None):
     if execution:
         from execution_codegen import ExecutionGenerator
         for path, text in ExecutionGenerator(model['nodes'], model.get('canonicalVersion', '0.2.0')).source().items():
+            if ui and path=='frontend/src/task-contract.ts':continue
             add(path, text, 'TYPED_EXECUTION_SOURCE')
     add("backend/src/main/resources/acp-model.json", encoded(model), "RUNTIME_MODEL")
     add("contracts/target-ir.json", encoded(model), "TARGET_IR")
@@ -142,6 +170,21 @@ public class RuntimeConfiguration {
         tz=templates['backend/src/main/resources/acp-tzdb-2026d.json']
         build['tzdb']={'version':'2026d','artifact':'acp-tzdb-2026d.json','sha256':hashlib.sha256(tz.encode()).hexdigest()}
         add("acp/target-upgrade.json",encoded({'from':{'profile':'acp-spring-vue-postgres/0.2.0','generator':'acp-spring-vue-generator/0.2.0'},'to':build,'migrations':[{'path':'database/V1__initial.sql','sha256':hashlib.sha256(sql.encode()).hexdigest()},{'path':'database/V2__delivery_jobs.sql','sha256':hashlib.sha256(MIGRATION.encode()).hexdigest()},{'path':'database/V3__privacy_lifecycle.sql','sha256':hashlib.sha256(privacy_sql.encode()).hexdigest()}],'origins':'acp/provenance.json'}),"TARGET_UPGRADE")
+    if ui:
+        ui_text=encoded(ui)
+        add('acp/task-ui-model.json',ui_text,'VALIDATED_TASK_UI_MODEL')
+        add('frontend/src/task-ui-model.ts','export const ui = '+ui_text.strip()+' as const;','VALIDATED_TASK_UI_MODEL')
+        add('frontend/src/task-contract.ts',ui_contracts(ui),'TYPED_UI_CONTRACT')
+        build['taskUIModel']={'path':'acp/task-ui-model.json','sha256':hashlib.sha256(ui_text.encode()).hexdigest()}
+        build['browserProfile']=BROWSER
+        # UI requirements are obligations; browser checks do not certify deployment.
+        deployment=json.loads(next(a['text'] for a in artifacts if a['path']=='acp/deployment-requirements.json'))
+        deployment['taskInterfaceObligations']=[{'requirement':r,'status':'OUTSTANDING','origins':[{'id':ui['screen']['id'],'revision':ui['screen']['revision']}]} for r in ['OIDC_CLIENT_CONFIGURATION','CSP_SECURITY_HEADERS','HTTPS_TLS','MANUAL_ACCESSIBILITY_REVIEW','SUPPORTED_BROWSER_POLICY','PRODUCTION_TELEMETRY_EXPORTERS']]
+        deployment_text=encoded(deployment)
+        next(a for a in artifacts if a['path']=='acp/deployment-requirements.json')['text']=deployment_text
+        build['deploymentRequirements']['sha256']=hashlib.sha256(deployment_text.encode()).hexdigest()
+        upgrade=next(a for a in artifacts if a['path']=='acp/target-upgrade.json')
+        upgrade['text']=encoded({'from':{'profile':'acp-spring-vue-postgres/0.3.0','generator':'acp-spring-vue-generator/0.3.0'},'to':build,'databaseChange':'NONE','migrations':build['migrationDigests'],'origins':'acp/provenance.json'})
     paths = {}
     for op in model["api"]:
         paths.setdefault(op["path"], {})[op["method"].lower()] = {
@@ -149,15 +192,15 @@ public class RuntimeConfiguration {
             "security": [{"oidc": []}], "responses": {"200": {"description": "Successful operation"}, **{str(code): {"description": "Structured target error"} for code in op["errors"]}}}
     add("contracts/openapi.json", encoded({"openapi": "3.1.0", "info": {"title": "ACP generated API", "version": "0.1.0"}, "paths": paths,
         "components": {"securitySchemes": {"oidc": {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}}}}), "API_CONTRACT")
-    add("frontend/src/model.ts", "export const model = " + encoded(model).strip() + " as const;\n", "TASK_UI_MODEL")
+    add("frontend/src/model.ts", "export { ui as model } from './task-ui-model';\n" if ui else "export const model = " + encoded(model).strip() + " as const;\n", "TASK_UI_MODEL")
     sidecars = []
     for a in sorted(artifacts, key=lambda a: a["path"]):
         sidecars.append({"artifact": a["path"], "artifactDigest": "sha256:" + hashlib.sha256(a["text"].encode()).hexdigest(),
                          "generator": profile["generator"], "targetRole": a["role"], "ownership": a["owner"],
-                         "origins": [{"id": n["id"], "revision": n["revision"]} for n in model["nodes"] if n["id"] in a["origins"]],
+                         "originSet": "canonical-model",
                          "targetObjects": [identifier(id, "target") for id in a["origins"]],
                          "locations": [], "locationConfidence": "ARTIFACT_ONLY"})
-    add("acp/provenance.json", encoded({"version": "0.2.0", "build": build, "artifacts": sidecars}), "PROVENANCE")
+    add("acp/provenance.json", encoded({"version": "0.3.0", "build": build, "originSets": {"canonical-model": [{"id":n["id"],"revision":n["revision"]} for n in model["nodes"]]}, "artifacts": sidecars}), "PROVENANCE")
     return sorted(artifacts, key=lambda a: a["path"])
 
 

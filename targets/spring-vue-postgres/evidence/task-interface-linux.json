@@ -1,0 +1,3688 @@
+{
+  "pythonRegressionSuite": {
+    "tests": 233,
+    "result": "PASS",
+    "elapsedSeconds": 2517.201
+  },
+  "repositoryChecks": "PASS",
+  "dependencyConsistency": "PASS",
+  "canonicalVectors": {
+    "result": "PASS",
+    "corpora": [
+      "canonical",
+      "execution-v03",
+      "deterministic-v04"
+    ],
+    "positivePerCorpus": 9,
+    "negativePerCorpus": 13,
+    "snapshotHashesPerCorpus": 2,
+    "approvedBytes": "UNCHANGED"
+  },
+  "environment": {
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4",
+    "node": "v24.21.0"
+  },
+  "status": "FINAL_BUNDLE_LOCAL_LINUX_PASS",
+  "profile": "acp-spring-vue-postgres/0.4.0",
+  "generator": "acp-spring-vue-generator/0.4.0",
+  "bundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "closureGate": "BLOCKED_FINAL_AUDIT_REQUIRED",
+  "manualAccessibility": "OUTSTANDING",
+  "deploymentInfrastructure": "OUTSTANDING",
+  "domains": {
+    "payment": {
+      "compilerOwnedRegeneration": "PASS",
+      "uncoordinatedCompilerEditRejected": "PASS",
+      "unapprovedAIRejected": "PASS",
+      "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "admission": {
+        "operation": "lower",
+        "result": "ACCEPTED"
+      },
+      "blockers": [],
+      "determinism": "PASS",
+      "humanExtensionPreservation": "PASS",
+      "generatedProvenance": {
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+        "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.4.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.4.0",
+        "taskUIModel": {
+          "path": "acp/task-ui-model.json",
+          "sha256": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+        },
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "checks": {
+        "backend": "PASS",
+        "frontend-lock": "PASS",
+        "frontend-types": "PASS",
+        "frontend-tests": "PASS",
+        "frontend-build": "PASS",
+        "real-browser": "PASS"
+      },
+      "result": "PASS",
+      "browserTestGeneration": {
+        "determinism": "PASS",
+        "sha256": {
+          "journeys": "7daee45e51ff5c57c51a0468c1d6e362f8de35ddb742b36bf54c4d5e79b54543",
+          "serverFixture": "fc64d68e4e75a265c6c7697fc29d6ed22377736538dff02fd59be109e8f21d47",
+          "identityFixture": "8889c75f03d610f989fc8a1a1428c1f3606b41123c902acee70549ed6a60fbc1",
+          "config": "dcd7a2865d9d8d44bbc0ec65a41336e2d6d86e56ed9414e718d3db47269e76df"
+        }
+      },
+      "actualNegotiation": {
+        "accepted": true,
+        "capabilities": [
+          "AcceptanceCriterion/0.2.0",
+          "AccessibilityRequirement/0.2.0",
+          "Action/0.2.0",
+          "Actor/0.2.0",
+          "Aggregate/0.2.0",
+          "Applicability/0.2.0",
+          "Assumption/0.2.0",
+          "AuthenticationModel/0.2.0",
+          "Backup/0.2.0",
+          "Command/0.2.0",
+          "CompatibilityRequirement/0.2.0",
+          "Constraint/0.2.0",
+          "DataClassification/0.2.0",
+          "DataLifecycle/0.2.0",
+          "Decision/0.2.0",
+          "DeletionPolicy/0.2.0",
+          "DeliveryPolicy/0.2.0",
+          "Entity/0.2.0",
+          "Event/0.2.0",
+          "EvidenceRequirement/0.2.0",
+          "ExecutionStep/0.2.0",
+          "Fact/0.2.0",
+          "Failure/0.2.0",
+          "Field/0.2.0",
+          "Filter/0.2.0",
+          "Form/0.2.0",
+          "Goal/0.2.0",
+          "IdempotencyPolicy/0.2.0",
+          "InputControl/0.2.0",
+          "Invariant/0.2.0",
+          "Job/0.2.0",
+          "LegalHold/0.2.0",
+          "ObservabilityRequirement/0.2.0",
+          "Parameter/0.2.0",
+          "PerformanceRequirement/0.2.0",
+          "Permission/0.2.0",
+          "PermissionBoundary/0.2.0",
+          "Policy/0.2.0",
+          "PolicySet/0.2.0",
+          "Preference/0.2.0",
+          "Query/0.2.0",
+          "RatePolicy/0.2.0",
+          "Recovery/0.2.0",
+          "Relation/0.2.0",
+          "ReliabilityRequirement/0.2.0",
+          "Requirement/0.2.0",
+          "ResponsivePolicy/0.2.0",
+          "Retention/0.2.0",
+          "RetryPolicy/0.2.0",
+          "Role/0.2.0",
+          "RoleAssignment/0.2.0",
+          "Schedule/0.2.0",
+          "Scope/0.2.0",
+          "Screen/0.2.0",
+          "Search/0.2.0",
+          "Service/0.2.0",
+          "SessionPolicy/0.2.0",
+          "State/0.2.0",
+          "StateMachine/0.2.0",
+          "Table/0.2.0",
+          "TestRequirement/0.2.0",
+          "Transaction/0.2.0",
+          "Transition/0.2.0",
+          "UseCase/0.2.0",
+          "ValueObject/0.2.0",
+          "ViewState/0.2.0",
+          "Wizard/0.2.0",
+          "WizardStep/0.2.0",
+          "acp.deterministic-execution.0.4",
+          "semantic.execution-dataflow/0.3"
+        ]
+      },
+      "uiSemanticModel": {
+        "accessibility": {
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "checks": [
+              "ERROR_ANNOUNCEMENT",
+              "FOCUS",
+              "KEYBOARD",
+              "LABELS"
+            ],
+            "evidence": {
+              "id": "EVID-A11Y",
+              "revision": 3
+            },
+            "method": "AUTOMATED_AND_MANUAL",
+            "subjects": [
+              {
+                "id": "ACTION-TASK",
+                "revision": 3
+              },
+              {
+                "id": "CONTROL-TASK-RESOURCE",
+                "revision": 2
+              },
+              {
+                "id": "CONTROL-TEXT",
+                "revision": 3
+              },
+              {
+                "id": "FORM-TASK",
+                "revision": 3
+              },
+              {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              }
+            ]
+          },
+          "id": "A11Y-TASK",
+          "kind": "AccessibilityRequirement",
+          "lifecycle": "APPROVED",
+          "name": "A11Y-TASK",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "A11Y-TASK",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "A11Y-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "action": {
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "confirmation": "REQUIRED",
+            "label": "Complete task",
+            "permissions": [
+              {
+                "id": "PERM-CMD-RECORD",
+                "revision": 3
+              }
+            ],
+            "useCase": {
+              "id": "UC-TASK",
+              "revision": 3
+            }
+          },
+          "id": "ACTION-TASK",
+          "kind": "Action",
+          "lifecycle": "APPROVED",
+          "name": "ACTION-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "ACTION-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "actionPath": "/api/op_225e20f12f0b359413f7a725",
+        "boundary": {
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "denied": {
+              "id": "VIEW-ERROR",
+              "revision": 3
+            },
+            "permissions": [
+              {
+                "id": "PERM-CMD-RECORD",
+                "revision": 3
+              },
+              {
+                "id": "PERM-QUERY-TASKS",
+                "revision": 3
+              }
+            ]
+          },
+          "id": "BOUNDARY-TASK",
+          "kind": "PermissionBoundary",
+          "lifecycle": "APPROVED",
+          "name": "BOUNDARY-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "BOUNDARY-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "columns": [
+          {
+            "basis": [
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "classification": "INTERNAL",
+              "classificationRef": {
+                "id": "CLASS-INTERNAL",
+                "revision": 2
+              },
+              "optional": false,
+              "owner": {
+                "id": "OUTPUT-TASK",
+                "revision": 1
+              },
+              "type": {
+                "kind": "String"
+              }
+            },
+            "id": "OUTPUT-TASK-TEXT",
+            "kind": "Field",
+            "lifecycle": "APPROVED",
+            "name": "OUTPUT-TASK-TEXT",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "OUTPUT-TASK-TEXT",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 2,
+            "steward": "fixture:authors"
+          }
+        ],
+        "controls": [
+          {
+            "basis": [
+              {
+                "id": "DEC-EXECUTION-V03",
+                "revision": 1
+              },
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "errorMessage": "Select the authorized resource identity.",
+              "field": {
+                "id": "INPUT-TASK-RESOURCE",
+                "revision": 2
+              },
+              "form": {
+                "id": "FORM-TASK",
+                "revision": 3
+              },
+              "label": "Resource identity",
+              "purpose": "TEXT",
+              "required": true
+            },
+            "id": "CONTROL-TASK-RESOURCE",
+            "kind": "InputControl",
+            "lifecycle": "APPROVED",
+            "name": "CONTROL-TASK-RESOURCE",
+            "origins": [
+              {
+                "actor": "assistant:fixture-draft",
+                "actorType": "AI",
+                "locator": "CONTROL-TASK-RESOURCE",
+                "source": "fixture:execution-v03-proposal"
+              }
+            ],
+            "revision": 2,
+            "steward": "fixture:authors"
+          },
+          {
+            "basis": [
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "errorMessage": "Enter a task note.",
+              "field": {
+                "id": "INPUT-TASK-TEXT",
+                "revision": 2
+              },
+              "form": {
+                "id": "FORM-TASK",
+                "revision": 3
+              },
+              "label": "Task note",
+              "purpose": "MULTILINE",
+              "required": true
+            },
+            "id": "CONTROL-TEXT",
+            "kind": "InputControl",
+            "lifecycle": "APPROVED",
+            "name": "CONTROL-TEXT",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "CONTROL-TEXT",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          }
+        ],
+        "fields": [
+          {
+            "basis": [
+              {
+                "id": "DEC-EXECUTION-V03",
+                "revision": 1
+              },
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "classification": "INTERNAL",
+              "classificationRef": {
+                "id": "CLASS-INTERNAL",
+                "revision": 2
+              },
+              "optional": false,
+              "owner": {
+                "id": "INPUT-TASK",
+                "revision": 1
+              },
+              "type": {
+                "entity": {
+                  "id": "ENT-PAYMENT",
+                  "revision": 2
+                },
+                "kind": "Identifier"
+              }
+            },
+            "id": "INPUT-TASK-RESOURCE",
+            "kind": "Field",
+            "lifecycle": "APPROVED",
+            "name": "INPUT-TASK-RESOURCE",
+            "origins": [
+              {
+                "actor": "assistant:fixture-draft",
+                "actorType": "AI",
+                "locator": "INPUT-TASK-RESOURCE",
+                "source": "fixture:execution-v03-proposal"
+              }
+            ],
+            "revision": 2,
+            "steward": "fixture:authors"
+          },
+          {
+            "basis": [
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "classification": "INTERNAL",
+              "classificationRef": {
+                "id": "CLASS-INTERNAL",
+                "revision": 2
+              },
+              "optional": false,
+              "owner": {
+                "id": "INPUT-TASK",
+                "revision": 1
+              },
+              "type": {
+                "kind": "String"
+              }
+            },
+            "id": "INPUT-TASK-TEXT",
+            "kind": "Field",
+            "lifecycle": "APPROVED",
+            "name": "INPUT-TASK-TEXT",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "INPUT-TASK-TEXT",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 2,
+            "steward": "fixture:authors"
+          }
+        ],
+        "filter": {
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "field": {
+              "id": "OUTPUT-TASK-TEXT",
+              "revision": 2
+            },
+            "inputField": {
+              "id": "QUERY-TEXT",
+              "revision": 2
+            },
+            "inputType": {
+              "kind": "String"
+            },
+            "operator": "CONTAINS",
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            }
+          },
+          "id": "FILTER-TEXT",
+          "kind": "Filter",
+          "lifecycle": "APPROVED",
+          "name": "FILTER-TEXT",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "FILTER-TEXT",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "FILTER-TEXT",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "form": {
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "controls": [
+              {
+                "id": "CONTROL-TASK-RESOURCE",
+                "revision": 2
+              },
+              {
+                "id": "CONTROL-TEXT",
+                "revision": 3
+              }
+            ],
+            "submit": {
+              "id": "ACTION-TASK",
+              "revision": 3
+            },
+            "useCase": {
+              "id": "UC-TASK",
+              "revision": 3
+            }
+          },
+          "id": "FORM-TASK",
+          "kind": "Form",
+          "lifecycle": "APPROVED",
+          "name": "FORM-TASK",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "FORM-TASK",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "FORM-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "outputField": "OUTPUT-TASK-TEXT",
+        "page": {
+          "limit": 50,
+          "offset": 0
+        },
+        "query": {
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "input": {
+              "id": "QUERY-INPUT",
+              "revision": 1
+            },
+            "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+            "maximumResults": 100,
+            "orderBy": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "id": "FLD-PAYMENT-ID",
+                  "revision": 2
+                }
+              }
+            ],
+            "paginated": true,
+            "predicate": {
+              "pattern": {
+                "field": {
+                  "id": "QUERY-TEXT",
+                  "revision": 2
+                },
+                "scope": "OPERATION",
+                "tag": "input"
+              },
+              "tag": "textContains",
+              "value": {
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-TASK-SUMMARY",
+                  "revision": 2
+                },
+                "tag": "field"
+              }
+            },
+            "projection": [
+              {
+                "field": {
+                  "id": "OUTPUT-TASK-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "binding": "resource",
+                  "ref": {
+                    "id": "FLD-TASK-SUMMARY",
+                    "revision": 2
+                  },
+                  "tag": "field"
+                }
+              }
+            ],
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "result": {
+              "definition": {
+                "id": "OUTPUT-TASK",
+                "revision": 1
+              },
+              "kind": "Value"
+            },
+            "scope": {
+              "id": "SCOPE-ENT-PAYMENT",
+              "revision": 2
+            }
+          },
+          "id": "QUERY-TASKS",
+          "kind": "Query",
+          "lifecycle": "APPROVED",
+          "name": "QUERY-TASKS",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "QUERY-TASKS",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "assistant:proposal-author",
+              "actorType": "AI",
+              "locator": "QUERY-TASKS",
+              "source": "fixture:deterministic-v04-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "QUERY-TASKS",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "queryInputField": "QUERY-TEXT",
+        "queryPath": "/api/op_647d32adf46be996dd32e08b",
+        "resourceInputField": "INPUT-TASK-RESOURCE",
+        "responsive": {
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "modes": [
+              "COMPACT",
+              "EXPANDED"
+            ],
+            "preserveActions": true,
+            "preserveReadingOrder": true,
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          },
+          "id": "RESPONSIVE-TASK",
+          "kind": "ResponsivePolicy",
+          "lifecycle": "APPROVED",
+          "name": "RESPONSIVE-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "RESPONSIVE-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "screen": {
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "accessibility": {
+              "id": "A11Y-TASK",
+              "revision": 3
+            },
+            "actions": [
+              {
+                "id": "ACTION-TASK",
+                "revision": 3
+              }
+            ],
+            "boundary": {
+              "id": "BOUNDARY-TASK",
+              "revision": 3
+            },
+            "content": [
+              {
+                "id": "SEARCH-TASKS",
+                "revision": 3
+              },
+              {
+                "id": "TABLE-TASKS",
+                "revision": 3
+              },
+              {
+                "id": "WIZARD-TASK",
+                "revision": 3
+              }
+            ],
+            "responsive": {
+              "id": "RESPONSIVE-TASK",
+              "revision": 3
+            },
+            "states": [
+              {
+                "id": "VIEW-EMPTY",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-ERROR",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-LOADING",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-SUCCESS",
+                "revision": 3
+              }
+            ],
+            "task": {
+              "id": "UC-TASK",
+              "revision": 3
+            }
+          },
+          "id": "SCREEN-TASK",
+          "kind": "Screen",
+          "lifecycle": "APPROVED",
+          "name": "SCREEN-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "SCREEN-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "search": {
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "filters": [
+              {
+                "id": "FILTER-TEXT",
+                "revision": 3
+              }
+            ],
+            "label": "Find a task",
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            }
+          },
+          "id": "SEARCH-TASKS",
+          "kind": "Search",
+          "lifecycle": "APPROVED",
+          "name": "SEARCH-TASKS",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "SEARCH-TASKS",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "selectionBinding": {
+          "expectedVersionSource": "QueryCompletion.version",
+          "source": "QueryCompletion.resourceId",
+          "target": {
+            "id": "INPUT-TASK-RESOURCE",
+            "revision": 2
+          }
+        },
+        "states": {
+          "EMPTY": {
+            "basis": [
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "message": "Task view: empty",
+              "screen": {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              },
+              "state": "EMPTY"
+            },
+            "id": "VIEW-EMPTY",
+            "kind": "ViewState",
+            "lifecycle": "APPROVED",
+            "name": "VIEW-EMPTY",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "VIEW-EMPTY",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          },
+          "ERROR": {
+            "basis": [
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "message": "Task view: error",
+              "recovery": {
+                "id": "ACTION-TASK",
+                "revision": 3
+              },
+              "screen": {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              },
+              "state": "ERROR"
+            },
+            "id": "VIEW-ERROR",
+            "kind": "ViewState",
+            "lifecycle": "APPROVED",
+            "name": "VIEW-ERROR",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "VIEW-ERROR",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          },
+          "LOADING": {
+            "basis": [
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "message": "Task view: loading",
+              "screen": {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              },
+              "state": "LOADING"
+            },
+            "id": "VIEW-LOADING",
+            "kind": "ViewState",
+            "lifecycle": "APPROVED",
+            "name": "VIEW-LOADING",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "VIEW-LOADING",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          },
+          "SUCCESS": {
+            "basis": [
+              {
+                "id": "REQ-PAYMENT",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "message": "Task view: success",
+              "screen": {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              },
+              "state": "SUCCESS"
+            },
+            "id": "VIEW-SUCCESS",
+            "kind": "ViewState",
+            "lifecycle": "APPROVED",
+            "name": "VIEW-SUCCESS",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "VIEW-SUCCESS",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          }
+        },
+        "step": {
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "form": {
+              "id": "FORM-TASK",
+              "revision": 3
+            },
+            "requiresPrevious": false,
+            "wizard": {
+              "id": "WIZARD-TASK",
+              "revision": 3
+            }
+          },
+          "id": "WSTEP-INPUT",
+          "kind": "WizardStep",
+          "lifecycle": "APPROVED",
+          "name": "WSTEP-INPUT",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "WSTEP-INPUT",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "table": {
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "columns": [
+              {
+                "id": "OUTPUT-TASK-TEXT",
+                "revision": 2
+              }
+            ],
+            "emptyMessage": "No tasks are available.",
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            }
+          },
+          "id": "TABLE-TASKS",
+          "kind": "Table",
+          "lifecycle": "APPROVED",
+          "name": "TABLE-TASKS",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "TABLE-TASKS",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "task": {
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "input": {
+              "id": "INPUT-TASK",
+              "revision": 1
+            },
+            "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+            "output": {
+              "id": "OUTPUT-TASK",
+              "revision": 1
+            },
+            "outputBindings": [
+              {
+                "field": {
+                  "id": "OUTPUT-TASK-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "field": {
+                    "id": "RESULT-TEXT",
+                    "revision": 2
+                  },
+                  "step": {
+                    "id": "STEP-CMD-RECORD",
+                    "revision": 3
+                  },
+                  "tag": "stepResult"
+                }
+              }
+            ],
+            "service": {
+              "id": "SERVICE-TASKS",
+              "revision": 3
+            },
+            "steps": [
+              {
+                "id": "STEP-CMD-RECORD",
+                "revision": 3
+              }
+            ]
+          },
+          "id": "UC-TASK",
+          "kind": "UseCase",
+          "lifecycle": "APPROVED",
+          "name": "UC-TASK",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "UC-TASK",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "assistant:proposal-author",
+              "actorType": "AI",
+              "locator": "UC-TASK",
+              "source": "fixture:deterministic-v04-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "UC-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "textInputField": "INPUT-TASK-TEXT",
+        "version": "1.0.0",
+        "wizard": {
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            },
+            "steps": [
+              {
+                "id": "WSTEP-INPUT",
+                "revision": 3
+              }
+            ]
+          },
+          "id": "WIZARD-TASK",
+          "kind": "Wizard",
+          "lifecycle": "APPROVED",
+          "name": "WIZARD-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "WIZARD-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        }
+      },
+      "browserProfiles": [
+        {
+          "version": "153.0.8010.12",
+          "engine": "chromium",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "profile": {
+            "axe": "4.13.0",
+            "engine": "chromium",
+            "manualAccessibility": "OUTSTANDING",
+            "otherBrowsers": "OUTSTANDING",
+            "playwright": "1.63.0",
+            "version": "1.0.0",
+            "viewports": {
+              "COMPACT": {
+                "height": 844,
+                "width": 390
+              },
+              "EXPANDED": {
+                "height": 900,
+                "width": 1280
+              }
+            }
+          }
+        },
+        {
+          "version": "153.0.8010.12",
+          "engine": "chromium",
+          "viewport": {
+            "width": 1280,
+            "height": 900
+          },
+          "profile": {
+            "axe": "4.13.0",
+            "engine": "chromium",
+            "manualAccessibility": "OUTSTANDING",
+            "otherBrowsers": "OUTSTANDING",
+            "playwright": "1.63.0",
+            "version": "1.0.0",
+            "viewports": {
+              "COMPACT": {
+                "height": 844,
+                "width": 390
+              },
+              "EXPANDED": {
+                "height": 900,
+                "width": 1280
+              }
+            }
+          }
+        }
+      ],
+      "browserStats": {
+        "startTime": "2026-10-09T00:57:32.860Z",
+        "duration": 48120.2,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "journeys": [
+        {
+          "name": "production typed query, semantic order, keyboard journey, exact database effect and axe",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid confirmation and committed response loss replay one logical key",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "permissions, forged calls, wrong tenant and identity change clear protected state",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "semantic workflow failure rolls back and announces safely",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "exact Unicode case-sensitive filter transport and expired identity clear data",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "stale version rejects without overwrite; revoked session clears data",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "production typed query, semantic order, keyboard journey, exact database effect and axe",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid confirmation and committed response loss replay one logical key",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "permissions, forged calls, wrong tenant and identity change clear protected state",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "semantic workflow failure rolls back and announces safely",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "exact Unicode case-sensitive filter transport and expired identity clear data",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "stale version rejects without overwrite; revoked session clears data",
+          "project": "EXPANDED",
+          "status": "PASS"
+        }
+      ],
+      "axe": [
+        {
+          "state": "results",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 31,
+          "incomplete": []
+        },
+        {
+          "state": "empty",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "validation",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 36,
+          "incomplete": []
+        },
+        {
+          "state": "confirmation",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 15,
+          "incomplete": []
+        },
+        {
+          "state": "success",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 36,
+          "incomplete": []
+        },
+        {
+          "state": "denied-missing-action",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "denied-missing-query",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "results",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 31,
+          "incomplete": []
+        },
+        {
+          "state": "empty",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "validation",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 36,
+          "incomplete": []
+        },
+        {
+          "state": "confirmation",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 15,
+          "incomplete": []
+        },
+        {
+          "state": "success",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 36,
+          "incomplete": []
+        },
+        {
+          "state": "denied-missing-action",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "denied-missing-query",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        }
+      ],
+      "axeRuleSuppressions": [],
+      "httpOutcomes": {
+        "stats": {
+          "startTime": "2026-10-09T04:31:12.304Z",
+          "duration": 7196.997,
+          "expected": 8,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "facts": [
+          {
+            "project": "COMPACT",
+            "name": "http-failure",
+            "facts": {
+              "status": 422,
+              "envelope": {
+                "failureId": "FAIL-BUSINESS",
+                "failureRevision": 1,
+                "code": "INVALID_STATE",
+                "category": "BUSINESS",
+                "retryable": false,
+                "operationId": "CMD-RECORD",
+                "operationRevision": 3,
+                "correlationId": "e474ac62-8bea-4960-8d4d-82c680b202ec"
+              },
+              "database": {
+                "rows": [
+                  {
+                    "text": "old",
+                    "version": 0,
+                    "state": "STATE-POSTED"
+                  }
+                ],
+                "events": 0,
+                "idempotency": 0
+              }
+            }
+          },
+          {
+            "project": "COMPACT",
+            "name": "http-stale",
+            "facts": {
+              "peerStatus": 200,
+              "staleStatus": 409,
+              "before": {
+                "rows": [
+                  {
+                    "text": "competing note",
+                    "version": 1,
+                    "state": "STATE-POSTED"
+                  }
+                ],
+                "events": 1,
+                "idempotency": 1
+              },
+              "after": {
+                "rows": [
+                  {
+                    "text": "competing note",
+                    "version": 1,
+                    "state": "STATE-POSTED"
+                  }
+                ],
+                "events": 1,
+                "idempotency": 1
+              }
+            }
+          },
+          {
+            "project": "COMPACT",
+            "name": "http-expired",
+            "facts": {
+              "status": 401,
+              "protectedDataCleared": true
+            }
+          },
+          {
+            "project": "COMPACT",
+            "name": "http-revoked",
+            "facts": {
+              "status": 403,
+              "protectedDataCleared": true
+            }
+          },
+          {
+            "project": "EXPANDED",
+            "name": "http-failure",
+            "facts": {
+              "status": 422,
+              "envelope": {
+                "failureId": "FAIL-BUSINESS",
+                "failureRevision": 1,
+                "code": "INVALID_STATE",
+                "category": "BUSINESS",
+                "retryable": false,
+                "operationId": "CMD-RECORD",
+                "operationRevision": 3,
+                "correlationId": "0022ca1b-86a5-4404-bfbe-ccac8927baf6"
+              },
+              "database": {
+                "rows": [
+                  {
+                    "text": "old",
+                    "version": 0,
+                    "state": "STATE-POSTED"
+                  }
+                ],
+                "events": 0,
+                "idempotency": 0
+              }
+            }
+          },
+          {
+            "project": "EXPANDED",
+            "name": "http-stale",
+            "facts": {
+              "peerStatus": 200,
+              "staleStatus": 409,
+              "before": {
+                "rows": [
+                  {
+                    "text": "competing note",
+                    "version": 1,
+                    "state": "STATE-POSTED"
+                  }
+                ],
+                "events": 1,
+                "idempotency": 1
+              },
+              "after": {
+                "rows": [
+                  {
+                    "text": "competing note",
+                    "version": 1,
+                    "state": "STATE-POSTED"
+                  }
+                ],
+                "events": 1,
+                "idempotency": 1
+              }
+            }
+          },
+          {
+            "project": "EXPANDED",
+            "name": "http-expired",
+            "facts": {
+              "status": 401,
+              "protectedDataCleared": true
+            }
+          },
+          {
+            "project": "EXPANDED",
+            "name": "http-revoked",
+            "facts": {
+              "status": 403,
+              "protectedDataCleared": true
+            }
+          }
+        ]
+      },
+      "supplementalComponentTests": {
+        "identityRace": "PASS",
+        "rateRecoverySameKey": "PASS"
+      },
+      "postgresqlVersion": "18.6",
+      "backendSuites": [
+        {
+          "name": "acp.domain.ApplicationPolicyTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.ClassificationAuditTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.ExactDecimalTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.FailureMappingTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.MigrationTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.ObservabilityNonDisclosureTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.PortableFaultMappingTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.PrivacyGuardsTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.SessionGateTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.DeliveryJobTest",
+          "tests": "24",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.InvocationCoreTest",
+          "tests": "13",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.InvocationHttpTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.PrivacyHttpTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.PrivacyLifecycleTest",
+          "tests": "15",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        }
+      ],
+      "databaseFacts": {
+        "method": "real JDBC /__test/facts response values asserted by passing browser tests",
+        "successfulAction": {
+          "text": "browser note 🦋",
+          "version": 1,
+          "events": 1,
+          "committedIdempotencyRows": 1,
+          "state": "STATE-POSTED"
+        },
+        "confirmationCancelEvents": 0,
+        "networkResponseLossReplay": {
+          "sameKey": true,
+          "eventCount": 1
+        },
+        "semanticFailure": {
+          "text": "old",
+          "events": 0
+        },
+        "staleVersion": {
+          "competingSessionCommittedEvents": 1,
+          "competingText": "competing note",
+          "additionalStaleEvents": 0,
+          "noOverwrite": true
+        }
+      },
+      "upgrade": {
+        "oldProvenance": {
+          "bundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+          "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "canonicalVersion": "0.3.0",
+          "compiler": "acp-reference-compiler/0.1.0",
+          "deploymentRequirements": {
+            "path": "acp/deployment-requirements.json",
+            "sha256": "6990ebbffd91aa580f341f0fcf7e1fba1bcbdc5b7a38c6da3d54c2209a0f8549"
+          },
+          "features": [
+            "acp.deterministic-execution.0.4"
+          ],
+          "generator": "acp-spring-vue-generator/0.3.0",
+          "migrationDigests": {
+            "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+            "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+            "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          "pipeline": "acp-reference-pipeline/0.1.0",
+          "protocol": "acp-target-worker/0.1.0",
+          "semanticModelVersion": "0.4.0",
+          "targetIRVersion": "0.2.0",
+          "targetProfile": "acp-spring-vue-postgres/0.3.0",
+          "tzdb": {
+            "artifact": "acp-tzdb-2026d.json",
+            "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+            "version": "2026d"
+          }
+        },
+        "newProvenance": {
+          "browserProfile": {
+            "axe": "4.13.0",
+            "engine": "chromium",
+            "manualAccessibility": "OUTSTANDING",
+            "otherBrowsers": "OUTSTANDING",
+            "playwright": "1.63.0",
+            "version": "1.0.0",
+            "viewports": {
+              "COMPACT": {
+                "height": 844,
+                "width": 390
+              },
+              "EXPANDED": {
+                "height": 900,
+                "width": 1280
+              }
+            }
+          },
+          "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+          "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "canonicalVersion": "0.3.0",
+          "compiler": "acp-reference-compiler/0.1.0",
+          "deploymentRequirements": {
+            "path": "acp/deployment-requirements.json",
+            "sha256": "a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017"
+          },
+          "features": [
+            "acp.deterministic-execution.0.4"
+          ],
+          "generator": "acp-spring-vue-generator/0.4.0",
+          "migrationDigests": {
+            "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+            "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+            "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          "pipeline": "acp-reference-pipeline/0.1.0",
+          "protocol": "acp-target-worker/0.1.0",
+          "semanticModelVersion": "0.4.0",
+          "targetIRVersion": "0.2.0",
+          "targetProfile": "acp-spring-vue-postgres/0.4.0",
+          "taskUIModel": {
+            "path": "acp/task-ui-model.json",
+            "sha256": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          "tzdb": {
+            "artifact": "acp-tzdb-2026d.json",
+            "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+            "version": "2026d"
+          }
+        },
+        "allTablesRowForRow": "PASS",
+        "zeroMigrations": "PASS",
+        "actualOldProjectRegeneration": "PASS",
+        "humanIdentityCustomizationSurvived": "PASS",
+        "identityInterfacePreparation": "EXPLICIT_SYNTHETIC_DEPLOYMENT_FIXTURE_FOR_0.4",
+        "oldFrontendBuild": "PASS",
+        "newFrontendBuildAndTests": "PASS",
+        "V1V2V3Exact": "PASS"
+      }
+    },
+    "case-management": {
+      "compilerOwnedRegeneration": "PASS",
+      "uncoordinatedCompilerEditRejected": "PASS",
+      "unapprovedAIRejected": "PASS",
+      "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "admission": {
+        "operation": "lower",
+        "result": "ACCEPTED"
+      },
+      "blockers": [],
+      "determinism": "PASS",
+      "humanExtensionPreservation": "PASS",
+      "generatedProvenance": {
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+        "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "f2d66fed68e5b9b706a64351aaf59dd2f33436a1d5713befe9c50e0050b0a600"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.4.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.4.0",
+        "taskUIModel": {
+          "path": "acp/task-ui-model.json",
+          "sha256": "fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+        },
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "checks": {
+        "backend": "PASS",
+        "frontend-lock": "PASS",
+        "frontend-types": "PASS",
+        "frontend-tests": "PASS",
+        "frontend-build": "PASS",
+        "real-browser": "PASS"
+      },
+      "result": "PASS",
+      "browserTestGeneration": {
+        "determinism": "PASS",
+        "sha256": {
+          "journeys": "fba533515021091c5589e568200b8b94532958755de59db564bdfebdbcee00ab",
+          "serverFixture": "746f6c9ea63977603b945b085b11a7c261c5687a6851d5ff9d2dee96945fe271",
+          "identityFixture": "8889c75f03d610f989fc8a1a1428c1f3606b41123c902acee70549ed6a60fbc1",
+          "config": "45adf10473ccb7cc1ccc05d922c8c2a4705c69085971dec609b0374e56ae25a5"
+        }
+      },
+      "actualNegotiation": {
+        "accepted": true,
+        "capabilities": [
+          "AcceptanceCriterion/0.2.0",
+          "AccessibilityRequirement/0.2.0",
+          "Action/0.2.0",
+          "Actor/0.2.0",
+          "Aggregate/0.2.0",
+          "Applicability/0.2.0",
+          "AuthenticationModel/0.2.0",
+          "Backup/0.2.0",
+          "Command/0.2.0",
+          "CompatibilityRequirement/0.2.0",
+          "DataClassification/0.2.0",
+          "DataLifecycle/0.2.0",
+          "Decision/0.2.0",
+          "DeletionPolicy/0.2.0",
+          "DeliveryPolicy/0.2.0",
+          "Entity/0.2.0",
+          "Event/0.2.0",
+          "EvidenceRequirement/0.2.0",
+          "ExecutionStep/0.2.0",
+          "Failure/0.2.0",
+          "Field/0.2.0",
+          "Filter/0.2.0",
+          "Form/0.2.0",
+          "IdempotencyPolicy/0.2.0",
+          "InputControl/0.2.0",
+          "Job/0.2.0",
+          "LegalHold/0.2.0",
+          "ObservabilityRequirement/0.2.0",
+          "Parameter/0.2.0",
+          "PerformanceRequirement/0.2.0",
+          "Permission/0.2.0",
+          "PermissionBoundary/0.2.0",
+          "Policy/0.2.0",
+          "PolicySet/0.2.0",
+          "Query/0.2.0",
+          "RatePolicy/0.2.0",
+          "Recovery/0.2.0",
+          "Relation/0.2.0",
+          "ReliabilityRequirement/0.2.0",
+          "Requirement/0.2.0",
+          "ResponsivePolicy/0.2.0",
+          "Retention/0.2.0",
+          "RetryPolicy/0.2.0",
+          "Role/0.2.0",
+          "RoleAssignment/0.2.0",
+          "Schedule/0.2.0",
+          "Scope/0.2.0",
+          "Screen/0.2.0",
+          "Search/0.2.0",
+          "Service/0.2.0",
+          "SessionPolicy/0.2.0",
+          "State/0.2.0",
+          "StateMachine/0.2.0",
+          "Table/0.2.0",
+          "TestRequirement/0.2.0",
+          "Transaction/0.2.0",
+          "Transition/0.2.0",
+          "TypeDefinition/0.2.0",
+          "UseCase/0.2.0",
+          "ValueObject/0.2.0",
+          "ViewState/0.2.0",
+          "Wizard/0.2.0",
+          "WizardStep/0.2.0",
+          "acp.deterministic-execution.0.4",
+          "semantic.execution-dataflow/0.3"
+        ]
+      },
+      "uiSemanticModel": {
+        "accessibility": {
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "checks": [
+              "ERROR_ANNOUNCEMENT",
+              "FOCUS",
+              "KEYBOARD",
+              "LABELS"
+            ],
+            "evidence": {
+              "id": "EVID-A11Y",
+              "revision": 3
+            },
+            "method": "AUTOMATED_AND_MANUAL",
+            "subjects": [
+              {
+                "id": "ACTION-TASK",
+                "revision": 3
+              },
+              {
+                "id": "CONTROL-TASK-RESOURCE",
+                "revision": 2
+              },
+              {
+                "id": "CONTROL-TEXT",
+                "revision": 3
+              },
+              {
+                "id": "FORM-TASK",
+                "revision": 3
+              },
+              {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              }
+            ]
+          },
+          "id": "A11Y-TASK",
+          "kind": "AccessibilityRequirement",
+          "lifecycle": "APPROVED",
+          "name": "A11Y-TASK",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "A11Y-TASK",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "A11Y-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "action": {
+          "basis": [
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "confirmation": "REQUIRED",
+            "label": "Complete task",
+            "permissions": [
+              {
+                "id": "PERM-CMD-APPROVE",
+                "revision": 3
+              },
+              {
+                "id": "PERM-CMD-ARCHIVE",
+                "revision": 3
+              },
+              {
+                "id": "PERM-CMD-REVIEW",
+                "revision": 3
+              }
+            ],
+            "useCase": {
+              "id": "UC-TASK",
+              "revision": 3
+            }
+          },
+          "id": "ACTION-TASK",
+          "kind": "Action",
+          "lifecycle": "APPROVED",
+          "name": "ACTION-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "ACTION-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "actionPath": "/api/op_225e20f12f0b359413f7a725",
+        "boundary": {
+          "basis": [
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-REVIEWER",
+              "revision": 2
+            },
+            "denied": {
+              "id": "VIEW-ERROR",
+              "revision": 3
+            },
+            "permissions": [
+              {
+                "id": "PERM-CMD-APPROVE",
+                "revision": 3
+              },
+              {
+                "id": "PERM-CMD-ARCHIVE",
+                "revision": 3
+              },
+              {
+                "id": "PERM-CMD-REVIEW",
+                "revision": 3
+              },
+              {
+                "id": "PERM-QUERY-TASKS",
+                "revision": 3
+              }
+            ]
+          },
+          "id": "BOUNDARY-TASK",
+          "kind": "PermissionBoundary",
+          "lifecycle": "APPROVED",
+          "name": "BOUNDARY-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "BOUNDARY-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "columns": [
+          {
+            "basis": [
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "classification": "INTERNAL",
+              "classificationRef": {
+                "id": "CLASS-INTERNAL",
+                "revision": 2
+              },
+              "optional": false,
+              "owner": {
+                "id": "OUTPUT-TASK",
+                "revision": 1
+              },
+              "type": {
+                "kind": "String"
+              }
+            },
+            "id": "OUTPUT-TASK-TEXT",
+            "kind": "Field",
+            "lifecycle": "APPROVED",
+            "name": "OUTPUT-TASK-TEXT",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "OUTPUT-TASK-TEXT",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 2,
+            "steward": "fixture:authors"
+          }
+        ],
+        "controls": [
+          {
+            "basis": [
+              {
+                "id": "DEC-EXECUTION-V03",
+                "revision": 1
+              },
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "errorMessage": "Select the authorized resource identity.",
+              "field": {
+                "id": "INPUT-TASK-RESOURCE",
+                "revision": 2
+              },
+              "form": {
+                "id": "FORM-TASK",
+                "revision": 3
+              },
+              "label": "Resource identity",
+              "purpose": "TEXT",
+              "required": true
+            },
+            "id": "CONTROL-TASK-RESOURCE",
+            "kind": "InputControl",
+            "lifecycle": "APPROVED",
+            "name": "CONTROL-TASK-RESOURCE",
+            "origins": [
+              {
+                "actor": "assistant:fixture-draft",
+                "actorType": "AI",
+                "locator": "CONTROL-TASK-RESOURCE",
+                "source": "fixture:execution-v03-proposal"
+              }
+            ],
+            "revision": 2,
+            "steward": "fixture:authors"
+          },
+          {
+            "basis": [
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "errorMessage": "Enter a task note.",
+              "field": {
+                "id": "INPUT-TASK-TEXT",
+                "revision": 2
+              },
+              "form": {
+                "id": "FORM-TASK",
+                "revision": 3
+              },
+              "label": "Task note",
+              "purpose": "MULTILINE",
+              "required": true
+            },
+            "id": "CONTROL-TEXT",
+            "kind": "InputControl",
+            "lifecycle": "APPROVED",
+            "name": "CONTROL-TEXT",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "CONTROL-TEXT",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          }
+        ],
+        "fields": [
+          {
+            "basis": [
+              {
+                "id": "DEC-EXECUTION-V03",
+                "revision": 1
+              },
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "classification": "INTERNAL",
+              "classificationRef": {
+                "id": "CLASS-INTERNAL",
+                "revision": 2
+              },
+              "optional": false,
+              "owner": {
+                "id": "INPUT-TASK",
+                "revision": 1
+              },
+              "type": {
+                "entity": {
+                  "id": "CASE",
+                  "revision": 2
+                },
+                "kind": "Identifier"
+              }
+            },
+            "id": "INPUT-TASK-RESOURCE",
+            "kind": "Field",
+            "lifecycle": "APPROVED",
+            "name": "INPUT-TASK-RESOURCE",
+            "origins": [
+              {
+                "actor": "assistant:fixture-draft",
+                "actorType": "AI",
+                "locator": "INPUT-TASK-RESOURCE",
+                "source": "fixture:execution-v03-proposal"
+              }
+            ],
+            "revision": 2,
+            "steward": "fixture:authors"
+          },
+          {
+            "basis": [
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "classification": "INTERNAL",
+              "classificationRef": {
+                "id": "CLASS-INTERNAL",
+                "revision": 2
+              },
+              "optional": false,
+              "owner": {
+                "id": "INPUT-TASK",
+                "revision": 1
+              },
+              "type": {
+                "kind": "String"
+              }
+            },
+            "id": "INPUT-TASK-TEXT",
+            "kind": "Field",
+            "lifecycle": "APPROVED",
+            "name": "INPUT-TASK-TEXT",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "INPUT-TASK-TEXT",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 2,
+            "steward": "fixture:authors"
+          }
+        ],
+        "filter": {
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "field": {
+              "id": "OUTPUT-TASK-TEXT",
+              "revision": 2
+            },
+            "inputField": {
+              "id": "QUERY-TEXT",
+              "revision": 2
+            },
+            "inputType": {
+              "kind": "String"
+            },
+            "operator": "CONTAINS",
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            }
+          },
+          "id": "FILTER-TEXT",
+          "kind": "Filter",
+          "lifecycle": "APPROVED",
+          "name": "FILTER-TEXT",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "FILTER-TEXT",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "FILTER-TEXT",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "form": {
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "controls": [
+              {
+                "id": "CONTROL-TASK-RESOURCE",
+                "revision": 2
+              },
+              {
+                "id": "CONTROL-TEXT",
+                "revision": 3
+              }
+            ],
+            "submit": {
+              "id": "ACTION-TASK",
+              "revision": 3
+            },
+            "useCase": {
+              "id": "UC-TASK",
+              "revision": 3
+            }
+          },
+          "id": "FORM-TASK",
+          "kind": "Form",
+          "lifecycle": "APPROVED",
+          "name": "FORM-TASK",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "FORM-TASK",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "FORM-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "outputField": "OUTPUT-TASK-TEXT",
+        "page": {
+          "limit": 50,
+          "offset": 0
+        },
+        "query": {
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "input": {
+              "id": "QUERY-INPUT",
+              "revision": 1
+            },
+            "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+            "maximumResults": 100,
+            "orderBy": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "id": "CASE-ID",
+                  "revision": 2
+                }
+              }
+            ],
+            "paginated": true,
+            "predicate": {
+              "pattern": {
+                "field": {
+                  "id": "QUERY-TEXT",
+                  "revision": 2
+                },
+                "scope": "OPERATION",
+                "tag": "input"
+              },
+              "tag": "textContains",
+              "value": {
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-TASK-SUMMARY",
+                  "revision": 2
+                },
+                "tag": "field"
+              }
+            },
+            "projection": [
+              {
+                "field": {
+                  "id": "OUTPUT-TASK-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "binding": "resource",
+                  "ref": {
+                    "id": "FLD-TASK-SUMMARY",
+                    "revision": 2
+                  },
+                  "tag": "field"
+                }
+              }
+            ],
+            "resource": {
+              "id": "CASE",
+              "revision": 2
+            },
+            "result": {
+              "definition": {
+                "id": "OUTPUT-TASK",
+                "revision": 1
+              },
+              "kind": "Value"
+            },
+            "scope": {
+              "id": "SCOPE-CASE",
+              "revision": 2
+            }
+          },
+          "id": "QUERY-TASKS",
+          "kind": "Query",
+          "lifecycle": "APPROVED",
+          "name": "QUERY-TASKS",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "QUERY-TASKS",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "assistant:proposal-author",
+              "actorType": "AI",
+              "locator": "QUERY-TASKS",
+              "source": "fixture:deterministic-v04-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "QUERY-TASKS",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "queryInputField": "QUERY-TEXT",
+        "queryPath": "/api/op_647d32adf46be996dd32e08b",
+        "resourceInputField": "INPUT-TASK-RESOURCE",
+        "responsive": {
+          "basis": [
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "modes": [
+              "COMPACT",
+              "EXPANDED"
+            ],
+            "preserveActions": true,
+            "preserveReadingOrder": true,
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          },
+          "id": "RESPONSIVE-TASK",
+          "kind": "ResponsivePolicy",
+          "lifecycle": "APPROVED",
+          "name": "RESPONSIVE-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "RESPONSIVE-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "screen": {
+          "basis": [
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "accessibility": {
+              "id": "A11Y-TASK",
+              "revision": 3
+            },
+            "actions": [
+              {
+                "id": "ACTION-TASK",
+                "revision": 3
+              }
+            ],
+            "boundary": {
+              "id": "BOUNDARY-TASK",
+              "revision": 3
+            },
+            "content": [
+              {
+                "id": "SEARCH-TASKS",
+                "revision": 3
+              },
+              {
+                "id": "TABLE-TASKS",
+                "revision": 3
+              },
+              {
+                "id": "WIZARD-TASK",
+                "revision": 3
+              }
+            ],
+            "responsive": {
+              "id": "RESPONSIVE-TASK",
+              "revision": 3
+            },
+            "states": [
+              {
+                "id": "VIEW-EMPTY",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-ERROR",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-LOADING",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-SUCCESS",
+                "revision": 3
+              }
+            ],
+            "task": {
+              "id": "UC-TASK",
+              "revision": 3
+            }
+          },
+          "id": "SCREEN-TASK",
+          "kind": "Screen",
+          "lifecycle": "APPROVED",
+          "name": "SCREEN-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "SCREEN-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "search": {
+          "basis": [
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "filters": [
+              {
+                "id": "FILTER-TEXT",
+                "revision": 3
+              }
+            ],
+            "label": "Find a task",
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            }
+          },
+          "id": "SEARCH-TASKS",
+          "kind": "Search",
+          "lifecycle": "APPROVED",
+          "name": "SEARCH-TASKS",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "SEARCH-TASKS",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "selectionBinding": {
+          "expectedVersionSource": "QueryCompletion.version",
+          "source": "QueryCompletion.resourceId",
+          "target": {
+            "id": "INPUT-TASK-RESOURCE",
+            "revision": 2
+          }
+        },
+        "states": {
+          "EMPTY": {
+            "basis": [
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "message": "Task view: empty",
+              "screen": {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              },
+              "state": "EMPTY"
+            },
+            "id": "VIEW-EMPTY",
+            "kind": "ViewState",
+            "lifecycle": "APPROVED",
+            "name": "VIEW-EMPTY",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "VIEW-EMPTY",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          },
+          "ERROR": {
+            "basis": [
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "message": "Task view: error",
+              "recovery": {
+                "id": "ACTION-TASK",
+                "revision": 3
+              },
+              "screen": {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              },
+              "state": "ERROR"
+            },
+            "id": "VIEW-ERROR",
+            "kind": "ViewState",
+            "lifecycle": "APPROVED",
+            "name": "VIEW-ERROR",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "VIEW-ERROR",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          },
+          "LOADING": {
+            "basis": [
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "message": "Task view: loading",
+              "screen": {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              },
+              "state": "LOADING"
+            },
+            "id": "VIEW-LOADING",
+            "kind": "ViewState",
+            "lifecycle": "APPROVED",
+            "name": "VIEW-LOADING",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "VIEW-LOADING",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          },
+          "SUCCESS": {
+            "basis": [
+              {
+                "id": "REQ-CASE",
+                "revision": 1
+              }
+            ],
+            "data": {
+              "message": "Task view: success",
+              "screen": {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              },
+              "state": "SUCCESS"
+            },
+            "id": "VIEW-SUCCESS",
+            "kind": "ViewState",
+            "lifecycle": "APPROVED",
+            "name": "VIEW-SUCCESS",
+            "origins": [
+              {
+                "actor": "fixture:author",
+                "actorType": "HUMAN",
+                "locator": "VIEW-SUCCESS",
+                "source": "fixture:synthetic"
+              }
+            ],
+            "revision": 3,
+            "steward": "fixture:authors"
+          }
+        },
+        "step": {
+          "basis": [
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "form": {
+              "id": "FORM-TASK",
+              "revision": 3
+            },
+            "requiresPrevious": false,
+            "wizard": {
+              "id": "WIZARD-TASK",
+              "revision": 3
+            }
+          },
+          "id": "WSTEP-INPUT",
+          "kind": "WizardStep",
+          "lifecycle": "APPROVED",
+          "name": "WSTEP-INPUT",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "WSTEP-INPUT",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "table": {
+          "basis": [
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "columns": [
+              {
+                "id": "OUTPUT-TASK-TEXT",
+                "revision": 2
+              }
+            ],
+            "emptyMessage": "No tasks are available.",
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            }
+          },
+          "id": "TABLE-TASKS",
+          "kind": "Table",
+          "lifecycle": "APPROVED",
+          "name": "TABLE-TASKS",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "TABLE-TASKS",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "task": {
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "input": {
+              "id": "INPUT-TASK",
+              "revision": 1
+            },
+            "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+            "output": {
+              "id": "OUTPUT-TASK",
+              "revision": 1
+            },
+            "outputBindings": [
+              {
+                "field": {
+                  "id": "OUTPUT-TASK-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "field": {
+                    "id": "RESULT-TEXT",
+                    "revision": 2
+                  },
+                  "step": {
+                    "id": "STEP-CMD-ARCHIVE",
+                    "revision": 3
+                  },
+                  "tag": "stepResult"
+                }
+              }
+            ],
+            "service": {
+              "id": "SERVICE-TASKS",
+              "revision": 3
+            },
+            "steps": [
+              {
+                "id": "STEP-CMD-REVIEW",
+                "revision": 3
+              },
+              {
+                "id": "STEP-CMD-APPROVE",
+                "revision": 3
+              },
+              {
+                "id": "STEP-CMD-ARCHIVE",
+                "revision": 3
+              }
+            ]
+          },
+          "id": "UC-TASK",
+          "kind": "UseCase",
+          "lifecycle": "APPROVED",
+          "name": "UC-TASK",
+          "origins": [
+            {
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI",
+              "locator": "UC-TASK",
+              "source": "fixture:execution-v03-proposal"
+            },
+            {
+              "actor": "assistant:proposal-author",
+              "actorType": "AI",
+              "locator": "UC-TASK",
+              "source": "fixture:deterministic-v04-proposal"
+            },
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "UC-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        },
+        "textInputField": "INPUT-TASK-TEXT",
+        "version": "1.0.0",
+        "wizard": {
+          "basis": [
+            {
+              "id": "REQ-CASE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            },
+            "steps": [
+              {
+                "id": "WSTEP-INPUT",
+                "revision": 3
+              }
+            ]
+          },
+          "id": "WIZARD-TASK",
+          "kind": "Wizard",
+          "lifecycle": "APPROVED",
+          "name": "WIZARD-TASK",
+          "origins": [
+            {
+              "actor": "fixture:author",
+              "actorType": "HUMAN",
+              "locator": "WIZARD-TASK",
+              "source": "fixture:synthetic"
+            }
+          ],
+          "revision": 3,
+          "steward": "fixture:authors"
+        }
+      },
+      "browserProfiles": [
+        {
+          "version": "153.0.8010.12",
+          "engine": "chromium",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "profile": {
+            "axe": "4.13.0",
+            "engine": "chromium",
+            "manualAccessibility": "OUTSTANDING",
+            "otherBrowsers": "OUTSTANDING",
+            "playwright": "1.63.0",
+            "version": "1.0.0",
+            "viewports": {
+              "COMPACT": {
+                "height": 844,
+                "width": 390
+              },
+              "EXPANDED": {
+                "height": 900,
+                "width": 1280
+              }
+            }
+          }
+        },
+        {
+          "version": "153.0.8010.12",
+          "engine": "chromium",
+          "viewport": {
+            "width": 1280,
+            "height": 900
+          },
+          "profile": {
+            "axe": "4.13.0",
+            "engine": "chromium",
+            "manualAccessibility": "OUTSTANDING",
+            "otherBrowsers": "OUTSTANDING",
+            "playwright": "1.63.0",
+            "version": "1.0.0",
+            "viewports": {
+              "COMPACT": {
+                "height": 844,
+                "width": 390
+              },
+              "EXPANDED": {
+                "height": 900,
+                "width": 1280
+              }
+            }
+          }
+        }
+      ],
+      "browserStats": {
+        "startTime": "2026-10-09T01:10:40.947Z",
+        "duration": 42978.872,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "journeys": [
+        {
+          "name": "production typed query, semantic order, keyboard journey, exact database effect and axe",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid confirmation and committed response loss replay one logical key",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "permissions, forged calls, wrong tenant and identity change clear protected state",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "semantic workflow failure rolls back and announces safely",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "exact Unicode case-sensitive filter transport and expired identity clear data",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "stale version rejects without overwrite; revoked session clears data",
+          "project": "COMPACT",
+          "status": "PASS"
+        },
+        {
+          "name": "production typed query, semantic order, keyboard journey, exact database effect and axe",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid confirmation and committed response loss replay one logical key",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "permissions, forged calls, wrong tenant and identity change clear protected state",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "semantic workflow failure rolls back and announces safely",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "exact Unicode case-sensitive filter transport and expired identity clear data",
+          "project": "EXPANDED",
+          "status": "PASS"
+        },
+        {
+          "name": "stale version rejects without overwrite; revoked session clears data",
+          "project": "EXPANDED",
+          "status": "PASS"
+        }
+      ],
+      "axe": [
+        {
+          "state": "results",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 31,
+          "incomplete": []
+        },
+        {
+          "state": "empty",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "validation",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 36,
+          "incomplete": []
+        },
+        {
+          "state": "confirmation",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 15,
+          "incomplete": []
+        },
+        {
+          "state": "success",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 36,
+          "incomplete": []
+        },
+        {
+          "state": "denied-missing-action",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "denied-missing-query",
+          "project": "COMPACT",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "results",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 31,
+          "incomplete": []
+        },
+        {
+          "state": "empty",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "validation",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 36,
+          "incomplete": []
+        },
+        {
+          "state": "confirmation",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 15,
+          "incomplete": []
+        },
+        {
+          "state": "success",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 36,
+          "incomplete": []
+        },
+        {
+          "state": "denied-missing-action",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        },
+        {
+          "state": "denied-missing-query",
+          "project": "EXPANDED",
+          "violations": [],
+          "passes": 26,
+          "incomplete": []
+        }
+      ],
+      "axeRuleSuppressions": [],
+      "httpOutcomes": {
+        "stats": {
+          "startTime": "2026-10-09T04:31:37.604Z",
+          "duration": 8542.408000000001,
+          "expected": 8,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "facts": [
+          {
+            "project": "COMPACT",
+            "name": "http-failure",
+            "facts": {
+              "status": 422,
+              "envelope": {
+                "failureId": "FAIL-BUSINESS",
+                "failureRevision": 1,
+                "code": "INVALID_STATE",
+                "category": "BUSINESS",
+                "retryable": false,
+                "operationId": "CMD-REVIEW",
+                "operationRevision": 3,
+                "correlationId": "9d82e6f3-a230-45a8-8f60-987838fa60df"
+              },
+              "database": {
+                "idempotency": 0,
+                "rows": [
+                  {
+                    "text": "old",
+                    "version": 0,
+                    "state": "STATE-ARCHIVED"
+                  }
+                ],
+                "events": 0
+              }
+            }
+          },
+          {
+            "project": "COMPACT",
+            "name": "http-stale",
+            "facts": {
+              "peerStatus": 200,
+              "staleStatus": 409,
+              "before": {
+                "idempotency": 3,
+                "rows": [
+                  {
+                    "text": "competing note",
+                    "version": 3,
+                    "state": "STATE-ARCHIVED"
+                  }
+                ],
+                "events": 3
+              },
+              "after": {
+                "idempotency": 3,
+                "rows": [
+                  {
+                    "text": "competing note",
+                    "version": 3,
+                    "state": "STATE-ARCHIVED"
+                  }
+                ],
+                "events": 3
+              }
+            }
+          },
+          {
+            "project": "COMPACT",
+            "name": "http-expired",
+            "facts": {
+              "status": 401,
+              "protectedDataCleared": true
+            }
+          },
+          {
+            "project": "COMPACT",
+            "name": "http-revoked",
+            "facts": {
+              "status": 403,
+              "protectedDataCleared": true
+            }
+          },
+          {
+            "project": "EXPANDED",
+            "name": "http-failure",
+            "facts": {
+              "status": 422,
+              "envelope": {
+                "failureId": "FAIL-BUSINESS",
+                "failureRevision": 1,
+                "code": "INVALID_STATE",
+                "category": "BUSINESS",
+                "retryable": false,
+                "operationId": "CMD-REVIEW",
+                "operationRevision": 3,
+                "correlationId": "4dd78ed4-763b-4c13-adca-056da5e92a69"
+              },
+              "database": {
+                "idempotency": 0,
+                "rows": [
+                  {
+                    "text": "old",
+                    "version": 0,
+                    "state": "STATE-ARCHIVED"
+                  }
+                ],
+                "events": 0
+              }
+            }
+          },
+          {
+            "project": "EXPANDED",
+            "name": "http-stale",
+            "facts": {
+              "peerStatus": 200,
+              "staleStatus": 409,
+              "before": {
+                "idempotency": 3,
+                "rows": [
+                  {
+                    "text": "competing note",
+                    "version": 3,
+                    "state": "STATE-ARCHIVED"
+                  }
+                ],
+                "events": 3
+              },
+              "after": {
+                "idempotency": 3,
+                "rows": [
+                  {
+                    "text": "competing note",
+                    "version": 3,
+                    "state": "STATE-ARCHIVED"
+                  }
+                ],
+                "events": 3
+              }
+            }
+          },
+          {
+            "project": "EXPANDED",
+            "name": "http-expired",
+            "facts": {
+              "status": 401,
+              "protectedDataCleared": true
+            }
+          },
+          {
+            "project": "EXPANDED",
+            "name": "http-revoked",
+            "facts": {
+              "status": 403,
+              "protectedDataCleared": true
+            }
+          }
+        ]
+      },
+      "supplementalComponentTests": {
+        "identityRace": "PASS",
+        "rateRecoverySameKey": "PASS"
+      },
+      "postgresqlVersion": "18.6",
+      "backendSuites": [
+        {
+          "name": "acp.domain.ApplicationPolicyTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.ClassificationAuditTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.ExactDecimalTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.FailureMappingTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.MigrationTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.ObservabilityNonDisclosureTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.PortableFaultMappingTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.PrivacyGuardsTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.domain.SessionGateTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.DeliveryJobTest",
+          "tests": "24",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.InvocationCoreTest",
+          "tests": "14",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.InvocationHttpTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.PrivacyHttpTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "acp.generated.PrivacyLifecycleTest",
+          "tests": "15",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        }
+      ],
+      "databaseFacts": {
+        "method": "real JDBC /__test/facts response values asserted by passing browser tests",
+        "successfulAction": {
+          "text": "browser note 🦋",
+          "version": 3,
+          "events": 3,
+          "committedIdempotencyRows": 3,
+          "state": "STATE-ARCHIVED"
+        },
+        "confirmationCancelEvents": 0,
+        "networkResponseLossReplay": {
+          "sameKey": true,
+          "eventCount": 3
+        },
+        "semanticFailure": {
+          "text": "old",
+          "events": 0
+        },
+        "staleVersion": {
+          "competingSessionCommittedEvents": 3,
+          "competingText": "competing note",
+          "additionalStaleEvents": 0,
+          "noOverwrite": true
+        }
+      },
+      "upgrade": {
+        "oldProvenance": {
+          "bundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+          "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+          "canonicalVersion": "0.3.0",
+          "compiler": "acp-reference-compiler/0.1.0",
+          "deploymentRequirements": {
+            "path": "acp/deployment-requirements.json",
+            "sha256": "6406eab4a0b7656c36073e53ee06493c78335711f4930c8d424e6d9443d5529f"
+          },
+          "features": [
+            "acp.deterministic-execution.0.4"
+          ],
+          "generator": "acp-spring-vue-generator/0.3.0",
+          "migrationDigests": {
+            "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+            "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+            "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          "pipeline": "acp-reference-pipeline/0.1.0",
+          "protocol": "acp-target-worker/0.1.0",
+          "semanticModelVersion": "0.4.0",
+          "targetIRVersion": "0.2.0",
+          "targetProfile": "acp-spring-vue-postgres/0.3.0",
+          "tzdb": {
+            "artifact": "acp-tzdb-2026d.json",
+            "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+            "version": "2026d"
+          }
+        },
+        "newProvenance": {
+          "browserProfile": {
+            "axe": "4.13.0",
+            "engine": "chromium",
+            "manualAccessibility": "OUTSTANDING",
+            "otherBrowsers": "OUTSTANDING",
+            "playwright": "1.63.0",
+            "version": "1.0.0",
+            "viewports": {
+              "COMPACT": {
+                "height": 844,
+                "width": 390
+              },
+              "EXPANDED": {
+                "height": 900,
+                "width": 1280
+              }
+            }
+          },
+          "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+          "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+          "canonicalVersion": "0.3.0",
+          "compiler": "acp-reference-compiler/0.1.0",
+          "deploymentRequirements": {
+            "path": "acp/deployment-requirements.json",
+            "sha256": "f2d66fed68e5b9b706a64351aaf59dd2f33436a1d5713befe9c50e0050b0a600"
+          },
+          "features": [
+            "acp.deterministic-execution.0.4"
+          ],
+          "generator": "acp-spring-vue-generator/0.4.0",
+          "migrationDigests": {
+            "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+            "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+            "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          "pipeline": "acp-reference-pipeline/0.1.0",
+          "protocol": "acp-target-worker/0.1.0",
+          "semanticModelVersion": "0.4.0",
+          "targetIRVersion": "0.2.0",
+          "targetProfile": "acp-spring-vue-postgres/0.4.0",
+          "taskUIModel": {
+            "path": "acp/task-ui-model.json",
+            "sha256": "fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          "tzdb": {
+            "artifact": "acp-tzdb-2026d.json",
+            "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+            "version": "2026d"
+          }
+        },
+        "allTablesRowForRow": "PASS",
+        "zeroMigrations": "PASS",
+        "actualOldProjectRegeneration": "PASS",
+        "humanIdentityCustomizationSurvived": "PASS",
+        "identityInterfacePreparation": "EXPLICIT_SYNTHETIC_DEPLOYMENT_FIXTURE_FOR_0.4",
+        "oldFrontendBuild": "PASS",
+        "newFrontendBuildAndTests": "PASS",
+        "V1V2V3Exact": "PASS"
+      }
+    }
+  }
+}

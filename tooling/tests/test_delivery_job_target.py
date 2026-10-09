@@ -21,8 +21,8 @@ class DeliveryJobTargetTests(unittest.TestCase):
         cls.snapshots={d:approved_snapshot(d) for d in ('payment','case-management')}
         cls.templates={p.relative_to(ROOT/'templates').as_posix():p.read_text() for p in (ROOT/'templates').rglob('*') if p.is_file()}
     def test_exact_release_identity_and_changed_bundle_requires_new_version(self):
-        self.assertEqual('acp-spring-vue-postgres/0.3.0',PROFILE['profile'])
-        self.assertEqual('acp-spring-vue-generator/0.3.0',PROFILE['generator'])
+        self.assertEqual('acp-spring-vue-postgres/0.4.0',PROFILE['profile'])
+        self.assertEqual('acp-spring-vue-generator/0.4.0',PROFILE['generator'])
         verify_release(PROFILE,bundle_digest())
         with self.assertRaisesRegex(ValueError,'GENERATOR_VERSION_REUSE'):verify_release(PROFILE,'f'*64)
         with patch('target_worker.bundle_digest',return_value='f'*64):
@@ -44,8 +44,8 @@ class DeliveryJobTargetTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(artifacts['backend/src/main/resources/acp-tzdb-2026d.json'].encode()).hexdigest(),provenance['build']['tzdb']['sha256'])
             self.assertEqual((ROOT/'historical/invocation-0.1'/(domain+'-V1__initial.sql')).read_text(),artifacts['database/V1__initial.sql'])
             transition=json.loads(artifacts['acp/target-upgrade.json']);self.assertEqual(PROFILE['profile'],transition['to']['targetProfile'])
-            self.assertEqual('acp-spring-vue-postgres/0.2.0',transition['from']['profile'])
-            for migration in transition['migrations']:self.assertEqual(hashlib.sha256(artifacts[migration['path']].encode()).hexdigest(),migration['sha256'])
+            self.assertEqual('acp-spring-vue-postgres/0.3.0',transition['from']['profile'])
+            for path,digest in transition['migrations'].items():self.assertEqual(hashlib.sha256(artifacts[path].encode()).hexdigest(),digest)
             for mapping in provenance['artifacts']:self.assertEqual('sha256:'+hashlib.sha256(artifacts[mapping['artifact']].encode()).hexdigest(),mapping['artifactDigest'])
     def test_unsupported_delivery_schedule_and_job_forms_reject(self):
         for domain,snapshot in self.snapshots.items():

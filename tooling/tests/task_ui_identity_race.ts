@@ -1,0 +1,30 @@
+// @vitest-environment happy-dom
+import { expect, it, vi } from 'vitest';
+import { flushPromises, mount } from '@vue/test-utils';
+import App from './App.vue';
+import { ui } from './task-ui-model';
+import { call } from './api';
+import { identity, onIdentityChange } from './extensions/identity';
+vi.mock('./api', async original => ({ ...await original<typeof import('./api')>(), call: vi.fn() }));
+vi.mock('./extensions/identity', () => ({ identity: vi.fn(), onIdentityChange: vi.fn(() => () => {}), accessToken: vi.fn() }));
+it('discards a late post-submit refresh after identity changes', async () => {
+  const row = { resourceId: 'selected', version: 0, state: null, output: { [ui.outputField]: 'protected old identity' } };
+  vi.mocked(identity).mockReturnValue({ actor: ui.boundary.data.actor.id, subject: 'old', tenant: 'old', permissions: new Set(ui.boundary.data.permissions.map(p => p.id)) });
+  let resolve!: (value: typeof row[]) => void;
+  const refresh = new Promise<typeof row[]>(r => { resolve = r; });
+  vi.mocked(call).mockResolvedValueOnce([row]).mockResolvedValueOnce(row).mockReturnValueOnce(refresh);
+  const w = mount(App); await flushPromises();
+  await w.find('tbody button').trigger('click');
+  await w.find('textarea').setValue('note');
+  vi.spyOn(w.find('dialog').element as HTMLDialogElement, 'showModal').mockImplementation(() => {});
+  await w.find('form[data-semantic-id]').trigger('submit');
+  await w.findAll('dialog button')[1].trigger('click'); await flushPromises();
+  expect(call).toHaveBeenCalledTimes(3);
+  vi.mocked(identity).mockReturnValue({ actor: ui.boundary.data.actor.id, subject: 'new', tenant: 'new', permissions: new Set() });
+  vi.mocked(onIdentityChange).mock.calls[0][0]();
+  resolve([row]); await flushPromises();
+  expect(w.find('table').exists()).toBe(false);
+  expect(w.text()).not.toContain('protected old identity');
+  expect(w.find('[role="status"]').exists()).toBe(false);
+  w.unmount();
+});

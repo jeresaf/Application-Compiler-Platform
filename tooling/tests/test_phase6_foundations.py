@@ -14,7 +14,7 @@ from compiler_contracts import Artifact, ArtifactPlan, Document, Owner, Provenan
 from compiler_core import CompilerFault
 from filesystem_artifacts import ApprovedAICandidate, FilesystemArtifactStore, StoreConflict
 from target_worker import ROOT, PROFILE, ProductionTarget, TargetWorker, TargetWorkerError
-from target_provenance import inspect_mapping
+from target_provenance import inspect_mapping, read_provenance
 
 
 def artifact(path="backend/example.txt", text="initial\n", owner=Owner.COMPILER, prior=None):
@@ -168,7 +168,7 @@ class WorkerTests(unittest.TestCase):
             self.assertNotIn(extension, {a.path for a in regeneration.output.artifacts})
             store.apply(regeneration.output)
             self.assertEqual("// human-owned OIDC integration\n", (store.root / extension).read_text())
-            sidecars = json.loads((store.root / "acp/provenance.json").read_text())["artifacts"]
+            sidecars = read_provenance(store.root / "acp/provenance.json")["artifacts"]
             mapping = next(m for m in sidecars if m["artifact"] == "backend/pom.xml")
             self.assertEqual("CURRENT", inspect_mapping(store.root, mapping)["status"])
             self.assertEqual("STALE_SEMANTICS", inspect_mapping(store.root, mapping, semantic_revisions={})["status"])

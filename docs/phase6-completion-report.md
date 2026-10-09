@@ -2,7 +2,11 @@
 
 Phase 6 is IN PROGRESS. This file is not an acceptance or completion claim. Phases 1–5 retain their approved historical status. Phase 7 is NOT STARTED. No generated application is claimed production-ready.
 
-## Current approved privacy/lifecycle checkpoint
+## Current generated task-interface tranche
+
+The [task-interface report](phase6-task-interface.md) records target/generator 0.4.0, the validated Task UI Model, bounded per-family capabilities, full compiler/materializer admission and real production-build browser journeys. Target IR remains 0.2.0; approved semantic contracts and V1/V2/V3 migrations remain unchanged. Final Linux evidence and hosted reproduction commands are recorded there. Both exact approved applications have zero negotiation blockers, with 233 Python regressions, 145 backend tests and 40 real browser journeys green locally. Zero negotiation blockers do not close Phase 6. Manual accessibility and deployment infrastructure evidence remain OUTSTANDING; the separate closure audit remains BLOCKED. Phase 7 is NOT STARTED.
+
+## Historical approved privacy/lifecycle checkpoint
 
 The approved privacy/lifecycle implementation is commit `01fe1e905ed97e482a004761a553e2d8b7a1a749`. Target `acp-spring-vue-postgres/0.3.0` and generator `acp-spring-vue-generator/0.3.0` are sealed to bundle `6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc`. Target IR remains `0.2.0`; the [implementation report](phase6-privacy-lifecycle.md) explains why its structure and meaning remain compatible.
 

@@ -1,8 +1,12 @@
 # Phase 6 target contract — implementation in progress
 
+The current [generated task-interface tranche](phase6-task-interface.md) introduces target/generator 0.4.0 with unchanged Target IR 0.2.0. Its full-admission gate requires actual compiler/worker generation, materialization, backend/frontend builds and real browser journeys. Historical blocker contracts remain immutable; an empty expected-blocker allowance is not used. Phase 6 remains IN PROGRESS / NOT CLOSED pending a separate final closure audit; Phase 7 is NOT STARTED.
+
+## Historical delivery/Jobs and foundation checkpoint
+
 The [delivery and Jobs tranche](phase6-delivery-jobs.md) uses target profile and generator 0.2.0 and explicitly versioned Target IR 0.2.0. Actual worker negotiation against both unchanged approved Canonical 0.3 snapshots reports 16 blockers per application, bound by [contract 3.0.0](../targets/spring-vue-postgres/expected-open-blockers-v3.json): five privacy/lifecycle families and eleven UI families. DeliveryPolicy, Schedule and Job support is constrained to the exact documented subset. Historical blocker contracts 1.1.0 and 2.0.0 remain unchanged. Strict Phase 6 closure remains BLOCKED; Phase 6 is IN PROGRESS and Phase 7 is NOT STARTED.
 
-The [profile](../targets/spring-vue-postgres/profile.json) and [ADR](adr/0014-first-production-target.md) describe the first target direction. The worker currently advertises `releaseStatus: INCOMPLETE`. Both complete reference domains fail negotiation on outstanding capabilities. A successful template build is not successful production-target compilation.
+The [profile](../targets/spring-vue-postgres/profile.json) and [ADR](adr/0014-first-production-target.md) describe the first target direction. At this historical checkpoint the worker advertised `releaseStatus: INCOMPLETE`, and both complete reference domains failed negotiation on outstanding capabilities. A successful template build is not successful production-target compilation.
 
 ## Worker protocol
 
@@ -29,9 +33,9 @@ The neutral compiler's optional `target_model` derivative is negotiated through 
 
 Generated roots contain `backend/`, `frontend/`, `database/`, `contracts/` and `acp/`. Deployment packaging is still outstanding. Semantic IDs, rather than display names, drive hashed SQL/API identifiers. Source uses deterministic UTF-8/LF. No generated artifact includes build timestamps. Generator bundle digests bind implementation files in the reference host adapter.
 
-## Capability matrix
+## Historical foundation capability matrix
 
-The executable manifest is authoritative for current negotiation; retrieve it with `TargetWorker().call("manifest", {})` from [the host adapter](../tooling/target_worker.py). Recognized support is bounded and the release is incomplete.
+The table below records the historical foundation subset. The executable manifest is authoritative for current negotiation; retrieve it with `TargetWorker().call("manifest", {})` from [the host adapter](../tooling/target_worker.py). Recognized support is bounded and the release is incomplete.
 
 | Family | Current implementation / limitation |
 | --- | --- |
@@ -92,4 +96,9 @@ The unnegotiated template checks are reproducible with `python3.14 targets/sprin
 
 The current approved-execution component runner is `tooling/check_execution_components.py`. The dedicated Ubuntu `phase6-target` job uses `tooling/check_phase6_target.py`, which begins with fresh reference approval and the real negotiated compiler. It currently fails closed for both complete domains. Browser journeys and full target database evolution remain outstanding; no complete target or CI success is claimed.
 
-While releaseStatus is INCOMPLETE, CI asserts [the reviewed versioned blocker contract](../targets/spring-vue-postgres/expected-open-blockers-v3.json) using `--expect-open-blockers`. Both disappeared and added blockers fail. The default command remains strict for closure review. A non-INCOMPLETE manifest never receives an expected-blocker allowance. This reports EXPECTED_BLOCKED_STATE, not target acceptance.
+At the historical delivery/Jobs checkpoint, CI asserted [the reviewed versioned blocker contract](../targets/spring-vue-postgres/expected-open-blockers-v3.json) using `--expect-open-blockers`. Both disappeared and added blockers fail. The default command remains strict for closure review. A non-INCOMPLETE manifest never receives an expected-blocker allowance. This reports EXPECTED_BLOCKED_STATE, not target acceptance.
+
+
+## Current full-admission gate
+
+Run `python3.14 tooling/check_phase6_target.py --output /tmp/acp-task-interface --run-builds --full-admission` with the documented ephemeral PostgreSQL environment. This mode forbids expected-blocker allowances and requires generation, deterministic comparison, ownership/provenance checks, backend/frontend regressions and real production-build Chromium journeys. Historical expected-open contracts remain available as exact historical evidence. Passing full admission does not pass the separate final Phase 6 closure audit. Deployment and manual accessibility obligations remain OUTSTANDING.

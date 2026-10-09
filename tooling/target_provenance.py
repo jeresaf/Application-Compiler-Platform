@@ -19,3 +19,19 @@ def inspect_mapping(root, mapping, *, semantic_revisions=None):
     if semantic_revisions is not None and any(semantic_revisions.get(origin["id"]) != origin["revision"] for origin in mapping["origins"]):
         return {"status": "STALE_SEMANTICS", "locations": []}
     return {"status": "CURRENT", "locations": mapping["locations"], "confidence": mapping["locationConfidence"]}
+
+
+def read_provenance(path):
+    """Expand exact versioned origin sets; old 0.2 sidecars remain readable."""
+    import json
+    value=json.loads(Path(path).read_text())
+    if value['version']=='0.3.0':
+        sets=value['originSets']
+        for mapping in value['artifacts']:
+            key=mapping['originSet']
+            if key not in sets:raise ValueError('PROVENANCE_ORIGIN_SET')
+            origins=sets[key]
+            if not origins or len({o['id'] for o in origins})!=len(origins) or any(type(o['revision']) is not int or o['revision']<1 for o in origins):raise ValueError('PROVENANCE_ORIGINS')
+            mapping['origins']=origins
+    elif value['version']!='0.2.0':raise ValueError('PROVENANCE_VERSION')
+    return value

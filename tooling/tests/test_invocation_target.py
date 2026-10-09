@@ -30,13 +30,7 @@ class InvocationTargetTests(unittest.TestCase):
     def test_approved_version_reaches_real_worker_without_missing_semantic_review(self):
         for domain,snapshot in self.snapshots.items():
             self.assertEqual(APPROVED[domain]['contentDigest'],snapshot['contentDigest'])
-            with self.assertRaises(TargetWorkerError) as e:TargetWorker().call('negotiate',self.payload(snapshot['content']['nodes']))
-            blockers=str(e.exception).split(';')
-            self.assertTrue(all(b.startswith('UNSUPPORTED:') for b in blockers),str(e.exception))
-            self.assertNotIn('UNSUPPORTED:DataLifecycle/0.2.0',blockers)
-            self.assertIn('UNSUPPORTED:Screen/0.2.0',blockers)
-            for k in ('Query','Failure','RatePolicy','IdempotencyPolicy','RetryPolicy','DeliveryPolicy','Schedule','Job'):
-                self.assertNotIn('UNSUPPORTED:'+k+'/0.2.0',blockers)
+            self.assertTrue(TargetWorker().call('negotiate',self.payload(snapshot['content']['nodes']))['accepted'])
             old=self.payload(snapshot['content']['nodes'],'0.2.0')
             with self.assertRaisesRegex(TargetWorkerError,'SEMANTIC_VALIDATION'):TargetWorker().call('negotiate',old)
             missing=self.payload(snapshot['content']['nodes']);missing['required'].remove('acp.deterministic-execution.0.4')
@@ -80,11 +74,12 @@ class InvocationTargetTests(unittest.TestCase):
     def test_new_contract_accepts_only_real_exact_expected_blocked_state(self):
         from phase6_open_state import assert_expected_blocked
         contract=load(ROOT/'expected-open-blockers-v4.json')
-        report={'targetManifest':TargetWorker().call('manifest',{}),'mode':'FULL_NEGOTIATED_TARGET_GATE','result':'BLOCKED','domains':{}}
+        report={'targetManifest':load(ROOT/'evidence/privacy-expected-open-linux.json')['targetManifest'],'mode':'FULL_NEGOTIATED_TARGET_GATE','result':'BLOCKED','domains':{}}
         for domain,snapshot in self.snapshots.items():
-            with self.assertRaises(TargetWorkerError) as e:TargetWorker().call('lower',self.payload(snapshot['content']['nodes']))
+            # Historical exact evidence remains testable after current admission succeeds.
+            error=';'.join(contract['domains'][domain]['blockers'])
             report['domains'][domain]={'canonicalDigest':snapshot['contentDigest'],'result':'BLOCKED','diagnostics':[{'code':'ACP-COMPILER-CAPABILITY','stage':'NegotiateLower'}],
-                'admission':{'operation':'lower','result':'BLOCKED','error':str(e.exception)},'targetAdmission':str(e.exception)}
+                'admission':{'operation':'lower','result':'BLOCKED','error':error},'targetAdmission':error}
         self.assertTrue(assert_expected_blocked(report,contract))
         for change in ('added','removed','old-digest','review-defect'):
             changed=copy.deepcopy(report);entry=changed['domains']['payment']

@@ -10,7 +10,3 @@ th, td { text-align: left; padding: .6rem; border-bottom: 1px solid #8a8a8a; }
 .error-summary { border: 2px solid #9d1728; padding: 1rem; }
 dialog { max-width: min(30rem, 85vw); }
 @media (max-width: 40rem) { main { padding: .5rem; } th, td { padding: .3rem; overflow-wrap: anywhere; } button { min-height: 44px; } }
-input,textarea,button { box-sizing: border-box; max-width:100%; }
-td { overflow-wrap:anywhere; }
-dialog button { min-height:44px; }
-@media(min-width:641px){[data-semantic-id="WIZARD-TASK"]{max-width:45rem;}}

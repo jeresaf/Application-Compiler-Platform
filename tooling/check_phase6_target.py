@@ -21,7 +21,7 @@ from filesystem_artifacts import FilesystemArtifactStore
 from phase6_reference_tests import source as test_source, http_source, variants
 from target_worker import ROOT, PROFILE, ProductionTarget, TargetWorkerError
 sys.path.insert(0, str(ROOT / "worker"))
-from target_provenance import inspect_mapping
+from target_provenance import inspect_mapping, read_provenance
 from phase6_open_state import assert_expected_blocked
 
 
@@ -81,7 +81,7 @@ def run(output, builds, expect_open=False):
         store.apply(regeneration.output)
         if (directory / extension).read_text() != '// explicit host-owned identity integration\n':
             raise RuntimeError('HUMAN_EXTENSION_OVERWRITTEN')
-        mappings = json.loads((directory / 'acp/provenance.json').read_text())['artifacts']
+        mappings = read_provenance(directory / 'acp/provenance.json')['artifacts']
         for mapping in mappings:
             if inspect_mapping(directory, mapping)['status'] != 'CURRENT':
                 raise RuntimeError('PROVENANCE_FAILED')
@@ -137,5 +137,10 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--run-builds', action='store_true')
     parser.add_argument('--expect-open-blockers', action='store_true', help='Assert the versioned exact blocked state only while manifest is INCOMPLETE; strict by default')
+    parser.add_argument('--full-admission',action='store_true',help='Require complete task-interface generation/build/browser admission; separate closure audit remains outstanding')
     args = parser.parse_args()
+    if args.full_admission:
+        if args.expect_open_blockers or not args.run_builds:parser.error('Full admission requires builds and forbids expected-blocker allowances')
+        from check_task_interface import run as run_full
+        raise SystemExit(run_full(args.output.absolute(),True))
     raise SystemExit(run(args.output.absolute(), args.run_builds, args.expect_open_blockers))
