@@ -1,7 +1,7 @@
 {
-  "profile": "acp-spring-vue-postgres/0.4.0",
+  "profile": "acp-spring-vue-postgres/0.5.0",
   "protocol": "acp-target-worker/0.1.0",
-  "generator": "acp-spring-vue-generator/0.4.0",
+  "generator": "acp-spring-vue-generator/0.5.0",
   "stack": {
     "java": "21",
     "springBoot": "4.1.1",

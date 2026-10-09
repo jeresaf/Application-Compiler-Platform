@@ -13,8 +13,9 @@ public final class RuntimeBootstrap implements AutoCloseable {
     private final ScheduledExecutorService timer=Executors.newSingleThreadScheduledExecutor(r->{Thread t=new Thread(r,"acp-runtime-poll");t.setDaemon(true);return t;});
     private final LifecycleRuntime lifecycle;private final JobRuntime jobs;private final DeliveryRuntime delivery;private final TargetModel model;private final JdbcTemplate jdbc;
     private final Map<String,String> tenants=new HashMap<>();
+    private final Environment environment; private final boolean transportBound;
     public RuntimeBootstrap(JdbcTemplate jdbc,PlatformTransactionManager manager,TargetModel model,Invocations invocations,Environment env,ObjectProvider<JobRuntime.PrincipalPort> principalProvider,ObjectProvider<DeliveryRuntime.Transport> transportProvider) {
-        this.jdbc=jdbc;this.model=model;var clock=new InvocationCore.SystemTime();
+        this.jdbc=jdbc;this.model=model;this.environment=env;var clock=new InvocationCore.SystemTime();
         var principal=principalProvider.getIfAvailable();if(principal==null)throw new IllegalStateException("JOB_PRINCIPAL_ADAPTER_REQUIRED");
         Map<String,String> handles=new HashMap<>();
         for(var job:model.nodes("Job")) {
@@ -25,10 +26,12 @@ public final class RuntimeBootstrap implements AutoCloseable {
         jobs=new JobRuntime(jdbc,manager,model,clock,principal,handles,new GeneratedJobs(jdbc,invocations));
         var sessions=new acp.security.SessionGate(model,jdbc,manager);var expressions=new acp.domain.Expressions(model);var policy=new acp.security.ApplicationPolicy(model,expressions,sessions);var guards=new acp.security.PrivacyGuards(model,policy,expressions);
         lifecycle=new LifecycleRuntime(jdbc,manager,model,policy,expressions,clock,new LifecycleActions(new ExecutionStore(jdbc,policy,guards)));
-        var transport=transportProvider.getIfAvailable();delivery=new DeliveryRuntime(jdbc,manager,model,clock,transport==null?o->{throw new IllegalStateException("TRANSPORT_ADAPTER_REQUIRED");}:transport);
+        var transport=transportProvider.getIfAvailable();transportBound=transport!=null;if(!transportBound && !"development".equals(env.getProperty("acp.runtime.mode")))throw new IllegalStateException("TRANSPORT_ADAPTER_REQUIRED");delivery=new DeliveryRuntime(jdbc,manager,model,clock,transport==null?o->{throw new IllegalStateException("TRANSPORT_ADAPTER_REQUIRED");}:transport);
     }
     public LifecycleRuntime management(){return lifecycle;}
+    public void validateConfiguration(){RuntimeConfigurationContract.validate(environment, model, transportBound);}
     public void start() {
+        validateConfiguration();
         var clock=new InvocationCore.SystemTime();tenants.forEach((job,tenant)->jobs.activate(job,tenant,clock.now()));
         timer.scheduleWithFixedDelay(()->{
             try{

@@ -118,7 +118,7 @@ def plan(model, templates, profile, inventory=(), *, build=None):
         if not ui and path.startswith('frontend/src/'):
             legacy='legacy-frontend/'+path.removeprefix('frontend/src/')
             if legacy in templates:text=templates[legacy]
-        if model.get('canonicalVersion')!='0.3.0' and path.endswith(('/RuntimeBootstrap.java','/LifecycleRuntime.java')):continue
+        if model.get('canonicalVersion')!='0.3.0' and path.endswith(('/RuntimeBootstrap.java','/RuntimeConfigurationContract.java','/RuntimeConfigurationContractTest.java','/LifecycleRuntime.java')):continue
         if execution and path in {'backend/src/main/java/acp/application/TaskService.java', 'backend/src/main/java/acp/api/TaskController.java'}:
             continue
         if execution and path == 'frontend/src/App.vue':
@@ -153,7 +153,7 @@ public class RuntimeConfiguration {
  @org.springframework.context.annotation.Bean(destroyMethod="close")
  acp.infrastructure.RuntimeBootstrap runtimeBootstrap(org.springframework.jdbc.core.JdbcTemplate jdbc,org.springframework.transaction.PlatformTransactionManager manager,acp.infrastructure.TargetModel model,Invocations invocations,org.springframework.core.env.Environment env,org.springframework.beans.factory.ObjectProvider<acp.infrastructure.JobRuntime.PrincipalPort> principal,org.springframework.beans.factory.ObjectProvider<acp.infrastructure.DeliveryRuntime.Transport> transport) {return new acp.infrastructure.RuntimeBootstrap(jdbc,manager,model,invocations,env,principal,transport);}
  @org.springframework.context.annotation.Bean
- org.springframework.boot.ApplicationRunner startRuntime(acp.infrastructure.RuntimeBootstrap runtime,org.springframework.core.env.Environment env){return args->{if(env.getProperty("acp.runtime.poll-enabled",Boolean.class,true))runtime.start();};}
+ org.springframework.boot.ApplicationRunner startRuntime(acp.infrastructure.RuntimeBootstrap runtime,org.springframework.core.env.Environment env){return args->{if(!"development".equals(env.getProperty("acp.runtime.mode")))runtime.validateConfiguration();if(env.getProperty("acp.runtime.poll-enabled",Boolean.class,true))runtime.start();};}
 }
 ""","RUNTIME_CONFIGURATION")
         from privacy_lifecycle import migration,requirements,actions

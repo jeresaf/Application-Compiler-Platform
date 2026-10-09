@@ -49,7 +49,7 @@ const name=path.resolve('dist','.'+decodeURIComponent(req.url.split('?')[0]));if
     logs=[(output/(domain+'-browser-backend.log')).open('wb'),(output/(domain+'-browser-frontend.log')).open('wb')]
     processes=[]
     try:
-        processes.append(subprocess.Popen(['java','-cp',cp,'acp.browser.BrowserServer','--server.address=127.0.0.1','--server.port='+str(backend_port),'--spring.flyway.schemas='+schema,'--spring.flyway.default-schema='+schema,'--spring.flyway.clean-disabled=false','--acp.runtime.poll-enabled=false','--acp.jobs.JOB-TASK.revision-3.credential-handle=browser-test-only'],cwd=backend,env=env,stdout=logs[0],stderr=subprocess.STDOUT))
+        processes.append(subprocess.Popen(['java','-cp',cp,'acp.browser.BrowserServer','--server.address=127.0.0.1','--server.port='+str(backend_port),'--spring.flyway.schemas='+schema,'--spring.flyway.default-schema='+schema,'--spring.flyway.clean-disabled=false','--acp.runtime.mode=development','--acp.runtime.poll-enabled=false','--acp.jobs.JOB-TASK.revision-3.credential-handle=browser-test-only'],cwd=backend,env=env,stdout=logs[0],stderr=subprocess.STDOUT))
         processes.append(subprocess.Popen(['node','browser-server.mjs'],cwd=front,stdout=logs[1],stderr=subprocess.STDOUT))
         for _ in range(120):
             if any(p.poll() is not None for p in processes):raise RuntimeError('BROWSER_SERVER_EXIT')

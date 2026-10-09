@@ -53,11 +53,27 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
     try:
         if history.read_accepted_plan(digest) != accepted_plan:
             raise MigrationBlocked("UNACCEPTED_HISTORY")
+    except (KeyError, PermissionError):
+        raise MigrationBlocked("UNACCEPTED_HISTORY") from None
+    try:
         if history.read_approved_bindings(digest, fingerprint(bindings, "migration-bindings")) != bindings:
             raise MigrationBlocked("UNAPPROVED_DATA_BINDINGS")
     except (KeyError, PermissionError):
-        raise MigrationBlocked("UNACCEPTED_HISTORY") from None
-    execution = after['content']['schemaVersion'] == '0.2.0'
+        raise MigrationBlocked("UNAPPROVED_DATA_BINDINGS") from None
+    before_version = before['content']['schemaVersion']
+    after_version = after['content']['schemaVersion']
+    # Semantic compatibility, persisted representation and relationship support
+    # are independent decisions. Never reinterpret existing text as bytea.
+    supported_versions = {'0.1.0', '0.2.0', '0.3.0'}
+    semantic_transitions = {('0.1.0','0.1.0'),('0.2.0','0.2.0'),('0.3.0','0.3.0'),('0.2.0','0.3.0')}
+    if before_version not in supported_versions or after_version not in supported_versions or (before_version,after_version) not in semantic_transitions:
+        raise MigrationBlocked('SEMANTIC_VERSION_UNSUPPORTED')
+    scalar_storage = {'0.1.0': 'legacy-text', '0.2.0': 'scalar-bytes', '0.3.0': 'scalar-bytes'}
+    storage = scalar_storage[after_version]
+    if scalar_storage[before_version] != storage:
+        raise MigrationBlocked('INCOMPATIBLE_STORAGE_REPRESENTATION')
+    relation_forms_supported = (before_version, after_version) == ('0.2.0', '0.2.0')
+    backfill_encoding = 'utf-8-bytes' if storage == 'scalar-bytes' else 'sql-literal'
     old = {node["id"]: node for node in before["content"]["nodes"]}
     new = {node["id"]: node for node in after["content"]["nodes"]}
     revisions = {id: (old[id]["revision"], new[id]["revision"]) for id in set(old) & set(new)}
@@ -79,7 +95,7 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
             continue
         if node["kind"] != "Field":
             if node['kind'] == 'Relation':
-                if not execution or before['content']['schemaVersion'] != '0.2.0':
+                if not relation_forms_supported:
                     raise MigrationBlocked('RELATION_STORAGE_VERSION')
                 if any(node['data'][role + 'Cardinality']['min'] != 0 for role in ('source', 'target')):
                     raise MigrationBlocked('REQUIRED_RELATION_BACKFILL_BINDING')
@@ -106,13 +122,13 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
         if typ["kind"] == "Nullable":
             typ = typ["item"]
         types = {"String": "text", "Boolean": "boolean", "Integer": "bigint", "Date": "date", "Instant": "timestamptz"}
-        if execution:
+        if storage == 'scalar-bytes':
             types = {'String': 'bytea', 'Boolean': 'boolean'}
         if typ["kind"] not in types:
             raise MigrationBlocked("FIELD_TYPE_UPGRADE_UNSUPPORTED")
         table, column = identifier(field["owner"]["id"], "e"), identifier(id, "f")
         sql.append(f"ALTER TABLE {table} ADD COLUMN {column} {types[typ['kind']]};")
-        if execution and field['optional'] and field['type']['kind'] == 'Nullable':
+        if storage == 'scalar-bytes' and field['optional'] and field['type']['kind'] == 'Nullable':
             presence = identifier(id, 'present')
             sql.append(f'ALTER TABLE {table} ADD COLUMN {presence} boolean NOT NULL DEFAULT false;')
             sql.append(f'ALTER TABLE {table} ADD CHECK ({presence} OR {column} IS NULL);')
@@ -125,12 +141,22 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
                     or (typ["kind"] == "Boolean" and type(value) is not bool)
                     or (typ["kind"] == "Integer" and type(value) is not int)):
                 raise MigrationBlocked("BACKFILL_TYPE")
-            encoded = "decode('" + value.encode('utf-8', 'strict').hex() + "','hex')" if execution and type(value) is str else literal(value)
+            encoded = "decode('" + value.encode('utf-8', 'strict').hex() + "','hex')" if backfill_encoding == 'utf-8-bytes' and type(value) is str else literal(value)
             sql += [f"UPDATE {table} SET {column}={encoded} WHERE {column} IS NULL;",
                     f"DO $$ BEGIN IF EXISTS (SELECT 1 FROM {table} WHERE {column} IS NULL) THEN RAISE EXCEPTION 'ACP_REQUIRED_BACKFILL_PRECONDITION'; END IF; END $$;",
                     f"ALTER TABLE {table} ALTER COLUMN {column} SET NOT NULL;"]
             phases += ["BACKFILL", "VERIFY", "SWITCH"]
         changed.append({"id": id, "revision": node["revision"], "phases": phases})
+    if sql and storage == 'scalar-bytes':
+        checks=[]
+        for prior in old.values():
+            if prior['kind'] != 'Field':continue
+            field=prior['data'];typ=field['type']
+            if typ['kind']=='Nullable':typ=typ['item']
+            if typ['kind']!='String':continue
+            table=identifier(field['owner']['id'],'e');column=identifier(prior['id'],'f')
+            checks.append(f"DO $$ BEGIN IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema=current_schema() AND table_name='{table}' AND column_name='{column}' AND udt_name<>'bytea') THEN RAISE EXCEPTION 'ACP_INCOMPATIBLE_STORAGE_REPRESENTATION'; END IF; END $$;")
+        sql=checks+sql
     return Document.of({"version": "0.1.0", "phase3PlanDigest": digest,
         "previousSnapshot": before["contentDigest"], "nextSnapshot": after["contentDigest"],
         "bindingsDigest": fingerprint(bindings, "migration-bindings"), "changes": changed,

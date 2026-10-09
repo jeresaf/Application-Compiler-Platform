@@ -269,7 +269,7 @@ jobs:
   phase6-closure-audit:
     needs: [contracts, phase5c-hard-gates, phase6-target]
     runs-on: ubuntu-24.04
-    timeout-minutes: 75
+    timeout-minutes: 90
     services:
       postgres:
         image: postgres:18.6
@@ -306,7 +306,7 @@ jobs:
       - name: Install exact audit generation dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes libseccomp2
+          sudo apt-get install --yes libseccomp2 postgresql-client openssl
           python3.14 -m pip install -r tooling/requirements.txt
       - name: Enable authoritative commit evidence
         run: |
@@ -317,8 +317,8 @@ jobs:
             sleep 1
           done
           docker exec "${{ job.services.postgres.id }}" psql -U acp_test -d acp_test -c "SHOW track_commit_timestamp"
-      - name: Perform final closure audit without waivers
-        # Exit 2 is PHASE6_CLOSURE_BLOCKED; do not hide it or mark Phase 6 closed.
+      - name: Perform successor closure audit without waivers
+        # Exit 1 is an execution exception; exit 2 is PHASE6_CLOSURE_BLOCKED; do not hide it or mark Phase 6 closed.
         run: python3.14 tooling/audit/phase6.py --output /tmp/acp-phase6-final-audit
       - name: Retain dated vulnerability advisory details
         if: always()
@@ -327,7 +327,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: phase6-final-closure-audit
+          name: phase6-remediation-0.5.0-closure-audit
           path: |
             /tmp/acp-phase6-final-audit/*.json
             /tmp/acp-phase6-final-audit/*.log
@@ -337,3 +337,5 @@ jobs:
             /tmp/acp-phase6-final-audit/admission/supplemental-http/
             /tmp/acp-phase6-final-audit/admission/*/frontend/browser-results.json
             /tmp/acp-phase6-final-audit/admission/*/frontend/test-results/
+            /tmp/acp-phase6-final-audit/admission/*/backend/target/surefire-reports/
+            /tmp/acp-phase6-final-audit/oidc/

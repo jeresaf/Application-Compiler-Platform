@@ -1,0 +1,11 @@
+{
+  "contract": "acp-runtime-configuration/1.0.0",
+  "scope": "Deployment configuration; no Canonical semantics or Target IR change",
+  "productionProfile": "trusted-tls-proxy",
+  "required": ["spring.datasource.url", "spring.datasource.username", "spring.datasource.password", "spring.security.oauth2.resourceserver.jwt.issuer-uri", "spring.security.oauth2.resourceserver.jwt.audiences", "acp.runtime.configuration-contract", "acp.runtime.mode", "acp.runtime.timezone-artifact", "acp.runtime.scheduler-profile", "acp.runtime.delivery", "acp.runtime.deployment-profile", "server.forward-headers-strategy", "acp.runtime.trusted-proxy-network"],
+  "modes": ["production", "development"],
+  "production": {"pollEnabled": true, "database": "PostgreSQL", "issuerScheme": "https", "timezoneArtifact": "2026d", "schedulerProfile": "single-instance-postgresql-claims", "delivery": "active", "transportAdapterRequired": true, "jobPrincipalAdapterRequired": true, "jobHandles": "Each declared Job ID and revision requires an opaque credential handle and tenant-bound principal"},
+  "development": {"pollDisabled": "Explicit development mode may disable background polling. This is not production admission or delivery evidence.", "issuerHttpException": "Loopback only when polling is enabled"},
+  "deploymentObligations": ["Restrict backend ingress to the trusted TLS proxy network before enabling framework forwarded headers", "TLS and certificate management", "OIDC assurance and provider interoperability", "At-rest and backup encryption", "Supply delivery transport and Job principal adapters"],
+  "secrets": "Deployment owned; no default credentials"
+}

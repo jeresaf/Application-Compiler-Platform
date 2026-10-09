@@ -23,8 +23,8 @@ from compiler_core import compile_pipeline
 from check_task_interface import ui_context
 from target_provenance import read_provenance
 
-BASELINE = 'db5d03dcc0763a62b3150d9b485581b163e89435'
-BUNDLE = '61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a'
+BASELINE = '7e4e3438179e7a446c5f3737ad1d6d9cb07a96ea'
+BUNDLE = json.loads((ROOT/'targets/spring-vue-postgres/release-contract.json').read_text())['releases'][PROFILE['profile']]['bundleDigest']
 TARGET = ROOT/'targets/spring-vue-postgres'
 
 
@@ -55,11 +55,14 @@ def baseline():
     if bundle_digest()!=BUNDLE:
         raise RuntimeError('SEALED_BUNDLE_MISMATCH_STOP')
     subprocess.run(['git','merge-base','--is-ancestor',BASELINE,'HEAD'],cwd=ROOT,check=True)
-    protected = ['contracts','test-corpus','targets/spring-vue-postgres/release-contract.json',
+    protected = ['contracts','test-corpus','docs/phase6-final-closure-audit.md','targets/spring-vue-postgres/evidence/phase6-final-closure.json',
                  'targets/spring-vue-postgres/admission-contract-v5.json',
                  'docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md']
     if subprocess.check_output(['git','diff',BASELINE,'HEAD','--',*protected],cwd=ROOT):
         raise RuntimeError('APPROVED_BASELINE_CHANGED')
+    from target_release import verify_preserved_releases
+    previous=json.loads(subprocess.check_output(['git','show',BASELINE+':targets/spring-vue-postgres/release-contract.json'],cwd=ROOT,text=True))
+    verify_preserved_releases(previous,json.loads((TARGET/'release-contract.json').read_text()))
     return {'mergedMainCommit':BASELINE,'auditExecutionCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
             'target':PROFILE['profile'],'generator':PROFILE['generator'],'bundleDigest':'sha256:'+BUNDLE,
             'targetIR':'0.2.0','admissionContract':json.loads((TARGET/'admission-contract-v5.json').read_text()),
@@ -166,17 +169,17 @@ def evolution_inventory(output):
         migration=plan_upgrade(Document.of(snapshot),Document.of(plan.read()['candidate']),plan,bindings,FixtureAcceptedHistory(plan,bindings)).read()
         probes.append({'domain':domain,'authority':'SYNTHETIC_TEST_WITNESS_ONLY','oldSnapshot':snapshot['contentDigest'],
             'newSnapshot':plan.read()['candidate']['contentDigest'],'migration':migration,
-            'productionStorageForString':'bytea','observedNewColumnType':'text' if ' text;' in migration['sql'] else 'OTHER',
-            'finding':'INCOMPATIBLE_STORAGE_PLANNING_FOR_CANONICAL_0.3'})
+            'productionStorageForString':'bytea','observedNewColumnType':'bytea' if ' bytea;' in migration['sql'] else 'INCOMPATIBLE',
+            'finding':'STORAGE_PLANNING_FIXED_PG_REGRESSION_REQUIRED'})
     history=json.loads((ROOT/'test-corpus/change/evolution.json').read_text())
     return {'historicalRecordedSteps':history,'productionNegotiationProbes':rows,'requiredFieldPlanningProbes':probes,
             'result':'BLOCKED','reason':'No complete accepted-history deployment chain with authorized backfills, migration execution, regenerated UI and post-transition behavior. Semantic history is not deployed evolution.',
-            'plannerFinding':"target_migrations.py selects bytea storage only for schemaVersion == 0.2.0; Canonical 0.3 falls through to text storage. Production fix would change the sealed bundle: STOP; deliberate successor corrective tranche required."}
+            'plannerFinding':"Canonical 0.3 scalar storage now selects bytea independently of relationship support. New field/backfill journeys above remain synthetic; no new human business approval is manufactured."}
 
 
 def run(args):
     output=args.output.resolve();output.mkdir(parents=True,exist_ok=False)
-    report={'schemaVersion':'1.0.0','auditPerformedAt':datetime.now(timezone.utc).isoformat(),
+    report={'schemaVersion':'2.0.0','auditIdentity':'phase6-remediation-0.5.0','evidenceRoot':str(output),'auditPerformedAt':datetime.now(timezone.utc).isoformat(),
             'phase6':'IN_PROGRESS','phase7':'NOT_STARTED','recommendation':'PHASE6_CLOSURE_BLOCKED','commands':[]}
     report['baseline']=baseline();write(output/'baseline.json',report['baseline'])
     def execute(arguments,name,timeout=3600):
@@ -191,6 +194,9 @@ def run(args):
         report['admission']=json.loads((output/'admission/task-interface-report.json').read_text())
         report['provenance']=provenance_and_trace(output,output/'admission')
         report['historicalProvenance']=historical_provenance(output)
+        execute(['-m','unittest','tooling.tests.test_canonical03_migrations','tooling.tests.test_closure_evaluator','-v'],'remediation-regressions',1800)
+        execute(['tooling/integration/oidc.py','--projects',str(output/'admission'),'--output',str(output/'oidc')],'deployment-oidc-integration',1800)
+        execute(['tooling/integration/release_upgrade.py','--projects',str(output/'admission'),'--output',str(output/'release-upgrade')],'sealed-release-upgrade',3600)
         report['evolution']=evolution_inventory(output)
         from package_audit import packages
         report['packages']=packages(output,output/'admission')
@@ -199,13 +205,20 @@ def run(args):
     finally:
         report['sealedBundleAfterAudit']='sha256:'+bundle_digest()
         if bundle_digest()!=BUNDLE:raise RuntimeError('SEALED_BUNDLE_CHANGED_STOP')
-        from criteria import assess
-        report['criteria']=assess(report)
+        from criteria import assess,current_binding,sha
+        binding=current_binding();report['criterionEvidence']={}
+        paths=[output/'admission/task-interface-report.json',*sorted((output/'admission').glob('*/backend/target/surefire-reports/TEST-*.xml'))]
+        artifacts=[{'path':p.relative_to(output).as_posix(),'sha256':sha(p.read_bytes())} for p in paths if p.is_file()]
+        write(output/'audit-state.json',{'phase6':'IN_PROGRESS','phase7':'NOT_STARTED','closureAuthority':'EXPLICIT_HUMAN_REVIEW_REQUIRED','recommendation':'PHASE6_CLOSURE_BLOCKED'})
+        for n in (1,2,3,6,7,11,16,34,35,36,38,39):
+            report['criterionEvidence'][str(n)]={'criterion':n,**binding,'evaluatedAt':datetime.now(timezone.utc).isoformat(),'artifacts':artifacts+[{'path':p.name,'sha256':sha(p.read_bytes())} for p in (output/'baseline.json',output/'audit-state.json')]}
+        report['auditExecution']={'status':'EXCEPTION' if report.get('executionError') else 'PERFORMED','exception':report.get('executionError')}
+        report['criteria']=assess(report,root=output,binding=binding)
         report['blockers']=[r for r in report['criteria'] if r['status']=='BLOCKED']
         report['recommendation']='PHASE6_CLOSURE_BLOCKED' if report['blockers'] else 'PHASE6_CLOSURE_RECOMMENDED'
         write(output/'phase6-final-closure.json',report)
         print(report['recommendation'],flush=True)
-    return 2 if report['blockers'] else 0
+    return 1 if report.get('executionError') else 2 if report['blockers'] else 0
 
 
 if __name__=='__main__':

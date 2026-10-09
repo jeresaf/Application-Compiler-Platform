@@ -269,7 +269,7 @@ def variants(domain,nodes):
 def http_source(domain):
     from phase6_reference_tests import http_source as previous
     s=previous(domain).replace('TypedHttpTest','InvocationHttpTest')
-    s=s.replace('properties={', 'properties={"acp.jobs.JOB-TASK.revision-3.credential-handle=test-only-handle", "acp.runtime.poll-enabled=false",')
+    s=s.replace('properties={', 'properties={"acp.runtime.mode=development", "acp.jobs.JOB-TASK.revision-3.credential-handle=test-only-handle", "acp.runtime.poll-enabled=false",')
     s=s.replace('@TestConfiguration static class Identity {', '@TestConfiguration static class Identity { @Bean acp.infrastructure.JobRuntime.PrincipalPort jobPrincipal() {return (id,rev,handle)->referenceOnlyDecoder().decode("reference-only-token");}')
     s=s.replace('String input="{\\"expectedVersion\\":0,', 'String input="{\\"idempotencyKey\\":\\"http-key\\",\\"expectedVersion\\":0,')
     path='/api/'+symbol('UC-TASK','op');q=json.dumps

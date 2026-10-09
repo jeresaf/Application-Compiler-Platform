@@ -111,14 +111,12 @@ def scan(components, front, output, domain):
 
 def packages(output, generated):
     reports={}
-    config={'contract':'AUDIT_CONFIGURATION_INVENTORY_1','enforcement':'NOT_A_COMPLETE_STARTUP_SCHEMA',
-        'requiredEnvironment':['ACP_DATABASE_URL','ACP_DATABASE_USER','ACP_DATABASE_PASSWORD','ACP_OIDC_ISSUER','ACP_OIDC_AUDIENCE'],
-        'requiredExtensions':['JobRuntime.PrincipalPort','DeliveryRuntime.Transport','frontend identity adapter'],
-        'requiredJobHandle':'acp.jobs.JOB-TASK.revision-3.credential-handle',
-        'deploymentObligations':['TLS/proxy/CSP configuration','scheduler configuration validation'],
-        'secrets':'Deployment supplies opaque handles; no generated default secret.'}
+    config=json.loads((generated/'payment/backend/src/main/resources/acp-runtime-configuration-contract.json').read_text())
     for domain in ('payment','case-management'):
         project=generated/domain;front=project/'frontend';backend=project/'backend'
+        dependency_graph=command(['mvn','-B','-ntp','dependency:tree','-DoutputType=json','-DoutputFile=target/resolved-dependencies.json'],backend,output/(domain+'-maven-dependency-graph.log'),900)
+        graph=backend/'target/resolved-dependencies.json'
+        (output/(domain+'-maven-dependency-graph.json')).write_bytes(graph.read_bytes())
         identity=(front/'src/extensions/identity.ts').read_bytes()
         if b'browser-authorized' in identity:raise RuntimeError('TEST_IDENTITY_IN_SOURCE')
         builds=[];packages_=[];contents=None;hits=None
@@ -129,7 +127,7 @@ def packages(output, generated):
             (output/(domain+f'-production-{attempt}.tar')).write_bytes(package)
         components=backend_components(backend/'target/application-0.1.0.jar')+frontend_components(front)
         sbom={'bomFormat':'CycloneDX','specVersion':'1.6','version':1,
-              'metadata':{'component':{'type':'application','name':'ACP '+domain,'version':'target-0.4.0'}},
+              'metadata':{'component':{'type':'application','name':'ACP '+domain,'version':json.loads((project/'acp/profile.json').read_text())['profile']}},
               'components':[{k:v for k,v in c.items() if k!='licenses' or v} for c in components]}
         sbom_binding=write(output/(domain+'-sbom.cdx.json'),sbom)
         python=[{'name':d.metadata['Name'],'version':d.version} for d in importlib.metadata.distributions()]
