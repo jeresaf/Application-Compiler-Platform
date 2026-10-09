@@ -4,7 +4,7 @@ Phase 6 is IN PROGRESS. This file is not an acceptance or completion claim. Phas
 
 ## Current generated task-interface tranche
 
-The [task-interface report](phase6-task-interface.md) records target/generator 0.4.0, the validated Task UI Model, bounded per-family capabilities, full compiler/materializer admission and real production-build browser journeys. Target IR remains 0.2.0; approved semantic contracts and V1/V2/V3 migrations remain unchanged. Final Linux evidence and hosted reproduction commands are recorded there. Both exact approved applications have zero negotiation blockers, with 233 Python regressions, 145 backend tests and 40 real browser journeys green locally. Zero negotiation blockers do not close Phase 6. Manual accessibility and deployment infrastructure evidence remain OUTSTANDING; the separate closure audit remains BLOCKED. Phase 7 is NOT STARTED.
+The [task-interface report](phase6-task-interface.md) records target/generator 0.4.0, the validated Task UI Model, bounded per-family capabilities, full compiler/materializer admission and real production-build browser journeys. Target IR remains 0.2.0; approved semantic contracts and V1/V2/V3 migrations remain unchanged. Final Linux evidence and hosted reproduction commands are recorded there. Both exact approved applications have zero negotiation blockers, with 233 Python regressions, 145 backend tests and 40 real browser journeys green locally. Zero negotiation blockers do not close Phase 6. Manual accessibility and deployment infrastructure evidence remain OUTSTANDING; the [final closure audit](phase6-final-closure-audit.md) is PERFORMED and recommends PHASE6_CLOSURE_BLOCKED. Phase 7 is NOT STARTED.
 
 ## Historical approved privacy/lifecycle checkpoint
 

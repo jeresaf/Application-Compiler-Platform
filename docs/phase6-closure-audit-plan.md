@@ -1,4 +1,6 @@
-# Separate Phase 6 closure audit — NOT PERFORMED
+# Historical Phase 6 pre-audit plan
+
+The dedicated [final audit](phase6-final-closure-audit.md) is now PERFORMED with recommendation **PHASE6_CLOSURE_BLOCKED**. The table below preserves the earlier planning snapshot; current dispositions and exact evidence are in that report.
 
 The task-interface tranche does not authorize Phase 6 closure. Phase 6 remains IN PROGRESS / NOT CLOSED; Phase 7 remains NOT STARTED. This plan records the subsequent review needed even when both approved applications have zero negotiation blockers and full admission passes.
 
@@ -14,4 +16,4 @@ The task-interface tranche does not authorize Phase 6 closure. Phase 6 remains I
 | Traceability | Reconcile exact approved snapshots, semantic IDs/revisions, capability constraints, generated UI model, provenance, migration digests and evidence links | Final completeness audit OUTSTANDING |
 | Hosted CI | Review all Ubuntu jobs for the exact final implementation commit and retained historical gates | Final hosted review required |
 
-The reviewer must explicitly assess residual limitations and deployment obligations. No row in this plan constitutes acceptance, a waiver or an automatic closure rule. A separate authorized audit and explicit closure decision are required.
+The reviewer must explicitly assess residual limitations and deployment obligations. No row in this plan constitutes acceptance, a waiver or an automatic closure rule. The performed audit does not grant closure; an explicit human closure decision remains required after remediation.

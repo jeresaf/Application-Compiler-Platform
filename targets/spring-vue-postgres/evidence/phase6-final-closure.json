@@ -1,0 +1,3193 @@
+{
+  "schemaVersion": "1.0.0",
+  "auditPerformedAt": "2026-10-09T08:30:37.752218+00:00",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "recommendation": "PHASE6_CLOSURE_BLOCKED",
+  "commands": [
+    {
+      "command": [
+        "/home/aiko-jerry/Projects/Application-Compiler-Platform/.venv/bin/python3.14",
+        "tooling/audit/admission.py",
+        "--output",
+        "/tmp/acp-phase6-final-audit-release/admission",
+        "--run-builds",
+        "--full-admission"
+      ],
+      "exitCode": 0,
+      "seconds": 971.966,
+      "log": "full-admission.log",
+      "logDigest": "sha256:291a7d30fb068fe45dce27d2758259dd0052560434db2758bde98e6a97738cc4"
+    },
+    {
+      "command": [
+        "/home/aiko-jerry/Projects/Application-Compiler-Platform/.venv/bin/python3.14",
+        "tooling/tests/task_ui_http_outcomes.py",
+        "--root",
+        "/tmp/acp-phase6-final-audit-release/admission"
+      ],
+      "exitCode": 0,
+      "seconds": 70.835,
+      "log": "supplemental-browser.log",
+      "logDigest": "sha256:b0881923a08c6a5de84071f97bf8ba13d2761362d3d094cd3d9acd432c21d962"
+    },
+    {
+      "command": [
+        "/home/aiko-jerry/Projects/Application-Compiler-Platform/.venv/bin/python3.14",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'tooling/tests');unittest.main(module=None)",
+        "tooling.tests.test_target_worker_faults",
+        "tooling.tests.test_materializer_faults",
+        "tooling.tests.test_phase6_foundations",
+        "tooling.tests.test_target_migrations",
+        "tooling.tests.test_execution_v03_evolution",
+        "tooling.tests.test_deterministic_approval",
+        "-v"
+      ],
+      "exitCode": 0,
+      "seconds": 313.668,
+      "log": "faults-ownership-history.log",
+      "logDigest": "sha256:7f57510cda70458a00a7961c68ea503cc0762f58218e62e88ea7daa890d67dcd"
+    }
+  ],
+  "baseline": {
+    "mergedMainCommit": "db5d03dcc0763a62b3150d9b485581b163e89435",
+    "auditExecutionCommit": "2184cb334889fa04ad281838768d8080c813a0f6",
+    "target": "acp-spring-vue-postgres/0.4.0",
+    "generator": "acp-spring-vue-generator/0.4.0",
+    "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+    "targetIR": "0.2.0",
+    "admissionContract": {
+      "contractVersion": "5.0.0",
+      "previousCheckpointContract": "4.0.0",
+      "mode": "ACTUAL_FULL_ADMISSION_EVIDENCE",
+      "profile": "acp-spring-vue-postgres/0.4.0",
+      "generator": "acp-spring-vue-generator/0.4.0",
+      "bundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+      "targetIR": "0.2.0",
+      "phase6": "IN_PROGRESS",
+      "closureGate": "BLOCKED_FINAL_AUDIT_REQUIRED",
+      "domains": {
+        "payment": {
+          "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "actualNegotiation": {
+            "accepted": true,
+            "capabilities": [
+              "AcceptanceCriterion/0.2.0",
+              "AccessibilityRequirement/0.2.0",
+              "Action/0.2.0",
+              "Actor/0.2.0",
+              "Aggregate/0.2.0",
+              "Applicability/0.2.0",
+              "Assumption/0.2.0",
+              "AuthenticationModel/0.2.0",
+              "Backup/0.2.0",
+              "Command/0.2.0",
+              "CompatibilityRequirement/0.2.0",
+              "Constraint/0.2.0",
+              "DataClassification/0.2.0",
+              "DataLifecycle/0.2.0",
+              "Decision/0.2.0",
+              "DeletionPolicy/0.2.0",
+              "DeliveryPolicy/0.2.0",
+              "Entity/0.2.0",
+              "Event/0.2.0",
+              "EvidenceRequirement/0.2.0",
+              "ExecutionStep/0.2.0",
+              "Fact/0.2.0",
+              "Failure/0.2.0",
+              "Field/0.2.0",
+              "Filter/0.2.0",
+              "Form/0.2.0",
+              "Goal/0.2.0",
+              "IdempotencyPolicy/0.2.0",
+              "InputControl/0.2.0",
+              "Invariant/0.2.0",
+              "Job/0.2.0",
+              "LegalHold/0.2.0",
+              "ObservabilityRequirement/0.2.0",
+              "Parameter/0.2.0",
+              "PerformanceRequirement/0.2.0",
+              "Permission/0.2.0",
+              "PermissionBoundary/0.2.0",
+              "Policy/0.2.0",
+              "PolicySet/0.2.0",
+              "Preference/0.2.0",
+              "Query/0.2.0",
+              "RatePolicy/0.2.0",
+              "Recovery/0.2.0",
+              "Relation/0.2.0",
+              "ReliabilityRequirement/0.2.0",
+              "Requirement/0.2.0",
+              "ResponsivePolicy/0.2.0",
+              "Retention/0.2.0",
+              "RetryPolicy/0.2.0",
+              "Role/0.2.0",
+              "RoleAssignment/0.2.0",
+              "Schedule/0.2.0",
+              "Scope/0.2.0",
+              "Screen/0.2.0",
+              "Search/0.2.0",
+              "Service/0.2.0",
+              "SessionPolicy/0.2.0",
+              "State/0.2.0",
+              "StateMachine/0.2.0",
+              "Table/0.2.0",
+              "TestRequirement/0.2.0",
+              "Transaction/0.2.0",
+              "Transition/0.2.0",
+              "UseCase/0.2.0",
+              "ValueObject/0.2.0",
+              "ViewState/0.2.0",
+              "Wizard/0.2.0",
+              "WizardStep/0.2.0",
+              "acp.deterministic-execution.0.4",
+              "semantic.execution-dataflow/0.3"
+            ]
+          },
+          "blockers": [],
+          "fullPipeline": "PASS",
+          "taskUIModelDigest": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+        },
+        "case-management": {
+          "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+          "actualNegotiation": {
+            "accepted": true,
+            "capabilities": [
+              "AcceptanceCriterion/0.2.0",
+              "AccessibilityRequirement/0.2.0",
+              "Action/0.2.0",
+              "Actor/0.2.0",
+              "Aggregate/0.2.0",
+              "Applicability/0.2.0",
+              "AuthenticationModel/0.2.0",
+              "Backup/0.2.0",
+              "Command/0.2.0",
+              "CompatibilityRequirement/0.2.0",
+              "DataClassification/0.2.0",
+              "DataLifecycle/0.2.0",
+              "Decision/0.2.0",
+              "DeletionPolicy/0.2.0",
+              "DeliveryPolicy/0.2.0",
+              "Entity/0.2.0",
+              "Event/0.2.0",
+              "EvidenceRequirement/0.2.0",
+              "ExecutionStep/0.2.0",
+              "Failure/0.2.0",
+              "Field/0.2.0",
+              "Filter/0.2.0",
+              "Form/0.2.0",
+              "IdempotencyPolicy/0.2.0",
+              "InputControl/0.2.0",
+              "Job/0.2.0",
+              "LegalHold/0.2.0",
+              "ObservabilityRequirement/0.2.0",
+              "Parameter/0.2.0",
+              "PerformanceRequirement/0.2.0",
+              "Permission/0.2.0",
+              "PermissionBoundary/0.2.0",
+              "Policy/0.2.0",
+              "PolicySet/0.2.0",
+              "Query/0.2.0",
+              "RatePolicy/0.2.0",
+              "Recovery/0.2.0",
+              "Relation/0.2.0",
+              "ReliabilityRequirement/0.2.0",
+              "Requirement/0.2.0",
+              "ResponsivePolicy/0.2.0",
+              "Retention/0.2.0",
+              "RetryPolicy/0.2.0",
+              "Role/0.2.0",
+              "RoleAssignment/0.2.0",
+              "Schedule/0.2.0",
+              "Scope/0.2.0",
+              "Screen/0.2.0",
+              "Search/0.2.0",
+              "Service/0.2.0",
+              "SessionPolicy/0.2.0",
+              "State/0.2.0",
+              "StateMachine/0.2.0",
+              "Table/0.2.0",
+              "TestRequirement/0.2.0",
+              "Transaction/0.2.0",
+              "Transition/0.2.0",
+              "TypeDefinition/0.2.0",
+              "UseCase/0.2.0",
+              "ValueObject/0.2.0",
+              "ViewState/0.2.0",
+              "Wizard/0.2.0",
+              "WizardStep/0.2.0",
+              "acp.deterministic-execution.0.4",
+              "semantic.execution-dataflow/0.3"
+            ]
+          },
+          "blockers": [],
+          "fullPipeline": "PASS",
+          "taskUIModelDigest": "fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+        }
+      }
+    },
+    "approval": {
+      "date": "2026-10-08",
+      "statement": "Approve ADR-0016 and the complete deterministic-v04 fixture decisions, including the F-01 failure bindings.",
+      "status": "APPROVED_REFERENCE_SEMANTICS",
+      "reviewedCommit": "76e7700758454b5cfd00c39a68475439c1a1e6ca",
+      "assets": {
+        "contracts/authoring-0.4.schema.json": "sha256:2e60a19f9683d4515a0bd51fc5b0b964164990eea7fadd6715b50fdf11d25d60",
+        "contracts/canonical-0.3.schema.json": "sha256:104bb574abac5eafd7b8e4e6ea5b030b08b30631f8207437ed6713cf9e3098ea",
+        "contracts/change-0.3.schema.json": "sha256:7424c400b2887eafc5d572f7c55c702daa07956e3d79729bf0d6562fa931f491",
+        "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+      },
+      "versions": {
+        "authoring": "0.4.0",
+        "canonical": "0.3.0",
+        "change": "0.3.0"
+      },
+      "scope": "Complete ADR-0016 and both ACP synthetic reference fixtures, including F-01; not production business requirements or target support",
+      "provenance": "AI proposed; human project authority explicitly approved in user instruction",
+      "authorityRepresentation": "Bounded reference/test authority with public key; no manufactured reviewer identity or production credentials",
+      "referenceClock": 1791417600
+    },
+    "canonicalDigests": {
+      "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+    },
+    "environment": {
+      "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+      "node": "v24.21.0",
+      "java": "openjdk version \"21\" 2023-09-19 LTS",
+      "platform": "linux",
+      "hosted": false
+    },
+    "protectedFiles": {
+      "targets/spring-vue-postgres/release-contract.json": "sha256:c3b325684e32f1a87a7b558b8a9b0deed0dd9bbb0cb9cc1791e563855d4fc984",
+      "targets/spring-vue-postgres/admission-contract-v5.json": "sha256:d0f804785616b9fa581535300b4581c8d62ce1eeba058c06ee826cd9f8fdb383",
+      "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+    }
+  },
+  "admission": {
+    "mode": "FULL_TASK_INTERFACE_ADMISSION",
+    "approval": {
+      "date": "2026-10-08",
+      "statement": "Approve ADR-0016 and the complete deterministic-v04 fixture decisions, including the F-01 failure bindings.",
+      "status": "APPROVED_REFERENCE_SEMANTICS",
+      "reviewedCommit": "76e7700758454b5cfd00c39a68475439c1a1e6ca",
+      "assets": {
+        "contracts/authoring-0.4.schema.json": "sha256:2e60a19f9683d4515a0bd51fc5b0b964164990eea7fadd6715b50fdf11d25d60",
+        "contracts/canonical-0.3.schema.json": "sha256:104bb574abac5eafd7b8e4e6ea5b030b08b30631f8207437ed6713cf9e3098ea",
+        "contracts/change-0.3.schema.json": "sha256:7424c400b2887eafc5d572f7c55c702daa07956e3d79729bf0d6562fa931f491",
+        "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+      },
+      "versions": {
+        "authoring": "0.4.0",
+        "canonical": "0.3.0",
+        "change": "0.3.0"
+      },
+      "scope": "Complete ADR-0016 and both ACP synthetic reference fixtures, including F-01; not production business requirements or target support",
+      "provenance": "AI proposed; human project authority explicitly approved in user instruction",
+      "authorityRepresentation": "Bounded reference/test authority with public key; no manufactured reviewer identity or production credentials",
+      "referenceClock": 1791417600
+    },
+    "profile": "acp-spring-vue-postgres/0.4.0",
+    "generator": "acp-spring-vue-generator/0.4.0",
+    "bundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+    "phase6": "IN_PROGRESS",
+    "phase7": "NOT_STARTED",
+    "closureGate": "BLOCKED_FINAL_AUDIT_REQUIRED",
+    "domains": {
+      "payment": {
+        "compilerOwnedRegeneration": "PASS",
+        "uncoordinatedCompilerEditRejected": "PASS",
+        "unapprovedAIRejected": "PASS",
+        "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "admission": {
+          "operation": "lower",
+          "result": "ACCEPTED"
+        },
+        "blockers": [],
+        "determinism": "PASS",
+        "humanExtensionPreservation": "PASS",
+        "generatedProvenance": {
+          "browserProfile": {
+            "axe": "4.13.0",
+            "engine": "chromium",
+            "manualAccessibility": "OUTSTANDING",
+            "otherBrowsers": "OUTSTANDING",
+            "playwright": "1.63.0",
+            "version": "1.0.0",
+            "viewports": {
+              "COMPACT": {
+                "height": 844,
+                "width": 390
+              },
+              "EXPANDED": {
+                "height": 900,
+                "width": 1280
+              }
+            }
+          },
+          "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+          "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "canonicalVersion": "0.3.0",
+          "compiler": "acp-reference-compiler/0.1.0",
+          "deploymentRequirements": {
+            "path": "acp/deployment-requirements.json",
+            "sha256": "a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017"
+          },
+          "features": [
+            "acp.deterministic-execution.0.4"
+          ],
+          "generator": "acp-spring-vue-generator/0.4.0",
+          "migrationDigests": {
+            "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+            "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+            "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          "pipeline": "acp-reference-pipeline/0.1.0",
+          "protocol": "acp-target-worker/0.1.0",
+          "semanticModelVersion": "0.4.0",
+          "targetIRVersion": "0.2.0",
+          "targetProfile": "acp-spring-vue-postgres/0.4.0",
+          "taskUIModel": {
+            "path": "acp/task-ui-model.json",
+            "sha256": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          "tzdb": {
+            "artifact": "acp-tzdb-2026d.json",
+            "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+            "version": "2026d"
+          }
+        },
+        "checks": {
+          "backend": "PASS",
+          "frontend-lock": "PASS",
+          "frontend-types": "PASS",
+          "frontend-tests": "PASS",
+          "frontend-build": "PASS",
+          "real-browser": "PASS"
+        },
+        "browser": {
+          "stats": {
+            "startTime": "2026-10-09T08:37:07.852Z",
+            "duration": 34037.676,
+            "expected": 12,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "rawEvidence": {
+            "archiveEntry": "admission/payment/frontend/browser-results.json",
+            "sha256": "sha256:91e3152c131648fd2c0677c40606eb5a8b5a60c67584251fcbb631edc2775029"
+          }
+        },
+        "result": "PASS"
+      },
+      "case-management": {
+        "compilerOwnedRegeneration": "PASS",
+        "uncoordinatedCompilerEditRejected": "PASS",
+        "unapprovedAIRejected": "PASS",
+        "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "admission": {
+          "operation": "lower",
+          "result": "ACCEPTED"
+        },
+        "blockers": [],
+        "determinism": "PASS",
+        "humanExtensionPreservation": "PASS",
+        "generatedProvenance": {
+          "browserProfile": {
+            "axe": "4.13.0",
+            "engine": "chromium",
+            "manualAccessibility": "OUTSTANDING",
+            "otherBrowsers": "OUTSTANDING",
+            "playwright": "1.63.0",
+            "version": "1.0.0",
+            "viewports": {
+              "COMPACT": {
+                "height": 844,
+                "width": 390
+              },
+              "EXPANDED": {
+                "height": 900,
+                "width": 1280
+              }
+            }
+          },
+          "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+          "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+          "canonicalVersion": "0.3.0",
+          "compiler": "acp-reference-compiler/0.1.0",
+          "deploymentRequirements": {
+            "path": "acp/deployment-requirements.json",
+            "sha256": "f2d66fed68e5b9b706a64351aaf59dd2f33436a1d5713befe9c50e0050b0a600"
+          },
+          "features": [
+            "acp.deterministic-execution.0.4"
+          ],
+          "generator": "acp-spring-vue-generator/0.4.0",
+          "migrationDigests": {
+            "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+            "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+            "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          "pipeline": "acp-reference-pipeline/0.1.0",
+          "protocol": "acp-target-worker/0.1.0",
+          "semanticModelVersion": "0.4.0",
+          "targetIRVersion": "0.2.0",
+          "targetProfile": "acp-spring-vue-postgres/0.4.0",
+          "taskUIModel": {
+            "path": "acp/task-ui-model.json",
+            "sha256": "fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          "tzdb": {
+            "artifact": "acp-tzdb-2026d.json",
+            "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+            "version": "2026d"
+          }
+        },
+        "checks": {
+          "backend": "PASS",
+          "frontend-lock": "PASS",
+          "frontend-types": "PASS",
+          "frontend-tests": "PASS",
+          "frontend-build": "PASS",
+          "real-browser": "PASS"
+        },
+        "browser": {
+          "stats": {
+            "startTime": "2026-10-09T08:46:19.030Z",
+            "duration": 39877.83,
+            "expected": 12,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "rawEvidence": {
+            "archiveEntry": "admission/case-management/frontend/browser-results.json",
+            "sha256": "sha256:c544d05ddb07679765fe40a17dea1dd995c23590c504389ceeed4defa979dfda"
+          }
+        },
+        "result": "PASS"
+      }
+    },
+    "result": "FULL_ADMISSION_PASS_PHASE6_NOT_CLOSED"
+  },
+  "provenance": {
+    "payment": {
+      "planDigest": "sha256:62fa6bd1752aaed51b00729c5842134b4de5517601555617c1618d9ad367af0e",
+      "artifactCount": 69,
+      "determinism": "PASS",
+      "targetIRDigest": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd",
+      "taskUIModelDigest": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae",
+      "migrationDigests": {
+        "V1__initial.sql": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+        "V2__delivery_jobs.sql": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+        "V3__privacy_lifecycle.sql": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+      },
+      "sidecarContract": "0.3.0",
+      "build": {
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+        "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.4.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.4.0",
+        "taskUIModel": {
+          "path": "acp/task-ui-model.json",
+          "sha256": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+        },
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "obligations": [
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "ENCRYPTION_AT_REST",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "TLS_IN_TRANSIT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "KEY_MANAGEMENT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "BACKUP_ENCRYPTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "ENCRYPTION_AT_REST",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "TLS_IN_TRANSIT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "KEY_MANAGEMENT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "BACKUP_ENCRYPTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "ENCRYPTION_AT_REST",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "TLS_IN_TRANSIT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "KEY_MANAGEMENT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "BACKUP_ENCRYPTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "ENCRYPTION_AT_REST",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "TLS_IN_TRANSIT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "KEY_MANAGEMENT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "BACKUP_ENCRYPTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "DELETE-ENT-PAYMENT",
+            "revision": 2
+          },
+          "requirement": "BACKUP_LIFECYCLE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "DELETE-ENT-PAYMENT",
+            "revision": 2
+          },
+          "requirement": "WAL_REPLICA_RETENTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "DELETE-ENT-PAYMENT",
+            "revision": 2
+          },
+          "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "DELETE-ENT-PAYMENT",
+            "revision": 2
+          },
+          "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "LIFECYCLE-ENT-PAYMENT",
+            "revision": 3
+          },
+          "requirement": "BACKUP_LIFECYCLE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "LIFECYCLE-ENT-PAYMENT",
+            "revision": 3
+          },
+          "requirement": "WAL_REPLICA_RETENTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "LIFECYCLE-ENT-PAYMENT",
+            "revision": 3
+          },
+          "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "LIFECYCLE-ENT-PAYMENT",
+            "revision": 3
+          },
+          "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "RETENTION-ENT-PAYMENT",
+            "revision": 2
+          },
+          "requirement": "BACKUP_LIFECYCLE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "RETENTION-ENT-PAYMENT",
+            "revision": 2
+          },
+          "requirement": "WAL_REPLICA_RETENTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "RETENTION-ENT-PAYMENT",
+            "revision": 2
+          },
+          "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "RETENTION-ENT-PAYMENT",
+            "revision": 2
+          },
+          "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "OIDC_CLIENT_CONFIGURATION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "CSP_SECURITY_HEADERS",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "HTTPS_TLS",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "MANUAL_ACCESSIBILITY_REVIEW",
+          "status": "OUTSTANDING",
+          "classification": "MANUAL_REVIEW_REQUIRED",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "SUPPORTED_BROWSER_POLICY",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "PRODUCTION_TELEMETRY_EXPORTERS",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        }
+      ],
+      "traceabilityEvidence": "phase6-final-traceability.json",
+      "hostPlanEvidence": {
+        "archiveEntry": "payment-artifact-plan.json",
+        "sha256": "sha256:72ab58634938b9e4e9131034950947356c73c0ec44b4241ea420a8f481146c20"
+      }
+    },
+    "case-management": {
+      "planDigest": "sha256:80b38674be248b8f8cb151dffb42f842c17a85b8e2d08bfbf29870e7da28b7fa",
+      "artifactCount": 69,
+      "determinism": "PASS",
+      "targetIRDigest": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2",
+      "taskUIModelDigest": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771",
+      "migrationDigests": {
+        "V1__initial.sql": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+        "V2__delivery_jobs.sql": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+        "V3__privacy_lifecycle.sql": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+      },
+      "sidecarContract": "0.3.0",
+      "build": {
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+        "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "f2d66fed68e5b9b706a64351aaf59dd2f33436a1d5713befe9c50e0050b0a600"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.4.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.4.0",
+        "taskUIModel": {
+          "path": "acp/task-ui-model.json",
+          "sha256": "fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+        },
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "obligations": [
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "ENCRYPTION_AT_REST",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "TLS_IN_TRANSIT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "KEY_MANAGEMENT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "BACKUP_ENCRYPTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-INTERNAL",
+            "revision": 2
+          },
+          "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "ENCRYPTION_AT_REST",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "TLS_IN_TRANSIT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "KEY_MANAGEMENT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "BACKUP_ENCRYPTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          },
+          "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "ENCRYPTION_AT_REST",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "TLS_IN_TRANSIT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "KEY_MANAGEMENT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "BACKUP_ENCRYPTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SECRET",
+            "revision": 2
+          },
+          "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "ENCRYPTION_AT_REST",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "TLS_IN_TRANSIT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "KEY_MANAGEMENT",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "BACKUP_ENCRYPTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "CLASS-SENSITIVE",
+            "revision": 2
+          },
+          "requirement": "OBSERVABILITY_EXPORTER_NON_DISCLOSURE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "DELETE-CASE",
+            "revision": 2
+          },
+          "requirement": "BACKUP_LIFECYCLE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "DELETE-CASE",
+            "revision": 2
+          },
+          "requirement": "WAL_REPLICA_RETENTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "DELETE-CASE",
+            "revision": 2
+          },
+          "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "DELETE-CASE",
+            "revision": 2
+          },
+          "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "LIFECYCLE-CASE",
+            "revision": 3
+          },
+          "requirement": "BACKUP_LIFECYCLE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "LIFECYCLE-CASE",
+            "revision": 3
+          },
+          "requirement": "WAL_REPLICA_RETENTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "LIFECYCLE-CASE",
+            "revision": 3
+          },
+          "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "LIFECYCLE-CASE",
+            "revision": 3
+          },
+          "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "RETENTION-CASE",
+            "revision": 2
+          },
+          "requirement": "BACKUP_LIFECYCLE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "RETENTION-CASE",
+            "revision": 2
+          },
+          "requirement": "WAL_REPLICA_RETENTION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "RETENTION-CASE",
+            "revision": 2
+          },
+          "requirement": "PRIVACY_DESTRUCTION_VERIFICATION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origin": {
+            "id": "RETENTION-CASE",
+            "revision": 2
+          },
+          "requirement": "CLASSIFIED_HISTORICAL_EVENT_IDEMPOTENCY_STORAGE",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "OIDC_CLIENT_CONFIGURATION",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "CSP_SECURITY_HEADERS",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "HTTPS_TLS",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "MANUAL_ACCESSIBILITY_REVIEW",
+          "status": "OUTSTANDING",
+          "classification": "MANUAL_REVIEW_REQUIRED",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "SUPPORTED_BROWSER_POLICY",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        },
+        {
+          "origins": [
+            {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            }
+          ],
+          "requirement": "PRODUCTION_TELEMETRY_EXPORTERS",
+          "status": "OUTSTANDING",
+          "classification": "REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT",
+          "disposition": "OUTSTANDING"
+        }
+      ],
+      "traceabilityEvidence": "phase6-final-traceability.json",
+      "hostPlanEvidence": {
+        "archiveEntry": "case-management-artifact-plan.json",
+        "sha256": "sha256:d58de576bbcdf410c3ed861cf39d186d2ae1877235cc933133eae52e820edb9e"
+      }
+    }
+  },
+  "historicalProvenance": {
+    "policy": "C",
+    "productionWindow": "0.2/0.3 sidecars only; target 0.1 is outside supported production upgrade window",
+    "forensicAdapter": "retained historical tests only; not production compatibility",
+    "cases": [
+      {
+        "input": {
+          "version": "0.1.0",
+          "artifacts": []
+        },
+        "result": "REJECT"
+      },
+      {
+        "input": {
+          "version": "0.1.0",
+          "artifacts": [
+            {
+              "origins": "malformed"
+            }
+          ]
+        },
+        "result": "REJECT"
+      },
+      {
+        "input": {
+          "version": "0.2.0",
+          "artifacts": []
+        },
+        "result": "ACCEPT"
+      },
+      {
+        "input": {
+          "version": "0.3.0",
+          "originSets": {},
+          "artifacts": [
+            {
+              "originSet": "missing"
+            }
+          ]
+        },
+        "result": "REJECT"
+      }
+    ],
+    "additionalRequirement": "Complete malformed 0.2/0.3 schema validation remains a release-review gap"
+  },
+  "evolution": {
+    "historicalRecordedSteps": {
+      "scenarioVersion": "0.1.0",
+      "domains": [
+        {
+          "base": "payment.json",
+          "steps": [
+            {
+              "step": "initial-release",
+              "contentDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e"
+            },
+            {
+              "step": "stable-id-rename",
+              "contentDigest": "sha256:2a190961cc1514837db3267eaf001a6c0d2c7401da33309a4f1a8e96b6da9132",
+              "writeSet": [
+                "A11Y-TASK",
+                "ACT-USER",
+                "ACTION-TASK",
+                "AGG-ENT-MEMBER",
+                "ASSIGN-ENT-PAYMENT",
+                "AUTH-ACT-USER",
+                "BOUNDARY-TASK",
+                "COMPATIBILITY-TASK",
+                "CONSTRAINT-TENANT",
+                "CONTROL-TEXT",
+                "ENT-MEMBER",
+                "EVID-A11Y",
+                "EVID-COMPATIBILITY",
+                "EVID-OBSERVE",
+                "EVID-PERF",
+                "EVID-RELIABILITY",
+                "EVID-TEST",
+                "FILTER-TEXT",
+                "FLD-MEMBER-ID",
+                "FLD-MEMBER-TENANT",
+                "FORM-TASK",
+                "HOLD-ENT-PAYMENT",
+                "JOB-TASK",
+                "LIFECYCLE-ENT-PAYMENT",
+                "OBSERVE-TASK",
+                "PERF-TASK",
+                "PERM-CMD-RECORD",
+                "PERM-QUERY-TASKS",
+                "POL-QUERY-TASKS",
+                "POL-TENANT",
+                "POLSET-CMD-RECORD",
+                "POLSET-QUERY-TASKS",
+                "QUERY-TASKS",
+                "RATE-CMD-RECORD",
+                "RATE-QUERY-TASKS",
+                "REL-MEMBER-PAYMENT",
+                "RELIABILITY-TASK",
+                "RESPONSIVE-TASK",
+                "ROLE-OPERATOR",
+                "SCOPE-ENT-PAYMENT",
+                "SCREEN-TASK",
+                "SEARCH-TASKS",
+                "SERVICE-TASKS",
+                "SESSION-ACT-USER",
+                "STEP-CMD-RECORD",
+                "TABLE-TASKS",
+                "TEST-TASK",
+                "TRANS-RECORD",
+                "UC-TASK",
+                "VIEW-EMPTY",
+                "VIEW-ERROR",
+                "VIEW-LOADING",
+                "VIEW-SUCCESS",
+                "WIZARD-TASK",
+                "WSTEP-INPUT"
+              ],
+              "risk": "LOW",
+              "compatibility": "BACKWARD"
+            },
+            {
+              "step": "optional-relationship",
+              "contentDigest": "sha256:b144dbdc5839ce7e49b2c72d8795e55d43ef1d28d728a0ccce18c6f80c042d27",
+              "writeSet": [
+                "EVOLUTION-optional-relationship"
+              ],
+              "risk": "LOW",
+              "compatibility": "BACKWARD"
+            },
+            {
+              "step": "required-field",
+              "contentDigest": "sha256:107b477da9d3dba0786a383655fe14ace8fb9095f8c548ac32445b0ea7e7da21",
+              "writeSet": [
+                "EVOLUTION-required-field"
+              ],
+              "risk": "HIGH",
+              "compatibility": "REVIEW_REQUIRED"
+            },
+            {
+              "step": "security-tightening",
+              "contentDigest": "sha256:f46de7fe55cb3fed216cf4a3bedda68231215a968e74b32ac7ab5517f6e44ac6",
+              "writeSet": [
+                "SESSION-ACT-USER"
+              ],
+              "risk": "HIGH",
+              "compatibility": "REVIEW_REQUIRED"
+            },
+            {
+              "step": "workflow-change",
+              "contentDigest": "sha256:a85576d6beabfb7a2a5417a18539db6160cc925f819a0b6c6e183b9f33f88311",
+              "writeSet": [
+                "TRANS-RECORD"
+              ],
+              "risk": "REVIEW",
+              "compatibility": "REVIEW_REQUIRED"
+            }
+          ]
+        },
+        {
+          "base": "case-management.json",
+          "steps": [
+            {
+              "step": "initial-release",
+              "contentDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779"
+            },
+            {
+              "step": "stable-id-rename",
+              "contentDigest": "sha256:d9a39a2a64dd573ead0b24f5c90ea2e063c5a96090cd0547184f05b6959cb548",
+              "writeSet": [
+                "A11Y-TASK",
+                "ACTION-TASK",
+                "AGG-CASE",
+                "APPROVAL",
+                "APPROVAL-ID",
+                "APPROVAL-TENANT",
+                "APPROVAL-reason",
+                "ASSIGN-CASE",
+                "BOUNDARY-TASK",
+                "CMD-APPROVE",
+                "CMD-ARCHIVE",
+                "CMD-REVIEW",
+                "CONTROL-TEXT",
+                "EVID-A11Y",
+                "EVID-OBSERVE",
+                "EVID-RELIABILITY",
+                "EVID-TEST",
+                "FORM-TASK",
+                "HOLD-CASE",
+                "JOB-TASK",
+                "LIFECYCLE-CASE",
+                "OBSERVE-TASK",
+                "PERM-CMD-APPROVE",
+                "PERM-CMD-ARCHIVE",
+                "PERM-CMD-REVIEW",
+                "POL-APPROVE",
+                "POL-ARCHIVE",
+                "POL-QUERY-TASKS",
+                "POL-REVIEW",
+                "POLSET-CMD-APPROVE",
+                "POLSET-CMD-ARCHIVE",
+                "POLSET-CMD-REVIEW",
+                "POLSET-QUERY-TASKS",
+                "RATE-CMD-APPROVE",
+                "RATE-CMD-ARCHIVE",
+                "RATE-CMD-REVIEW",
+                "REL-CASE-APPROVAL",
+                "RELIABILITY-TASK",
+                "RESPONSIVE-TASK",
+                "ROLE-REVIEWER",
+                "SCREEN-TASK",
+                "SERVICE-TASKS",
+                "STEP-CMD-APPROVE",
+                "STEP-CMD-ARCHIVE",
+                "STEP-CMD-REVIEW",
+                "TEST-TASK",
+                "TRANS-APPROVE",
+                "TRANS-ARCHIVE",
+                "TRANS-REVIEW",
+                "TX-TASK",
+                "UC-TASK",
+                "VIEW-EMPTY",
+                "VIEW-ERROR",
+                "VIEW-LOADING",
+                "VIEW-SUCCESS",
+                "WIZARD-TASK",
+                "WSTEP-INPUT"
+              ],
+              "risk": "LOW",
+              "compatibility": "BACKWARD"
+            },
+            {
+              "step": "optional-relationship",
+              "contentDigest": "sha256:726a57b0ff385d824ee1702f2457e870bf58c123027a4bc65a42f17b2ed9f91c",
+              "writeSet": [
+                "EVOLUTION-optional-relationship"
+              ],
+              "risk": "LOW",
+              "compatibility": "BACKWARD"
+            },
+            {
+              "step": "required-field",
+              "contentDigest": "sha256:e809857519045082cec5f59811dbaeda0f3038c7adde066a257039aae8cfbfb8",
+              "writeSet": [
+                "EVOLUTION-required-field"
+              ],
+              "risk": "HIGH",
+              "compatibility": "REVIEW_REQUIRED"
+            },
+            {
+              "step": "security-tightening",
+              "contentDigest": "sha256:0005dec5c13c32afc15b4436612c275625114230a1bd864bfbdac41bbea8c0da",
+              "writeSet": [
+                "SESSION-ACT-REVIEWER"
+              ],
+              "risk": "HIGH",
+              "compatibility": "REVIEW_REQUIRED"
+            },
+            {
+              "step": "workflow-change",
+              "contentDigest": "sha256:d019e23f6455f5aeb38da324f0726b22e875e223a3d4420721a654db3fb150ca",
+              "writeSet": [
+                "TRANS-APPROVE"
+              ],
+              "risk": "REVIEW",
+              "compatibility": "REVIEW_REQUIRED"
+            }
+          ]
+        }
+      ]
+    },
+    "productionNegotiationProbes": [
+      {
+        "domain": "payment",
+        "snapshotDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+        "canonicalVersion": "0.1.0",
+        "negotiation": "EXPLICIT_EFFECTS_REQUIRED;UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:DeliveryPolicy/0.2.0;UNSUPPORTED:Failure/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:IdempotencyPolicy/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:Job/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:RatePolicy/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:RetryPolicy/0.2.0;UNSUPPORTED:Schedule/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0",
+        "response": null,
+        "deployedEvolution": "NOT_PROVEN"
+      },
+      {
+        "domain": "payment",
+        "snapshotDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+        "canonicalVersion": "0.2.0",
+        "negotiation": "ANONYMIZATION_VALUES_REVIEW_REQUIRED:DELETE-ENT-PAYMENT;CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:DELETE-ENT-PAYMENT;CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:RETENTION-ENT-PAYMENT;EXPLICIT_EXECUTION_CAPABILITY_REQUIRED;QUERY_ORDERING_REVIEW_REQUIRED:QUERY-TASKS;UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:DeliveryPolicy/0.2.0;UNSUPPORTED:Failure/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:IdempotencyPolicy/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:Job/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:RatePolicy/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:RetryPolicy/0.2.0;UNSUPPORTED:Schedule/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0",
+        "response": null,
+        "deployedEvolution": "NOT_PROVEN"
+      },
+      {
+        "domain": "payment",
+        "snapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "negotiation": "DETERMINISTIC_FEATURE_REQUIRED;EXPLICIT_EXECUTION_CAPABILITY_REQUIRED",
+        "response": null,
+        "deployedEvolution": "NOT_PROVEN"
+      },
+      {
+        "domain": "case-management",
+        "snapshotDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+        "canonicalVersion": "0.1.0",
+        "negotiation": "EXPLICIT_EFFECTS_REQUIRED;UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:DeliveryPolicy/0.2.0;UNSUPPORTED:Failure/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:IdempotencyPolicy/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:Job/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:RatePolicy/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:RetryPolicy/0.2.0;UNSUPPORTED:Schedule/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0",
+        "response": null,
+        "deployedEvolution": "NOT_PROVEN"
+      },
+      {
+        "domain": "case-management",
+        "snapshotDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+        "canonicalVersion": "0.2.0",
+        "negotiation": "ANONYMIZATION_VALUES_REVIEW_REQUIRED:DELETE-CASE;CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:DELETE-CASE;CLOSED_TRIGGER_BINDING_REVIEW_REQUIRED:RETENTION-CASE;EXPLICIT_EXECUTION_CAPABILITY_REQUIRED;QUERY_ORDERING_REVIEW_REQUIRED:QUERY-TASKS;UNSUPPORTED:Action/0.2.0;UNSUPPORTED:DataClassification/0.2.0;UNSUPPORTED:DataLifecycle/0.2.0;UNSUPPORTED:DeletionPolicy/0.2.0;UNSUPPORTED:DeliveryPolicy/0.2.0;UNSUPPORTED:Failure/0.2.0;UNSUPPORTED:Filter/0.2.0;UNSUPPORTED:Form/0.2.0;UNSUPPORTED:IdempotencyPolicy/0.2.0;UNSUPPORTED:InputControl/0.2.0;UNSUPPORTED:Job/0.2.0;UNSUPPORTED:LegalHold/0.2.0;UNSUPPORTED:PermissionBoundary/0.2.0;UNSUPPORTED:RatePolicy/0.2.0;UNSUPPORTED:Retention/0.2.0;UNSUPPORTED:RetryPolicy/0.2.0;UNSUPPORTED:Schedule/0.2.0;UNSUPPORTED:Screen/0.2.0;UNSUPPORTED:Search/0.2.0;UNSUPPORTED:Table/0.2.0;UNSUPPORTED:ViewState/0.2.0;UNSUPPORTED:Wizard/0.2.0;UNSUPPORTED:WizardStep/0.2.0",
+        "response": null,
+        "deployedEvolution": "NOT_PROVEN"
+      },
+      {
+        "domain": "case-management",
+        "snapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "canonicalVersion": "0.3.0",
+        "negotiation": "DETERMINISTIC_FEATURE_REQUIRED;EXPLICIT_EXECUTION_CAPABILITY_REQUIRED",
+        "response": null,
+        "deployedEvolution": "NOT_PROVEN"
+      }
+    ],
+    "requiredFieldPlanningProbes": [
+      {
+        "domain": "payment",
+        "authority": "SYNTHETIC_TEST_WITNESS_ONLY",
+        "oldSnapshot": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "newSnapshot": "sha256:d2c1304de803f30592e40e8f541344e14720b3177498690a6132e42c67560d23",
+        "migration": {
+          "bindingsDigest": "sha256:0502330eca1409658aba11cabd8880dcc0f76e249da12a0a5835ccfe7c613095",
+          "changes": [
+            {
+              "id": "EVOLUTION-required-field",
+              "phases": [
+                "EXPAND",
+                "BACKFILL",
+                "VERIFY",
+                "SWITCH"
+              ],
+              "revision": 1
+            }
+          ],
+          "nextSnapshot": "sha256:d2c1304de803f30592e40e8f541344e14720b3177498690a6132e42c67560d23",
+          "phase3PlanDigest": "sha256:5899635379f2d47756278fd0f9f97dc53aa222468dcb1a0c9a9723d66c6f6eab",
+          "previousSnapshot": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "productionRollback": "NOT_CLAIMED",
+          "recovery": "Forward repair; restore only after verified recovery review",
+          "sql": "ALTER TABLE e_52ec36081d245a500ce7f793 ADD COLUMN f_2f3dc35e157160e85f988b0c text;\nUPDATE e_52ec36081d245a500ce7f793 SET f_2f3dc35e157160e85f988b0c='audit-only backfill' WHERE f_2f3dc35e157160e85f988b0c IS NULL;\nDO $$ BEGIN IF EXISTS (SELECT 1 FROM e_52ec36081d245a500ce7f793 WHERE f_2f3dc35e157160e85f988b0c IS NULL) THEN RAISE EXCEPTION 'ACP_REQUIRED_BACKFILL_PRECONDITION'; END IF; END $$;\nALTER TABLE e_52ec36081d245a500ce7f793 ALTER COLUMN f_2f3dc35e157160e85f988b0c SET NOT NULL;\n",
+          "version": "0.1.0"
+        },
+        "productionStorageForString": "bytea",
+        "observedNewColumnType": "text",
+        "finding": "INCOMPATIBLE_STORAGE_PLANNING_FOR_CANONICAL_0.3"
+      },
+      {
+        "domain": "case-management",
+        "authority": "SYNTHETIC_TEST_WITNESS_ONLY",
+        "oldSnapshot": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "newSnapshot": "sha256:92f8fbee77217025e9d6f26dd9831e79f0a6c880981c2a8c3ac94a06aa014a3d",
+        "migration": {
+          "bindingsDigest": "sha256:0502330eca1409658aba11cabd8880dcc0f76e249da12a0a5835ccfe7c613095",
+          "changes": [
+            {
+              "id": "EVOLUTION-required-field",
+              "phases": [
+                "EXPAND",
+                "BACKFILL",
+                "VERIFY",
+                "SWITCH"
+              ],
+              "revision": 1
+            }
+          ],
+          "nextSnapshot": "sha256:92f8fbee77217025e9d6f26dd9831e79f0a6c880981c2a8c3ac94a06aa014a3d",
+          "phase3PlanDigest": "sha256:50c387fd418fd277824f7bbeeca2cffe6da37d77c328839a090fc8ec299f785f",
+          "previousSnapshot": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+          "productionRollback": "NOT_CLAIMED",
+          "recovery": "Forward repair; restore only after verified recovery review",
+          "sql": "ALTER TABLE e_30b82cbe46f23754678604ec ADD COLUMN f_2f3dc35e157160e85f988b0c text;\nUPDATE e_30b82cbe46f23754678604ec SET f_2f3dc35e157160e85f988b0c='audit-only backfill' WHERE f_2f3dc35e157160e85f988b0c IS NULL;\nDO $$ BEGIN IF EXISTS (SELECT 1 FROM e_30b82cbe46f23754678604ec WHERE f_2f3dc35e157160e85f988b0c IS NULL) THEN RAISE EXCEPTION 'ACP_REQUIRED_BACKFILL_PRECONDITION'; END IF; END $$;\nALTER TABLE e_30b82cbe46f23754678604ec ALTER COLUMN f_2f3dc35e157160e85f988b0c SET NOT NULL;\n",
+          "version": "0.1.0"
+        },
+        "productionStorageForString": "bytea",
+        "observedNewColumnType": "text",
+        "finding": "INCOMPATIBLE_STORAGE_PLANNING_FOR_CANONICAL_0.3"
+      }
+    ],
+    "result": "BLOCKED",
+    "reason": "No complete accepted-history deployment chain with authorized backfills, migration execution, regenerated UI and post-transition behavior. Semantic history is not deployed evolution.",
+    "plannerFinding": "target_migrations.py selects bytea storage only for schemaVersion == 0.2.0; Canonical 0.3 falls through to text storage. Production fix would change the sealed bundle: STOP; deliberate successor corrective tranche required."
+  },
+  "packages": {
+    "payment": {
+      "packageDigest": "sha256:f9ffc1a2c04d51e2ba8eb44650194d86771464b93d780177b84e5364bd823bbb",
+      "repeatPackageDigest": "sha256:f9ffc1a2c04d51e2ba8eb44650194d86771464b93d780177b84e5364bd823bbb",
+      "reproducibility": "PASS",
+      "testExclusion": "PASS",
+      "forbiddenHits": [],
+      "bytes": 33566720,
+      "files": {
+        "backend/application.jar": "sha256:7ce11394f7414304ce11508dbb479363353dde2cc401282af5e867fa4ee3ecdb",
+        "database/V1__initial.sql": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+        "database/V2__delivery_jobs.sql": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+        "database/V3__privacy_lifecycle.sql": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9",
+        "acp/deployment-requirements.json": "sha256:a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017",
+        "acp/profile.json": "sha256:5d9c4a9abfff59569281c157ddda3db271a1c1e339451ea808a4c728786a958c",
+        "acp/provenance.json": "sha256:b3931f893f65ba9d937ca837dff66236b343296e8a7249f8b17c96264e37a821",
+        "acp/target-upgrade.json": "sha256:517d3d232badba6a7c490a1ef5bdb8cb551bf311b7c1db0ad3a8db09f6a15170",
+        "acp/task-ui-model.json": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae",
+        "contracts/openapi.json": "sha256:ff3b10ff342f01dcff50f0c866211cf1c27c6deefb8c90e0a9c310700bf8cf6b",
+        "contracts/target-ir.json": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd",
+        "frontend/assets/index-C7DgS2ll.css": "sha256:9aeb9b4ce2c23c03d8259228df9c817f237fcc480261c5b5e152c5f60eb26932",
+        "frontend/assets/index-DZM5fyOc.js": "sha256:aa1ad432881d179cee977fe40d8b174924d14e7d2ecdb39e48f838ae957f0b9f",
+        "frontend/index.html": "sha256:40e64aa52fc389f780553e15b2aaa3d7fcad2eecaede97dcaeb9628d74e98d48",
+        "runtime-configuration.json": "sha256:c166d4d17312a787fe9b3eb7e4e9273bd9401714fba94b4aa5b249249bdede06"
+      },
+      "sbom": {
+        "path": "phase6-final-payment-sbom.cdx.json",
+        "sha256": "sha256:bb3355f498ea05f970055a47af335f86e42bbd6b8381ff7227c9287e8c2f6209"
+      },
+      "dependencies": {
+        "path": "phase6-final-payment-dependencies-licenses.json",
+        "sha256": "sha256:7d1dd2340dacf2a55b00dd32a252cab7090b7b9c43458c0a4e5744da15a929f9"
+      },
+      "security": {
+        "scanAt": "2026-10-09T09:00:01.514854+00:00",
+        "databaseTimestamp": "NOT_EXPOSED_BY_SERVICES",
+        "severityPolicy": "High/Critical findings block release; unscored findings and unavailable coverage also block. No automatic suppressions.",
+        "deterministicArtifactInput": false,
+        "npm": {
+          "command": [
+            "npm",
+            "audit",
+            "--omit=dev",
+            "--json"
+          ],
+          "exitCode": 0,
+          "seconds": 1.268,
+          "log": "payment-npm-audit.json",
+          "logDigest": "sha256:c08d5529e1c9e175df9d202e64e15059a9447c4bea7cdee10b3b1d009a1089da"
+        },
+        "osv": {
+          "queries": [
+            {
+              "package": {
+                "purl": "pkg:maven/org.hdrhistogram/HdrHistogram@2.2.2"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.zaxxer/HikariCP@7.0.2"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/commons-logging/commons-logging@1.3.6"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.flywaydb/flyway-core@12.4.0"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.flywaydb/flyway-database-postgresql@12.4.0"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.21"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/tools.jackson.core/jackson-core@3.1.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/jakarta.annotation/jakarta.annotation-api@3.0.0"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.slf4j/jul-to-slf4j@2.0.18"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.apache.logging.log4j/log4j-api@2.25.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.apache.logging.log4j/log4j-to-slf4j@2.25.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/ch.qos.logback/logback-classic@1.5.38"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/ch.qos.logback/logback-core@1.5.38"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.google.code.gson/gson@2.13.1"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.slf4j/slf4j-api@2.0.18"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.yaml/snakeyaml@2.6"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40babel/helper-string-parser@7.29.7"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40babel/helper-validator-identifier@7.29.7"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40babel/parser@7.29.9"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40babel/types@7.29.8"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40jridgewell/sourcemap-codec@1.6.0"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/compiler-core@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/compiler-dom@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/compiler-sfc@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/magic-string@0.30.21"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/compiler-ssr@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/reactivity@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/runtime-core@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/runtime-dom@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/server-renderer@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/shared@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/csstype@3.2.3"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/entities@7.0.1"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/estree-walker@2.0.2"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/nanoid@3.3.20"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/picocolors@1.1.1"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/postcss@8.5.29"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/source-map-js@1.2.2"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/typescript@6.0.3"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/vue@3.5.43"
+              }
+            }
+          ],
+          "response": {
+            "results": [
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {
+                "vulns": [
+                  {
+                    "id": "GHSA-7hhh-6rmp-j9qf",
+                    "modified": "2026-10-01T15:30:05.552671Z"
+                  },
+                  {
+                    "id": "GHSA-p6pp-m3f8-5c89",
+                    "modified": "2026-10-01T15:30:13.452657Z"
+                  }
+                ]
+              },
+              {
+                "vulns": [
+                  {
+                    "id": "GHSA-7hhh-6rmp-j9qf",
+                    "modified": "2026-10-01T15:30:05.552671Z"
+                  },
+                  {
+                    "id": "GHSA-p6pp-m3f8-5c89",
+                    "modified": "2026-10-01T15:30:13.452657Z"
+                  }
+                ]
+              },
+              {
+                "vulns": [
+                  {
+                    "id": "GHSA-cxp5-3px4-pw24",
+                    "modified": "2026-09-30T15:46:18.051343Z"
+                  },
+                  {
+                    "id": "GHSA-gx83-3vf8-gh7j",
+                    "modified": "2026-09-28T21:00:05.608227Z"
+                  },
+                  {
+                    "id": "GHSA-q4xh-88c3-wmh7",
+                    "modified": "2026-09-28T20:30:05.315085Z"
+                  },
+                  {
+                    "id": "GHSA-wjgm-6hv5-3cvf",
+                    "modified": "2026-09-28T20:30:05.331167Z"
+                  },
+                  {
+                    "id": "GHSA-wv8q-qhhj-9h54",
+                    "modified": "2026-09-30T15:46:18.451708Z"
+                  }
+                ]
+              },
+              {
+                "vulns": [
+                  {
+                    "id": "GHSA-cxp5-3px4-pw24",
+                    "modified": "2026-09-30T15:46:18.051343Z"
+                  },
+                  {
+                    "id": "GHSA-gx83-3vf8-gh7j",
+                    "modified": "2026-09-28T21:00:05.608227Z"
+                  },
+                  {
+                    "id": "GHSA-q4xh-88c3-wmh7",
+                    "modified": "2026-09-28T20:30:05.315085Z"
+                  },
+                  {
+                    "id": "GHSA-wjgm-6hv5-3cvf",
+                    "modified": "2026-09-28T20:30:05.331167Z"
+                  },
+                  {
+                    "id": "GHSA-wv8q-qhhj-9h54",
+                    "modified": "2026-09-30T15:46:18.451708Z"
+                  }
+                ]
+              },
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {}
+            ]
+          },
+          "status": "COMPLETED",
+          "findingCount": 14,
+          "disposition": "Any returned advisory requires severity/affected-version triage; not automatically accepted."
+        }
+      },
+      "builds": [
+        {
+          "command": [
+            "mvn",
+            "-B",
+            "-ntp",
+            "package",
+            "-DskipTests"
+          ],
+          "exitCode": 0,
+          "seconds": 11.072,
+          "log": "payment-package-backend-1.log",
+          "logDigest": "sha256:6a9f21a2309d399f676fad95ecc5d85a727af2c27da6ab3c552aa3801a5c93c4"
+        },
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "exitCode": 0,
+          "seconds": 0.866,
+          "log": "payment-package-frontend-1.log",
+          "logDigest": "sha256:f7336ee338f068e2d5eeb49f01904d0ddf6b9727d038a5ac1d92d635709948cc"
+        },
+        {
+          "command": [
+            "mvn",
+            "-B",
+            "-ntp",
+            "package",
+            "-DskipTests"
+          ],
+          "exitCode": 0,
+          "seconds": 8.443,
+          "log": "payment-package-backend-2.log",
+          "logDigest": "sha256:7bcf17b8af03433327363c5b3cbd94019b5c2fcf2f6f0d1d6fe944da38989e2e"
+        },
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "exitCode": 0,
+          "seconds": 0.867,
+          "log": "payment-package-frontend-2.log",
+          "logDigest": "sha256:1445b999958f38f102d7e667d421bbb789173ccab8305a24954b365a08a8cb26"
+        }
+      ],
+      "configuration": {
+        "contract": "AUDIT_CONFIGURATION_INVENTORY_1",
+        "enforcement": "NOT_A_COMPLETE_STARTUP_SCHEMA",
+        "requiredEnvironment": [
+          "ACP_DATABASE_URL",
+          "ACP_DATABASE_USER",
+          "ACP_DATABASE_PASSWORD",
+          "ACP_OIDC_ISSUER",
+          "ACP_OIDC_AUDIENCE"
+        ],
+        "requiredExtensions": [
+          "JobRuntime.PrincipalPort",
+          "DeliveryRuntime.Transport",
+          "frontend identity adapter"
+        ],
+        "requiredJobHandle": "acp.jobs.JOB-TASK.revision-3.credential-handle",
+        "deploymentObligations": [
+          "TLS/proxy/CSP configuration",
+          "scheduler configuration validation"
+        ],
+        "secrets": "Deployment supplies opaque handles; no generated default secret."
+      },
+      "productionIdentityDigest": "sha256:51513cf71c2c676a0a82d9aeaa85dbe681356b9c86ffc7304e17641afd6a18b5",
+      "deploymentReadiness": "BLOCKED_PENDING_ADAPTERS_AND_CONFIGURATION",
+      "localArtifact": ".audit-artifacts/phase6-final-closure/payment-production.tar"
+    },
+    "case-management": {
+      "packageDigest": "sha256:0eed486f966012782eb52f156cdf3a04bc17977580eaf3422bd3590ca97f1efc",
+      "repeatPackageDigest": "sha256:0eed486f966012782eb52f156cdf3a04bc17977580eaf3422bd3590ca97f1efc",
+      "reproducibility": "PASS",
+      "testExclusion": "PASS",
+      "forbiddenHits": [],
+      "bytes": 33679360,
+      "files": {
+        "backend/application.jar": "sha256:0ed892ebb3c0a00cda9331eecec7122e46c57b11101f5e70be09d4354b887dac",
+        "database/V1__initial.sql": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+        "database/V2__delivery_jobs.sql": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+        "database/V3__privacy_lifecycle.sql": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5",
+        "acp/deployment-requirements.json": "sha256:f2d66fed68e5b9b706a64351aaf59dd2f33436a1d5713befe9c50e0050b0a600",
+        "acp/profile.json": "sha256:5d9c4a9abfff59569281c157ddda3db271a1c1e339451ea808a4c728786a958c",
+        "acp/provenance.json": "sha256:babe21545e504957660181896314b5985e19fe9aecbe7a9f12b4f04cbc7e1851",
+        "acp/target-upgrade.json": "sha256:860a3e0702a4d14953b78fa2d446a75ace1a64c6860afaa3b3ffd95fafda9092",
+        "acp/task-ui-model.json": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771",
+        "contracts/openapi.json": "sha256:39b3369bed595b9d53403535cc521998c7a2d984b29f56ef25f4a66c3a76c857",
+        "contracts/target-ir.json": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2",
+        "frontend/assets/index-C7DgS2ll.css": "sha256:9aeb9b4ce2c23c03d8259228df9c817f237fcc480261c5b5e152c5f60eb26932",
+        "frontend/assets/index-CbphYYoA.js": "sha256:5a0b87c6598c6361a3aca1b9213ae1d1872495c9600ad96660c37ed7f9c5e9b1",
+        "frontend/index.html": "sha256:e3c58bd3ef749773628b5d4fbcbe2631e6387befef0bef23817d538ccf485fae",
+        "runtime-configuration.json": "sha256:c166d4d17312a787fe9b3eb7e4e9273bd9401714fba94b4aa5b249249bdede06"
+      },
+      "sbom": {
+        "path": "phase6-final-case-management-sbom.cdx.json",
+        "sha256": "sha256:66a377e495fba36158db02ad40d45d964a750d2636fb39d8c293f08d1dec0720"
+      },
+      "dependencies": {
+        "path": "phase6-final-case-management-dependencies-licenses.json",
+        "sha256": "sha256:7d1dd2340dacf2a55b00dd32a252cab7090b7b9c43458c0a4e5744da15a929f9"
+      },
+      "security": {
+        "scanAt": "2026-10-09T09:00:23.266998+00:00",
+        "databaseTimestamp": "NOT_EXPOSED_BY_SERVICES",
+        "severityPolicy": "High/Critical findings block release; unscored findings and unavailable coverage also block. No automatic suppressions.",
+        "deterministicArtifactInput": false,
+        "npm": {
+          "command": [
+            "npm",
+            "audit",
+            "--omit=dev",
+            "--json"
+          ],
+          "exitCode": 0,
+          "seconds": 1.018,
+          "log": "case-management-npm-audit.json",
+          "logDigest": "sha256:c08d5529e1c9e175df9d202e64e15059a9447c4bea7cdee10b3b1d009a1089da"
+        },
+        "osv": {
+          "queries": [
+            {
+              "package": {
+                "purl": "pkg:maven/org.hdrhistogram/HdrHistogram@2.2.2"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.zaxxer/HikariCP@7.0.2"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/commons-logging/commons-logging@1.3.6"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.flywaydb/flyway-core@12.4.0"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.flywaydb/flyway-database-postgresql@12.4.0"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.21"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/tools.jackson.core/jackson-core@3.1.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/jakarta.annotation/jakarta.annotation-api@3.0.0"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.slf4j/jul-to-slf4j@2.0.18"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.apache.logging.log4j/log4j-api@2.25.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.apache.logging.log4j/log4j-to-slf4j@2.25.5"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/ch.qos.logback/logback-classic@1.5.38"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/ch.qos.logback/logback-core@1.5.38"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/com.google.code.gson/gson@2.13.1"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.slf4j/slf4j-api@2.0.18"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:maven/org.yaml/snakeyaml@2.6"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40babel/helper-string-parser@7.29.7"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40babel/helper-validator-identifier@7.29.7"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40babel/parser@7.29.9"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40babel/types@7.29.8"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40jridgewell/sourcemap-codec@1.6.0"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/compiler-core@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/compiler-dom@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/compiler-sfc@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/magic-string@0.30.21"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/compiler-ssr@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/reactivity@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/runtime-core@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/runtime-dom@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/server-renderer@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/%40vue/shared@3.5.43"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/csstype@3.2.3"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/entities@7.0.1"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/estree-walker@2.0.2"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/nanoid@3.3.20"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/picocolors@1.1.1"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/postcss@8.5.29"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/source-map-js@1.2.2"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/typescript@6.0.3"
+              }
+            },
+            {
+              "package": {
+                "purl": "pkg:npm/vue@3.5.43"
+              }
+            }
+          ],
+          "response": {
+            "results": [
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {
+                "vulns": [
+                  {
+                    "id": "GHSA-7hhh-6rmp-j9qf",
+                    "modified": "2026-10-01T15:30:05.552671Z"
+                  },
+                  {
+                    "id": "GHSA-p6pp-m3f8-5c89",
+                    "modified": "2026-10-01T15:30:13.452657Z"
+                  }
+                ]
+              },
+              {
+                "vulns": [
+                  {
+                    "id": "GHSA-7hhh-6rmp-j9qf",
+                    "modified": "2026-10-01T15:30:05.552671Z"
+                  },
+                  {
+                    "id": "GHSA-p6pp-m3f8-5c89",
+                    "modified": "2026-10-01T15:30:13.452657Z"
+                  }
+                ]
+              },
+              {
+                "vulns": [
+                  {
+                    "id": "GHSA-cxp5-3px4-pw24",
+                    "modified": "2026-09-30T15:46:18.051343Z"
+                  },
+                  {
+                    "id": "GHSA-gx83-3vf8-gh7j",
+                    "modified": "2026-09-28T21:00:05.608227Z"
+                  },
+                  {
+                    "id": "GHSA-q4xh-88c3-wmh7",
+                    "modified": "2026-09-28T20:30:05.315085Z"
+                  },
+                  {
+                    "id": "GHSA-wjgm-6hv5-3cvf",
+                    "modified": "2026-09-28T20:30:05.331167Z"
+                  },
+                  {
+                    "id": "GHSA-wv8q-qhhj-9h54",
+                    "modified": "2026-09-30T15:46:18.451708Z"
+                  }
+                ]
+              },
+              {
+                "vulns": [
+                  {
+                    "id": "GHSA-cxp5-3px4-pw24",
+                    "modified": "2026-09-30T15:46:18.051343Z"
+                  },
+                  {
+                    "id": "GHSA-gx83-3vf8-gh7j",
+                    "modified": "2026-09-28T21:00:05.608227Z"
+                  },
+                  {
+                    "id": "GHSA-q4xh-88c3-wmh7",
+                    "modified": "2026-09-28T20:30:05.315085Z"
+                  },
+                  {
+                    "id": "GHSA-wjgm-6hv5-3cvf",
+                    "modified": "2026-09-28T20:30:05.331167Z"
+                  },
+                  {
+                    "id": "GHSA-wv8q-qhhj-9h54",
+                    "modified": "2026-09-30T15:46:18.451708Z"
+                  }
+                ]
+              },
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
+              {}
+            ]
+          },
+          "status": "COMPLETED",
+          "findingCount": 14,
+          "disposition": "Any returned advisory requires severity/affected-version triage; not automatically accepted."
+        }
+      },
+      "builds": [
+        {
+          "command": [
+            "mvn",
+            "-B",
+            "-ntp",
+            "package",
+            "-DskipTests"
+          ],
+          "exitCode": 0,
+          "seconds": 8.043,
+          "log": "case-management-package-backend-1.log",
+          "logDigest": "sha256:9a025cfa30abcea56bf046174f457a633bfab2cf09e030d4bc18d4a7b8c7f467"
+        },
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "exitCode": 0,
+          "seconds": 0.766,
+          "log": "case-management-package-frontend-1.log",
+          "logDigest": "sha256:d04365dd8e2b7384d313a440da74eada16733f55a2d523d80e99cbcead42a464"
+        },
+        {
+          "command": [
+            "mvn",
+            "-B",
+            "-ntp",
+            "package",
+            "-DskipTests"
+          ],
+          "exitCode": 0,
+          "seconds": 8.098,
+          "log": "case-management-package-backend-2.log",
+          "logDigest": "sha256:ec34e2eadb9848dbffffd2dff56b69470c813ac2a7919e6f63b3c35331a1dc1d"
+        },
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "exitCode": 0,
+          "seconds": 1.027,
+          "log": "case-management-package-frontend-2.log",
+          "logDigest": "sha256:b35619e56107e7ba9d56b5d54208dafdf2d53f097f3886d7fe212e8e394a91b0"
+        }
+      ],
+      "configuration": {
+        "contract": "AUDIT_CONFIGURATION_INVENTORY_1",
+        "enforcement": "NOT_A_COMPLETE_STARTUP_SCHEMA",
+        "requiredEnvironment": [
+          "ACP_DATABASE_URL",
+          "ACP_DATABASE_USER",
+          "ACP_DATABASE_PASSWORD",
+          "ACP_OIDC_ISSUER",
+          "ACP_OIDC_AUDIENCE"
+        ],
+        "requiredExtensions": [
+          "JobRuntime.PrincipalPort",
+          "DeliveryRuntime.Transport",
+          "frontend identity adapter"
+        ],
+        "requiredJobHandle": "acp.jobs.JOB-TASK.revision-3.credential-handle",
+        "deploymentObligations": [
+          "TLS/proxy/CSP configuration",
+          "scheduler configuration validation"
+        ],
+        "secrets": "Deployment supplies opaque handles; no generated default secret."
+      },
+      "productionIdentityDigest": "sha256:51513cf71c2c676a0a82d9aeaa85dbe681356b9c86ffc7304e17641afd6a18b5",
+      "deploymentReadiness": "BLOCKED_PENDING_ADAPTERS_AND_CONFIGURATION",
+      "localArtifact": ".audit-artifacts/phase6-final-closure/case-management-production.tar"
+    }
+  },
+  "sealedBundleAfterAudit": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+  "criteria": [
+    {
+      "requirement": 1,
+      "area": "Immutable baseline",
+      "status": "PASS",
+      "detail": "Exact merged baseline and execution commit; clean checkout, protected history and sealed bundle checked."
+    },
+    {
+      "requirement": 2,
+      "area": "Release immutability",
+      "status": "PASS",
+      "detail": "No bundled file changes; 0.4.0 retained. Production defects identified here require a deliberate successor."
+    },
+    {
+      "requirement": 3,
+      "area": "Full actual admission",
+      "status": "PASS",
+      "detail": "Original strict CLI with --full-admission --run-builds; no expected-blocker allowance."
+    },
+    {
+      "requirement": 4,
+      "area": "Integrated final entrypoint",
+      "status": "PASS",
+      "detail": "Audit orchestrates full strict admission, supplemental browser, fault/materializer/history, provenance and package checks; exits 2 for unmet closure criteria."
+    },
+    {
+      "requirement": 5,
+      "area": "Accepted-history deployed evolution",
+      "status": "BLOCKED",
+      "detail": "Semantic six-step witnesses and independent upgrades do not prove every accepted deployed transition. Canonical 0.3 backfill storage currently falls through to text instead of bytea; no deployed 0.2→0.3 chain or sequential 0.1→0.2→0.3→0.4 proof."
+    },
+    {
+      "requirement": 6,
+      "area": "Historical provenance",
+      "status": "PASS",
+      "detail": "Policy C: target 0.1 excluded from supported production upgrade window. Historical test adapter is forensic evidence only; 0.2/0.3 ordinary reader remains production policy."
+    },
+    {
+      "requirement": 7,
+      "area": "Scheduler observation",
+      "status": "PASS",
+      "detail": "Exact occurrence-scoped recovery assertions retain non-skipped count. Separate deterministic scheduler observation is fixed immediately after the original occurrence; invocation clock alone observes actual PostgreSQL commit time."
+    },
+    {
+      "requirement": 8,
+      "area": "Integrated ownership",
+      "status": "BLOCKED",
+      "detail": "Actual compiler replacement/human identity preservation/unapproved AI rejection plus retained approved AI/framework/CAS/unknown-file tests. Complete integrated cross-owner transition matrix remains incomplete."
+    },
+    {
+      "requirement": 9,
+      "area": "Provenance completeness",
+      "status": "BLOCKED",
+      "detail": "Exact ArtifactPlans retained separately from conservative sidecar origin sets. Host per-artifact revisions checked; exhaustive target-object bijection/input-digest reconciliation and HUMAN-owned artifact provenance remain incomplete."
+    },
+    {
+      "requirement": 10,
+      "area": "Traceability",
+      "status": "BLOCKED",
+      "detail": "Machine-readable family→basis→ID/revision→host-artifact trace exists; suite-level runtime links do not prove a per-object assertion chain for every representative."
+    },
+    {
+      "requirement": 11,
+      "area": "Production browser review",
+      "status": "PASS",
+      "detail": "24 production-browser journeys plus 16 exact HTTP outcomes against real Spring/PostgreSQL; report preserves database facts and axe incomplete results."
+    },
+    {
+      "requirement": 12,
+      "area": "Manual accessibility",
+      "status": "DEPLOYMENT_OBLIGATION",
+      "detail": "MANUAL_ACCESSIBILITY_REVIEW=OUTSTANDING; permitted before deployment, not represented as automated evidence. Human acceptance of this disposition is still required."
+    },
+    {
+      "requirement": 13,
+      "area": "Browser support",
+      "status": "DEPLOYMENT_OBLIGATION",
+      "detail": "SUPPORTED_BROWSER_PROFILE=CHROMIUM only; Firefox/WebKit OUTSTANDING, not supported by this audit."
+    },
+    {
+      "requirement": 14,
+      "area": "Deployable package",
+      "status": "BLOCKED",
+      "detail": "Deterministic tar audit binds jar/assets/migrations/profile/provenance/deployment requirements/configuration inventory. An enforced exact startup configuration schema and deployable non-test identity/principal/transport integrations are still missing."
+    },
+    {
+      "requirement": 15,
+      "area": "Container/package profile",
+      "status": "DEPLOYMENT_OBLIGATION",
+      "detail": "Chosen audit package is a reproducible JAR+static-assets tar, not OCI. Java 21/Node generation environment bound; no image digest or portable architecture/container guarantee claimed."
+    },
+    {
+      "requirement": 16,
+      "area": "Startup configuration",
+      "status": "BLOCKED",
+      "detail": "Database/OIDC placeholders and Job principal/handle guards exist. Missing delivery transport is deferred to poll-time; explicit scheduler/TLS/proxy validation and configuration schema enforcement are incomplete. Do not modify sealed 0.4."
+    },
+    {
+      "requirement": 17,
+      "area": "Test-only exclusion",
+      "status": "PASS",
+      "detail": "Packages rebuilt using restored production identity; inspect archive entries and decompressed JS/class content for BrowserServer, decoder, tokens, test endpoints and credentials."
+    },
+    {
+      "requirement": 18,
+      "area": "Transitive dependency inventory",
+      "status": "BLOCKED",
+      "detail": "Package JAR dependencies, npm lock and Python distributions inventoried. Maven plugin/build graph checksums and full transitive immutable resolution lock not complete; inventory alone is not a lock."
+    },
+    {
+      "requirement": 19,
+      "area": "SBOM",
+      "status": "PASS",
+      "detail": "CycloneDX 1.6 JSON from actual packaged backend JARs and frontend lock; generation/build-only tools distinguished in evidence."
+    },
+    {
+      "requirement": 20,
+      "area": "License review",
+      "status": "BLOCKED",
+      "detail": "License declarations inventoried; unknowns/redistribution notices and compatibility require resolution and human/legal review. No automatic legal approval."
+    },
+    {
+      "requirement": 21,
+      "area": "Current vulnerability assessment",
+      "status": "BLOCKED",
+      "detail": "npm audit and OSV timestamped runtime assessments are independent of deterministic package bytes. Missing/unscored/high/critical findings block closure; exact results in package evidence. Compiler/build-plugin vulnerability coverage is incomplete even if runtime scanners return zero findings."
+    },
+    {
+      "requirement": 22,
+      "area": "Worker confinement",
+      "status": "BLOCKED",
+      "detail": "Retained real sandbox/protocol/resource supervision tests rerun. Exhaustive process/identity/clock syscalls plus memory/CPU exhaustion under the production sandbox are not all exercised by existing tests."
+    },
+    {
+      "requirement": 23,
+      "area": "Materializer",
+      "status": "PASS",
+      "detail": "Retained traversal/symlink/stale-CAS/concurrent-writer/crash/manual/human/AI/framework fault suites rerun. Power-loss durability and hostile same-user mutation remain Phase 11 concerns."
+    },
+    {
+      "requirement": 24,
+      "area": "Deployment migration failure/recovery",
+      "status": "BLOCKED",
+      "detail": "Existing migration planner, Flyway repeat/legacy upgrade tests do not cover complete unavailable-DB/validation/partial-upgrade/incompatible-schema/safe-retry deployment matrix. Destructive rollback NOT CLAIMED."
+    },
+    {
+      "requirement": 25,
+      "area": "Real application restart matrix",
+      "status": "BLOCKED",
+      "detail": "Lost-process idempotency/outbox/Job/lifecycle runtime tests exist. A complete real process restart with all specified committed state simultaneously is not proven."
+    },
+    {
+      "requirement": 26,
+      "area": "Deployment obligations",
+      "status": "DEPLOYMENT_OBLIGATION",
+      "detail": "Every generated OUTSTANDING row retained and classified in domain evidence; none waived. Release blockers are separately enumerated."
+    },
+    {
+      "requirement": 27,
+      "area": "Encryption/TLS",
+      "status": "DEPLOYMENT_OBLIGATION",
+      "detail": "At-rest, backup encryption, TLS termination and key management remain REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT; not runtime guarantees."
+    },
+    {
+      "requirement": 28,
+      "area": "Physical destruction",
+      "status": "DEPLOYMENT_OBLIGATION",
+      "detail": "ANONYMIZE does not establish physical erasure, WAL/replica/backup destruction; retained deployment obligations."
+    },
+    {
+      "requirement": 29,
+      "area": "Production OIDC integration",
+      "status": "BLOCKED",
+      "detail": "Required identity()/onIdentityChange()/accessToken()/permissions() contract documented. No accepted non-test provider adapter fixture proving token acquisition/change notification/configuration end-to-end."
+    },
+    {
+      "requirement": 30,
+      "area": "Performance baseline",
+      "status": "BLOCKED",
+      "detail": "Build durations/package sizes are measured; bounded Query/Action/startup/browser-load/concurrent-rate performance measurements are not complete. No synthetic SLO promised."
+    },
+    {
+      "requirement": 31,
+      "area": "Resource scaling",
+      "status": "BLOCKED",
+      "detail": "Approved fixtures within limits pass; no larger valid generated UI fixture/node-limit scaling and provenance-growth curve accepted."
+    },
+    {
+      "requirement": 32,
+      "area": "Generation/package determinism",
+      "status": "BLOCKED",
+      "detail": "Independent compiler contexts compare ArtifactPlan digest and repeated package builds compare exact bytes. Package builds share the same checkout/build cache; two independently materialized clean package builds are still required. Runtime random keys excluded."
+    },
+    {
+      "requirement": 33,
+      "area": "Fresh hosted reproduction",
+      "status": "BLOCKED",
+      "detail": "Dedicated closure CI job added with pinned Ubuntu/Python/Node and Java. Not run while the user instruction forbids pushing. Existing baseline CI success is historical, not current audit evidence."
+    },
+    {
+      "requirement": 34,
+      "area": "Historical contracts",
+      "status": "PASS",
+      "detail": "Protected contract/corpus/release/ADR bytes compared against immutable merged baseline."
+    },
+    {
+      "requirement": 35,
+      "area": "Human closure authority",
+      "status": "PASS",
+      "detail": "Audit recommendation does not mark Phase 6 COMPLETE; stop for explicit human review."
+    },
+    {
+      "requirement": 36,
+      "area": "Recommendation",
+      "status": "PASS",
+      "detail": "Only PHASE6_CLOSURE_BLOCKED or PHASE6_CLOSURE_RECOMMENDED; blocked report lists remediation criteria."
+    },
+    {
+      "requirement": 37,
+      "area": "Bound machine-readable report",
+      "status": "PASS",
+      "detail": "Baseline, exact execution commit, Canonical/bundle/IR/UI/migration/package/SBOM/security/browser/fault/history/obligation evidence bound with digests."
+    },
+    {
+      "requirement": 38,
+      "area": "Dedicated closure CI",
+      "status": "PASS",
+      "detail": "Separate dependent job; no continue-on-error. BLOCKED audit exits nonzero rather than faking green."
+    },
+    {
+      "requirement": 39,
+      "area": "Phase disposition",
+      "status": "PASS",
+      "detail": "Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED; closure cannot be accepted automatically."
+    }
+  ],
+  "blockers": [
+    {
+      "requirement": 5,
+      "area": "Accepted-history deployed evolution",
+      "status": "BLOCKED",
+      "detail": "Semantic six-step witnesses and independent upgrades do not prove every accepted deployed transition. Canonical 0.3 backfill storage currently falls through to text instead of bytea; no deployed 0.2→0.3 chain or sequential 0.1→0.2→0.3→0.4 proof."
+    },
+    {
+      "requirement": 8,
+      "area": "Integrated ownership",
+      "status": "BLOCKED",
+      "detail": "Actual compiler replacement/human identity preservation/unapproved AI rejection plus retained approved AI/framework/CAS/unknown-file tests. Complete integrated cross-owner transition matrix remains incomplete."
+    },
+    {
+      "requirement": 9,
+      "area": "Provenance completeness",
+      "status": "BLOCKED",
+      "detail": "Exact ArtifactPlans retained separately from conservative sidecar origin sets. Host per-artifact revisions checked; exhaustive target-object bijection/input-digest reconciliation and HUMAN-owned artifact provenance remain incomplete."
+    },
+    {
+      "requirement": 10,
+      "area": "Traceability",
+      "status": "BLOCKED",
+      "detail": "Machine-readable family→basis→ID/revision→host-artifact trace exists; suite-level runtime links do not prove a per-object assertion chain for every representative."
+    },
+    {
+      "requirement": 14,
+      "area": "Deployable package",
+      "status": "BLOCKED",
+      "detail": "Deterministic tar audit binds jar/assets/migrations/profile/provenance/deployment requirements/configuration inventory. An enforced exact startup configuration schema and deployable non-test identity/principal/transport integrations are still missing."
+    },
+    {
+      "requirement": 16,
+      "area": "Startup configuration",
+      "status": "BLOCKED",
+      "detail": "Database/OIDC placeholders and Job principal/handle guards exist. Missing delivery transport is deferred to poll-time; explicit scheduler/TLS/proxy validation and configuration schema enforcement are incomplete. Do not modify sealed 0.4."
+    },
+    {
+      "requirement": 18,
+      "area": "Transitive dependency inventory",
+      "status": "BLOCKED",
+      "detail": "Package JAR dependencies, npm lock and Python distributions inventoried. Maven plugin/build graph checksums and full transitive immutable resolution lock not complete; inventory alone is not a lock."
+    },
+    {
+      "requirement": 20,
+      "area": "License review",
+      "status": "BLOCKED",
+      "detail": "License declarations inventoried; unknowns/redistribution notices and compatibility require resolution and human/legal review. No automatic legal approval."
+    },
+    {
+      "requirement": 21,
+      "area": "Current vulnerability assessment",
+      "status": "BLOCKED",
+      "detail": "npm audit and OSV timestamped runtime assessments are independent of deterministic package bytes. Missing/unscored/high/critical findings block closure; exact results in package evidence. Compiler/build-plugin vulnerability coverage is incomplete even if runtime scanners return zero findings."
+    },
+    {
+      "requirement": 22,
+      "area": "Worker confinement",
+      "status": "BLOCKED",
+      "detail": "Retained real sandbox/protocol/resource supervision tests rerun. Exhaustive process/identity/clock syscalls plus memory/CPU exhaustion under the production sandbox are not all exercised by existing tests."
+    },
+    {
+      "requirement": 24,
+      "area": "Deployment migration failure/recovery",
+      "status": "BLOCKED",
+      "detail": "Existing migration planner, Flyway repeat/legacy upgrade tests do not cover complete unavailable-DB/validation/partial-upgrade/incompatible-schema/safe-retry deployment matrix. Destructive rollback NOT CLAIMED."
+    },
+    {
+      "requirement": 25,
+      "area": "Real application restart matrix",
+      "status": "BLOCKED",
+      "detail": "Lost-process idempotency/outbox/Job/lifecycle runtime tests exist. A complete real process restart with all specified committed state simultaneously is not proven."
+    },
+    {
+      "requirement": 29,
+      "area": "Production OIDC integration",
+      "status": "BLOCKED",
+      "detail": "Required identity()/onIdentityChange()/accessToken()/permissions() contract documented. No accepted non-test provider adapter fixture proving token acquisition/change notification/configuration end-to-end."
+    },
+    {
+      "requirement": 30,
+      "area": "Performance baseline",
+      "status": "BLOCKED",
+      "detail": "Build durations/package sizes are measured; bounded Query/Action/startup/browser-load/concurrent-rate performance measurements are not complete. No synthetic SLO promised."
+    },
+    {
+      "requirement": 31,
+      "area": "Resource scaling",
+      "status": "BLOCKED",
+      "detail": "Approved fixtures within limits pass; no larger valid generated UI fixture/node-limit scaling and provenance-growth curve accepted."
+    },
+    {
+      "requirement": 32,
+      "area": "Generation/package determinism",
+      "status": "BLOCKED",
+      "detail": "Independent compiler contexts compare ArtifactPlan digest and repeated package builds compare exact bytes. Package builds share the same checkout/build cache; two independently materialized clean package builds are still required. Runtime random keys excluded."
+    },
+    {
+      "requirement": 33,
+      "area": "Fresh hosted reproduction",
+      "status": "BLOCKED",
+      "detail": "Dedicated closure CI job added with pinned Ubuntu/Python/Node and Java. Not run while the user instruction forbids pushing. Existing baseline CI success is historical, not current audit evidence."
+    }
+  ],
+  "validationCounts": {
+    "backend": {
+      "payment": 72,
+      "case-management": 73
+    },
+    "mainBrowser": {
+      "payment": {
+        "startTime": "2026-10-09T08:37:07.852Z",
+        "duration": 34037.676,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "case-management": {
+        "startTime": "2026-10-09T08:46:19.030Z",
+        "duration": 39877.83,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "supplementalBrowser": {
+      "payment": {
+        "startTime": "2026-10-09T08:47:25.739Z",
+        "duration": 9319.506,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "case-management": {
+        "startTime": "2026-10-09T08:47:59.563Z",
+        "duration": 10221.784000000001,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "faultHistoryTests": 38
+  },
+  "rawEvidence": {
+    "path": ".audit-artifacts/phase6-final-closure/raw-audit-evidence.tar.gz",
+    "sha256": "sha256:320cf0a09c4f4e9b2b903ce9d4d924c293b433f79a5d625d66898425a4168127",
+    "originalReportDigest": "sha256:0a3aeed382469a33f6b64235872e28c19da4fa2f91bfe1f8d0bc01bba0a77189",
+    "fileDigests": {
+      "baseline.json": "sha256:3fa103d7ea45f65a687d34384e4a3fda8536d9dfc57c0ee6a3b0b2090f03823b",
+      "case-management-artifact-plan.json": "sha256:d58de576bbcdf410c3ed861cf39d186d2ae1877235cc933133eae52e820edb9e",
+      "case-management-dependencies-licenses.json": "sha256:7d1dd2340dacf2a55b00dd32a252cab7090b7b9c43458c0a4e5744da15a929f9",
+      "case-management-npm-audit.json": "sha256:c08d5529e1c9e175df9d202e64e15059a9447c4bea7cdee10b3b1d009a1089da",
+      "case-management-package-backend-1.log": "sha256:9a025cfa30abcea56bf046174f457a633bfab2cf09e030d4bc18d4a7b8c7f467",
+      "case-management-package-backend-2.log": "sha256:ec34e2eadb9848dbffffd2dff56b69470c813ac2a7919e6f63b3c35331a1dc1d",
+      "case-management-package-frontend-1.log": "sha256:d04365dd8e2b7384d313a440da74eada16733f55a2d523d80e99cbcead42a464",
+      "case-management-package-frontend-2.log": "sha256:b35619e56107e7ba9d56b5d54208dafdf2d53f097f3886d7fe212e8e394a91b0",
+      "case-management-production-1.tar": "sha256:0eed486f966012782eb52f156cdf3a04bc17977580eaf3422bd3590ca97f1efc",
+      "case-management-sbom.cdx.json": "sha256:66a377e495fba36158db02ad40d45d964a750d2636fb39d8c293f08d1dec0720",
+      "case-management-security-assessment.json": "sha256:53de64003f38212411ad7d2de8433a806b2f9f0aaecf01cd7d55470955f38319",
+      "faults-ownership-history.log": "sha256:7f57510cda70458a00a7961c68ea503cc0762f58218e62e88ea7daa890d67dcd",
+      "full-admission.log": "sha256:291a7d30fb068fe45dce27d2758259dd0052560434db2758bde98e6a97738cc4",
+      "osv-advisory-details.json": "sha256:84b4f7205a266b3a03791413b33a7d82e356e022139491a701fd6cd6a1b28425",
+      "package-report.json": "sha256:87202d69e69683bedcdba867b2a2d3973c395b575316b1e47287258a98339f4d",
+      "payment-artifact-plan.json": "sha256:72ab58634938b9e4e9131034950947356c73c0ec44b4241ea420a8f481146c20",
+      "payment-dependencies-licenses.json": "sha256:7d1dd2340dacf2a55b00dd32a252cab7090b7b9c43458c0a4e5744da15a929f9",
+      "payment-npm-audit.json": "sha256:c08d5529e1c9e175df9d202e64e15059a9447c4bea7cdee10b3b1d009a1089da",
+      "payment-package-backend-1.log": "sha256:6a9f21a2309d399f676fad95ecc5d85a727af2c27da6ab3c552aa3801a5c93c4",
+      "payment-package-backend-2.log": "sha256:7bcf17b8af03433327363c5b3cbd94019b5c2fcf2f6f0d1d6fe944da38989e2e",
+      "payment-package-frontend-1.log": "sha256:f7336ee338f068e2d5eeb49f01904d0ddf6b9727d038a5ac1d92d635709948cc",
+      "payment-package-frontend-2.log": "sha256:1445b999958f38f102d7e667d421bbb789173ccab8305a24954b365a08a8cb26",
+      "payment-production-1.tar": "sha256:f9ffc1a2c04d51e2ba8eb44650194d86771464b93d780177b84e5364bd823bbb",
+      "payment-sbom.cdx.json": "sha256:bb3355f498ea05f970055a47af335f86e42bbd6b8381ff7227c9287e8c2f6209",
+      "payment-security-assessment.json": "sha256:332d5efe7c6486978336472e5cda46a195e9b3e1cb9b9bf52f38127e614f86df",
+      "phase6-final-closure.json": "sha256:0a3aeed382469a33f6b64235872e28c19da4fa2f91bfe1f8d0bc01bba0a77189",
+      "progress.json": "sha256:6e9d915c84588beb3afbf1a038e8421814dbb2e06f73b9999829a12f35e93d17",
+      "provenance-input.json": "sha256:80150fe924aa6bbf0f4741385232de547ca7367685bb94384ff1c9acb8336b3b",
+      "supplemental-browser.log": "sha256:b0881923a08c6a5de84071f97bf8ba13d2761362d3d094cd3d9acd432c21d962",
+      "traceability-and-provenance.json": "sha256:b5fdb14640c822aa00bd3fb256b7c0774a3523f97e8781f3713a064c1f6e582f",
+      "admission/case-management/frontend/browser-results.json": "sha256:c544d05ddb07679765fe40a17dea1dd995c23590c504389ceeed4defa979dfda",
+      "admission/payment/frontend/browser-results.json": "sha256:91e3152c131648fd2c0677c40606eb5a8b5a60c67584251fcbb631edc2775029",
+      "admission/supplemental-http/case-management-browser-backend.log": "sha256:2bd90d64a5478631520cf46bfc94dd344b0d0b4d17ade4b1f117e3e689091768",
+      "admission/supplemental-http/case-management-browser-compile.log": "sha256:c0983c39b6a216b059e1754948aed1f032a309c4f67fe25b533923a23ed9ac28",
+      "admission/supplemental-http/case-management-browser-frontend.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "admission/supplemental-http/case-management-browser-journeys.log": "sha256:5b8b1e49851c7b0d4abe78b0bf492e876ea7bf35f553d07c2a504ad533ae0ea8",
+      "admission/supplemental-http/case-management-browser-production-build.log": "sha256:32b3894d287abd57cbb4db606c33de4baa2a3bf7996c2d81038e7fed59fc5ab7",
+      "admission/supplemental-http/case-management-http-results.json": "sha256:fd4a6f1e1881f8137552446ecf6efd1c3a50c771fd300b44d64ebd6f4ac4fdef",
+      "admission/supplemental-http/http-outcomes-report.json": "sha256:809b21f96108845a8615eff436405cf406dba79b51ad23b08e0278aac80e5b51",
+      "admission/supplemental-http/payment-browser-backend.log": "sha256:c6d3d44b928da901757ee4487f594edf495837879dbd082bea92e7dabd32c962",
+      "admission/supplemental-http/payment-browser-compile.log": "sha256:8889900ebbfd2e044050fb939e77b3b7c380b1299055eded22ea6d25c3474aee",
+      "admission/supplemental-http/payment-browser-frontend.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "admission/supplemental-http/payment-browser-journeys.log": "sha256:fdf8a08f09d81af9b3193c31310cee0c1351323327d036f34b19a2319fb2f4e3",
+      "admission/supplemental-http/payment-browser-production-build.log": "sha256:fda655b9293c7d31e470ff69463671a040cb63fb7e2c9723f540ce232f73cea5",
+      "admission/supplemental-http/payment-http-results.json": "sha256:226c9d89f7c059f45b073316313501c0eb5d0b02483b340b764ede89a3387f04",
+      "admission/case-management-backend.log": "sha256:e05b3d8c00cb5bf5ed03633f4f75ecface142d699a9dcda1fd285cfef06384e1",
+      "admission/case-management-browser-backend.log": "sha256:6e28f7d7fd3ba25ed4e68b8311bc364ec01992df42b110b09fc5fe53e94b0274",
+      "admission/case-management-browser-compile.log": "sha256:1969ace64d3d8189b4aa1adb9bce86b3484e41d65b0863368babe2120aba2b45",
+      "admission/case-management-browser-frontend.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "admission/case-management-browser-install.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "admission/case-management-browser-journeys.log": "sha256:dea578484cae9867fc2b4e57fca6540bf0b47bd018423a6e5f179f6701042c30",
+      "admission/case-management-browser-production-build.log": "sha256:c5fe4276217af6272079376c154a7f27f5741291a695aa2708a92c3bf818729f",
+      "admission/case-management-frontend-build.log": "sha256:e3389605261ce336ecdf3495363c3827eaa320e316a43d3845a6657dcb727314",
+      "admission/case-management-frontend-lock.log": "sha256:a951b2c91e16faa9b4fdcac335e739ca0d34094506cab3cef93d3459c4f05ceb",
+      "admission/case-management-frontend-tests.log": "sha256:501cf748e632f15cc3ba0339654a83f2ec0c1a041f36835435210c097ab02236",
+      "admission/case-management-frontend-types.log": "sha256:6a046f23ff260ca658d4805fe4f2f032549722687c383b41c1dbc01bcfff1582",
+      "admission/payment-backend.log": "sha256:7b48191f2c8496c7f27507af3c8f862f17c30fed28be023a4ef465b5993d2967",
+      "admission/payment-browser-backend.log": "sha256:ad36e07b7e881cc6f18ae572829b0445d454e3f449942339c4e8a19d35879b91",
+      "admission/payment-browser-compile.log": "sha256:604f691e788e15642ceab20dafa5888a16c31f5b4877c171f8fab12ff62e6a61",
+      "admission/payment-browser-frontend.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "admission/payment-browser-install.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "admission/payment-browser-journeys.log": "sha256:f792e941bf4f8e84937d1f934649eaa710c50674b252d8613ff2664ce101cf13",
+      "admission/payment-browser-production-build.log": "sha256:b863e04205db1e234c18dce96da3776dd4dca7da7729286281c29272f333cd97",
+      "admission/payment-frontend-build.log": "sha256:3b1365320220ab0c94935aeac2bf20b8d01ee86e512aaab7ee4a83742914040f",
+      "admission/payment-frontend-lock.log": "sha256:a951b2c91e16faa9b4fdcac335e739ca0d34094506cab3cef93d3459c4f05ceb",
+      "admission/payment-frontend-tests.log": "sha256:52d4f9ceb15fd89a9659a49da6e776277767bc11001eb0913fc8a27a196fca34",
+      "admission/payment-frontend-types.log": "sha256:6a046f23ff260ca658d4805fe4f2f032549722687c383b41c1dbc01bcfff1582"
+    },
+    "scope": "AUDIT_EVIDENCE_NOT_A_DEPLOYMENT_PACKAGE"
+  },
+  "reportingReview": {
+    "commit": "bc665e35218e6125c7b1c53cb1eec27951338fd5",
+    "at": "2026-10-09T09:07:46.460299+00:00",
+    "actorType": "AI",
+    "humanAcceptance": "NOT_GRANTED",
+    "reason": "Criterion 32 tightened: same-checkout repeat packages do not prove independent clean package builds. Runtime observations unchanged.",
+    "policyDigest": "sha256:7eb775967f54900064df84e75271186a1e072b97d58236b62cb776a0aa09b782"
+  },
+  "securityReview": {
+    "path": "phase6-final-security.json",
+    "sha256": "sha256:6b9660f9f843d830494627cade4214a433d780ef5a9a9e3a8bf33b16fc416e4f"
+  },
+  "traceabilityReport": {
+    "path": "phase6-final-traceability.json",
+    "sha256": "sha256:1a2b459c4e6f2c77e53c6e02d237b0b53fced902599a893818758aa661db30a6"
+  }
+}

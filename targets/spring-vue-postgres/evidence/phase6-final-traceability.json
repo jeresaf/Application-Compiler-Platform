@@ -1,0 +1,2844 @@
+{
+  "payment": {
+    "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+    "hostPlanEvidence": {
+      "archiveEntry": "payment-artifact-plan.json",
+      "sha256": "sha256:72ab58634938b9e4e9131034950947356c73c0ec44b4241ea420a8f481146c20"
+    },
+    "representatives": [
+      {
+        "kind": "Entity",
+        "id": "ENT-MEMBER",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ENT-MEMBER",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:20c080b868ad20fcf838bd3811b182af01e1563ab3d4840eaa8350c5f4ff76cc",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Field",
+        "id": "FLD-AMOUNT",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FLD-AMOUNT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:8a48e199f4099cfb9579c42585d0528aaaf7fca04da4d716cf6d6e27353bf044",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Permission",
+        "id": "PERM-CMD-RECORD",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PERM-CMD-RECORD",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:6963d8929619d2a44aeb2ade9f8f338f579886655832cf853b79446d4d02a9a3",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/ApplicationPolicy.java",
+            "sha256": "sha256:6aa6044e35efd2bfdf25e76d057a73c4f4b7c2497b872e1b99ff81063a9416dc"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/Observability.java",
+            "sha256": "sha256:5ed47cacba7692d2488eb7bf1e2de782305b49ed8e86e0bc1278f3f0ad0fb6b9"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/PrivacyGuards.java",
+            "sha256": "sha256:568e389ff8fb12c589c0ced8a5fec7e11813e870af8ebe5d5ad2ae4bba259f54"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/SecurityConfiguration.java",
+            "sha256": "sha256:87f53f432af128e610b549c85009421329ad690f3506d076730e769bd2186390"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/SessionGate.java",
+            "sha256": "sha256:9692b6b8bde341cc328a9bdf025ee758414aad682ed4c6abe683e109c4802ef0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Policy",
+        "id": "POL-QUERY-TASKS",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POL-QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:19c2d1834f203f2a812d911a0daf518fe1e8a16503a4af84fcf4b1b197c4051e",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/ApplicationPolicy.java",
+            "sha256": "sha256:6aa6044e35efd2bfdf25e76d057a73c4f4b7c2497b872e1b99ff81063a9416dc"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/Observability.java",
+            "sha256": "sha256:5ed47cacba7692d2488eb7bf1e2de782305b49ed8e86e0bc1278f3f0ad0fb6b9"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/PrivacyGuards.java",
+            "sha256": "sha256:568e389ff8fb12c589c0ced8a5fec7e11813e870af8ebe5d5ad2ae4bba259f54"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/SecurityConfiguration.java",
+            "sha256": "sha256:87f53f432af128e610b549c85009421329ad690f3506d076730e769bd2186390"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/SessionGate.java",
+            "sha256": "sha256:9692b6b8bde341cc328a9bdf025ee758414aad682ed4c6abe683e109c4802ef0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Command",
+        "id": "CMD-RECORD",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "CMD-RECORD",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CMD-RECORD",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "CMD-RECORD",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:202573ec5ad868393421b0699fa074ce7152df78a8d1ab646f9e1349e171ad40",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/Invocations.java",
+            "sha256": "sha256:ebfd668c23749f0421df72363bdccdb0dd8a7f9bd08b574a835304f75250f0a7"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/TypedTasks.java",
+            "sha256": "sha256:8613df8dcc01ce7a448488b87a1d597d3bf354401701b04f0ec1b006af1e5b13"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Query",
+        "id": "QUERY-TASKS",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "QUERY-TASKS",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "QUERY-TASKS",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:b6dfd8f2e6f1b9a9137f9f0ac2d2a1e60bdeb4cb2536322031995fb7bc21d6c6",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/Invocations.java",
+            "sha256": "sha256:ebfd668c23749f0421df72363bdccdb0dd8a7f9bd08b574a835304f75250f0a7"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/TypedTasks.java",
+            "sha256": "sha256:8613df8dcc01ce7a448488b87a1d597d3bf354401701b04f0ec1b006af1e5b13"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:109684400025407efae7a730e4965459e7b1b2131acfdacfe9b07bdb180ccc82"
+          }
+        ]
+      },
+      {
+        "kind": "UseCase",
+        "id": "UC-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "UC-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "UC-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "UC-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:adc9eeeaf6d6ea7540ac5ea5c7adbb683dceff4c40661e95cc857d2a077cbedf",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/Invocations.java",
+            "sha256": "sha256:ebfd668c23749f0421df72363bdccdb0dd8a7f9bd08b574a835304f75250f0a7"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/TypedTasks.java",
+            "sha256": "sha256:8613df8dcc01ce7a448488b87a1d597d3bf354401701b04f0ec1b006af1e5b13"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:109684400025407efae7a730e4965459e7b1b2131acfdacfe9b07bdb180ccc82"
+          }
+        ]
+      },
+      {
+        "kind": "Failure",
+        "id": "FAIL-BUSINESS",
+        "revision": 1,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FAIL-BUSINESS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:10a5bec1d97f859693729558919ce87ae0c05c13866b23ccd483aa436d95edee",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "RatePolicy",
+        "id": "RATE-CMD-RECORD",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "RATE-CMD-RECORD",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "RATE-CMD-RECORD",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:01e630cc0791dff08df9599ce3210d63a5a22b9ad110064344c0c535f6382f87",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "IdempotencyPolicy",
+        "id": "IDEM-OPERATION",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "IDEM-OPERATION",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "IDEM-OPERATION",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:5fd52239c0b09e8eaab544eb6ae57bff3955ca76a9af4018cf3aeddab509031f",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "DeliveryPolicy",
+        "id": "DELIVERY-EVT-RECORDED",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELIVERY-EVT-RECORDED",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELIVERY-EVT-RECORDED",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:2535574b8ba3068eccd599e2e52c305fb8e7142739561ad2951b9a3027acbc2e",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Schedule",
+        "id": "SCHEDULE-TASK",
+        "revision": 1,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SCHEDULE-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:264c28ff8a35c0f4c918993789f8515bfd360d982005163e8ef7c55db69600fb",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Job",
+        "id": "JOB-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "JOB-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "JOB-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "JOB-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:093724c6ea87068a587ec4d255e112abc23a743ef5eca3728b5e75618911cee5",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "DataClassification",
+        "id": "CLASS-INTERNAL",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-INTERNAL",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-INTERNAL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:0d75131685529ed4a754d030a37c9e800389515b688c629ee1c7bff31d3e2113",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "DataLifecycle",
+        "id": "LIFECYCLE-ENT-PAYMENT",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "LIFECYCLE-ENT-PAYMENT",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "LIFECYCLE-ENT-PAYMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:2415d1c955a58b88d5cb8312d83b22491dff81c3089e1f486a5e61f35e687538",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/LifecycleActions.java",
+            "sha256": "sha256:47d05ef3ea397301ccace8607bad104ca4b5da83f9d783f71eace67b2e82d2bb"
+          },
+          {
+            "path": "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+            "sha256": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Retention",
+        "id": "RETENTION-ENT-PAYMENT",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RETENTION-ENT-PAYMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:9dfd123d4fd040b09bde55307f6a3a9037bc89c2e5530bc347922e9391844c96",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/LifecycleActions.java",
+            "sha256": "sha256:47d05ef3ea397301ccace8607bad104ca4b5da83f9d783f71eace67b2e82d2bb"
+          },
+          {
+            "path": "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+            "sha256": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "DeletionPolicy",
+        "id": "DELETE-ENT-PAYMENT",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELETE-ENT-PAYMENT",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELETE-ENT-PAYMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:965f54921240ef13b18cd6786d79115b22349f8b5145ecf3dd181cee7c96f1f5",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/LifecycleActions.java",
+            "sha256": "sha256:47d05ef3ea397301ccace8607bad104ca4b5da83f9d783f71eace67b2e82d2bb"
+          },
+          {
+            "path": "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+            "sha256": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "LegalHold",
+        "id": "HOLD-ENT-PAYMENT",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "HOLD-ENT-PAYMENT",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "HOLD-ENT-PAYMENT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:cde19add67373c064a62760e69d063aadfdc3edb46b4d036f4860d93d7a6766d",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/LifecycleActions.java",
+            "sha256": "sha256:47d05ef3ea397301ccace8607bad104ca4b5da83f9d783f71eace67b2e82d2bb"
+          },
+          {
+            "path": "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+            "sha256": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Screen",
+        "id": "SCREEN-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SCREEN-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:539dcdd3b931c7dc46dea6305a71066975c4ab655f15b81fb7574b114791219f",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:109684400025407efae7a730e4965459e7b1b2131acfdacfe9b07bdb180ccc82"
+          }
+        ]
+      },
+      {
+        "kind": "Form",
+        "id": "FORM-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "FORM-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "FORM-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:c48ea38beb1bab819fe1bf97674849b72f4187683528b9a056848d55a1a58831",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:109684400025407efae7a730e4965459e7b1b2131acfdacfe9b07bdb180ccc82"
+          }
+        ]
+      },
+      {
+        "kind": "InputControl",
+        "id": "CONTROL-TASK-RESOURCE",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "CONTROL-TASK-RESOURCE",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:02baac0473926e2f3976460fe57afe3209be38c8e11b82f886494a483ba1e03a",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:109684400025407efae7a730e4965459e7b1b2131acfdacfe9b07bdb180ccc82"
+          }
+        ]
+      },
+      {
+        "kind": "Action",
+        "id": "ACTION-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ACTION-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:5990eccb9177112c5c71a9aced701b39fc88d2a6966d5fcc8efe22646a17850f",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:109684400025407efae7a730e4965459e7b1b2131acfdacfe9b07bdb180ccc82"
+          }
+        ]
+      },
+      {
+        "kind": "PermissionBoundary",
+        "id": "BOUNDARY-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "BOUNDARY-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:edbaeaf2a130d3fd7280affbe98926c637cf26803e6ad69d3dd3f4269ff01a3e",
+        "runtimeEvidence": "admission/payment-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:098e719e28359a01ed1ff4ecb2487dc7b45d6343da468ea7f7f8f3a6e5fc08fd"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:109684400025407efae7a730e4965459e7b1b2131acfdacfe9b07bdb180ccc82"
+          }
+        ]
+      }
+    ]
+  },
+  "case-management": {
+    "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+    "hostPlanEvidence": {
+      "archiveEntry": "case-management-artifact-plan.json",
+      "sha256": "sha256:d58de576bbcdf410c3ed861cf39d186d2ae1877235cc933133eae52e820edb9e"
+    },
+    "representatives": [
+      {
+        "kind": "Entity",
+        "id": "APPROVAL",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "APPROVAL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:8151b80feec929d0c2f05a3a9f059f2bff72a3346f4af4dd5eec39e7254da578",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Field",
+        "id": "APPROVAL-ID",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "APPROVAL-ID",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:b5602592fdbbd8ef4af1be0fa413e95171e7d1d03014bbc4fe56ab37e1079fab",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Permission",
+        "id": "PERM-CMD-APPROVE",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "PERM-CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:d150e85ef9581b76e7a1b3ddcdfe7b8e2dec62e854f0a4ffbed02937276c6ace",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/ApplicationPolicy.java",
+            "sha256": "sha256:6aa6044e35efd2bfdf25e76d057a73c4f4b7c2497b872e1b99ff81063a9416dc"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/Observability.java",
+            "sha256": "sha256:5ed47cacba7692d2488eb7bf1e2de782305b49ed8e86e0bc1278f3f0ad0fb6b9"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/PrivacyGuards.java",
+            "sha256": "sha256:568e389ff8fb12c589c0ced8a5fec7e11813e870af8ebe5d5ad2ae4bba259f54"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/SecurityConfiguration.java",
+            "sha256": "sha256:87f53f432af128e610b549c85009421329ad690f3506d076730e769bd2186390"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/SessionGate.java",
+            "sha256": "sha256:9692b6b8bde341cc328a9bdf025ee758414aad682ed4c6abe683e109c4802ef0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Policy",
+        "id": "POL-APPROVE",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "POL-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:3213dd283094311312f7a556bb04b6df6e7156d2723249f37c0e89676f1320f2",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/ApplicationPolicy.java",
+            "sha256": "sha256:6aa6044e35efd2bfdf25e76d057a73c4f4b7c2497b872e1b99ff81063a9416dc"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/Observability.java",
+            "sha256": "sha256:5ed47cacba7692d2488eb7bf1e2de782305b49ed8e86e0bc1278f3f0ad0fb6b9"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/PrivacyGuards.java",
+            "sha256": "sha256:568e389ff8fb12c589c0ced8a5fec7e11813e870af8ebe5d5ad2ae4bba259f54"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/SecurityConfiguration.java",
+            "sha256": "sha256:87f53f432af128e610b549c85009421329ad690f3506d076730e769bd2186390"
+          },
+          {
+            "path": "backend/src/main/java/acp/security/SessionGate.java",
+            "sha256": "sha256:9692b6b8bde341cc328a9bdf025ee758414aad682ed4c6abe683e109c4802ef0"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Command",
+        "id": "CMD-APPROVE",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "CMD-APPROVE",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CMD-APPROVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:45db3d556ac1d640ab88593ddb800efd4c23dc33c7b5b40d15e9633fde7a2266",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/Invocations.java",
+            "sha256": "sha256:3de7a472cffa5f31bd713e328df5b9a6cbf384bc1964d12a05ba7710274f33b8"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/TypedTasks.java",
+            "sha256": "sha256:aef7a64de96daca6acfd63eacc88064a455922c1338226c2ed8953fa9a497495"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Query",
+        "id": "QUERY-TASKS",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "QUERY-TASKS",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "QUERY-TASKS",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "QUERY-TASKS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:8e154e6923a142a2206c19ad0d89c234c62e5ac15eee256c49bb0e089fb92956",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/Invocations.java",
+            "sha256": "sha256:3de7a472cffa5f31bd713e328df5b9a6cbf384bc1964d12a05ba7710274f33b8"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/TypedTasks.java",
+            "sha256": "sha256:aef7a64de96daca6acfd63eacc88064a455922c1338226c2ed8953fa9a497495"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:715e736d76872add7ea681773537e425a1be91dcd8ac621cc1cc3a7875365a24"
+          }
+        ]
+      },
+      {
+        "kind": "UseCase",
+        "id": "UC-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "UC-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "UC-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "UC-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:69bd16460f771dc8c8b732b3d783f296e2d5729ea6ed133c31bc97205a1e06e8",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/Invocations.java",
+            "sha256": "sha256:3de7a472cffa5f31bd713e328df5b9a6cbf384bc1964d12a05ba7710274f33b8"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/TypedTasks.java",
+            "sha256": "sha256:aef7a64de96daca6acfd63eacc88064a455922c1338226c2ed8953fa9a497495"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:715e736d76872add7ea681773537e425a1be91dcd8ac621cc1cc3a7875365a24"
+          }
+        ]
+      },
+      {
+        "kind": "Failure",
+        "id": "FAIL-BUSINESS",
+        "revision": 1,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "FAIL-BUSINESS",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:909b9db02581830d6f9500c645b4340aafbcf992b88fd7c54f5748832d226ab1",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "RatePolicy",
+        "id": "RATE-CMD-APPROVE",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "RATE-CMD-APPROVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "RATE-CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:033964720bc29e26efab1b461ec633e9b8e7908fb90432e068708248887054c9",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "IdempotencyPolicy",
+        "id": "IDEM-OPERATION",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "IDEM-OPERATION",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "IDEM-OPERATION",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:78cf6b2598d5382e7cb62b6057af037331d6eddf87062a5999bea07ae60a5fb9",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "DeliveryPolicy",
+        "id": "DELIVERY-EVT-APPROVE",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELIVERY-EVT-APPROVE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELIVERY-EVT-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:987647ea7d4570ea1c445f4107219861487ccf737a84acd8dc5119ac1ae3be70",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Schedule",
+        "id": "SCHEDULE-TASK",
+        "revision": 1,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SCHEDULE-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:a4907d9b77375b6965d971d6bce2ac0c6f94556fbb61142602240c36fa544c84",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Job",
+        "id": "JOB-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "JOB-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "JOB-TASK",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "JOB-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:f41652767d89522a86761d27c947041ad0c44289a28d925e33b11e7ad7f62758",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "DataClassification",
+        "id": "CLASS-INTERNAL",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "CLASS-INTERNAL",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "CLASS-INTERNAL",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:aee600c2b57579f5c601ed7adf3b6ae152c4b59cbcf3d86d8e4a35d53853d42c",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "DataLifecycle",
+        "id": "LIFECYCLE-CASE",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "LIFECYCLE-CASE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "LIFECYCLE-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:1ac72cd3945be164c120440fd61d6091ae92fc4662ccfbcda6315712356370a0",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/LifecycleActions.java",
+            "sha256": "sha256:2cdfc6941a9ce86bff8725059ec602dcedb67b24265a9245cea452cfe325dcf1"
+          },
+          {
+            "path": "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+            "sha256": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Retention",
+        "id": "RETENTION-CASE",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "RETENTION-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:5159815ef41c2d2d35765fa42e530b8e3ccb901b30ab2d95c8ae7a86e807788a",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/LifecycleActions.java",
+            "sha256": "sha256:2cdfc6941a9ce86bff8725059ec602dcedb67b24265a9245cea452cfe325dcf1"
+          },
+          {
+            "path": "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+            "sha256": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "DeletionPolicy",
+        "id": "DELETE-CASE",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "DELETE-CASE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "DELETE-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:0525a3e46ee246d3b4ee7840f7edc3e23b7bdfa1df2818693399a9a19778feab",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/LifecycleActions.java",
+            "sha256": "sha256:2cdfc6941a9ce86bff8725059ec602dcedb67b24265a9245cea452cfe325dcf1"
+          },
+          {
+            "path": "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+            "sha256": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "LegalHold",
+        "id": "HOLD-CASE",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:deterministic-v04-proposal",
+            "locator": "HOLD-CASE",
+            "actor": "assistant:proposal-author",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "HOLD-CASE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:c703f51f2cd5a8611b59e2ee858de51275039de031a0933d2d915860c45be2d3",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "backend/src/main/java/acp/generated/LifecycleActions.java",
+            "sha256": "sha256:2cdfc6941a9ce86bff8725059ec602dcedb67b24265a9245cea452cfe325dcf1"
+          },
+          {
+            "path": "backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+            "sha256": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "backend/src/main/resources/db/migration/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "database/V1__initial.sql",
+            "sha256": "sha256:b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674"
+          },
+          {
+            "path": "database/V2__delivery_jobs.sql",
+            "sha256": "sha256:747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad"
+          },
+          {
+            "path": "database/V3__privacy_lifecycle.sql",
+            "sha256": "sha256:71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          }
+        ]
+      },
+      {
+        "kind": "Screen",
+        "id": "SCREEN-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "SCREEN-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:02b47fe3e5b973f8fe04e495e6597b19b38e32ceaf3ba2808edab4b6cfa44f1f",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:715e736d76872add7ea681773537e425a1be91dcd8ac621cc1cc3a7875365a24"
+          }
+        ]
+      },
+      {
+        "kind": "Form",
+        "id": "FORM-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "FORM-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "FORM-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:8c77fada09c48432c4678d273cfbbf62362788490a553c2b8435eb42323b3421",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:715e736d76872add7ea681773537e425a1be91dcd8ac621cc1cc3a7875365a24"
+          }
+        ]
+      },
+      {
+        "kind": "InputControl",
+        "id": "CONTROL-TASK-RESOURCE",
+        "revision": 2,
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "CONTROL-TASK-RESOURCE",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:d60d2143bf5bbceefa87195e65813ca4a4b40f496537000e47fb72a1e9e4151b",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:715e736d76872add7ea681773537e425a1be91dcd8ac621cc1cc3a7875365a24"
+          }
+        ]
+      },
+      {
+        "kind": "Action",
+        "id": "ACTION-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ACTION-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:7462dc7fccf20f20a05031befc4fcd06266938d86ae87819fb78b3f626940c03",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:715e736d76872add7ea681773537e425a1be91dcd8ac621cc1cc3a7875365a24"
+          }
+        ]
+      },
+      {
+        "kind": "PermissionBoundary",
+        "id": "BOUNDARY-TASK",
+        "revision": 3,
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "BOUNDARY-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "canonicalNodeDigest": "sha256:94b966e35e3877ac0664a7b241eb16611e277ca012d30cc6c333e6237258a4ac",
+        "runtimeEvidence": "admission/case-management-backend.log and browser-results.json",
+        "runtimeLinkQuality": "SUITE_LEVEL; per-object assertion trace NOT PROVEN",
+        "artifacts": [
+          {
+            "path": "acp/provenance.json",
+            "sha256": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9"
+          },
+          {
+            "path": "acp/task-ui-model.json",
+            "sha256": "sha256:fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+          },
+          {
+            "path": "backend/src/main/resources/acp-model.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "contracts/target-ir.json",
+            "sha256": "sha256:ef191ae1ee7a328f71b169013324a78b9b0e01078bf9169b91d4af405303dad2"
+          },
+          {
+            "path": "frontend/src/App.vue",
+            "sha256": "sha256:fb6a6e195d05dd565debcb5dddedc473266dc993375d4f095eff38db1a106d96"
+          },
+          {
+            "path": "frontend/src/model.ts",
+            "sha256": "sha256:c521b998c6e46d9611656514c6326ccc12c738c30a53ea732c546a1a625d3054"
+          },
+          {
+            "path": "frontend/src/task-contract.ts",
+            "sha256": "sha256:1a4da0544ce4cc9900dca7a3905f135598b081fcad6df8678488344c584f08a8"
+          },
+          {
+            "path": "frontend/src/task-ui-model.ts",
+            "sha256": "sha256:715e736d76872add7ea681773537e425a1be91dcd8ac621cc1cc3a7875365a24"
+          }
+        ]
+      }
+    ]
+  }
+}
