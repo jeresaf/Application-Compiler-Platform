@@ -10,8 +10,9 @@ Expiry requires acquisition again; no token is persisted or embedded.
 
 The deployment supplies client ID, redirect URI, scopes and the mapping of
 untrusted ID-token claims to UI hints. Server authorization is authoritative.
-This example does not establish production provider interoperability, refresh,
-ID-token signature validation or a production identity assurance policy. Those
+This example does not establish production provider interoperability, refresh or a production identity assurance policy. RS256 ID-token signature,
+issuer, audience, expiry, issued-at, nonce and optional access-token hash are
+verified through issuer JWKS before hints are exposed. Those
 remain deployment review obligations. Browser-test authorities must never be
 used by this adapter or packaged in production.
 

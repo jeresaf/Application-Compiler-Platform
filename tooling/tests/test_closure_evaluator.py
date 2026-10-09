@@ -15,13 +15,17 @@ class ClosureEvaluatorTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup);self.root=Path(self.temp.name)
         self.now=datetime.now(timezone.utc)
-        self.binding={'bundleDigest':'sha256:'+'a'*64,'canonicalDigests':{'payment':'approved-payment','case-management':'approved-case'},'approvalDigest':'approved-record','executionCommit':'reviewed-execution'}
-        self.xml=self.root/'startup.xml';self.xml.write_text('<testsuite><testcase name="productionConfigurationFailsBeforeActivation"/><testcase name="activeDeliveryRequiresTransport"/></testsuite>')
+        self.binding={'bundleDigest':'sha256:'+'a'*64,'canonicalDigests':{'payment':'approved-payment','case-management':'approved-case'},'approvalDigest':'approved-record','executionCommit':__import__('subprocess').check_output(['git','rev-parse','HEAD'],text=True).strip()}
+        self.xml=self.root/'startup.xml';self.xml.write_text('<testsuite><testcase classname="acp.domain.RuntimeConfigurationContractTest" name="productionConfigurationFailsBeforeActivation"/><testcase classname="acp.domain.RuntimeConfigurationContractTest" name="activeDeliveryRequiresTransport"/></testsuite>')
         self.record={'criterion':16,**self.binding,'evaluatedAt':self.now.isoformat(),'artifacts':[{'path':self.xml.name,'sha256':criteria.sha(self.xml.read_bytes())}]}
     def row(self,record=None,number=16):
         return next(r for r in criteria.assess({'criterionEvidence':{str(number):record or self.record}},root=self.root,binding=self.binding,now=self.now) if r['requirement']==number)
     def test_correct_specific_artifacts_pass_without_status_labels(self):
         self.assertEqual('PASS',self.row()['status'])
+    def test_named_test_without_registered_class_is_rejected(self):
+        self.xml.write_text('<testsuite><testcase classname="ForgedTest" name="productionConfigurationFailsBeforeActivation"/><testcase classname="ForgedTest" name="activeDeliveryRequiresTransport"/></testsuite>')
+        self.record['artifacts'][0]['sha256']=criteria.sha(self.xml.read_bytes())
+        self.assertIn('REGISTERED_TEST_SOURCE_REQUIRED',self.row()['failureReason'])
     def test_missing_evidence_never_passes(self):
         rows=criteria.assess({'result':'PASS'},root=self.root,binding=self.binding,now=self.now)
         self.assertTrue(all(r['status']=='BLOCKED' for r in rows))

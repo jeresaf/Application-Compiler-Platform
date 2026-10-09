@@ -48,15 +48,25 @@ def validate_record(number,record,root,binding,now):
     return files
 
 
-def junit(files,required):
-    found=set()
+def junit(files,required,execution_commit=None):
+    found=set();classes={}
     for path in files.values():
         if path.suffix!='.xml':continue
         suite=ET.parse(path).getroot()
         for case in suite.iter('testcase'):
             if any(case.find(k) is not None for k in ('failure','error','skipped')):raise ValueError('TEST_NOT_GREEN')
-            found.add(case.attrib['name'])
+            found.add(case.attrib['name']);classes[case.attrib['name']]=case.attrib.get('classname')
     if not set(required)<=found:raise ValueError('INCOMPLETE_CRITERION_TESTS:'+','.join(sorted(set(required)-found)))
+    if execution_commit:
+        for name in required:
+            classname=classes.get(name)
+            if not classname:raise ValueError('REGISTERED_TEST_CLASS_REQUIRED:'+name)
+            candidates=list((ROOT/'targets/spring-vue-postgres/templates/backend/src/test/java').rglob(classname.rsplit('.',1)[-1]+'.java'))
+            registered=False
+            for candidate in candidates:
+                result=subprocess.run(['git','show',execution_commit+':'+candidate.relative_to(ROOT).as_posix()],cwd=ROOT,capture_output=True,text=True)
+                if result.returncode==0 and ('void '+name+'(') in result.stdout and result.stdout.encode()==candidate.read_bytes():registered=True
+            if not registered:raise ValueError('REGISTERED_TEST_SOURCE_REQUIRED:'+name)
 
 
 def read_named(files,name):
@@ -141,12 +151,79 @@ def validate(number,files,binding,now,accepted_reviews):
             job=workflow.split('  phase6-closure-audit:')[1]
             if 'continue-on-error' in job or 'tooling/audit/phase6.py' not in job or 'if: always()' not in job:raise ValueError('CLOSURE_CI_POLICY')
         return
+    if number==29:
+        value=read_named(files,'oidc-integration.json')
+        if value['bundleDigest'].removeprefix('sha256:')!=binding['bundleDigest'].removeprefix('sha256:') or value['fixture']!='AUTHORIZATION_CODE_PKCE_RS256_JWKS':raise ValueError('OIDC_FIXTURE_BINDING')
+        if set(value['domains'])!={'payment','case-management'}:raise ValueError('INCOMPLETE_OIDC_DOMAINS')
+        for domain,report in value['domains'].items():
+            stats=report['stats']
+            if stats['expected']!=2 or stats['unexpected'] or stats['flaky'] or stats['skipped']:raise ValueError('OIDC_BROWSER_NOT_GREEN')
+            def specs(node):
+                yield from node.get('specs',[])
+                for child in node.get('suites',[]):yield from specs(child)
+            for spec in specs(report):
+                if spec['title']!='oidcAcquisitionIdentityChangeExpiredAndWrongTenant':raise ValueError('UNRELATED_OIDC_TEST')
+        return
+    if number==23:
+        logs=[p for p in files.values() if p.name=='faults-ownership-history.log']
+        if len(logs)!=1:raise ValueError('EXACT_FAULT_SUITE_REQUIRED')
+        text=logs[0].read_text()
+        for test in ('test_concurrent_stale_writers_publish_once','test_parent_symlink_swap_cannot_redirect_publication','test_process_crash_before_publish_preserves_original','test_ai_requires_bound_provenance_and_host_approval','test_atomic_cas_and_manual_edit_rejection'):
+            lines=[line for line in text.splitlines() if line.startswith(test+' ')]
+            if len(lines)!=1 or not lines[0].endswith(' ... ok'):raise ValueError('FAULT_CASE_NOT_GREEN:'+test)
+        if not text.rstrip().endswith('OK') or 'FAILED (' in text:raise ValueError('FAULT_SUITE_NOT_GREEN')
+        return
+    if number in (4,37):
+        manifest=read_named(files,'audit-producer-manifest.json')
+        for key,value in binding.items():
+            if manifest.get(key)!=value:raise ValueError('PRODUCER_MANIFEST_BINDING:'+key)
+        required={'full-admission.log','supplemental-browser.log','faults-ownership-history.log','remediation-regressions.log','deployment-oidc-integration.log','sealed-release-upgrade.log'}
+        if not required<={c['log'] for c in manifest['commands']}:raise ValueError('INCOMPLETE_AUDIT_PRODUCERS')
+        for entry in manifest['commands']:
+            path=next((p for p in files.values() if p.name==entry['log']),None)
+            if entry['exitCode']!=0 or path is None or sha(path.read_bytes())!=entry['logDigest']:raise ValueError('AUDIT_PRODUCER_NOT_VERIFIED')
+        for n in (3,16,17,19,23,29):validate(n,files,binding,now,accepted_reviews)
+        supplemental=read_named(files,'http-outcomes-report.json')
+        if set(supplemental['domains'])!={'payment','case-management'}:raise ValueError('INCOMPLETE_SUPPLEMENTAL_HTTP')
+        return
+    if number in (17,19):
+        import io,tarfile,zipfile
+        report=read_named(files,'package-report.json')
+        if set(report)!={'payment','case-management'}:raise ValueError('INCOMPLETE_PACKAGES')
+        for domain,row in report.items():
+            packages=[p for p in files.values() if p.name==domain+'-production-1.tar']
+            if len(packages)!=1 or sha(packages[0].read_bytes())!=row['packageDigest']:raise ValueError('MISMATCHED_PACKAGE_DIGEST')
+            with tarfile.open(packages[0]) as archive:
+                contents={m.name:archive.extractfile(m).read() for m in archive.getmembers() if m.isfile()}
+            if {k:sha(v) for k,v in contents.items()}!=row['files']:raise ValueError('PACKAGE_CONTENT_BINDING')
+            with zipfile.ZipFile(io.BytesIO(contents['backend/application.jar'])) as jar:
+                libraries=[n for n in jar.namelist() if n.startswith('BOOT-INF/lib/') and n.endswith('.jar')]
+                if number==17:
+                    forbidden=(b'BrowserServer',b'browser-authorized',b'/__test/',b'ephemeral-test-only',b'browser-test-only',b'BrowserJwtDecoder',b'acp-disposable',b'disposable-integration')
+                    for name in jar.namelist():
+                        if name.startswith('BOOT-INF/classes/') and any(word in name.encode()+jar.read(name) for word in forbidden):raise ValueError('TEST_AUTHORITY_IN_PACKAGE')
+                    for path,data in contents.items():
+                        if path.startswith('frontend/') and any(word in data for word in forbidden):raise ValueError('TEST_AUTHORITY_IN_FRONTEND')
+                else:
+                    sbom=read_named(files,domain+'-sbom.cdx.json')
+                    backend=[c for c in sbom['components'] if {'name':'acp:source','value':'packaged-backend'} in c.get('properties',[])]
+                    if len(backend)!=len(libraries):raise ValueError('INCOMPLETE_PACKAGED_SBOM')
+                    hashes={sha(jar.read(n)).split(':')[1] for n in libraries}
+                    if hashes!={h['content'] for c in backend for h in c['hashes'] if h['alg']=='SHA-256'}:raise ValueError('SBOM_PACKAGE_MISMATCH')
+                    for name in libraries:
+                        with zipfile.ZipFile(io.BytesIO(jar.read(name))) as lib:
+                            properties=None
+                            for entry in lib.namelist():
+                                if entry.startswith('META-INF/maven/') and entry.endswith('/pom.properties'):
+                                    properties=dict(line.split('=',1) for line in lib.read(entry).decode().splitlines() if '=' in line and not line.startswith('#'))
+                            if properties and not any(c.get('group')==properties['groupId'] and c['name']==properties['artifactId'] and c['version']==properties['version'] and c.get('purl')=='pkg:maven/'+properties['groupId']+'/'+properties['artifactId']+'@'+properties['version'] for c in backend):raise ValueError('FORGED_SBOM_PACKAGE_IDENTITY')
+        return
     if number in (3,7,11):return admission(files,binding)
     if number==5:return evolution(files,binding)
     if number==21:return security(files,binding,now)
     if number in DEPLOYMENT:return deployment(files,number,accepted_reviews)
     spec=SPECS[number]
-    if spec['tests']:return junit(files,spec['tests'])
+    if spec['tests']:return junit(files,spec['tests'],binding['executionCommit'])
     raise ValueError('INVALID_CRITERION_DEFINITION')
 
 
@@ -158,6 +235,7 @@ def assess(report,root=None,binding=None,now=None,accepted_reviews=None):
     for number,spec in SPECS.items():
         reason=None
         try:
+            if 'verificationFailure' in binding:raise ValueError('UNVERIFIED_AUDIT_CONTEXT:'+binding['verificationFailure'])
             record=records.get(str(number))
             files=validate_record(number,record,root,binding,now)
             validate(number,files,binding,now,accepted_reviews or {})
@@ -172,7 +250,7 @@ def assess(report,root=None,binding=None,now=None,accepted_reviews=None):
     return rows
 
 
-DEPLOYMENT={12,13,15,26,27,28}
+DEPLOYMENT={12,13,15,20,26,27,28}
 SPECS={}
 SPECS[1]={'area': 'Immutable baseline', 'detail': 'Exact merged baseline and execution commit; clean checkout, protected history and sealed bundle checked.', 'tests': [], 'evidenceRequired': {'binding': ['bundleDigest', 'canonicalDigests', 'approvalDigest', 'executionCommit', 'evaluatedAt'], 'artifacts': 'Existing files with verified SHA-256; no self-reported status accepted', 'criterionTests': []}}
 SPECS[2]={'area': 'Release immutability', 'detail': 'Intentional 0.5.0 successor; exact prior release entries retained and verified against the reviewed baseline.', 'tests': [], 'evidenceRequired': {'binding': ['bundleDigest', 'canonicalDigests', 'approvalDigest', 'executionCommit', 'evaluatedAt'], 'artifacts': 'Existing files with verified SHA-256; no self-reported status accepted', 'criterionTests': []}}
@@ -231,3 +309,8 @@ _WITNESSES={
 for _number,_name in _WITNESSES.items():
     SPECS[_number]['tests']=[_name]
     SPECS[_number]['evidenceRequired']['criterionTests']=[_name]
+
+SPECS[5]['detail']='A deployed target-release evolution of unchanged approved snapshots is separate from accepted semantic evolution. Synthetic String/backfill witnesses are not new human business approvals; a complete accepted ChangeSet/data-binding deployment chain remains required.'
+SPECS[14]['detail']='Versioned startup configuration is implemented. Deployment-owned identity/principal/transport wiring, external TLS/proxy operation and production provider acceptance still require complete deployable-profile evidence.'
+SPECS[24]['detail']='Actual PostgreSQL String/backfill/presence/required/transactional rollback and incompatible-storage regressions supplement existing Flyway upgrade checks; the complete unavailable-DB/partial-upgrade/safe-retry deployment matrix remains required.'
+SPECS[29]['detail']='Deployment-owned authorization-code PKCE fixture verifies RS256/JWKS identity tokens and real generated-backend expiry/tenant behavior. Production provider acceptance and assurance remain separate deployment obligations.'

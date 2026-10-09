@@ -178,15 +178,40 @@ def evolution_inventory(output):
 
 
 def run(args):
-    output=args.output.resolve();output.mkdir(parents=True,exist_ok=False)
-    report={'schemaVersion':'2.0.0','auditIdentity':'phase6-remediation-0.5.0','evidenceRoot':str(output),'auditPerformedAt':datetime.now(timezone.utc).isoformat(),
+    output=args.output.resolve()
+    reused=None
+    if args.resume:
+        import shutil
+        from criteria import admission as verify_admission,current_binding
+        previous_path=output/'phase6-final-closure.json'
+        if not previous_path.is_file():previous_path=output/'progress.json'
+        previous=json.loads(previous_path.read_text())
+        old=previous['baseline'];binding=current_binding()
+        if old['bundleDigest']!=binding['bundleDigest'] or old['canonicalDigests']!=binding['canonicalDigests']:raise RuntimeError('RESUME_INPUT_MISMATCH')
+        when=datetime.fromisoformat(previous['auditPerformedAt'])
+        if (datetime.now(timezone.utc)-when).total_seconds()>86400:raise RuntimeError('RESUME_EVIDENCE_EXPIRED')
+        entry=next(c for c in previous['commands'] if c['log']=='full-admission.log')
+        if entry['exitCode']!=0 or digest((output/entry['log']).read_bytes())!=entry['logDigest']:raise RuntimeError('RESUME_ADMISSION_LOG_CHANGED')
+        paths=[output/'admission/task-interface-report.json',*sorted((output/'admission').glob('*/backend/target/surefire-reports/TEST-*.xml'))]
+        verify_admission({p.relative_to(output).as_posix():p for p in paths},binding)
+        reused={'originalExecutionCommit':old['auditExecutionCommit'],'bundleDigest':old['bundleDigest'],
+            'log':entry,'artifacts':{p.relative_to(output).as_posix():digest(p.read_bytes()) for p in paths},
+            'reason':'Immutable generator bundle and exact approved snapshots unchanged; independently revalidated admission report and real JUnit/browser artifacts. This is reuse, not a new admission execution.'}
+        archive=output/'attempts'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ');archive.mkdir(parents=True,exist_ok=False)
+        for path in list(output.iterdir()):
+            if path.name not in {'admission','full-admission.log','attempts'}:shutil.move(str(path),archive/path.name)
+        supplemental=output/'admission/supplemental-http'
+        if supplemental.exists():shutil.move(str(supplemental),archive/'supplemental-http')
+    else:output.mkdir(parents=True,exist_ok=False)
+    report={'schemaVersion':'2.0.0','auditIdentity':'phase6-remediation-0.5.0/'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'),'evidenceRoot':str(output),'auditPerformedAt':datetime.now(timezone.utc).isoformat(),
             'phase6':'IN_PROGRESS','phase7':'NOT_STARTED','recommendation':'PHASE6_CLOSURE_BLOCKED','commands':[]}
-    report['baseline']=baseline();write(output/'baseline.json',report['baseline'])
+    if reused:report['reusedAdmission']=reused;report['commands'].append(reused['log'])
     def execute(arguments,name,timeout=3600):
         r=command([sys.executable,*arguments],ROOT,output/(name+'.log'),timeout)
         report['commands'].append(r);write(output/'progress.json',report)
     try:
-        execute(['tooling/audit/admission.py','--output',str(output/'admission'),'--run-builds','--full-admission'],'full-admission',3600)
+        report['baseline']=baseline();write(output/'baseline.json',report['baseline'])
+        if not reused:execute(['tooling/audit/admission.py','--output',str(output/'admission'),'--run-builds','--full-admission'],'full-admission',3600)
         execute(['tooling/tests/task_ui_http_outcomes.py','--root',str(output/'admission')],'supplemental-browser',1800)
         execute(['-c',"import sys,unittest;sys.path.insert(0,'tooling/tests');unittest.main(module=None)",'tooling.tests.test_target_worker_faults','tooling.tests.test_materializer_faults',
                  'tooling.tests.test_phase6_foundations','tooling.tests.test_target_migrations',
@@ -203,15 +228,24 @@ def run(args):
     except Exception as error:
         report['executionError']=type(error).__name__+':'+str(error)
     finally:
-        report['sealedBundleAfterAudit']='sha256:'+bundle_digest()
-        if bundle_digest()!=BUNDLE:raise RuntimeError('SEALED_BUNDLE_CHANGED_STOP')
         from criteria import assess,current_binding,sha
-        binding=current_binding();report['criterionEvidence']={}
+        try:
+            report['sealedBundleAfterAudit']='sha256:'+bundle_digest()
+            if bundle_digest()!=BUNDLE:raise RuntimeError('SEALED_BUNDLE_CHANGED_STOP')
+            binding=current_binding()
+        except Exception as error:
+            report['executionError']=type(error).__name__+':'+str(error)
+            binding={'verificationFailure':report['executionError']}
+        report['criterionEvidence']={}
         paths=[output/'admission/task-interface-report.json',*sorted((output/'admission').glob('*/backend/target/surefire-reports/TEST-*.xml'))]
         artifacts=[{'path':p.relative_to(output).as_posix(),'sha256':sha(p.read_bytes())} for p in paths if p.is_file()]
         write(output/'audit-state.json',{'phase6':'IN_PROGRESS','phase7':'NOT_STARTED','closureAuthority':'EXPLICIT_HUMAN_REVIEW_REQUIRED','recommendation':'PHASE6_CLOSURE_BLOCKED'})
-        for n in (1,2,3,6,7,11,16,34,35,36,38,39):
-            report['criterionEvidence'][str(n)]={'criterion':n,**binding,'evaluatedAt':datetime.now(timezone.utc).isoformat(),'artifacts':artifacts+[{'path':p.name,'sha256':sha(p.read_bytes())} for p in (output/'baseline.json',output/'audit-state.json')]}
+        write(output/'audit-producer-manifest.json',{**binding,'commands':report['commands']})
+        paths += [output/'audit-producer-manifest.json',output/'admission/supplemental-http/http-outcomes-report.json',*[output/c['log'] for c in report['commands']],output/'faults-ownership-history.log',output/'package-report.json',output/'oidc/oidc-integration.json']
+        paths += list(output.glob('*-production-1.tar'))+list(output.glob('*-sbom.cdx.json'))
+        artifacts=[{'path':p.relative_to(output).as_posix(),'sha256':sha(p.read_bytes())} for p in paths if p.is_file()]
+        for n in (1,2,3,4,6,7,11,16,17,19,23,29,34,35,36,37,38,39):
+            report['criterionEvidence'][str(n)]={'criterion':n,**binding,'evaluatedAt':datetime.now(timezone.utc).isoformat(),'artifacts':artifacts+[{'path':p.name,'sha256':sha(p.read_bytes())} for p in (output/'baseline.json',output/'audit-state.json') if p.is_file()]}
         report['auditExecution']={'status':'EXCEPTION' if report.get('executionError') else 'PERFORMED','exception':report.get('executionError')}
         report['criteria']=assess(report,root=output,binding=binding)
         report['blockers']=[r for r in report['criteria'] if r['status']=='BLOCKED']
@@ -222,5 +256,12 @@ def run(args):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True)
-    raise SystemExit(run(p.parse_args()))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);p.add_argument('--resume',action='store_true',help='Revalidate and reuse identical-bundle full admission; rerun remaining audit producers with separate provenance')
+    args=p.parse_args()
+    try:code=run(args)
+    except Exception as error:
+        args.output.mkdir(parents=True,exist_ok=True)
+        write(args.output/('audit-execution-exception-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')+'.json'),
+            {'auditExecution':{'status':'EXCEPTION','exception':type(error).__name__+':'+str(error)},'recommendation':'PHASE6_CLOSURE_BLOCKED','phase6':'IN_PROGRESS','phase7':'NOT_STARTED'})
+        print('AUDIT_EXECUTION_EXCEPTION',flush=True);code=1
+    raise SystemExit(code)

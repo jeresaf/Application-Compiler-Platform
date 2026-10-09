@@ -23,8 +23,8 @@ async function discovery(){
  const cfg=configured();const response=await fetch(cfg.issuer.replace(/\/$/,'')+'/.well-known/openid-configuration');
  if(!response.ok)throw new Error('OIDC_DISCOVERY');const metadata=await response.json();
  if(metadata.issuer!==cfg.issuer)throw new Error('OIDC_ISSUER_MISMATCH');
- for(const key of ['authorization_endpoint','token_endpoint'])if(new URL(metadata[key]).origin!==new URL(cfg.issuer).origin)throw new Error('OIDC_ENDPOINT_ORIGIN');
- return metadata as {authorization_endpoint:string;token_endpoint:string};
+ for(const key of ['authorization_endpoint','token_endpoint','jwks_uri'])if(new URL(metadata[key]).origin!==new URL(cfg.issuer).origin)throw new Error('OIDC_ENDPOINT_ORIGIN');
+ return metadata as {authorization_endpoint:string;token_endpoint:string;jwks_uri:string};
 }
 export async function login(){
  const cfg=configured(),metadata=await discovery(),state=random(),nonce=random(),verifier=random();
@@ -45,12 +45,20 @@ export async function callback(){
  if(!response.ok){clearIdentity();throw new Error('OIDC_TOKEN_ACQUISITION');}
  const value=await response.json();
  if(value.token_type?.toLowerCase()!=='bearer'||typeof value.access_token!=='string'||!Number.isFinite(value.expires_in)||value.expires_in<=0)throw new Error('OIDC_TOKEN_RESPONSE');
- // ID-token claims are untrusted UI hints, never identity/authorization proof.
- // This example requires an ID token for nonce and deployment hint extraction;
- // server-side bearer validation remains mandatory independently of hints.
- const payload=value.id_token?.split('.')[1];if(!payload)throw new Error('OIDC_ID_TOKEN_REQUIRED');
- const claims=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(payload.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0))));
- if(claims.iss!==cfg.issuer||claims.aud!==cfg.clientId||claims.nonce!==attempt.nonce)throw new Error('OIDC_ID_TOKEN_BINDING');
+ const parts=value.id_token?.split('.');if(!parts||parts.length!==3)throw new Error('OIDC_ID_TOKEN_REQUIRED');
+ const decode=(part:string)=>Uint8Array.from(atob(part.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
+ const header=JSON.parse(new TextDecoder().decode(decode(parts[0])));
+ if(header.alg!=='RS256'||typeof header.kid!=='string')throw new Error('OIDC_ID_TOKEN_ALGORITHM');
+ const keysResponse=await fetch(metadata.jwks_uri);if(!keysResponse.ok||new URL(keysResponse.url).origin!==new URL(cfg.issuer).origin)throw new Error('OIDC_JWKS');
+ const keys=await keysResponse.json();const jwk=keys.keys?.find((k:JsonWebKey & {kid?:string})=>k.kid===header.kid&&k.kty==='RSA'&&(!k.use||k.use==='sig')&&(!k.alg||k.alg==='RS256'));
+ if(!jwk)throw new Error('OIDC_SIGNING_KEY');
+ const signingKey=await crypto.subtle.importKey('jwk',jwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
+ if(!await crypto.subtle.verify('RSASSA-PKCS1-v1_5',signingKey,decode(parts[2]),new TextEncoder().encode(parts[0]+'.'+parts[1])))throw new Error('OIDC_ID_TOKEN_SIGNATURE');
+ const claims=JSON.parse(new TextDecoder().decode(decode(parts[1]))),now=Math.floor(Date.now()/1000);
+ const audiences=Array.isArray(claims.aud)?claims.aud:[claims.aud];
+ if(claims.iss!==cfg.issuer||!audiences.includes(cfg.clientId)||(audiences.length>1&&claims.azp!==cfg.clientId)||claims.nonce!==attempt.nonce||typeof claims.sub!=='string'||!Number.isInteger(claims.exp)||claims.exp<=now||!Number.isInteger(claims.iat)||claims.iat>now+60)throw new Error('OIDC_ID_TOKEN_BINDING');
+ if(claims.at_hash){const hash=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value.access_token)));if(claims.at_hash!==base64url(hash.slice(0,hash.length/2)))throw new Error('OIDC_ACCESS_TOKEN_BINDING');}
+ // Verified identity claims still provide presentation hints, not server permissions.
  token=value.access_token;expiry=Date.now()+value.expires_in*1000;hints=cfg.hints(claims);changed();return true;
 }
 export function clearIdentity(){token='';expiry=0;hints={actor:'',subject:'',tenant:'',permissions:new Set()};changed();}

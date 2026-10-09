@@ -12,7 +12,7 @@ import xml.etree.ElementTree as ET
 from phase6 import command,digest,write,ROOT
 
 FORBIDDEN = (b'BrowserServer',b'browser-authorized',b'/__test/',b'ephemeral-test-only',
-             b'browser-test-only',b'BrowserJwtDecoder',b'UIUpgradeSeedTest')
+             b'browser-test-only',b'BrowserJwtDecoder',b'UIUpgradeSeedTest',b'acp-disposable',b'disposable-integration')
 
 
 def backend_components(jar):

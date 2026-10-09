@@ -37,7 +37,7 @@ class Issuer:
     q={k:v[0] for k,v in urllib.parse.parse_qs(self.rfile.read(int(self.headers.get('Content-Length',0))).decode()).items()}
     code=issuer.codes.pop(q.get('code',''),None)
     if q.get('grant_type')!='authorization_code' or not code or code['client_id']!=q.get('client_id') or code['redirect_uri']!=q.get('redirect_uri') or code['code_challenge']!=b64(hashlib.sha256(q.get('code_verifier','').encode()).digest()):self.response({'error':'invalid_grant'},400);return
-    token=issuer.token(code['tenant'],code['expired'],code['nonce']);self.response({'access_token':token,'id_token':token,'token_type':'Bearer','expires_in':600})
+    token=issuer.token(code['tenant'],code['expired'],code['nonce']);self.response({'access_token':token,'id_token':issuer.token(code['tenant'],False,code['nonce']),'token_type':'Bearer','expires_in':600})
   self.server=ThreadingHTTPServer(('127.0.0.1',0),Handler);self.url='http://127.0.0.1:'+str(self.server.server_port)
   self.thread=threading.Thread(target=self.server.serve_forever,daemon=True);self.thread.start()
  def token(self,tenant='tenant-one',expired=False,nonce='job-integration'):
@@ -74,7 +74,10 @@ Object.assign(window,{integrationLogin:login,integrationLogout:clearIdentity});
    reports={}
    try:
     for domain in ('payment','case-management'):
-     reports[domain]=gate.browser(projects/domain,domain,output)
+     identity=projects/domain/'frontend/src/extensions/identity.ts';original_identity=identity.read_bytes()
+     (output/(domain+'-production-identity-backup.ts')).write_bytes(original_identity)
+     try:reports[domain]=gate.browser(projects/domain,domain,output)
+     finally:identity.write_bytes(original_identity)
    finally:gate.subprocess.Popen=original_popen
    from target_worker import bundle_digest
    (output/'oidc-integration.json').write_text(json.dumps({'fixture':'AUTHORIZATION_CODE_PKCE_RS256_JWKS','bundleDigest':bundle_digest(),'domains':reports,'productionProviderAcceptance':'OUTSTANDING'},indent=2)+'\n')
@@ -82,21 +85,30 @@ Object.assign(window,{integrationLogin:login,integrationLogout:clearIdentity});
 
 def spec(url,token):
  return '''import {test,expect} from '@playwright/test';
+import {ui} from '../src/task-ui-model';
 const issuer=ISSUER,headers={Authorization:'Bearer '+TOKEN};
 test('oidcAcquisitionIdentityChangeExpiredAndWrongTenant',async({page})=>{
  await page.request.get(issuer+'/fixture/select?tenant=tenant-one');
  expect((await page.request.post('/__test/reset',{headers})).status()).toBe(200);
  await page.goto('/');await page.evaluate(()=>(window as any).integrationLogin());
+ await expect(page.getByRole('button',{name:'Search',exact:true})).toBeVisible();await page.getByRole('button',{name:'Search',exact:true}).click();
  await expect(page.getByRole('button',{name:'Select fixture-resource',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Select fixture-resource',exact:true}).click();
  await page.getByLabel('Task note').fill('protected draft');
  await page.evaluate(()=>(window as any).integrationLogout());
  await expect(page.locator('table')).toHaveCount(0);await expect(page.getByLabel('Task note')).toHaveValue('');
  await page.request.get(issuer+'/fixture/select?tenant=tenant-two');
+ const wrong=page.waitForResponse(r=>r.url().includes(ui.queryPath)&&r.request().method()==='POST');
  await page.evaluate(()=>(window as any).integrationLogin());
- await expect(page.locator('table tbody tr')).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Search',exact:true})).toBeVisible();await page.getByRole('button',{name:'Search',exact:true}).click();
+ const tenantResponse=await wrong;expect(tenantResponse.status()).toBe(200);expect(await tenantResponse.json()).toEqual([]);
+ await expect(page.getByText('Task view: empty',{exact:true})).toBeVisible();
  await page.request.get(issuer+'/fixture/select?tenant=tenant-one&expired=true');
- await page.evaluate(()=>(window as any).integrationLogout());await page.evaluate(()=>(window as any).integrationLogin());
+ await page.evaluate(()=>(window as any).integrationLogout());
+ const expired=page.waitForResponse(r=>r.url().includes(ui.queryPath)&&r.request().method()==='POST');
+ await page.evaluate(()=>(window as any).integrationLogin());
+ await expect(page.getByRole('button',{name:'Search',exact:true})).toBeVisible();await page.getByRole('button',{name:'Search',exact:true}).click();
+ expect((await expired).status()).toBe(401);
  await expect(page.getByRole('alert')).toBeVisible();await expect(page.locator('table')).toHaveCount(0);
 });
 '''.replace('ISSUER',json.dumps(url)).replace('TOKEN',json.dumps(token))
