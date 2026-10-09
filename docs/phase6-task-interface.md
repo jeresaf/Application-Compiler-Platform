@@ -33,11 +33,13 @@ Use the Linux environment in [DEV_LINUX.md](../DEV_LINUX.md), the pinned Node/Ja
 ```bash
 .venv/bin/python3.14 tooling/check_target_release.py
 .venv/bin/python3.14 -m unittest discover -s tooling/tests -v
-.venv/bin/python3.14 tooling/check_phase6_target.py --output /tmp/acp-ui-check --run-builds --full-admission
+.venv/bin/python3.14 tooling/tests/phase6_gates.py target --output /tmp/acp-ui-check --run-builds --full-admission
 .venv/bin/python3.14 tooling/tests/task_ui_upgrade.py --output /tmp/acp-ui-upgrade --new-projects /tmp/acp-ui-check
 ```
 
 Choose fresh output directories for full admission. Chromium must be installed through the pinned generated Playwright dependency; CI installs its Ubuntu system dependencies. The GitHub workflow also runs the focused late-identity-refresh regression and retains every historical invocation, delivery/job, privacy/lifecycle, upgrade and evolution gate. `/tmp` reports are ephemeral local evidence; retained repository summaries and uploaded CI artifacts identify their exact bundle.
+
+The test-only gate entrypoints preserve the sealed runtime while adapting the historical delivery recovery fixture to later calendar days: assertions select the original occurrence identity and require exactly one non-skipped occurrence. Later daily occurrences may correctly be recorded as skipped. Both domains passed this focused real-PostgreSQL check. The historical invocation upgrade harness separately reads original 0.1 inline provenance without rewriting it; both actual upgrades passed locally. These adapters do not change generated production bytes or weaken runtime gates.
 
 ## Final Linux validation — 2026-10-09
 

@@ -206,7 +206,7 @@ jobs:
       - name: Compile both complete approved domains through the negotiated target
         # Full admission requires real generation, builds, PostgreSQL and browser.
         # Phase 6 final closure review remains independently outstanding.
-        run: python3.14 tooling/check_phase6_target.py --output /tmp/acp-phase6-target --run-builds --full-admission
+        run: python3.14 tooling/tests/phase6_gates.py target --output /tmp/acp-phase6-target --run-builds --full-admission
       - name: Verify identity clearing and logical recovery keys
         run: |
           for domain in payment case-management; do
@@ -225,7 +225,7 @@ jobs:
       - name: Verify durable delivery and scheduling against PostgreSQL
         run: python3.14 tooling/tests/delivery_components.py --output /tmp/acp-delivery-job-components --run-builds
       - name: Verify privacy lifecycle, redaction, deployment obligations and concurrent disposal
-        run: python3.14 tooling/check_privacy_lifecycle_components.py --output /tmp/acp-privacy-lifecycle-components --run-builds
+        run: python3.14 tooling/tests/phase6_gates.py privacy --output /tmp/acp-privacy-lifecycle-components --run-builds
       - name: Upgrade actual accepted target 0.2 applications and exercise lifecycle in place
         run: python3.14 tooling/check_privacy_profile_upgrade.py --output /tmp/acp-privacy-profile-upgrade --new-projects /tmp/acp-privacy-lifecycle-components
       - name: Upgrade actual accepted invocation applications in place
