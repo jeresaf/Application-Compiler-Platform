@@ -185,7 +185,7 @@ def run(args):
     try:
         execute(['tooling/audit/admission.py','--output',str(output/'admission'),'--run-builds','--full-admission'],'full-admission',3600)
         execute(['tooling/tests/task_ui_http_outcomes.py','--root',str(output/'admission')],'supplemental-browser',1800)
-        execute(['-m','unittest','tooling.tests.test_target_worker_faults','tooling.tests.test_materializer_faults',
+        execute(['-c',"import sys,unittest;sys.path.insert(0,'tooling/tests');unittest.main(module=None)",'tooling.tests.test_target_worker_faults','tooling.tests.test_materializer_faults',
                  'tooling.tests.test_phase6_foundations','tooling.tests.test_target_migrations',
                  'tooling.tests.test_execution_v03_evolution','tooling.tests.test_deterministic_approval','-v'],'faults-ownership-history',1800)
         report['admission']=json.loads((output/'admission/task-interface-report.json').read_text())
