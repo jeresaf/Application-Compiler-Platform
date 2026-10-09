@@ -3,7 +3,7 @@
 The issuer is integration infrastructure, never generated or packaged. The
 adapter is the deployment-owned PKCE fixture, not the browser-test authority.
 """
-import argparse,base64,hashlib,json,os,secrets,subprocess,sys,tempfile,threading,time,urllib.parse,urllib.request
+import argparse,base64,hashlib,json,os,secrets,shutil,subprocess,sys,tempfile,threading,time,urllib.parse,urllib.request
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
@@ -78,8 +78,17 @@ Object.assign(window,{integrationLogin:login,integrationLogout:clearIdentity});
     for domain in ('payment','case-management'):
      identity=projects/domain/'frontend/src/extensions/identity.ts';original_identity=identity.read_bytes()
      (output/(domain+'-production-identity-backup.ts')).write_bytes(original_identity)
-     try:reports[domain]=gate.browser(projects/domain,domain,output)
-     finally:identity.write_bytes(original_identity)
+     front=projects/domain/'frontend';tests=front/'browser-tests';backup=output/(domain+'-prior-browser-tests')
+     browser_result=front/'browser-results.json';prior_result=browser_result.read_bytes() if browser_result.is_file() else None
+     if tests.exists():shutil.move(str(tests),backup)
+     try:
+      reports[domain]=gate.browser(projects/domain,domain,output)
+      (output/(domain+'-oidc-browser-results.json')).write_bytes(browser_result.read_bytes())
+     finally:
+      identity.write_bytes(original_identity)
+      if tests.exists():shutil.move(str(tests),output/(domain+'-oidc-browser-tests'))
+      if backup.exists():shutil.move(str(backup),tests)
+      if prior_result is not None:browser_result.write_bytes(prior_result)
    finally:gate.subprocess.Popen=original_popen
    from target_worker import bundle_digest
    (output/'oidc-integration.json').write_text(json.dumps({'fixture':'AUTHORIZATION_CODE_PKCE_RS256_JWKS','executionCommit':source_commit,'sourceDigest':source_digest,'adapterDigest':'sha256:'+hashlib.sha256((ROOT/'fixtures/deployment-oidc/identity.ts').read_bytes()).hexdigest(),'bundleDigest':bundle_digest(),'domains':reports,'productionProviderAcceptance':'OUTSTANDING'},indent=2)+'\n')
