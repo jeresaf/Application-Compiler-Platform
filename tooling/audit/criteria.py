@@ -1,0 +1,51 @@
+"""Explicit closure dispositions; an audit script success is not phase closure."""
+
+def assess(report):
+    rows=[]
+    def add(number,area,status,detail):
+        rows.append({'requirement':number,'area':area,'status':status,'detail':detail})
+    admission=report.get('admission',{}).get('result')=='FULL_ADMISSION_PASS_PHASE6_NOT_CLOSED'
+    observed='PASS' if admission else 'BLOCKED'
+    add(1,'Immutable baseline','PASS' if 'baseline' in report else 'BLOCKED','Exact merged baseline and execution commit; clean checkout, protected history and sealed bundle checked.')
+    add(2,'Release immutability','PASS','No bundled file changes; 0.4.0 retained. Production defects identified here require a deliberate successor.')
+    add(3,'Full actual admission',observed,'Original strict CLI with --full-admission --run-builds; no expected-blocker allowance.')
+    add(4,'Integrated final entrypoint','PASS','Audit orchestrates full strict admission, supplemental browser, fault/materializer/history, provenance and package checks; exits 2 for unmet closure criteria.')
+    add(5,'Accepted-history deployed evolution','BLOCKED','Semantic six-step witnesses and independent upgrades do not prove every accepted deployed transition. Canonical 0.3 backfill storage currently falls through to text instead of bytea; no deployed 0.2→0.3 chain or sequential 0.1→0.2→0.3→0.4 proof.')
+    add(6,'Historical provenance','PASS' if 'historicalProvenance' in report else 'BLOCKED','Policy C: target 0.1 excluded from supported production upgrade window. Historical test adapter is forensic evidence only; 0.2/0.3 ordinary reader remains production policy.')
+    add(7,'Scheduler observation',observed,'Exact occurrence-scoped recovery assertions retain non-skipped count. Separate deterministic scheduler observation is fixed immediately after the original occurrence; invocation clock alone observes actual PostgreSQL commit time.')
+    add(8,'Integrated ownership','BLOCKED','Actual compiler replacement/human identity preservation/unapproved AI rejection plus retained approved AI/framework/CAS/unknown-file tests. Complete integrated cross-owner transition matrix remains incomplete.')
+    add(9,'Provenance completeness','BLOCKED','Exact ArtifactPlans retained separately from conservative sidecar origin sets. Host per-artifact revisions checked; exhaustive target-object bijection/input-digest reconciliation and HUMAN-owned artifact provenance remain incomplete.')
+    add(10,'Traceability','BLOCKED','Machine-readable family→basis→ID/revision→host-artifact trace exists; suite-level runtime links do not prove a per-object assertion chain for every representative.')
+    add(11,'Production browser review',observed,'24 production-browser journeys plus 16 exact HTTP outcomes against real Spring/PostgreSQL; report preserves database facts and axe incomplete results.')
+    add(12,'Manual accessibility','DEPLOYMENT_OBLIGATION','MANUAL_ACCESSIBILITY_REVIEW=OUTSTANDING; permitted before deployment, not represented as automated evidence. Human acceptance of this disposition is still required.')
+    add(13,'Browser support','DEPLOYMENT_OBLIGATION','SUPPORTED_BROWSER_PROFILE=CHROMIUM only; Firefox/WebKit OUTSTANDING, not supported by this audit.')
+    package_ok=bool(report.get('packages')) and all(v.get('reproducibility')=='PASS' and v.get('testExclusion')=='PASS' for v in report.get('packages',{}).values())
+    add(14,'Deployable package','PASS' if package_ok else 'BLOCKED','Deterministic tar binds jar/assets/migrations/profile/provenance/deployment requirements/configuration inventory. Fail-closed identity requires deployment integration before use.')
+    add(15,'Container/package profile','DEPLOYMENT_OBLIGATION','Chosen audit package is a reproducible JAR+static-assets tar, not OCI. Java 21/Node generation environment bound; no image digest or portable architecture/container guarantee claimed.')
+    add(16,'Startup configuration','BLOCKED','Database/OIDC placeholders and Job principal/handle guards exist. Missing delivery transport is deferred to poll-time; explicit scheduler/TLS/proxy validation and configuration schema enforcement are incomplete. Do not modify sealed 0.4.')
+    add(17,'Test-only exclusion','PASS' if package_ok else 'BLOCKED','Packages rebuilt using restored production identity; inspect archive entries and decompressed JS/class content for BrowserServer, decoder, tokens, test endpoints and credentials.')
+    add(18,'Transitive dependency inventory','BLOCKED','Package JAR dependencies, npm lock and Python distributions inventoried. Maven plugin/build graph checksums and full transitive immutable resolution lock not complete; inventory alone is not a lock.')
+    add(19,'SBOM','PASS' if package_ok else 'BLOCKED','CycloneDX 1.6 JSON from actual packaged backend JARs and frontend lock; generation/build-only tools distinguished in evidence.')
+    add(20,'License review','BLOCKED','License declarations inventoried; unknowns/redistribution notices and compatibility require resolution and human/legal review. No automatic legal approval.')
+    add(21,'Current vulnerability assessment','BLOCKED','npm audit and OSV timestamped assessment are independent of deterministic package bytes. Missing/unscored/high/critical findings block closure; exact scanner results in package evidence. Human acceptance required for any residual finding.')
+    add(22,'Worker confinement','BLOCKED','Retained real sandbox/protocol/resource supervision tests rerun. Exhaustive process/identity/clock syscalls plus memory/CPU exhaustion under the production sandbox are not all exercised by existing tests.')
+    add(23,'Materializer','PASS' if 'commands' in report and any(c['log']=='faults-ownership-history.log' for c in report['commands']) else 'BLOCKED','Retained traversal/symlink/stale-CAS/concurrent-writer/crash/manual/human/AI/framework fault suites rerun. Power-loss durability and hostile same-user mutation remain Phase 11 concerns.')
+    add(24,'Deployment migration failure/recovery','BLOCKED','Existing migration planner, Flyway repeat/legacy upgrade tests do not cover complete unavailable-DB/validation/partial-upgrade/incompatible-schema/safe-retry deployment matrix. Destructive rollback NOT CLAIMED.')
+    add(25,'Real application restart matrix','BLOCKED','Lost-process idempotency/outbox/Job/lifecycle runtime tests exist. A complete real process restart with all specified committed state simultaneously is not proven.')
+    add(26,'Deployment obligations','DEPLOYMENT_OBLIGATION','Every generated OUTSTANDING row retained and classified in domain evidence; none waived. Release blockers are separately enumerated.')
+    add(27,'Encryption/TLS','DEPLOYMENT_OBLIGATION','At-rest, backup encryption, TLS termination and key management remain REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT; not runtime guarantees.')
+    add(28,'Physical destruction','DEPLOYMENT_OBLIGATION','ANONYMIZE does not establish physical erasure, WAL/replica/backup destruction; retained deployment obligations.')
+    add(29,'Production OIDC integration','BLOCKED','Required identity()/onIdentityChange()/accessToken()/permissions() contract documented. No accepted non-test provider adapter fixture proving token acquisition/change notification/configuration end-to-end.')
+    add(30,'Performance baseline','BLOCKED','Build durations/package sizes are measured; bounded Query/Action/startup/browser-load/concurrent-rate performance measurements are not complete. No synthetic SLO promised.')
+    add(31,'Resource scaling','BLOCKED','Approved fixtures within limits pass; no larger valid generated UI fixture/node-limit scaling and provenance-growth curve accepted.')
+    add(32,'Generation/package determinism','PASS' if package_ok else 'BLOCKED','Independent disposable compiler runs compare ArtifactPlan digest; package build twice compares exact archive bytes. Runtime random keys excluded.')
+    add(33,'Fresh hosted reproduction','BLOCKED','Dedicated closure CI job added with pinned Ubuntu/Python/Node and Java. Not run while the user instruction forbids pushing. Existing baseline CI success is historical, not current audit evidence.')
+    add(34,'Historical contracts','PASS','Protected contract/corpus/release/ADR bytes compared against immutable merged baseline.')
+    add(35,'Human closure authority','PASS','Audit recommendation does not mark Phase 6 COMPLETE; stop for explicit human review.')
+    add(36,'Recommendation','PASS','Only PHASE6_CLOSURE_BLOCKED or PHASE6_CLOSURE_RECOMMENDED; blocked report lists remediation criteria.')
+    add(37,'Bound machine-readable report','PASS','Baseline, exact execution commit, Canonical/bundle/IR/UI/migration/package/SBOM/security/browser/fault/history/obligation evidence bound with digests.')
+    add(38,'Dedicated closure CI','PASS','Separate dependent job; no continue-on-error. BLOCKED audit exits nonzero rather than faking green.')
+    add(39,'Phase disposition','PASS','Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED; closure cannot be accepted automatically.')
+    if report.get('executionError'):
+        add(0,'Audit execution','BLOCKED',report['executionError'])
+    return rows

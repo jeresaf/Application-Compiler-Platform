@@ -265,3 +265,72 @@ jobs:
             /tmp/acp-privacy-profile-upgrade/target-upgrade-report.json
             /tmp/acp-privacy-profile-upgrade/*.log
             /tmp/acp-privacy-profile-upgrade/old-projects/*/backend/target/surefire-reports/
+
+  phase6-closure-audit:
+    needs: [contracts, phase5c-hard-gates, phase6-target]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    services:
+      postgres:
+        image: postgres:18.6
+        env:
+          POSTGRES_DB: acp_test
+          POSTGRES_USER: acp_test
+          POSTGRES_PASSWORD: ephemeral-test-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U acp_test -d acp_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+      ACP_TEST_DATABASE_USER: acp_test
+      ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+          package-manager-cache: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install exact audit generation dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libseccomp2
+          python3.14 -m pip install -r tooling/requirements.txt
+      - name: Enable authoritative commit evidence
+        run: |
+          docker exec "${{ job.services.postgres.id }}" psql -U acp_test -d acp_test -c "ALTER SYSTEM SET track_commit_timestamp = on"
+          docker restart "${{ job.services.postgres.id }}"
+          for attempt in $(seq 1 30); do
+            if docker exec "${{ job.services.postgres.id }}" pg_isready -U acp_test -d acp_test; then break; fi
+            sleep 1
+          done
+          docker exec "${{ job.services.postgres.id }}" psql -U acp_test -d acp_test -c "SHOW track_commit_timestamp"
+      - name: Perform final closure audit without waivers
+        # Exit 2 is PHASE6_CLOSURE_BLOCKED; do not hide it or mark Phase 6 closed.
+        run: python3.14 tooling/audit/phase6.py --output /tmp/acp-phase6-final-audit
+      - name: Preserve closure recommendation and complete evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase6-final-closure-audit
+          path: |
+            /tmp/acp-phase6-final-audit/*.json
+            /tmp/acp-phase6-final-audit/*.log
+            /tmp/acp-phase6-final-audit/*-production-1.tar
+            /tmp/acp-phase6-final-audit/admission/task-interface-report.json
+            /tmp/acp-phase6-final-audit/admission/*.log
+            /tmp/acp-phase6-final-audit/admission/supplemental-http/
+            /tmp/acp-phase6-final-audit/admission/*/frontend/browser-results.json
+            /tmp/acp-phase6-final-audit/admission/*/frontend/test-results/
