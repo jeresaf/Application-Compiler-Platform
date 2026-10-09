@@ -223,7 +223,7 @@ jobs:
       - name: Verify approved Canonical 0.3 invocation runtime against PostgreSQL and HTTP
         run: python3.14 tooling/check_invocation_components.py --output /tmp/acp-invocation-components --run-builds
       - name: Verify durable delivery and scheduling against PostgreSQL
-        run: python3.14 tooling/check_delivery_job_components.py --output /tmp/acp-delivery-job-components --run-builds
+        run: python3.14 tooling/tests/delivery_components.py --output /tmp/acp-delivery-job-components --run-builds
       - name: Verify privacy lifecycle, redaction, deployment obligations and concurrent disposal
         run: python3.14 tooling/check_privacy_lifecycle_components.py --output /tmp/acp-privacy-lifecycle-components --run-builds
       - name: Upgrade actual accepted target 0.2 applications and exercise lifecycle in place
