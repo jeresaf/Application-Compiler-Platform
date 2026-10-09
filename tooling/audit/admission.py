@@ -18,7 +18,8 @@ def deterministic_source(domain):
     source=scoped_source(domain)
     old='var recovered=jobs(action);recovered.activate("JOB-TASK","tenant-one",time.fixed);'
     new='''var schedulerNow=scheduled().add(java.math.BigInteger.ONE);
-        var recovered=new JobRuntime(jdbc,new DataSourceTransactionManager(ds),model,()->schedulerNow,
+        var schedulerClock=new InvocationCore.Time(){public java.math.BigInteger now(){return schedulerNow;}public void sleep(long seconds){time.sleep(seconds);}};
+        var recovered=new JobRuntime(jdbc,new DataSourceTransactionManager(ds),model,schedulerClock,
             (id,rev,handle)->identity("tenant-one","fixture:operator"),
             java.util.Map.of("JOB-TASK@3","opaque-test-handle"),action);
         recovered.activate("JOB-TASK","tenant-one",schedulerNow);'''

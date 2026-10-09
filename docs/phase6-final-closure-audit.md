@@ -18,6 +18,8 @@ Use a fresh output directory. These are disposable test credentials, never gener
 
 Exit **2** means `PHASE6_CLOSURE_BLOCKED`, not a successful target release. The dedicated `phase6-closure-audit` Ubuntu job depends on the retained contracts, Phase 5 hard gates and Phase 6 target job. It uploads evidence even when closure is blocked and uses no `continue-on-error`. Its hosted execution remains outstanding while the instruction not to push applies.
 
+The audit-only delivery fixture uses a separate scheduler observation clock immediately after the original occurrence while keeping the invocation clock aligned with real PostgreSQL commit timestamps. Exact occurrence identity and the count of non-skipped occurrences are still asserted. Production scheduler semantics and bundled historical test source are unchanged.
+
 ## Explicit compatibility and deployment policies
 
 Historical provenance policy **C** is chosen: target 0.1 and sidecar 0.1 are outside the supported production upgrade window. The historical 0.1 adapter is retained only for forensic regression evidence; it is not a production migration tool. The ordinary reader supports sidecars 0.2/0.3. This narrows the production claim; it does not rewrite or invalidate historical tests. A future decision to support 0.1 directly requires a deliberate successor if bundled production tooling changes.

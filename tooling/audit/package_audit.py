@@ -130,7 +130,7 @@ def packages(output, generated):
         components=backend_components(backend/'target/application-0.1.0.jar')+frontend_components(front)
         sbom={'bomFormat':'CycloneDX','specVersion':'1.6','version':1,
               'metadata':{'component':{'type':'application','name':'ACP '+domain,'version':'target-0.4.0'}},
-              'components':components}
+              'components':[{k:v for k,v in c.items() if k!='licenses' or v} for c in components]}
         sbom_binding=write(output/(domain+'-sbom.cdx.json'),sbom)
         python=[{'name':d.metadata['Name'],'version':d.version} for d in importlib.metadata.distributions()]
         dependencies={'components':components,'pythonGenerationEnvironment':sorted(python,key=lambda d:d['name']),
