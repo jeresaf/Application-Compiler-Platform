@@ -72,6 +72,24 @@ def publish(source):
         'actorType':'AI','humanAcceptance':'NOT_GRANTED',
         'reason':'Independent artifact re-evaluation; runtime execution commit is frozen to baseline startup. Original report and producer manifest retained verbatim in raw archive.',
         'policyDigest':digest((ROOT/'tooling/audit/criteria.py').read_bytes())}
+    # Preserve partial, genuine runtime security coverage as partial evidence.
+    # The existing verifier must reject it for complete closure coverage.
+    partial={'scanAt':min(p['security']['scanAt'] for p in raw['packages'].values()),
+        'bundleDigest':binding['bundleDigest'],'coverage':['packaged-backend','npm-production'],
+        'findings':[{'domain':d,'advisory':v} for d,p in raw['packages'].items()
+                    for result in p['security'].get('osv',{}).get('response',{}).get('results',[])
+                    for v in result.get('vulns',[])],
+        'unknownComponents':[{'domain':d,'component':c['bom-ref']} for d in raw['packages']
+                    for c in json.loads((source/(d+'-sbom.cdx.json')).read_text())['components']
+                    if c.get('scope')=='required' and not c.get('purl')],
+        'packages':[{'file':d+'-production-1.tar','sha256':p['packageDigest']} for d,p in raw['packages'].items()],
+        'sourceAssessments':{d:p['security'] for d,p in raw['packages'].items()},
+        'remainingCoverage':['compiler','build-plugins']}
+    scan=durable/'security-assessment.json';write(scan,partial)
+    report['criterionEvidence']['21']={'criterion':21,**binding,
+        'evaluatedAt':datetime.now(timezone.utc).isoformat(),
+        'artifacts':[{'path':'security-assessment.json','sha256':digest(scan.read_bytes())},
+                     *[{'path':v['file'],'sha256':v['sha256']} for v in partial['packages']]]}
     report['criteria']=assess(report,root=durable,binding=binding)
     report['blockers']=[row for row in report['criteria'] if row['status']=='BLOCKED']
     report['recommendation']='PHASE6_CLOSURE_BLOCKED' if report['blockers'] else 'PHASE6_CLOSURE_RECOMMENDED'
@@ -103,6 +121,15 @@ def publish(source):
         path='admission/task-interface-report.json'
         value['browser']={'stats':value['browser']['stats'],
             'rawEvidence':{'archiveEntry':path,'sha256':digest(records[path])}}
+    admission=copy.deepcopy(report['admission'])
+    admission.update(evidenceIdentity='phase6-remediation-0.5.0-admission',
+        originalExecutionCommit=report['reusedAdmission']['originalExecutionCommit'],
+        reusedByAuditExecutionCommit=report['baseline']['auditExecutionCommit'],
+        rawReportDigest=digest(records['admission/task-interface-report.json']),
+        admissionContractVersion='5.0.0',phase6='IN_PROGRESS',phase7='NOT_STARTED')
+    report['successorAdmissionEvidence']=write(evidence/'phase6-remediation-admission.json',admission)
+    report['additionalValidation']={name:{'archiveEntry':name,'sha256':digest(records[name])}
+        for name in ('python-regression.log','local-validation.json','hosted-validation.json') if name in records}
     write(evidence/'phase6-remediation-closure.json',report)
     print(report['recommendation'],len(report['blockers']),'blocked criteria; raw evidence:',durable)
 
