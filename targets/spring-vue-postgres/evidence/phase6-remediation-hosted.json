@@ -1,0 +1,2781 @@
+{
+  "evidenceIdentity": "phase6-remediation-hosted/38024839562",
+  "retrievedAt": "2026-10-10T22:51:02.933226+00:00",
+  "run": {
+    "id": 38024839562,
+    "head_sha": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+    "path": ".github/workflows/acp-contracts.yml",
+    "status": "completed",
+    "conclusion": "failure",
+    "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38024839562"
+  },
+  "jobs": [
+    {
+      "job": "contracts",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned contract tooling",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check dependency consistency",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check documentation and repository contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate all schemas, corpora, history and recovery tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Independently verify canonical bytes and hashes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Independently verify Canonical 0.2 execution vectors",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Independently verify approved Canonical 0.3 bytes and hashes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "job": "phase5-experiments",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Retain alternate JDK for controlled Phase 5C comparison",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned reference and frontend dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build all three actual ACP grammars",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify frontend interchange, diagnostics, determinism and Java bytes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify pinned Rust canonical interoperability and graph slice",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Exercise native editor and source-analysis APIs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify Phase 5B wire, source, diagnostics, determinism and scale evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Reproduce controlled frontend upgrades from isolated locks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify Phase 5C native persistence, fault parity and toolchain evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve Phase 5C hosted evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve hosted evidence separately from laptop measurements",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "job": "phase5c-hard-gates",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify actual Ubuntu evidence and honest unresolved-gate disposition",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "job": "phase6-target",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install contract dependencies and worker confinement library",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify successor generator release identity and packaged tzdb",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable authoritative PostgreSQL commit evidence for idempotency",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile both complete approved domains through the negotiated target",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify identity clearing and logical recovery keys",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify exact HTTP outcomes through the production browser",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify actual sealed 0.3 upgrade without database changes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify isolated typed components without claiming target admission",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify approved Canonical 0.3 invocation runtime against PostgreSQL and HTTP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify durable delivery and scheduling against PostgreSQL",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify privacy lifecycle, redaction, deployment obligations and concurrent disposal",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upgrade actual accepted target 0.2 applications and exercise lifecycle in place",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify forensic target 0.1 upgrade evidence outside production support window",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify approved Canonical 0.3 evolution and exact approval boundaries",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve negotiated gate and generated build evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "job": "phase6-closure-audit",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install exact audit generation dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable authoritative commit evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Perform successor closure audit without waivers",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Retain dated vulnerability advisory details",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve closure recommendation and complete evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "auditExecution": {
+    "status": "PERFORMED",
+    "exception": null
+  },
+  "auditIdentity": "phase6-remediation-0.5.0/20261010T052841796951Z",
+  "auditExitCode": 2,
+  "recommendation": "PHASE6_CLOSURE_BLOCKED",
+  "baseline": {
+    "mergedMainCommit": "7e4e3438179e7a446c5f3737ad1d6d9cb07a96ea",
+    "auditExecutionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+    "target": "acp-spring-vue-postgres/0.5.0",
+    "generator": "acp-spring-vue-generator/0.5.0",
+    "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+    "targetIR": "0.2.0",
+    "admissionContract": {
+      "contractVersion": "5.0.0",
+      "previousCheckpointContract": "4.0.0",
+      "mode": "ACTUAL_FULL_ADMISSION_EVIDENCE",
+      "profile": "acp-spring-vue-postgres/0.4.0",
+      "generator": "acp-spring-vue-generator/0.4.0",
+      "bundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+      "targetIR": "0.2.0",
+      "phase6": "IN_PROGRESS",
+      "closureGate": "BLOCKED_FINAL_AUDIT_REQUIRED",
+      "domains": {
+        "payment": {
+          "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "actualNegotiation": {
+            "accepted": true,
+            "capabilities": [
+              "AcceptanceCriterion/0.2.0",
+              "AccessibilityRequirement/0.2.0",
+              "Action/0.2.0",
+              "Actor/0.2.0",
+              "Aggregate/0.2.0",
+              "Applicability/0.2.0",
+              "Assumption/0.2.0",
+              "AuthenticationModel/0.2.0",
+              "Backup/0.2.0",
+              "Command/0.2.0",
+              "CompatibilityRequirement/0.2.0",
+              "Constraint/0.2.0",
+              "DataClassification/0.2.0",
+              "DataLifecycle/0.2.0",
+              "Decision/0.2.0",
+              "DeletionPolicy/0.2.0",
+              "DeliveryPolicy/0.2.0",
+              "Entity/0.2.0",
+              "Event/0.2.0",
+              "EvidenceRequirement/0.2.0",
+              "ExecutionStep/0.2.0",
+              "Fact/0.2.0",
+              "Failure/0.2.0",
+              "Field/0.2.0",
+              "Filter/0.2.0",
+              "Form/0.2.0",
+              "Goal/0.2.0",
+              "IdempotencyPolicy/0.2.0",
+              "InputControl/0.2.0",
+              "Invariant/0.2.0",
+              "Job/0.2.0",
+              "LegalHold/0.2.0",
+              "ObservabilityRequirement/0.2.0",
+              "Parameter/0.2.0",
+              "PerformanceRequirement/0.2.0",
+              "Permission/0.2.0",
+              "PermissionBoundary/0.2.0",
+              "Policy/0.2.0",
+              "PolicySet/0.2.0",
+              "Preference/0.2.0",
+              "Query/0.2.0",
+              "RatePolicy/0.2.0",
+              "Recovery/0.2.0",
+              "Relation/0.2.0",
+              "ReliabilityRequirement/0.2.0",
+              "Requirement/0.2.0",
+              "ResponsivePolicy/0.2.0",
+              "Retention/0.2.0",
+              "RetryPolicy/0.2.0",
+              "Role/0.2.0",
+              "RoleAssignment/0.2.0",
+              "Schedule/0.2.0",
+              "Scope/0.2.0",
+              "Screen/0.2.0",
+              "Search/0.2.0",
+              "Service/0.2.0",
+              "SessionPolicy/0.2.0",
+              "State/0.2.0",
+              "StateMachine/0.2.0",
+              "Table/0.2.0",
+              "TestRequirement/0.2.0",
+              "Transaction/0.2.0",
+              "Transition/0.2.0",
+              "UseCase/0.2.0",
+              "ValueObject/0.2.0",
+              "ViewState/0.2.0",
+              "Wizard/0.2.0",
+              "WizardStep/0.2.0",
+              "acp.deterministic-execution.0.4",
+              "semantic.execution-dataflow/0.3"
+            ]
+          },
+          "blockers": [],
+          "fullPipeline": "PASS",
+          "taskUIModelDigest": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+        },
+        "case-management": {
+          "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+          "actualNegotiation": {
+            "accepted": true,
+            "capabilities": [
+              "AcceptanceCriterion/0.2.0",
+              "AccessibilityRequirement/0.2.0",
+              "Action/0.2.0",
+              "Actor/0.2.0",
+              "Aggregate/0.2.0",
+              "Applicability/0.2.0",
+              "AuthenticationModel/0.2.0",
+              "Backup/0.2.0",
+              "Command/0.2.0",
+              "CompatibilityRequirement/0.2.0",
+              "DataClassification/0.2.0",
+              "DataLifecycle/0.2.0",
+              "Decision/0.2.0",
+              "DeletionPolicy/0.2.0",
+              "DeliveryPolicy/0.2.0",
+              "Entity/0.2.0",
+              "Event/0.2.0",
+              "EvidenceRequirement/0.2.0",
+              "ExecutionStep/0.2.0",
+              "Failure/0.2.0",
+              "Field/0.2.0",
+              "Filter/0.2.0",
+              "Form/0.2.0",
+              "IdempotencyPolicy/0.2.0",
+              "InputControl/0.2.0",
+              "Job/0.2.0",
+              "LegalHold/0.2.0",
+              "ObservabilityRequirement/0.2.0",
+              "Parameter/0.2.0",
+              "PerformanceRequirement/0.2.0",
+              "Permission/0.2.0",
+              "PermissionBoundary/0.2.0",
+              "Policy/0.2.0",
+              "PolicySet/0.2.0",
+              "Query/0.2.0",
+              "RatePolicy/0.2.0",
+              "Recovery/0.2.0",
+              "Relation/0.2.0",
+              "ReliabilityRequirement/0.2.0",
+              "Requirement/0.2.0",
+              "ResponsivePolicy/0.2.0",
+              "Retention/0.2.0",
+              "RetryPolicy/0.2.0",
+              "Role/0.2.0",
+              "RoleAssignment/0.2.0",
+              "Schedule/0.2.0",
+              "Scope/0.2.0",
+              "Screen/0.2.0",
+              "Search/0.2.0",
+              "Service/0.2.0",
+              "SessionPolicy/0.2.0",
+              "State/0.2.0",
+              "StateMachine/0.2.0",
+              "Table/0.2.0",
+              "TestRequirement/0.2.0",
+              "Transaction/0.2.0",
+              "Transition/0.2.0",
+              "TypeDefinition/0.2.0",
+              "UseCase/0.2.0",
+              "ValueObject/0.2.0",
+              "ViewState/0.2.0",
+              "Wizard/0.2.0",
+              "WizardStep/0.2.0",
+              "acp.deterministic-execution.0.4",
+              "semantic.execution-dataflow/0.3"
+            ]
+          },
+          "blockers": [],
+          "fullPipeline": "PASS",
+          "taskUIModelDigest": "fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+        }
+      }
+    },
+    "approval": {
+      "date": "2026-10-08",
+      "statement": "Approve ADR-0016 and the complete deterministic-v04 fixture decisions, including the F-01 failure bindings.",
+      "status": "APPROVED_REFERENCE_SEMANTICS",
+      "reviewedCommit": "76e7700758454b5cfd00c39a68475439c1a1e6ca",
+      "assets": {
+        "contracts/authoring-0.4.schema.json": "sha256:2e60a19f9683d4515a0bd51fc5b0b964164990eea7fadd6715b50fdf11d25d60",
+        "contracts/canonical-0.3.schema.json": "sha256:104bb574abac5eafd7b8e4e6ea5b030b08b30631f8207437ed6713cf9e3098ea",
+        "contracts/change-0.3.schema.json": "sha256:7424c400b2887eafc5d572f7c55c702daa07956e3d79729bf0d6562fa931f491",
+        "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+      },
+      "versions": {
+        "authoring": "0.4.0",
+        "canonical": "0.3.0",
+        "change": "0.3.0"
+      },
+      "scope": "Complete ADR-0016 and both ACP synthetic reference fixtures, including F-01; not production business requirements or target support",
+      "provenance": "AI proposed; human project authority explicitly approved in user instruction",
+      "authorityRepresentation": "Bounded reference/test authority with public key; no manufactured reviewer identity or production credentials",
+      "referenceClock": 1791417600
+    },
+    "canonicalDigests": {
+      "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+    },
+    "environment": {
+      "python": "3.14.7 (main, Aug  6 2026, 02:19:46) [GCC 13.3.0]",
+      "node": "v24.21.0",
+      "java": "openjdk version \"21.0.12.1\" 2026-08-18 LTS",
+      "platform": "linux",
+      "hosted": true
+    },
+    "protectedFiles": {
+      "docs/phase6-final-closure-audit.md": "sha256:28d62d474b7f466b768c9f20bfd1c5b860d03c673a0c24ff9c400e576dd4f00b",
+      "targets/spring-vue-postgres/evidence/phase6-final-closure.json": "sha256:8639f2e9d74e2e184bcfd5ae7c177c4a5a4f84c434221c34de3d0e662cadb9b9",
+      "targets/spring-vue-postgres/admission-contract-v5.json": "sha256:d0f804785616b9fa581535300b4581c8d62ce1eeba058c06ee826cd9f8fdb383",
+      "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+    }
+  },
+  "criterionDispositions": [
+    {
+      "requirement": 1,
+      "area": "Immutable baseline",
+      "status": "PASS",
+      "detail": "Exact merged baseline and execution commit; clean checkout, protected history and sealed bundle checked.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "exactReviewedBaselineAndProtectedHistory"
+        ]
+      },
+      "validationFunction": "criteria.validate/1",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 2,
+      "area": "Release immutability",
+      "status": "PASS",
+      "detail": "Intentional 0.5.0 successor; exact prior release entries retained and verified against the reviewed baseline.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "previousReleasedBundlesRemainImmutable"
+        ]
+      },
+      "validationFunction": "criteria.validate/2",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 3,
+      "area": "Full actual admission",
+      "status": "PASS",
+      "detail": "Original strict CLI with --full-admission --run-builds; no expected-blocker allowance.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/3",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 4,
+      "area": "Integrated final entrypoint",
+      "status": "PASS",
+      "detail": "Audit orchestrates full strict admission, supplemental browser, fault/materializer/history, provenance and package checks; exits 2 for unmet closure criteria.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "closureEntrypointRunsEveryRequiredProducer"
+        ]
+      },
+      "validationFunction": "criteria.validate/4",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 5,
+      "area": "Accepted-history deployed evolution",
+      "status": "BLOCKED",
+      "detail": "A deployed target-release evolution of unchanged approved snapshots is separate from accepted semantic evolution. Synthetic String/backfill witnesses are not new human business approvals; a complete accepted ChangeSet/data-binding deployment chain remains required.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/5",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 6,
+      "area": "Historical provenance",
+      "status": "PASS",
+      "detail": "Policy C: target 0.1 excluded from supported production upgrade window. Historical test adapter is forensic evidence only; 0.2/0.3 ordinary reader remains production policy.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "productionEvolutionWindowExcludesTarget01"
+        ]
+      },
+      "validationFunction": "criteria.validate/6",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 7,
+      "area": "Scheduler observation",
+      "status": "PASS",
+      "detail": "Exact occurrence-scoped recovery assertions retain non-skipped count. Separate deterministic scheduler observation is fixed immediately after the original occurrence; invocation clock alone observes actual PostgreSQL commit time.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/7",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 8,
+      "area": "Integrated ownership",
+      "status": "BLOCKED",
+      "detail": "Actual compiler replacement/human identity preservation/unapproved AI rejection plus retained approved AI/framework/CAS/unknown-file tests. Complete integrated cross-owner transition matrix remains incomplete.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "integratedCrossOwnerTransitions"
+        ]
+      },
+      "validationFunction": "criteria.validate/8",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 9,
+      "area": "Provenance completeness",
+      "status": "BLOCKED",
+      "detail": "Exact ArtifactPlans retained separately from conservative sidecar origin sets. Host per-artifact revisions checked; exhaustive target-object bijection/input-digest reconciliation and HUMAN-owned artifact provenance remain incomplete.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "everyTargetObjectHasExactRevisionAndInputDigest"
+        ]
+      },
+      "validationFunction": "criteria.validate/9",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 10,
+      "area": "Traceability",
+      "status": "BLOCKED",
+      "detail": "Machine-readable family\u2192basis\u2192ID/revision\u2192host-artifact trace exists; suite-level runtime links do not prove a per-object assertion chain for every representative.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "representativeObjectRuntimeTraceability"
+        ]
+      },
+      "validationFunction": "criteria.validate/10",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 11,
+      "area": "Production browser review",
+      "status": "PASS",
+      "detail": "24 production-browser journeys plus 16 exact HTTP outcomes against real Spring/PostgreSQL; report preserves database facts and axe incomplete results.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/11",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 12,
+      "area": "Manual accessibility",
+      "status": "BLOCKED",
+      "detail": "MANUAL_ACCESSIBILITY_REVIEW=OUTSTANDING; permitted before deployment, not represented as automated evidence. Human acceptance of this disposition is still required.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/12",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 13,
+      "area": "Browser support",
+      "status": "BLOCKED",
+      "detail": "SUPPORTED_BROWSER_PROFILE=CHROMIUM only; Firefox/WebKit OUTSTANDING, not supported by this audit.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/13",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 14,
+      "area": "Deployable package",
+      "status": "BLOCKED",
+      "detail": "Versioned startup configuration is implemented. Deployment-owned identity/principal/transport wiring, external TLS/proxy operation and production provider acceptance still require complete deployable-profile evidence.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "productionDistributionStartsWithDeploymentConfiguration"
+        ]
+      },
+      "validationFunction": "criteria.validate/14",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 15,
+      "area": "Container/package profile",
+      "status": "BLOCKED",
+      "detail": "Chosen audit package is a reproducible JAR+static-assets tar, not OCI. Java 21/Node generation environment bound; no image digest or portable architecture/container guarantee claimed.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/15",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 16,
+      "area": "Startup configuration",
+      "status": "PASS",
+      "detail": "Versioned production startup configuration validated before background activation; require focused startup tests.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "productionConfigurationFailsBeforeActivation",
+          "activeDeliveryRequiresTransport"
+        ]
+      },
+      "validationFunction": "criteria.validate/16",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 17,
+      "area": "Test-only exclusion",
+      "status": "PASS",
+      "detail": "Packages rebuilt using restored production identity; inspect archive entries and decompressed JS/class content for BrowserServer, decoder, tokens, test endpoints and credentials.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "productionPackagesExcludeTestAuthority"
+        ]
+      },
+      "validationFunction": "criteria.validate/17",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 18,
+      "area": "Transitive dependency inventory",
+      "status": "BLOCKED",
+      "detail": "Package JAR dependencies, npm lock and Python distributions inventoried. Maven plugin/build graph checksums and full transitive immutable resolution lock not complete; inventory alone is not a lock.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "transitiveResolutionLockIncludesBuildPlugins"
+        ]
+      },
+      "validationFunction": "criteria.validate/18",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 19,
+      "area": "SBOM",
+      "status": "PASS",
+      "detail": "CycloneDX 1.6 JSON from actual packaged backend JARs and frontend lock; generation/build-only tools distinguished in evidence.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "sbomMatchesEveryPackagedDependency"
+        ]
+      },
+      "validationFunction": "criteria.validate/19",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 20,
+      "area": "License review",
+      "status": "BLOCKED",
+      "detail": "License declarations inventoried; unknowns/redistribution notices and compatibility require resolution and human/legal review. No automatic legal approval.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "licensesAndRedistributionNoticesAccepted"
+        ]
+      },
+      "validationFunction": "criteria.validate/20",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 21,
+      "area": "Current vulnerability assessment",
+      "status": "BLOCKED",
+      "detail": "npm audit and OSV timestamped runtime assessments are independent of deterministic package bytes. Missing/unscored/high/critical findings block closure; exact results in package evidence. Compiler/build-plugin vulnerability coverage is incomplete even if runtime scanners return zero findings.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/21",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 22,
+      "area": "Worker confinement",
+      "status": "BLOCKED",
+      "detail": "Retained real sandbox/protocol/resource supervision tests rerun. Exhaustive process/identity/clock syscalls plus memory/CPU exhaustion under the production sandbox are not all exercised by existing tests.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "productionSandboxDeniesSyscallsAndBoundsCpuMemory"
+        ]
+      },
+      "validationFunction": "criteria.validate/22",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 23,
+      "area": "Materializer",
+      "status": "PASS",
+      "detail": "Retained traversal/symlink/stale-CAS/concurrent-writer/crash/manual/human/AI/framework fault suites rerun. Power-loss durability and hostile same-user mutation remain Phase 11 concerns.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "materializerRejectsTraversalStaleCasAndCrash"
+        ]
+      },
+      "validationFunction": "criteria.validate/23",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 24,
+      "area": "Deployment migration failure/recovery",
+      "status": "BLOCKED",
+      "detail": "Actual PostgreSQL String/backfill/presence/required/transactional rollback and incompatible-storage regressions supplement existing Flyway upgrade checks; the complete unavailable-DB/partial-upgrade/safe-retry deployment matrix remains required.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "failedBackfillRollsBackDdl",
+          "requiredFieldRejectsNull"
+        ]
+      },
+      "validationFunction": "criteria.validate/24",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 25,
+      "area": "Real application restart matrix",
+      "status": "BLOCKED",
+      "detail": "Lost-process idempotency/outbox/Job/lifecycle runtime tests exist. A complete real process restart with all specified committed state simultaneously is not proven.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "restartPreservesAllCommittedRuntimeFamilies"
+        ]
+      },
+      "validationFunction": "criteria.validate/25",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 26,
+      "area": "Deployment obligations",
+      "status": "BLOCKED",
+      "detail": "Every generated OUTSTANDING row retained and classified in domain evidence; none waived. Release blockers are separately enumerated.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/26",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 27,
+      "area": "Encryption/TLS",
+      "status": "BLOCKED",
+      "detail": "At-rest, backup encryption, TLS termination and key management remain REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT; not runtime guarantees.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/27",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 28,
+      "area": "Physical destruction",
+      "status": "BLOCKED",
+      "detail": "ANONYMIZE does not establish physical erasure, WAL/replica/backup destruction; retained deployment obligations.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": []
+      },
+      "validationFunction": "criteria.validate/28",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 29,
+      "area": "Production OIDC integration",
+      "status": "PASS",
+      "detail": "Deployment-owned authorization-code PKCE fixture verifies RS256/JWKS identity tokens and real generated-backend expiry/tenant behavior. Production provider acceptance and assurance remain separate deployment obligations.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "oidcAcquisitionIdentityChangeExpiredAndWrongTenant"
+        ]
+      },
+      "validationFunction": "criteria.validate/29",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 30,
+      "area": "Performance baseline",
+      "status": "BLOCKED",
+      "detail": "Build durations/package sizes are measured; bounded Query/Action/startup/browser-load/concurrent-rate performance measurements are not complete. No synthetic SLO promised.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "measuredApplicationPerformanceBaseline"
+        ]
+      },
+      "validationFunction": "criteria.validate/30",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 31,
+      "area": "Resource scaling",
+      "status": "BLOCKED",
+      "detail": "Approved fixtures within limits pass; no larger valid generated UI fixture/node-limit scaling and provenance-growth curve accepted.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "validLargeFixtureScaling"
+        ]
+      },
+      "validationFunction": "criteria.validate/31",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 32,
+      "area": "Generation/package determinism",
+      "status": "BLOCKED",
+      "detail": "Independent compiler contexts compare ArtifactPlan digest and repeated package builds compare exact bytes. Package builds share the same checkout/build cache; two independently materialized clean package builds are still required. Runtime random keys excluded.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "independentCleanPackageBuildsMatch"
+        ]
+      },
+      "validationFunction": "criteria.validate/32",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 33,
+      "area": "Fresh hosted reproduction",
+      "status": "BLOCKED",
+      "detail": "Historical run 37910102322: contracts, phase5-experiments, phase5c-hard-gates and phase6-target passed; closure audit performed and deliberately exited 2 PHASE6_CLOSURE_BLOCKED. Fresh successor hosted evidence is required.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "freshHostedSuccessorAuditPerformed"
+        ]
+      },
+      "validationFunction": "criteria.validate/33",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": "MISSING_EVIDENCE",
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 34,
+      "area": "Historical contracts",
+      "status": "PASS",
+      "detail": "Protected contract/corpus/release/ADR bytes compared against immutable merged baseline.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "historicalContractBytesUnchanged"
+        ]
+      },
+      "validationFunction": "criteria.validate/34",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 35,
+      "area": "Human closure authority",
+      "status": "PASS",
+      "detail": "Audit recommendation does not mark Phase 6 COMPLETE; stop for explicit human review.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "humanClosureAuthorityRemainsRequired"
+        ]
+      },
+      "validationFunction": "criteria.validate/35",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 36,
+      "area": "Recommendation",
+      "status": "PASS",
+      "detail": "Only PHASE6_CLOSURE_BLOCKED or PHASE6_CLOSURE_RECOMMENDED; blocked report lists remediation criteria.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "recommendationReflectsEveryBlocker"
+        ]
+      },
+      "validationFunction": "criteria.validate/36",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 37,
+      "area": "Bound machine-readable report",
+      "status": "PASS",
+      "detail": "Baseline, exact execution commit, Canonical/bundle/IR/UI/migration/package/SBOM/security/browser/fault/history/obligation evidence bound with digests.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "reportBindsEveryEvidenceArtifact"
+        ]
+      },
+      "validationFunction": "criteria.validate/37",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 38,
+      "area": "Dedicated closure CI",
+      "status": "PASS",
+      "detail": "Separate dependent job; no continue-on-error. BLOCKED audit exits nonzero rather than faking green.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "dedicatedClosureJobDistinguishesBlockedAndException"
+        ]
+      },
+      "validationFunction": "criteria.validate/38",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    },
+    {
+      "requirement": 39,
+      "area": "Phase disposition",
+      "status": "PASS",
+      "detail": "Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED; closure cannot be accepted automatically.",
+      "evidenceRequired": {
+        "binding": [
+          "bundleDigest",
+          "canonicalDigests",
+          "approvalDigest",
+          "executionCommit",
+          "evaluatedAt"
+        ],
+        "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+        "criterionTests": [
+          "phase6InProgressPhase7NotStarted"
+        ]
+      },
+      "validationFunction": "criteria.validate/39",
+      "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+      "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+      "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+      "failureReason": null,
+      "evaluationProvenance": {
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalDigests": {
+          "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+        },
+        "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+        "executionCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+        "evaluationCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95"
+      }
+    }
+  ],
+  "blockedCriteria": [
+    5,
+    8,
+    9,
+    10,
+    12,
+    13,
+    14,
+    15,
+    18,
+    20,
+    21,
+    22,
+    24,
+    25,
+    26,
+    27,
+    28,
+    30,
+    31,
+    32,
+    33
+  ],
+  "commands": [
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.14.7/x64/bin/python3.14",
+        "tooling/audit/admission.py",
+        "--output",
+        "/tmp/acp-phase6-final-audit/admission",
+        "--run-builds",
+        "--full-admission"
+      ],
+      "exitCode": 0,
+      "seconds": 414.181,
+      "log": "full-admission.log",
+      "logDigest": "sha256:291a7d30fb068fe45dce27d2758259dd0052560434db2758bde98e6a97738cc4"
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.14.7/x64/bin/python3.14",
+        "tooling/tests/task_ui_http_outcomes.py",
+        "--root",
+        "/tmp/acp-phase6-final-audit/admission"
+      ],
+      "exitCode": 0,
+      "seconds": 27.639,
+      "log": "supplemental-browser.log",
+      "logDigest": "sha256:b0881923a08c6a5de84071f97bf8ba13d2761362d3d094cd3d9acd432c21d962"
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.14.7/x64/bin/python3.14",
+        "-c",
+        "import sys,unittest;sys.path.insert(0,'tooling/tests');unittest.main(module=None)",
+        "tooling.tests.test_target_worker_faults",
+        "tooling.tests.test_materializer_faults",
+        "tooling.tests.test_phase6_foundations",
+        "tooling.tests.test_target_migrations",
+        "tooling.tests.test_execution_v03_evolution",
+        "tooling.tests.test_deterministic_approval",
+        "-v"
+      ],
+      "exitCode": 0,
+      "seconds": 114.461,
+      "log": "faults-ownership-history.log",
+      "logDigest": "sha256:9e84049fe3e205b7d942aa7a9e4264bc71b0d1c527224ff497e545f5149b0f94"
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.14.7/x64/bin/python3.14",
+        "-m",
+        "unittest",
+        "tooling.tests.test_canonical03_migrations",
+        "tooling.tests.test_closure_evaluator",
+        "-v"
+      ],
+      "exitCode": 0,
+      "seconds": 53.735,
+      "log": "remediation-regressions.log",
+      "logDigest": "sha256:6a34ea1543e439671ba16c43e9247a4a66fcc5650ae9dc8abb0db4ba2085e24c"
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.14.7/x64/bin/python3.14",
+        "tooling/integration/oidc.py",
+        "--projects",
+        "/tmp/acp-phase6-final-audit/admission",
+        "--output",
+        "/tmp/acp-phase6-final-audit/oidc"
+      ],
+      "exitCode": 0,
+      "seconds": 24.094,
+      "log": "deployment-oidc-integration.log",
+      "logDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.14.7/x64/bin/python3.14",
+        "tooling/integration/release_upgrade.py",
+        "--projects",
+        "/tmp/acp-phase6-final-audit/admission",
+        "--output",
+        "/tmp/acp-phase6-final-audit/release-upgrade"
+      ],
+      "exitCode": 0,
+      "seconds": 88.996,
+      "log": "sealed-release-upgrade.log",
+      "logDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "packages": {
+    "payment": {
+      "packageDigest": "sha256:20a17053b113f2b71e04b14e3287e0fc048916d5147b9752471704ea0ea2df7b",
+      "repeatPackageDigest": "sha256:20a17053b113f2b71e04b14e3287e0fc048916d5147b9752471704ea0ea2df7b",
+      "reproducibility": "PASS",
+      "testExclusion": "PASS",
+      "bytes": 33587200,
+      "sbom": {
+        "path": "payment-sbom.cdx.json",
+        "sha256": "sha256:9863675f553c516e34297e56a15180f73a3bae3ecfd921e557d3fc38d525979c"
+      },
+      "dependencies": {
+        "path": "payment-dependencies-licenses.json",
+        "sha256": "sha256:94c0b9e52f7f2f7aadfc6cf13c3967034ec9785d452340cc530adce09de851af"
+      },
+      "scanAt": "2026-10-10T05:42:34.427005+00:00",
+      "osvStatus": "COMPLETED",
+      "osvMatches": 0,
+      "npmVulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "jacksonInventory": [
+        {
+          "group": "com.fasterxml.jackson.core",
+          "name": "jackson-annotations",
+          "version": "2.21"
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "name": "jackson-core",
+          "version": "2.21.7"
+        },
+        {
+          "group": "tools.jackson.core",
+          "name": "jackson-core",
+          "version": "3.1.7"
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "name": "jackson-databind",
+          "version": "2.21.7"
+        },
+        {
+          "group": "tools.jackson.core",
+          "name": "jackson-databind",
+          "version": "3.1.7"
+        }
+      ]
+    },
+    "case-management": {
+      "packageDigest": "sha256:f0ac7baa3b735904c317767192a11859bf92fc2e6ed897bfc5462a92ba03f3c5",
+      "repeatPackageDigest": "sha256:f0ac7baa3b735904c317767192a11859bf92fc2e6ed897bfc5462a92ba03f3c5",
+      "reproducibility": "PASS",
+      "testExclusion": "PASS",
+      "bytes": 33699840,
+      "sbom": {
+        "path": "case-management-sbom.cdx.json",
+        "sha256": "sha256:a8df40cff1bcd851cc077568b4dbc5618a8145348cf73b474c33223072a9b74c"
+      },
+      "dependencies": {
+        "path": "case-management-dependencies-licenses.json",
+        "sha256": "sha256:94c0b9e52f7f2f7aadfc6cf13c3967034ec9785d452340cc530adce09de851af"
+      },
+      "scanAt": "2026-10-10T05:42:45.966714+00:00",
+      "osvStatus": "COMPLETED",
+      "osvMatches": 0,
+      "npmVulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "jacksonInventory": [
+        {
+          "group": "com.fasterxml.jackson.core",
+          "name": "jackson-annotations",
+          "version": "2.21"
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "name": "jackson-core",
+          "version": "2.21.7"
+        },
+        {
+          "group": "tools.jackson.core",
+          "name": "jackson-core",
+          "version": "3.1.7"
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "name": "jackson-databind",
+          "version": "2.21.7"
+        },
+        {
+          "group": "tools.jackson.core",
+          "name": "jackson-databind",
+          "version": "3.1.7"
+        }
+      ]
+    }
+  },
+  "previousFindingDispositions": [
+    {
+      "id": "GHSA-7hhh-6rmp-j9qf",
+      "previousSeverity": "HIGH",
+      "disposition": "REMEDIATED_IN_PACKAGED_RUNTIME",
+      "basis": "Actual packaged inventory bound to SBOM and fresh OSV queries; prior advisory retained, no suppression. This is runtime scope only.",
+      "currentVersions": {
+        "payment": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-core",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-core",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-core@3.1.7"
+          }
+        ],
+        "case-management": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-core",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-core",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-core@3.1.7"
+          }
+        ]
+      },
+      "matchedInCurrentAssessment": false,
+      "advisoryModified": "2026-10-01T15:30:05.552671898Z"
+    },
+    {
+      "id": "GHSA-cxp5-3px4-pw24",
+      "previousSeverity": "HIGH",
+      "disposition": "REMEDIATED_IN_PACKAGED_RUNTIME",
+      "basis": "Actual packaged inventory bound to SBOM and fresh OSV queries; prior advisory retained, no suppression. This is runtime scope only.",
+      "currentVersions": {
+        "payment": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ],
+        "case-management": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ]
+      },
+      "matchedInCurrentAssessment": false,
+      "advisoryModified": "2026-09-30T15:46:18.051343022Z"
+    },
+    {
+      "id": "GHSA-gx83-3vf8-gh7j",
+      "previousSeverity": "MODERATE",
+      "disposition": "REMEDIATED_IN_PACKAGED_RUNTIME",
+      "basis": "Actual packaged inventory bound to SBOM and fresh OSV queries; prior advisory retained, no suppression. This is runtime scope only.",
+      "currentVersions": {
+        "payment": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ],
+        "case-management": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ]
+      },
+      "matchedInCurrentAssessment": false,
+      "advisoryModified": "2026-09-28T21:00:05.608227628Z"
+    },
+    {
+      "id": "GHSA-p6pp-m3f8-5c89",
+      "previousSeverity": "HIGH",
+      "disposition": "REMEDIATED_IN_PACKAGED_RUNTIME",
+      "basis": "Actual packaged inventory bound to SBOM and fresh OSV queries; prior advisory retained, no suppression. This is runtime scope only.",
+      "currentVersions": {
+        "payment": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-core",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-core",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-core@3.1.7"
+          }
+        ],
+        "case-management": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-core",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-core",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-core@3.1.7"
+          }
+        ]
+      },
+      "matchedInCurrentAssessment": false,
+      "advisoryModified": "2026-10-01T15:30:13.452657713Z"
+    },
+    {
+      "id": "GHSA-q4xh-88c3-wmh7",
+      "previousSeverity": "HIGH",
+      "disposition": "REMEDIATED_IN_PACKAGED_RUNTIME",
+      "basis": "Actual packaged inventory bound to SBOM and fresh OSV queries; prior advisory retained, no suppression. This is runtime scope only.",
+      "currentVersions": {
+        "payment": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ],
+        "case-management": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ]
+      },
+      "matchedInCurrentAssessment": false,
+      "advisoryModified": "2026-09-28T20:30:05.315085978Z"
+    },
+    {
+      "id": "GHSA-wjgm-6hv5-3cvf",
+      "previousSeverity": "MODERATE",
+      "disposition": "REMEDIATED_IN_PACKAGED_RUNTIME",
+      "basis": "Actual packaged inventory bound to SBOM and fresh OSV queries; prior advisory retained, no suppression. This is runtime scope only.",
+      "currentVersions": {
+        "payment": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ],
+        "case-management": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ]
+      },
+      "matchedInCurrentAssessment": false,
+      "advisoryModified": "2026-09-28T20:30:05.331167692Z"
+    },
+    {
+      "id": "GHSA-wv8q-qhhj-9h54",
+      "previousSeverity": "HIGH",
+      "disposition": "REMEDIATED_IN_PACKAGED_RUNTIME",
+      "basis": "Actual packaged inventory bound to SBOM and fresh OSV queries; prior advisory retained, no suppression. This is runtime scope only.",
+      "currentVersions": {
+        "payment": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ],
+        "case-management": [
+          {
+            "group": "com.fasterxml.jackson.core",
+            "name": "jackson-databind",
+            "version": "2.21.7",
+            "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.7"
+          },
+          {
+            "group": "tools.jackson.core",
+            "name": "jackson-databind",
+            "version": "3.1.7",
+            "purl": "pkg:maven/tools.jackson.core/jackson-databind@3.1.7"
+          }
+        ]
+      },
+      "matchedInCurrentAssessment": false,
+      "advisoryModified": "2026-09-30T15:46:18.451708212Z"
+    }
+  ],
+  "artifact": {
+    "id": 11660244558,
+    "name": "phase6-remediation-0.5.0-closure-audit",
+    "size_in_bytes": 62554172,
+    "digest": "sha256:95c35d3d287d85e7e1bd3a651a238017994378a9824b5ee9866e9ad4da009f13",
+    "created_at": "2026-10-10T05:42:58Z",
+    "expires_at": "2027-01-08T04:39:43Z",
+    "expired": false
+  },
+  "rawEvidence": {
+    "archive": ".audit-artifacts/phase6-remediation-0.5.0/hosted/closure-audit.zip",
+    "sha256": "sha256:95c35d3d287d85e7e1bd3a651a238017994378a9824b5ee9866e9ad4da009f13",
+    "originalReportEntry": "phase6-final-closure.json",
+    "originalReportDigest": "sha256:395749334ed0132d1980e8beb6028c88582d410632290ee3f7edafd7eefe95bf",
+    "workflowLogs": {
+      "path": ".audit-artifacts/phase6-remediation-0.5.0/hosted/workflow-logs.zip",
+      "sha256": "sha256:ba6b78260df4bb7457f3c0465526beedd4958f7bb595f35d9418270a502e6d0d"
+    },
+    "githubStatus": {
+      "path": ".audit-artifacts/phase6-remediation-0.5.0/hosted/github-status.jsonl",
+      "sha256": "sha256:61da85774a95227cac990f8a232ab03f9934709e2f7740b143821693f3c92f3f"
+    }
+  },
+  "supplementalLocalUpgrade": {
+    "report": {
+      "fromCheckpoint": "fc89eeeefa43b90c4d19764bc344c2063f73a53a",
+      "oldBundleDigest": "6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+      "mode": "ACTUAL_SEALED_0.3_TO_SUCCESSOR_DATABASE_UNCHANGED",
+      "successorProfile": "acp-spring-vue-postgres/0.5.0",
+      "domains": {
+        "payment": {
+          "oldProvenance": {
+            "bundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+            "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+            "canonicalVersion": "0.3.0",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "deploymentRequirements": {
+              "path": "acp/deployment-requirements.json",
+              "sha256": "6990ebbffd91aa580f341f0fcf7e1fba1bcbdc5b7a38c6da3d54c2209a0f8549"
+            },
+            "features": [
+              "acp.deterministic-execution.0.4"
+            ],
+            "generator": "acp-spring-vue-generator/0.3.0",
+            "migrationDigests": {
+              "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+              "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+              "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+            },
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "protocol": "acp-target-worker/0.1.0",
+            "semanticModelVersion": "0.4.0",
+            "targetIRVersion": "0.2.0",
+            "targetProfile": "acp-spring-vue-postgres/0.3.0",
+            "tzdb": {
+              "artifact": "acp-tzdb-2026d.json",
+              "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+              "version": "2026d"
+            }
+          },
+          "newProvenance": {
+            "browserProfile": {
+              "axe": "4.13.0",
+              "engine": "chromium",
+              "manualAccessibility": "OUTSTANDING",
+              "otherBrowsers": "OUTSTANDING",
+              "playwright": "1.63.0",
+              "version": "1.0.0",
+              "viewports": {
+                "COMPACT": {
+                  "height": 844,
+                  "width": 390
+                },
+                "EXPANDED": {
+                  "height": 900,
+                  "width": 1280
+                }
+              }
+            },
+            "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+            "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+            "canonicalVersion": "0.3.0",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "deploymentRequirements": {
+              "path": "acp/deployment-requirements.json",
+              "sha256": "a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017"
+            },
+            "features": [
+              "acp.deterministic-execution.0.4"
+            ],
+            "generator": "acp-spring-vue-generator/0.5.0",
+            "migrationDigests": {
+              "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+              "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+              "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+            },
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "protocol": "acp-target-worker/0.1.0",
+            "semanticModelVersion": "0.4.0",
+            "targetIRVersion": "0.2.0",
+            "targetProfile": "acp-spring-vue-postgres/0.5.0",
+            "taskUIModel": {
+              "path": "acp/task-ui-model.json",
+              "sha256": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+            },
+            "tzdb": {
+              "artifact": "acp-tzdb-2026d.json",
+              "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+              "version": "2026d"
+            }
+          },
+          "allTablesRowForRow": "PASS",
+          "zeroMigrations": "PASS",
+          "actualOldProjectRegeneration": "PASS",
+          "humanIdentityCustomizationSurvived": "PASS",
+          "identityInterfacePreparation": "EXPLICIT_SYNTHETIC_DEPLOYMENT_FIXTURE_FOR_0.4",
+          "oldFrontendBuild": "PASS",
+          "newFrontendBuildAndTests": "PASS",
+          "V1V2V3Exact": "PASS"
+        },
+        "case-management": {
+          "oldProvenance": {
+            "bundleDigest": "sha256:6b2fce95708344c7b78888efdc71da76ef70981ffb9b36933dda36b83a436afc",
+            "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "canonicalVersion": "0.3.0",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "deploymentRequirements": {
+              "path": "acp/deployment-requirements.json",
+              "sha256": "6406eab4a0b7656c36073e53ee06493c78335711f4930c8d424e6d9443d5529f"
+            },
+            "features": [
+              "acp.deterministic-execution.0.4"
+            ],
+            "generator": "acp-spring-vue-generator/0.3.0",
+            "migrationDigests": {
+              "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+              "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+              "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+            },
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "protocol": "acp-target-worker/0.1.0",
+            "semanticModelVersion": "0.4.0",
+            "targetIRVersion": "0.2.0",
+            "targetProfile": "acp-spring-vue-postgres/0.3.0",
+            "tzdb": {
+              "artifact": "acp-tzdb-2026d.json",
+              "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+              "version": "2026d"
+            }
+          },
+          "newProvenance": {
+            "browserProfile": {
+              "axe": "4.13.0",
+              "engine": "chromium",
+              "manualAccessibility": "OUTSTANDING",
+              "otherBrowsers": "OUTSTANDING",
+              "playwright": "1.63.0",
+              "version": "1.0.0",
+              "viewports": {
+                "COMPACT": {
+                  "height": 844,
+                  "width": 390
+                },
+                "EXPANDED": {
+                  "height": 900,
+                  "width": 1280
+                }
+              }
+            },
+            "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+            "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "canonicalVersion": "0.3.0",
+            "compiler": "acp-reference-compiler/0.1.0",
+            "deploymentRequirements": {
+              "path": "acp/deployment-requirements.json",
+              "sha256": "f2d66fed68e5b9b706a64351aaf59dd2f33436a1d5713befe9c50e0050b0a600"
+            },
+            "features": [
+              "acp.deterministic-execution.0.4"
+            ],
+            "generator": "acp-spring-vue-generator/0.5.0",
+            "migrationDigests": {
+              "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+              "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+              "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+            },
+            "pipeline": "acp-reference-pipeline/0.1.0",
+            "protocol": "acp-target-worker/0.1.0",
+            "semanticModelVersion": "0.4.0",
+            "targetIRVersion": "0.2.0",
+            "targetProfile": "acp-spring-vue-postgres/0.5.0",
+            "taskUIModel": {
+              "path": "acp/task-ui-model.json",
+              "sha256": "fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+            },
+            "tzdb": {
+              "artifact": "acp-tzdb-2026d.json",
+              "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+              "version": "2026d"
+            }
+          },
+          "allTablesRowForRow": "PASS",
+          "zeroMigrations": "PASS",
+          "actualOldProjectRegeneration": "PASS",
+          "humanIdentityCustomizationSurvived": "PASS",
+          "identityInterfacePreparation": "EXPLICIT_SYNTHETIC_DEPLOYMENT_FIXTURE_FOR_0.4",
+          "oldFrontendBuild": "PASS",
+          "newFrontendBuildAndTests": "PASS",
+          "V1V2V3Exact": "PASS"
+        }
+      },
+      "result": "PASS"
+    },
+    "files": {
+      "case-management-new-frontend-build.log": "sha256:59367adda62389a9086c4824ca74a73f0d80d55505062bb6d1ca8d3eaecf1f5c",
+      "case-management-new-frontend-lock.log": "sha256:a951b2c91e16faa9b4fdcac335e739ca0d34094506cab3cef93d3459c4f05ceb",
+      "case-management-new-frontend-tests.log": "sha256:b04b6e474c80f1db3af95df195a3f511a46716deb294bee6ff7c70c54d2ca524",
+      "case-management-new-frontend-types.log": "sha256:6a046f23ff260ca658d4805fe4f2f032549722687c383b41c1dbc01bcfff1582",
+      "case-management-new-unchanged.log": "sha256:078de5eba132109cc4c2690d0916ec681490d4c19fa98e3db9edc02eb91fda86",
+      "case-management-old-frontend-build.log": "sha256:0c46c23c9789590443af26661d1d31692d75a29306ebaf120e09f736ac9dd52e",
+      "case-management-old-frontend-lock.log": "sha256:a951b2c91e16faa9b4fdcac335e739ca0d34094506cab3cef93d3459c4f05ceb",
+      "case-management-old-frontend-types.log": "sha256:6a046f23ff260ca658d4805fe4f2f032549722687c383b41c1dbc01bcfff1582",
+      "case-management-old-seed.log": "sha256:fb7961ac976353b660c97ba756f1ef6ca45f60a2e656b476c65e09d199554f68",
+      "command.log": "sha256:aaa17c94cdf3193481e347fa0a975505d51990b2a3ddefa86d6275b3e11c636d",
+      "old-generation.log": "sha256:6015b03bc0bb1c6e1266d4f9829c8f0112841bb71c137a9411a31e509ed5b366",
+      "payment-new-frontend-build.log": "sha256:fe344c0347f473103b8ca2fcebadcaba34bc472ea991320df64a8c54f660b872",
+      "payment-new-frontend-lock.log": "sha256:a951b2c91e16faa9b4fdcac335e739ca0d34094506cab3cef93d3459c4f05ceb",
+      "payment-new-frontend-tests.log": "sha256:9369079f24be66368240f7343cfa92bd3e873b5043510c8cf6b1730d947b4ec1",
+      "payment-new-frontend-types.log": "sha256:6a046f23ff260ca658d4805fe4f2f032549722687c383b41c1dbc01bcfff1582",
+      "payment-new-unchanged.log": "sha256:461801734d82c9afbe3e7e73003e604ea788107ad21d5ba7fa9f8f4e84ea081c",
+      "payment-old-frontend-build.log": "sha256:faad10d55c090c497f4c1bd5fd6b9db163ae0cd9c8cefc4e1daa037ec1d3677f",
+      "payment-old-frontend-lock.log": "sha256:a951b2c91e16faa9b4fdcac335e739ca0d34094506cab3cef93d3459c4f05ceb",
+      "payment-old-frontend-types.log": "sha256:6a046f23ff260ca658d4805fe4f2f032549722687c383b41c1dbc01bcfff1582",
+      "payment-old-seed.log": "sha256:07646619d186a407a7e2819283b83a1a65f4397a59f0dd84f438a89ea21711bf",
+      "ui-upgrade-report.json": "sha256:9f0db59c08af9bbd8ea282e25dd2bfcef296ee483dfec701fc1c51a9a3a41d26"
+    },
+    "path": ".audit-artifacts/phase6-remediation-0.5.0/supplemental-ui-upgrade",
+    "sourceContentCommit": "f3b74bfeadb2614bf0feeaf320707acede730e95",
+    "qualification": "Local harness source matches f3b74bf; local command began before that source was committed. Hosted execution used the clean committed f3b74bf checkout."
+  },
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "closureApproval": "NOT_GRANTED",
+  "scope": "Four ordinary jobs passed; closure intentionally blocked. Original local and hosted observations retained without relabeling."
+}

@@ -1,0 +1,212 @@
+{
+  "mode": "FULL_TASK_INTERFACE_ADMISSION",
+  "approval": {
+    "date": "2026-10-08",
+    "statement": "Approve ADR-0016 and the complete deterministic-v04 fixture decisions, including the F-01 failure bindings.",
+    "status": "APPROVED_REFERENCE_SEMANTICS",
+    "reviewedCommit": "76e7700758454b5cfd00c39a68475439c1a1e6ca",
+    "assets": {
+      "contracts/authoring-0.4.schema.json": "sha256:2e60a19f9683d4515a0bd51fc5b0b964164990eea7fadd6715b50fdf11d25d60",
+      "contracts/canonical-0.3.schema.json": "sha256:104bb574abac5eafd7b8e4e6ea5b030b08b30631f8207437ed6713cf9e3098ea",
+      "contracts/change-0.3.schema.json": "sha256:7424c400b2887eafc5d572f7c55c702daa07956e3d79729bf0d6562fa931f491",
+      "docs/adr/0016-deterministic-query-lifecycle-and-rate-semantics.md": "sha256:bc1dd54ba835442e49b0a4430c60b6ab00b9c13cf00301392b08f1c80bcb7e93"
+    },
+    "versions": {
+      "authoring": "0.4.0",
+      "canonical": "0.3.0",
+      "change": "0.3.0"
+    },
+    "scope": "Complete ADR-0016 and both ACP synthetic reference fixtures, including F-01; not production business requirements or target support",
+    "provenance": "AI proposed; human project authority explicitly approved in user instruction",
+    "authorityRepresentation": "Bounded reference/test authority with public key; no manufactured reviewer identity or production credentials",
+    "referenceClock": 1791417600
+  },
+  "profile": "acp-spring-vue-postgres/0.5.0",
+  "generator": "acp-spring-vue-generator/0.5.0",
+  "bundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "closureGate": "BLOCKED_FINAL_AUDIT_REQUIRED",
+  "domains": {
+    "payment": {
+      "compilerOwnedRegeneration": "PASS",
+      "uncoordinatedCompilerEditRejected": "PASS",
+      "unapprovedAIRejected": "PASS",
+      "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "admission": {
+        "operation": "lower",
+        "result": "ACCEPTED"
+      },
+      "blockers": [],
+      "determinism": "PASS",
+      "humanExtensionPreservation": "PASS",
+      "generatedProvenance": {
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.5.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.5.0",
+        "taskUIModel": {
+          "path": "acp/task-ui-model.json",
+          "sha256": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+        },
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "checks": {
+        "backend": "PASS",
+        "frontend-lock": "PASS",
+        "frontend-types": "PASS",
+        "frontend-tests": "PASS",
+        "frontend-build": "PASS",
+        "real-browser": "PASS"
+      },
+      "browser": {
+        "stats": {
+          "startTime": "2026-10-09T10:51:21.691Z",
+          "duration": 65598.214,
+          "expected": 12,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "rawEvidence": {
+          "archiveEntry": "admission/task-interface-report.json",
+          "sha256": "sha256:732e248f4eff1402299b2eec0b77a551782d5995374a25e44a0797c5c2d30ad9"
+        }
+      },
+      "result": "PASS"
+    },
+    "case-management": {
+      "compilerOwnedRegeneration": "PASS",
+      "uncoordinatedCompilerEditRejected": "PASS",
+      "unapprovedAIRejected": "PASS",
+      "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "admission": {
+        "operation": "lower",
+        "result": "ACCEPTED"
+      },
+      "blockers": [],
+      "determinism": "PASS",
+      "humanExtensionPreservation": "PASS",
+      "generatedProvenance": {
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+        "canonicalSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "f2d66fed68e5b9b706a64351aaf59dd2f33436a1d5713befe9c50e0050b0a600"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.5.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "b84e41e5902c1f611d4692e454409cb0013b52f76129ce7b89c608d2934a4674",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "71d6792bd43301a63f0b9af69398a96620f634232f61c1aba9c99ce705f06fa5"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.5.0",
+        "taskUIModel": {
+          "path": "acp/task-ui-model.json",
+          "sha256": "fbf9f119aa4c36c31fa3ae0280679c4dbd2fddf6e7b244de78b2cda0f8b46771"
+        },
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "checks": {
+        "backend": "PASS",
+        "frontend-lock": "PASS",
+        "frontend-types": "PASS",
+        "frontend-tests": "PASS",
+        "frontend-build": "PASS",
+        "real-browser": "PASS"
+      },
+      "browser": {
+        "stats": {
+          "startTime": "2026-10-09T11:06:09.699Z",
+          "duration": 59513.933000000005,
+          "expected": 12,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "rawEvidence": {
+          "archiveEntry": "admission/task-interface-report.json",
+          "sha256": "sha256:732e248f4eff1402299b2eec0b77a551782d5995374a25e44a0797c5c2d30ad9"
+        }
+      },
+      "result": "PASS"
+    }
+  },
+  "result": "FULL_ADMISSION_PASS_PHASE6_NOT_CLOSED",
+  "evidenceIdentity": "phase6-remediation-0.5.0-admission",
+  "originalExecutionCommit": "1abbf0d33ee8be2ea0b3b6daf61309fa42d00138",
+  "reusedByAuditExecutionCommit": "8510c2c79c6cf187dfa7f3901daa89defa3c6f21",
+  "rawReportDigest": "sha256:732e248f4eff1402299b2eec0b77a551782d5995374a25e44a0797c5c2d30ad9",
+  "admissionContractVersion": "5.0.0"
+}
