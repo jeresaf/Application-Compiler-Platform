@@ -15,7 +15,11 @@ def run(output,new_projects):
  if not (old_projects/'privacy-lifecycle-report.json').exists():
   with (output/'old-generation.log').open('wb') as log:subprocess.run([sys.executable,'tooling/check_privacy_lifecycle_components.py','--output',str(old_projects)],cwd=checkout,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=600)
  assert json.loads((old_projects/'privacy-lifecycle-report.json').read_text())['result']=='GENERATED_ONLY_NO_RUNTIME_CLAIM'
- report={'fromCheckpoint':BASE,'oldBundleDigest':DIGEST,'mode':'ACTUAL_0.3_TO_0.4_DATABASE_UNCHANGED','domains':{}}
+ from target_worker import PROFILE
+ from target_release import verify_production_upgrade
+ successor=PROFILE['profile']
+ verify_production_upgrade('acp-spring-vue-postgres/0.3.0',successor)
+ report={'fromCheckpoint':BASE,'oldBundleDigest':DIGEST,'mode':'ACTUAL_SEALED_0.3_TO_SUCCESSOR_DATABASE_UNCHANGED','successorProfile':successor,'domains':{}}
  for domain in ('payment','case-management'):
   old=old_projects/domain;new=new_projects/domain
   assert json.loads((old/'acp/profile.json').read_text())['profile']=='acp-spring-vue-postgres/0.3.0'
@@ -54,7 +58,7 @@ export function onIdentityChange(_notify:()=>void):()=>void{return ()=>{};}
   for artifact in rows:
    path=old/artifact['path'];path.parent.mkdir(parents=True,exist_ok=True);path.write_text(artifact['text'])
   assert identity.read_text()==custom
-  assert json.loads((old/'acp/profile.json').read_text())['profile']=='acp-spring-vue-postgres/0.4.0'
+  assert json.loads((old/'acp/profile.json').read_text())['profile']==successor
   for name,command in [('new-frontend-lock',['npm','ci','--ignore-scripts','--no-audit','--no-fund']),('new-frontend-types',['npm','run','typecheck']),('new-frontend-tests',['npm','test']),('new-frontend-build',['npm','run','build'])]:
    with (output/(domain+'-'+name+'.log')).open('wb') as log:subprocess.run(command,cwd=old/'frontend',stdout=log,stderr=subprocess.STDOUT,check=True,timeout=600)
   # New-runtime test snapshots every table, validates Flyway with zero migrations,
