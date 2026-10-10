@@ -2,7 +2,7 @@
 
 No synthetic business ChangeSet/backfill is represented as human approved.
 """
-import argparse,io,json,subprocess,sys,tarfile
+import argparse,hashlib,io,json,subprocess,sys,tarfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2];sys.path[:0]=[str(ROOT/'tooling')]
 BASELINE='7e4e3438179e7a446c5f3737ad1d6d9cb07a96ea'
@@ -23,7 +23,7 @@ for domain in ('payment','case-management'):
  src,ctx=ui_context(domain);result=compile_pipeline(src,ctx).result;assert isinstance(result,Success);FilesystemArtifactStore(Path(sys.argv[1])/domain).apply(result.output)
 """
  with (output/'sealed-04-generation.log').open('wb') as log:subprocess.run([sys.executable,'-c',generate,str(old)],cwd=checkout,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=1800)
- report={'policy':verify_production_upgrade('acp-spring-vue-postgres/0.4.0','acp-spring-vue-postgres/0.5.0'),'canonicalChange':'NONE_APPROVED_SNAPSHOTS_UNCHANGED','semanticEvolutionBoundary':'New String addition/backfills are synthetic test witnesses only; no new business approval exists. This target-release journey does not satisfy a complete semantic-evolution closure criterion.','domains':{}}
+ report={'executionCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'sourceDigest':'sha256:'+hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'policy':verify_production_upgrade('acp-spring-vue-postgres/0.4.0','acp-spring-vue-postgres/0.5.0'),'canonicalChange':'NONE_APPROVED_SNAPSHOTS_UNCHANGED','semanticEvolutionBoundary':'New String addition/backfills are synthetic test witnesses only; no new business approval exists. This target-release journey does not satisfy a complete semantic-evolution closure criterion.','domains':{}}
  for domain in ('payment','case-management'):
   seed=source(domain);seed=seed[:seed.index('    @Test void exactApprovedInvocation')].replace('class InvocationCoreTest','class RemediationSeedTest')
   seed+='    @Test void committedApprovedApplicationBeforeSuccessor() throws Exception {inv.'+symbol('UC-TASK','v')+'(0,invocation("before-successor"),"approved-target-upgrade",identity("tenant-one","fixture:operator"));}\n}\n'
@@ -41,9 +41,18 @@ for domain in ('payment','case-management'):
    with (output/(domain+'-'+label+'.log')).open('wb') as log:subprocess.run(['mvn','-B','-ntp','-Dtest='+test,'test'],cwd=project/'backend',stdout=log,stderr=subprocess.STDOUT,check=True,timeout=900)
   previous=read_provenance(old/domain/'acp/provenance.json');current=read_provenance(projects/domain/'acp/provenance.json')
   newmaps={m['artifact']:m for m in current['artifacts']}
+  human_transitions=[];compared=0
   for mapping in previous['artifacts']:
+   if mapping['artifact'] not in newmaps:
+    artifact=mapping['artifact'];receipt=projects/domain/'.acp-store.json'
+    if artifact!='frontend/src/extensions/identity.ts' or mapping['ownership']!='COMPILER_OWNED' or json.loads(receipt.read_text()).get(artifact,{}).get('owner')!='HUMAN_OWNED':raise ValueError('UPGRADE_ORIGIN_LOSS:'+artifact)
+    before=(old/domain/artifact).read_bytes();after=(projects/domain/artifact).read_bytes()
+    if after!=before+b'\n// deployment-owned customization must survive regeneration\n':raise ValueError('UNVERIFIED_HUMAN_EXTENSION_TRANSITION')
+    human_transitions.append({'artifact':artifact,'previousOrigins':mapping['origins'],'newOwner':'HUMAN_OWNED','contentDigest':'sha256:'+hashlib.sha256(after).hexdigest(),'adoptionReceiptDigest':'sha256:'+hashlib.sha256(receipt.read_bytes()).hexdigest(),'basis':'Explicit admission harness adoption and exact retained customization; compiler origin is not represented as current human authorship.'})
+    continue
    if newmaps[mapping['artifact']]['origins']!=mapping['origins']:raise ValueError('UPGRADE_ORIGIN_LOSS')
-  report['domains'][domain]={'previousBuild':previous['build'],'successorBuild':current['build'],'originsCompared':len(previous['artifacts']),'noCleanBetweenOldCommitAndSuccessor':True,'junit':str(projects/domain/'backend/target/surefire-reports/TEST-acp.generated.RemediationUpgradeTest.xml')}
+   compared+=1
+  report['domains'][domain]={'previousBuild':previous['build'],'successorBuild':current['build'],'compilerOriginsCompared':compared,'humanOwnershipTransitions':human_transitions,'noCleanBetweenOldCommitAndSuccessor':True,'junit':str(projects/domain/'backend/target/surefire-reports/TEST-acp.generated.RemediationUpgradeTest.xml')}
  (output/'release-upgrade.json').write_text(json.dumps(report,indent=2)+'\n')
 
 if __name__=='__main__':
