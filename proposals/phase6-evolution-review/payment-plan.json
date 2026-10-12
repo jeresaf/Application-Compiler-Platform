@@ -1,0 +1,4958 @@
+{
+  "planVersion": "0.3.0",
+  "kind": "CHANGE",
+  "author": "assistant:proposal",
+  "change": {
+    "changeVersion": "0.3.0",
+    "id": "CHANGE-REVIEW-payment",
+    "author": "assistant:proposal",
+    "intent": "UNAPPROVED synthetic reference-only required field; HUMAN REVIEW REQUIRED",
+    "branch": "BRANCH-CHANGE-required-field",
+    "base": {
+      "sequence": 0,
+      "digest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "operations": [
+      {
+        "op": "ADD",
+        "node": {
+          "id": "EVOLVE-REFERENCE-NOTE",
+          "revision": 1,
+          "kind": "Field",
+          "name": "Synthetic reference evolution note",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment/EVOLVE-REFERENCE-NOTE",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "type": {
+              "kind": "String"
+            },
+            "optional": false,
+            "classification": "PUBLIC",
+            "classificationRef": {
+              "id": "CLASS-PUBLIC",
+              "revision": 2
+            }
+          }
+        }
+      }
+    ],
+    "reads": [],
+    "migration": {
+      "id": "MIG-FORWARD",
+      "mode": "REQUIRED",
+      "compatibility": "BACKWARD",
+      "irreversible": false,
+      "steps": [
+        "Expand",
+        "Backfill",
+        "Verify",
+        "Contract after client retirement"
+      ],
+      "preconditions": [
+        "Review data observations and active clients"
+      ],
+      "verification": [
+        "Verify required values and retained constraints"
+      ],
+      "recovery": "Forward repair; restore only after verified recovery review",
+      "observations": []
+    },
+    "sources": [],
+    "parents": [],
+    "rollbackOf": null,
+    "canonicalVersion": "0.3.0"
+  },
+  "candidate": {
+    "content": {
+      "irKind": "CanonicalApplication",
+      "schemaVersion": "0.3.0",
+      "semanticModelVersion": "0.4.0",
+      "canonicalProfile": "acp-jcs-safe-v1",
+      "applicationId": "APP-FIXTURE",
+      "requiredFeatures": [
+        "acp.deterministic-execution.0.4"
+      ],
+      "nodes": [
+        {
+          "id": "A11Y-TASK",
+          "revision": 3,
+          "kind": "AccessibilityRequirement",
+          "name": "A11Y-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "A11Y-TASK",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "A11Y-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "ACTION-TASK",
+                "revision": 3
+              },
+              {
+                "id": "CONTROL-TASK-RESOURCE",
+                "revision": 2
+              },
+              {
+                "id": "CONTROL-TEXT",
+                "revision": 3
+              },
+              {
+                "id": "FORM-TASK",
+                "revision": 3
+              },
+              {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              }
+            ],
+            "checks": [
+              "ERROR_ANNOUNCEMENT",
+              "FOCUS",
+              "KEYBOARD",
+              "LABELS"
+            ],
+            "method": "AUTOMATED_AND_MANUAL",
+            "evidence": {
+              "id": "EVID-A11Y",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "AC-PAYMENT",
+          "revision": 1,
+          "kind": "AcceptanceCriterion",
+          "name": "AC-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "AC-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            },
+            "scenario": "Positive in-tenant payment succeeds; nonpositive or cross-tenant attempt is denied."
+          }
+        },
+        {
+          "id": "ACT-USER",
+          "revision": 2,
+          "kind": "Actor",
+          "name": "ACT-USER",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "ACT-USER",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subject": {
+              "id": "ENT-MEMBER",
+              "revision": 2
+            },
+            "authentication": {
+              "id": "AUTH-ACT-USER",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "ACTION-TASK",
+          "revision": 3,
+          "kind": "Action",
+          "name": "ACTION-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "ACTION-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "useCase": {
+              "id": "UC-TASK",
+              "revision": 3
+            },
+            "permissions": [
+              {
+                "id": "PERM-CMD-RECORD",
+                "revision": 3
+              }
+            ],
+            "label": "Complete task",
+            "confirmation": "REQUIRED"
+          }
+        },
+        {
+          "id": "AGG-ENT-MEMBER",
+          "revision": 2,
+          "kind": "Aggregate",
+          "name": "AGG-ENT-MEMBER",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "AGG-ENT-MEMBER",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "root": {
+              "id": "ENT-MEMBER",
+              "revision": 2
+            },
+            "members": [
+              {
+                "id": "ENT-MEMBER",
+                "revision": 2
+              }
+            ],
+            "invariants": [],
+            "consistency": "ATOMIC"
+          }
+        },
+        {
+          "id": "AGG-ENT-PAYMENT",
+          "revision": 2,
+          "kind": "Aggregate",
+          "name": "AGG-ENT-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "AGG-ENT-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "root": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "members": [
+              {
+                "id": "ENT-PAYMENT",
+                "revision": 2
+              }
+            ],
+            "invariants": [
+              {
+                "id": "INV-POSITIVE",
+                "revision": 2
+              }
+            ],
+            "consistency": "ATOMIC"
+          }
+        },
+        {
+          "id": "AGG-ENT-TENANT",
+          "revision": 2,
+          "kind": "Aggregate",
+          "name": "AGG-ENT-TENANT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "AGG-ENT-TENANT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "root": {
+              "id": "ENT-TENANT",
+              "revision": 2
+            },
+            "members": [
+              {
+                "id": "ENT-TENANT",
+                "revision": 2
+              }
+            ],
+            "invariants": [],
+            "consistency": "ATOMIC"
+          }
+        },
+        {
+          "id": "APPLIES-ALL",
+          "revision": 1,
+          "kind": "Applicability",
+          "name": "APPLIES-ALL",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "APPLIES-ALL",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "condition": {
+              "tag": "literal",
+              "type": {
+                "kind": "Boolean"
+              },
+              "value": true
+            },
+            "rationale": "Synthetic reference obligations are applicable.",
+            "decision": {
+              "id": "DEC-APPLICABILITY",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "ASSIGN-ENT-PAYMENT",
+          "revision": 3,
+          "kind": "RoleAssignment",
+          "name": "ASSIGN-ENT-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "ASSIGN-ENT-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "role": {
+              "id": "ROLE-OPERATOR",
+              "revision": 3
+            },
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "scope": {
+              "id": "SCOPE-ENT-PAYMENT",
+              "revision": 2
+            },
+            "principal": "fixture:operator"
+          }
+        },
+        {
+          "id": "ASSUMPTION-ONLINE",
+          "revision": 1,
+          "kind": "Assumption",
+          "name": "ASSUMPTION-ONLINE",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "ASSUMPTION-ONLINE",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [],
+          "data": {
+            "statement": "Operators have connectivity.",
+            "reviewTrigger": "Before selecting an offline workflow."
+          }
+        },
+        {
+          "id": "AUTH-ACT-USER",
+          "revision": 2,
+          "kind": "AuthenticationModel",
+          "name": "AUTH-ACT-USER",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "AUTH-ACT-USER",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "assurance": "MULTI_FACTOR",
+            "mechanisms": [
+              "KNOWLEDGE",
+              "POSSESSION"
+            ]
+          }
+        },
+        {
+          "id": "BACKUP-TASK",
+          "revision": 2,
+          "kind": "Backup",
+          "name": "BACKUP-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "BACKUP-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resources": [
+              {
+                "id": "ENT-PAYMENT",
+                "revision": 2
+              }
+            ],
+            "intervalSeconds": 3600,
+            "retentionSeconds": 604800,
+            "encrypted": true,
+            "evidence": {
+              "id": "EVID-BACKUP",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "BOUNDARY-TASK",
+          "revision": 3,
+          "kind": "PermissionBoundary",
+          "name": "BOUNDARY-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "BOUNDARY-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "permissions": [
+              {
+                "id": "PERM-CMD-RECORD",
+                "revision": 3
+              },
+              {
+                "id": "PERM-QUERY-TASKS",
+                "revision": 3
+              }
+            ],
+            "denied": {
+              "id": "VIEW-ERROR",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "CLASS-INTERNAL",
+          "revision": 2,
+          "kind": "DataClassification",
+          "name": "CLASS-INTERNAL",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "CLASS-INTERNAL",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "CLASS-INTERNAL",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "level": "INTERNAL",
+            "audit": "WRITE",
+            "encryptAtRest": true,
+            "encryptInTransit": true,
+            "export": "DENY",
+            "redaction": "NONE",
+            "redactionScope": "NON_DOMAIN_OBSERVABILITY"
+          }
+        },
+        {
+          "id": "CLASS-PUBLIC",
+          "revision": 2,
+          "kind": "DataClassification",
+          "name": "CLASS-PUBLIC",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "CLASS-PUBLIC",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "CLASS-PUBLIC",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "level": "PUBLIC",
+            "audit": "WRITE",
+            "encryptAtRest": true,
+            "encryptInTransit": true,
+            "export": "DENY",
+            "redaction": "NONE",
+            "redactionScope": "NON_DOMAIN_OBSERVABILITY"
+          }
+        },
+        {
+          "id": "CLASS-SECRET",
+          "revision": 2,
+          "kind": "DataClassification",
+          "name": "CLASS-SECRET",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "CLASS-SECRET",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "CLASS-SECRET",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "level": "SECRET",
+            "audit": "READ_WRITE",
+            "encryptAtRest": true,
+            "encryptInTransit": true,
+            "export": "DENY",
+            "redaction": "OMIT",
+            "redactionScope": "NON_DOMAIN_OBSERVABILITY"
+          }
+        },
+        {
+          "id": "CLASS-SENSITIVE",
+          "revision": 2,
+          "kind": "DataClassification",
+          "name": "CLASS-SENSITIVE",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "CLASS-SENSITIVE",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "CLASS-SENSITIVE",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "level": "SENSITIVE",
+            "audit": "READ_WRITE",
+            "encryptAtRest": true,
+            "encryptInTransit": true,
+            "export": "DENY",
+            "redaction": "MASK",
+            "redactionScope": "NON_DOMAIN_OBSERVABILITY"
+          }
+        },
+        {
+          "id": "CMD-RECORD",
+          "revision": 3,
+          "kind": "Command",
+          "name": "CMD-RECORD",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "CMD-RECORD",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "CMD-RECORD",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "CMD-RECORD",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "invariants": [
+              {
+                "id": "INV-POSITIVE",
+                "revision": 2
+              }
+            ],
+            "emits": [
+              {
+                "id": "EVT-RECORDED",
+                "revision": 2
+              }
+            ],
+            "aggregate": {
+              "id": "AGG-ENT-PAYMENT",
+              "revision": 2
+            },
+            "writes": [
+              {
+                "id": "ENT-PAYMENT",
+                "revision": 2
+              }
+            ],
+            "failures": [
+              {
+                "id": "FAIL-BUSINESS",
+                "revision": 1
+              },
+              {
+                "id": "FAIL-TRANSIENT",
+                "revision": 1
+              }
+            ],
+            "idempotency": {
+              "id": "IDEM-OPERATION",
+              "revision": 2
+            },
+            "input": {
+              "id": "OPERATION-INPUT",
+              "revision": 1
+            },
+            "output": {
+              "id": "OPERATION-RESULT",
+              "revision": 1
+            },
+            "writeFields": [
+              {
+                "id": "FLD-TASK-SUMMARY",
+                "revision": 2
+              }
+            ],
+            "assignments": [
+              {
+                "resource": {
+                  "id": "ENT-PAYMENT",
+                  "revision": 2
+                },
+                "field": {
+                  "id": "FLD-TASK-SUMMARY",
+                  "revision": 2
+                },
+                "value": {
+                  "tag": "input",
+                  "scope": "OPERATION",
+                  "field": {
+                    "id": "OPERATION-TEXT",
+                    "revision": 2
+                  }
+                }
+              }
+            ],
+            "outputBindings": [
+              {
+                "field": {
+                  "id": "RESULT-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "tag": "postField",
+                  "field": {
+                    "id": "FLD-TASK-SUMMARY",
+                    "revision": 2
+                  }
+                }
+              }
+            ],
+            "eventBindings": [
+              {
+                "event": {
+                  "id": "EVT-RECORDED",
+                  "revision": 2
+                },
+                "payload": [
+                  {
+                    "field": {
+                      "id": "FLD-AMOUNT",
+                      "revision": 2
+                    },
+                    "value": {
+                      "tag": "postField",
+                      "field": {
+                        "id": "FLD-AMOUNT",
+                        "revision": 2
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "emissionOrder": "DECLARED_BINDING_SEQUENCE",
+            "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY",
+            "failureBindings": [
+              {
+                "failure": {
+                  "id": "FAIL-BUSINESS",
+                  "revision": 1
+                },
+                "stage": "PRE_STATE",
+                "trigger": {
+                  "kind": "WORKFLOW_NO_APPLICABLE_TRANSITION",
+                  "machine": {
+                    "id": "WF-PAYMENT",
+                    "revision": 2
+                  }
+                }
+              },
+              {
+                "failure": {
+                  "id": "FAIL-TRANSIENT",
+                  "revision": 1
+                },
+                "stage": "INFRASTRUCTURE",
+                "trigger": {
+                  "kind": "INFRASTRUCTURE_CLASS",
+                  "faultClass": "DEPENDENCY_UNAVAILABLE"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "COMPATIBILITY-TASK",
+          "revision": 3,
+          "kind": "CompatibilityRequirement",
+          "name": "COMPATIBILITY-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "COMPATIBILITY-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subject": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            },
+            "policy": "BACKWARD",
+            "supportedVersions": [
+              "1",
+              "2"
+            ],
+            "currentVersion": "2",
+            "windowSeconds": 86400,
+            "evidence": {
+              "id": "EVID-COMPATIBILITY",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "CONSTRAINT-TENANT",
+          "revision": 3,
+          "kind": "Constraint",
+          "name": "CONSTRAINT-TENANT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "CONSTRAINT-TENANT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [],
+          "data": {
+            "statement": "Payment authorization is tenant scoped.",
+            "subjects": [
+              {
+                "id": "POL-TENANT",
+                "revision": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "CONTROL-TASK-RESOURCE",
+          "revision": 2,
+          "kind": "InputControl",
+          "name": "CONTROL-TASK-RESOURCE",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "CONTROL-TASK-RESOURCE",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "form": {
+              "id": "FORM-TASK",
+              "revision": 3
+            },
+            "field": {
+              "id": "INPUT-TASK-RESOURCE",
+              "revision": 2
+            },
+            "label": "Resource identity",
+            "errorMessage": "Select the authorized resource identity.",
+            "required": true,
+            "purpose": "TEXT"
+          }
+        },
+        {
+          "id": "CONTROL-TEXT",
+          "revision": 3,
+          "kind": "InputControl",
+          "name": "CONTROL-TEXT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "CONTROL-TEXT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "form": {
+              "id": "FORM-TASK",
+              "revision": 3
+            },
+            "field": {
+              "id": "INPUT-TASK-TEXT",
+              "revision": 2
+            },
+            "label": "Task note",
+            "errorMessage": "Enter a task note.",
+            "required": true,
+            "purpose": "MULTILINE"
+          }
+        },
+        {
+          "id": "DEC-APPLICABILITY",
+          "revision": 1,
+          "kind": "Decision",
+          "name": "DEC-APPLICABILITY",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "DEC-APPLICABILITY",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "statement": "All declared fixture quality obligations apply.",
+            "strength": "REQUIRED",
+            "rationale": "Exercise the complete bounded quality model.",
+            "alternatives": [
+              "Omit verification"
+            ]
+          }
+        },
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1,
+          "kind": "Decision",
+          "name": "Proposed deterministic execution reference semantics",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "payment",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "statement": "PROPOSED ONLY: identity ASC query ordering, explicit terminal closure commit anchor, exact anonymization constants, deterministic admission, commit-anchored idempotency/delivery, ordered emissions, SKIP jobs, action-local hold release observability redaction, and explicit ordered workflow/dependency Failure bindings.",
+            "strength": "REQUIRED",
+            "rationale": "HUMAN REVIEW REQUIRED. Planning and structural candidate markers are not approval or production business requirements.",
+            "alternatives": [
+              "Retain approved 0.3/0.2 meaning and reject incomplete target capabilities"
+            ]
+          }
+        },
+        {
+          "id": "DEC-EXECUTION-V03",
+          "revision": 1,
+          "kind": "Decision",
+          "name": "DEC-EXECUTION-V03",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "DEC-EXECUTION-V03",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "statement": "Proposed fixture behavior: explicit root selection; summary-only assignments; prior-step text flow; explicit output and event payloads.",
+            "strength": "REQUIRED",
+            "rationale": "New test semantics, authored explicitly for review; no inferred migration and no real approval.",
+            "alternatives": [
+              "Keep old incomplete operation behavior and block execution admission"
+            ]
+          }
+        },
+        {
+          "id": "DEC-MONEY",
+          "revision": 1,
+          "kind": "Decision",
+          "name": "DEC-MONEY",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "DEC-MONEY",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [],
+          "data": {
+            "statement": "This fixture uses exact money values.",
+            "strength": "LOCKED",
+            "rationale": "Exercise semantic currency types without choosing a database.",
+            "alternatives": [
+              "Primitive untyped amount"
+            ]
+          }
+        },
+        {
+          "id": "DELETE-ENT-PAYMENT",
+          "revision": 2,
+          "kind": "DeletionPolicy",
+          "name": "DELETE-ENT-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "DELETE-ENT-PAYMENT",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "DELETE-ENT-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "trigger": "CLOSED",
+            "mode": "ANONYMIZE",
+            "afterSeconds": 172800,
+            "fields": [
+              {
+                "id": "FLD-AMOUNT",
+                "revision": 2
+              }
+            ],
+            "holdBehavior": "BLOCK",
+            "anonymizationEffects": [
+              {
+                "field": {
+                  "id": "FLD-AMOUNT",
+                  "revision": 2
+                },
+                "action": "REPLACE",
+                "replacement": {
+                  "type": {
+                    "kind": "Money",
+                    "currency": "UGX",
+                    "precision": 18,
+                    "scale": 2,
+                    "rounding": "REJECT"
+                  },
+                  "value": "1"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "DELIVERY-EVT-RECORDED",
+          "revision": 2,
+          "kind": "DeliveryPolicy",
+          "name": "DELIVERY-EVT-RECORDED",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "DELIVERY-EVT-RECORDED",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "DELIVERY-EVT-RECORDED",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "event": {
+              "id": "EVT-RECORDED",
+              "revision": 2
+            },
+            "guarantee": "AT_LEAST_ONCE",
+            "ordering": "PER_AGGREGATE",
+            "windowSeconds": 3600,
+            "deduplication": {
+              "id": "IDEM-OPERATION",
+              "revision": 2
+            },
+            "windowAnchor": "EVENT_COMMIT",
+            "occurrenceOrder": "COMMIT_STEP_EMISSION_SEQUENCE"
+          }
+        },
+        {
+          "id": "ENT-MEMBER",
+          "revision": 2,
+          "kind": "Entity",
+          "name": "ENT-MEMBER",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "ENT-MEMBER",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "identity": [
+              {
+                "id": "FLD-MEMBER-ID",
+                "revision": 2
+              }
+            ],
+            "tenantField": {
+              "id": "FLD-MEMBER-TENANT",
+              "revision": 2
+            },
+            "tenancy": "SCOPED"
+          }
+        },
+        {
+          "id": "ENT-PAYMENT",
+          "revision": 2,
+          "kind": "Entity",
+          "name": "ENT-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "ENT-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "identity": [
+              {
+                "id": "FLD-PAYMENT-ID",
+                "revision": 2
+              }
+            ],
+            "tenantField": {
+              "id": "FLD-PAYMENT-TENANT",
+              "revision": 2
+            },
+            "tenancy": "SCOPED"
+          }
+        },
+        {
+          "id": "ENT-TENANT",
+          "revision": 2,
+          "kind": "Entity",
+          "name": "ENT-TENANT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "ENT-TENANT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "identity": [
+              {
+                "id": "FLD-TENANT-ID",
+                "revision": 2
+              }
+            ],
+            "tenancy": "TENANT_ROOT"
+          }
+        },
+        {
+          "id": "EVID-A11Y",
+          "revision": 3,
+          "kind": "EvidenceRequirement",
+          "name": "EVID-A11Y",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "EVID-A11Y",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVID-A11Y",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "ACTION-TASK",
+                "revision": 3
+              },
+              {
+                "id": "CONTROL-TASK-RESOURCE",
+                "revision": 2
+              },
+              {
+                "id": "CONTROL-TEXT",
+                "revision": 3
+              },
+              {
+                "id": "FORM-TASK",
+                "revision": 3
+              },
+              {
+                "id": "SCREEN-TASK",
+                "revision": 3
+              }
+            ],
+            "methods": [
+              "AUTO_A11Y",
+              "MANUAL_A11Y"
+            ],
+            "maxAgeSeconds": 86400,
+            "applicability": {
+              "id": "APPLIES-ALL",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "EVID-BACKUP",
+          "revision": 2,
+          "kind": "EvidenceRequirement",
+          "name": "EVID-BACKUP",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVID-BACKUP",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "ENT-PAYMENT",
+                "revision": 2
+              }
+            ],
+            "methods": [
+              "BACKUP"
+            ],
+            "maxAgeSeconds": 86400,
+            "applicability": {
+              "id": "APPLIES-ALL",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "EVID-COMPATIBILITY",
+          "revision": 3,
+          "kind": "EvidenceRequirement",
+          "name": "EVID-COMPATIBILITY",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVID-COMPATIBILITY",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "QUERY-TASKS",
+                "revision": 3
+              }
+            ],
+            "methods": [
+              "COMPATIBILITY"
+            ],
+            "maxAgeSeconds": 86400,
+            "applicability": {
+              "id": "APPLIES-ALL",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "EVID-OBSERVE",
+          "revision": 3,
+          "kind": "EvidenceRequirement",
+          "name": "EVID-OBSERVE",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVID-OBSERVE",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "JOB-TASK",
+                "revision": 3
+              },
+              {
+                "id": "SERVICE-TASKS",
+                "revision": 3
+              }
+            ],
+            "methods": [
+              "OBSERVABILITY"
+            ],
+            "maxAgeSeconds": 86400,
+            "applicability": {
+              "id": "APPLIES-ALL",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "EVID-PERF",
+          "revision": 3,
+          "kind": "EvidenceRequirement",
+          "name": "EVID-PERF",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVID-PERF",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "QUERY-TASKS",
+                "revision": 3
+              }
+            ],
+            "methods": [
+              "PERFORMANCE"
+            ],
+            "maxAgeSeconds": 86400,
+            "applicability": {
+              "id": "APPLIES-ALL",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "EVID-RECOVERY",
+          "revision": 2,
+          "kind": "EvidenceRequirement",
+          "name": "EVID-RECOVERY",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVID-RECOVERY",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "ENT-PAYMENT",
+                "revision": 2
+              }
+            ],
+            "methods": [
+              "RECOVERY"
+            ],
+            "maxAgeSeconds": 86400,
+            "applicability": {
+              "id": "APPLIES-ALL",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "EVID-RELIABILITY",
+          "revision": 3,
+          "kind": "EvidenceRequirement",
+          "name": "EVID-RELIABILITY",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVID-RELIABILITY",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "SERVICE-TASKS",
+                "revision": 3
+              }
+            ],
+            "methods": [
+              "RELIABILITY"
+            ],
+            "maxAgeSeconds": 86400,
+            "applicability": {
+              "id": "APPLIES-ALL",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "EVID-TEST",
+          "revision": 3,
+          "kind": "EvidenceRequirement",
+          "name": "EVID-TEST",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVID-TEST",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "UC-TASK",
+                "revision": 3
+              }
+            ],
+            "methods": [
+              "AUTHORIZATION"
+            ],
+            "maxAgeSeconds": 86400,
+            "applicability": {
+              "id": "APPLIES-ALL",
+              "revision": 1
+            }
+          }
+        },
+        {
+          "id": "EVOLVE-REFERENCE-NOTE",
+          "revision": 1,
+          "kind": "Field",
+          "name": "Synthetic reference evolution note",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment/EVOLVE-REFERENCE-NOTE",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "type": {
+              "kind": "String"
+            },
+            "optional": false,
+            "classification": "PUBLIC",
+            "classificationRef": {
+              "id": "CLASS-PUBLIC",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "EVT-RECORDED",
+          "revision": 2,
+          "kind": "Event",
+          "name": "EVT-RECORDED",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "EVT-RECORDED",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "payload": [
+              {
+                "id": "FLD-AMOUNT",
+                "revision": 2
+              }
+            ],
+            "delivery": {
+              "id": "DELIVERY-EVT-RECORDED",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FACT-SYNTHETIC",
+          "revision": 1,
+          "kind": "Fact",
+          "name": "FACT-SYNTHETIC",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FACT-SYNTHETIC",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [],
+          "data": {
+            "statement": "All fixture actors and data are synthetic.",
+            "evidence": "fixture:declaration"
+          }
+        },
+        {
+          "id": "FAIL-BUSINESS",
+          "revision": 1,
+          "kind": "Failure",
+          "name": "FAIL-BUSINESS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FAIL-BUSINESS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "code": "INVALID_STATE",
+            "category": "BUSINESS",
+            "retryable": false
+          }
+        },
+        {
+          "id": "FAIL-TRANSIENT",
+          "revision": 1,
+          "kind": "Failure",
+          "name": "FAIL-TRANSIENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FAIL-TRANSIENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "code": "DEPENDENCY_UNAVAILABLE",
+            "category": "TRANSIENT",
+            "retryable": true
+          }
+        },
+        {
+          "id": "FILTER-TEXT",
+          "revision": 3,
+          "kind": "Filter",
+          "name": "FILTER-TEXT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "FILTER-TEXT",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "FILTER-TEXT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            },
+            "field": {
+              "id": "OUTPUT-TASK-TEXT",
+              "revision": 2
+            },
+            "operator": "CONTAINS",
+            "inputType": {
+              "kind": "String"
+            },
+            "inputField": {
+              "id": "QUERY-TEXT",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FLD-AMOUNT",
+          "revision": 2,
+          "kind": "Field",
+          "name": "FLD-AMOUNT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FLD-AMOUNT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "type": {
+              "kind": "Money",
+              "currency": "UGX",
+              "precision": 18,
+              "scale": 2,
+              "rounding": "REJECT"
+            },
+            "optional": false,
+            "classification": "SENSITIVE",
+            "classificationRef": {
+              "id": "CLASS-SENSITIVE",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FLD-MEMBER-ID",
+          "revision": 2,
+          "kind": "Field",
+          "name": "FLD-MEMBER-ID",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FLD-MEMBER-ID",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-MEMBER",
+              "revision": 2
+            },
+            "type": {
+              "kind": "Identifier",
+              "entity": {
+                "id": "ENT-MEMBER",
+                "revision": 2
+              }
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FLD-MEMBER-TENANT",
+          "revision": 2,
+          "kind": "Field",
+          "name": "FLD-MEMBER-TENANT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FLD-MEMBER-TENANT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-MEMBER",
+              "revision": 2
+            },
+            "type": {
+              "kind": "Identifier",
+              "entity": {
+                "id": "ENT-TENANT",
+                "revision": 2
+              }
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FLD-PAYMENT-ID",
+          "revision": 2,
+          "kind": "Field",
+          "name": "FLD-PAYMENT-ID",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FLD-PAYMENT-ID",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "type": {
+              "kind": "Identifier",
+              "entity": {
+                "id": "ENT-PAYMENT",
+                "revision": 2
+              }
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FLD-PAYMENT-TENANT",
+          "revision": 2,
+          "kind": "Field",
+          "name": "FLD-PAYMENT-TENANT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FLD-PAYMENT-TENANT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "type": {
+              "kind": "Identifier",
+              "entity": {
+                "id": "ENT-TENANT",
+                "revision": 2
+              }
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FLD-TASK-SUMMARY",
+          "revision": 2,
+          "kind": "Field",
+          "name": "FLD-TASK-SUMMARY",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FLD-TASK-SUMMARY",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "type": {
+              "kind": "String"
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FLD-TENANT-ID",
+          "revision": 2,
+          "kind": "Field",
+          "name": "FLD-TENANT-ID",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "FLD-TENANT-ID",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "ENT-TENANT",
+              "revision": 2
+            },
+            "type": {
+              "kind": "Identifier",
+              "entity": {
+                "id": "ENT-TENANT",
+                "revision": 2
+              }
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "FORM-TASK",
+          "revision": 3,
+          "kind": "Form",
+          "name": "FORM-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "FORM-TASK",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "FORM-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "useCase": {
+              "id": "UC-TASK",
+              "revision": 3
+            },
+            "controls": [
+              {
+                "id": "CONTROL-TASK-RESOURCE",
+                "revision": 2
+              },
+              {
+                "id": "CONTROL-TEXT",
+                "revision": 3
+              }
+            ],
+            "submit": {
+              "id": "ACTION-TASK",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "GOAL-ENTRY",
+          "revision": 1,
+          "kind": "Goal",
+          "name": "GOAL-ENTRY",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "GOAL-ENTRY",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [],
+          "data": {
+            "statement": "Reduce payment entry effort.",
+            "measure": "Median user actions per completed entry."
+          }
+        },
+        {
+          "id": "HOLD-ENT-PAYMENT",
+          "revision": 3,
+          "kind": "LegalHold",
+          "name": "HOLD-ENT-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "HOLD-ENT-PAYMENT",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "HOLD-ENT-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "condition": {
+              "tag": "literal",
+              "type": {
+                "kind": "Boolean"
+              },
+              "value": true
+            },
+            "release": {
+              "id": "PERM-CMD-RECORD",
+              "revision": 3
+            },
+            "releaseMode": "CURRENT_LIFECYCLE_ACTION"
+          }
+        },
+        {
+          "id": "IDEM-OPERATION",
+          "revision": 2,
+          "kind": "IdempotencyPolicy",
+          "name": "IDEM-OPERATION",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "IDEM-OPERATION",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "IDEM-OPERATION",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "scope": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "keyType": {
+              "kind": "String"
+            },
+            "windowSeconds": 86400,
+            "replay": "RETURN_RESULT",
+            "conflict": "REJECT_DIFFERENT_INPUT",
+            "windowAnchor": "COMMITTED_RESULT",
+            "inFlight": "RETURN_IN_PROGRESS"
+          }
+        },
+        {
+          "id": "INPUT-TASK",
+          "revision": 1,
+          "kind": "ValueObject",
+          "name": "INPUT-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "INPUT-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "equality": "STRUCTURAL"
+          }
+        },
+        {
+          "id": "INPUT-TASK-RESOURCE",
+          "revision": 2,
+          "kind": "Field",
+          "name": "INPUT-TASK-RESOURCE",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "INPUT-TASK-RESOURCE",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "INPUT-TASK",
+              "revision": 1
+            },
+            "type": {
+              "kind": "Identifier",
+              "entity": {
+                "id": "ENT-PAYMENT",
+                "revision": 2
+              }
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "INPUT-TASK-TEXT",
+          "revision": 2,
+          "kind": "Field",
+          "name": "INPUT-TASK-TEXT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "INPUT-TASK-TEXT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "INPUT-TASK",
+              "revision": 1
+            },
+            "type": {
+              "kind": "String"
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "INV-POSITIVE",
+          "revision": 2,
+          "kind": "Invariant",
+          "name": "INV-POSITIVE",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "INV-POSITIVE",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "predicate": {
+              "tag": "binary",
+              "op": "gt",
+              "left": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-AMOUNT",
+                  "revision": 2
+                }
+              },
+              "right": {
+                "tag": "parameter",
+                "ref": {
+                  "id": "PARAM-ZERO",
+                  "revision": 1
+                }
+              }
+            },
+            "enforcement": [
+              "TRANSITION",
+              "WRITE"
+            ]
+          }
+        },
+        {
+          "id": "JOB-TASK",
+          "revision": 3,
+          "kind": "Job",
+          "name": "JOB-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "JOB-TASK",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "JOB-TASK",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "JOB-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "useCase": {
+              "id": "UC-TASK",
+              "revision": 3
+            },
+            "schedule": {
+              "id": "SCHEDULE-TASK",
+              "revision": 1
+            },
+            "retry": {
+              "id": "RETRY-TASK",
+              "revision": 2
+            },
+            "idempotency": {
+              "id": "IDEM-OPERATION",
+              "revision": 2
+            },
+            "timeoutSeconds": 30,
+            "inputBindings": [
+              {
+                "field": {
+                  "id": "INPUT-TASK-RESOURCE",
+                  "revision": 2
+                },
+                "value": {
+                  "tag": "literal",
+                  "type": {
+                    "kind": "Identifier",
+                    "entity": {
+                      "id": "ENT-PAYMENT",
+                      "revision": 2
+                    }
+                  },
+                  "value": "fixture-resource"
+                }
+              },
+              {
+                "field": {
+                  "id": "INPUT-TASK-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "tag": "literal",
+                  "type": {
+                    "kind": "String"
+                  },
+                  "value": "Explicit scheduled fixture text"
+                }
+              }
+            ],
+            "missedOccurrences": "SKIP",
+            "catchUp": null
+          }
+        },
+        {
+          "id": "LIFECYCLE-ENT-PAYMENT",
+          "revision": 3,
+          "kind": "DataLifecycle",
+          "name": "LIFECYCLE-ENT-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "LIFECYCLE-ENT-PAYMENT",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "LIFECYCLE-ENT-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "retention": {
+              "id": "RETENTION-ENT-PAYMENT",
+              "revision": 2
+            },
+            "deletion": {
+              "id": "DELETE-ENT-PAYMENT",
+              "revision": 2
+            },
+            "holds": [
+              {
+                "id": "HOLD-ENT-PAYMENT",
+                "revision": 3
+              }
+            ],
+            "anchor": {
+              "kind": "CLOSED_COMMIT",
+              "machine": {
+                "id": "WF-PAYMENT",
+                "revision": 2
+              },
+              "states": [
+                {
+                  "id": "STATE-POSTED",
+                  "revision": 2
+                }
+              ],
+              "instant": "COMMITTED_ENTRY",
+              "terminal": true
+            }
+          }
+        },
+        {
+          "id": "OBSERVE-TASK",
+          "revision": 3,
+          "kind": "ObservabilityRequirement",
+          "name": "OBSERVE-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "OBSERVE-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subjects": [
+              {
+                "id": "JOB-TASK",
+                "revision": 3
+              },
+              {
+                "id": "SERVICE-TASKS",
+                "revision": 3
+              }
+            ],
+            "signals": [
+              "AUDIT",
+              "HEALTH",
+              "LOG",
+              "METRIC",
+              "READINESS",
+              "TRACE"
+            ],
+            "correlation": "REQUIRED",
+            "redaction": "CLASSIFICATION",
+            "evidence": {
+              "id": "EVID-OBSERVE",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "OPERATION-INPUT",
+          "revision": 1,
+          "kind": "ValueObject",
+          "name": "OPERATION-INPUT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "OPERATION-INPUT",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "equality": "STRUCTURAL"
+          }
+        },
+        {
+          "id": "OPERATION-RESULT",
+          "revision": 1,
+          "kind": "ValueObject",
+          "name": "OPERATION-RESULT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "OPERATION-RESULT",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "equality": "STRUCTURAL"
+          }
+        },
+        {
+          "id": "OPERATION-TEXT",
+          "revision": 2,
+          "kind": "Field",
+          "name": "OPERATION-TEXT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "OPERATION-TEXT",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "OPERATION-INPUT",
+              "revision": 1
+            },
+            "type": {
+              "kind": "String"
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "OUTPUT-TASK",
+          "revision": 1,
+          "kind": "ValueObject",
+          "name": "OUTPUT-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "OUTPUT-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "equality": "STRUCTURAL"
+          }
+        },
+        {
+          "id": "OUTPUT-TASK-TEXT",
+          "revision": 2,
+          "kind": "Field",
+          "name": "OUTPUT-TASK-TEXT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "OUTPUT-TASK-TEXT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "OUTPUT-TASK",
+              "revision": 1
+            },
+            "type": {
+              "kind": "String"
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "PARAM-ZERO",
+          "revision": 1,
+          "kind": "Parameter",
+          "name": "PARAM-ZERO",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "PARAM-ZERO",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "type": {
+              "kind": "Money",
+              "currency": "UGX",
+              "precision": 18,
+              "scale": 2,
+              "rounding": "REJECT"
+            },
+            "value": "0"
+          }
+        },
+        {
+          "id": "PERF-TASK",
+          "revision": 3,
+          "kind": "PerformanceRequirement",
+          "name": "PERF-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "PERF-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subject": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            },
+            "metric": "P95_LATENCY_MS",
+            "comparison": "LTE",
+            "threshold": "500",
+            "workload": {
+              "concurrency": 10,
+              "records": 10000,
+              "durationSeconds": 60,
+              "minimumSamples": 100
+            },
+            "evidence": {
+              "id": "EVID-PERF",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "PERM-CMD-RECORD",
+          "revision": 3,
+          "kind": "Permission",
+          "name": "PERM-CMD-RECORD",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "PERM-CMD-RECORD",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "action": {
+              "id": "CMD-RECORD",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "PERM-QUERY-TASKS",
+          "revision": 3,
+          "kind": "Permission",
+          "name": "PERM-QUERY-TASKS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "PERM-QUERY-TASKS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "action": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "POL-QUERY-TASKS",
+          "revision": 3,
+          "kind": "Policy",
+          "name": "POL-QUERY-TASKS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "POL-QUERY-TASKS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "roles": [
+              {
+                "id": "ROLE-OPERATOR",
+                "revision": 3
+              }
+            ],
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "action": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            },
+            "effect": "ALLOW",
+            "predicate": {
+              "tag": "literal",
+              "type": {
+                "kind": "Boolean"
+              },
+              "value": true
+            },
+            "permission": {
+              "id": "PERM-QUERY-TASKS",
+              "revision": 3
+            },
+            "scope": {
+              "id": "SCOPE-ENT-PAYMENT",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "POL-TENANT",
+          "revision": 3,
+          "kind": "Policy",
+          "name": "POL-TENANT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "POL-TENANT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "roles": [
+              {
+                "id": "ROLE-OPERATOR",
+                "revision": 3
+              }
+            ],
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "action": {
+              "id": "CMD-RECORD",
+              "revision": 3
+            },
+            "effect": "ALLOW",
+            "predicate": {
+              "tag": "binary",
+              "op": "identityEq",
+              "left": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-PAYMENT-TENANT",
+                  "revision": 2
+                }
+              },
+              "right": {
+                "tag": "field",
+                "binding": "actor",
+                "ref": {
+                  "id": "FLD-MEMBER-TENANT",
+                  "revision": 2
+                }
+              }
+            },
+            "permission": {
+              "id": "PERM-CMD-RECORD",
+              "revision": 3
+            },
+            "scope": {
+              "id": "SCOPE-ENT-PAYMENT",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "POLSET-CMD-RECORD",
+          "revision": 3,
+          "kind": "PolicySet",
+          "name": "POLSET-CMD-RECORD",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "POLSET-CMD-RECORD",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "action": {
+              "id": "CMD-RECORD",
+              "revision": 3
+            },
+            "policies": [
+              {
+                "id": "POL-TENANT",
+                "revision": 3
+              }
+            ],
+            "combining": "DENY_OVERRIDES",
+            "default": "DENY"
+          }
+        },
+        {
+          "id": "POLSET-QUERY-TASKS",
+          "revision": 3,
+          "kind": "PolicySet",
+          "name": "POLSET-QUERY-TASKS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "POLSET-QUERY-TASKS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "action": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            },
+            "policies": [
+              {
+                "id": "POL-QUERY-TASKS",
+                "revision": 3
+              }
+            ],
+            "combining": "DENY_OVERRIDES",
+            "default": "DENY"
+          }
+        },
+        {
+          "id": "PREF-UI",
+          "revision": 1,
+          "kind": "Preference",
+          "name": "PREF-UI",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "PREF-UI",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [],
+          "data": {
+            "statement": "Prefer fewer payment-entry steps.",
+            "rationale": "Reduce repeated input."
+          }
+        },
+        {
+          "id": "QUERY-INPUT",
+          "revision": 1,
+          "kind": "ValueObject",
+          "name": "QUERY-INPUT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "QUERY-INPUT",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "equality": "STRUCTURAL"
+          }
+        },
+        {
+          "id": "QUERY-TASKS",
+          "revision": 3,
+          "kind": "Query",
+          "name": "QUERY-TASKS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "QUERY-TASKS",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "QUERY-TASKS",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "QUERY-TASKS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "scope": {
+              "id": "SCOPE-ENT-PAYMENT",
+              "revision": 2
+            },
+            "result": {
+              "kind": "Value",
+              "definition": {
+                "id": "OUTPUT-TASK",
+                "revision": 1
+              }
+            },
+            "projection": [
+              {
+                "field": {
+                  "id": "OUTPUT-TASK-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "tag": "field",
+                  "binding": "resource",
+                  "ref": {
+                    "id": "FLD-TASK-SUMMARY",
+                    "revision": 2
+                  }
+                }
+              }
+            ],
+            "paginated": true,
+            "maximumResults": 100,
+            "input": {
+              "id": "QUERY-INPUT",
+              "revision": 1
+            },
+            "predicate": {
+              "tag": "textContains",
+              "value": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-TASK-SUMMARY",
+                  "revision": 2
+                }
+              },
+              "pattern": {
+                "tag": "input",
+                "scope": "OPERATION",
+                "field": {
+                  "id": "QUERY-TEXT",
+                  "revision": 2
+                }
+              }
+            },
+            "orderBy": [
+              {
+                "field": {
+                  "id": "FLD-PAYMENT-ID",
+                  "revision": 2
+                },
+                "direction": "ASC"
+              }
+            ],
+            "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
+          }
+        },
+        {
+          "id": "QUERY-TEXT",
+          "revision": 2,
+          "kind": "Field",
+          "name": "QUERY-TEXT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "QUERY-TEXT",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "QUERY-INPUT",
+              "revision": 1
+            },
+            "type": {
+              "kind": "String"
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "RATE-CMD-RECORD",
+          "revision": 3,
+          "kind": "RatePolicy",
+          "name": "RATE-CMD-RECORD",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "RATE-CMD-RECORD",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "RATE-CMD-RECORD",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "permission": {
+              "id": "PERM-CMD-RECORD",
+              "revision": 3
+            },
+            "requests": 100,
+            "windowSeconds": 60,
+            "burst": 10,
+            "partition": "ACTOR",
+            "algorithm": {
+              "kind": "TOKEN_BUCKET",
+              "refill": "CONTINUOUS_RATIONAL",
+              "initial": "FULL",
+              "charge": "AUTHORIZED_INVOCATION",
+              "replay": "CHARGE",
+              "clock": "NONDECREASING"
+            }
+          }
+        },
+        {
+          "id": "RATE-QUERY-TASKS",
+          "revision": 3,
+          "kind": "RatePolicy",
+          "name": "RATE-QUERY-TASKS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "RATE-QUERY-TASKS",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "RATE-QUERY-TASKS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "permission": {
+              "id": "PERM-QUERY-TASKS",
+              "revision": 3
+            },
+            "requests": 100,
+            "windowSeconds": 60,
+            "burst": 10,
+            "partition": "ACTOR",
+            "algorithm": {
+              "kind": "TOKEN_BUCKET",
+              "refill": "CONTINUOUS_RATIONAL",
+              "initial": "FULL",
+              "charge": "AUTHORIZED_INVOCATION",
+              "replay": "CHARGE",
+              "clock": "NONDECREASING"
+            }
+          }
+        },
+        {
+          "id": "RECOVERY-TASK",
+          "revision": 2,
+          "kind": "Recovery",
+          "name": "RECOVERY-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "RECOVERY-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "backup": {
+              "id": "BACKUP-TASK",
+              "revision": 2
+            },
+            "rpoSeconds": 3600,
+            "rtoSeconds": 1800,
+            "restoreTestIntervalSeconds": 86400,
+            "evidence": {
+              "id": "EVID-RECOVERY",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "REL-MEMBER-PAYMENT",
+          "revision": 2,
+          "kind": "Relation",
+          "name": "REL-MEMBER-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "REL-MEMBER-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "source": {
+              "id": "ENT-MEMBER",
+              "revision": 2
+            },
+            "target": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "sourceCardinality": {
+              "min": 1,
+              "max": 1
+            },
+            "targetCardinality": {
+              "min": 0,
+              "max": "UNBOUNDED"
+            },
+            "ownership": "REFERENCE",
+            "onDelete": "RESTRICT"
+          }
+        },
+        {
+          "id": "RELIABILITY-TASK",
+          "revision": 3,
+          "kind": "ReliabilityRequirement",
+          "name": "RELIABILITY-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "RELIABILITY-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "subject": {
+              "id": "SERVICE-TASKS",
+              "revision": 3
+            },
+            "metric": "AVAILABILITY_PERCENT",
+            "threshold": "99.5",
+            "windowSeconds": 86400,
+            "evidence": {
+              "id": "EVID-RELIABILITY",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1,
+          "kind": "Requirement",
+          "name": "REQ-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "REQ-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [],
+          "data": {
+            "statement": "Synthetic scenario: authorized users record positive payments within their tenant.",
+            "priority": "MUST",
+            "acceptance": [
+              {
+                "id": "AC-PAYMENT",
+                "revision": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "RESPONSIVE-TASK",
+          "revision": 3,
+          "kind": "ResponsivePolicy",
+          "name": "RESPONSIVE-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "RESPONSIVE-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            },
+            "modes": [
+              "COMPACT",
+              "EXPANDED"
+            ],
+            "preserveActions": true,
+            "preserveReadingOrder": true
+          }
+        },
+        {
+          "id": "RESULT-TEXT",
+          "revision": 2,
+          "kind": "Field",
+          "name": "RESULT-TEXT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "RESULT-TEXT",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "OPERATION-RESULT",
+              "revision": 1
+            },
+            "type": {
+              "kind": "String"
+            },
+            "optional": false,
+            "classification": "INTERNAL",
+            "classificationRef": {
+              "id": "CLASS-INTERNAL",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "RETENTION-ENT-PAYMENT",
+          "revision": 2,
+          "kind": "Retention",
+          "name": "RETENTION-ENT-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "RETENTION-ENT-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "trigger": "CLOSED",
+            "minimumSeconds": 86400
+          }
+        },
+        {
+          "id": "RETRY-TASK",
+          "revision": 2,
+          "kind": "RetryPolicy",
+          "name": "RETRY-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "RETRY-TASK",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "RETRY-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "failures": [
+              {
+                "id": "FAIL-TRANSIENT",
+                "revision": 1
+              }
+            ],
+            "maxAttempts": 3,
+            "initialSeconds": 1,
+            "maxDelaySeconds": 10,
+            "multiplier": 2,
+            "delayBasis": "AFTER_FAILURE_COMPLETION",
+            "jitter": "NONE",
+            "attemptCounting": "INCLUDING_INITIAL"
+          }
+        },
+        {
+          "id": "ROLE-OPERATOR",
+          "revision": 3,
+          "kind": "Role",
+          "name": "ROLE-OPERATOR",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "ROLE-OPERATOR",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "permissions": [
+              {
+                "id": "PERM-CMD-RECORD",
+                "revision": 3
+              },
+              {
+                "id": "PERM-QUERY-TASKS",
+                "revision": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "SCHEDULE-TASK",
+          "revision": 1,
+          "kind": "Schedule",
+          "name": "SCHEDULE-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "SCHEDULE-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "mode": "LOCAL_DAILY",
+            "localTime": "09:00:00",
+            "timezone": "Africa/Nairobi",
+            "tzdbVersion": "2026d",
+            "gap": "SKIP",
+            "overlap": "EARLIER"
+          }
+        },
+        {
+          "id": "SCOPE-ENT-PAYMENT",
+          "revision": 2,
+          "kind": "Scope",
+          "name": "SCOPE-ENT-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "SCOPE-ENT-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "mode": "SAME_TENANT",
+            "actorTenant": {
+              "id": "FLD-MEMBER-TENANT",
+              "revision": 2
+            },
+            "resourceTenant": {
+              "id": "FLD-PAYMENT-TENANT",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "SCREEN-TASK",
+          "revision": 3,
+          "kind": "Screen",
+          "name": "SCREEN-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "SCREEN-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "task": {
+              "id": "UC-TASK",
+              "revision": 3
+            },
+            "content": [
+              {
+                "id": "SEARCH-TASKS",
+                "revision": 3
+              },
+              {
+                "id": "TABLE-TASKS",
+                "revision": 3
+              },
+              {
+                "id": "WIZARD-TASK",
+                "revision": 3
+              }
+            ],
+            "actions": [
+              {
+                "id": "ACTION-TASK",
+                "revision": 3
+              }
+            ],
+            "states": [
+              {
+                "id": "VIEW-EMPTY",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-ERROR",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-LOADING",
+                "revision": 3
+              },
+              {
+                "id": "VIEW-SUCCESS",
+                "revision": 3
+              }
+            ],
+            "boundary": {
+              "id": "BOUNDARY-TASK",
+              "revision": 3
+            },
+            "responsive": {
+              "id": "RESPONSIVE-TASK",
+              "revision": 3
+            },
+            "accessibility": {
+              "id": "A11Y-TASK",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "SEARCH-TASKS",
+          "revision": 3,
+          "kind": "Search",
+          "name": "SEARCH-TASKS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "SEARCH-TASKS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            },
+            "filters": [
+              {
+                "id": "FILTER-TEXT",
+                "revision": 3
+              }
+            ],
+            "label": "Find a task"
+          }
+        },
+        {
+          "id": "SERVICE-TASKS",
+          "revision": 3,
+          "kind": "Service",
+          "name": "SERVICE-TASKS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "SERVICE-TASKS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "operations": [
+              {
+                "id": "CMD-RECORD",
+                "revision": 3
+              },
+              {
+                "id": "QUERY-TASKS",
+                "revision": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "SESSION-ACT-USER",
+          "revision": 2,
+          "kind": "SessionPolicy",
+          "name": "SESSION-ACT-USER",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "SESSION-ACT-USER",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "authentication": {
+              "id": "AUTH-ACT-USER",
+              "revision": 2
+            },
+            "idleSeconds": 900,
+            "absoluteSeconds": 28800,
+            "reauthSeconds": 3600
+          }
+        },
+        {
+          "id": "STATE-DRAFT",
+          "revision": 2,
+          "kind": "State",
+          "name": "STATE-DRAFT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "STATE-DRAFT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "machine": {
+              "id": "WF-PAYMENT",
+              "revision": 2
+            },
+            "terminal": false
+          }
+        },
+        {
+          "id": "STATE-POSTED",
+          "revision": 2,
+          "kind": "State",
+          "name": "STATE-POSTED",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "STATE-POSTED",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "machine": {
+              "id": "WF-PAYMENT",
+              "revision": 2
+            },
+            "terminal": true
+          }
+        },
+        {
+          "id": "STEP-CMD-RECORD",
+          "revision": 3,
+          "kind": "ExecutionStep",
+          "name": "STEP-CMD-RECORD",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "STEP-CMD-RECORD",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "STEP-CMD-RECORD",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "owner": {
+              "id": "UC-TASK",
+              "revision": 3
+            },
+            "operation": {
+              "id": "CMD-RECORD",
+              "revision": 3
+            },
+            "onFailure": "STOP",
+            "transaction": {
+              "id": "TX-TASK",
+              "revision": 3
+            },
+            "resource": {
+              "tag": "input",
+              "scope": "USE_CASE",
+              "field": {
+                "id": "INPUT-TASK-RESOURCE",
+                "revision": 2
+              }
+            },
+            "inputBindings": [
+              {
+                "field": {
+                  "id": "OPERATION-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "tag": "input",
+                  "scope": "USE_CASE",
+                  "field": {
+                    "id": "INPUT-TASK-TEXT",
+                    "revision": 2
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "TABLE-TASKS",
+          "revision": 3,
+          "kind": "Table",
+          "name": "TABLE-TASKS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "TABLE-TASKS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "query": {
+              "id": "QUERY-TASKS",
+              "revision": 3
+            },
+            "columns": [
+              {
+                "id": "OUTPUT-TASK-TEXT",
+                "revision": 2
+              }
+            ],
+            "emptyMessage": "No tasks are available."
+          }
+        },
+        {
+          "id": "TEST-TASK",
+          "revision": 3,
+          "kind": "TestRequirement",
+          "name": "TEST-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "TEST-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "criterion": {
+              "id": "AC-PAYMENT",
+              "revision": 1
+            },
+            "subjects": [
+              {
+                "id": "UC-TASK",
+                "revision": 3
+              }
+            ],
+            "level": "AUTHORIZATION",
+            "evidence": {
+              "id": "EVID-TEST",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "TRANS-RECORD",
+          "revision": 3,
+          "kind": "Transition",
+          "name": "TRANS-RECORD",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "TRANS-RECORD",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "TRANS-RECORD",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "machine": {
+              "id": "WF-PAYMENT",
+              "revision": 2
+            },
+            "from": {
+              "id": "STATE-DRAFT",
+              "revision": 2
+            },
+            "to": {
+              "id": "STATE-POSTED",
+              "revision": 2
+            },
+            "command": {
+              "id": "CMD-RECORD",
+              "revision": 3
+            },
+            "actor": {
+              "id": "ACT-USER",
+              "revision": 2
+            },
+            "guard": {
+              "tag": "binary",
+              "op": "gt",
+              "left": {
+                "tag": "field",
+                "binding": "resource",
+                "ref": {
+                  "id": "FLD-AMOUNT",
+                  "revision": 2
+                }
+              },
+              "right": {
+                "tag": "parameter",
+                "ref": {
+                  "id": "PARAM-ZERO",
+                  "revision": 1
+                }
+              }
+            },
+            "effects": [
+              {
+                "id": "EVT-RECORDED",
+                "revision": 2
+              }
+            ],
+            "eventBindings": [
+              {
+                "event": {
+                  "id": "EVT-RECORDED",
+                  "revision": 2
+                },
+                "payload": [
+                  {
+                    "field": {
+                      "id": "FLD-AMOUNT",
+                      "revision": 2
+                    },
+                    "value": {
+                      "tag": "postField",
+                      "field": {
+                        "id": "FLD-AMOUNT",
+                        "revision": 2
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "TX-TASK",
+          "revision": 3,
+          "kind": "Transaction",
+          "name": "TX-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "TX-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "aggregate": {
+              "id": "AGG-ENT-PAYMENT",
+              "revision": 2
+            },
+            "commands": [
+              {
+                "id": "CMD-RECORD",
+                "revision": 3
+              }
+            ],
+            "consistency": "ATOMIC",
+            "onFailure": "ROLLBACK"
+          }
+        },
+        {
+          "id": "UC-TASK",
+          "revision": 3,
+          "kind": "UseCase",
+          "name": "UC-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:execution-v03-proposal",
+              "locator": "UC-TASK",
+              "actor": "assistant:fixture-draft",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:deterministic-v04-proposal",
+              "locator": "UC-TASK",
+              "actor": "assistant:proposal-author",
+              "actorType": "AI"
+            },
+            {
+              "source": "fixture:synthetic",
+              "locator": "UC-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "DEC-DETERMINISTIC-V04",
+              "revision": 1
+            },
+            {
+              "id": "DEC-EXECUTION-V03",
+              "revision": 1
+            },
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "service": {
+              "id": "SERVICE-TASKS",
+              "revision": 3
+            },
+            "steps": [
+              {
+                "id": "STEP-CMD-RECORD",
+                "revision": 3
+              }
+            ],
+            "input": {
+              "id": "INPUT-TASK",
+              "revision": 1
+            },
+            "output": {
+              "id": "OUTPUT-TASK",
+              "revision": 1
+            },
+            "outputBindings": [
+              {
+                "field": {
+                  "id": "OUTPUT-TASK-TEXT",
+                  "revision": 2
+                },
+                "value": {
+                  "tag": "stepResult",
+                  "step": {
+                    "id": "STEP-CMD-RECORD",
+                    "revision": 3
+                  },
+                  "field": {
+                    "id": "RESULT-TEXT",
+                    "revision": 2
+                  }
+                }
+              }
+            ],
+            "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
+          }
+        },
+        {
+          "id": "VIEW-EMPTY",
+          "revision": 3,
+          "kind": "ViewState",
+          "name": "VIEW-EMPTY",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "VIEW-EMPTY",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            },
+            "state": "EMPTY",
+            "message": "Task view: empty"
+          }
+        },
+        {
+          "id": "VIEW-ERROR",
+          "revision": 3,
+          "kind": "ViewState",
+          "name": "VIEW-ERROR",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "VIEW-ERROR",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            },
+            "state": "ERROR",
+            "message": "Task view: error",
+            "recovery": {
+              "id": "ACTION-TASK",
+              "revision": 3
+            }
+          }
+        },
+        {
+          "id": "VIEW-LOADING",
+          "revision": 3,
+          "kind": "ViewState",
+          "name": "VIEW-LOADING",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "VIEW-LOADING",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            },
+            "state": "LOADING",
+            "message": "Task view: loading"
+          }
+        },
+        {
+          "id": "VIEW-SUCCESS",
+          "revision": 3,
+          "kind": "ViewState",
+          "name": "VIEW-SUCCESS",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "VIEW-SUCCESS",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            },
+            "state": "SUCCESS",
+            "message": "Task view: success"
+          }
+        },
+        {
+          "id": "WF-PAYMENT",
+          "revision": 2,
+          "kind": "StateMachine",
+          "name": "WF-PAYMENT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "WF-PAYMENT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "resource": {
+              "id": "ENT-PAYMENT",
+              "revision": 2
+            },
+            "initial": {
+              "id": "STATE-DRAFT",
+              "revision": 2
+            }
+          }
+        },
+        {
+          "id": "WIZARD-TASK",
+          "revision": 3,
+          "kind": "Wizard",
+          "name": "WIZARD-TASK",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "WIZARD-TASK",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "screen": {
+              "id": "SCREEN-TASK",
+              "revision": 3
+            },
+            "steps": [
+              {
+                "id": "WSTEP-INPUT",
+                "revision": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "WSTEP-INPUT",
+          "revision": 3,
+          "kind": "WizardStep",
+          "name": "WSTEP-INPUT",
+          "lifecycle": "APPROVED",
+          "steward": "fixture:authors",
+          "origins": [
+            {
+              "source": "fixture:synthetic",
+              "locator": "WSTEP-INPUT",
+              "actor": "fixture:author",
+              "actorType": "HUMAN"
+            }
+          ],
+          "basis": [
+            {
+              "id": "REQ-PAYMENT",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "wizard": {
+              "id": "WIZARD-TASK",
+              "revision": 3
+            },
+            "form": {
+              "id": "FORM-TASK",
+              "revision": 3
+            },
+            "requiresPrevious": false
+          }
+        }
+      ],
+      "issues": []
+    },
+    "contentDigest": "sha256:1acc4a3c2e46d4a62a97ae7bf2e29f03f9b3290f5bb3bc5179968d3771676d67"
+  },
+  "readSet": [
+    {
+      "id": "AC-PAYMENT",
+      "revision": 1,
+      "digest": "sha256:759f8d17df6d18578766fcd501aa915d07aab00f8066dd83d2e68eed949356f8"
+    },
+    {
+      "id": "CLASS-INTERNAL",
+      "revision": 2,
+      "digest": "sha256:6519adeda8c76af604a53234a8e50221cc4cb67e4ccb93c7b066394a600e84e8"
+    },
+    {
+      "id": "CLASS-PUBLIC",
+      "revision": 2,
+      "digest": "sha256:d45e1a27520b6e5fea2735a065ef33697effe2876d750febf7f9d9b93d65dce9"
+    },
+    {
+      "id": "DEC-DETERMINISTIC-V04",
+      "revision": 1,
+      "digest": "sha256:ef371d577283c5d529a9420bfad96573afb07632c05431a3612eb718d0e9b080"
+    },
+    {
+      "id": "ENT-PAYMENT",
+      "revision": 2,
+      "digest": "sha256:135d2d11186690a828643b6874ae0b8798a7eced30a8cec9c5777e1dde21ae3a"
+    },
+    {
+      "id": "ENT-TENANT",
+      "revision": 2,
+      "digest": "sha256:1893688e9a4ee999ca059562c8a3d13b19fe4d540d67e3620bfc893ad18dade2"
+    },
+    {
+      "id": "FLD-PAYMENT-ID",
+      "revision": 2,
+      "digest": "sha256:2f4b2d8f074d6b2f9c7238e43d682b0a5897dc9fa980211b2631bd108d467ae0"
+    },
+    {
+      "id": "FLD-PAYMENT-TENANT",
+      "revision": 2,
+      "digest": "sha256:96e7f55652b8dd739d30ad0ebf28aba1ebc38bf576c5db2962204935225f90f2"
+    },
+    {
+      "id": "FLD-TENANT-ID",
+      "revision": 2,
+      "digest": "sha256:9a9f3bb0a30f6b323e220e92b390b3f376b904f689e0dc8fa4aaf7896f8628d4"
+    },
+    {
+      "id": "REQ-PAYMENT",
+      "revision": 1,
+      "digest": "sha256:8739064fb38b18e86f2cebe6b95db4c5540adc52a72791fef3182b086a032053"
+    },
+    {
+      "id": "EVOLVE-REFERENCE-NOTE",
+      "revision": 0,
+      "digest": null
+    }
+  ],
+  "writeSet": [
+    "EVOLVE-REFERENCE-NOTE"
+  ],
+  "diff": [
+    {
+      "id": "EVOLVE-REFERENCE-NOTE",
+      "operation": "ADD",
+      "before": null,
+      "after": {
+        "id": "EVOLVE-REFERENCE-NOTE",
+        "revision": 1,
+        "kind": "Field",
+        "name": "Synthetic reference evolution note",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "proposal:phase6-evolution-review",
+            "locator": "payment/EVOLVE-REFERENCE-NOTE",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "ENT-PAYMENT",
+            "revision": 2
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "PUBLIC",
+          "classificationRef": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          }
+        }
+      },
+      "fields": [
+        "basis",
+        "data",
+        "id",
+        "kind",
+        "lifecycle",
+        "name",
+        "origins",
+        "revision",
+        "steward"
+      ]
+    }
+  ],
+  "impact": {
+    "semanticIds": [
+      "EVOLVE-REFERENCE-NOTE"
+    ],
+    "external": "NOT_ANALYZED",
+    "method": "exact-reference-closure-v1"
+  },
+  "risk": "HIGH",
+  "compatibility": "REVIEW_REQUIRED",
+  "requiredScopes": [
+    "MIGRATION",
+    "SECURITY",
+    "SEMANTIC"
+  ],
+  "tombstones": [],
+  "dataEffect": "REQUIRES_DATA_REVIEW",
+  "provenance": [
+    {
+      "concept": {
+        "id": "EVOLVE-REFERENCE-NOTE",
+        "revision": 1
+      },
+      "basis": [
+        {
+          "id": "REQ-PAYMENT",
+          "revision": 1
+        }
+      ],
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "payment/EVOLVE-REFERENCE-NOTE",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "changeId": "CHANGE-REVIEW-payment",
+      "snapshotDigest": "sha256:1acc4a3c2e46d4a62a97ae7bf2e29f03f9b3290f5bb3bc5179968d3771676d67"
+    }
+  ],
+  "evidenceStaleness": {
+    "priorSnapshot": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+    "reason": "EXACT_SNAPSHOT_CHANGED"
+  },
+  "planDigest": "sha256:8f113107f14c8e34f34a0e27f02ebc691d2288f248eb357d32bfcbb052af6d7f"
+}

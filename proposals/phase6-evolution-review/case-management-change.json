@@ -1,0 +1,79 @@
+{
+  "changeVersion": "0.3.0",
+  "id": "CHANGE-REVIEW-case-management",
+  "author": "assistant:proposal",
+  "intent": "UNAPPROVED synthetic reference-only required field; HUMAN REVIEW REQUIRED",
+  "branch": "BRANCH-CHANGE-required-field",
+  "base": {
+    "sequence": 0,
+    "digest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+    "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "operations": [
+    {
+      "op": "ADD",
+      "node": {
+        "id": "EVOLVE-REFERENCE-NOTE",
+        "revision": 1,
+        "kind": "Field",
+        "name": "Synthetic reference evolution note",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "proposal:phase6-evolution-review",
+            "locator": "case-management/EVOLVE-REFERENCE-NOTE",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "CASE",
+            "revision": 2
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "PUBLIC",
+          "classificationRef": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          }
+        }
+      }
+    }
+  ],
+  "reads": [],
+  "migration": {
+    "id": "MIG-FORWARD",
+    "mode": "REQUIRED",
+    "compatibility": "BACKWARD",
+    "irreversible": false,
+    "steps": [
+      "Expand",
+      "Backfill",
+      "Verify",
+      "Contract after client retirement"
+    ],
+    "preconditions": [
+      "Review data observations and active clients"
+    ],
+    "verification": [
+      "Verify required values and retained constraints"
+    ],
+    "recovery": "Forward repair; restore only after verified recovery review",
+    "observations": []
+  },
+  "sources": [],
+  "parents": [],
+  "rollbackOf": null,
+  "canonicalVersion": "0.3.0"
+}

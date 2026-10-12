@@ -1,0 +1,61 @@
+{
+  "status": "REVIEW_REQUIRED_NOT_APPROVED",
+  "reviewedSource": "80e19a6282c481c616f370e2876d3099eead0a2e",
+  "sealedBundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+  "authorityIssued": false,
+  "migrationExecuted": false,
+  "domains": {
+    "payment": {
+      "baseDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "candidateDigest": "sha256:1acc4a3c2e46d4a62a97ae7bf2e29f03f9b3290f5bb3bc5179968d3771676d67",
+      "previewPlanDigest": "sha256:8f113107f14c8e34f34a0e27f02ebc691d2288f248eb357d32bfcbb052af6d7f",
+      "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
+      "bindingUTF8Hex": "65cc8100f09fa68b27",
+      "owner": {
+        "id": "ENT-PAYMENT",
+        "revision": 2
+      },
+      "files": {
+        "change": "sha256:6128b6aaecf27a7ad53aa45924f9b2ec18bb59e82886d1f43d859aa56e95d14f",
+        "plan": "sha256:66aacf6a380612719abbfb4c905f021d59bbc1879ef1c74d4d2a536669c712e7",
+        "canonical-candidate": "sha256:cd3b5bdd9fe78e5e470a351194a15a7b20bbd03cc3b62d0c922c8c483f35d387",
+        "data-bindings": "sha256:c503a5f0b12fb10c7fe05b7cd6f577bb0ee06f6db7563d3667d57beffda2b04e"
+      },
+      "anchorStatus": "SYNTHETIC_PREVIEW_ANCHOR_NOT_ACCEPTED_HISTORY",
+      "candidateLifecycleMeaning": "APPROVED is the structural active-candidate encoding; no human approval is asserted",
+      "decisionsRequired": [
+        "SEMANTIC_CANDIDATE_AND_CHANGESET",
+        "INDEPENDENT_DATA_BINDING",
+        "REAL_ACCEPTED_HISTORY_REBASE_AND_PLAN",
+        "EXACT_SQL_AND_DEPLOYMENT_APPROVAL"
+      ],
+      "approvals": []
+    },
+    "case-management": {
+      "baseDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "candidateDigest": "sha256:2eeadc0fa771ce42db9705ca23a380129edbc2643b8f7a72d76d6029b44fe8ef",
+      "previewPlanDigest": "sha256:b7893da12b00ffb169d0bff233b45b2e0f4b84f51bb7cee33c9b94abeae51a0d",
+      "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
+      "bindingUTF8Hex": "65cc8100f09fa68b27",
+      "owner": {
+        "id": "CASE",
+        "revision": 2
+      },
+      "files": {
+        "change": "sha256:90264b24b832242087b2ba960c79a2fc5069fc9aae8cef1a019a552c3fba4aee",
+        "plan": "sha256:b694847982a9ca1fc99d61152055f89ebc3175fad5d8fcb72ba88cf72f8059b3",
+        "canonical-candidate": "sha256:426067bfddd97763d80f037cc402e8b2a96a4a6b7afb0e77d11754e671b2f94b",
+        "data-bindings": "sha256:c503a5f0b12fb10c7fe05b7cd6f577bb0ee06f6db7563d3667d57beffda2b04e"
+      },
+      "anchorStatus": "SYNTHETIC_PREVIEW_ANCHOR_NOT_ACCEPTED_HISTORY",
+      "candidateLifecycleMeaning": "APPROVED is the structural active-candidate encoding; no human approval is asserted",
+      "decisionsRequired": [
+        "SEMANTIC_CANDIDATE_AND_CHANGESET",
+        "INDEPENDENT_DATA_BINDING",
+        "REAL_ACCEPTED_HISTORY_REBASE_AND_PLAN",
+        "EXACT_SQL_AND_DEPLOYMENT_APPROVAL"
+      ],
+      "approvals": []
+    }
+  }
+}

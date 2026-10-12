@@ -1,0 +1,79 @@
+{
+  "changeVersion": "0.3.0",
+  "id": "CHANGE-REVIEW-payment",
+  "author": "assistant:proposal",
+  "intent": "UNAPPROVED synthetic reference-only required field; HUMAN REVIEW REQUIRED",
+  "branch": "BRANCH-CHANGE-required-field",
+  "base": {
+    "sequence": 0,
+    "digest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+    "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "operations": [
+    {
+      "op": "ADD",
+      "node": {
+        "id": "EVOLVE-REFERENCE-NOTE",
+        "revision": 1,
+        "kind": "Field",
+        "name": "Synthetic reference evolution note",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "proposal:phase6-evolution-review",
+            "locator": "payment/EVOLVE-REFERENCE-NOTE",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-PAYMENT",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "ENT-PAYMENT",
+            "revision": 2
+          },
+          "type": {
+            "kind": "String"
+          },
+          "optional": false,
+          "classification": "PUBLIC",
+          "classificationRef": {
+            "id": "CLASS-PUBLIC",
+            "revision": 2
+          }
+        }
+      }
+    }
+  ],
+  "reads": [],
+  "migration": {
+    "id": "MIG-FORWARD",
+    "mode": "REQUIRED",
+    "compatibility": "BACKWARD",
+    "irreversible": false,
+    "steps": [
+      "Expand",
+      "Backfill",
+      "Verify",
+      "Contract after client retirement"
+    ],
+    "preconditions": [
+      "Review data observations and active clients"
+    ],
+    "verification": [
+      "Verify required values and retained constraints"
+    ],
+    "recovery": "Forward repair; restore only after verified recovery review",
+    "observations": []
+  },
+  "sources": [],
+  "parents": [],
+  "rollbackOf": null,
+  "canonicalVersion": "0.3.0"
+}
