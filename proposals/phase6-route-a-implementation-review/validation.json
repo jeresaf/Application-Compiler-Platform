@@ -1,0 +1,48 @@
+{
+  "routeA": {
+    "result": "PASS",
+    "tests": 78,
+    "seconds": "269.373",
+    "integrationTests": 42,
+    "symbolicTests": 25,
+    "replayTests": 11,
+    "skipped": 0
+  },
+  "compiler": {
+    "result": "OK_WITH_ONE_EXISTING_OPT_IN_SKIP",
+    "tests": 270,
+    "seconds": "1195.954",
+    "skipped": 1,
+    "skipReason": "requires explicit disposable PostgreSQL; application migration SQL not authorized by this task"
+  },
+  "canonicalVectors": {
+    "result": "PASS",
+    "corpora": [
+      "canonical",
+      "execution-v03",
+      "deterministic-v04"
+    ],
+    "each": {
+      "positive": 9,
+      "negative": 13,
+      "snapshotHashes": 2
+    }
+  },
+  "sealedRelease": {
+    "result": "PASS",
+    "version": "0.5.0",
+    "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb"
+  },
+  "preservation": {
+    "result": "PASS",
+    "preexistingFilesUnchanged": 697,
+    "comparison": "Git clean-filtered tracked bytes; existing working-tree CRLF is not a source change",
+    "onlyPreexistingFileChanged": ".github/workflows/acp-contracts.yml"
+  },
+  "authorization": "IMPLEMENTATION_AND_ISOLATED_TESTING_ONLY",
+  "hosted": "PENDING_EXACT_SOURCE_RUN",
+  "operationalAuthority": "NOT_REGISTERED",
+  "operationalHistory": "NOT_INITIALIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

@@ -1,0 +1,21 @@
+{
+  "command": "pip download --require-hashes --no-deps -r engineering/route_a_gateway/requirements.txt",
+  "result": "PASS",
+  "artifacts": [
+    {
+      "filename": "pycparser-3.11-py3-none-any.whl",
+      "digest": "sha256:51d5a8ba2be0bbe440b99d2112604c95bbbc3c2748a64260186c541e1729cd80",
+      "bytes": 51178
+    },
+    {
+      "filename": "cffi-2.1.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "digest": "sha256:b0431303acaea1089ad4b3e9ce4e6518193def1118d4073ca848635ee4ea2e96",
+      "bytes": 221525
+    },
+    {
+      "filename": "cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl",
+      "digest": "sha256:9dab55f57c74c3cad24c323bacbbd04be4705ba6eb0d92e920b1fc4837ed5079",
+      "bytes": 4752576
+    }
+  ]
+}

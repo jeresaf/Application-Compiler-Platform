@@ -1,0 +1,17 @@
+{
+  "recordVersion": "acp-route-a-documentary-human-decision/1",
+  "reviewedSource": "a0e95496e9217fcb24a5da1f444484dccbb64ac5",
+  "approvedRequestBodyDigest": "sha256:44805966e05af1db2c4faa3b786361737495025b0eb9e30bfbafe35c701c2eab",
+  "decision": "APPROVED_IMPLEMENTATION_AND_ISOLATED_TESTING_ONLY",
+  "evidence": "human-instruction.txt",
+  "instructionDigest": "sha256:c70816820653858b6f0803ff07ede6f4d06057486d594b8fd9d544b688607ea1",
+  "authentication": "DOCUMENTARY_HUMAN_INSTRUCTION_NOT_A_CRYPTOGRAPHIC_AUTHORITY_PROOF",
+  "realAuthorityRegistration": false,
+  "acceptedGenesisAuthorized": false,
+  "acceptedTransitionsAuthorized": false,
+  "dataBindingsApproved": false,
+  "migrationSqlAuthorized": false,
+  "deploymentAuthorized": false,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

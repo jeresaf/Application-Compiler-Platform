@@ -33,14 +33,31 @@ jobs:
         run: python3.14 tooling/check_repository.py
       - name: Validate all schemas, corpora, history and recovery tests
         run: python3.14 -m unittest discover -s tooling/tests -v
-      - name: Verify pure Route A replay and negative mutations without creating history
-        run: python3.14 -m unittest discover -s verification/route_a -v
+      - name: Install isolated Route A engineering dependencies
+        run: |
+          python3.14 -m venv engineering/route_a_gateway/.venv
+          engineering/route_a_gateway/.venv/bin/python3.14 -m pip install -r tooling/requirements.txt
+          engineering/route_a_gateway/.venv/bin/python3.14 -m pip install --require-hashes -r engineering/route_a_gateway/requirements.txt
+          engineering/route_a_gateway/.venv/bin/python3.14 -m pip check
+      - name: Verify Route A replay, symbolic contracts and isolated authenticated integration
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p .audit-artifacts/route-a-engineering
+          engineering/route_a_gateway/.venv/bin/python3.14 -m unittest discover -s verification/route_a -v 2>&1 | tee .audit-artifacts/route-a-engineering/tests.log
       - name: Independently verify canonical bytes and hashes
         run: node tooling/check_canonical_vectors.mjs
       - name: Independently verify Canonical 0.2 execution vectors
         run: node tooling/check_canonical_vectors.mjs test-corpus/execution-v03
       - name: Independently verify approved Canonical 0.3 bytes and hashes
         run: node tooling/check_canonical_vectors.mjs test-corpus/deterministic-v04
+      - name: Retain Route A engineering test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: route-a-engineering-test-evidence
+          path: .audit-artifacts/route-a-engineering/
+          if-no-files-found: warn
   phase5-experiments:
     runs-on: ubuntu-24.04
     timeout-minutes: 40

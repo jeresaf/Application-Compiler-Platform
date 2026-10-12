@@ -1,0 +1,738 @@
+ACP — PHASE 6
+ROUTE A AUTHENTICATED HISTORY IMPLEMENTATION
+
+HUMAN PROJECT-AUTHORITY DECISION:
+APPROVED — IMPLEMENTATION AND ISOLATED TESTING ONLY
+
+==================================================
+1. AUTHORIZATION IDENTITY
+==================================================
+
+Project:
+Application Compiler Platform (ACP)
+
+Repository:
+jeresaf/Application-Compiler-Platform
+
+Branch:
+codex/phase6-production-remediation
+
+Reviewed and authorized source commit:
+a0e95496e9217fcb24a5da1f444484dccbb64ac5
+
+Approved request:
+proposals/phase6-route-a-implementation-authorization/request.json
+
+Approved request body digest:
+sha256:44805966e05af1db2c4faa3b786361737495025b0eb9e30bfbafe35c701c2eab
+
+The project authority has now explicitly approved
+the implementation-and-isolated-testing scope
+defined by this exact request.
+
+Do not expand or reinterpret that authorization.
+
+Record the human decision separately from the
+original request without modifying its immutable
+reviewed bytes or hashes.
+
+The approval is a documentary human instruction.
+
+Do not fabricate:
+- Cryptographic signatures.
+- Authenticated project-authority sessions.
+- Signing keys.
+- Approval receipts.
+- Real reviewer identities.
+- Accepted journal entries.
+
+Any future operational authorization must use
+genuine authenticated evidence.
+
+==================================================
+2. OBJECTIVE
+==================================================
+
+Implement a working, independently testable
+Route A authenticated history gateway.
+
+Use the existing:
+
+- HistoryRepository
+- Canonical IR
+- ChangeSet planner
+- Deterministic plan reproduction
+- Existing native approval interfaces
+
+Preserve their established semantic contracts.
+
+This task must produce functioning engineering
+code and reproducible integration-test evidence.
+
+Do not spend this implementation checkpoint
+producing architecture documents without
+building the authorized code.
+
+==================================================
+3. MANDATORY ARCHITECTURE
+==================================================
+
+Use the reviewed documents as binding contracts:
+
+docs/phase6-route-a-authority-integration-design.md
+
+docs/phase6-route-a-gateway-contract.md
+
+docs/phase6-route-a-acceptance-sequence.md
+
+docs/phase6-route-a-security-threat-model.md
+
+docs/phase6-route-a-recovery-matrix.md
+
+docs/phase6-route-a-implementation-plan.md
+
+Preserve approval envelope:
+
+acp-route-a-approval/2
+
+Preserve the exact reviewed:
+
+- Operation identity.
+- Repository identity.
+- Application identity.
+- Authority configuration.
+- REVIEW_REQUIRED event binding.
+- Plan digest.
+- Canonical candidate digest.
+- Expected journal head.
+- Required approval scopes.
+- Author identity.
+- Independent reviewer identity.
+- Approval validity.
+- Nonce and replay controls.
+
+Do not change approved Canonical semantics.
+
+==================================================
+4. ALLOWED IMPLEMENTATION PATHS
+==================================================
+
+Primary implementation:
+
+engineering/route_a_gateway/
+
+Integration tests:
+
+verification/route_a/
+
+Review evidence:
+
+proposals/phase6-route-a-implementation-review/
+
+Implementation documentation:
+
+docs/phase6-route-a-*.md
+
+CI modifications, when necessary:
+
+.github/workflows/acp-contracts.yml
+
+Retain existing CI gates and pinned environments.
+
+Do not modify native compiler or sealed generator
+files under this authorization.
+
+If compatibility requires modifying a sealed
+file or published contract:
+
+STOP.
+
+Report the exact conflict and request separate
+authorization for an intentional successor release.
+
+==================================================
+5. IMPLEMENT THE AUTHENTICATED GATEWAY
+==================================================
+
+Build a reusable external gateway library.
+
+The gateway must support:
+
+- Repository-specific identity binding.
+- Immutable per-call verification context.
+- Authenticated caller interfaces.
+- Authorization policy enforcement.
+- Independent reviewer verification.
+- Exact proposal-event binding.
+- Trusted current-head observations.
+- Controlled access to HistoryRepository.
+- Historical authentication.
+- Authorized retry and receipt retrieval.
+- Quarantined export and restore verification.
+
+Keep the implementation modular.
+
+No production service endpoint is authorized
+under this task.
+
+All integration execution must remain inside
+temporary, isolated test environments.
+
+==================================================
+6. IMPLEMENT REAL CRYPTOGRAPHIC VERIFICATION
+==================================================
+
+The new implementation must verify genuine
+cryptographic signatures using a reviewed,
+maintained cryptographic library.
+
+Do not implement custom cryptographic primitives.
+
+For isolated tests only:
+
+- Generate disposable test keys.
+- Use artificial test principals.
+- Use synthetic issuer and audience values.
+- Sign test-only approval envelopes.
+- Verify signatures and exact signed bytes.
+- Reject tampered or malformed envelopes.
+- Reject incorrect keys and algorithms.
+- Reject altered repository/application bindings.
+- Reject expired or not-yet-valid proofs.
+- Reject changed scopes.
+- Reject changed plan and candidate digests.
+
+Clearly mark all test keys and approvals:
+
+NON_AUTHORITATIVE_TEST_ONLY
+
+Test signatures must never be imported as
+real project-authority approvals.
+
+Make actual production algorithm, issuer,
+trust roots and signing custody configurable.
+
+Do not enroll real trust material.
+
+==================================================
+7. IMPLEMENT EXACT PROPOSAL-EVENT BINDING
+==================================================
+
+Preserve the corrected stage-specific lifecycle:
+
+PROPOSE
+  No approval proof.
+
+REVIEW
+  Author submission only.
+
+APPROVE
+  Independent authenticated approval proof
+  bound to the exact REVIEW_REQUIRED event.
+
+APPLY
+  Exact approved-event linkage and unchanged
+  authenticated proof.
+
+GENESIS
+  No ordinary proposal version.
+
+Use the reviewed engineering event-reference
+format derived from actual native stored events.
+
+Never infer event identity from ChangeSet ID alone.
+
+Never create a future APPROVED event reference
+before the event exists.
+
+A changed proposal must require a new approval.
+
+A rebase must require fresh review.
+
+A proof for one repository must not authorize
+a different repository.
+
+==================================================
+8. IMPLEMENT THE DURABLE OPERATION LEDGER
+==================================================
+
+Implement actual durable storage and versioned
+state transitions.
+
+Required normal states:
+
+RESERVED
+  ↓
+JOURNAL_COMMITTED
+  ↓
+RECEIPT_STORED
+  ↓
+WITNESSED
+  ↓
+PUBLISHED
+
+Also support the reviewed terminal and
+failure states:
+
+REJECTED
+EXPIRED
+RECOVERY_REQUIRED
+QUARANTINED
+
+Enforce:
+
+- Unique operation IDs.
+- Unique approval IDs.
+- Unique nonces.
+- Immutable operation subjects.
+- Compare-and-swap version checks.
+- Durable transition evidence.
+- Rejection of illegal state changes.
+- No state skipping.
+- No reuse of consumed approvals.
+- No automatic release from quarantine.
+
+The ledger and native journal are separate
+transaction domains.
+
+Do not claim cross-store atomicity.
+
+==================================================
+9. IMPLEMENT WRITER FENCING AND RECONCILIATION
+==================================================
+
+Use a testable single-writer mechanism.
+
+For isolated single-host SQLite tests,
+implement enforceable process-level locking.
+
+Do not rely only on an expiring lease.
+
+Prevent concurrent unfenced writers.
+
+Test:
+
+- Competing write attempts.
+- Lost process ownership.
+- Restart after crash.
+- Interrupted native commit.
+- Commit succeeds before ledger update.
+- Ledger update succeeds before response.
+- Receipt persisted before response loss.
+- Witness unavailable after commit.
+- Conflicting witness observations.
+- Recovery from an uncertain operation.
+
+Reconciliation must inspect actual durable
+native state before deciding the next transition.
+
+When commit existence cannot be established,
+remain RECOVERY_REQUIRED.
+
+Never manufacture a replacement journal entry
+or accepted receipt.
+
+==================================================
+10. IMPLEMENT SERVICE RECEIPT VERIFICATION
+==================================================
+
+Create a versioned receipt format and verifier.
+
+Receipt verification must bind:
+
+- Repository and application.
+- Exact operation.
+- Native journal sequence.
+- Previous and new journal heads.
+- Canonical snapshot digest.
+- Full plan digest.
+- Approval proof digest.
+- Authority configuration.
+- Actual commit evidence.
+- Service signing identity.
+- Receipt integrity.
+
+Fixture-only signing is allowed in isolated tests.
+
+No operational receipt issuer may be provisioned.
+
+Never treat a locally generated test receipt
+as a genuine project-authority approval.
+
+==================================================
+11. IMPLEMENT WITNESS INTEGRATION
+==================================================
+
+Build a configurable witness client/protocol.
+
+Use an independent synthetic witness implementation
+for integration tests.
+
+Verify:
+
+- Exact journal-head continuity.
+- Monotonic checkpoint advancement.
+- Correct repository identity.
+- Correct receipt digest.
+- No acceptance of stale checkpoints.
+- Fork and conflicting-head detection.
+- Witness outage handling.
+- Recovery after witness returns.
+
+A locally committed but unwitnessed entry
+must never become PUBLISHED.
+
+No real witness service registration is authorized.
+
+==================================================
+12. IMPLEMENT AUTHENTICATED HISTORICAL AUDIT
+==================================================
+
+Implement the real verification adapter required
+by the existing HistoryRepository interface.
+
+Support:
+
+authenticate()
+verify()
+verify_historical()
+
+Preserve the existing native verdict shape.
+
+Historical verification must authenticate:
+
+- Original proof bytes.
+- Proof-time reviewer identity.
+- Original approved scopes.
+- Historical key validity.
+- Authority configuration version.
+- Relevant revocation chronology.
+- Exact predecessor journal head.
+- Original application and repository.
+- Actual committed operation.
+
+Do not trust the proof's self-declared head
+without independent journal verification.
+
+A structural audit alone must not qualify
+history for operational admission.
+
+==================================================
+13. IMPLEMENT AUTHORIZED RETRY RETRIEVAL
+==================================================
+
+Build a separate authenticated read path for
+previously committed operation receipts.
+
+The gateway must authorize RECEIPT_READ
+independently of native retry behavior.
+
+Reject:
+
+- Wrong caller.
+- Wrong repository.
+- Wrong application.
+- Wrong operation.
+- Wrong proposal event.
+- Wrong plan.
+- Wrong proof.
+- Wrong retry key.
+- Missing read grant.
+- Expired/revoked caller session.
+- Unpublished receipt.
+
+Never use native apply() as an unauthenticated
+receipt-lookup endpoint.
+
+==================================================
+14. IMPLEMENT EXPORT AND QUARANTINED RESTORE
+==================================================
+
+Create export verification code covering:
+
+- Exact journal records.
+- Accepted snapshots.
+- Plans and proofs.
+- Authority policy history.
+- Operation-ledger state.
+- Service receipts.
+- Witness checkpoints.
+- Complete file hashes.
+- Source and repository identities.
+
+Test restoration only in disposable stores.
+
+Restoration must begin in quarantine.
+
+Require independent authenticated historical
+verification before a test store can be marked
+verified.
+
+Reject:
+
+- Corrupted archives.
+- Missing receipts.
+- Wrong repository.
+- Stale backups.
+- Truncated journal chains.
+- Conflicting witness checkpoints.
+- Missing historical trust evidence.
+
+No operational history restoration or promotion
+is permitted.
+
+==================================================
+15. STRICT TESTING BOUNDARY
+==================================================
+
+All integration tests must use:
+
+- Artificial application identities.
+- Artificial repository identities.
+- Disposable test keys.
+- Synthetic authenticated principals.
+- Temporary files and databases.
+- Isolated loopback test providers.
+- Clearly non-authoritative journal fixtures.
+
+Do not initialize actual accepted-history
+repositories for:
+
+APP-FIXTURE
+
+APP-CASE-MANAGEMENT
+
+Do not accept their real genesis plans.
+
+Do not import historical fixture approvals
+as real authority.
+
+Do not execute application migration SQL.
+
+Do not connect to production application databases.
+
+Do not deploy applications.
+
+==================================================
+16. SECURITY NEGATIVE TESTS
+==================================================
+
+Test at least:
+
+Wrong repository
+Wrong application
+Wrong authenticated author
+Self-approval
+Wrong reviewer
+Missing reviewer grant
+Expired proof
+Future-dated proof
+Revoked grant
+Unknown signing key
+Invalid signature
+Tampered signed envelope
+Modified Canonical candidate
+Changed plan
+Incorrect required scopes
+Replayed approval nonce
+Duplicate genesis
+Changed proposal-event version
+Stale journal head
+Changed read set
+Concurrent writers
+Lost lock ownership
+Crash during native commit
+Crash between ledger transitions
+Duplicate retry request
+Unauthorized receipt retrieval
+Corrupted service receipt
+Witness outage
+Witness fork
+Truncated history
+Stale backup
+Missing historical authority evidence
+Quarantine bypass
+Unauthorized SQL execution attempt
+Unauthorized deployment operation
+
+All security failures must fail closed.
+
+Do not substitute Boolean flags or symbolic
+oracle assertions for actual integration evidence.
+
+Keep the existing symbolic contract tests as
+independent regression checks.
+
+==================================================
+17. ACCEPTANCE CRITERIA
+==================================================
+
+To accept this implementation checkpoint:
+
+A. The authenticated gateway operates with
+   genuine cryptographic test verification.
+
+B. Repository identity cannot be substituted.
+
+C. Independent reviewer policy is enforced.
+
+D. Exact native proposal events remain bound
+   throughout approval and application.
+
+E. Real durable ledger state is verified.
+
+F. Crash and recovery tests pass.
+
+G. Writer fencing prevents competing writes.
+
+H. Signed test receipt integrity is verified.
+
+I. Independent witness checks control publication.
+
+J. Historical verification rejects tampering.
+
+K. Authorized retry retrieval is enforced.
+
+L. Quarantined export/restore tests pass.
+
+M. No existing Canonical or generator contract
+   is weakened.
+
+N. All existing compiler/regression tests pass.
+
+O. Test-only authority artifacts cannot be
+   mistaken for real accepted history.
+
+P. The sealed 0.5.0 generator remains unchanged.
+
+A partial implementation is not a pass.
+
+Report missing requirements explicitly.
+
+==================================================
+18. CI REQUIREMENTS
+==================================================
+
+Continue to use:
+
+Ubuntu 24.04
+Python 3.14.7
+Node.js 24.21.0
+
+Preserve existing CI workflows and gates.
+
+Add tests for the new engineering adapter.
+
+Do not remove or bypass existing tests.
+
+Do not disable the Phase 6 closure audit.
+
+If the closure audit returns:
+
+PHASE6_CLOSURE_BLOCKED
+
+preserve the actual reason and blocker evidence.
+
+Do not report an overall workflow PASS when
+the closure audit returns exit 2.
+
+==================================================
+19. REQUIRED DELIVERABLES
+==================================================
+
+A. Working engineering source under:
+
+engineering/route_a_gateway/
+
+B. Integration tests under:
+
+verification/route_a/
+
+C. Test provider and fixture infrastructure.
+
+D. Durable ledger implementation.
+
+E. Cryptographic proof-verification implementation.
+
+F. Receipt verification and witness integration.
+
+G. Recovery and quarantined-restore tests.
+
+H. Implementation documentation and threat
+   coverage matrix.
+
+I. Dependency/license and test evidence.
+
+J. Local test results and hosted CI results.
+
+K. Exact commit, modified files and source hashes.
+
+L. Explicit remaining engineering and
+   authorization blockers.
+
+M. Review package under:
+
+proposals/phase6-route-a-implementation-review/
+
+==================================================
+20. STOP CONDITION
+==================================================
+
+Complete the authorized implementation and
+isolated testing work, then stop for independent
+architecture/security review.
+
+Do not proceed to operational construction,
+trust registration or accepted-history genesis.
+
+Do not ask for production credentials.
+
+Do not grant new authority automatically.
+
+Do not authorize migrations or deployment.
+
+If the implementation cannot meet a required
+control within the authorized paths and contracts,
+report the blocker rather than weakening security.
+
+==================================================
+REQUIRED END STATE
+==================================================
+
+Route A:
+IMPLEMENTATION AUTHORIZED
+
+Gateway:
+IMPLEMENTED AND TESTED, OR EXPLICITLY INCOMPLETE
+
+Real operational authority:
+NOT REGISTERED
+
+Operational history repositories:
+NOT INITIALIZED
+
+PAYMENT / CASE genesis:
+NOT AUTHORIZED
+
+Accepted semantic transitions:
+NOT AUTHORIZED
+
+Independent data bindings:
+NOT APPROVED
+
+Migration SQL:
+NOT AUTHORIZED
+
+Deployment:
+NOT AUTHORIZED
+
+Sealed generator:
+0.5.0 UNCHANGED
+
+Phase 6:
+IN_PROGRESS
+
+Phase 7:
+NOT_STARTED
+
+STOP FOR INDEPENDENT REVIEW.
