@@ -1,0 +1,200 @@
+{
+  "observationType": "POST_PUSH_FINAL_HOSTED_OBSERVATION",
+  "observedAt": "2026-10-12T13:32:27.810051+00:00",
+  "sourceCommit": "cad62a3aa668bfc134d72458f969cc1ac6669bb7",
+  "workflowFileDigest": "sha256:e8adccb3cf6215bde5743dadb4964374778d2e07694fe9eb53c02ab60163e166",
+  "sourceBranch": "codex/phase6-production-remediation",
+  "runId": 38250157253,
+  "runAttempt": 1,
+  "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38250157253",
+  "status": "completed",
+  "overallConclusion": "failure",
+  "requiredJobsResult": "SUCCESS",
+  "jobs": [
+    {
+      "id": 114814068732,
+      "name": "phase5-experiments",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-12T12:37:15Z",
+      "completedAt": "2026-10-12T12:45:13Z"
+    },
+    {
+      "id": 114814069061,
+      "name": "contracts",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-12T12:37:15Z",
+      "completedAt": "2026-10-12T12:44:36Z"
+    },
+    {
+      "id": 114816987914,
+      "name": "phase5c-hard-gates",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-12T12:45:15Z",
+      "completedAt": "2026-10-12T12:45:31Z"
+    },
+    {
+      "id": 114817108414,
+      "name": "phase6-target",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-12T12:45:34Z",
+      "completedAt": "2026-10-12T13:13:01Z"
+    },
+    {
+      "id": 114827691852,
+      "name": "phase6-closure-audit",
+      "status": "completed",
+      "conclusion": "failure",
+      "startedAt": "2026-10-12T13:13:04Z",
+      "completedAt": "2026-10-12T13:30:56Z"
+    }
+  ],
+  "closureJobReportedSeparately": true,
+  "closureAudit": {
+    "jobId": 114827691852,
+    "conclusion": "failure",
+    "auditExecution": {
+      "status": "PERFORMED",
+      "exception": null
+    },
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "blockerCount": 21,
+    "blockerRequirements": [
+      5,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      18,
+      20,
+      21,
+      22,
+      24,
+      25,
+      26,
+      27,
+      28,
+      30,
+      31,
+      32,
+      33
+    ]
+  },
+  "fullAdmission": {
+    "result": "FULL_ADMISSION_PASS_PHASE6_NOT_CLOSED",
+    "domains": {
+      "payment": {
+        "compilerOwnedRegeneration": "PASS",
+        "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "admission": {
+          "operation": "lower",
+          "result": "ACCEPTED"
+        },
+        "blockers": [],
+        "humanExtensionPreservation": "PASS",
+        "checks": {
+          "backend": "PASS",
+          "frontend-lock": "PASS",
+          "frontend-types": "PASS",
+          "frontend-tests": "PASS",
+          "frontend-build": "PASS",
+          "real-browser": "PASS"
+        }
+      },
+      "case-management": {
+        "compilerOwnedRegeneration": "PASS",
+        "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "admission": {
+          "operation": "lower",
+          "result": "ACCEPTED"
+        },
+        "blockers": [],
+        "humanExtensionPreservation": "PASS",
+        "checks": {
+          "backend": "PASS",
+          "frontend-lock": "PASS",
+          "frontend-types": "PASS",
+          "frontend-tests": "PASS",
+          "frontend-build": "PASS",
+          "real-browser": "PASS"
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "target": {
+      "id": 11749363468,
+      "name": "phase6-target-ubuntu-evidence",
+      "digest": "sha256:3ac56cd541546209a3e5db2be1e770bd153cd5af8ce351d856278fb7ac0fdc03",
+      "archiveVerified": true,
+      "sizeInBytes": 1499818,
+      "sourceCommit": "cad62a3aa668bfc134d72458f969cc1ac6669bb7",
+      "report": {
+        "archiveMember": "acp-phase6-target/task-interface-report.json",
+        "rawDigest": "sha256:43fdd9d83f63c0d1383bddfca8def8aa48dc27d9c57dd8bdf1414428e2308309",
+        "storedAs": "hosted-task-interface-report.json"
+      }
+    },
+    "closure": {
+      "id": 11750402289,
+      "name": "phase6-remediation-0.5.0-closure-audit",
+      "digest": "sha256:831ba04c9d976a4c2bbbd78826602739b78eddc2380e67bd901c8b7c6fe380b8",
+      "archiveVerified": true,
+      "sizeInBytes": 62554493,
+      "sourceCommit": "cad62a3aa668bfc134d72458f969cc1ac6669bb7",
+      "report": {
+        "archiveMember": "phase6-final-closure.json",
+        "rawDigest": "sha256:a98f1b494741daa8e84549b9c7401f7d3b60804a8bbb82c9a32c3993183d4893",
+        "rawSize": 7292013,
+        "storedAs": "hosted-phase6-final-closure.json.gz",
+        "losslessCompression": "gzip"
+      }
+    }
+  },
+  "frozenInventoryManifestDigest": "sha256:1f62718ef8a971ae602a58411f2a5383e9790b5c211a4429b04507800ebcf4e8",
+  "frozenInventories": {
+    "payment": {
+      "frozenInventoryPath": "targets/spring-vue-postgres/evidence/retained-data-inventory/2026-10-12/payment.json",
+      "frozenInventoryFileDigest": "sha256:34482960e1368983f0431244c8cab6141c4c63dab2efe40130f9aa58f9564248",
+      "committedInventoryBlob": "f22835d9cd6671ee9541509e0c89a2deb9f34aaa",
+      "originalCaptureSourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+      "inventoryDigest": "sha256:58e981019343c35ddd5e22aeb1260b972cad1d9e3abc0f69a5895ba05c0885e6",
+      "populationDigest": "sha256:a9a55cb23e425b6fb58b695b5ab894e57d3b201fd7c26e91a8b088e8d03674c1",
+      "bindingReviewPath": "proposals/phase6-measured-data-binding-review/payment.json",
+      "bindingReviewFileDigest": "sha256:702adb31db7e7007c4dd120490a3c441a9102c57826438d5f2dcf2a9d382f8df"
+    },
+    "case-management": {
+      "frozenInventoryPath": "targets/spring-vue-postgres/evidence/retained-data-inventory/2026-10-12/case-management.json",
+      "frozenInventoryFileDigest": "sha256:5581bcad468f55d5dbed563cdc9c71bf04e453f9353e1f353717077f833ae6d4",
+      "committedInventoryBlob": "a840f9f77f17182b3ce4f38a4a839d05e9418483",
+      "originalCaptureSourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+      "inventoryDigest": "sha256:248bc448998ab0a7bf4e76045e3916bf412239591831f53a80177e086f33b688",
+      "populationDigest": "sha256:2d02a964cf774d928d6ce2c973ba2c2992a0354267a64c3d5b1e2aa52ac665d0",
+      "bindingReviewPath": "proposals/phase6-measured-data-binding-review/case-management.json",
+      "bindingReviewFileDigest": "sha256:008606b30cf7634614c40200161fdb75d150b2b4d50ed298a1d053d18ca2f07b"
+    }
+  },
+  "limitations": {
+    "resourcesPerApplication": 3,
+    "syntheticTenantsPerApplication": 2,
+    "populationClass": "NEWLY_CONSTRUCTED_SYNTHETIC_REFERENCE_TEST_DEPLOYMENTS",
+    "arbitraryProductionPopulationSupport": false,
+    "writerCoverage": "BOUNDED_REPOSITORY_SOURCES",
+    "externalWriters": "NOT_INVENTORIED"
+  },
+  "existingAuthenticHistory": "AUTHENTIC_HISTORY_UNAVAILABLE",
+  "authorityDesignStatus": "PROPOSED_NOT_AUTHORIZED",
+  "hostedValidationScope": "Committed inventory source only; newly added observation/design documents were not part of this run.",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "migrationExecuted": false,
+  "bindingApprovalsIssued": false,
+  "authorityConstructed": false,
+  "genesisAccepted": false
+}

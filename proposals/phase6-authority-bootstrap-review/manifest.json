@@ -1,0 +1,11 @@
+{
+  "classification": "UNAPPROVED_AUTHORITY_BOOTSTRAP_DESIGN",
+  "reviewedInventoryCommit": "cad62a3aa668bfc134d72458f969cc1ac6669bb7",
+  "digestMethod": "SHA-256 of exact file bytes; evidence hash only, not a signature or approval",
+  "files": {
+    "docs/phase6-new-reference-authority-bootstrap-design.md": "sha256:4ad73957538b23aee1a9c276956d90812af27c1dc55c844e3e1d69504959cb18",
+    "proposals/phase6-authority-bootstrap-review/proposal.json": "sha256:60d3485c45e1833f4c8989ce7be725d33f36a3a9af4a4f49d44c8348ee2f98a7"
+  },
+  "authorityConstructed": false,
+  "genesisAccepted": false
+}

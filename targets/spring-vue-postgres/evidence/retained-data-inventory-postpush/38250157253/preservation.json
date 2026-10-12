@@ -1,0 +1,32 @@
+{
+  "immutableEvidence": {
+    "targets/spring-vue-postgres/evidence/retained-data-inventory/2026-10-12/manifest.json": {
+      "digest": "sha256:1f62718ef8a971ae602a58411f2a5383e9790b5c211a4429b04507800ebcf4e8",
+      "verifiedFiles": 43,
+      "result": "PASS"
+    },
+    "targets/spring-vue-postgres/evidence/retained-data-inventory/2026-10-12/preserved-files.json": {
+      "digest": "sha256:58b2678e8acf6d81616d337e635ad41892031bfb09a39c17597f0a4bc17757f9",
+      "verifiedFiles": 93,
+      "result": "PASS"
+    }
+  },
+  "trackedFilesChangedFromReviewedSource": [],
+  "sealedReleaseCheck": {
+    "result": "PASS",
+    "profile": "acp-spring-vue-postgres/0.5.0",
+    "generator": "acp-spring-vue-generator/0.5.0",
+    "bundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+    "history": "prior released entries immutable"
+  },
+  "result": "PASS",
+  "sealed04Preservation": {
+    "sourceCommit": "7e4e3438179e7a446c5f3737ad1d6d9cb07a96ea",
+    "sourceReleaseContractFileDigest": "sha256:c3b325684e32f1a87a7b558b8a9b0deed0dd9bbb0cb9cc1791e563855d4fc984",
+    "unchangedReleasedEntry": {
+      "generator": "acp-spring-vue-generator/0.4.0",
+      "bundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a"
+    },
+    "result": "PASS"
+  }
+}

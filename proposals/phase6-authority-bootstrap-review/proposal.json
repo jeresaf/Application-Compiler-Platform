@@ -1,0 +1,53 @@
+{
+  "classification": "PROPOSED_NEW_REFERENCE_REPOSITORY_DESIGN_ONLY",
+  "reviewedInventoryCommit": "cad62a3aa668bfc134d72458f969cc1ac6669bb7",
+  "designPath": "docs/phase6-new-reference-authority-bootstrap-design.md",
+  "designFileDigest": "sha256:4ad73957538b23aee1a9c276956d90812af27c1dc55c844e3e1d69504959cb18",
+  "frozenInventoryManifestDigest": "sha256:1f62718ef8a971ae602a58411f2a5383e9790b5c211a4429b04507800ebcf4e8",
+  "applications": {
+    "payment": {
+      "applicationId": "APP-FIXTURE",
+      "baselinePath": "test-corpus/deterministic-v04/payment-canonical-candidate.json",
+      "baselineFileDigest": "sha256:57b3c3ab9c016b1da264ee007510ab8e3f3650b0ce95cd817b96b6c09a75ea5c",
+      "baselineCanonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "existingAuthenticHistory": "AUTHENTIC_HISTORY_UNAVAILABLE",
+      "newRepositoryId": null,
+      "genesisAuthorization": null,
+      "genesisAccepted": false
+    },
+    "case-management": {
+      "applicationId": "APP-CASE-MANAGEMENT",
+      "baselinePath": "test-corpus/deterministic-v04/case-management-canonical-candidate.json",
+      "baselineFileDigest": "sha256:e547bfc0826b3c15edf3e349b1eb3d01f963089b42f646271b4c34926968ff63",
+      "baselineCanonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "existingAuthenticHistory": "AUTHENTIC_HISTORY_UNAVAILABLE",
+      "newRepositoryId": null,
+      "genesisAuthorization": null,
+      "genesisAccepted": false
+    }
+  },
+  "proposedProtocol": "EXPLICIT_BASELINE_ADOPTION_REQUIRES_SEPARATE_ARCHITECTURE_APPROVAL",
+  "existingAdapterSupportsBaselineAdoption": false,
+  "trustedHost": null,
+  "authorityIdentity": null,
+  "authenticatedPrincipals": null,
+  "receiptVerificationPolicy": null,
+  "witnessConfiguration": null,
+  "humanDecisionsRequired": [
+    "BASELINE_ADOPTION_PROTOCOL_AND_VERIFIER_WORK",
+    "EXACT_BASELINE_PER_APPLICATION",
+    "HOST_REPOSITORY_IDENTITIES_AND_CONSTRUCTION_SCOPE",
+    "AUTHENTICATION_APPROVAL_SEPARATION_AND_TRUST_POLICY",
+    "RECEIPT_KEY_CUSTODY_WITNESS_BACKUP_AND_RECOVERY_POLICY",
+    "SEPARATE_EXACT_GENESIS_AUTHORIZATION_AFTER_IMPLEMENTATION_REVIEW"
+  ],
+  "authorityConstructed": false,
+  "signaturesCreated": false,
+  "receiptsCreated": false,
+  "independentBindingApprovalsIssued": false,
+  "migrationSqlExecuted": false,
+  "deploymentAuthorized": false,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "alternative": "FRESH_PROSPECTIVELY_AUTHORIZED_REPLAY_REQUIRES_CHAIN_FEASIBILITY_REVIEW"
+}

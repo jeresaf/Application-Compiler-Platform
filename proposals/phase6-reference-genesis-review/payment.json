@@ -1,0 +1,71 @@
+{
+  "request": {
+    "requestVersion": "reference-genesis-review/1",
+    "requestId": "payment-reference-history-genesis-review-1",
+    "classification": "HUMAN_REVIEW_REQUEST_NOT_AN_APPROVAL",
+    "applicationId": "APP-FIXTURE",
+    "proposedRepositoryIdentity": "urn:acp:reference-history:payment:new-1",
+    "repositoryIdentityStatus": "PROPOSED_LOGICAL_ID_NOT_INITIALIZED_OR_AUTHENTICATED",
+    "initialSnapshot": {
+      "path": "test-corpus/deterministic-v04/payment-canonical-candidate.json",
+      "fileDigest": "sha256:57b3c3ab9c016b1da264ee007510ab8e3f3650b0ce95cd817b96b6c09a75ea5c",
+      "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "meaning": "Original approved Canonical 0.3 snapshot; not EVOLVE-REFERENCE-NOTE candidate"
+    },
+    "authorityModel": {
+      "path": "proposals/phase6-reference-genesis-review/authority-model.json",
+      "fileDigest": "sha256:f28032e8a6fc9624c54316832a4421bd50c7485d54ce4bbf506245f3102a4f66"
+    },
+    "targetEvidence": {
+      "inventorySourceCommit": "cad62a3aa668bfc134d72458f969cc1ac6669bb7",
+      "hostedRun": 38250157253,
+      "observationPath": "targets/spring-vue-postgres/evidence/retained-data-inventory-postpush/38250157253/observation.json",
+      "observationDigest": "sha256:01cc68fc5856f078b2e336902964e2fd3f07db93e30ed53dc118e086206ad19f",
+      "fullAdmission": "PASS",
+      "closure": "PHASE6_CLOSURE_BLOCKED",
+      "predecessorBundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+      "successorBundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb"
+    },
+    "requestedPermittedScope": [
+      "ONE_NEW_REFERENCE_HISTORY_GENESIS_FOR_THIS_EXACT_APPLICATION_AND_SNAPSHOT"
+    ],
+    "excludedScopes": [
+      "SEMANTIC_EVOLUTION",
+      "CONTENT_SIGNING",
+      "DATA_BINDING",
+      "MIGRATION_PLAN_ACCEPTANCE",
+      "MIGRATION_EXECUTION",
+      "DEPLOYMENT",
+      "LATER_JOURNAL_APPEND"
+    ],
+    "proposedInitialHead": {
+      "sequence": 0,
+      "previousJournalDigest": null,
+      "snapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "journalDigest": null,
+      "status": "PROPOSAL_ONLY_NO_ACCEPTED_HEAD"
+    },
+    "historyAvailability": "AUTHENTIC_HISTORY_UNAVAILABLE",
+    "priorAcceptedHistoryClaimed": false,
+    "approvalStatus": "NOT_GRANTED",
+    "executionEligible": false,
+    "unresolvedPrerequisites": [
+      "Human selection/approval of bootstrap route: supported fresh replay if feasible, or separately reviewed baseline-adoption protocol",
+      "Exact host, issuer/audience, real trust material and principals pinned and independently authenticated",
+      "Repository identity explicitly accepted by project authority",
+      "Reviewed verifier/plan bytes and exact request validity/replay policy",
+      "Witness, export, backup and restoration configuration approved",
+      "Separate explicit authenticated genesis approval over final concrete bytes"
+    ],
+    "bindingRule": "Any change to snapshot, repository, authority configuration, plan, proof policy or permitted scope requires new exact request bytes/digest and independent review. A signature on this incomplete review request must not be accepted as execution authorization.",
+    "authenticatedContentSigning": "PENDING",
+    "independentDataBindings": "NOT_APPROVED",
+    "migrationPlans": "NOT_APPROVED",
+    "migrationExecution": "NOT_AUTHORIZED",
+    "deployment": "NOT_AUTHORIZED",
+    "phase6": "IN_PROGRESS",
+    "phase7": "NOT_STARTED"
+  },
+  "requestDigest": "sha256:63dbd8c0936de8b3c9e4b671429d3ed15a13b2d927a365e37c67799f420b5eee",
+  "digestMethod": "SHA-256 of request object encoded as sorted compact JSON, ensure_ascii=True; no trailing newline; evidence digest, not approval"
+}

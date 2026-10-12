@@ -1,0 +1,18 @@
+test_both_measured_populations_and_all_negative_checks (tooling.tests.test_retained_inventory.PublishedReferenceInventoryTests.test_both_measured_populations_and_all_negative_checks) ... ok
+test_changed_tenant (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_changed_tenant) ... ok
+test_database_mismatch (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_database_mismatch) ... ok
+test_extra_row (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_extra_row) ... ok
+test_missing_row (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_missing_row) ... ok
+test_modified_stored_bytes (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_modified_stored_bytes) ... ok
+test_new_source_even_without_literal_sql_is_a_writer_boundary_change (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_new_source_even_without_literal_sql_is_a_writer_boundary_change) ... ok
+test_read_only_recapture_allows_timestamp_change_only (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_read_only_recapture_allows_timestamp_change_only) ... ok
+test_runtime_drift (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_runtime_drift) ... ok
+test_schema_mismatch (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_schema_mismatch) ... ok
+test_stale_population_digest (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_stale_population_digest) ... ok
+test_unexpected_writer (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_unexpected_writer) ... ok
+test_wrong_application (tooling.tests.test_retained_inventory.RetainedInventoryTests.test_wrong_application) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.250s
+
+OK

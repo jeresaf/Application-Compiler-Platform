@@ -1,0 +1,36 @@
+{
+  "classification": "PROPOSED_AUTHORITY_MODEL_NOT_DEPLOYED",
+  "version": "review-1",
+  "hostIdentity": null,
+  "authenticationIssuer": null,
+  "authenticationAudience": null,
+  "trustedVerificationKeys": null,
+  "projectAuthorityPrincipal": null,
+  "authorPrincipal": null,
+  "reviewerPrincipal": null,
+  "operatorPrincipal": null,
+  "separation": "Authenticated author and independent reviewer must differ; operator and host administrator cannot grant project authority.",
+  "bootstrapAuthentication": "Project authority must authenticate and explicitly authorize exact repository/application/configuration/snapshot/request bytes; test identities and unsigned fixtures are inadmissible.",
+  "receiptPolicy": "Independently verifiable authenticated or signed receipts bound to repository, application, request, proof, policy, sequence, previous journal digest and Canonical digest; real trust material must be pinned before acceptance.",
+  "admission": "Existing Canonical validity and exact approved snapshot digest required; no renumbering or weakened admission.",
+  "planVerification": "Reproduce the exact genesis/adoption plan using a reviewed verifier; independently authenticate the reviewer proof, scope, validity and exact request/plan bindings before append. Legacy adapter does not support direct later-revision baseline adoption.",
+  "journal": "Atomic append with expected-head compare-and-swap, immutable entries, reproducible snapshots and independent witnessed head checkpoints.",
+  "continuity": "Verify every sequence and previous digest from explicitly authorized new genesis; no prior acceptance asserted.",
+  "scopes": [
+    "REFERENCE_HISTORY_GENESIS_ONLY"
+  ],
+  "excludedScopes": [
+    "SEMANTIC_EVOLUTION",
+    "CONTENT_SIGNING",
+    "DATA_BINDING",
+    "MIGRATION_PLAN_ACCEPTANCE",
+    "MIGRATION_EXECUTION",
+    "DEPLOYMENT",
+    "LATER_JOURNAL_APPEND"
+  ],
+  "rejection": "Reject tamper, wrong application/repository, stale head, replayed or expired proof, unknown keys, self approval and missing prerequisites.",
+  "recovery": "Atomic crash recovery and exact-request idempotency; ambiguous commit resolved by authenticated head read; restore behind witnessed head fails closed. Never delete accepted entries or reuse sequences.",
+  "designPath": "docs/phase6-new-reference-authority-bootstrap-design.md",
+  "designDigest": "sha256:4ad73957538b23aee1a9c276956d90812af27c1dc55c844e3e1d69504959cb18",
+  "implementationAuthorized": false
+}

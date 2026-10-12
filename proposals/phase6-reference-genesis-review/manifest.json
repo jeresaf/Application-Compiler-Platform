@@ -1,0 +1,19 @@
+{
+  "classification": "UNAPPROVED_SEPARATE_GENESIS_REVIEW_REQUESTS",
+  "files": {
+    "proposals/phase6-reference-genesis-review/authority-model.json": "sha256:f28032e8a6fc9624c54316832a4421bd50c7485d54ce4bbf506245f3102a4f66",
+    "proposals/phase6-reference-genesis-review/case-management.json": "sha256:0923017344c6c713b3d970da51354526dbf42eb14eb61b9332a0afc8fcd73267",
+    "proposals/phase6-reference-genesis-review/case-management.md": "sha256:3e722955a7e7160019dfb2a1689eb2b2a495d154318cb86fece9860732a022f8",
+    "proposals/phase6-reference-genesis-review/payment.json": "sha256:53c072898e844cf2789edc8c6c845b6b070594dbf5276ce2724487bcb2ab9184",
+    "proposals/phase6-reference-genesis-review/payment.md": "sha256:a2acd44973a3141f0975e12bd5eba9b4d3e0103a50394f150127c6d47d7673e9",
+    "proposals/phase6-reference-genesis-review/validation.json": "sha256:acccecd61b29c3ef573ad5ebaf4f12d4c7d4fbd49d2dffb1bbf9164396d01995",
+    "docs/phase6-reference-genesis-review.md": "sha256:1f18d27aaa134c71ee7e728ef9e48326d9c313230907518385180c04578ba08c"
+  },
+  "boundExistingEvidence": {
+    "docs/phase6-new-reference-authority-bootstrap-design.md": "sha256:4ad73957538b23aee1a9c276956d90812af27c1dc55c844e3e1d69504959cb18",
+    "targets/spring-vue-postgres/evidence/retained-data-inventory-postpush/38250157253/observation.json": "sha256:01cc68fc5856f078b2e336902964e2fd3f07db93e30ed53dc118e086206ad19f"
+  },
+  "approvalsIssued": false,
+  "repositoriesInitialized": false,
+  "genesisAccepted": false
+}

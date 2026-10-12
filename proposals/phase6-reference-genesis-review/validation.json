@@ -1,0 +1,63 @@
+{
+  "result": "PASS",
+  "preservedManifests": {
+    "targets/spring-vue-postgres/evidence/retained-data-inventory/2026-10-12/manifest.json": {
+      "digest": "sha256:1f62718ef8a971ae602a58411f2a5383e9790b5c211a4429b04507800ebcf4e8",
+      "filesVerified": 43,
+      "result": "PASS"
+    },
+    "targets/spring-vue-postgres/evidence/retained-data-inventory/2026-10-12/preserved-files.json": {
+      "digest": "sha256:58b2678e8acf6d81616d337e635ad41892031bfb09a39c17597f0a4bc17757f9",
+      "filesVerified": 93,
+      "result": "PASS"
+    },
+    "targets/spring-vue-postgres/evidence/retained-data-inventory-postpush/38250157253/manifest.json": {
+      "digest": "sha256:7b03467f9b28e73fc8d42f9de433318ddf52cbf464896f4ec1fc8fbfe883c3f5",
+      "filesVerified": 15,
+      "result": "PASS"
+    },
+    "proposals/phase6-reference-genesis-review/manifest.json": {
+      "digest": "sha256:bda45e6b7b1d492500c137e02788fb275edb387937e1309858c1f3b1f9aa72cf",
+      "filesVerified": 5,
+      "result": "PASS"
+    }
+  },
+  "requests": {
+    "payment": {
+      "requestDigest": "sha256:63dbd8c0936de8b3c9e4b671429d3ed15a13b2d927a365e37c67799f420b5eee",
+      "bindingChecks": "PASS",
+      "changedBindingChecks": {
+        "applicationId": "DIGEST_MISMATCH_REJECTED",
+        "proposedRepositoryIdentity": "DIGEST_MISMATCH_REJECTED",
+        "initialSnapshot": "DIGEST_MISMATCH_REJECTED",
+        "authorityModel": "DIGEST_MISMATCH_REJECTED",
+        "targetEvidence": "DIGEST_MISMATCH_REJECTED",
+        "requestedPermittedScope": "DIGEST_MISMATCH_REJECTED"
+      },
+      "executionEligible": false
+    },
+    "case-management": {
+      "requestDigest": "sha256:7646041bff54da50b5ec9c65483950fabb71ac12b29dbea0aea5b974fd866597",
+      "bindingChecks": "PASS",
+      "changedBindingChecks": {
+        "applicationId": "DIGEST_MISMATCH_REJECTED",
+        "proposedRepositoryIdentity": "DIGEST_MISMATCH_REJECTED",
+        "initialSnapshot": "DIGEST_MISMATCH_REJECTED",
+        "authorityModel": "DIGEST_MISMATCH_REJECTED",
+        "targetEvidence": "DIGEST_MISMATCH_REJECTED",
+        "requestedPermittedScope": "DIGEST_MISMATCH_REJECTED"
+      },
+      "executionEligible": false
+    }
+  },
+  "trackedSourceUnchanged": true,
+  "repositoryChecks": "Repository contract checks: PASS",
+  "validationScope": "Review-package hashes and binding integrity only; no live authority, proof verifier, genesis or migration was exercised.",
+  "sealedReleaseCheck": {
+    "result": "PASS",
+    "profile": "acp-spring-vue-postgres/0.5.0",
+    "generator": "acp-spring-vue-generator/0.5.0",
+    "bundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+    "history": "prior released entries immutable"
+  }
+}
