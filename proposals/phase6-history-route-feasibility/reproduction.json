@@ -1,0 +1,3250 @@
+{
+  "payment": {
+    "retainedRevisionCount": 250,
+    "allBasisReferencesResolve": true,
+    "genesisSource": "Existing tooling.reference_models.models + canonical_fixtures.synthetic_approved historical recipe; reconstructed in memory, not a newly approved source",
+    "sourceDigest": "sha256:6177521b3ea4a9e5fd6326010f01755d9ef54300e96c5bdeb0d83a757d0d4bc8",
+    "receiptMigration": "authoring-0.2-to-canonical-0.1-v1",
+    "receiptTargetDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+    "genesisPlanDigest": "sha256:4503786c4b317ea48b8eadf1a6795e9f190507ae31d4784c435414e20b09c0a3",
+    "genesisScopes": [
+      "SEMANTIC",
+      "SECURITY"
+    ],
+    "initialDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+    "allGenesisRevisionsOne": true,
+    "transitions": [
+      {
+        "corpus": "execution-v03",
+        "baseDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+        "changeFile": "test-corpus/execution-v03/payment-change.json",
+        "changeFileDigest": "sha256:a85b63e0425e7d3c017bdf3b934fad0535a76db4a6a2d69e90e1e2de142fe5a0",
+        "fixtureBase": {
+          "sequence": 0,
+          "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+          "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "authorLabel": "author",
+        "sources": [],
+        "parents": [],
+        "historicalPlanDigest": "sha256:9f32a52a87ef1faa12daf0a24dbbbb6687d2c59e10cb07ea9f1b6035e5f448a0",
+        "candidateDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+        "requiredScopes": [
+          "MIGRATION",
+          "SECURITY",
+          "SEMANTIC"
+        ],
+        "migration": {
+          "id": "MIG-FORWARD",
+          "mode": "REQUIRED",
+          "compatibility": "BACKWARD",
+          "irreversible": false,
+          "steps": [
+            "Expand",
+            "Backfill",
+            "Verify",
+            "Contract after client retirement"
+          ],
+          "preconditions": [
+            "Review data observations and active clients"
+          ],
+          "verification": [
+            "Verify required values and retained constraints"
+          ],
+          "recovery": "Forward repair; restore only after verified recovery review",
+          "observations": []
+        },
+        "revisions": [
+          {
+            "id": "A11Y-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ACTION-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ASSIGN-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "BOUNDARY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CMD-RECORD",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "COMPATIBILITY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CONSTRAINT-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CONTROL-TASK-RESOURCE",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "CONTROL-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "EVID-A11Y",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-COMPATIBILITY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-OBSERVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-PERF",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-RELIABILITY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-TEST",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FILTER-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FORM-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "HOLD-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "INPUT-TASK-RESOURCE",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "JOB-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "LIFECYCLE-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "OBSERVE-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "OPERATION-INPUT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "OPERATION-RESULT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "OPERATION-TEXT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "PERF-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "PERM-CMD-RECORD",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "PERM-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POL-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POL-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POLSET-CMD-RECORD",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POLSET-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "QUERY-INPUT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "QUERY-TEXT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "RATE-CMD-RECORD",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RATE-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RELIABILITY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RESPONSIVE-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RESULT-TEXT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "ROLE-OPERATOR",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "SCREEN-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "SEARCH-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "SERVICE-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STEP-CMD-RECORD",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TABLE-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TEST-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TRANS-RECORD",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TX-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "UC-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-EMPTY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-ERROR",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-LOADING",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-SUCCESS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "WIZARD-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "WSTEP-INPUT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          }
+        ]
+      },
+      {
+        "corpus": "deterministic-v04",
+        "baseDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+        "changeFile": "test-corpus/deterministic-v04/payment-change.json",
+        "changeFileDigest": "sha256:f27a344784c029baa36191030c38294a7e3573dbcdb91f1258d4fb65aa807c0c",
+        "fixtureBase": {
+          "sequence": 0,
+          "digest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+          "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "authorLabel": "assistant:proposal-author",
+        "sources": [],
+        "parents": [],
+        "historicalPlanDigest": "sha256:882781981441c2ab50d71617a15edfca88c6b9ebaa25c130cf40f56ea8ce356e",
+        "candidateDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "requiredScopes": [
+          "SECURITY",
+          "SEMANTIC"
+        ],
+        "migration": {
+          "id": "MIG-NONE",
+          "mode": "NONE",
+          "compatibility": "BACKWARD",
+          "irreversible": false,
+          "steps": [],
+          "preconditions": [],
+          "verification": [],
+          "recovery": "No data operation",
+          "observations": []
+        },
+        "revisions": [
+          {
+            "id": "A11Y-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "ACT-USER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ACTION-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "AGG-ENT-MEMBER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "AGG-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "AGG-ENT-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ASSIGN-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "AUTH-ACT-USER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "BACKUP-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "BOUNDARY-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "CLASS-INTERNAL",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CLASS-PUBLIC",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CLASS-SECRET",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CLASS-SENSITIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CMD-RECORD",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "COMPATIBILITY-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "CONSTRAINT-TENANT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "CONTROL-TASK-RESOURCE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CONTROL-TEXT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "DELETE-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DELIVERY-EVT-RECORDED",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ENT-MEMBER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ENT-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-A11Y",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-BACKUP",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-COMPATIBILITY",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-OBSERVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-PERF",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-RECOVERY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-RELIABILITY",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-TEST",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVT-RECORDED",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FILTER-TEXT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "FLD-AMOUNT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-MEMBER-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-MEMBER-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-PAYMENT-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-PAYMENT-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-TASK-SUMMARY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-TENANT-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FORM-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "HOLD-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "IDEM-OPERATION",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "INPUT-TASK-RESOURCE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "INPUT-TASK-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "INV-POSITIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "JOB-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "LIFECYCLE-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "OBSERVE-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "OPERATION-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "OUTPUT-TASK-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "PERF-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "PERM-CMD-RECORD",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "PERM-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POL-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POL-TENANT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POLSET-CMD-RECORD",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POLSET-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "QUERY-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RATE-CMD-RECORD",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RATE-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RECOVERY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REL-MEMBER-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RELIABILITY-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RESPONSIVE-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RESULT-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RETENTION-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RETRY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ROLE-OPERATOR",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "SCOPE-ENT-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "SCREEN-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "SEARCH-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "SERVICE-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "SESSION-ACT-USER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STATE-DRAFT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STATE-POSTED",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STEP-CMD-RECORD",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TABLE-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TEST-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TRANS-RECORD",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TX-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "UC-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "VIEW-EMPTY",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "VIEW-ERROR",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "VIEW-LOADING",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "VIEW-SUCCESS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "WF-PAYMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "WIZARD-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "WSTEP-INPUT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          }
+        ]
+      }
+    ],
+    "finalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+    "exactCanonicalEquality": true,
+    "laterRevisionNodes": [
+      {
+        "id": "A11Y-TASK",
+        "revision": 3
+      },
+      {
+        "id": "ACT-USER",
+        "revision": 2
+      },
+      {
+        "id": "ACTION-TASK",
+        "revision": 3
+      },
+      {
+        "id": "AGG-ENT-MEMBER",
+        "revision": 2
+      },
+      {
+        "id": "AGG-ENT-PAYMENT",
+        "revision": 2
+      },
+      {
+        "id": "AGG-ENT-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "ASSIGN-ENT-PAYMENT",
+        "revision": 3
+      },
+      {
+        "id": "AUTH-ACT-USER",
+        "revision": 2
+      },
+      {
+        "id": "BACKUP-TASK",
+        "revision": 2
+      },
+      {
+        "id": "BOUNDARY-TASK",
+        "revision": 3
+      },
+      {
+        "id": "CLASS-INTERNAL",
+        "revision": 2
+      },
+      {
+        "id": "CLASS-PUBLIC",
+        "revision": 2
+      },
+      {
+        "id": "CLASS-SECRET",
+        "revision": 2
+      },
+      {
+        "id": "CLASS-SENSITIVE",
+        "revision": 2
+      },
+      {
+        "id": "CMD-RECORD",
+        "revision": 3
+      },
+      {
+        "id": "COMPATIBILITY-TASK",
+        "revision": 3
+      },
+      {
+        "id": "CONSTRAINT-TENANT",
+        "revision": 3
+      },
+      {
+        "id": "CONTROL-TASK-RESOURCE",
+        "revision": 2
+      },
+      {
+        "id": "CONTROL-TEXT",
+        "revision": 3
+      },
+      {
+        "id": "DELETE-ENT-PAYMENT",
+        "revision": 2
+      },
+      {
+        "id": "DELIVERY-EVT-RECORDED",
+        "revision": 2
+      },
+      {
+        "id": "ENT-MEMBER",
+        "revision": 2
+      },
+      {
+        "id": "ENT-PAYMENT",
+        "revision": 2
+      },
+      {
+        "id": "ENT-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "EVID-A11Y",
+        "revision": 3
+      },
+      {
+        "id": "EVID-BACKUP",
+        "revision": 2
+      },
+      {
+        "id": "EVID-COMPATIBILITY",
+        "revision": 3
+      },
+      {
+        "id": "EVID-OBSERVE",
+        "revision": 3
+      },
+      {
+        "id": "EVID-PERF",
+        "revision": 3
+      },
+      {
+        "id": "EVID-RECOVERY",
+        "revision": 2
+      },
+      {
+        "id": "EVID-RELIABILITY",
+        "revision": 3
+      },
+      {
+        "id": "EVID-TEST",
+        "revision": 3
+      },
+      {
+        "id": "EVT-RECORDED",
+        "revision": 2
+      },
+      {
+        "id": "FILTER-TEXT",
+        "revision": 3
+      },
+      {
+        "id": "FLD-AMOUNT",
+        "revision": 2
+      },
+      {
+        "id": "FLD-MEMBER-ID",
+        "revision": 2
+      },
+      {
+        "id": "FLD-MEMBER-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "FLD-PAYMENT-ID",
+        "revision": 2
+      },
+      {
+        "id": "FLD-PAYMENT-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "FLD-TASK-SUMMARY",
+        "revision": 2
+      },
+      {
+        "id": "FLD-TENANT-ID",
+        "revision": 2
+      },
+      {
+        "id": "FORM-TASK",
+        "revision": 3
+      },
+      {
+        "id": "HOLD-ENT-PAYMENT",
+        "revision": 3
+      },
+      {
+        "id": "IDEM-OPERATION",
+        "revision": 2
+      },
+      {
+        "id": "INPUT-TASK-RESOURCE",
+        "revision": 2
+      },
+      {
+        "id": "INPUT-TASK-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "INV-POSITIVE",
+        "revision": 2
+      },
+      {
+        "id": "JOB-TASK",
+        "revision": 3
+      },
+      {
+        "id": "LIFECYCLE-ENT-PAYMENT",
+        "revision": 3
+      },
+      {
+        "id": "OBSERVE-TASK",
+        "revision": 3
+      },
+      {
+        "id": "OPERATION-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "OUTPUT-TASK-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "PERF-TASK",
+        "revision": 3
+      },
+      {
+        "id": "PERM-CMD-RECORD",
+        "revision": 3
+      },
+      {
+        "id": "PERM-QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "POL-QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "POL-TENANT",
+        "revision": 3
+      },
+      {
+        "id": "POLSET-CMD-RECORD",
+        "revision": 3
+      },
+      {
+        "id": "POLSET-QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "QUERY-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "RATE-CMD-RECORD",
+        "revision": 3
+      },
+      {
+        "id": "RATE-QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "RECOVERY-TASK",
+        "revision": 2
+      },
+      {
+        "id": "REL-MEMBER-PAYMENT",
+        "revision": 2
+      },
+      {
+        "id": "RELIABILITY-TASK",
+        "revision": 3
+      },
+      {
+        "id": "RESPONSIVE-TASK",
+        "revision": 3
+      },
+      {
+        "id": "RESULT-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "RETENTION-ENT-PAYMENT",
+        "revision": 2
+      },
+      {
+        "id": "RETRY-TASK",
+        "revision": 2
+      },
+      {
+        "id": "ROLE-OPERATOR",
+        "revision": 3
+      },
+      {
+        "id": "SCOPE-ENT-PAYMENT",
+        "revision": 2
+      },
+      {
+        "id": "SCREEN-TASK",
+        "revision": 3
+      },
+      {
+        "id": "SEARCH-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "SERVICE-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "SESSION-ACT-USER",
+        "revision": 2
+      },
+      {
+        "id": "STATE-DRAFT",
+        "revision": 2
+      },
+      {
+        "id": "STATE-POSTED",
+        "revision": 2
+      },
+      {
+        "id": "STEP-CMD-RECORD",
+        "revision": 3
+      },
+      {
+        "id": "TABLE-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "TEST-TASK",
+        "revision": 3
+      },
+      {
+        "id": "TRANS-RECORD",
+        "revision": 3
+      },
+      {
+        "id": "TX-TASK",
+        "revision": 3
+      },
+      {
+        "id": "UC-TASK",
+        "revision": 3
+      },
+      {
+        "id": "VIEW-EMPTY",
+        "revision": 3
+      },
+      {
+        "id": "VIEW-ERROR",
+        "revision": 3
+      },
+      {
+        "id": "VIEW-LOADING",
+        "revision": 3
+      },
+      {
+        "id": "VIEW-SUCCESS",
+        "revision": 3
+      },
+      {
+        "id": "WF-PAYMENT",
+        "revision": 2
+      },
+      {
+        "id": "WIZARD-TASK",
+        "revision": 3
+      },
+      {
+        "id": "WSTEP-INPUT",
+        "revision": 3
+      }
+    ]
+  },
+  "case-management": {
+    "retainedRevisionCount": 357,
+    "allBasisReferencesResolve": true,
+    "genesisSource": "Existing tooling.reference_models.models + canonical_fixtures.synthetic_approved historical recipe; reconstructed in memory, not a newly approved source",
+    "sourceDigest": "sha256:749d1fbdcf7a59cfd4f5c28ec37ed83e7d5913a72a2922521eb5697f90418418",
+    "receiptMigration": "authoring-0.2-to-canonical-0.1-v1",
+    "receiptTargetDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+    "genesisPlanDigest": "sha256:2af4caca19a0efb57966fa578d3ab9937d0b8a8c7ab9230d76fcf8d1e5356e2b",
+    "genesisScopes": [
+      "SEMANTIC",
+      "SECURITY"
+    ],
+    "initialDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+    "allGenesisRevisionsOne": true,
+    "transitions": [
+      {
+        "corpus": "execution-v03",
+        "baseDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+        "changeFile": "test-corpus/execution-v03/case-management-change.json",
+        "changeFileDigest": "sha256:3ab17015d0e2ba885f9ea2e4f911e63f017e3e8c6b8edd0971bfee60500562e3",
+        "fixtureBase": {
+          "sequence": 0,
+          "digest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+          "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "authorLabel": "author",
+        "sources": [],
+        "parents": [],
+        "historicalPlanDigest": "sha256:9d79387aa309a5e6b3d979edb2a796c93da2461f6d5d8efd42effca017eefb10",
+        "candidateDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+        "requiredScopes": [
+          "MIGRATION",
+          "SECURITY",
+          "SEMANTIC"
+        ],
+        "migration": {
+          "id": "MIG-FORWARD",
+          "mode": "REQUIRED",
+          "compatibility": "BACKWARD",
+          "irreversible": false,
+          "steps": [
+            "Expand",
+            "Backfill",
+            "Verify",
+            "Contract after client retirement"
+          ],
+          "preconditions": [
+            "Review data observations and active clients"
+          ],
+          "verification": [
+            "Verify required values and retained constraints"
+          ],
+          "recovery": "Forward repair; restore only after verified recovery review",
+          "observations": []
+        },
+        "revisions": [
+          {
+            "id": "A11Y-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ACTION-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ASSIGN-CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "BOUNDARY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "COMPATIBILITY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CONTROL-TASK-RESOURCE",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "CONTROL-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DEC-EXECUTION-V03",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "EVID-A11Y",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-COMPATIBILITY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-OBSERVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-PERF",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-RELIABILITY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-TEST",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FILTER-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FORM-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "HOLD-CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "INPUT-TASK-RESOURCE",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "JOB-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "LIFECYCLE-CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "OBSERVE-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "OPERATION-INPUT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "OPERATION-RESULT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "OPERATION-TEXT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "PERF-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "PERM-CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "PERM-CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "PERM-CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "PERM-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POL-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POL-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POL-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POL-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POLSET-CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POLSET-CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POLSET-CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "POLSET-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "QUERY-INPUT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "QUERY-TEXT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "RATE-CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RATE-CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RATE-CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RATE-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RELIABILITY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RESPONSIVE-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RESULT-TEXT",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "ROLE-REVIEWER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "SCREEN-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "SEARCH-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "SERVICE-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STEP-CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STEP-CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STEP-CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TABLE-TASKS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TEST-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TRANS-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TRANS-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TRANS-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "TX-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "UC-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-EMPTY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-ERROR",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-LOADING",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-SUCCESS",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "WIZARD-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "WSTEP-INPUT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          }
+        ]
+      },
+      {
+        "corpus": "deterministic-v04",
+        "baseDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+        "changeFile": "test-corpus/deterministic-v04/case-management-change.json",
+        "changeFileDigest": "sha256:2c79f8186b54ce07e36b78053051977387218ae8865df1cafd96c75ab1875e53",
+        "fixtureBase": {
+          "sequence": 0,
+          "digest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+          "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "authorLabel": "assistant:proposal-author",
+        "sources": [],
+        "parents": [],
+        "historicalPlanDigest": "sha256:d904bc51285d778ba66784fbd08842bd151980e8a22f7662c6330e0f3fd51131",
+        "candidateDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "requiredScopes": [
+          "SECURITY",
+          "SEMANTIC"
+        ],
+        "migration": {
+          "id": "MIG-NONE",
+          "mode": "NONE",
+          "compatibility": "BACKWARD",
+          "irreversible": false,
+          "steps": [],
+          "preconditions": [],
+          "verification": [],
+          "recovery": "No data operation",
+          "observations": []
+        },
+        "revisions": [
+          {
+            "id": "A11Y-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "ACT-REVIEWER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ACTION-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "AGG-CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "AGG-ORG",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "AGG-USER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "APPROVAL",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "APPROVAL-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "APPROVAL-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "APPROVAL-reason",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ASSIGN-CASE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "ASSIGNMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ASSIGNMENT-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ASSIGNMENT-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ASSIGNMENT-task",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "AUTH-ACT-REVIEWER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "BACKUP-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "BOUNDARY-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CASE-ASSIGNEE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CASE-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CASE-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CLASS-INTERNAL",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CLASS-PUBLIC",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CLASS-SECRET",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CLASS-SENSITIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "COMMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "COMMENT-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "COMMENT-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "COMMENT-body",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "COMPATIBILITY-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "CONTROL-TASK-RESOURCE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "CONTROL-TEXT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "DEC-DETERMINISTIC-V04",
+            "operation": "ADD",
+            "before": null,
+            "after": 1
+          },
+          {
+            "id": "DELETE-CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DELIVERY-EVT-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DELIVERY-EVT-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DELIVERY-EVT-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DOCUMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DOCUMENT-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DOCUMENT-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "DOCUMENT-title",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-A11Y",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-BACKUP",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-COMPATIBILITY",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-OBSERVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-PERF",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-RECOVERY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVID-RELIABILITY",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVID-TEST",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "EVT-APPROVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVT-ARCHIVE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "EVT-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FILTER-TEXT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "FLD-CASE-TITLE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-NOTE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-TASK-SUMMARY",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FLD-TITLE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "FORM-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "HOLD-CASE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "IDEM-OPERATION",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "INPUT-TASK-RESOURCE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "INPUT-TASK-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "JOB-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "LIFECYCLE-CASE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "OBSERVE-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "OPERATION-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ORG",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ORG-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "OUTPUT-TASK-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "PERF-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "PERM-CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "PERM-CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "PERM-CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "PERM-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POL-APPROVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POL-ARCHIVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POL-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POL-REVIEW",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POLSET-CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POLSET-CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POLSET-CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "POLSET-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "QUERY-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RATE-CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RATE-CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RATE-CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RATE-QUERY-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RECOVERY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REL-ASSIGNEE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REL-CASE-APPROVAL",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REL-CASE-ASSIGNMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REL-CASE-COMMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REL-CASE-DOCUMENT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REL-CASE-REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RELIABILITY-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RESPONSIVE-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "RESULT-TEXT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RETENTION-CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "RETRY-TASK",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REVIEW",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REVIEW-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REVIEW-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "REVIEW-outcome",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "ROLE-REVIEWER",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "SCOPE-CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "SCREEN-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "SEARCH-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "SERVICE-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "SESSION-ACT-REVIEWER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STATE-APPROVED",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STATE-ARCHIVED",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STATE-OPEN",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STATE-REVIEWED",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "STEP-CMD-APPROVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "STEP-CMD-ARCHIVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "STEP-CMD-REVIEW",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TABLE-TASKS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TEST-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TRANS-APPROVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TRANS-ARCHIVE",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TRANS-REVIEW",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "TX-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "UC-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "USER",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "USER-ID",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "USER-TENANT",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "VIEW-EMPTY",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "VIEW-ERROR",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "VIEW-LOADING",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "VIEW-SUCCESS",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "WF-CASE",
+            "operation": "REVISE",
+            "before": 1,
+            "after": 2
+          },
+          {
+            "id": "WIZARD-TASK",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          },
+          {
+            "id": "WSTEP-INPUT",
+            "operation": "REVISE",
+            "before": 2,
+            "after": 3
+          }
+        ]
+      }
+    ],
+    "finalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+    "exactCanonicalEquality": true,
+    "laterRevisionNodes": [
+      {
+        "id": "A11Y-TASK",
+        "revision": 3
+      },
+      {
+        "id": "ACT-REVIEWER",
+        "revision": 2
+      },
+      {
+        "id": "ACTION-TASK",
+        "revision": 3
+      },
+      {
+        "id": "AGG-CASE",
+        "revision": 2
+      },
+      {
+        "id": "AGG-ORG",
+        "revision": 2
+      },
+      {
+        "id": "AGG-USER",
+        "revision": 2
+      },
+      {
+        "id": "APPROVAL",
+        "revision": 2
+      },
+      {
+        "id": "APPROVAL-ID",
+        "revision": 2
+      },
+      {
+        "id": "APPROVAL-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "APPROVAL-reason",
+        "revision": 2
+      },
+      {
+        "id": "ASSIGN-CASE",
+        "revision": 3
+      },
+      {
+        "id": "ASSIGNMENT",
+        "revision": 2
+      },
+      {
+        "id": "ASSIGNMENT-ID",
+        "revision": 2
+      },
+      {
+        "id": "ASSIGNMENT-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "ASSIGNMENT-task",
+        "revision": 2
+      },
+      {
+        "id": "AUTH-ACT-REVIEWER",
+        "revision": 2
+      },
+      {
+        "id": "BACKUP-TASK",
+        "revision": 2
+      },
+      {
+        "id": "BOUNDARY-TASK",
+        "revision": 3
+      },
+      {
+        "id": "CASE",
+        "revision": 2
+      },
+      {
+        "id": "CASE-ASSIGNEE",
+        "revision": 2
+      },
+      {
+        "id": "CASE-ID",
+        "revision": 2
+      },
+      {
+        "id": "CASE-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "CLASS-INTERNAL",
+        "revision": 2
+      },
+      {
+        "id": "CLASS-PUBLIC",
+        "revision": 2
+      },
+      {
+        "id": "CLASS-SECRET",
+        "revision": 2
+      },
+      {
+        "id": "CLASS-SENSITIVE",
+        "revision": 2
+      },
+      {
+        "id": "CMD-APPROVE",
+        "revision": 3
+      },
+      {
+        "id": "CMD-ARCHIVE",
+        "revision": 3
+      },
+      {
+        "id": "CMD-REVIEW",
+        "revision": 3
+      },
+      {
+        "id": "COMMENT",
+        "revision": 2
+      },
+      {
+        "id": "COMMENT-ID",
+        "revision": 2
+      },
+      {
+        "id": "COMMENT-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "COMMENT-body",
+        "revision": 2
+      },
+      {
+        "id": "COMPATIBILITY-TASK",
+        "revision": 3
+      },
+      {
+        "id": "CONTROL-TASK-RESOURCE",
+        "revision": 2
+      },
+      {
+        "id": "CONTROL-TEXT",
+        "revision": 3
+      },
+      {
+        "id": "DELETE-CASE",
+        "revision": 2
+      },
+      {
+        "id": "DELIVERY-EVT-APPROVE",
+        "revision": 2
+      },
+      {
+        "id": "DELIVERY-EVT-ARCHIVE",
+        "revision": 2
+      },
+      {
+        "id": "DELIVERY-EVT-REVIEW",
+        "revision": 2
+      },
+      {
+        "id": "DOCUMENT",
+        "revision": 2
+      },
+      {
+        "id": "DOCUMENT-ID",
+        "revision": 2
+      },
+      {
+        "id": "DOCUMENT-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "DOCUMENT-title",
+        "revision": 2
+      },
+      {
+        "id": "EVID-A11Y",
+        "revision": 3
+      },
+      {
+        "id": "EVID-BACKUP",
+        "revision": 2
+      },
+      {
+        "id": "EVID-COMPATIBILITY",
+        "revision": 3
+      },
+      {
+        "id": "EVID-OBSERVE",
+        "revision": 3
+      },
+      {
+        "id": "EVID-PERF",
+        "revision": 3
+      },
+      {
+        "id": "EVID-RECOVERY",
+        "revision": 2
+      },
+      {
+        "id": "EVID-RELIABILITY",
+        "revision": 3
+      },
+      {
+        "id": "EVID-TEST",
+        "revision": 3
+      },
+      {
+        "id": "EVT-APPROVE",
+        "revision": 2
+      },
+      {
+        "id": "EVT-ARCHIVE",
+        "revision": 2
+      },
+      {
+        "id": "EVT-REVIEW",
+        "revision": 2
+      },
+      {
+        "id": "FILTER-TEXT",
+        "revision": 3
+      },
+      {
+        "id": "FLD-CASE-TITLE",
+        "revision": 2
+      },
+      {
+        "id": "FLD-NOTE",
+        "revision": 2
+      },
+      {
+        "id": "FLD-TASK-SUMMARY",
+        "revision": 2
+      },
+      {
+        "id": "FLD-TITLE",
+        "revision": 2
+      },
+      {
+        "id": "FORM-TASK",
+        "revision": 3
+      },
+      {
+        "id": "HOLD-CASE",
+        "revision": 3
+      },
+      {
+        "id": "IDEM-OPERATION",
+        "revision": 2
+      },
+      {
+        "id": "INPUT-TASK-RESOURCE",
+        "revision": 2
+      },
+      {
+        "id": "INPUT-TASK-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "JOB-TASK",
+        "revision": 3
+      },
+      {
+        "id": "LIFECYCLE-CASE",
+        "revision": 3
+      },
+      {
+        "id": "OBSERVE-TASK",
+        "revision": 3
+      },
+      {
+        "id": "OPERATION-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "ORG",
+        "revision": 2
+      },
+      {
+        "id": "ORG-ID",
+        "revision": 2
+      },
+      {
+        "id": "OUTPUT-TASK-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "PERF-TASK",
+        "revision": 3
+      },
+      {
+        "id": "PERM-CMD-APPROVE",
+        "revision": 3
+      },
+      {
+        "id": "PERM-CMD-ARCHIVE",
+        "revision": 3
+      },
+      {
+        "id": "PERM-CMD-REVIEW",
+        "revision": 3
+      },
+      {
+        "id": "PERM-QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "POL-APPROVE",
+        "revision": 3
+      },
+      {
+        "id": "POL-ARCHIVE",
+        "revision": 3
+      },
+      {
+        "id": "POL-QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "POL-REVIEW",
+        "revision": 3
+      },
+      {
+        "id": "POLSET-CMD-APPROVE",
+        "revision": 3
+      },
+      {
+        "id": "POLSET-CMD-ARCHIVE",
+        "revision": 3
+      },
+      {
+        "id": "POLSET-CMD-REVIEW",
+        "revision": 3
+      },
+      {
+        "id": "POLSET-QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "QUERY-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "RATE-CMD-APPROVE",
+        "revision": 3
+      },
+      {
+        "id": "RATE-CMD-ARCHIVE",
+        "revision": 3
+      },
+      {
+        "id": "RATE-CMD-REVIEW",
+        "revision": 3
+      },
+      {
+        "id": "RATE-QUERY-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "RECOVERY-TASK",
+        "revision": 2
+      },
+      {
+        "id": "REL-ASSIGNEE",
+        "revision": 2
+      },
+      {
+        "id": "REL-CASE-APPROVAL",
+        "revision": 2
+      },
+      {
+        "id": "REL-CASE-ASSIGNMENT",
+        "revision": 2
+      },
+      {
+        "id": "REL-CASE-COMMENT",
+        "revision": 2
+      },
+      {
+        "id": "REL-CASE-DOCUMENT",
+        "revision": 2
+      },
+      {
+        "id": "REL-CASE-REVIEW",
+        "revision": 2
+      },
+      {
+        "id": "RELIABILITY-TASK",
+        "revision": 3
+      },
+      {
+        "id": "RESPONSIVE-TASK",
+        "revision": 3
+      },
+      {
+        "id": "RESULT-TEXT",
+        "revision": 2
+      },
+      {
+        "id": "RETENTION-CASE",
+        "revision": 2
+      },
+      {
+        "id": "RETRY-TASK",
+        "revision": 2
+      },
+      {
+        "id": "REVIEW",
+        "revision": 2
+      },
+      {
+        "id": "REVIEW-ID",
+        "revision": 2
+      },
+      {
+        "id": "REVIEW-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "REVIEW-outcome",
+        "revision": 2
+      },
+      {
+        "id": "ROLE-REVIEWER",
+        "revision": 3
+      },
+      {
+        "id": "SCOPE-CASE",
+        "revision": 2
+      },
+      {
+        "id": "SCREEN-TASK",
+        "revision": 3
+      },
+      {
+        "id": "SEARCH-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "SERVICE-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "SESSION-ACT-REVIEWER",
+        "revision": 2
+      },
+      {
+        "id": "STATE-APPROVED",
+        "revision": 2
+      },
+      {
+        "id": "STATE-ARCHIVED",
+        "revision": 2
+      },
+      {
+        "id": "STATE-OPEN",
+        "revision": 2
+      },
+      {
+        "id": "STATE-REVIEWED",
+        "revision": 2
+      },
+      {
+        "id": "STEP-CMD-APPROVE",
+        "revision": 3
+      },
+      {
+        "id": "STEP-CMD-ARCHIVE",
+        "revision": 3
+      },
+      {
+        "id": "STEP-CMD-REVIEW",
+        "revision": 3
+      },
+      {
+        "id": "TABLE-TASKS",
+        "revision": 3
+      },
+      {
+        "id": "TEST-TASK",
+        "revision": 3
+      },
+      {
+        "id": "TRANS-APPROVE",
+        "revision": 3
+      },
+      {
+        "id": "TRANS-ARCHIVE",
+        "revision": 3
+      },
+      {
+        "id": "TRANS-REVIEW",
+        "revision": 3
+      },
+      {
+        "id": "TX-TASK",
+        "revision": 3
+      },
+      {
+        "id": "UC-TASK",
+        "revision": 3
+      },
+      {
+        "id": "USER",
+        "revision": 2
+      },
+      {
+        "id": "USER-ID",
+        "revision": 2
+      },
+      {
+        "id": "USER-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "VIEW-EMPTY",
+        "revision": 3
+      },
+      {
+        "id": "VIEW-ERROR",
+        "revision": 3
+      },
+      {
+        "id": "VIEW-LOADING",
+        "revision": 3
+      },
+      {
+        "id": "VIEW-SUCCESS",
+        "revision": 3
+      },
+      {
+        "id": "WF-CASE",
+        "revision": 2
+      },
+      {
+        "id": "WIZARD-TASK",
+        "revision": 3
+      },
+      {
+        "id": "WSTEP-INPUT",
+        "revision": 3
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+import sys,json,pathlib,hashlib
+sys.path.insert(0,str(pathlib.Path('tooling').resolve()))
+from canonical_json import load,canonical_bytes,digest
+from canonical_fixtures import synthetic_approved
+from reference_models import models
+from canonical_ir import migrate_authoring,validate_snapshot
+from changes import genesis,prepare,index
+out={}
+for name,model in models().items():
+ domain=name[:-5];source=synthetic_approved(model) # Existing historical fixture recipe only; never authority proof.
+ g=genesis(source,'author');initial=load(pathlib.Path('test-corpus/canonical')/name)
+ assert canonical_bytes(g['candidate'])==canonical_bytes(initial)
+ manifest=load(pathlib.Path('test-corpus/canonical/manifest.json'))
+ assert digest(source,'authoring')==next(e['sourceDigest'] for e in manifest['examples'] if e['file']==name)
+ assert all(n['revision']==1 for n in initial['content']['nodes'])
+ steps=[];base=initial
+ for folder,suffix in [('execution-v03','canonical'),('deterministic-v04','canonical-candidate')]:
+  path=pathlib.Path('test-corpus')/folder
+  c=load(path/(domain+'-change.json'));plan=prepare(base,c);stored=load(path/(domain+'-plan.json'));expected=load(path/(domain+'-'+suffix+'.json'))
+  assert canonical_bytes(plan)==canonical_bytes(stored)
+  assert canonical_bytes(plan['candidate'])==canonical_bytes(expected)
+  steps.append({'corpus':folder,'baseDigest':base['contentDigest'],'changeFile':str(path/(domain+'-change.json')),'changeFileDigest':'sha256:'+hashlib.sha256((path/(domain+'-change.json')).read_bytes()).hexdigest(),'fixtureBase':c['base'],'authorLabel':c['author'],'sources':c['sources'],'parents':c['parents'],'historicalPlanDigest':plan['planDigest'],'candidateDigest':expected['contentDigest'],'requiredScopes':plan['requiredScopes'],'migration':c['migration'],'revisions':[{'id':d['id'],'operation':d['operation'],'before':d['before']['revision'] if d['before'] else None,'after':d['after']['revision'] if d['after'] else None} for d in plan['diff']]})
+  base=expected
+ records={}
+ for snapshot in (initial,load(pathlib.Path('test-corpus/execution-v03')/(domain+'-canonical.json')),base):
+  for n in snapshot['content']['nodes']:
+   key=(n['id'],n['revision']);assert key not in records or records[key]==n;records[key]=n
+  for n in snapshot['content']['nodes']:
+   assert all((r['id'],r['revision']) in records for r in n['basis'])
+ out[domain]={'retainedRevisionCount':len(records),'allBasisReferencesResolve':True,'genesisSource':'Existing tooling.reference_models.models + canonical_fixtures.synthetic_approved historical recipe; reconstructed in memory, not a newly approved source','sourceDigest':digest(source,'authoring'),'receiptMigration':g['sources'][0]['receipt']['migration'],'receiptTargetDigest':g['sources'][0]['receipt']['targetDigest'],'genesisPlanDigest':g['planDigest'],'genesisScopes':g['requiredScopes'],'initialDigest':initial['contentDigest'],'allGenesisRevisionsOne':all(n['revision']==1 for n in initial['content']['nodes']),'transitions':steps,'finalDigest':base['contentDigest'],'exactCanonicalEquality':True,'laterRevisionNodes':[{'id':n['id'],'revision':n['revision']} for n in base['content']['nodes'] if n['revision']>1]}
+pathlib.Path('/tmp/acp-route-feasibility.json').write_text(json.dumps(out,indent=2)+'\n')
+print(json.dumps({d:{k:v for k,v in b.items() if k not in ('transitions','laterRevisionNodes')}|{'laterRevisionNodes':len(b['laterRevisionNodes']),'transitions':[{k:v for k,v in s.items() if k not in ('revisions','migration')}|{'revisionsChanged':len(s['revisions'])} for s in b['transitions']]} for d,b in out.items()},indent=2))

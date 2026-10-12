@@ -1,0 +1,9 @@
+{
+  "runId": 38258433466,
+  "jobId": 114858071920,
+  "sourceCommit": "dac1334ce9b8f4227eb0da5af074bb775ee28791",
+  "observedLogLines": [
+    "2026-10-12T14:41:59.7124777Z PHASE6_CLOSURE_BLOCKED",
+    "2026-10-12T14:41:59.7460398Z ##[error]Process completed with exit code 2."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "exactCanonicalReproduction": {
+    "payment": {
+      "finalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "retainedRevisionCount": 250,
+      "allBasisReferencesResolve": true
+    },
+    "case-management": {
+      "finalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "retainedRevisionCount": 357,
+      "allBasisReferencesResolve": true
+    }
+  },
+  "inputPinsUnchanged": true,
+  "priorProtectedEvidenceUnchanged": true,
+  "hostedSourceVerified": "dac1334ce9b8f4227eb0da5af074bb775ee28791",
+  "hostedFinalConclusionsVerified": true,
+  "closureExit2Verified": true,
+  "repositoryChecks": "Repository contract checks: PASS",
+  "sealedRelease": {
+    "result": "PASS",
+    "profile": "acp-spring-vue-postgres/0.5.0",
+    "generator": "acp-spring-vue-generator/0.5.0",
+    "bundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+    "history": "prior released entries immutable"
+  },
+  "scope": "Pure planning and metadata/integrity checks only; no repository or authority instantiated."
+}

@@ -1,0 +1,24 @@
+{
+  "classification": "PURE_REPLAY_FEASIBILITY_NOT_ACCEPTED_HISTORY",
+  "reviewedSource": "dac1334ce9b8f4227eb0da5af074bb775ee28791",
+  "hostedRunId": 38258433466,
+  "files": {
+    "docs/phase6-history-bootstrap-route-feasibility.md": "sha256:c332b873a908bb9a037543f0d94bbbfa76652b2c7b691d8a1573b713d9d55e31",
+    "proposals/phase6-history-route-feasibility/ci-artifacts.json": "sha256:1a36964fecbf74e7d97eb65573fcb6eae7ed09486890d9ddf5e71366d37d065f",
+    "proposals/phase6-history-route-feasibility/ci-jobs.json": "sha256:589ab5d8c5900bdd403fbf3a139ae9369c8b2329bdf51b76d47c7f3b4a4017ed",
+    "proposals/phase6-history-route-feasibility/ci-run.json": "sha256:0ae64d559d1c20d59f323eb2c30a3a4c05a1f05c3e4246f6d68ed5cc4639811c",
+    "proposals/phase6-history-route-feasibility/closure-exit.json": "sha256:614595cf865bdde2fc293eb3c0e3a611bd948d02c65bdf87593bec5d227f189a",
+    "proposals/phase6-history-route-feasibility/input-manifest.json": "sha256:5fd1c26fce60985048f36a6d7b2d2893b0fac21720f70d2ced9fa3611b4c8b55",
+    "proposals/phase6-history-route-feasibility/preservation.json": "sha256:f0f057e2f4181dae6a6b32f60397824c2be1033adaf24cfc157881310863832d",
+    "proposals/phase6-history-route-feasibility/reproduce.txt": "sha256:55232c3db34e03f5bd4fe454ec975eb9f795267d819e2c7c9892bb1f9e099369",
+    "proposals/phase6-history-route-feasibility/reproduction.json": "sha256:5f59f793bf1f943d55230723901d90e1dd796f22da546206f27b5216066fd440",
+    "proposals/phase6-history-route-feasibility/validation.json": "sha256:979636ce7b1377b1d82d06888de9dfe0e3f0e8917eb7c777aa742f96cab4b521"
+  },
+  "historyRepositoriesInitialized": false,
+  "authenticatedApprovalsIssued": false,
+  "migrationSqlExecuted": false,
+  "deploymentAuthorized": false,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "status": "STOPPED_FOR_HUMAN_REVIEW"
+}
