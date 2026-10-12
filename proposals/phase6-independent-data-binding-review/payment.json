@@ -1,0 +1,88 @@
+{
+  "status": "REVIEW_REQUIRED",
+  "domain": "payment",
+  "applicationId": "APP-FIXTURE",
+  "source": {
+    "branch": "codex/phase6-production-remediation",
+    "commit": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583"
+  },
+  "semanticDecisionDigest": "sha256:e16442cb591899fcb392682770793a5984c9e8a6b7fa7577dd813ba5d664083f",
+  "semanticCandidateDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf",
+  "owner": "ENT-PAYMENT",
+  "field": "EVOLVE-REFERENCE-NOTE",
+  "proposedBinding": {
+    "requiredFieldBackfills": {
+      "EVOLVE-REFERENCE-NOTE": "e\u0301\u0000\ud83e\udd8b'"
+    }
+  },
+  "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
+  "value": "e\u0301\u0000\ud83e\udd8b'",
+  "valueJsonEscaped": "\"e\\u0301\\u0000\\ud83e\\udd8b'\"",
+  "utf8Hex": "65cc8100f09fa68b27",
+  "utf8ByteLength": 9,
+  "unicodeScalars": [
+    "U+0065",
+    "U+0301",
+    "U+0000",
+    "U+1F98B",
+    "U+0027"
+  ],
+  "population": {
+    "scope": "RETAINED_SYNTHETIC_REFERENCE_ROWS_ONLY",
+    "databaseIdentity": "PENDING_VERIFIED_REFERENCE_DATABASE_IDENTITY",
+    "schemaIdentity": "PENDING_VERIFIED_SCHEMA_IDENTITY",
+    "selection": "Every retained row of owner ENT-PAYMENT in this application reference database, only for tenants and resource IDs explicitly enumerated in the independently reviewed frozen inventory. No production rows.",
+    "tenantAllowlist": "PENDING_EXACT_REFERENCE_TENANT_INVENTORY",
+    "resourceIds": "PENDING_EXACT_RETAINED_ROW_INVENTORY",
+    "rowCounts": "PENDING_MEASURED_COUNTS",
+    "inventoryDigest": "PENDING_REAL_DATABASE_BYTE_INVENTORY",
+    "oldSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+    "assumptions": [
+      "Database is a disposable synthetic reference deployment, not a production tenant database",
+      "Database, schema, old sealed target and Canonical snapshot identity must be verified",
+      "Inventory contains all owner rows, exact tenant/identity scalar bytes, required old columns and operational state",
+      "No concurrent insert/delete/update may silently change the reviewed population; fence writers and recheck inventory",
+      "Unknown tenant, row, count, schema or byte drift stops migration before writes"
+    ],
+    "everySelectedRowReceivesSameValue": true,
+    "populationApproved": false
+  },
+  "tenantApplicability": "Only exact synthetic tenants enumerated in the future inventory; names such as tenant-one/tenant-two are test examples, not authorization or a production allowlist",
+  "valueMeaning": "Synthetic Unicode/NUL byte-preservation witness only, not a business note or production tenant default",
+  "unicodeAndNul": "Store exact UTF-8 bytes in bytea; never normalize composed/decomposed accents, strip NUL, trim text or reinterpret as SQL text",
+  "presenceRules": {
+    "beforeExpand": "field absent from old schema",
+    "afterExpandBeforeBackfill": "SQL NULL is transitional only",
+    "final": "explicit non-null String; this proposed value is neither null nor empty",
+    "emptyString": "valid distinct semantic String with zero bytes; never substitute this backfill for it",
+    "absent": "not equivalent to null or empty; new record omitting required note must fail final enforcement"
+  },
+  "notANewRecordDefault": "This mapping is only a one-time retained-row transformation on the reviewed frozen population. No DEFAULT clause, create input, UI value or future tenant policy is authorized. New writers supply explicit independently chosen values.",
+  "errorDetection": [
+    "Compare pre/post row identities, exact tenant counts and unchanged old column/runtime bytes",
+    "Compare encode(new_column, hex) for every selected row to 65cc8100f09fa68b27",
+    "Verify no selected row remains null, no unselected row changed and no new/removed row was hidden",
+    "Verify empty/null/absent negative cases and decomposed-accent/NUL preservation through typed application reads",
+    "Capture exact SQL hash, transaction outcome, row inventory digest and per-object runtime evidence"
+  ],
+  "recovery": {
+    "transactional": "Before COMMIT, transactional PostgreSQL DDL/backfill/verification can roll back as a unit if actually executed in one transaction; prove original schema and rows survive fault injection",
+    "staged": "Separately committed expand/backfill stages are not undone by rollback of a later transaction. Keep exact stage receipts and fence affected writers",
+    "ambiguousCommit": "Inspect actual schema, row inventories and transaction/version receipts before retry; no blind replay",
+    "afterCommit": "Reviewed forward repair or verified backup/restore with reconciliation of later committed domain/idempotency/outbox/job effects. No automatic production rollback",
+    "beforeActivation": "Do not deploy required-model readers over transitional nulls; switch/fence incompatible insert writers before final NOT NULL"
+  },
+  "approvalRequirements": [
+    "Independent human decision for this application, exact binding digest and exact frozen population",
+    "Bind the decision to the real rebased plan digest and approved Canonical candidate; identical binding digest cannot authorize another application or plan",
+    "Exact SQL/recovery/lock policy and execution/deployment approvals remain separate",
+    "Missing population inputs block execution even if the proposed scalar value is later approved"
+  ],
+  "approvals": [],
+  "authenticatedProofIssued": false,
+  "journalAccepted": false,
+  "migration": "NOT_AUTHORIZED",
+  "deployment": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

@@ -1,0 +1,73 @@
+{
+  "sourceCheckpoint": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583",
+  "observedAt": "2026-10-12T11:25:40.439108+00:00",
+  "scope": "Local additive recording and review preparation; no new recording commit or hosted run for these uncommitted files",
+  "semanticDecisions": {
+    "payment": {
+      "decisionRecordDigest": "sha256:e16442cb591899fcb392682770793a5984c9e8a6b7fa7577dd813ba5d664083f",
+      "signingRequestFileDigest": "sha256:016374afc9347cbca47c8b886d7b86fc9c89b115108d62390505596def66fbd4",
+      "status": "APPROVED_CONTENT",
+      "authenticatedProof": "PENDING_HUMAN_SIGNING"
+    },
+    "case-management": {
+      "decisionRecordDigest": "sha256:cc59ab55eb1e26aee24c399aec5a8865fe4f79b9b8e50a440a38f732017695b2",
+      "signingRequestFileDigest": "sha256:f0c52de660957c5c0d60779342c3e6587a295647fbccd3e06342a6d41c4fe888",
+      "status": "APPROVED_CONTENT",
+      "authenticatedProof": "PENDING_HUMAN_SIGNING"
+    }
+  },
+  "bindingPackages": "REVIEW_REQUIRED",
+  "realJournalRebase": "PENDING_AUTHENTIC_HISTORY",
+  "authenticatedProofIssued": false,
+  "acceptedJournalPlanApproved": false,
+  "migrationApproved": false,
+  "migrationExecuted": false,
+  "deploymentApproved": false,
+  "integrity": "PASS: application isolation, candidate/requiredness/classification/operation/ChangeSet/compatibility/source edits reject",
+  "migrationGate": "PASS: UNACCEPTED_HISTORY rejects both synthetic previews; independent binding port denies approval",
+  "recordImmutability": "PASS: create-only recorder refuses differing existing bytes; repeated generation identical",
+  "sealedBundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+  "priorTrackedFilesUnchanged": true,
+  "proposalBytesUnchanged": true,
+  "firstBlockedClosureAuditUnchanged": true,
+  "tests": {
+    "historical-tests.log": {
+      "tests": 17,
+      "seconds": 295.399,
+      "result": "PASS",
+      "sha256": "sha256:95a673a4cf4d3daff2be94d689dbd4d0b8261604f21d48aa7dcfeb8cbed91cba",
+      "localEvidence": ".audit-artifacts/phase6-semantic-decisions-2026-10-12/historical-tests.log"
+    },
+    "semantic-decision-tests.log": {
+      "tests": 7,
+      "seconds": 9.254,
+      "result": "PASS",
+      "sha256": "sha256:4d77d03c6f67e67e7146bb3019f7aaa5589b0ef7b7d3f0a37e3d33323dee98e8",
+      "localEvidence": ".audit-artifacts/phase6-semantic-decisions-2026-10-12/semantic-decision-tests.log"
+    }
+  },
+  "canonicalVectors": {
+    "execution-v03": "PASS: 9 positive, 13 negative, 2 snapshot hashes",
+    "deterministic-v04": "PASS: 9 positive, 13 negative, 2 snapshot hashes"
+  },
+  "repositoryContracts": "PASS",
+  "ciObservation": "phase6-semantic-recording-ci-f0c2e37.json; current run IN_PROGRESS_NOT_FINAL",
+  "files": {
+    "targets/spring-vue-postgres/evidence/semantic-content-decisions/2026-10-12/manifest.json": "sha256:b0c265e3c85e35ec55c7658506f0539b1b2b3d1bf92197e332c148eb066af992",
+    "targets/spring-vue-postgres/evidence/semantic-content-decisions/2026-10-12/case-management.json": "sha256:cc59ab55eb1e26aee24c399aec5a8865fe4f79b9b8e50a440a38f732017695b2",
+    "targets/spring-vue-postgres/evidence/semantic-content-decisions/2026-10-12/payment.json": "sha256:e16442cb591899fcb392682770793a5984c9e8a6b7fa7577dd813ba5d664083f",
+    "targets/spring-vue-postgres/evidence/semantic-content-decisions/2026-10-12/payment-signing-request.json": "sha256:016374afc9347cbca47c8b886d7b86fc9c89b115108d62390505596def66fbd4",
+    "targets/spring-vue-postgres/evidence/semantic-content-decisions/2026-10-12/case-management-signing-request.json": "sha256:f0c52de660957c5c0d60779342c3e6587a295647fbccd3e06342a6d41c4fe888",
+    "proposals/phase6-independent-data-binding-review/manifest.json": "sha256:b31a3eb4da859b15292a1efd37fe1c7e1020297eff467762422ce15f3b50663e",
+    "proposals/phase6-independent-data-binding-review/case-management.json": "sha256:ca38c5cd2989cd1f57f24279f03bcc49c79c533718befd8fdb3a99e25d4bb696",
+    "proposals/phase6-independent-data-binding-review/payment.md": "sha256:d8af9799bde984f41767575be16a1ebf35d2dea3481fac33b962529645f752cb",
+    "proposals/phase6-independent-data-binding-review/payment.json": "sha256:f582caa9519f4714755f05081a05a51e41cb31b0326a6200b0040c020fa9bc8d",
+    "proposals/phase6-independent-data-binding-review/case-management.md": "sha256:30f5f64684d2d5886953a7ff8a727a6fb492e3ce5f7544ca657ca3663cd67c8e",
+    "docs/phase6-semantic-content-decisions.md": "sha256:45ebdeb085736f50f91f5712f56f35647e6ac3c4f4a51b6b3920a7f99e9a858d",
+    "tooling/audit/semantic_content_decisions.py": "sha256:c4226ecbc41abf9804bf7d3637057a36a40543721222c226e31f993c7339408a",
+    "tooling/audit/prepare_data_binding_review.py": "sha256:65616cafdcc885e7be043d937ba5e290c310b94d6b6b7b1ef69bb77abb60e37c",
+    "tooling/tests/test_semantic_content_decisions.py": "sha256:60aa01817f39759794788810662af768064e35d9a673d18d6d1cc325adc2ba6c"
+  },
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

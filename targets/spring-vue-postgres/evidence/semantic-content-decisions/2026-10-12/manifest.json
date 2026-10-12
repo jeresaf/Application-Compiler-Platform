@@ -1,0 +1,21 @@
+{
+  "status": "DOCUMENTARY_SEMANTIC_DECISIONS_RECORDED",
+  "source": {
+    "branch": "codex/phase6-production-remediation",
+    "commit": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583"
+  },
+  "records": {
+    "payment": {
+      "decisionRecordDigest": "sha256:e16442cb591899fcb392682770793a5984c9e8a6b7fa7577dd813ba5d664083f",
+      "signingRequestFileDigest": "sha256:016374afc9347cbca47c8b886d7b86fc9c89b115108d62390505596def66fbd4",
+      "status": "APPROVED_CONTENT",
+      "authenticatedProof": "PENDING_HUMAN_SIGNING"
+    },
+    "case-management": {
+      "decisionRecordDigest": "sha256:cc59ab55eb1e26aee24c399aec5a8865fe4f79b9b8e50a440a38f732017695b2",
+      "signingRequestFileDigest": "sha256:f0c52de660957c5c0d60779342c3e6587a295647fbccd3e06342a6d41c4fe888",
+      "status": "APPROVED_CONTENT",
+      "authenticatedProof": "PENDING_HUMAN_SIGNING"
+    }
+  }
+}

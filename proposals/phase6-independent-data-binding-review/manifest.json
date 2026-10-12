@@ -1,0 +1,24 @@
+{
+  "status": "REVIEW_REQUIRED",
+  "source": {
+    "branch": "codex/phase6-production-remediation",
+    "commit": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583"
+  },
+  "approvalsIssued": false,
+  "domains": {
+    "payment": {
+      "applicationId": "APP-FIXTURE",
+      "packageDigest": "sha256:f582caa9519f4714755f05081a05a51e41cb31b0326a6200b0040c020fa9bc8d",
+      "notesDigest": "sha256:d8af9799bde984f41767575be16a1ebf35d2dea3481fac33b962529645f752cb",
+      "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
+      "status": "REVIEW_REQUIRED"
+    },
+    "case-management": {
+      "applicationId": "APP-CASE-MANAGEMENT",
+      "packageDigest": "sha256:ca38c5cd2989cd1f57f24279f03bcc49c79c533718befd8fdb3a99e25d4bb696",
+      "notesDigest": "sha256:30f5f64684d2d5886953a7ff8a727a6fb492e3ce5f7544ca657ca3663cd67c8e",
+      "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
+      "status": "REVIEW_REQUIRED"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "recordVersion": "1.0.0",
+  "decisionId": "PHASE6-SEMANTIC-CASE-MANAGEMENT-2026-10-12",
+  "status": "APPROVED_CONTENT",
+  "date": "2026-10-12",
+  "humanProjectAuthorityStatement": "On 2026-10-12, the project authority explicitly approved the bounded synthetic semantic requirements and ChangeSet content for PAYMENT and CASE MANAGEMENT independently, following the architecture review.",
+  "source": {
+    "branch": "codex/phase6-production-remediation",
+    "commit": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583"
+  },
+  "domain": "case-management",
+  "applicationId": "APP-CASE-MANAGEMENT",
+  "owner": "CASE",
+  "previousDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+  "candidateDigest": "sha256:e57eaee3f979f3b77feb255dde470772321b3354001547e71e02fbaadca2b59d",
+  "changeSetFileDigest": "sha256:55a53d04dfc196505880699f51e68d039232a8a37de88d4f9102c9c61f8fbcc0",
+  "scope": "SYNTHETIC_REFERENCE_SEMANTIC_CONTENT_ONLY",
+  "requirement": {
+    "id": "REQ-EVOLVE-REFERENCE-NOTE",
+    "revision": 1
+  },
+  "acceptanceCriteria": [
+    {
+      "id": "AC-EVOLVE-RETAINED",
+      "revision": 1
+    },
+    {
+      "id": "AC-EVOLVE-NEW-WRITE",
+      "revision": 1
+    },
+    {
+      "id": "AC-EVOLVE-UPDATE",
+      "revision": 1
+    },
+    {
+      "id": "AC-EVOLVE-ROLLOUT",
+      "revision": 1
+    }
+  ],
+  "field": {
+    "id": "EVOLVE-REFERENCE-NOTE",
+    "revision": 1
+  },
+  "approvedMeaning": [
+    "Exact proposed semantic candidate content",
+    "New synthetic reference-only Requirement",
+    "Four associated AcceptanceCriteria",
+    "Required String field semantics",
+    "Existing update behavior preservation",
+    "Explicit new-record value requirements",
+    "BREAKING final-schema compatibility classification",
+    "REVIEW_REQUIRED staged rollout intent"
+  ],
+  "exclusions": [
+    "Independent retained-data backfill bindings",
+    "Production tenant applicability",
+    "Real accepted-history journal rebase",
+    "Preview plan approval",
+    "Migration execution authority",
+    "Exact SQL",
+    "Schema deployment",
+    "Production identity/security assurance",
+    "Phase 6 closure"
+  ],
+  "proposalProvenance": {
+    "actorType": "AI",
+    "source": "proposal:phase6-evolution-review",
+    "locator": "case-management",
+    "actor": "assistant:proposal",
+    "relabeledAsHuman": false
+  },
+  "authenticatedApprovalProof": "PENDING_HUMAN_SIGNING",
+  "acceptedJournalPlan": "PENDING_AUTHENTIC_HISTORY",
+  "dataBinding": "REVIEW_REQUIRED",
+  "migration": "NOT_AUTHORIZED",
+  "deployment": "NOT_AUTHORIZED",
+  "authorityRepresentation": "Documentary record of explicit user-provided project-authority decision; no reviewer identity, signature, key, session or journal receipt is asserted",
+  "executionAuthority": false,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

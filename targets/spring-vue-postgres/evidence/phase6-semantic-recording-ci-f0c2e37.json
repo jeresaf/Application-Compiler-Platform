@@ -1,0 +1,565 @@
+{
+  "runId": 38240131941,
+  "reviewedSource": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583",
+  "branch": "codex/phase6-production-remediation",
+  "observedAt": "2026-10-12 11:22:35 UTC",
+  "jobs": [
+    {
+      "id": 114780393973,
+      "name": "phase5-experiments",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 38240131941,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Retain alternate JDK for controlled Phase 5C comparison",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Install pinned reference and frontend dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build all three actual ACP grammars",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Verify frontend interchange, diagnostics, determinism and Java bytes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verify pinned Rust canonical interoperability and graph slice",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Exercise native editor and source-analysis APIs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Verify Phase 5B wire, source, diagnostics, determinism and scale evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Reproduce controlled frontend upgrades from isolated locks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Verify Phase 5C native persistence, fault parity and toolchain evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Preserve Phase 5C hosted evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Preserve hosted evidence separately from laptop measurements",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 34
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 35
+        }
+      ]
+    },
+    {
+      "id": 114780394244,
+      "name": "contracts",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 38240131941,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install pinned contract tooling",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Check dependency consistency",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Check documentation and repository contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Validate all schemas, corpora, history and recovery tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Independently verify canonical bytes and hashes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Independently verify Canonical 0.2 execution vectors",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Independently verify approved Canonical 0.3 bytes and hashes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        }
+      ]
+    },
+    {
+      "id": 114785400207,
+      "name": "phase5c-hard-gates",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 38240131941,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Verify actual Ubuntu evidence and honest unresolved-gate disposition",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        }
+      ]
+    },
+    {
+      "id": 114785521276,
+      "name": "phase6-target",
+      "status": "in_progress",
+      "conclusion": null,
+      "run_id": 38240131941,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Install contract dependencies and worker confinement library",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Verify successor generator release identity and packaged tzdb",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Enable authoritative PostgreSQL commit evidence for idempotency",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Compile both complete approved domains through the negotiated target",
+          "status": "in_progress",
+          "conclusion": null,
+          "number": 10
+        },
+        {
+          "name": "Verify identity clearing and logical recovery keys",
+          "status": "pending",
+          "conclusion": null,
+          "number": 11
+        },
+        {
+          "name": "Verify exact HTTP outcomes through the production browser",
+          "status": "pending",
+          "conclusion": null,
+          "number": 12
+        },
+        {
+          "name": "Verify actual sealed 0.3 upgrade without database changes",
+          "status": "pending",
+          "conclusion": null,
+          "number": 13
+        },
+        {
+          "name": "Verify isolated typed components without claiming target admission",
+          "status": "pending",
+          "conclusion": null,
+          "number": 14
+        },
+        {
+          "name": "Verify approved Canonical 0.3 invocation runtime against PostgreSQL and HTTP",
+          "status": "pending",
+          "conclusion": null,
+          "number": 15
+        },
+        {
+          "name": "Verify durable delivery and scheduling against PostgreSQL",
+          "status": "pending",
+          "conclusion": null,
+          "number": 16
+        },
+        {
+          "name": "Verify privacy lifecycle, redaction, deployment obligations and concurrent disposal",
+          "status": "pending",
+          "conclusion": null,
+          "number": 17
+        },
+        {
+          "name": "Upgrade actual accepted target 0.2 applications and exercise lifecycle in place",
+          "status": "pending",
+          "conclusion": null,
+          "number": 18
+        },
+        {
+          "name": "Verify forensic target 0.1 upgrade evidence outside production support window",
+          "status": "pending",
+          "conclusion": null,
+          "number": 19
+        },
+        {
+          "name": "Verify approved Canonical 0.3 evolution and exact approval boundaries",
+          "status": "pending",
+          "conclusion": null,
+          "number": 20
+        },
+        {
+          "name": "Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries",
+          "status": "pending",
+          "conclusion": null,
+          "number": 21
+        },
+        {
+          "name": "Preserve negotiated gate and generated build evidence",
+          "status": "pending",
+          "conclusion": null,
+          "number": 22
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "pending",
+          "conclusion": null,
+          "number": 40
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "pending",
+          "conclusion": null,
+          "number": 41
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "pending",
+          "conclusion": null,
+          "number": 42
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "pending",
+          "conclusion": null,
+          "number": 43
+        },
+        {
+          "name": "Stop containers",
+          "status": "pending",
+          "conclusion": null,
+          "number": 44
+        }
+      ]
+    }
+  ],
+  "uploadedArtifacts": [
+    {
+      "id": 11742214098,
+      "name": "phase5c-ubuntu-evidence",
+      "size_in_bytes": 26634,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11742214098",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11742214098/zip",
+      "expired": false,
+      "created_at": "2026-10-12T11:16:45Z",
+      "expires_at": "2027-01-10T11:02:47Z",
+      "updated_at": "2026-10-12T11:16:45Z",
+      "digest": "sha256:b4a380d9849dec339864df45a1f2d669e957e39c0933b394d66dee9421baa0aa",
+      "workflow_run": {
+        "id": 38240131941,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583"
+      }
+    },
+    {
+      "id": 11741994446,
+      "name": "phase5b-ubuntu-evidence",
+      "size_in_bytes": 37545,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11741994446",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11741994446/zip",
+      "expired": false,
+      "created_at": "2026-10-12T11:16:47Z",
+      "expires_at": "2027-01-10T11:02:47Z",
+      "updated_at": "2026-10-12T11:16:47Z",
+      "digest": "sha256:4f5bd2ac4c721ca658b6523c574513d5999779379f9f686549a9ab376b28be8d",
+      "workflow_run": {
+        "id": 38240131941,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583"
+      }
+    }
+  ],
+  "artifactDownloadsVerified": false,
+  "overallGreen": false,
+  "closureResult": "NOT_YET_OBSERVED",
+  "observation": "IN_PROGRESS_NOT_FINAL",
+  "newRecordingCommit": null,
+  "newRecordingSourceCI": "NOT_RUN_UNCOMMITTED_CHANGES",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "run": {
+    "id": 38240131941,
+    "head_sha": "f0c2e37640d8b87f7cf9ebc6fe73f236f298a583",
+    "head_branch": "codex/phase6-production-remediation",
+    "event": "push",
+    "status": "in_progress",
+    "conclusion": null,
+    "run_attempt": 1,
+    "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38240131941",
+    "updated_at": "2026-10-12T11:17:15Z"
+  },
+  "retainedFullAdmission": {
+    "sourceCommit": "80e19a6282c481c616f370e2876d3099eead0a2e",
+    "runId": 38093244628,
+    "evidenceFile": "targets/spring-vue-postgres/evidence/phase6-checkpoint-hosted-38093244628.json",
+    "evidenceFileDigest": "sha256:a1c9a621def216926ba924770ce2f305596196826f4b4860a4c2da6162c36b4f",
+    "result": "FULL_ADMISSION_PASS_PHASE6_NOT_CLOSED",
+    "domains": {
+      "payment": {
+        "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "blockers": [],
+        "result": "PASS"
+      },
+      "case-management": {
+        "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+        "blockers": [],
+        "result": "PASS"
+      }
+    },
+    "scope": "Historical full admission of both original approved Canonical 0.3 applications; not proof of deployed new semantic candidate or completion of pending current CI"
+  }
+}
