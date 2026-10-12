@@ -1,0 +1,26 @@
+{
+  "localPureReplay": {
+    "result": "PASS",
+    "tests": 11,
+    "seconds": 41.205,
+    "command": ".venv/bin/python3.14 -m unittest discover -s verification/route_a -v",
+    "log": "proposals/phase6-route-a-integration-review/evidence/pure-replay-tests.txt"
+  },
+  "retainedInventoryRegression": {
+    "result": "PASS",
+    "tests": 13,
+    "seconds": 0.457,
+    "command": ".venv/bin/python3.14 -m unittest tooling.tests.test_retained_inventory -q"
+  },
+  "repositoryCheck": "PASS",
+  "sealedReleaseCheck": {
+    "result": "PASS",
+    "version": "0.5.0",
+    "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb"
+  },
+  "preservedPinnedFilesVerified": 121,
+  "construction": "NOT_AUTHORIZED",
+  "genesis": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

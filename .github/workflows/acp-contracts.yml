@@ -33,6 +33,8 @@ jobs:
         run: python3.14 tooling/check_repository.py
       - name: Validate all schemas, corpora, history and recovery tests
         run: python3.14 -m unittest discover -s tooling/tests -v
+      - name: Verify pure Route A replay and negative mutations without creating history
+        run: python3.14 -m unittest discover -s verification/route_a -v
       - name: Independently verify canonical bytes and hashes
         run: node tooling/check_canonical_vectors.mjs
       - name: Independently verify Canonical 0.2 execution vectors

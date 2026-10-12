@@ -1,0 +1,42 @@
+{
+  "runId": 38270051115,
+  "sourceCommit": "2b8cb7603f82ad696679157937fd3f9d1fbd04e4",
+  "runAttempt": 1,
+  "completedAt": "2026-10-12T16:31:46Z",
+  "overallConclusion": "failure",
+  "jobs": {
+    "phase5-experiments": {
+      "id": 114881803748,
+      "conclusion": "success",
+      "completedAt": "2026-10-12T15:39:04Z"
+    },
+    "contracts": {
+      "id": 114881804069,
+      "conclusion": "success",
+      "completedAt": "2026-10-12T15:38:52Z"
+    },
+    "phase5c-hard-gates": {
+      "id": 114887562520,
+      "conclusion": "success",
+      "completedAt": "2026-10-12T15:39:24Z"
+    },
+    "phase6-target": {
+      "id": 114887697677,
+      "conclusion": "success",
+      "completedAt": "2026-10-12T16:12:31Z"
+    },
+    "phase6-closure-audit": {
+      "id": 114900749962,
+      "conclusion": "failure",
+      "completedAt": "2026-10-12T16:31:46Z"
+    }
+  },
+  "closure": {
+    "auditExecution": "PERFORMED",
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "exitCode": 2,
+    "authority": "INTENTIONAL_RELEASE_GATE_NOT_PHASE_CLOSURE_APPROVAL"
+  },
+  "validationScope": "Committed source only; new local tests, workflow and design have not run in hosted CI.",
+  "preservation": "Original frozen database captures, historical approvals and sealed releases unchanged."
+}

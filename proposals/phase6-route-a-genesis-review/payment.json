@@ -1,0 +1,84 @@
+{
+  "reviewBodyDigest": "sha256:e4b80b29b44de75e3bab083b7461c601b088411946565d0e28d57cbbbe94a7c6",
+  "digestEncoding": "SHA-256 of body sorted compact JSON, ensure_ascii=true, no trailing newline",
+  "body": {
+    "format": "acp-route-a-genesis-review/1",
+    "status": "PROPOSED_NON_EXECUTABLE_HUMAN_REVIEW",
+    "applicationId": "APP-FIXTURE",
+    "repositoryId": "urn:acp:reference-history:payment:new-1",
+    "repositoryRegistration": "NOT_REGISTERED",
+    "action": "GENESIS_ACCEPT",
+    "scopeBoundary": "ONE_REVISION_ONE_CANONICAL_0_1_GENESIS_ONLY",
+    "requiredScopes": [
+      "SEMANTIC",
+      "SECURITY"
+    ],
+    "initialSnapshot": {
+      "path": "test-corpus/canonical/payment.json",
+      "fileDigest": "sha256:dc9ac48b6437182f2cc83d5c522e59bfacd018dbcbfa682391df4264fd0f537b",
+      "contentDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+      "allRevisions": 1
+    },
+    "source": {
+      "recipe": "Existing tooling.reference_models.models + canonical_fixtures.synthetic_approved historical recipe; reconstructed in memory, not a newly approved source",
+      "sourceDigest": "sha256:6177521b3ea4a9e5fd6326010f01755d9ef54300e96c5bdeb0d83a757d0d4bc8",
+      "receiptMigration": "authoring-0.2-to-canonical-0.1-v1",
+      "recipeFiles": {
+        "tooling/reference_models.py": "sha256:8d3e377e4f8152ccbef72bf5710d0413f12cdaecde0b39bfc3d6a6ec18b739d3",
+        "tooling/canonical_fixtures.py": "sha256:ce01c28f7e9d19dd63ae6f7b9972db5bda0adf2172932a4978101151472f2607"
+      }
+    },
+    "futureEndpointOnly": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+    "authorityModel": "acp-route-a-authority/1",
+    "designFiles": {
+      "docs/phase6-route-a-acceptance-sequence.md": "sha256:00016d80012ec28537aa1625928a867dcc3f5c67eaac719bf324e85cda0ce9af",
+      "docs/phase6-route-a-authority-integration-design.md": "sha256:10b2103a740552a24cb6fcfe6a62ee376e5e2bb2fee2b15b2388ae17bc3aa774",
+      "docs/phase6-route-a-implementation-plan.md": "sha256:c1350448edc62206ce1382a88c29073a69345fcad1480304c3d51aba532d3a6a",
+      "docs/phase6-route-a-recovery-matrix.md": "sha256:a3af2e8972de65573b18ee2e1c6c96e70b42810998cf00dbe365edcfafd60497",
+      "docs/phase6-route-a-security-threat-model.md": "sha256:b07f1b10c49a70f6d4c4e298fe99f3527ee89325864a50bb63b3ee7ee68c0f14"
+    },
+    "targetEvidence": {
+      "sealedPredecessor": "0.4.0",
+      "predecessorBundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+      "sealedSuccessor": "0.5.0",
+      "successorBundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+      "sourceCommit": "2b8cb7603f82ad696679157937fd3f9d1fbd04e4",
+      "hostedRun": 38270051115
+    },
+    "pendingExactExecutionInputs": {
+      "trustedHost": null,
+      "authenticationIssuer": null,
+      "projectAuthority": null,
+      "authenticatedAuthor": null,
+      "independentReviewer": null,
+      "repositoryOperator": null,
+      "serviceIdentity": null,
+      "authorityConfigurationDigest": null,
+      "signingKeyIdentity": null,
+      "verificationPolicy": null,
+      "expectedEmptyHeadObservation": null,
+      "freshPlanDigest": null,
+      "validFrom": null,
+      "validUntil": null,
+      "nonce": null,
+      "proof": null,
+      "acceptedJournalDigest": null
+    },
+    "excludedPermissions": [
+      "service construction",
+      "repository initialization",
+      "execution-v03 acceptance",
+      "deterministic-v04 acceptance",
+      "data binding",
+      "migration SQL",
+      "deployment"
+    ],
+    "historicalEvidence": "Historical fixture authors and preview proofs are reproduction inputs only, never prospective authority. Earlier final-0.3 review requests remain immutable; this is a separate original-0.1 subject.",
+    "humanDecisions": [
+      "Review this revision-one subject and proposed repository identity separately for this application.",
+      "Select trusted host, authentication provider, actual distinct principals, key and revocation policy, witness, durable storage and recovery responsibilities.",
+      "Separately authorize implementation and construction before creating any service or repository.",
+      "Only subsequently review a fully bound fresh genesis plan with actual authenticated author, configuration, empty state, validity and nonce. No approval is issued by this package."
+    ]
+  }
+}

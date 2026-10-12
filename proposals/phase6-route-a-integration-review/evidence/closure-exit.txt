@@ -1,0 +1,2 @@
+2026-10-12T16:31:39.6896947Z PHASE6_CLOSURE_BLOCKED
+2026-10-12T16:31:39.7244773Z ##[error]Process completed with exit code 2.

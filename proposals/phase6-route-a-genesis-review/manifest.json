@@ -1,0 +1,13 @@
+{
+  "status": "PROPOSED_REVIEW_ONLY",
+  "files": {
+    "proposals/phase6-route-a-genesis-review/case-management.json": "sha256:64514acdbaea9186a6b0797ead95653a80b71ebe37557919dd2c08689761ed3b",
+    "proposals/phase6-route-a-genesis-review/case-management.md": "sha256:03a69513e9318ba94fe6d3b0cfbeeac477168c7674a6cffcc6c87efc9c1baa72",
+    "proposals/phase6-route-a-genesis-review/payment.json": "sha256:5cc6d8be3da59f01260c20f5d0e0637b4785a488a2d081705076434917965328",
+    "proposals/phase6-route-a-genesis-review/payment.md": "sha256:80f8d14c096bb409856da20cd4235609f583e61b063349f9deb4aae822ecd1b4"
+  },
+  "priorReviewManifest": {
+    "path": "proposals/phase6-reference-genesis-review/manifest.json",
+    "digest": "sha256:a721734f04a5c0a96a4197a55111761ea4ecc65c8d7a8fbdcae87e3667ff88f5"
+  }
+}
