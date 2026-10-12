@@ -1,0 +1,21 @@
+{
+  "runId": 38289636933,
+  "sourceCommit": "0541bddefd52b9a30666f2da9c81e06e2aaeca61",
+  "runAttempt": 1,
+  "status": "completed",
+  "conclusion": "failure",
+  "jobs": {
+    "phase5-experiments": "success",
+    "contracts": "success",
+    "phase5c-hard-gates": "success",
+    "phase6-target": "success",
+    "phase6-closure-audit": "failure"
+  },
+  "closure": {
+    "auditExecution": "PERFORMED",
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "exitCode": 2,
+    "blockers": 21
+  },
+  "scope": "Validates reviewed source 0541bdd, not the new local correction."
+}

@@ -1,0 +1,43 @@
+{
+  "bodyDigest": "sha256:52c92c2a7e9a71f7461f1064c022abfd614b6f6b07dd074a02d74ccb717db7f1",
+  "encoding": "body sorted compact JSON, ensure_ascii=true, no LF",
+  "body": {
+    "format": "acp-route-a-stage-correction-decisions/1",
+    "status": "HUMAN_REVIEW_REQUIRED",
+    "reviewedCommit": "0541bddefd52b9a30666f2da9c81e06e2aaeca61",
+    "subjects": {
+      "docs/phase6-route-a-gateway-contract.md": "sha256:e19480ad7338d3874182418a7a7a5b96c0cf05bdeadc1e47a0c0bf156d63143d",
+      "docs/phase6-route-a-authority-integration-design.md": "sha256:4efbbcb670f2277ea0b040af74d1df5cdf5dd1077155eaef0011f1bd6b4f4e5d",
+      "verification/route_a/test_gateway_contract.py": "sha256:72419d3c6eb84baee6b0f1cf855b30842a03b73851e707b881e006117615f24f"
+    },
+    "decisions": [
+      {
+        "id": "STAGE-1",
+        "proposed": "Accept proposed engineering approval envelope /2 with signed operation and actual REVIEW_REQUIRED event binding, plus explicit stage validation: genesis without proposal version; propose/review without proof/reservation; approve/apply with verified repository-bound proof; distinct reviewed/approved-event linkage."
+      },
+      {
+        "id": "DURABLE-READ-1",
+        "proposed": "Require verified durable proof/event resolution and independent read grants for retry, historical audit, export and restore; never manufacture missing bindings."
+      },
+      {
+        "id": "AUTHORIZATION-1",
+        "proposed": "Architecture review does not grant implementation authorization. Separately decide whether to authorize adapter implementation and real integration tests after accepting corrected design."
+      }
+    ],
+    "remainingPriorDecisions": {
+      "path": "proposals/phase6-route-a-hardening-review/human-decisions.json",
+      "digest": "sha256:9a8728b079b29a08f8e4471bd1416591adac5ac02862c15b185407b0df019507",
+      "scope": "Actual trust provider/host/principals, role grants, signature/key/clock/revocation policy, witness, fencing/storage/backup/recovery choices remain unresolved."
+    },
+    "boundaries": {
+      "implementation": "NOT_AUTHORIZED",
+      "construction": "NOT_AUTHORIZED",
+      "genesis": "NOT_AUTHORIZED",
+      "dataBindings": "NOT_APPROVED",
+      "migration": "NOT_AUTHORIZED",
+      "deployment": "NOT_AUTHORIZED",
+      "phase6": "IN_PROGRESS",
+      "phase7": "NOT_STARTED"
+    }
+  }
+}

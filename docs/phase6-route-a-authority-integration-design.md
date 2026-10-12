@@ -188,3 +188,13 @@ trusted context lifecycle, closed durable states, retry retrieval authorization,
 independent historical context and exact remaining human decisions. It supplements
 this reviewed design; implementation and construction remain unauthorized. Earlier
 manifest hashes describe document bytes at `c9949c4` and remain historical evidence.
+
+## Stage-specific contract correction
+
+The [corrected gateway contract](phase6-route-a-gateway-contract.md) makes proposal,
+proof, reservation and retry fields stage-specific. Its proposed engineering proof
+envelope `/2` adds a signed operation ID and actual REVIEW_REQUIRED event binding
+(null for genesis), with explicit genesis retry identity. `/1` above remains the
+historical unimplemented design at the reviewed checkpoint. No existing approval or
+Canonical contract is rewritten. Future implementation requires `/2` review and separate
+authorization; no signature, repository or authority is created by this correction.

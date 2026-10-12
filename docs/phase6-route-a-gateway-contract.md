@@ -50,8 +50,9 @@ Historical verification continues under the original approved policy chronology.
 Approval/application binding is durable, not the lifetime of a Python object: native
 proposal ID is insufficient because a PROPOSED proposal can be edited. Gateway subject
 maps repository + proposal-event version + plan digest + configuration digest to a unique
-operation. Approve compares this subject with current native event; apply loads the exact
-APPROVED event and compares the full signed subject again. Edits, rebase, different proof,
+operation. Approve compares this subject with the current REVIEW_REQUIRED event; apply loads
+the distinct exact APPROVED event, verifies its predecessor link to that reviewed
+version and compares the unchanged signed subject again. Edits, rebase, different proof,
 new configuration or stale head cannot mutate the reservation; they require a new operation
 and fresh review. Native transactions retain their own reproduction/head/read-set checks.
 The gateway holds a per-repository fencing epoch across lookup/reconciliation/native call;
@@ -67,6 +68,90 @@ zombie process inside native SQLite, which has no epoch argument. Cross-host fai
 unsupported until the selected storage/host fencing mechanism demonstrably excludes the
 old writer; an unproven distributed lease is not sufficient. Restore must also acquire
 this external writer fence before promoting a quarantined store.
+
+## Stage-specific subject validation — correction to 0541bdd
+
+The common immutable fields are registered repository/application/configuration identity,
+unique host operation ID, action, exact reproduced plan bytes, independently resolved
+expected head, authenticated author and exact required scopes. The optional fields below
+are **required or forbidden by stage**, never filled with placeholders merely to satisfy
+a common constructor. Native proposal-event identities are exact event digests/versions,
+not just a mutable ChangeSet ID. A symbolic test label is not a real approval proof.
+
+| Stage | Proposal/event and exact source | Proof, reservation and retry requirements |
+| --- | --- | --- |
+| GENESIS / bootstrap | Exact revision-one genesis plan/source and authenticated author; independently verified EMPTY_UNINITIALIZED; `proposal_version`, `reviewed_version`, `event_state` and ordinary `change` must be null. | Genuine repository-bound approval must be verified before bootstrap; durable reservation required. Unique gateway operation ID and explicit genesis retry identity required. Native fixed `GENESIS` retry key is scoped by repository and gateway operation, never a fabricated proposal version. |
+| PROPOSE | Exact ChangeSet bytes, reproduced plan and authenticated current base; authenticated author. Native proposal-event version/state are null before propose returns. | Proof fingerprint, reservation and apply retry are null. No reviewer approval exists or is consumed. Native PROPOSED event returned by propose becomes a new immutable observed subject for later review. |
+| REVIEW | Exact current native PROPOSED event/version, its plan/ChangeSet and authenticated author. Native review is author submission only. | Proof fingerprint, reservation, reviewed-event link and apply retry remain null. No independent approval or nonce consumption. Resulting REVIEW_REQUIRED event has its own exact version. |
+| APPROVE | Exact current REVIEW_REQUIRED event/version and reproduced plan; genuinely authenticated independent reviewer. | Exact repository-bound proof required. Persist durable operation/approval/nonce reservation after verifying proof and before native approve. No native apply retry is invented. The proof binds the reviewed event/plan; it cannot bind the not-yet-created APPROVED event version. |
+| APPLY | Exact immutable native APPROVED event/version; its predecessor REVIEW_REQUIRED event version, exact plan and unchanged stored proof. Both events must be independently read/verified and linked to the same operation/reservation. | Proof and reservation required, plus explicit apply retry identity. Current action grants/time, head/read-set checks and writer fence still required. An approved event is not interchangeable with a reviewed event. |
+| RETRY / HISTORICAL AUDIT | Reconstruct original approved-event and proof identity from verified durable proposal/journal/operation evidence; never from caller-supplied missing fields. Genesis retains null ordinary proposal versions. | Immutable accepted proof, reservation and original retry identity must resolve exactly. Require separate current read authorization. Missing source/event/proof links fail closed rather than inventing bindings. |
+| EXPORT / RESTORE | Apply the same per-entry durable rules to each included entry, including genesis exceptions; pin independently trusted checkpoint and repository identity. | Current export/recovery/read grants and verified durable bindings required; no new approval is granted by copying or importing an archive. |
+
+Preflight reviewer authentication and proof validation are not native approve calls. They
+may inspect an unsigned proposal and collect a real human decision only under future
+explicit authorization. The executable APPROVE subject denotes the point after a real
+proof is verified and its durable reservation exists. This task creates neither proofs
+nor reservations. `validate_stage` models mandatory inputs; it does not authenticate them.
+
+After native approve, append an immutable observation linking the new APPROVED event to
+the exact REVIEW_REQUIRED event, reservation and unchanged proof. Preserve the original
+signed subject. On apply, `link_approval` requires matching repository, application,
+configuration, operation, action, plan, base, author, proof, scopes, ChangeSet and reservation,
+with the approved record naming the reviewed version. Current approved-event equality is
+checked separately against native storage. Apply's retry transport key may be selected
+later and durably bound before append; it does not mutate the signed plan or reviewed
+subject. No approval transfers to an edited/rebased/new proposal or another repository.
+
+### Exact native event references and signed approval context
+
+Native `proposal(id)` returns current state/plan/body but omits its event serial; it is
+insufficient by itself for version binding. Under the exclusive writer fence, use existing
+`export_records()` to read its consistent `proposals` rows `[serial, changeId, state,
+planDigest, body]`. Select the latest row for that ChangeSet and cross-check it against
+`proposal(id)`. Define an engineering event reference as its serial plus SHA-256 of
+`b"acp-route-a-proposal-event/1\0" + canonical_bytes({repositoryId, applicationId, row})`.
+These are proposed host metadata bytes, not new Canonical IR fields or native contract
+changes. A reference is valid only with its exact authenticated stored row. Never fabricate
+an event hash or derive it only from plan digest: the same plan can occur at different
+native event serials. The symbolic `proposal_version` and `reviewed_version` stand for
+these complete immutable references, not arbitrary client version strings.
+
+For approve, pin the actual REVIEW_REQUIRED row before the call. Afterward, read and bind
+the actual APPROVED row, requiring its immediately preceding event for the same ChangeSet
+to be the pinned REVIEW_REQUIRED row and its proof/plan to match the reservation. Apply
+repeats this read under the fence and checks the exact approved row before invoking native
+apply. Native transactions still enforce their original lifecycle/head/read-set checks.
+An internal service read of native exports does not grant the caller an EXPORT_READ
+capability or expose other records. Without exclusive writer enforcement, this read/call
+sequence is unsafe; no unsupported atomic native event-version CAS is claimed.
+
+The proposed **engineering** signed envelope is therefore `acp-route-a-approval/2`:
+it retains all `/1` signed fields and additionally requires signed `operationId`,
+`proposalBinding` and `genesisRetryIdentity`. These keys are always present. For a
+transition, `proposalBinding` is the closed object `{changeId, reviewRequiredEvent}`,
+where `reviewRequiredEvent` is `{serial, digest}` for the exact REVIEW_REQUIRED row;
+`genesisRetryIdentity` is null. For genesis, `proposalBinding` is null and
+`genesisRetryIdentity` is the explicit nonblank gateway genesis retry identity.
+The serial must be the exact positive native integer and digest the exact engineering
+event SHA-256; no unknown keys or substituted version strings are accepted. No future APPROVED-event reference
+is invented at signing time. Its later link is separately verified from durable native
+rows and retained in operation/receipt/witness evidence. Apply's transport retry key
+remains a durably bound operation field rather than a new human-approval subject.
+
+This is a revision to a previously unimplemented design, not issuance of a proof or
+reinterpretation of an immutable historical approval. Legacy `changes.request(plan)` and
+native verification interfaces remain unchanged. Future executable admission must reject
+an old `/1` proposal where `/2` is required; no missing event/operation field may be added
+after signing. Actual algorithm, encoding, keys and project authority remain unselected.
+The proof-subject comparison in the oracle models these extra signed bindings, including
+same-app cross-repository replay and approval inheritance after resubmission.
+
+Propose and author review cannot enter the operation ledger: RESERVED starts only after
+real approval verification and reservation. A crash before reservation can leave a native
+PROPOSED/REVIEW_REQUIRED event, never an accepted journal entry. Recover that exact event
+without inventing approval. Existing closed ledger transitions, fencing, cross-store
+reconciliation, independent witnessing and downstream isolation remain unchanged.
 
 ## Closed durable operation state machine
 
@@ -211,7 +296,7 @@ has its own manifest and does not replace earlier genesis review packages or pro
 ## Executable regression contract and future adversarial integration
 
 The maintained contracts CI discovery already includes `verification/route_a`; no gate
-is removed. `test_gateway_contract.py` contains 13 executable, side-effect-free contract
+is removed. `test_gateway_contract.py` contains 23 executable, side-effect-free contract
 oracle tests. Its symbolic HostFacts/HistoricalFacts are supplied test premises, **not**
 implementations of authentication or evidence verification. No test value is a deployable
 credential, signature, approval or accepted receipt. Its functions are not imported by
@@ -268,9 +353,49 @@ New local results and exact file hashes are recorded in the
 STOP FOR HUMAN ARCHITECTURE REVIEW. No implementation, service construction, repository
 initialization, genesis acceptance or downstream execution is authorized by this design.
 
-Local validation: **24 Route A tests PASS** (13 gateway oracle and 11 unchanged exact
+Historical validation at `0541bdd`: **24 Route A tests PASS** (13 gateway oracle and 11 unchanged exact
 replay), **13 retained-inventory tests PASS**, sealed 0.5.0 verification PASS with
 unchanged bundle digest. No source in the sealed generator or approved Canonical corpus
 was changed. See [local validation](../proposals/phase6-route-a-hardening-review/validation.json)
 and [exact-bound remaining decision requests](../proposals/phase6-route-a-hardening-review/human-decisions.json).
 The latter are proposed review subjects, not signatures or granted authority.
+
+## Contract-correction checkpoint
+
+Reviewed source `0541bddefd52b9a30666f2da9c81e06e2aaeca61`. The 10 added stage-specific
+regressions cover proof-free propose/review, genesis null proposal identity, required
+approve/apply proofs and reservations, distinct reviewed/approved versions, changed proof,
+cross-repository proof replay, new-proposal approval inheritance and durable read admission.
+All are side-effect-free. No real adapter, authority, signature or journal exists in them.
+
+The correction has a separate [review manifest](../proposals/phase6-route-a-stage-correction/manifest.json);
+prior manifests, approvals, sealed bytes and frozen captures are immutable. Remaining
+[human decisions](../proposals/phase6-route-a-stage-correction/human-decisions.json)
+include accepting this stage-aware contract and selecting real trust/operational policy
+before any separate implementation authorization. No approval is issued here.
+
+Requested [hosted run 38289636933](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38289636933)
+is complete and validates reviewed `0541bdd`, not the new correction.
+
+| Job | Final conclusion |
+| --- | --- |
+| contracts | success |
+| phase5-experiments | success |
+| phase5c-hard-gates | success |
+| phase6-target | success |
+| phase6-closure-audit | failure; PERFORMED without exception, PHASE6_CLOSURE_BLOCKED, exit 2 |
+
+Overall workflow conclusion: **failure**. The 21 exact blocker objects are retained
+separately in the [closure summary](../proposals/phase6-route-a-stage-correction/evidence/closure-summary.json),
+with [uploaded artifact identity and original report hash](../proposals/phase6-route-a-stage-correction/evidence/closure-artifact-observation.json),
+[raw job log](../proposals/phase6-route-a-stage-correction/evidence/closure-job.log)
+and [source/job observation](../proposals/phase6-route-a-stage-correction/evidence/hosted-observation.json).
+No closure blocker is waived and no Phase 6 closure is claimed.
+
+Final local validation: 34 Route A tests PASS (23 stage/gateway, 11 unchanged replay),
+32.285 seconds; 13 retained-inventory tests PASS, 0.307 seconds. Sealed 0.5.0 check PASS;
+bundle `sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb` unchanged.
+See [exact local results](../proposals/phase6-route-a-stage-correction/validation.json).
+
+Implementation, construction, genesis, migration and deployment NOT AUTHORIZED; data
+bindings NOT APPROVED. Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED. STOP FOR HUMAN REVIEW.

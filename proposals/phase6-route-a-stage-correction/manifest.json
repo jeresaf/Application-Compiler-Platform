@@ -1,0 +1,24 @@
+{
+  "format": "acp-route-a-stage-correction/1",
+  "status": "STOP_FOR_HUMAN_REVIEW",
+  "reviewedSource": "0541bddefd52b9a30666f2da9c81e06e2aaeca61",
+  "files": {
+    "docs/phase6-route-a-authority-integration-design.md": "sha256:4efbbcb670f2277ea0b040af74d1df5cdf5dd1077155eaef0011f1bd6b4f4e5d",
+    "docs/phase6-route-a-gateway-contract.md": "sha256:e19480ad7338d3874182418a7a7a5b96c0cf05bdeadc1e47a0c0bf156d63143d",
+    "proposals/phase6-route-a-stage-correction/evidence/ci-artifacts.json": "sha256:c35906d22f432771d644b050d184570d4de93d6f50fa6c8cdc2795b69e9df76d",
+    "proposals/phase6-route-a-stage-correction/evidence/ci-jobs.json": "sha256:eabb45179223a3da9410a3d53698c0144beffa0a4a117146054efe0a0a85031a",
+    "proposals/phase6-route-a-stage-correction/evidence/ci-run.json": "sha256:f08409a35572fc4e4540b09a6c8d4e27bf2b73e66f442159954d41463d44a774",
+    "proposals/phase6-route-a-stage-correction/evidence/closure-artifact-observation.json": "sha256:df513336424e551cf4017880120c859cf9e120d663e314c8304ed59c626b21ce",
+    "proposals/phase6-route-a-stage-correction/evidence/closure-job.log": "sha256:446bbc23bf81b1e81073de94b39d266dfac993b8f1ac062a1c5857aac4ce8880",
+    "proposals/phase6-route-a-stage-correction/evidence/closure-summary.json": "sha256:27f77804a18b70040364024a07156ecde95d07e22d6438907a7c3471cb2313f1",
+    "proposals/phase6-route-a-stage-correction/evidence/hosted-observation.json": "sha256:f4d4bd069822b8cc1ed9d7c683e627a9fd88405f8da9a0d1746fa51314342a0c",
+    "proposals/phase6-route-a-stage-correction/evidence/local-tests.txt": "sha256:6a0b4bbc5040a65d29778c4885d0c6515b3f196595e1adcf30c7e2abb0b86f37",
+    "proposals/phase6-route-a-stage-correction/human-decisions.json": "sha256:05ecf0001c8935adc8110beda16ab5f1bdb357585b10630c79a3da240fbe8a40",
+    "proposals/phase6-route-a-stage-correction/validation.json": "sha256:9128f84dcd7cf3b5f82c9ceb84fafa556460b89515dc49c821dca3c4c13ee47e",
+    "verification/route_a/test_gateway_contract.py": "sha256:72419d3c6eb84baee6b0f1cf855b30842a03b73851e707b881e006117615f24f"
+  },
+  "historicalReviewManifest": {
+    "path": "proposals/phase6-route-a-hardening-review/manifest.json",
+    "digest": "sha256:442a95783c99499cc932f8755b3f931affb6c7e898025e762ebb8e36aa3c61cb"
+  }
+}
