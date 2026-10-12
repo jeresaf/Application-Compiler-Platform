@@ -76,3 +76,11 @@ Exclude raw credentials and private signing material. Alert on stale witnesses,
 unreconciled commits, duplicate nonce attempts, audit failure and configuration drift.
 Keep immutable security observations separate from the accepted semantic journal;
 failed attempts are not new accepted semantic entries.
+
+## Conditional-review hardening
+
+The [gateway and ledger contract](phase6-route-a-gateway-contract.md) specifies the
+trusted context lifecycle, closed durable states, retry retrieval authorization,
+independent historical context and exact remaining human decisions. It supplements
+this reviewed design; implementation and construction remain unauthorized. Earlier
+manifest hashes describe document bytes at `c9949c4` and remain historical evidence.

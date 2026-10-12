@@ -1,0 +1,59 @@
+{
+  "bodyDigest": "sha256:c88e8ceb9110c4d1d3aab5faaf08ee32f9424ba3087f284eb214d8f23e822361",
+  "encoding": "body sorted compact JSON, ensure_ascii=true, no LF",
+  "body": {
+    "format": "acp-route-a-hardening-decisions/1",
+    "status": "HUMAN_ARCHITECTURE_REVIEW_REQUIRED",
+    "reviewedSource": "c9949c429e336270c27b1938960b5cd6c330a4ab",
+    "designFiles": {
+      "docs/phase6-route-a-acceptance-sequence.md": "sha256:0ba8f5be677b6bba9a34bef3ed24228c12333c517fafbeef2878f873f371e099",
+      "docs/phase6-route-a-authority-integration-design.md": "sha256:b6ab5b6aa46cc2843cf6feb1a3977e6e4bf6375704126c153af6675583c6a505",
+      "docs/phase6-route-a-gateway-contract.md": "sha256:fe8e258cf578609b03faccce8b82b722961ae6215d503f64f64a66fd93f47bbf",
+      "docs/phase6-route-a-implementation-plan.md": "sha256:2b86778089ff94c07c256911c9f202db8ae5aca9ca69c8b42f408c0839d65402",
+      "docs/phase6-route-a-recovery-matrix.md": "sha256:3e9a1c2eef4d0df16f61ac10582d275c1b5a31f7bc0e566723db1db1438bdad4",
+      "docs/phase6-route-a-security-threat-model.md": "sha256:534696cd3d2f24e86b1d56e65f0af2dca8581e272afb2dc22dde8f0cb7c2f1a9"
+    },
+    "contractTest": {
+      "path": "verification/route_a/test_gateway_contract.py",
+      "digest": "sha256:615c3aa732a1a0ec4d74621cbc6ba11706bbcf7769bac19eb8f3a79be673afe6"
+    },
+    "decisions": [
+      {
+        "id": "CONTEXT-1",
+        "proposed": "Immutable per-call registered context, durable proposal-event binding, author apply grant and separate receipt-read authorization."
+      },
+      {
+        "id": "LEDGER-1",
+        "proposed": "Closed five-stage progression plus rejected/expired/recovery/quarantine states; no cross-store atomicity; fenced reconciliation before further writes."
+      },
+      {
+        "id": "HISTORY-1",
+        "proposed": "Independently witnessed checkpoint and predecessor-derived per-entry historical context; original authority chronology required."
+      },
+      {
+        "id": "TRUST-1",
+        "proposed": "Human selection of actual host, provider, principals, signature policy, clocks, keys, revocation and configuration registration is required; none selected."
+      },
+      {
+        "id": "OPERATIONS-1",
+        "proposed": "Human selection of independent witness, fencing enforcement, backup/storage custody, retention, freshness and recovery authority is required; none selected."
+      },
+      {
+        "id": "BUILD-1",
+        "proposed": "Separate explicit implementation and real integration-test authorization only after architecture review; construction remains separately unauthorized."
+      }
+    ],
+    "excludedAuthorizations": [
+      "construction",
+      "repository initialization",
+      "genesis",
+      "semantic transition acceptance",
+      "independent data binding",
+      "SQL",
+      "PostgreSQL migration",
+      "deployment"
+    ],
+    "phase6": "IN_PROGRESS",
+    "phase7": "NOT_STARTED"
+  }
+}

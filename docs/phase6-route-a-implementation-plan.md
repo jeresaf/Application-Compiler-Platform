@@ -113,3 +113,11 @@ real authority adapter DESIGNED, NOT DEPLOYED; reference history NOT INITIALIZED
 genesis and transitions NOT AUTHORIZED; authenticated content proofs PENDING;
 independent data bindings NOT APPROVED; executable migration and deployment NOT
 AUTHORIZED. Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED. STOP FOR HUMAN ARCHITECTURE REVIEW.
+
+## Conditional-review hardening
+
+The [gateway and ledger contract](phase6-route-a-gateway-contract.md) specifies the
+trusted context lifecycle, closed durable states, retry retrieval authorization,
+independent historical context and exact remaining human decisions. It supplements
+this reviewed design; implementation and construction remain unauthorized. Earlier
+manifest hashes describe document bytes at `c9949c4` and remain historical evidence.

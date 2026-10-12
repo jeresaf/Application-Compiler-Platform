@@ -94,3 +94,11 @@ A fully compromised trust root or colluding authority and witness is outside an 
 single-host hash-chain guarantee and must be addressed by the selected governance model.
 Do not claim production security until authorized implementation and independent
 integration tests demonstrate all applicable controls.
+
+## Conditional-review hardening
+
+The [gateway and ledger contract](phase6-route-a-gateway-contract.md) specifies the
+trusted context lifecycle, closed durable states, retry retrieval authorization,
+independent historical context and exact remaining human decisions. It supplements
+this reviewed design; implementation and construction remain unauthorized. Earlier
+manifest hashes describe document bytes at `c9949c4` and remain historical evidence.

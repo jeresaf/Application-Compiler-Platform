@@ -1,0 +1,881 @@
+{
+  "total_count": 5,
+  "jobs": [
+    {
+      "id": 114912896429,
+      "run_id": 38279457352,
+      "workflow_name": "ACP semantic, canonical and change contracts",
+      "head_branch": "codex/phase6-production-remediation",
+      "run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/runs/38279457352",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUbwpTM8AAAAawVelrQ",
+      "head_sha": "c9949c429e336270c27b1938960b5cd6c330a4ab",
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/jobs/114912896429",
+      "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38279457352/job/114912896429",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T16:44:04Z",
+      "started_at": "2026-10-12T16:44:06Z",
+      "completed_at": "2026-10-12T16:57:59Z",
+      "name": "phase5-experiments",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-12T16:44:07Z",
+          "completed_at": "2026-10-12T16:44:08Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-12T16:44:08Z",
+          "completed_at": "2026-10-12T16:44:10Z"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-12T16:44:10Z",
+          "completed_at": "2026-10-12T16:44:18Z"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-12T16:44:18Z",
+          "completed_at": "2026-10-12T16:44:19Z"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-12T16:44:19Z",
+          "completed_at": "2026-10-12T16:44:23Z"
+        },
+        {
+          "name": "Retain alternate JDK for controlled Phase 5C comparison",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-12T16:44:23Z",
+          "completed_at": "2026-10-12T16:44:23Z"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-12T16:44:23Z",
+          "completed_at": "2026-10-12T16:44:27Z"
+        },
+        {
+          "name": "Install pinned reference and frontend dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-12T16:44:27Z",
+          "completed_at": "2026-10-12T16:44:42Z"
+        },
+        {
+          "name": "Build all three actual ACP grammars",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-12T16:44:42Z",
+          "completed_at": "2026-10-12T16:44:55Z"
+        },
+        {
+          "name": "Verify frontend interchange, diagnostics, determinism and Java bytes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-12T16:44:55Z",
+          "completed_at": "2026-10-12T16:48:23Z"
+        },
+        {
+          "name": "Verify pinned Rust canonical interoperability and graph slice",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-12T16:48:23Z",
+          "completed_at": "2026-10-12T16:48:35Z"
+        },
+        {
+          "name": "Exercise native editor and source-analysis APIs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-12T16:48:35Z",
+          "completed_at": "2026-10-12T16:48:40Z"
+        },
+        {
+          "name": "Verify Phase 5B wire, source, diagnostics, determinism and scale evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-12T16:48:40Z",
+          "completed_at": "2026-10-12T16:51:20Z"
+        },
+        {
+          "name": "Reproduce controlled frontend upgrades from isolated locks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-12T16:51:20Z",
+          "completed_at": "2026-10-12T16:51:46Z"
+        },
+        {
+          "name": "Verify Phase 5C native persistence, fault parity and toolchain evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-12T16:51:46Z",
+          "completed_at": "2026-10-12T16:57:55Z"
+        },
+        {
+          "name": "Preserve Phase 5C hosted evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-12T16:57:55Z",
+          "completed_at": "2026-10-12T16:57:56Z"
+        },
+        {
+          "name": "Preserve hosted evidence separately from laptop measurements",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-10-12T16:57:56Z",
+          "completed_at": "2026-10-12T16:57:56Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30,
+          "started_at": "2026-10-12T16:57:56Z",
+          "completed_at": "2026-10-12T16:57:56Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31,
+          "started_at": "2026-10-12T16:57:56Z",
+          "completed_at": "2026-10-12T16:57:57Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32,
+          "started_at": "2026-10-12T16:57:57Z",
+          "completed_at": "2026-10-12T16:57:57Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33,
+          "started_at": "2026-10-12T16:57:57Z",
+          "completed_at": "2026-10-12T16:57:57Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 34,
+          "started_at": "2026-10-12T16:57:57Z",
+          "completed_at": "2026-10-12T16:57:57Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 35,
+          "started_at": "2026-10-12T16:57:57Z",
+          "completed_at": "2026-10-12T16:57:57Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/check-runs/114912896429",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000925,
+      "runner_name": "GitHub Actions 1000000925",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 114912896742,
+      "run_id": 38279457352,
+      "workflow_name": "ACP semantic, canonical and change contracts",
+      "head_branch": "codex/phase6-production-remediation",
+      "run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/runs/38279457352",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUbwpTM8AAAAawVem5g",
+      "head_sha": "c9949c429e336270c27b1938960b5cd6c330a4ab",
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/jobs/114912896742",
+      "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38279457352/job/114912896742",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T16:44:05Z",
+      "started_at": "2026-10-12T16:44:07Z",
+      "completed_at": "2026-10-12T16:58:21Z",
+      "name": "contracts",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-12T16:44:08Z",
+          "completed_at": "2026-10-12T16:44:09Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-12T16:44:09Z",
+          "completed_at": "2026-10-12T16:44:11Z"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-12T16:44:11Z",
+          "completed_at": "2026-10-12T16:44:21Z"
+        },
+        {
+          "name": "Install pinned contract tooling",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-12T16:44:21Z",
+          "completed_at": "2026-10-12T16:44:22Z"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-12T16:44:22Z",
+          "completed_at": "2026-10-12T16:44:23Z"
+        },
+        {
+          "name": "Check dependency consistency",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-12T16:44:23Z",
+          "completed_at": "2026-10-12T16:44:23Z"
+        },
+        {
+          "name": "Check documentation and repository contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-12T16:44:23Z",
+          "completed_at": "2026-10-12T16:44:23Z"
+        },
+        {
+          "name": "Validate all schemas, corpora, history and recovery tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-12T16:44:23Z",
+          "completed_at": "2026-10-12T16:57:47Z"
+        },
+        {
+          "name": "Verify pure Route A replay and negative mutations without creating history",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-12T16:57:47Z",
+          "completed_at": "2026-10-12T16:58:16Z"
+        },
+        {
+          "name": "Independently verify canonical bytes and hashes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-12T16:58:16Z",
+          "completed_at": "2026-10-12T16:58:16Z"
+        },
+        {
+          "name": "Independently verify Canonical 0.2 execution vectors",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-12T16:58:16Z",
+          "completed_at": "2026-10-12T16:58:17Z"
+        },
+        {
+          "name": "Independently verify approved Canonical 0.3 bytes and hashes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-12T16:58:17Z",
+          "completed_at": "2026-10-12T16:58:17Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-10-12T16:58:17Z",
+          "completed_at": "2026-10-12T16:58:17Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-10-12T16:58:17Z",
+          "completed_at": "2026-10-12T16:58:17Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24,
+          "started_at": "2026-10-12T16:58:17Z",
+          "completed_at": "2026-10-12T16:58:17Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-10-12T16:58:17Z",
+          "completed_at": "2026-10-12T16:58:17Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/check-runs/114912896742",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000926,
+      "runner_name": "GitHub Actions 1000000926",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 114918248726,
+      "run_id": 38279457352,
+      "workflow_name": "ACP semantic, canonical and change contracts",
+      "head_branch": "codex/phase6-production-remediation",
+      "run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/runs/38279457352",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUbwpTM8AAAAawalRFg",
+      "head_sha": "c9949c429e336270c27b1938960b5cd6c330a4ab",
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/jobs/114918248726",
+      "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38279457352/job/114918248726",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T16:58:21Z",
+      "started_at": "2026-10-12T16:58:23Z",
+      "completed_at": "2026-10-12T16:58:39Z",
+      "name": "phase5c-hard-gates",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-12T16:58:24Z",
+          "completed_at": "2026-10-12T16:58:25Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-12T16:58:25Z",
+          "completed_at": "2026-10-12T16:58:27Z"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-12T16:58:27Z",
+          "completed_at": "2026-10-12T16:58:35Z"
+        },
+        {
+          "name": "Run actions/download-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-12T16:58:35Z",
+          "completed_at": "2026-10-12T16:58:36Z"
+        },
+        {
+          "name": "Verify actual Ubuntu evidence and honest unresolved-gate disposition",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-12T16:58:36Z",
+          "completed_at": "2026-10-12T16:58:36Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-12T16:58:36Z",
+          "completed_at": "2026-10-12T16:58:36Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-12T16:58:36Z",
+          "completed_at": "2026-10-12T16:58:36Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-12T16:58:36Z",
+          "completed_at": "2026-10-12T16:58:36Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/check-runs/114918248726",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000927,
+      "runner_name": "GitHub Actions 1000000927",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 114918362455,
+      "run_id": 38279457352,
+      "workflow_name": "ACP semantic, canonical and change contracts",
+      "head_branch": "codex/phase6-production-remediation",
+      "run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/runs/38279457352",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUbwpTM8AAAAawasNVw",
+      "head_sha": "c9949c429e336270c27b1938960b5cd6c330a4ab",
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/jobs/114918362455",
+      "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38279457352/job/114918362455",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T16:58:39Z",
+      "started_at": "2026-10-12T16:58:42Z",
+      "completed_at": "2026-10-12T17:26:20Z",
+      "name": "phase6-target",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-12T16:58:43Z",
+          "completed_at": "2026-10-12T16:58:46Z"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-12T16:58:46Z",
+          "completed_at": "2026-10-12T16:59:04Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-12T16:59:04Z",
+          "completed_at": "2026-10-12T16:59:05Z"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-12T16:59:05Z",
+          "completed_at": "2026-10-12T16:59:12Z"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-12T16:59:12Z",
+          "completed_at": "2026-10-12T16:59:12Z"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-12T16:59:12Z",
+          "completed_at": "2026-10-12T16:59:15Z"
+        },
+        {
+          "name": "Install contract dependencies and worker confinement library",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-12T16:59:15Z",
+          "completed_at": "2026-10-12T16:59:25Z"
+        },
+        {
+          "name": "Verify successor generator release identity and packaged tzdb",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-12T16:59:25Z",
+          "completed_at": "2026-10-12T16:59:25Z"
+        },
+        {
+          "name": "Enable authoritative PostgreSQL commit evidence for idempotency",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-12T16:59:25Z",
+          "completed_at": "2026-10-12T16:59:26Z"
+        },
+        {
+          "name": "Compile both complete approved domains through the negotiated target",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-12T16:59:26Z",
+          "completed_at": "2026-10-12T17:07:28Z"
+        },
+        {
+          "name": "Verify identity clearing and logical recovery keys",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-12T17:07:28Z",
+          "completed_at": "2026-10-12T17:07:30Z"
+        },
+        {
+          "name": "Verify exact HTTP outcomes through the production browser",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-12T17:07:30Z",
+          "completed_at": "2026-10-12T17:08:01Z"
+        },
+        {
+          "name": "Verify actual sealed 0.3 upgrade without database changes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-12T17:08:01Z",
+          "completed_at": "2026-10-12T17:09:49Z"
+        },
+        {
+          "name": "Verify isolated typed components without claiming target admission",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-12T17:09:49Z",
+          "completed_at": "2026-10-12T17:10:35Z"
+        },
+        {
+          "name": "Verify approved Canonical 0.3 invocation runtime against PostgreSQL and HTTP",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-12T17:10:35Z",
+          "completed_at": "2026-10-12T17:11:41Z"
+        },
+        {
+          "name": "Verify durable delivery and scheduling against PostgreSQL",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-12T17:11:41Z",
+          "completed_at": "2026-10-12T17:15:20Z"
+        },
+        {
+          "name": "Verify privacy lifecycle, redaction, deployment obligations and concurrent disposal",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-10-12T17:15:20Z",
+          "completed_at": "2026-10-12T17:19:33Z"
+        },
+        {
+          "name": "Upgrade actual accepted target 0.2 applications and exercise lifecycle in place",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-10-12T17:19:33Z",
+          "completed_at": "2026-10-12T17:21:18Z"
+        },
+        {
+          "name": "Verify forensic target 0.1 upgrade evidence outside production support window",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19,
+          "started_at": "2026-10-12T17:21:18Z",
+          "completed_at": "2026-10-12T17:22:36Z"
+        },
+        {
+          "name": "Verify approved Canonical 0.3 evolution and exact approval boundaries",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20,
+          "started_at": "2026-10-12T17:22:36Z",
+          "completed_at": "2026-10-12T17:23:51Z"
+        },
+        {
+          "name": "Verify approved Canonical 0.2 and ChangeSet 0.2 evolution boundaries",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-10-12T17:23:51Z",
+          "completed_at": "2026-10-12T17:26:13Z"
+        },
+        {
+          "name": "Preserve negotiated gate and generated build evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-10-12T17:26:13Z",
+          "completed_at": "2026-10-12T17:26:15Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 40,
+          "started_at": "2026-10-12T17:26:15Z",
+          "completed_at": "2026-10-12T17:26:15Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 41,
+          "started_at": "2026-10-12T17:26:15Z",
+          "completed_at": "2026-10-12T17:26:15Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 42,
+          "started_at": "2026-10-12T17:26:15Z",
+          "completed_at": "2026-10-12T17:26:15Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 43,
+          "started_at": "2026-10-12T17:26:15Z",
+          "completed_at": "2026-10-12T17:26:15Z"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 44,
+          "started_at": "2026-10-12T17:26:15Z",
+          "completed_at": "2026-10-12T17:26:16Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 45,
+          "started_at": "2026-10-12T17:26:16Z",
+          "completed_at": "2026-10-12T17:26:16Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/check-runs/114918362455",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000928,
+      "runner_name": "GitHub Actions 1000000928",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 114928516217,
+      "run_id": 38279457352,
+      "workflow_name": "ACP semantic, canonical and change contracts",
+      "head_branch": "codex/phase6-production-remediation",
+      "run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/runs/38279457352",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUbwpTM8AAAAawkX8eQ",
+      "head_sha": "c9949c429e336270c27b1938960b5cd6c330a4ab",
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/jobs/114928516217",
+      "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38279457352/job/114928516217",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-12T17:26:20Z",
+      "started_at": "2026-10-12T17:26:22Z",
+      "completed_at": "2026-10-12T17:50:12Z",
+      "name": "phase6-closure-audit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-12T17:26:23Z",
+          "completed_at": "2026-10-12T17:26:26Z"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-12T17:26:26Z",
+          "completed_at": "2026-10-12T17:26:43Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-12T17:26:43Z",
+          "completed_at": "2026-10-12T17:26:45Z"
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-12T17:26:45Z",
+          "completed_at": "2026-10-12T17:26:54Z"
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-12T17:26:54Z",
+          "completed_at": "2026-10-12T17:26:57Z"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-12T17:26:57Z",
+          "completed_at": "2026-10-12T17:26:57Z"
+        },
+        {
+          "name": "Install exact audit generation dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-12T17:26:57Z",
+          "completed_at": "2026-10-12T17:27:17Z"
+        },
+        {
+          "name": "Enable authoritative commit evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-12T17:27:17Z",
+          "completed_at": "2026-10-12T17:27:17Z"
+        },
+        {
+          "name": "Perform successor closure audit without waivers",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 9,
+          "started_at": "2026-10-12T17:27:17Z",
+          "completed_at": "2026-10-12T17:50:03Z"
+        },
+        {
+          "name": "Retain dated vulnerability advisory details",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-12T17:50:03Z",
+          "completed_at": "2026-10-12T17:50:04Z"
+        },
+        {
+          "name": "Preserve closure recommendation and complete evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-12T17:50:04Z",
+          "completed_at": "2026-10-12T17:50:08Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-10-12T17:50:08Z",
+          "completed_at": "2026-10-12T17:50:08Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 19,
+          "started_at": "2026-10-12T17:50:08Z",
+          "completed_at": "2026-10-12T17:50:08Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 20,
+          "started_at": "2026-10-12T17:50:08Z",
+          "completed_at": "2026-10-12T17:50:08Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-10-12T17:50:08Z",
+          "completed_at": "2026-10-12T17:50:08Z"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-10-12T17:50:08Z",
+          "completed_at": "2026-10-12T17:50:09Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-10-12T17:50:09Z",
+          "completed_at": "2026-10-12T17:50:09Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/check-runs/114928516217",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000929,
+      "runner_name": "GitHub Actions 1000000929",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "format": "acp-route-a-hardening-review/1",
+  "status": "DESIGN_ONLY_STOP_FOR_HUMAN_REVIEW",
+  "reviewedSource": "c9949c429e336270c27b1938960b5cd6c330a4ab",
+  "files": {
+    "docs/phase6-route-a-acceptance-sequence.md": "sha256:0ba8f5be677b6bba9a34bef3ed24228c12333c517fafbeef2878f873f371e099",
+    "docs/phase6-route-a-authority-integration-design.md": "sha256:b6ab5b6aa46cc2843cf6feb1a3977e6e4bf6375704126c153af6675583c6a505",
+    "docs/phase6-route-a-gateway-contract.md": "sha256:fe8e258cf578609b03faccce8b82b722961ae6215d503f64f64a66fd93f47bbf",
+    "docs/phase6-route-a-implementation-plan.md": "sha256:2b86778089ff94c07c256911c9f202db8ae5aca9ca69c8b42f408c0839d65402",
+    "docs/phase6-route-a-recovery-matrix.md": "sha256:3e9a1c2eef4d0df16f61ac10582d275c1b5a31f7bc0e566723db1db1438bdad4",
+    "docs/phase6-route-a-security-threat-model.md": "sha256:534696cd3d2f24e86b1d56e65f0af2dca8581e272afb2dc22dde8f0cb7c2f1a9",
+    "proposals/phase6-route-a-hardening-review/evidence/ci-artifacts.json": "sha256:c8284669c31e15ee588240382085769d3143e0e11829c9497567b353c2856a77",
+    "proposals/phase6-route-a-hardening-review/evidence/ci-jobs.json": "sha256:d4be9da17c0214ee8f527a8b2971840c28d659766421d55a20aa79a91fe58b0d",
+    "proposals/phase6-route-a-hardening-review/evidence/ci-run.json": "sha256:98e915bae4c0743b6c609c1f12a2355d1577071b82ed51c442243a0cfae635a1",
+    "proposals/phase6-route-a-hardening-review/evidence/closure-artifact-observation.json": "sha256:2f39c987db7bf64e3f14dcbfdb7c7150db27ba661118aa27ddf2c4bff2a5be2f",
+    "proposals/phase6-route-a-hardening-review/evidence/closure-job.log": "sha256:8b0b7952ac77227c4a680b3544a784d184b95731b05ecaa1d2860c9ce121eb4d",
+    "proposals/phase6-route-a-hardening-review/evidence/closure-summary.json": "sha256:d67c4178dc63c21e596a311c56c21008d9a96b79cf34cefcf87b7ead166fbd34",
+    "proposals/phase6-route-a-hardening-review/evidence/local-contract-tests.txt": "sha256:d841215cbc49fbe6e9e7b4e8c57daf6f87706c86ef6798fdb646c53587605244",
+    "proposals/phase6-route-a-hardening-review/evidence/observation.json": "sha256:d73846377f8a5f599d3db9aa3c087529c8677e3bdaef050ef5e73f5ada32251e",
+    "proposals/phase6-route-a-hardening-review/human-decisions.json": "sha256:9a8728b079b29a08f8e4471bd1416591adac5ac02862c15b185407b0df019507",
+    "proposals/phase6-route-a-hardening-review/validation.json": "sha256:3019068613748f6122cc2fe1787615c9bdfc75851e859495009f7e954e5b2f67",
+    "verification/route_a/test_gateway_contract.py": "sha256:615c3aa732a1a0ec4d74621cbc6ba11706bbcf7769bac19eb8f3a79be673afe6"
+  },
+  "historicalReviewManifests": {
+    "proposals/phase6-route-a-genesis-review/manifest.json": "sha256:dec07307b06b96891722923c1aa4a16e5766f123d39cde6e57608528531bfa80",
+    "proposals/phase6-route-a-integration-review/manifest.json": "sha256:020b5dbbc6e4a4f18c42796049a4d12be804f3f475ca59fcb524c10584baa1bb"
+  }
+}

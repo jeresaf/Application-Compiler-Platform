@@ -1,0 +1,23 @@
+{
+  "runId": 38279457352,
+  "sourceCommit": "c9949c429e336270c27b1938960b5cd6c330a4ab",
+  "runAttempt": 1,
+  "observedFinalStatus": "completed",
+  "overallConclusion": "failure",
+  "jobs": {
+    "phase5-experiments": "success",
+    "contracts": "success",
+    "phase5c-hard-gates": "success",
+    "phase6-target": "success",
+    "phase6-closure-audit": "failure"
+  },
+  "closure": {
+    "auditExecution": "PERFORMED",
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "exitCode": 2,
+    "blockerCount": 21
+  },
+  "scope": "Hosted run validates reviewed source, not new local hardening tests or design.",
+  "preservedPinnedFiles": 121,
+  "priorReviewManifests": "Unchanged; file subjects verified at their exact reviewed commit."
+}

@@ -1,0 +1,28 @@
+{
+  "routeA": {
+    "command": ".venv/bin/python3.14 -m unittest discover -s verification/route_a -v",
+    "tests": 24,
+    "result": "PASS",
+    "gatewayContractTests": 13,
+    "unchangedReplayTests": 11,
+    "evidence": "evidence/local-contract-tests.txt"
+  },
+  "retainedInventory": {
+    "command": ".venv/bin/python3.14 -m unittest tooling.tests.test_retained_inventory -q",
+    "tests": 13,
+    "result": "PASS"
+  },
+  "sealedRelease": {
+    "command": ".venv/bin/python3.14 tooling/check_target_release.py",
+    "result": "PASS",
+    "version": "0.5.0",
+    "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb"
+  },
+  "construction": "NOT_AUTHORIZED",
+  "implementation": "NOT_YET_AUTHORIZED",
+  "genesis": "NOT_AUTHORIZED",
+  "sql": "NOT_AUTHORIZED",
+  "deployment": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}
