@@ -1,0 +1,909 @@
+{
+  "status": "REVIEW_REQUIRED_NOT_APPROVED",
+  "domain": "case-management",
+  "applicationId": "APP-CASE-MANAGEMENT",
+  "approvals": [],
+  "oldMeaning": "Synthetic organization case intake, document review, assignment, approval, comments and archival tasks.",
+  "proposedMeaning": "PROPOSED, UNAPPROVED, SYNTHETIC REFERENCE ONLY: CASE records retain a required exact String reference note. New records must explicitly supply it; retained-row backfill requires independent approval and is never a future-write default. No create operation or UI is added. Existing approved update behavior preserves it. Rollout remains REVIEW_REQUIRED.",
+  "requirement": {
+    "revision": 1,
+    "lifecycle": "APPROVED",
+    "steward": "assistant:proposal",
+    "origins": [
+      {
+        "source": "proposal:phase6-evolution-review",
+        "locator": "case-management",
+        "actor": "assistant:proposal",
+        "actorType": "AI"
+      }
+    ],
+    "id": "REQ-EVOLVE-REFERENCE-NOTE",
+    "kind": "Requirement",
+    "name": "PROPOSED synthetic reference note requirement",
+    "basis": [],
+    "data": {
+      "statement": "PROPOSED, UNAPPROVED, SYNTHETIC REFERENCE ONLY: CASE records retain a required exact String reference note. New records must explicitly supply it; retained-row backfill requires independent approval and is never a future-write default. No create operation or UI is added. Existing approved update behavior preserves it. Rollout remains REVIEW_REQUIRED.",
+      "priority": "MUST",
+      "acceptance": [
+        {
+          "id": "AC-EVOLVE-RETAINED",
+          "revision": 1
+        },
+        {
+          "id": "AC-EVOLVE-NEW-WRITE",
+          "revision": 1
+        },
+        {
+          "id": "AC-EVOLVE-UPDATE",
+          "revision": 1
+        },
+        {
+          "id": "AC-EVOLVE-ROLLOUT",
+          "revision": 1
+        }
+      ]
+    }
+  },
+  "acceptanceCriteria": [
+    {
+      "revision": 1,
+      "lifecycle": "APPROVED",
+      "steward": "assistant:proposal",
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "case-management",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "id": "AC-EVOLVE-RETAINED",
+      "kind": "AcceptanceCriterion",
+      "name": "PROPOSED AC-EVOLVE-RETAINED",
+      "basis": [
+        {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "requirement": {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        },
+        "scenario": "PROPOSED synthetic reference-only: retained rows receive only the independently approved exact backfill bytes; never use this binding as a production tenant or future-write default."
+      }
+    },
+    {
+      "revision": 1,
+      "lifecycle": "APPROVED",
+      "steward": "assistant:proposal",
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "case-management",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "id": "AC-EVOLVE-NEW-WRITE",
+      "kind": "AcceptanceCriterion",
+      "name": "PROPOSED AC-EVOLVE-NEW-WRITE",
+      "basis": [
+        {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "requirement": {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        },
+        "scenario": "PROPOSED: each new reference record must explicitly supply EVOLVE-REFERENCE-NOTE as a non-null String. Absent, null or non-String values are rejected; empty String is permitted. Preserve exact Unicode scalar sequence as UTF-8, without normalization or an inferred default. Target 0.5.0 exposes no resource-create Command or UseCase; direct fixture provisioning must supply this field explicitly."
+      }
+    },
+    {
+      "revision": 1,
+      "lifecycle": "APPROVED",
+      "steward": "assistant:proposal",
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "case-management",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "id": "AC-EVOLVE-UPDATE",
+      "kind": "AcceptanceCriterion",
+      "name": "PROPOSED AC-EVOLVE-UPDATE",
+      "basis": [
+        {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "requirement": {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        },
+        "scenario": "PROPOSED: existing task Commands continue to update existing records using their exact approved inputs and preserve EVOLVE-REFERENCE-NOTE. Missing resource identity remains RESOURCE_NOT_FOUND; no upsert or create is introduced."
+      }
+    },
+    {
+      "revision": 1,
+      "lifecycle": "APPROVED",
+      "steward": "assistant:proposal",
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "case-management",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "id": "AC-EVOLVE-ROLLOUT",
+      "kind": "AcceptanceCriterion",
+      "name": "PROPOSED AC-EVOLVE-ROLLOUT",
+      "basis": [
+        {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "requirement": {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        },
+        "scenario": "PROPOSED: old insert writers that omit the field are incompatible with final NOT NULL/no-default schema. Expand nullable, backfill retained rows, verify, switch or fence all insert writers, then contract. Keep REVIEW_REQUIRED until actual old-writer/new-schema and recovery evidence exists."
+      }
+    }
+  ],
+  "field": {
+    "id": "EVOLVE-REFERENCE-NOTE",
+    "revision": 1,
+    "kind": "Field",
+    "name": "PROPOSED synthetic reference evolution note",
+    "lifecycle": "APPROVED",
+    "steward": "assistant:proposal",
+    "origins": [
+      {
+        "source": "proposal:phase6-evolution-review",
+        "locator": "case-management",
+        "actor": "assistant:proposal",
+        "actorType": "AI"
+      }
+    ],
+    "basis": [
+      {
+        "id": "REQ-EVOLVE-REFERENCE-NOTE",
+        "revision": 1
+      }
+    ],
+    "data": {
+      "owner": {
+        "id": "CASE",
+        "revision": 2
+      },
+      "type": {
+        "kind": "String"
+      },
+      "optional": false,
+      "classification": "PUBLIC",
+      "classificationRef": {
+        "id": "CLASS-PUBLIC",
+        "revision": 2
+      }
+    }
+  },
+  "oldSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+  "candidateDigest": "sha256:e57eaee3f979f3b77feb255dde470772321b3354001547e71e02fbaadca2b59d",
+  "previewPlanDigest": "sha256:0991059e572c725898558b74e73bd62b394a6d70b26a1f638cde8b8b1b28e112",
+  "compatibility": "REVIEW_REQUIRED",
+  "changeSchemaCompatibility": "BREAKING (conservative final-schema classification; rollout REVIEW_REQUIRED)",
+  "operations": {
+    "supportedResourceCreators": [],
+    "reason": "Every approved Command locks an existing tenant-scoped resource and issues UPDATE; missing row throws RESOURCE_NOT_FOUND. UseCases/UI invoke those same Commands. Runtime bookkeeping INSERTs do not create domain resources.",
+    "commands": [
+      {
+        "id": "CMD-APPROVE",
+        "revision": 3,
+        "input": {
+          "id": "OPERATION-INPUT",
+          "revision": 1
+        },
+        "requiredInputFields": [
+          {
+            "id": "OPERATION-TEXT",
+            "revision": 2
+          }
+        ],
+        "writeFields": [
+          {
+            "id": "FLD-TASK-SUMMARY",
+            "revision": 2
+          }
+        ],
+        "assignments": [
+          {
+            "resource": {
+              "id": "CASE",
+              "revision": 2
+            },
+            "field": {
+              "id": "FLD-TASK-SUMMARY",
+              "revision": 2
+            },
+            "value": {
+              "tag": "input",
+              "scope": "OPERATION",
+              "field": {
+                "id": "OPERATION-TEXT",
+                "revision": 2
+              }
+            }
+          }
+        ],
+        "createsResource": false,
+        "noteAssignmentAdded": false
+      },
+      {
+        "id": "CMD-ARCHIVE",
+        "revision": 3,
+        "input": {
+          "id": "OPERATION-INPUT",
+          "revision": 1
+        },
+        "requiredInputFields": [
+          {
+            "id": "OPERATION-TEXT",
+            "revision": 2
+          }
+        ],
+        "writeFields": [
+          {
+            "id": "FLD-TASK-SUMMARY",
+            "revision": 2
+          }
+        ],
+        "assignments": [
+          {
+            "resource": {
+              "id": "CASE",
+              "revision": 2
+            },
+            "field": {
+              "id": "FLD-TASK-SUMMARY",
+              "revision": 2
+            },
+            "value": {
+              "tag": "input",
+              "scope": "OPERATION",
+              "field": {
+                "id": "OPERATION-TEXT",
+                "revision": 2
+              }
+            }
+          }
+        ],
+        "createsResource": false,
+        "noteAssignmentAdded": false
+      },
+      {
+        "id": "CMD-REVIEW",
+        "revision": 3,
+        "input": {
+          "id": "OPERATION-INPUT",
+          "revision": 1
+        },
+        "requiredInputFields": [
+          {
+            "id": "OPERATION-TEXT",
+            "revision": 2
+          }
+        ],
+        "writeFields": [
+          {
+            "id": "FLD-TASK-SUMMARY",
+            "revision": 2
+          }
+        ],
+        "assignments": [
+          {
+            "resource": {
+              "id": "CASE",
+              "revision": 2
+            },
+            "field": {
+              "id": "FLD-TASK-SUMMARY",
+              "revision": 2
+            },
+            "value": {
+              "tag": "input",
+              "scope": "OPERATION",
+              "field": {
+                "id": "OPERATION-TEXT",
+                "revision": 2
+              }
+            }
+          }
+        ],
+        "createsResource": false,
+        "noteAssignmentAdded": false
+      }
+    ],
+    "useCase": {
+      "id": "UC-TASK",
+      "revision": 3,
+      "kind": "UseCase",
+      "name": "UC-TASK",
+      "lifecycle": "APPROVED",
+      "steward": "fixture:authors",
+      "origins": [
+        {
+          "source": "fixture:execution-v03-proposal",
+          "locator": "UC-TASK",
+          "actor": "assistant:fixture-draft",
+          "actorType": "AI"
+        },
+        {
+          "source": "fixture:deterministic-v04-proposal",
+          "locator": "UC-TASK",
+          "actor": "assistant:proposal-author",
+          "actorType": "AI"
+        },
+        {
+          "source": "fixture:synthetic",
+          "locator": "UC-TASK",
+          "actor": "fixture:author",
+          "actorType": "HUMAN"
+        }
+      ],
+      "basis": [
+        {
+          "id": "DEC-DETERMINISTIC-V04",
+          "revision": 1
+        },
+        {
+          "id": "DEC-EXECUTION-V03",
+          "revision": 1
+        },
+        {
+          "id": "REQ-CASE",
+          "revision": 1
+        }
+      ],
+      "data": {
+        "service": {
+          "id": "SERVICE-TASKS",
+          "revision": 3
+        },
+        "steps": [
+          {
+            "id": "STEP-CMD-REVIEW",
+            "revision": 3
+          },
+          {
+            "id": "STEP-CMD-APPROVE",
+            "revision": 3
+          },
+          {
+            "id": "STEP-CMD-ARCHIVE",
+            "revision": 3
+          }
+        ],
+        "input": {
+          "id": "INPUT-TASK",
+          "revision": 1
+        },
+        "output": {
+          "id": "OUTPUT-TASK",
+          "revision": 1
+        },
+        "outputBindings": [
+          {
+            "field": {
+              "id": "OUTPUT-TASK-TEXT",
+              "revision": 2
+            },
+            "value": {
+              "tag": "stepResult",
+              "step": {
+                "id": "STEP-CMD-ARCHIVE",
+                "revision": 3
+              },
+              "field": {
+                "id": "RESULT-TEXT",
+                "revision": 2
+              }
+            }
+          }
+        ],
+        "invocationOrder": "AUTH_SESSION_AUTHZ_TENANT_RATE_IDEMPOTENCY_TRANSACTION_ATOMIC_COMMIT_DELIVERY"
+      }
+    },
+    "steps": [
+      {
+        "id": "STEP-CMD-APPROVE",
+        "revision": 3,
+        "kind": "ExecutionStep",
+        "name": "STEP-CMD-APPROVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "STEP-CMD-APPROVE",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "STEP-CMD-APPROVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "UC-TASK",
+            "revision": 3
+          },
+          "operation": {
+            "id": "CMD-APPROVE",
+            "revision": 3
+          },
+          "onFailure": "STOP",
+          "transaction": {
+            "id": "TX-TASK",
+            "revision": 3
+          },
+          "resource": {
+            "tag": "input",
+            "scope": "USE_CASE",
+            "field": {
+              "id": "INPUT-TASK-RESOURCE",
+              "revision": 2
+            }
+          },
+          "inputBindings": [
+            {
+              "field": {
+                "id": "OPERATION-TEXT",
+                "revision": 2
+              },
+              "value": {
+                "tag": "stepResult",
+                "step": {
+                  "id": "STEP-CMD-REVIEW",
+                  "revision": 3
+                },
+                "field": {
+                  "id": "RESULT-TEXT",
+                  "revision": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "STEP-CMD-ARCHIVE",
+        "revision": 3,
+        "kind": "ExecutionStep",
+        "name": "STEP-CMD-ARCHIVE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "STEP-CMD-ARCHIVE",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "STEP-CMD-ARCHIVE",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "UC-TASK",
+            "revision": 3
+          },
+          "operation": {
+            "id": "CMD-ARCHIVE",
+            "revision": 3
+          },
+          "onFailure": "STOP",
+          "transaction": {
+            "id": "TX-TASK",
+            "revision": 3
+          },
+          "resource": {
+            "tag": "input",
+            "scope": "USE_CASE",
+            "field": {
+              "id": "INPUT-TASK-RESOURCE",
+              "revision": 2
+            }
+          },
+          "inputBindings": [
+            {
+              "field": {
+                "id": "OPERATION-TEXT",
+                "revision": 2
+              },
+              "value": {
+                "tag": "stepResult",
+                "step": {
+                  "id": "STEP-CMD-APPROVE",
+                  "revision": 3
+                },
+                "field": {
+                  "id": "RESULT-TEXT",
+                  "revision": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "STEP-CMD-REVIEW",
+        "revision": 3,
+        "kind": "ExecutionStep",
+        "name": "STEP-CMD-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "STEP-CMD-REVIEW",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "STEP-CMD-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "UC-TASK",
+            "revision": 3
+          },
+          "operation": {
+            "id": "CMD-REVIEW",
+            "revision": 3
+          },
+          "onFailure": "STOP",
+          "transaction": {
+            "id": "TX-TASK",
+            "revision": 3
+          },
+          "resource": {
+            "tag": "input",
+            "scope": "USE_CASE",
+            "field": {
+              "id": "INPUT-TASK-RESOURCE",
+              "revision": 2
+            }
+          },
+          "inputBindings": [
+            {
+              "field": {
+                "id": "OPERATION-TEXT",
+                "revision": 2
+              },
+              "value": {
+                "tag": "input",
+                "scope": "USE_CASE",
+                "field": {
+                  "id": "INPUT-TASK-TEXT",
+                  "revision": 2
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "ui": [
+      {
+        "id": "FORM-TASK",
+        "revision": 3,
+        "kind": "Form",
+        "name": "FORM-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "FORM-TASK",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "FORM-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "useCase": {
+            "id": "UC-TASK",
+            "revision": 3
+          },
+          "controls": [
+            {
+              "id": "CONTROL-TASK-RESOURCE",
+              "revision": 2
+            },
+            {
+              "id": "CONTROL-TEXT",
+              "revision": 3
+            }
+          ],
+          "submit": {
+            "id": "ACTION-TASK",
+            "revision": 3
+          }
+        }
+      },
+      {
+        "id": "CONTROL-TASK-RESOURCE",
+        "revision": 2,
+        "kind": "InputControl",
+        "name": "CONTROL-TASK-RESOURCE",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "CONTROL-TASK-RESOURCE",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "form": {
+            "id": "FORM-TASK",
+            "revision": 3
+          },
+          "field": {
+            "id": "INPUT-TASK-RESOURCE",
+            "revision": 2
+          },
+          "label": "Resource identity",
+          "errorMessage": "Select the authorized resource identity.",
+          "required": true,
+          "purpose": "TEXT"
+        }
+      },
+      {
+        "id": "CONTROL-TEXT",
+        "revision": 3,
+        "kind": "InputControl",
+        "name": "CONTROL-TEXT",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "CONTROL-TEXT",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "form": {
+            "id": "FORM-TASK",
+            "revision": 3
+          },
+          "field": {
+            "id": "INPUT-TASK-TEXT",
+            "revision": 2
+          },
+          "label": "Task note",
+          "errorMessage": "Enter a task note.",
+          "required": true,
+          "purpose": "MULTILINE"
+        }
+      },
+      {
+        "id": "ACTION-TASK",
+        "revision": 3,
+        "kind": "Action",
+        "name": "ACTION-TASK",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:synthetic",
+            "locator": "ACTION-TASK",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "useCase": {
+            "id": "UC-TASK",
+            "revision": 3
+          },
+          "permissions": [
+            {
+              "id": "PERM-CMD-APPROVE",
+              "revision": 3
+            },
+            {
+              "id": "PERM-CMD-ARCHIVE",
+              "revision": 3
+            },
+            {
+              "id": "PERM-CMD-REVIEW",
+              "revision": 3
+            }
+          ],
+          "label": "Complete task",
+          "confirmation": "REQUIRED"
+        }
+      }
+    ],
+    "newRecordProvisioning": "Only out-of-band fixture/admin insertion is available, not an admitted application create API. Such writers must supply all existing required owner fields plus the new field and obey existing FK/invariant constraints.",
+    "requiredProvisioningFields": [
+      {
+        "id": "CASE-ASSIGNEE",
+        "revision": 2
+      },
+      {
+        "id": "CASE-ID",
+        "revision": 2
+      },
+      {
+        "id": "CASE-TENANT",
+        "revision": 2
+      },
+      {
+        "id": "FLD-CASE-TITLE",
+        "revision": 2
+      },
+      {
+        "id": "FLD-TASK-SUMMARY",
+        "revision": 2
+      },
+      {
+        "id": "EVOLVE-REFERENCE-NOTE",
+        "revision": 1
+      }
+    ],
+    "incompatibleKnownWriters": [
+      "tooling/phase6_reference_tests.py: seed_sql/source seed INSERT",
+      "tooling/invocation_reference_tests.py: source clone INSERT with explicit old-column list",
+      "other integration seed/import writers that use explicit old-column lists: must inventory and switch or fence"
+    ],
+    "externalWriterInventory": "NOT_PROVIDED; no blanket compatibility claim"
+  },
+  "newWrite": {
+    "required": true,
+    "nullable": false,
+    "type": "String",
+    "emptyStringAllowed": true,
+    "absence": "REJECT",
+    "null": "REJECT",
+    "nonString": "REJECT",
+    "default": null,
+    "encoding": "exact UTF-8 bytes; no Unicode normalization; NUL is a scalar witness",
+    "existingUpdates": "preserve supplied stored note; no new assignment or create/upsert",
+    "currentCreateAPI": "UNSUPPORTED; proposal adds none",
+    "databaseEnforcement": "bytea NOT NULL enforces non-null presence only; raw SQL does not prove String type or valid UTF-8. Explicit provisioning must validate these proposed constraints; no provisioning implementation is approved"
+  },
+  "backfill": {
+    "scope": "SYNTHETIC_REFERENCE_RETAINED_ROWS_ONLY",
+    "binding": {
+      "requiredFieldBackfills": {
+        "EVOLVE-REFERENCE-NOTE": "e\u0301\u0000\ud83e\udd8b'"
+      }
+    },
+    "digest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
+    "utf8Hex": "65cc8100f09fa68b27",
+    "independentApproval": "REQUIRED_NOT_GRANTED",
+    "productionTenantDefault": false,
+    "futureWriteDefault": false
+  },
+  "unsupportedTargetBehavior": [
+    "No application resource-create operation is exposed by these approved fixtures",
+    "Staged expand/switch/contract deployment orchestration is not implemented by the sealed single migration planner",
+    "Actual old-writer/new-schema runtime compatibility and revised full admission are unproved",
+    "No approved new-record provisioning validator exists; bytea alone cannot enforce String/UTF-8 validity",
+    "Existing hard-coded seed and clone writers omit the required field",
+    "No real accepted journal anchor, approved binding, exact SQL or deployment receipt is supplied"
+  ],
+  "risks": [
+    "Final required schema breaks old inserts; nullable expansion alone does not enforce final semantics",
+    "Do not deploy required-model readers against a nullable expanded schema containing nulls",
+    "Public classification is a synthetic proposal; do not store production personal data on that assumption",
+    "A future create Command/input/UI or staged migration support needs separate exact semantic/target approval"
+  ],
+  "sourceEvidence": {
+    "targets/spring-vue-postgres/worker/execution_codegen.py": "sha256:fd512fce711007d32b3ae29963e01c7448b6a0584eaf29de6de93298caab2955",
+    "targets/spring-vue-postgres/worker/generation.py": "sha256:71380a57446ec6e12efae007299e6a4255e473480dae65c28e813ecff6122b84",
+    "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/ExecutionStore.java": "sha256:c3916e4866c3aaecbc8b3d3df1b23fdaf625a98961eea35a316740bf2ed2788b",
+    "tooling/phase6_reference_tests.py": "sha256:3e9ddcfb277b84283ae29625d6889f6fd84b8205ad068a05b556aba6dd3ed913",
+    "tooling/invocation_reference_tests.py": "sha256:efb6adc5fe8349e79f59ea3c1cb91eaab237a21e2acbde4531bf925211a295cb"
+  },
+  "runtimeEvidence": "NOT_EXECUTED; static source audit only",
+  "authorityBoundary": "Synthetic preview anchor is not accepted history; candidate lifecycle is structural, not human approval",
+  "changeSetFileDigest": "sha256:55a53d04dfc196505880699f51e68d039232a8a37de88d4f9102c9c61f8fbcc0",
+  "candidateFileDigest": "sha256:7f75e65fe24b7896cca4381519dcb21fbcaca89df761bae415d43a1b745ffcdb"
+}

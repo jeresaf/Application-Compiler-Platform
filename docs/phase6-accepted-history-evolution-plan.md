@@ -113,38 +113,52 @@ Each step below is a future gate, not a completed result.
    ownership, recovery and retained operational state. Do not substitute unit tests for
    deployment evidence. Only then evaluate closure criteria; this plan grants no closure.
 
-## New synthetic proposals and exact approval boundaries
+## Revised synthetic review packages (correction of e15bd10)
 
-The manifest and per-domain files propose one required String field named
-`EVOLVE-REFERENCE-NOTE` on an existing entity in each approved Canonical 0.3 application.
-The existing owner reference is explicit in each manifest entry. New origins are AI-only.
-The proposed backfill is the exact synthetic string with UTF-8 hex
-`65cc8100f09fa68b27` (decomposed accent, NUL, butterfly, apostrophe).
-This is a byte-preservation witness, not an inferred business default. It adds persistence
-semantics only; no new query projection, workflow effect or frontend control is implied.
-A required field can invalidate existing create operations that supply no value. These
-previews therefore do not establish deployable compatibility. Before implementation,
-review exact new-write command/dataflow/UI behavior or reject the proposal; do not reuse
-the retained-row backfill as an implicit default for future writes. Any additional
-behavior must be separately authored, digest-bound and approved, then re-planned.
+The planning approach is an accepted engineering checkpoint only. New semantic candidates,
+independent bindings, migration plans and deployment actions remain NOT APPROVED.
+The separate [PAYMENT package](../proposals/phase6-evolution-review/payment-human-review.md)
+and [CASE MANAGEMENT package](../proposals/phase6-evolution-review/case-management-human-review.md)
+provide exact candidate/ChangeSet digests, old/proposed meaning, commands and inputs,
+UseCase/UI impact, required-field/new-write rules, risks and rollout decisions.
+Their machine companions and [manifest](../proposals/phase6-evolution-review/manifest.json)
+bind all review bytes. These revised digests supersede the e15bd10 draft digests.
 
-Human decisions required separately for each domain:
+Each new field now derives from the explicitly proposed AI-origin requirement
+`REQ-EVOLVE-REFERENCE-NOTE` and its four synthetic acceptance criteria, rather than
+REQ-PAYMENT or REQ-CASE. Existing approved business meanings do not authorize this addition.
+Structural lifecycle APPROVED in candidates is not a human approval; packages and manifest
+remain REVIEW_REQUIRED with empty approvals.
 
-- **SEMANTIC_CANDIDATE_AND_CHANGESET:** approve or reject the exact candidate digest and
-  ChangeSet file hash in the manifest, including field identity, owner, type, requiredness,
-  classification and reference-only scope.
-- **INDEPENDENT_DATA_BINDING:** approve or reject the exact bindings digest and value for
-  retained reference rows. Production tenant applicability requires its own decision.
-- **REAL_ACCEPTED_HISTORY_REBASE_AND_PLAN:** after real history is supplied, review the
-  actual rebased plan digest, required scopes and candidate. Current preview plan hashes
-  use an explicitly synthetic anchor and cannot authorize execution.
-- **EXACT_SQL_AND_DEPLOYMENT_APPROVAL:** after supported deterministic lowering, review
-  exact SQL digest, sealed generator, runtime population, backup and failure/recovery plan.
-  No SQL or unknown future migration is approved by accepting this proposal.
+Static inspection of approved Commands and the sealed generator finds **no supported
+payment/case resource-create operation**. Commands lock tenant-scoped existing resources,
+reject missing rows and UPDATE; runtime bookkeeping INSERTs are distinct. UseCase inputs
+remain resource identity and task text, and UI remains the existing-record task interface.
+Direct reference setup and clone INSERT writers omit the new field and become incompatible
+with its final required schema. The complete external writer inventory is unknown.
 
-Current approvals are empty. Candidate digests are available now; authoritative deployment
-plan/SQL digests are intentionally pending their real inputs. Approval of unsupported
-compiler changes would require an additional explicit successor-contract/release decision.
+New records provisioned out of band must explicitly provide the new non-null String and
+all existing mandatory fields/FK/invariant inputs. Empty String is permitted; absence,
+null and non-String are rejected. No normalization, default, new create API, UI or implicit
+assignment is introduced. The retained reference backfill remains exact UTF-8 hex
+`65cc8100f09fa68b27`, never a production tenant or future-write default.
+
+Compatibility is REVIEW_REQUIRED; the ChangeSet now conservatively declares BREAKING,
+not BACKWARD. Old-writer/new-schema runtime compatibility is not claimed. UNKNOWN is a
+closed-schema value but the existing planner correctly refuses to prepare it; no evaluator
+or planner has been weakened. The proposed safe rollout is expand nullable without a
+default, backfill approved retained rows, verify, switch/fence every insert writer and
+re-scan under fencing, then contract NOT NULL. Do not run new required-model readers over
+nullable rows. The sealed target does not orchestrate this staged deployment; exact SQL,
+writer-switch/recovery evidence and any successor-target support need separate review.
+
+For each domain, decisions remain separate: semantic requirement/candidate/ChangeSet;
+independent reference-only binding; new-record writer and compatibility policy; real
+accepted-history rebase/plan; exact SQL and deployment/recovery approval. A future resource
+create Command/dataflow/UI requires an additional exact proposal, not a fabricated current
+operation. Preview anchors are synthetic and not accepted history. No unknown future plan
+or SQL is authorized. Historical execution-v03 and deterministic-v04 authority is audited
+independently, never replaced by these unapproved proposals.
 
 ## Complete deployment failure/recovery matrix
 
@@ -202,6 +216,26 @@ is desired, first obtain its separate exact semantic specification and approval.
 | AI | Exact bounded approval for proposed artifacts/semantics; origin never relabeled HUMAN |
 | FRAMEWORK | Protected artifact policy and exact framework version retained |
 | UNKNOWN | Reject materialization until ownership is explicitly resolved |
+
+## Correction validation and latest branch CI observation
+
+The [local verification record](../targets/spring-vue-postgres/evidence/phase6-evolution-corrections-validation.json)
+separates historical execution-v03/deterministic-v04 authority from unapproved synthetic
+proposals. Sixteen historical authority/semantic regression tests passed, and independent
+Canonical 0.2/0.3 byte/hash vectors passed. Revised package hashes, candidate/plan bindings,
+AI-only proposal origins, independent requirement basis and preservation of existing
+Command/UseCase/UI meanings were checked. Attempting to lower either preview without
+accepted history fails UNACCEPTED_HISTORY. No migration was executed.
+
+The [latest branch CI observation](../targets/spring-vue-postgres/evidence/phase6-evolution-corrections-ci-e15bd10.json)
+binds push run `38237101639` to reviewed commit
+`e15bd1058f69194c87f71599250cf4474b93514c`, with exact observation time, job IDs/steps,
+run status and available uploaded artifact metadata. At that observation, contracts,
+phase5-experiments and phase5c-hard-gates succeeded; phase6-target was still in progress
+and no closure result was available. Overall CI remains **IN_PROGRESS, NOT FINAL**,
+not GREEN. Pending stages are not successes. Artifact downloads are not claimed.
+This hosted run validates the earlier checkpoint, not these uncommitted revised packages.
+A final hosted result and CI bound to revised source remain future evidence.
 
 ## Evidence-driven stop condition
 

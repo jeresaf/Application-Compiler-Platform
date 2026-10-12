@@ -1,0 +1,148 @@
+{
+  "status": "REVIEW_INTEGRITY_PASS_NOT_DEPLOYMENT_APPROVAL",
+  "semanticEvolutionDeployed": "NOT_PROVED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "sealedBundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+  "historicalAuthority": {
+    "payment": {
+      "executionV03": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+      "deterministicV04": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "verification": "EXISTING_BOUNDED_REFERENCE_APPROVALS_VERIFIED",
+      "deploymentHistoryAndIndependentBindings": "NOT_SUPPLIED; no deployed-transition PASS asserted",
+      "transitions": [
+        {
+          "corpus": "execution-v03",
+          "candidateDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+          "planDigest": "sha256:9f32a52a87ef1faa12daf0a24dbbbb6687d2c59e10cb07ea9f1b6035e5f448a0",
+          "oldSnapshotDigest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+          "anchor": {
+            "sequence": 0,
+            "digest": "sha256:eaec1ba1aeb76a96bda57fab383ff6ce87a05f16d1ebea56f5727883255d9f6e",
+            "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "files": {
+            "test-corpus/execution-v03/payment-canonical.json": "sha256:5f246d645d44b99730109a68c22bbd067038b630771f2318f235b18aa42940b4",
+            "test-corpus/execution-v03/payment-plan.json": "sha256:005f61bcdbbd81e44d1a9ee737110d38f8944460105b19d7db57bc70fd4ff580",
+            "test-corpus/execution-v03/payment-change.json": "sha256:a85b63e0425e7d3c017bdf3b934fad0535a76db4a6a2d69e90e1e2de142fe5a0",
+            "test-corpus/execution-v03/human-approval.json": "sha256:f194092b700bb201e02fc87ecb764cab8c84576761daf39293b65f54253af3a4"
+          }
+        },
+        {
+          "corpus": "deterministic-v04",
+          "candidateDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+          "planDigest": "sha256:882781981441c2ab50d71617a15edfca88c6b9ebaa25c130cf40f56ea8ce356e",
+          "oldSnapshotDigest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+          "anchor": {
+            "sequence": 0,
+            "digest": "sha256:d2cd65d09c4739f53d4c57dddd1d29eb5456bc421c5fac745b336459590d25ac",
+            "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "files": {
+            "test-corpus/deterministic-v04/payment-canonical-candidate.json": "sha256:57b3c3ab9c016b1da264ee007510ab8e3f3650b0ce95cd817b96b6c09a75ea5c",
+            "test-corpus/deterministic-v04/payment-plan.json": "sha256:bec77072120fd01984520c2e7502234491febb1d1ca9c5fd02eb57cb049162fa",
+            "test-corpus/deterministic-v04/payment-change.json": "sha256:f27a344784c029baa36191030c38294a7e3573dbcdb91f1258d4fb65aa807c0c",
+            "test-corpus/deterministic-v04/human-approval.json": "sha256:754df05cd85882061ee16db21e09eec6fd02930f55d28026e84d9aea08e502b2"
+          }
+        }
+      ]
+    },
+    "case-management": {
+      "executionV03": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+      "deterministicV04": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "verification": "EXISTING_BOUNDED_REFERENCE_APPROVALS_VERIFIED",
+      "deploymentHistoryAndIndependentBindings": "NOT_SUPPLIED; no deployed-transition PASS asserted",
+      "transitions": [
+        {
+          "corpus": "execution-v03",
+          "candidateDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+          "planDigest": "sha256:9d79387aa309a5e6b3d979edb2a796c93da2461f6d5d8efd42effca017eefb10",
+          "oldSnapshotDigest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+          "anchor": {
+            "sequence": 0,
+            "digest": "sha256:3ee1b350e4222870270c871a379a36c48b8d6fbb684c05ad4ed7438b0b065779",
+            "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "files": {
+            "test-corpus/execution-v03/case-management-canonical.json": "sha256:049ab414885c7a22ad6538c95e01a6cf51b076bc32e56eb74b6320996522308f",
+            "test-corpus/execution-v03/case-management-plan.json": "sha256:642b66f19a4d945b80d2a3d69f72de46df7554adbb2cd74a2ae7c9e23218e1fa",
+            "test-corpus/execution-v03/case-management-change.json": "sha256:3ab17015d0e2ba885f9ea2e4f911e63f017e3e8c6b8edd0971bfee60500562e3",
+            "test-corpus/execution-v03/human-approval.json": "sha256:f194092b700bb201e02fc87ecb764cab8c84576761daf39293b65f54253af3a4"
+          }
+        },
+        {
+          "corpus": "deterministic-v04",
+          "candidateDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+          "planDigest": "sha256:d904bc51285d778ba66784fbd08842bd151980e8a22f7662c6330e0f3fd51131",
+          "oldSnapshotDigest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+          "anchor": {
+            "sequence": 0,
+            "digest": "sha256:4207852923d9e7e16f7e273d5bedbaa78bc2f10d82efa6f5568f00d23b89055b",
+            "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "files": {
+            "test-corpus/deterministic-v04/case-management-canonical-candidate.json": "sha256:e547bfc0826b3c15edf3e349b1eb3d01f963089b42f646271b4c34926968ff63",
+            "test-corpus/deterministic-v04/case-management-plan.json": "sha256:71611656ce4a0a299745488fdef19334a8548b99d15e18e5663935bab7c45433",
+            "test-corpus/deterministic-v04/case-management-change.json": "sha256:2c79f8186b54ce07e36b78053051977387218ae8865df1cafd96c75ab1875e53",
+            "test-corpus/deterministic-v04/human-approval.json": "sha256:754df05cd85882061ee16db21e09eec6fd02930f55d28026e84d9aea08e502b2"
+          }
+        }
+      ]
+    }
+  },
+  "proposals": {
+    "payment": {
+      "candidateDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf",
+      "previewPlanDigest": "sha256:9b2c7f905976302f3341beccf1a2820563ca3ac957129c9aa8a5c138e3402d15",
+      "integrity": "PASS",
+      "independentSyntheticRequirement": "PASS",
+      "existingOperationMeaningPreserved": "PASS",
+      "unacceptedMigration": "REJECTED_UNACCEPTED_HISTORY",
+      "runtimeCompatibility": "NOT_EXECUTED"
+    },
+    "case-management": {
+      "candidateDigest": "sha256:e57eaee3f979f3b77feb255dde470772321b3354001547e71e02fbaadca2b59d",
+      "previewPlanDigest": "sha256:0991059e572c725898558b74e73bd62b394a6d70b26a1f638cde8b8b1b28e112",
+      "integrity": "PASS",
+      "independentSyntheticRequirement": "PASS",
+      "existingOperationMeaningPreserved": "PASS",
+      "unacceptedMigration": "REJECTED_UNACCEPTED_HISTORY",
+      "runtimeCompatibility": "NOT_EXECUTED"
+    }
+  },
+  "observedAt": "2026-10-12T10:51:43.596799+00:00",
+  "sourceCheckpoint": "e15bd1058f69194c87f71599250cf4474b93514c",
+  "scope": "Local uncommitted review corrections; historical authority audit independent of unapproved proposals; no deployment or closure proof",
+  "reviewFiles": {
+    "proposals/phase6-evolution-review/manifest.json": "sha256:d15f527d1ca0696b5597a715e6ed069b828750b7aa0b99133a48d45c745ab48c",
+    "docs/phase6-accepted-history-evolution-plan.md": "sha256:dff8195bf6d81282d6e2561cf6b8b6904b8818629304c44e75ea75ebba4363f5",
+    "tooling/audit/prepare_evolution_review.py": "sha256:c2fae77fb348dfcc8c14ee8a5ac9a1561eb45c6271710152ce35b47e7e3ebf15",
+    "tooling/audit/verify_evolution_review.py": "sha256:6c2dc62053c6dc87e4bf5b97b8d82613259a59f71ff280ff970470cce8357ef3"
+  },
+  "historicalTests": {
+    "command": ".venv/bin/python3.14 -m unittest tooling.tests.test_execution_approval tooling.tests.test_deterministic_approval tooling.tests.test_deterministic_v04 -v",
+    "tests": 16,
+    "seconds": 101.178,
+    "result": "PASS",
+    "logDigest": "sha256:74859dc94b87ccb53494ac6922f6a11a1a69f63dbf1a31773550e4c5f1fc87c9",
+    "scope": "Existing historical reference authority/semantics unit regressions, not production deployment evidence; /tmp log ephemeral"
+  },
+  "canonicalVectors": {
+    "execution-v03": "PASS: 9 positive, 13 negative, 2 snapshot hashes",
+    "deterministic-v04": "PASS: 9 positive, 13 negative, 2 snapshot hashes"
+  },
+  "repositoryContracts": "PASS",
+  "protectedFiles": {
+    "gitCleanAgainstReviewedCheckpoint": [
+      "contracts/",
+      "test-corpus/",
+      "targets/spring-vue-postgres/profile.json",
+      "targets/spring-vue-postgres/worker/",
+      "targets/spring-vue-postgres/templates/",
+      "targets/spring-vue-postgres/evidence/phase6-final-closure.json",
+      "targets/spring-vue-postgres/evidence/phase6-checkpoint-hosted-38093244628.json",
+      "docs/phase6-final-closure-audit.md"
+    ],
+    "sealedBundleAfterVerification": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb"
+  }
+}

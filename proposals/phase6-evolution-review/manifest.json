@@ -1,31 +1,45 @@
 {
   "status": "REVIEW_REQUIRED_NOT_APPROVED",
-  "reviewedSource": "80e19a6282c481c616f370e2876d3099eead0a2e",
+  "reviewedSource": "e15bd1058f69194c87f71599250cf4474b93514c",
+  "planningCheckpoint": "ACCEPTED_ENGINEERING_APPROACH_ONLY",
   "sealedBundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
   "authorityIssued": false,
   "migrationExecuted": false,
   "domains": {
     "payment": {
       "baseDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
-      "candidateDigest": "sha256:1acc4a3c2e46d4a62a97ae7bf2e29f03f9b3290f5bb3bc5179968d3771676d67",
-      "previewPlanDigest": "sha256:8f113107f14c8e34f34a0e27f02ebc691d2288f248eb357d32bfcbb052af6d7f",
+      "candidateDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf",
+      "previewPlanDigest": "sha256:9b2c7f905976302f3341beccf1a2820563ca3ac957129c9aa8a5c138e3402d15",
       "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
       "bindingUTF8Hex": "65cc8100f09fa68b27",
+      "requirement": "REQ-EVOLVE-REFERENCE-NOTE",
+      "acceptanceCriteria": [
+        "AC-EVOLVE-RETAINED",
+        "AC-EVOLVE-NEW-WRITE",
+        "AC-EVOLVE-UPDATE",
+        "AC-EVOLVE-ROLLOUT"
+      ],
       "owner": {
         "id": "ENT-PAYMENT",
         "revision": 2
       },
+      "applicationId": "APP-FIXTURE",
       "files": {
-        "change": "sha256:6128b6aaecf27a7ad53aa45924f9b2ec18bb59e82886d1f43d859aa56e95d14f",
-        "plan": "sha256:66aacf6a380612719abbfb4c905f021d59bbc1879ef1c74d4d2a536669c712e7",
-        "canonical-candidate": "sha256:cd3b5bdd9fe78e5e470a351194a15a7b20bbd03cc3b62d0c922c8c483f35d387",
-        "data-bindings": "sha256:c503a5f0b12fb10c7fe05b7cd6f577bb0ee06f6db7563d3667d57beffda2b04e"
+        "change": "sha256:3fffe5ef53a9446b4c827a8ab220b8fa5d7e02760f941b7f8d7b227dc3facefa",
+        "plan": "sha256:2c4b92076e3a03a316635522cf4ac14954407faa4f9a111e89c9fd34fc6fc59d",
+        "canonical-candidate": "sha256:3eded7a54001e727dea5ac39abc5e011452e13e657dfd774272363baf373c789",
+        "data-bindings": "sha256:c503a5f0b12fb10c7fe05b7cd6f577bb0ee06f6db7563d3667d57beffda2b04e",
+        "human-review": "sha256:9101cd1785357d92b5d7093ff76976954a442ea31dbf5d597c57415a414f6984",
+        "human-review-notes": "sha256:7d64d072ab096b4625ab24f6261a7ad7c49afcc70db970986c502840eb5979dc"
       },
+      "compatibility": "REVIEW_REQUIRED",
+      "changeSchemaCompatibility": "BREAKING",
       "anchorStatus": "SYNTHETIC_PREVIEW_ANCHOR_NOT_ACCEPTED_HISTORY",
-      "candidateLifecycleMeaning": "APPROVED is the structural active-candidate encoding; no human approval is asserted",
+      "candidateLifecycleMeaning": "APPROVED is structural active-candidate encoding; no human approval asserted",
       "decisionsRequired": [
-        "SEMANTIC_CANDIDATE_AND_CHANGESET",
-        "INDEPENDENT_DATA_BINDING",
+        "SEMANTIC_REQUIREMENT_CANDIDATE_AND_CHANGESET",
+        "INDEPENDENT_REFERENCE_DATA_BINDING",
+        "NEW_RECORD_WRITER_AND_COMPATIBILITY_POLICY",
         "REAL_ACCEPTED_HISTORY_REBASE_AND_PLAN",
         "EXACT_SQL_AND_DEPLOYMENT_APPROVAL"
       ],
@@ -33,25 +47,38 @@
     },
     "case-management": {
       "baseDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
-      "candidateDigest": "sha256:2eeadc0fa771ce42db9705ca23a380129edbc2643b8f7a72d76d6029b44fe8ef",
-      "previewPlanDigest": "sha256:b7893da12b00ffb169d0bff233b45b2e0f4b84f51bb7cee33c9b94abeae51a0d",
+      "candidateDigest": "sha256:e57eaee3f979f3b77feb255dde470772321b3354001547e71e02fbaadca2b59d",
+      "previewPlanDigest": "sha256:0991059e572c725898558b74e73bd62b394a6d70b26a1f638cde8b8b1b28e112",
       "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
       "bindingUTF8Hex": "65cc8100f09fa68b27",
+      "requirement": "REQ-EVOLVE-REFERENCE-NOTE",
+      "acceptanceCriteria": [
+        "AC-EVOLVE-RETAINED",
+        "AC-EVOLVE-NEW-WRITE",
+        "AC-EVOLVE-UPDATE",
+        "AC-EVOLVE-ROLLOUT"
+      ],
       "owner": {
         "id": "CASE",
         "revision": 2
       },
+      "applicationId": "APP-CASE-MANAGEMENT",
       "files": {
-        "change": "sha256:90264b24b832242087b2ba960c79a2fc5069fc9aae8cef1a019a552c3fba4aee",
-        "plan": "sha256:b694847982a9ca1fc99d61152055f89ebc3175fad5d8fcb72ba88cf72f8059b3",
-        "canonical-candidate": "sha256:426067bfddd97763d80f037cc402e8b2a96a4a6b7afb0e77d11754e671b2f94b",
-        "data-bindings": "sha256:c503a5f0b12fb10c7fe05b7cd6f577bb0ee06f6db7563d3667d57beffda2b04e"
+        "change": "sha256:55a53d04dfc196505880699f51e68d039232a8a37de88d4f9102c9c61f8fbcc0",
+        "plan": "sha256:0ca60078e04164624ff3da0c10b860ceeb6d0c2baff6ee76bb73ab8452295ec1",
+        "canonical-candidate": "sha256:7f75e65fe24b7896cca4381519dcb21fbcaca89df761bae415d43a1b745ffcdb",
+        "data-bindings": "sha256:c503a5f0b12fb10c7fe05b7cd6f577bb0ee06f6db7563d3667d57beffda2b04e",
+        "human-review": "sha256:d27096625c8a5833bd4134ae0cc17a7b9751a2d9dd121d425002e364c315211d",
+        "human-review-notes": "sha256:853739fbeada5b0a5d8ad78d706abe3b92a8263b448cdd5fded3fb35c8a91b9f"
       },
+      "compatibility": "REVIEW_REQUIRED",
+      "changeSchemaCompatibility": "BREAKING",
       "anchorStatus": "SYNTHETIC_PREVIEW_ANCHOR_NOT_ACCEPTED_HISTORY",
-      "candidateLifecycleMeaning": "APPROVED is the structural active-candidate encoding; no human approval is asserted",
+      "candidateLifecycleMeaning": "APPROVED is structural active-candidate encoding; no human approval asserted",
       "decisionsRequired": [
-        "SEMANTIC_CANDIDATE_AND_CHANGESET",
-        "INDEPENDENT_DATA_BINDING",
+        "SEMANTIC_REQUIREMENT_CANDIDATE_AND_CHANGESET",
+        "INDEPENDENT_REFERENCE_DATA_BINDING",
+        "NEW_RECORD_WRITER_AND_COMPATIBILITY_POLICY",
         "REAL_ACCEPTED_HISTORY_REBASE_AND_PLAN",
         "EXACT_SQL_AND_DEPLOYMENT_APPROVAL"
       ],

@@ -6,7 +6,7 @@
     "changeVersion": "0.3.0",
     "id": "CHANGE-REVIEW-payment",
     "author": "assistant:proposal",
-    "intent": "UNAPPROVED synthetic reference-only required field; HUMAN REVIEW REQUIRED",
+    "intent": "UNAPPROVED synthetic reference requirement and required field; HUMAN REVIEW REQUIRED",
     "branch": "BRANCH-CHANGE-required-field",
     "base": {
       "sequence": 0,
@@ -17,23 +17,193 @@
       {
         "op": "ADD",
         "node": {
-          "id": "EVOLVE-REFERENCE-NOTE",
           "revision": 1,
-          "kind": "Field",
-          "name": "Synthetic reference evolution note",
           "lifecycle": "APPROVED",
-          "steward": "fixture:authors",
+          "steward": "assistant:proposal",
           "origins": [
             {
               "source": "proposal:phase6-evolution-review",
-              "locator": "payment/EVOLVE-REFERENCE-NOTE",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "kind": "Requirement",
+          "name": "PROPOSED synthetic reference note requirement",
+          "basis": [],
+          "data": {
+            "statement": "PROPOSED, UNAPPROVED, SYNTHETIC REFERENCE ONLY: ENT-PAYMENT records retain a required exact String reference note. New records must explicitly supply it; retained-row backfill requires independent approval and is never a future-write default. No create operation or UI is added. Existing approved update behavior preserves it. Rollout remains REVIEW_REQUIRED.",
+            "priority": "MUST",
+            "acceptance": [
+              {
+                "id": "AC-EVOLVE-RETAINED",
+                "revision": 1
+              },
+              {
+                "id": "AC-EVOLVE-NEW-WRITE",
+                "revision": 1
+              },
+              {
+                "id": "AC-EVOLVE-UPDATE",
+                "revision": 1
+              },
+              {
+                "id": "AC-EVOLVE-ROLLOUT",
+                "revision": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "op": "ADD",
+        "node": {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "AC-EVOLVE-RETAINED",
+          "kind": "AcceptanceCriterion",
+          "name": "PROPOSED AC-EVOLVE-RETAINED",
+          "basis": [
+            {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            },
+            "scenario": "PROPOSED synthetic reference-only: retained rows receive only the independently approved exact backfill bytes; never use this binding as a production tenant or future-write default."
+          }
+        }
+      },
+      {
+        "op": "ADD",
+        "node": {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "AC-EVOLVE-NEW-WRITE",
+          "kind": "AcceptanceCriterion",
+          "name": "PROPOSED AC-EVOLVE-NEW-WRITE",
+          "basis": [
+            {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            },
+            "scenario": "PROPOSED: each new reference record must explicitly supply EVOLVE-REFERENCE-NOTE as a non-null String. Absent, null or non-String values are rejected; empty String is permitted. Preserve exact Unicode scalar sequence as UTF-8, without normalization or an inferred default. Target 0.5.0 exposes no resource-create Command or UseCase; direct fixture provisioning must supply this field explicitly."
+          }
+        }
+      },
+      {
+        "op": "ADD",
+        "node": {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "AC-EVOLVE-UPDATE",
+          "kind": "AcceptanceCriterion",
+          "name": "PROPOSED AC-EVOLVE-UPDATE",
+          "basis": [
+            {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            },
+            "scenario": "PROPOSED: existing task Commands continue to update existing records using their exact approved inputs and preserve EVOLVE-REFERENCE-NOTE. Missing resource identity remains RESOURCE_NOT_FOUND; no upsert or create is introduced."
+          }
+        }
+      },
+      {
+        "op": "ADD",
+        "node": {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "AC-EVOLVE-ROLLOUT",
+          "kind": "AcceptanceCriterion",
+          "name": "PROPOSED AC-EVOLVE-ROLLOUT",
+          "basis": [
+            {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            },
+            "scenario": "PROPOSED: old insert writers that omit the field are incompatible with final NOT NULL/no-default schema. Expand nullable, backfill retained rows, verify, switch or fence all insert writers, then contract. Keep REVIEW_REQUIRED until actual old-writer/new-schema and recovery evidence exists."
+          }
+        }
+      },
+      {
+        "op": "ADD",
+        "node": {
+          "id": "EVOLVE-REFERENCE-NOTE",
+          "revision": 1,
+          "kind": "Field",
+          "name": "PROPOSED synthetic reference evolution note",
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
               "actor": "assistant:proposal",
               "actorType": "AI"
             }
           ],
           "basis": [
             {
-              "id": "REQ-PAYMENT",
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
               "revision": 1
             }
           ],
@@ -59,21 +229,25 @@
     "migration": {
       "id": "MIG-FORWARD",
       "mode": "REQUIRED",
-      "compatibility": "BACKWARD",
+      "compatibility": "BREAKING",
       "irreversible": false,
       "steps": [
-        "Expand",
-        "Backfill",
-        "Verify",
-        "Contract after client retirement"
+        "EXPAND nullable column without a default",
+        "BACKFILL only retained reference rows from independently approved binding",
+        "VERIFY exact bytes and every writer inventory",
+        "SWITCH or fence every insert writer before required enforcement",
+        "CONTRACT NOT NULL only after approved compatibility and recovery checks"
       ],
       "preconditions": [
-        "Review data observations and active clients"
+        "REVIEW_REQUIRED: no backward compatibility proof exists",
+        "Require actual accepted history and separately approved binding, SQL and deployment",
+        "Final schema rejects old INSERT writers omitting the field; no default is inferred"
       ],
       "verification": [
-        "Verify required values and retained constraints"
+        "Verify retained row bytes, explicit new insert values and rejection of omitted/null values",
+        "Verify existing update inputs, missing-resource rejection, UI behavior and recovery"
       ],
-      "recovery": "Forward repair; restore only after verified recovery review",
+      "recovery": "Fence incompatible writers; reconcile transaction outcome; reviewed forward repair or verified restore. No automatic production rollback.",
       "observations": []
     },
     "sources": [],
@@ -157,6 +331,122 @@
               "id": "EVID-A11Y",
               "revision": 3
             }
+          }
+        },
+        {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "AC-EVOLVE-NEW-WRITE",
+          "kind": "AcceptanceCriterion",
+          "name": "PROPOSED AC-EVOLVE-NEW-WRITE",
+          "basis": [
+            {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            },
+            "scenario": "PROPOSED: each new reference record must explicitly supply EVOLVE-REFERENCE-NOTE as a non-null String. Absent, null or non-String values are rejected; empty String is permitted. Preserve exact Unicode scalar sequence as UTF-8, without normalization or an inferred default. Target 0.5.0 exposes no resource-create Command or UseCase; direct fixture provisioning must supply this field explicitly."
+          }
+        },
+        {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "AC-EVOLVE-RETAINED",
+          "kind": "AcceptanceCriterion",
+          "name": "PROPOSED AC-EVOLVE-RETAINED",
+          "basis": [
+            {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            },
+            "scenario": "PROPOSED synthetic reference-only: retained rows receive only the independently approved exact backfill bytes; never use this binding as a production tenant or future-write default."
+          }
+        },
+        {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "AC-EVOLVE-ROLLOUT",
+          "kind": "AcceptanceCriterion",
+          "name": "PROPOSED AC-EVOLVE-ROLLOUT",
+          "basis": [
+            {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            },
+            "scenario": "PROPOSED: old insert writers that omit the field are incompatible with final NOT NULL/no-default schema. Expand nullable, backfill retained rows, verify, switch or fence all insert writers, then contract. Keep REVIEW_REQUIRED until actual old-writer/new-schema and recovery evidence exists."
+          }
+        },
+        {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "AC-EVOLVE-UPDATE",
+          "kind": "AcceptanceCriterion",
+          "name": "PROPOSED AC-EVOLVE-UPDATE",
+          "basis": [
+            {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            }
+          ],
+          "data": {
+            "requirement": {
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
+              "revision": 1
+            },
+            "scenario": "PROPOSED: existing task Commands continue to update existing records using their exact approved inputs and preserve EVOLVE-REFERENCE-NOTE. Missing resource identity remains RESOURCE_NOT_FOUND; no upsert or create is introduced."
           }
         },
         {
@@ -1734,20 +2024,20 @@
           "id": "EVOLVE-REFERENCE-NOTE",
           "revision": 1,
           "kind": "Field",
-          "name": "Synthetic reference evolution note",
+          "name": "PROPOSED synthetic reference evolution note",
           "lifecycle": "APPROVED",
-          "steward": "fixture:authors",
+          "steward": "assistant:proposal",
           "origins": [
             {
               "source": "proposal:phase6-evolution-review",
-              "locator": "payment/EVOLVE-REFERENCE-NOTE",
+              "locator": "payment",
               "actor": "assistant:proposal",
               "actorType": "AI"
             }
           ],
           "basis": [
             {
-              "id": "REQ-PAYMENT",
+              "id": "REQ-EVOLVE-REFERENCE-NOTE",
               "revision": 1
             }
           ],
@@ -3679,6 +3969,45 @@
           }
         },
         {
+          "revision": 1,
+          "lifecycle": "APPROVED",
+          "steward": "assistant:proposal",
+          "origins": [
+            {
+              "source": "proposal:phase6-evolution-review",
+              "locator": "payment",
+              "actor": "assistant:proposal",
+              "actorType": "AI"
+            }
+          ],
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "kind": "Requirement",
+          "name": "PROPOSED synthetic reference note requirement",
+          "basis": [],
+          "data": {
+            "statement": "PROPOSED, UNAPPROVED, SYNTHETIC REFERENCE ONLY: ENT-PAYMENT records retain a required exact String reference note. New records must explicitly supply it; retained-row backfill requires independent approval and is never a future-write default. No create operation or UI is added. Existing approved update behavior preserves it. Rollout remains REVIEW_REQUIRED.",
+            "priority": "MUST",
+            "acceptance": [
+              {
+                "id": "AC-EVOLVE-NEW-WRITE",
+                "revision": 1
+              },
+              {
+                "id": "AC-EVOLVE-RETAINED",
+                "revision": 1
+              },
+              {
+                "id": "AC-EVOLVE-ROLLOUT",
+                "revision": 1
+              },
+              {
+                "id": "AC-EVOLVE-UPDATE",
+                "revision": 1
+              }
+            ]
+          }
+        },
+        {
           "id": "REQ-PAYMENT",
           "revision": 1,
           "kind": "Requirement",
@@ -4793,7 +5122,7 @@
       ],
       "issues": []
     },
-    "contentDigest": "sha256:1acc4a3c2e46d4a62a97ae7bf2e29f03f9b3290f5bb3bc5179968d3771676d67"
+    "contentDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf"
   },
   "readSet": [
     {
@@ -4847,15 +5176,225 @@
       "digest": "sha256:8739064fb38b18e86f2cebe6b95db4c5540adc52a72791fef3182b086a032053"
     },
     {
+      "id": "AC-EVOLVE-NEW-WRITE",
+      "revision": 0,
+      "digest": null
+    },
+    {
+      "id": "AC-EVOLVE-RETAINED",
+      "revision": 0,
+      "digest": null
+    },
+    {
+      "id": "AC-EVOLVE-ROLLOUT",
+      "revision": 0,
+      "digest": null
+    },
+    {
+      "id": "AC-EVOLVE-UPDATE",
+      "revision": 0,
+      "digest": null
+    },
+    {
       "id": "EVOLVE-REFERENCE-NOTE",
+      "revision": 0,
+      "digest": null
+    },
+    {
+      "id": "REQ-EVOLVE-REFERENCE-NOTE",
       "revision": 0,
       "digest": null
     }
   ],
   "writeSet": [
-    "EVOLVE-REFERENCE-NOTE"
+    "AC-EVOLVE-NEW-WRITE",
+    "AC-EVOLVE-RETAINED",
+    "AC-EVOLVE-ROLLOUT",
+    "AC-EVOLVE-UPDATE",
+    "EVOLVE-REFERENCE-NOTE",
+    "REQ-EVOLVE-REFERENCE-NOTE"
   ],
   "diff": [
+    {
+      "id": "AC-EVOLVE-NEW-WRITE",
+      "operation": "ADD",
+      "before": null,
+      "after": {
+        "revision": 1,
+        "lifecycle": "APPROVED",
+        "steward": "assistant:proposal",
+        "origins": [
+          {
+            "source": "proposal:phase6-evolution-review",
+            "locator": "payment",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "id": "AC-EVOLVE-NEW-WRITE",
+        "kind": "AcceptanceCriterion",
+        "name": "PROPOSED AC-EVOLVE-NEW-WRITE",
+        "basis": [
+          {
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "requirement": {
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
+            "revision": 1
+          },
+          "scenario": "PROPOSED: each new reference record must explicitly supply EVOLVE-REFERENCE-NOTE as a non-null String. Absent, null or non-String values are rejected; empty String is permitted. Preserve exact Unicode scalar sequence as UTF-8, without normalization or an inferred default. Target 0.5.0 exposes no resource-create Command or UseCase; direct fixture provisioning must supply this field explicitly."
+        }
+      },
+      "fields": [
+        "basis",
+        "data",
+        "id",
+        "kind",
+        "lifecycle",
+        "name",
+        "origins",
+        "revision",
+        "steward"
+      ]
+    },
+    {
+      "id": "AC-EVOLVE-RETAINED",
+      "operation": "ADD",
+      "before": null,
+      "after": {
+        "revision": 1,
+        "lifecycle": "APPROVED",
+        "steward": "assistant:proposal",
+        "origins": [
+          {
+            "source": "proposal:phase6-evolution-review",
+            "locator": "payment",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "id": "AC-EVOLVE-RETAINED",
+        "kind": "AcceptanceCriterion",
+        "name": "PROPOSED AC-EVOLVE-RETAINED",
+        "basis": [
+          {
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "requirement": {
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
+            "revision": 1
+          },
+          "scenario": "PROPOSED synthetic reference-only: retained rows receive only the independently approved exact backfill bytes; never use this binding as a production tenant or future-write default."
+        }
+      },
+      "fields": [
+        "basis",
+        "data",
+        "id",
+        "kind",
+        "lifecycle",
+        "name",
+        "origins",
+        "revision",
+        "steward"
+      ]
+    },
+    {
+      "id": "AC-EVOLVE-ROLLOUT",
+      "operation": "ADD",
+      "before": null,
+      "after": {
+        "revision": 1,
+        "lifecycle": "APPROVED",
+        "steward": "assistant:proposal",
+        "origins": [
+          {
+            "source": "proposal:phase6-evolution-review",
+            "locator": "payment",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "id": "AC-EVOLVE-ROLLOUT",
+        "kind": "AcceptanceCriterion",
+        "name": "PROPOSED AC-EVOLVE-ROLLOUT",
+        "basis": [
+          {
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "requirement": {
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
+            "revision": 1
+          },
+          "scenario": "PROPOSED: old insert writers that omit the field are incompatible with final NOT NULL/no-default schema. Expand nullable, backfill retained rows, verify, switch or fence all insert writers, then contract. Keep REVIEW_REQUIRED until actual old-writer/new-schema and recovery evidence exists."
+        }
+      },
+      "fields": [
+        "basis",
+        "data",
+        "id",
+        "kind",
+        "lifecycle",
+        "name",
+        "origins",
+        "revision",
+        "steward"
+      ]
+    },
+    {
+      "id": "AC-EVOLVE-UPDATE",
+      "operation": "ADD",
+      "before": null,
+      "after": {
+        "revision": 1,
+        "lifecycle": "APPROVED",
+        "steward": "assistant:proposal",
+        "origins": [
+          {
+            "source": "proposal:phase6-evolution-review",
+            "locator": "payment",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "id": "AC-EVOLVE-UPDATE",
+        "kind": "AcceptanceCriterion",
+        "name": "PROPOSED AC-EVOLVE-UPDATE",
+        "basis": [
+          {
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "requirement": {
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
+            "revision": 1
+          },
+          "scenario": "PROPOSED: existing task Commands continue to update existing records using their exact approved inputs and preserve EVOLVE-REFERENCE-NOTE. Missing resource identity remains RESOURCE_NOT_FOUND; no upsert or create is introduced."
+        }
+      },
+      "fields": [
+        "basis",
+        "data",
+        "id",
+        "kind",
+        "lifecycle",
+        "name",
+        "origins",
+        "revision",
+        "steward"
+      ]
+    },
     {
       "id": "EVOLVE-REFERENCE-NOTE",
       "operation": "ADD",
@@ -4864,20 +5403,20 @@
         "id": "EVOLVE-REFERENCE-NOTE",
         "revision": 1,
         "kind": "Field",
-        "name": "Synthetic reference evolution note",
+        "name": "PROPOSED synthetic reference evolution note",
         "lifecycle": "APPROVED",
-        "steward": "fixture:authors",
+        "steward": "assistant:proposal",
         "origins": [
           {
             "source": "proposal:phase6-evolution-review",
-            "locator": "payment/EVOLVE-REFERENCE-NOTE",
+            "locator": "payment",
             "actor": "assistant:proposal",
             "actorType": "AI"
           }
         ],
         "basis": [
           {
-            "id": "REQ-PAYMENT",
+            "id": "REQ-EVOLVE-REFERENCE-NOTE",
             "revision": 1
           }
         ],
@@ -4908,17 +5447,77 @@
         "revision",
         "steward"
       ]
+    },
+    {
+      "id": "REQ-EVOLVE-REFERENCE-NOTE",
+      "operation": "ADD",
+      "before": null,
+      "after": {
+        "revision": 1,
+        "lifecycle": "APPROVED",
+        "steward": "assistant:proposal",
+        "origins": [
+          {
+            "source": "proposal:phase6-evolution-review",
+            "locator": "payment",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "id": "REQ-EVOLVE-REFERENCE-NOTE",
+        "kind": "Requirement",
+        "name": "PROPOSED synthetic reference note requirement",
+        "basis": [],
+        "data": {
+          "statement": "PROPOSED, UNAPPROVED, SYNTHETIC REFERENCE ONLY: ENT-PAYMENT records retain a required exact String reference note. New records must explicitly supply it; retained-row backfill requires independent approval and is never a future-write default. No create operation or UI is added. Existing approved update behavior preserves it. Rollout remains REVIEW_REQUIRED.",
+          "priority": "MUST",
+          "acceptance": [
+            {
+              "id": "AC-EVOLVE-NEW-WRITE",
+              "revision": 1
+            },
+            {
+              "id": "AC-EVOLVE-RETAINED",
+              "revision": 1
+            },
+            {
+              "id": "AC-EVOLVE-ROLLOUT",
+              "revision": 1
+            },
+            {
+              "id": "AC-EVOLVE-UPDATE",
+              "revision": 1
+            }
+          ]
+        }
+      },
+      "fields": [
+        "basis",
+        "data",
+        "id",
+        "kind",
+        "lifecycle",
+        "name",
+        "origins",
+        "revision",
+        "steward"
+      ]
     }
   ],
   "impact": {
     "semanticIds": [
-      "EVOLVE-REFERENCE-NOTE"
+      "AC-EVOLVE-NEW-WRITE",
+      "AC-EVOLVE-RETAINED",
+      "AC-EVOLVE-ROLLOUT",
+      "AC-EVOLVE-UPDATE",
+      "EVOLVE-REFERENCE-NOTE",
+      "REQ-EVOLVE-REFERENCE-NOTE"
     ],
     "external": "NOT_ANALYZED",
     "method": "exact-reference-closure-v1"
   },
   "risk": "HIGH",
-  "compatibility": "REVIEW_REQUIRED",
+  "compatibility": "BREAKING",
   "requiredScopes": [
     "MIGRATION",
     "SECURITY",
@@ -4929,30 +5528,135 @@
   "provenance": [
     {
       "concept": {
-        "id": "EVOLVE-REFERENCE-NOTE",
+        "id": "AC-EVOLVE-NEW-WRITE",
         "revision": 1
       },
       "basis": [
         {
-          "id": "REQ-PAYMENT",
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
           "revision": 1
         }
       ],
       "origins": [
         {
           "source": "proposal:phase6-evolution-review",
-          "locator": "payment/EVOLVE-REFERENCE-NOTE",
+          "locator": "payment",
           "actor": "assistant:proposal",
           "actorType": "AI"
         }
       ],
       "changeId": "CHANGE-REVIEW-payment",
-      "snapshotDigest": "sha256:1acc4a3c2e46d4a62a97ae7bf2e29f03f9b3290f5bb3bc5179968d3771676d67"
+      "snapshotDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf"
+    },
+    {
+      "concept": {
+        "id": "AC-EVOLVE-RETAINED",
+        "revision": 1
+      },
+      "basis": [
+        {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        }
+      ],
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "payment",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "changeId": "CHANGE-REVIEW-payment",
+      "snapshotDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf"
+    },
+    {
+      "concept": {
+        "id": "AC-EVOLVE-ROLLOUT",
+        "revision": 1
+      },
+      "basis": [
+        {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        }
+      ],
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "payment",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "changeId": "CHANGE-REVIEW-payment",
+      "snapshotDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf"
+    },
+    {
+      "concept": {
+        "id": "AC-EVOLVE-UPDATE",
+        "revision": 1
+      },
+      "basis": [
+        {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        }
+      ],
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "payment",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "changeId": "CHANGE-REVIEW-payment",
+      "snapshotDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf"
+    },
+    {
+      "concept": {
+        "id": "EVOLVE-REFERENCE-NOTE",
+        "revision": 1
+      },
+      "basis": [
+        {
+          "id": "REQ-EVOLVE-REFERENCE-NOTE",
+          "revision": 1
+        }
+      ],
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "payment",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "changeId": "CHANGE-REVIEW-payment",
+      "snapshotDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf"
+    },
+    {
+      "concept": {
+        "id": "REQ-EVOLVE-REFERENCE-NOTE",
+        "revision": 1
+      },
+      "basis": [],
+      "origins": [
+        {
+          "source": "proposal:phase6-evolution-review",
+          "locator": "payment",
+          "actor": "assistant:proposal",
+          "actorType": "AI"
+        }
+      ],
+      "changeId": "CHANGE-REVIEW-payment",
+      "snapshotDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf"
     }
   ],
   "evidenceStaleness": {
     "priorSnapshot": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
     "reason": "EXACT_SNAPSHOT_CHANGED"
   },
-  "planDigest": "sha256:8f113107f14c8e34f34a0e27f02ebc691d2288f248eb357d32bfcbb052af6d7f"
+  "planDigest": "sha256:9b2c7f905976302f3341beccf1a2820563ca3ac957129c9aa8a5c138e3402d15"
 }
