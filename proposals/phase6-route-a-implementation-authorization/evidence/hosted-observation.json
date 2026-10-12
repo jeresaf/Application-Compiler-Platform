@@ -1,0 +1,21 @@
+{
+  "runId": 38297229714,
+  "sourceCommit": "34e7cc0d890fc876efa7dabd8d40ba1202971e82",
+  "runAttempt": 1,
+  "status": "completed",
+  "conclusion": "failure",
+  "jobs": {
+    "contracts": "success",
+    "phase5-experiments": "success",
+    "phase5c-hard-gates": "success",
+    "phase6-target": "success",
+    "phase6-closure-audit": "failure"
+  },
+  "closure": {
+    "auditExecution": "PERFORMED",
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "exitCode": 2,
+    "blockers": 21
+  },
+  "scope": "Validates reviewed source 34e7cc0, not the later local test split or authorization request."
+}

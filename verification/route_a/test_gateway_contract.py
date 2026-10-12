@@ -5,6 +5,7 @@ sessions, receipts, databases, journal entries or authority grants are issued.
 Future integration must satisfy this contract using independently verified facts.
 """
 from dataclasses import dataclass, replace, FrozenInstanceError
+from types import SimpleNamespace
 import unittest
 
 
@@ -368,20 +369,31 @@ class GatewayContractTests(unittest.TestCase):
         self.assertIsNone(c.subject.proof_fingerprint)
         self.assertIsNone(c.subject.reservation)
         self.assertIsNone(c.subject.proposal_version)
-        with self.assertRaises(Denied): Ledger(c.subject)
         self.assertEqual('PREAPPROVAL_ONLY', check_preapproval(c,
             exact_change=c.subject.change,current_head=c.subject.expected_head))
         with self.assertRaises(Denied): check_preapproval(c,
             exact_change=b'OTHER',current_head=c.subject.expected_head)
         with self.assertRaises(Denied): check_preapproval(c,
             exact_change=c.subject.change,current_head=(1,'OTHER','OTHER'))
-        with self.assertRaises(Denied): advance(Ledger(c.subject),'JOURNAL_COMMITTED',verified_effect=True)
+
+    def test_preapproval_ledger_construction_is_rejected(self):
+        for purpose in ('propose', 'review'):
+            with self.subTest(purpose=purpose), self.assertRaises(Denied):
+                Ledger(self.staged(purpose))
+
+    def test_preapproval_transition_is_rejected_independently_of_construction(self):
+        for purpose in ('propose', 'review'):
+            # Deliberately malformed recovered-row representation, NOT Ledger().
+            # The reducer is actually invoked; constructor failure cannot mask it.
+            row = SimpleNamespace(subject=self.staged(purpose), state='RESERVED', stable=None)
+            with self.subTest(purpose=purpose), self.assertRaises(Denied):
+                advance(row, 'JOURNAL_COMMITTED', verified_effect=True)
+            self.assertEqual('RESERVED', row.state)
 
     def test_review_without_proof_is_author_submission_only(self):
         c=self.context('review')
         self.assertIsNone(c.subject.proof_fingerprint)
         self.assertIsNone(c.subject.reservation)
-        with self.assertRaises(Denied): Ledger(c.subject)
         self.assertEqual('PREAPPROVAL_ONLY', check_preapproval(c,
             exact_change=c.subject.change,current_head=c.subject.expected_head,
             current_event=c.subject.proposal_version))

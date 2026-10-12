@@ -1,0 +1,24 @@
+{
+  "routeA": {
+    "tests": 36,
+    "gateway": 25,
+    "unchangedReplay": 11,
+    "seconds": 29.562,
+    "result": "PASS",
+    "command": ".venv/bin/python3.14 -m unittest discover -s verification/route_a -v",
+    "log": "evidence/local-tests.txt"
+  },
+  "retainedInventory": {
+    "tests": 13,
+    "seconds": 0.26,
+    "result": "PASS"
+  },
+  "sealedRelease": {
+    "version": "0.5.0",
+    "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+    "result": "PASS"
+  },
+  "acceptedContractBytes": "UNCHANGED_FROM_REVIEWED_COMMIT",
+  "preservedUniqueInputs": 121,
+  "testChange": "Independent Ledger constructor and advance rejection tests; no adapter implementation."
+}

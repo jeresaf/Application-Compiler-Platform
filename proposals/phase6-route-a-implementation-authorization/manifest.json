@@ -1,0 +1,27 @@
+{
+  "format": "acp-route-a-implementation-authorization-review/1",
+  "reviewedSource": "34e7cc0d890fc876efa7dabd8d40ba1202971e82",
+  "status": "STOP_FOR_EXPLICIT_HUMAN_IMPLEMENTATION_AUTHORIZATION",
+  "files": {
+    "docs/phase6-route-a-implementation-authorization-request.md": "sha256:393f9459132e34f8df0b9fde8d9c84b436e5ec8b88de8b97d03d73c1c534e002",
+    "proposals/phase6-route-a-implementation-authorization/evidence/ci-artifacts.json": "sha256:741a88fbd4fbf7ae78bfe524a1bf62c282a6558aa91b960146ce89b722b1a542",
+    "proposals/phase6-route-a-implementation-authorization/evidence/ci-jobs.json": "sha256:a6c9d7c694567bd763f969a9615a1569816d6a5359b146d7e9f674ff79769bc4",
+    "proposals/phase6-route-a-implementation-authorization/evidence/ci-run.json": "sha256:a1e49931cdd5bd7b9bb8dbb822749d53a33af311cc001b1d4db41a6893cca283",
+    "proposals/phase6-route-a-implementation-authorization/evidence/closure-artifact-observation.json": "sha256:84e7356940e10d20c9d2f1c21c43f830ae552102aa2c931acd5de0d490ff580c",
+    "proposals/phase6-route-a-implementation-authorization/evidence/closure-job.log": "sha256:a8ff07ce6259aff5692ea27a31212def75910f5e4bafd7ed2550c5df20128083",
+    "proposals/phase6-route-a-implementation-authorization/evidence/closure-summary.json": "sha256:a01318aeeeef01efeb41bc6421c869130ab455dc08e83fd05fe7c53fa8115045",
+    "proposals/phase6-route-a-implementation-authorization/evidence/hosted-observation.json": "sha256:2254693ad1e99ae2ea6ef24b8fe58b3818469d0caf93dc1d117a0165f0128340",
+    "proposals/phase6-route-a-implementation-authorization/evidence/local-tests.txt": "sha256:787e94dfb725f3a87298e88caab88e268bd9a41a8b0a557a300aab4c088fcedf",
+    "proposals/phase6-route-a-implementation-authorization/request.json": "sha256:058eff72409a4400b879ce8f6fd93a6c7ba6c50ebdcd022485d21c5339553384",
+    "proposals/phase6-route-a-implementation-authorization/validation.json": "sha256:ffa7e9eca4833ae17918a6e8d80994f96520a3f8c5185913110750884b06f9ea",
+    "verification/route_a/test_gateway_contract.py": "sha256:ad63760b267131856e1d438e03eb23afc6e16bb90e20614fe8a954a894eeeff4"
+  },
+  "acceptedContracts": {
+    "docs/phase6-route-a-gateway-contract.md": "sha256:e19480ad7338d3874182418a7a7a5b96c0cf05bdeadc1e47a0c0bf156d63143d",
+    "docs/phase6-route-a-authority-integration-design.md": "sha256:4efbbcb670f2277ea0b040af74d1df5cdf5dd1077155eaef0011f1bd6b4f4e5d"
+  },
+  "priorReviewManifest": {
+    "path": "proposals/phase6-route-a-stage-correction/manifest.json",
+    "digest": "sha256:7e1a97abf82d46e1620b137b7bad96e96577a5068eecbe091e06a9ed634f3967"
+  }
+}

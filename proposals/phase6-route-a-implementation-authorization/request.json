@@ -1,0 +1,78 @@
+{
+  "requestBodyDigest": "sha256:44805966e05af1db2c4faa3b786361737495025b0eb9e30bfbafe35c701c2eab",
+  "digestEncoding": "body sorted compact JSON, ensure_ascii=true, no LF",
+  "body": {
+    "format": "acp-route-a-implementation-authorization-request/1",
+    "status": "PROPOSED_NOT_GRANTED",
+    "reviewedSource": "34e7cc0d890fc876efa7dabd8d40ba1202971e82",
+    "humanDesignVerdict": "STAGE_SPECIFIC_GATEWAY_CONTRACT_ACCEPTED",
+    "authorizationType": "IMPLEMENTATION_AND_ISOLATED_TESTING_ONLY",
+    "scopeDocument": {
+      "path": "docs/phase6-route-a-implementation-authorization-request.md",
+      "digest": "sha256:393f9459132e34f8df0b9fde8d9c84b436e5ec8b88de8b97d03d73c1c534e002"
+    },
+    "acceptedContracts": {
+      "docs/phase6-route-a-gateway-contract.md": "sha256:e19480ad7338d3874182418a7a7a5b96c0cf05bdeadc1e47a0c0bf156d63143d",
+      "docs/phase6-route-a-authority-integration-design.md": "sha256:4efbbcb670f2277ea0b040af74d1df5cdf5dd1077155eaef0011f1bd6b4f4e5d"
+    },
+    "finalizedSymbolicTests": {
+      "path": "verification/route_a/test_gateway_contract.py",
+      "digest": "sha256:ad63760b267131856e1d438e03eb23afc6e16bb90e20614fe8a954a894eeeff4"
+    },
+    "proposedProofContract": "acp-route-a-approval/2",
+    "requiredSignedProposalBinding": "Exact registered repository/application, operationId and actual REVIEW_REQUIRED event serial/digest; null ordinary proposalBinding for genesis; no future APPROVED event invented.",
+    "proposedWork": [
+      "External authenticated gateway adapter code",
+      "Repository-specific immutable verification context",
+      "Durable external operation ledger code and temporary test stores",
+      "Authenticated proof validation and historical policy interfaces",
+      "Independent reviewer and scoped retry-read enforcement",
+      "Service receipt verification code",
+      "Head witnessing client/protocol and test double",
+      "Crash/fencing/reconciliation integration tests",
+      "Export and quarantined restore tests"
+    ],
+    "proposedAllowedSourcePaths": [
+      "engineering/route_a_gateway/**",
+      "verification/route_a/**",
+      "docs/phase6-route-a-*.md (implementation documentation/evidence only; no contract redesign)",
+      "proposals/phase6-route-a-implementation-review/**",
+      ".github/workflows/acp-contracts.yml (add isolated tests only; retain all existing pins and gates)"
+    ],
+    "testBoundary": {
+      "identities": "NON_AUTHORITATIVE_TEST_ONLY",
+      "crypto": "Explicit test vectors/keys only; never real project-authority signing or enrollment",
+      "storage": "Temporary disposable laboratory stores, artificial app/repository identities; no operational reference history",
+      "processes": "Local/CI sandbox and loopback test-provider doubles only; no operational service construction",
+      "originalApplications": "Do not initialize or accept PAYMENT/CASE MANAGEMENT genesis or transitions",
+      "credentials": "No real project-authority, application PostgreSQL, deployment or production credentials"
+    },
+    "explicitExclusions": [
+      "Production authority registration",
+      "Operational reference authority construction or trust enrollment",
+      "Real project-authority proof issuance, human signing or reviewer grants",
+      "Accepted-history genesis",
+      "Accepted semantic transitions or operational migration-plan acceptance",
+      "Independent data-binding approvals or frozen population changes",
+      "Migration SQL and PostgreSQL migration/database access",
+      "Application deployment or operational restore/promotion/publication"
+    ],
+    "preservedBoundary": {
+      "canonicalSnapshots": {
+        "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90"
+      },
+      "generatorVersion": "0.5.0",
+      "generatorBundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+      "nativeOrSealedFileChanges": "EXCLUDED; require separate intentional successor-release authorization",
+      "historicalDecisionsAndFrozenCaptures": "IMMUTABLE",
+      "historyMigrationScope": "No independent binding, SQL or deployment grant"
+    },
+    "admission": "Complete real test-only cryptographic and crash/recovery evidence; preserve mandatory accepted regression behavior; no Boolean-oracle substitution or gate waivers. Stop for human review after implementation checkpoint.",
+    "futureImplementationCommit": null,
+    "actualAuthorityRegistration": null,
+    "authorizationGranted": false,
+    "phase6": "IN_PROGRESS",
+    "phase7": "NOT_STARTED"
+  }
+}
