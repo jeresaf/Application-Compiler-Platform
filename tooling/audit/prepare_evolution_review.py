@@ -14,7 +14,7 @@ from target_worker import bundle_digest
 ROOT = Path(__file__).resolve().parents[2]
 DEST = ROOT / 'proposals/phase6-evolution-review'
 SEAL = 'ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb'
-REVIEWED = 'e15bd1058f69194c87f71599250cf4474b93514c'
+REVIEWED = '5e58469c0b3091c32e217b5cb4ef50d4564e0dd8'
 REQ = 'REQ-EVOLVE-REFERENCE-NOTE'
 FIELD = 'EVOLVE-REFERENCE-NOTE'
 SCENARIOS = {
@@ -91,7 +91,7 @@ def main():
                     'requiredInputFields':[reference(f) for f in before['content']['nodes'] if f['kind']=='Field' and f['data']['owner']['id']==n['data']['input']['id'] and not f['data']['optional']],
                     'writeFields':n['data']['writeFields'],'assignments':n['data']['assignments'],
                     'createsResource':False,'noteAssignmentAdded':False} for n in commands],
-                'useCase':nodes['UC-TASK'],'steps':[n for n in before['content']['nodes'] if n['kind']=='ExecutionStep'],
+                'useCase':nodes['UC-TASK'],'steps':[nodes[ref['id']] for ref in nodes['UC-TASK']['data']['steps']],
                 'ui':[nodes[id] for id in ('FORM-TASK','CONTROL-TASK-RESOURCE','CONTROL-TEXT','ACTION-TASK')],
                 'newRecordProvisioning':'Only out-of-band fixture/admin insertion is available, not an admitted application create API. Such writers must supply all existing required owner fields plus the new field and obey existing FK/invariant constraints.',
                 'requiredProvisioningFields':[reference(f) for f in before['content']['nodes'] if f['kind']=='Field' and f['data']['owner']['id']==owner['id'] and not f['data']['optional']]+[reference(field)],

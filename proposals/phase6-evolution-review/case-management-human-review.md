@@ -42,7 +42,7 @@ Missing records fail RESOURCE_NOT_FOUND. Runtime outbox/job/audit inserts are no
 - `CMD-ARCHIVE`: `OPERATION-INPUT` requires `OPERATION-TEXT`; resource identity, expected version, authentication/authorization and existing invocation/idempotency rules still apply. Writes `FLD-TASK-SUMMARY`, not the proposed field.
 - `CMD-REVIEW`: `OPERATION-INPUT` requires `OPERATION-TEXT`; resource identity, expected version, authentication/authorization and existing invocation/idempotency rules still apply. Writes `FLD-TASK-SUMMARY`, not the proposed field.
 
-`UC-TASK` requires `INPUT-TASK-RESOURCE` and `INPUT-TASK-TEXT`; the exact command sequence is CMD-APPROVE → CMD-ARCHIVE → CMD-REVIEW.
+`UC-TASK` requires `INPUT-TASK-RESOURCE` and `INPUT-TASK-TEXT`; the exact command sequence is CMD-REVIEW → CMD-APPROVE → CMD-ARCHIVE.
 `FORM-TASK`/`CONTROL-TASK-RESOURCE`/`CONTROL-TEXT`/`ACTION-TASK` remain existing-record task controls. No create form or note input is proposed. Dependency revision closure is not a new business effect.
 
 ## New records and required constraints

@@ -1,0 +1,259 @@
+{
+  "runId": 38239152137,
+  "reviewedCommit": "5e58469c0b3091c32e217b5cb4ef50d4564e0dd8",
+  "observedAt": "2026-10-12 10:59:45 UTC",
+  "observation": "IN_PROGRESS_NOT_FINAL",
+  "overallGreen": false,
+  "jobs": [
+    {
+      "id": 114777157129,
+      "name": "contracts",
+      "status": "in_progress",
+      "conclusion": null,
+      "run_id": 38239152137,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install pinned contract tooling",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Check dependency consistency",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Check documentation and repository contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Validate all schemas, corpora, history and recovery tests",
+          "status": "in_progress",
+          "conclusion": null,
+          "number": 8
+        },
+        {
+          "name": "Independently verify canonical bytes and hashes",
+          "status": "pending",
+          "conclusion": null,
+          "number": 9
+        },
+        {
+          "name": "Independently verify Canonical 0.2 execution vectors",
+          "status": "pending",
+          "conclusion": null,
+          "number": 10
+        },
+        {
+          "name": "Independently verify approved Canonical 0.3 bytes and hashes",
+          "status": "pending",
+          "conclusion": null,
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "pending",
+          "conclusion": null,
+          "number": 20
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "pending",
+          "conclusion": null,
+          "number": 21
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "pending",
+          "conclusion": null,
+          "number": 22
+        }
+      ]
+    },
+    {
+      "id": 114777157345,
+      "name": "phase5-experiments",
+      "status": "in_progress",
+      "conclusion": null,
+      "run_id": 38239152137,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-node@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Retain alternate JDK for controlled Phase 5C comparison",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Install pinned reference and frontend dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build all three actual ACP grammars",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Verify frontend interchange, diagnostics, determinism and Java bytes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verify pinned Rust canonical interoperability and graph slice",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Exercise native editor and source-analysis APIs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Verify Phase 5B wire, source, diagnostics, determinism and scale evidence",
+          "status": "in_progress",
+          "conclusion": null,
+          "number": 13
+        },
+        {
+          "name": "Reproduce controlled frontend upgrades from isolated locks",
+          "status": "pending",
+          "conclusion": null,
+          "number": 14
+        },
+        {
+          "name": "Verify Phase 5C native persistence, fault parity and toolchain evidence",
+          "status": "pending",
+          "conclusion": null,
+          "number": 15
+        },
+        {
+          "name": "Preserve Phase 5C hosted evidence",
+          "status": "pending",
+          "conclusion": null,
+          "number": 16
+        },
+        {
+          "name": "Preserve hosted evidence separately from laptop measurements",
+          "status": "pending",
+          "conclusion": null,
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "pending",
+          "conclusion": null,
+          "number": 30
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "pending",
+          "conclusion": null,
+          "number": 31
+        },
+        {
+          "name": "Post Run actions/setup-node@v7",
+          "status": "pending",
+          "conclusion": null,
+          "number": 32
+        },
+        {
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "pending",
+          "conclusion": null,
+          "number": 33
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "pending",
+          "conclusion": null,
+          "number": 34
+        }
+      ]
+    }
+  ],
+  "scope": "Hosted run on reviewed 5e58469 source; does not validate subsequent local order correction",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "run": {
+    "id": 38239152137,
+    "head_sha": "5e58469c0b3091c32e217b5cb4ef50d4564e0dd8",
+    "head_branch": "codex/phase6-production-remediation",
+    "status": "in_progress",
+    "conclusion": null,
+    "event": "push",
+    "run_attempt": 1,
+    "html_url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38239152137",
+    "updated_at": "2026-10-12T10:53:47Z"
+  }
+}

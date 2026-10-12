@@ -1,6 +1,7 @@
 """Verify review integrity and authority boundaries; no deployment is performed."""
 import hashlib
 import json
+import re
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -75,6 +76,13 @@ def main():
             assert added[ref['id']]['data']['requirement'] == {'id':req['id'],'revision':1}
         for node in added.values():
             assert all(o['actorType']=='AI' for o in node['origins'])
+        canonical_nodes = {n['id']:n for n in before['content']['nodes']}
+        ordered_steps = canonical_nodes['UC-TASK']['data']['steps']
+        expected_order = [canonical_nodes[ref['id']]['data']['operation']['id'] for ref in ordered_steps]
+        assert [step['id'] for step in package['operations']['steps']] == [ref['id'] for ref in ordered_steps]
+        documented = re.search(r'the exact command sequence is ([^.]+)\.',
+                               (BASE/(domain+'-human-review.md')).read_text())
+        assert documented and documented.group(1).split(' → ') == expected_order
         proposed = {n['id']:n for n in candidate['content']['nodes']}
         for node in before['content']['nodes']:
             if node['kind'] in {'Command','UseCase','ExecutionStep','Form','InputControl','Action','Requirement','AcceptanceCriterion'}:

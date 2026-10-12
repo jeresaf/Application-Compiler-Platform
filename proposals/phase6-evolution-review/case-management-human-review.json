@@ -427,6 +427,77 @@
     },
     "steps": [
       {
+        "id": "STEP-CMD-REVIEW",
+        "revision": 3,
+        "kind": "ExecutionStep",
+        "name": "STEP-CMD-REVIEW",
+        "lifecycle": "APPROVED",
+        "steward": "fixture:authors",
+        "origins": [
+          {
+            "source": "fixture:execution-v03-proposal",
+            "locator": "STEP-CMD-REVIEW",
+            "actor": "assistant:fixture-draft",
+            "actorType": "AI"
+          },
+          {
+            "source": "fixture:synthetic",
+            "locator": "STEP-CMD-REVIEW",
+            "actor": "fixture:author",
+            "actorType": "HUMAN"
+          }
+        ],
+        "basis": [
+          {
+            "id": "DEC-EXECUTION-V03",
+            "revision": 1
+          },
+          {
+            "id": "REQ-CASE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "owner": {
+            "id": "UC-TASK",
+            "revision": 3
+          },
+          "operation": {
+            "id": "CMD-REVIEW",
+            "revision": 3
+          },
+          "onFailure": "STOP",
+          "transaction": {
+            "id": "TX-TASK",
+            "revision": 3
+          },
+          "resource": {
+            "tag": "input",
+            "scope": "USE_CASE",
+            "field": {
+              "id": "INPUT-TASK-RESOURCE",
+              "revision": 2
+            }
+          },
+          "inputBindings": [
+            {
+              "field": {
+                "id": "OPERATION-TEXT",
+                "revision": 2
+              },
+              "value": {
+                "tag": "input",
+                "scope": "USE_CASE",
+                "field": {
+                  "id": "INPUT-TASK-TEXT",
+                  "revision": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
         "id": "STEP-CMD-APPROVE",
         "revision": 3,
         "kind": "ExecutionStep",
@@ -567,77 +638,6 @@
                 },
                 "field": {
                   "id": "RESULT-TEXT",
-                  "revision": 2
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "id": "STEP-CMD-REVIEW",
-        "revision": 3,
-        "kind": "ExecutionStep",
-        "name": "STEP-CMD-REVIEW",
-        "lifecycle": "APPROVED",
-        "steward": "fixture:authors",
-        "origins": [
-          {
-            "source": "fixture:execution-v03-proposal",
-            "locator": "STEP-CMD-REVIEW",
-            "actor": "assistant:fixture-draft",
-            "actorType": "AI"
-          },
-          {
-            "source": "fixture:synthetic",
-            "locator": "STEP-CMD-REVIEW",
-            "actor": "fixture:author",
-            "actorType": "HUMAN"
-          }
-        ],
-        "basis": [
-          {
-            "id": "DEC-EXECUTION-V03",
-            "revision": 1
-          },
-          {
-            "id": "REQ-CASE",
-            "revision": 1
-          }
-        ],
-        "data": {
-          "owner": {
-            "id": "UC-TASK",
-            "revision": 3
-          },
-          "operation": {
-            "id": "CMD-REVIEW",
-            "revision": 3
-          },
-          "onFailure": "STOP",
-          "transaction": {
-            "id": "TX-TASK",
-            "revision": 3
-          },
-          "resource": {
-            "tag": "input",
-            "scope": "USE_CASE",
-            "field": {
-              "id": "INPUT-TASK-RESOURCE",
-              "revision": 2
-            }
-          },
-          "inputBindings": [
-            {
-              "field": {
-                "id": "OPERATION-TEXT",
-                "revision": 2
-              },
-              "value": {
-                "tag": "input",
-                "scope": "USE_CASE",
-                "field": {
-                  "id": "INPUT-TASK-TEXT",
                   "revision": 2
                 }
               }
