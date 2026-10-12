@@ -1,0 +1,8 @@
+{
+  "jobId": 114805828432,
+  "runId": 38243318747,
+  "observedLogLines": [
+    "2026-10-12T12:29:43.4089850Z PHASE6_CLOSURE_BLOCKED",
+    "2026-10-12T12:29:43.4433412Z ##[error]Process completed with exit code 2."
+  ]
+}

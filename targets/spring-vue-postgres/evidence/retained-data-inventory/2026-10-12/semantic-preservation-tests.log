@@ -1,0 +1,11 @@
+test_candidate_requiredness_classification_and_operation_edits_reject (test_semantic_content_decisions.SemanticContentDecisionTests.test_candidate_requiredness_classification_and_operation_edits_reject) ... ok
+test_changeset_and_compatibility_edits_reject (test_semantic_content_decisions.SemanticContentDecisionTests.test_changeset_and_compatibility_edits_reject) ... ok
+test_exact_records_are_independent_and_bound_to_reviewed_source (test_semantic_content_decisions.SemanticContentDecisionTests.test_exact_records_are_independent_and_bound_to_reviewed_source) ... ok
+test_independent_binding_packages_remain_unapproved_and_application_scoped (test_semantic_content_decisions.SemanticContentDecisionTests.test_independent_binding_packages_remain_unapproved_and_application_scoped) ... ok
+test_semantic_record_is_not_full_plan_authority_or_data_approval (test_semantic_content_decisions.SemanticContentDecisionTests.test_semantic_record_is_not_full_plan_authority_or_data_approval) ... ok
+test_signing_requests_are_exact_unsigned_and_cannot_grant_execution (test_semantic_content_decisions.SemanticContentDecisionTests.test_signing_requests_are_exact_unsigned_and_cannot_grant_execution) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 6.738s
+
+OK

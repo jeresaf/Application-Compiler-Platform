@@ -1,0 +1,15 @@
+{
+  "semanticContent": "APPROVED_CONTENT",
+  "authenticatedProof": "PENDING_HUMAN_SIGNING",
+  "bindingPopulation": "MEASURED_NOT_APPROVED",
+  "authenticHistory": "AUTHENTIC_HISTORY_UNAVAILABLE",
+  "acceptedMigrationPlan": "NOT_APPROVED",
+  "sqlExecution": "NOT_AUTHORIZED",
+  "deployment": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "originalApplicationsFullAdmission": "PASS",
+  "sealed05Bundle": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+  "workingTree": "Reviewed source plus new uncommitted inventory/review files; no existing tracked file changed except new task files",
+  "humanDecisions": "See separate application packages and docs/phase6-retained-data-inventory-review.md"
+}

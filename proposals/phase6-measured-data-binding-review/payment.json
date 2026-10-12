@@ -1,0 +1,295 @@
+{
+  "status": "REVIEW_REQUIRED",
+  "domain": "payment",
+  "applicationId": "APP-FIXTURE",
+  "source": {
+    "branch": "codex/phase6-production-remediation",
+    "commit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699"
+  },
+  "semanticDecisionDigest": "sha256:e16442cb591899fcb392682770793a5984c9e8a6b7fa7577dd813ba5d664083f",
+  "semanticCandidateDigest": "sha256:5c54e0692524ec907b5c5373b8b5536e4f053122ce033dda70957320a53281cf",
+  "owner": "ENT-PAYMENT",
+  "field": "EVOLVE-REFERENCE-NOTE",
+  "proposedBinding": {
+    "requiredFieldBackfills": {
+      "EVOLVE-REFERENCE-NOTE": "e\u0301\u0000\ud83e\udd8b'"
+    }
+  },
+  "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481",
+  "value": "e\u0301\u0000\ud83e\udd8b'",
+  "valueJsonEscaped": "\"e\\u0301\\u0000\\ud83e\\udd8b'\"",
+  "utf8Hex": "65cc8100f09fa68b27",
+  "utf8ByteLength": 9,
+  "unicodeScalars": [
+    "U+0065",
+    "U+0301",
+    "U+0000",
+    "U+1F98B",
+    "U+0027"
+  ],
+  "population": {
+    "scope": "RETAINED_SYNTHETIC_REFERENCE_ROWS_ONLY",
+    "classification": "NEWLY_CONSTRUCTED_SYNTHETIC_REFERENCE_TEST_DEPLOYMENT",
+    "databaseIdentity": {
+      "database": "payment_inventory",
+      "databaseOid": "16388",
+      "schema": "acp_retained_inventory",
+      "schemaOid": "16390",
+      "systemIdentifier": "7695745124246855724",
+      "version": "PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit",
+      "versionNumber": "180006",
+      "encoding": "UTF8",
+      "readOnly": "on",
+      "defaultReadOnly": "on",
+      "captureTimestamp": "2026-10-12 11:55:16.296162+00",
+      "transactionSnapshot": "826:826:"
+    },
+    "predecessor": {
+      "target": "acp-spring-vue-postgres/0.4.0",
+      "generator": "acp-spring-vue-generator/0.4.0",
+      "sourceCommit": "7e4e3438179e7a446c5f3737ad1d6d9cb07a96ea",
+      "bundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+      "provenanceDigest": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0",
+      "build": {
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+        "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.4.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.4.0",
+        "taskUIModel": {
+          "path": "acp/task-ui-model.json",
+          "sha256": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+        },
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "sealedArtifactsVerified": 68
+    },
+    "oldSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+    "tenantAllowlist": [
+      "tenant-one",
+      "tenant-two"
+    ],
+    "resources": [
+      {
+        "resourceHex": "72657461696e65642d73616d652d74656e616e74",
+        "tenantHex": "74656e616e742d6f6e65"
+      },
+      {
+        "resourceHex": "72657461696e65642d74656e616e742d74776f",
+        "tenantHex": "74656e616e742d74776f"
+      },
+      {
+        "resourceHex": "666978747572652d7265736f75726365",
+        "tenantHex": "74656e616e742d6f6e65"
+      }
+    ],
+    "ownerRowCount": 3,
+    "allTableCounts": {
+      "acp_audit": 1,
+      "acp_classification_audit": 2,
+      "acp_delivery_attempt": 0,
+      "acp_delivery_barrier": 0,
+      "acp_idempotency": 1,
+      "acp_job_charge": 0,
+      "acp_job_invocation_attempt": 0,
+      "acp_job_occurrence": 0,
+      "acp_job_skip_range": 0,
+      "acp_lifecycle_anchor": 1,
+      "acp_lifecycle_attempt": 0,
+      "acp_lifecycle_release_audit": 0,
+      "acp_outbox": 1,
+      "acp_rate": 1,
+      "acp_scheduler": 0,
+      "acp_sessions": 2,
+      "e_2f6d38b95ca9030968971abd": 3,
+      "e_47560209428de42ddef6e4ef": 2,
+      "e_52ec36081d245a500ce7f793": 2,
+      "flyway_schema_history": 4,
+      "r_e9dd06913e0eb39901f20920": 3
+    },
+    "inventoryDigest": "sha256:58e981019343c35ddd5e22aeb1260b972cad1d9e3abc0f69a5895ba05c0885e6",
+    "inventoryFileDigest": "sha256:34482960e1368983f0431244c8cab6141c4c63dab2efe40130f9aa58f9564248",
+    "populationDigest": "sha256:a9a55cb23e425b6fb58b695b5ab894e57d3b201fd7c26e91a8b088e8d03674c1",
+    "writerInventoryDigest": "sha256:d06ca0051cdac536d899672b55b7bfc9737894861f1ce43a3517f4fee5987f7d",
+    "selection": "Every row of ENT-PAYMENT in this exact frozen synthetic reference database; no production rows",
+    "populationApproved": false,
+    "measuredNotApproved": true,
+    "everySelectedRowWouldReceiveSameValue": true
+  },
+  "tenantApplicability": "Only exact synthetic tenants enumerated in the future inventory; names such as tenant-one/tenant-two are test examples, not authorization or a production allowlist",
+  "valueMeaning": "Synthetic Unicode/NUL byte-preservation witness only, not a business note or production tenant default",
+  "unicodeAndNul": "Store exact UTF-8 bytes in bytea; never normalize composed/decomposed accents, strip NUL, trim text or reinterpret as SQL text",
+  "presenceRules": {
+    "beforeExpand": "field absent from old schema",
+    "afterExpandBeforeBackfill": "SQL NULL is transitional only",
+    "final": "explicit non-null String; this proposed value is neither null nor empty",
+    "emptyString": "valid distinct semantic String with zero bytes; never substitute this backfill for it",
+    "absent": "not equivalent to null or empty; new record omitting required note must fail final enforcement"
+  },
+  "notANewRecordDefault": "This mapping is only a one-time retained-row transformation on the reviewed frozen population. No DEFAULT clause, create input, UI value or future tenant policy is authorized. New writers supply explicit independently chosen values.",
+  "errorDetection": [
+    "Compare pre/post row identities, exact tenant counts and unchanged old column/runtime bytes",
+    "Compare encode(new_column, hex) for every selected row to 65cc8100f09fa68b27",
+    "Verify no selected row remains null, no unselected row changed and no new/removed row was hidden",
+    "Verify empty/null/absent negative cases and decomposed-accent/NUL preservation through typed application reads",
+    "Capture exact SQL hash, transaction outcome, row inventory digest and per-object runtime evidence"
+  ],
+  "recovery": {
+    "transactional": "Before COMMIT, transactional PostgreSQL DDL/backfill/verification can roll back as a unit if actually executed in one transaction; prove original schema and rows survive fault injection",
+    "staged": "Separately committed expand/backfill stages are not undone by rollback of a later transaction. Keep exact stage receipts and fence affected writers",
+    "ambiguousCommit": "Inspect actual schema, row inventories and transaction/version receipts before retry; no blind replay",
+    "afterCommit": "Reviewed forward repair or verified backup/restore with reconciliation of later committed domain/idempotency/outbox/job effects. No automatic production rollback",
+    "beforeActivation": "Do not deploy required-model readers over transitional nulls; switch/fence incompatible insert writers before final NOT NULL"
+  },
+  "approvalRequirements": [
+    "Independent human decision for this application, exact binding digest and exact frozen population",
+    "Bind the decision to the real rebased plan digest and approved Canonical candidate; identical binding digest cannot authorize another application or plan",
+    "Exact SQL/recovery/lock policy and execution/deployment approvals remain separate",
+    "Missing population inputs block execution even if the proposed scalar value is later approved"
+  ],
+  "approvals": [],
+  "authenticatedProofIssued": false,
+  "journalAccepted": false,
+  "migration": "NOT_AUTHORIZED",
+  "deployment": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED",
+  "bindingPopulationStatus": "MEASURED_NOT_APPROVED",
+  "authenticatedContentProof": "PENDING_HUMAN_SIGNING",
+  "historyAvailability": "AUTHENTIC_HISTORY_UNAVAILABLE",
+  "acceptedMigrationPlan": "NOT_APPROVED",
+  "sqlExecution": "NOT_AUTHORIZED",
+  "writerFindings": [
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "operation": "seed_sql and relationship/child fixture inserts",
+      "omitsProposedField": true,
+      "newSchemaCompatibility": "INCOMPATIBLE_WHERE_OWNER_ROW_IS_CREATED"
+    },
+    {
+      "path": "tooling/invocation_reference_tests.py",
+      "operation": "explicit approved-snapshot column clone insert(String id)",
+      "omitsProposedField": true,
+      "newSchemaCompatibility": "INCOMPATIBLE"
+    },
+    {
+      "path": "tooling/integration/retained_inventory_seed.py",
+      "operation": "existing seed_sql and existing clone, multi-tenant harness",
+      "omitsProposedField": true,
+      "newSchemaCompatibility": "INCOMPATIBLE"
+    }
+  ],
+  "writerInventoryDigest": "sha256:d06ca0051cdac536d899672b55b7bfc9737894861f1ce43a3517f4fee5987f7d",
+  "proposedBindingValidation": {
+    "result": "VALID_FOR_REVIEW_ONLY",
+    "utf8Hex": "65cc8100f09fa68b27",
+    "byteLength": 9,
+    "measuredRows": 3,
+    "tenants": [
+      "tenant-one",
+      "tenant-two"
+    ],
+    "fieldCurrentlyAbsent": true,
+    "writesPerformed": false,
+    "newRecordDefault": false,
+    "productionApplicability": false
+  },
+  "validationEvidence": {
+    "result": "PASS",
+    "populationDigest": "sha256:a9a55cb23e425b6fb58b695b5ab894e57d3b201fd7c26e91a8b088e8d03674c1",
+    "authority": "NONE"
+  },
+  "negativeChecks": {
+    "missing-row": {
+      "result": "REJECTED",
+      "reason": "FROZEN_POPULATION_DRIFT"
+    },
+    "extra-row": {
+      "result": "REJECTED",
+      "reason": "FROZEN_POPULATION_DRIFT"
+    },
+    "changed-tenant": {
+      "result": "REJECTED",
+      "reason": "FROZEN_POPULATION_DRIFT"
+    },
+    "modified-stored-bytes": {
+      "result": "REJECTED",
+      "reason": "FROZEN_POPULATION_DRIFT"
+    },
+    "unexpected-new-writer": {
+      "result": "REJECTED",
+      "reason": "WRITER_DRIFT"
+    },
+    "database-mismatch": {
+      "result": "REJECTED",
+      "reason": "FROZEN_POPULATION_DRIFT"
+    },
+    "schema-mismatch": {
+      "result": "REJECTED",
+      "reason": "FROZEN_POPULATION_DRIFT"
+    },
+    "stale-population-digest": {
+      "result": "REJECTED",
+      "reason": "INVALID_INVENTORY_DIGEST"
+    },
+    "wrong-application": {
+      "result": "REJECTED",
+      "reason": "WRONG_APPLICATION"
+    }
+  },
+  "populationReviewBoundary": "A new test database is not authentic historical acceptance. Authentic history, signed content proof, independent binding approval, exact plan/SQL/recovery approval and deployment authority remain outstanding.",
+  "recoveryObligations": [
+    "Retain sealed predecessor artifacts, inventory and reproducible authorized fixture seed evidence before any future evolution.",
+    "Fence all existing seed/clone/import/provisioning writers; recheck database/schema identities, full rows/runtime state and source writer manifest against frozen digest.",
+    "Any missing/extra row, tenant/byte drift, writer change or identity mismatch invalidates this population; recapture and obtain a fresh independent decision, never silently retarget approval.",
+    "Before COMMIT prove transactional rollback; separately committed stages require explicit stage-aware repair, no assumed global rollback.",
+    "For ambiguous COMMIT inspect actual schema/data and genuine execution receipts before retry. After COMMIT require approved forward repair or tested backup/restore plus reconciliation of subsequent effects.",
+    "No proposed note value is a new-record default. Required-model readers/writers cannot activate over unverified transitional NULLs."
+  ],
+  "remainingHumanDecisions": [
+    "Human signing of the existing exact semantic-content requests through a trusted authority; no signature has been created.",
+    "Independent application-specific approval or rejection of the exact proposed scalar, frozen population and inventory/writer digests in this package.",
+    "Supply/identify a genuinely accepted append-only history repository, trusted authority configuration and authorized authenticated read mechanism; verify head, snapshots, continuity and receipt provenance.",
+    "Only after authentic history and valid content/binding authority: review the exact rebased plan, SQL, writer rollout, failure/recovery and execution scope.",
+    "Migration execution and deployment require separate explicit authorization; neither is authorized here."
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "sourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+  "scope": "Measured frozen populations; adversarial payloads are rehashed to prove comparison to independent frozen baseline, not merely checksum rejection",
+  "domains": {
+    "payment": {
+      "positiveRecapture": {
+        "result": "PASS",
+        "populationDigest": "sha256:a9a55cb23e425b6fb58b695b5ab894e57d3b201fd7c26e91a8b088e8d03674c1",
+        "authority": "NONE"
+      },
+      "negativeTests": {
+        "missing-row": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "extra-row": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "changed-tenant": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "modified-stored-bytes": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "unexpected-new-writer": {
+          "result": "REJECTED",
+          "reason": "WRITER_DRIFT"
+        },
+        "database-mismatch": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "schema-mismatch": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "stale-population-digest": {
+          "result": "REJECTED",
+          "reason": "INVALID_INVENTORY_DIGEST"
+        },
+        "wrong-application": {
+          "result": "REJECTED",
+          "reason": "WRONG_APPLICATION"
+        }
+      },
+      "bindingValidation": {
+        "result": "VALID_FOR_REVIEW_ONLY",
+        "utf8Hex": "65cc8100f09fa68b27",
+        "byteLength": 9,
+        "measuredRows": 3,
+        "tenants": [
+          "tenant-one",
+          "tenant-two"
+        ],
+        "fieldCurrentlyAbsent": true,
+        "writesPerformed": false,
+        "newRecordDefault": false,
+        "productionApplicability": false
+      }
+    },
+    "case-management": {
+      "positiveRecapture": {
+        "result": "PASS",
+        "populationDigest": "sha256:2d02a964cf774d928d6ce2c973ba2c2992a0354267a64c3d5b1e2aa52ac665d0",
+        "authority": "NONE"
+      },
+      "negativeTests": {
+        "missing-row": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "extra-row": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "changed-tenant": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "modified-stored-bytes": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "unexpected-new-writer": {
+          "result": "REJECTED",
+          "reason": "WRITER_DRIFT"
+        },
+        "database-mismatch": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "schema-mismatch": {
+          "result": "REJECTED",
+          "reason": "FROZEN_POPULATION_DRIFT"
+        },
+        "stale-population-digest": {
+          "result": "REJECTED",
+          "reason": "INVALID_INVENTORY_DIGEST"
+        },
+        "wrong-application": {
+          "result": "REJECTED",
+          "reason": "WRONG_APPLICATION"
+        }
+      },
+      "bindingValidation": {
+        "result": "VALID_FOR_REVIEW_ONLY",
+        "utf8Hex": "65cc8100f09fa68b27",
+        "byteLength": 9,
+        "measuredRows": 3,
+        "tenants": [
+          "tenant-one",
+          "tenant-two"
+        ],
+        "fieldCurrentlyAbsent": true,
+        "writesPerformed": false,
+        "newRecordDefault": false,
+        "productionApplicability": false
+      }
+    }
+  }
+}

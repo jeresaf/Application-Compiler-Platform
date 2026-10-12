@@ -1,0 +1,56 @@
+[INFO] Scanning for projects...
+[INFO] Loaded 24063 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] 
+[INFO] ---------------------< acp.generated:application >----------------------
+[INFO] Building application 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Loaded 24063 auto-discovered prefixes for remote repository maven-central (prefixes-maven-central.txt)
+[WARNING] Could not transfer metadata /.meta/prefixes.txt from/to flyway-community-db-support (https://maven.pkg.github.com/flyway/flyway-community-db-support): HTTP Status: 401
+[WARNING] Could not transfer metadata /.meta/prefixes.txt from/to MavenFeed (https://red-gate.pkgs.visualstudio.com/MavenFeed/_packaging/MavenFeed/maven/v1/): HTTP Status: 401
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ application ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 6 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ application ---
+[INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 27 source files with javac [debug parameters release 21] to target/classes
+[WARNING] /home/aiko-jerry/Projects/Application-Compiler-Platform/.audit-artifacts/phase6-retained-inventory/old-apps/payment/backend/src/main/java/acp/api/TypedJsonConfiguration.java:[21,27] extendMessageConverters(java.util.List<org.springframework.http.converter.HttpMessageConverter<?>>) in org.springframework.web.servlet.config.annotation.WebMvcConfigurer has been deprecated and marked for removal
+[WARNING] /home/aiko-jerry/Projects/Application-Compiler-Platform/.audit-artifacts/phase6-retained-inventory/old-apps/payment/backend/src/main/java/acp/api/TypedJsonConfiguration.java:[23,33] org.springframework.http.converter.json.MappingJackson2HttpMessageConverter in org.springframework.http.converter.json has been deprecated and marked for removal
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ application ---
+[INFO] skip non existing resourceDirectory /home/aiko-jerry/Projects/Application-Compiler-Platform/.audit-artifacts/phase6-retained-inventory/old-apps/payment/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ application ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 10 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ application ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running acp.generated.InventorySeedTest
+14:49:48.550 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://127.0.0.1:54349/payment_inventory (PostgreSQL 18.6)
+14:49:48.614 [main] INFO org.flywaydb.core.internal.database.base.Schema -- Creating schema "acp_retained_inventory" ...
+14:49:48.621 [main] INFO org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory -- Creating Schema History table "acp_retained_inventory"."flyway_schema_history" ...
+14:49:48.692 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "acp_retained_inventory": null
+14:49:48.726 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Migrating schema "acp_retained_inventory" to version "1 - initial"
+14:49:48.780 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Migrating schema "acp_retained_inventory" to version "2 - delivery jobs"
+14:49:48.814 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Migrating schema "acp_retained_inventory" to version "3 - privacy lifecycle"
+14:49:48.837 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Successfully applied 3 migrations to schema "acp_retained_inventory", now at version v3 (execution time 00:00.058s)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.390 s -- in acp.generated.InventorySeedTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.440 s
+[INFO] Finished at: 2026-10-12T14:49:49+03:00
+[INFO] ------------------------------------------------------------------------

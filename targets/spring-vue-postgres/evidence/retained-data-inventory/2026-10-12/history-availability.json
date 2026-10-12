@@ -1,0 +1,69 @@
+{
+  "sourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+  "observedAt": "2026-10-12T11:54:07.875646+00:00",
+  "status": "AUTHENTIC_HISTORY_UNAVAILABLE",
+  "discoveryScope": {
+    "filesystem": "Workspace filenames including hidden files, excluding .git, node_modules, caches and archived source; no .db/.sqlite/.sqlite3 store found",
+    "configuration": "README, DEV_LINUX, workflow and history/authority adapters; no deployed authority/read endpoint identified",
+    "environment": "No ACP history/journal/authority configuration names present; OS XAUTHORITY and JOURNAL_STREAM are unrelated",
+    "containers": "No running containers before this task; only a newly constructed reference PostgreSQL deployment is now present",
+    "externalScope": "No external history repository identity, trusted authority material or authorized authenticated history endpoint supplied; global absence is not asserted",
+    "sqliteHeaderScan": {
+      "filesRead": 1148,
+      "sqliteFiles": [],
+      "unreadable": [],
+      "excludedDirectories": [
+        ".aws",
+        ".cache",
+        ".codex",
+        ".git",
+        ".venv",
+        "__pycache__",
+        "node_modules",
+        "sealed-04-source",
+        "target"
+      ],
+      "method": "Read only first 16 bytes of regular non-symlink files, including extensionless files; no database opened or initialized",
+      "recordedAt": "2026-10-12T12:35:16.635812+00:00"
+    }
+  },
+  "historicalEvidencePreserved": {
+    "file": "proposals/phase6-evolution-review/historical-authority-inventory.json",
+    "fileDigest": "sha256:3a47d4360e0049fcc40a4af5013ed8d56bc51197b36084893895e36823752033",
+    "interpretation": "Previously approved execution-v03/deterministic-v04 fixture artifacts and zero-sequence test anchors are historical reference authority, not discovered deployed journal receipts"
+  },
+  "domains": {
+    "payment": {
+      "applicationId": "APP-FIXTURE",
+      "status": "AUTHENTIC_HISTORY_UNAVAILABLE",
+      "repositoryIdentity": null,
+      "trustedAuthorityConfiguration": null,
+      "authenticatedReadMechanism": null,
+      "acceptedHeadSequence": null,
+      "acceptedHeadDigest": null,
+      "acceptedJournalDigest": null,
+      "acceptedSnapshot": null,
+      "journalContinuity": "UNVERIFIED_NO_REPOSITORY",
+      "receipts": [],
+      "receiptProvenance": "No genuine accepted receipts discovered; none created",
+      "referenceSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "referenceSnapshotIsAcceptedDeployedHistory": false
+    },
+    "case-management": {
+      "applicationId": "APP-CASE-MANAGEMENT",
+      "status": "AUTHENTIC_HISTORY_UNAVAILABLE",
+      "repositoryIdentity": null,
+      "trustedAuthorityConfiguration": null,
+      "authenticatedReadMechanism": null,
+      "acceptedHeadSequence": null,
+      "acceptedHeadDigest": null,
+      "acceptedJournalDigest": null,
+      "acceptedSnapshot": null,
+      "journalContinuity": "UNVERIFIED_NO_REPOSITORY",
+      "receipts": [],
+      "receiptProvenance": "No genuine accepted receipts discovered; none created",
+      "referenceSnapshotDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "referenceSnapshotIsAcceptedDeployedHistory": false
+    }
+  }
+}

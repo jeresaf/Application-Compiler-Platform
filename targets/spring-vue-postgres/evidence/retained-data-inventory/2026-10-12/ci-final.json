@@ -1,0 +1,102 @@
+{
+  "runId": 38243318747,
+  "attempt": 1,
+  "branch": "codex/phase6-production-remediation",
+  "sourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+  "observedAt": "2026-10-12T12:35:16.617895+00:00",
+  "status": "completed",
+  "conclusion": "failure",
+  "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38243318747",
+  "jobs": [
+    {
+      "id": 114790998268,
+      "name": "phase5-experiments",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-12T11:32:36Z",
+      "completedAt": "2026-10-12T11:46:34Z"
+    },
+    {
+      "id": 114790998404,
+      "name": "contracts",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-12T11:32:37Z",
+      "completedAt": "2026-10-12T11:43:23Z"
+    },
+    {
+      "id": 114795985481,
+      "name": "phase5c-hard-gates",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-12T11:46:37Z",
+      "completedAt": "2026-10-12T11:46:53Z"
+    },
+    {
+      "id": 114796100428,
+      "name": "phase6-target",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-12T11:46:55Z",
+      "completedAt": "2026-10-12T12:14:09Z"
+    },
+    {
+      "id": 114805828432,
+      "name": "phase6-closure-audit",
+      "status": "completed",
+      "conclusion": "failure",
+      "startedAt": "2026-10-12T12:14:11Z",
+      "completedAt": "2026-10-12T12:29:51Z"
+    }
+  ],
+  "closure": {
+    "execution": {
+      "status": "PERFORMED",
+      "exception": null
+    },
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "blockers": 21,
+    "exitCode": 2,
+    "exitEvidence": "hosted-closure-exit.json",
+    "reportDigest": "sha256:6c45120155361a04d6972f067dff7be4cd70a8381b3ba8f819cf434cd7cb3c95"
+  },
+  "artifacts": [
+    {
+      "id": 11748036268,
+      "name": "phase6-remediation-0.5.0-closure-audit",
+      "digest": "sha256:1d95df3d6d2e3f757d6bbe54ab983f08afc70d402ced2763eff6fe423589a1c6",
+      "size": 62554138,
+      "expiresAt": "2027-01-10T11:32:34Z",
+      "archiveVerified": true
+    },
+    {
+      "id": 11746323564,
+      "name": "phase6-target-ubuntu-evidence",
+      "digest": "sha256:67b9258aeec8fb9b01651f6dc7076f4537dbe5e02161bea1b70c90dbd7716410",
+      "size": 1499538,
+      "expiresAt": "2027-01-10T11:32:34Z",
+      "archiveVerified": true
+    },
+    {
+      "id": 11743999798,
+      "name": "phase5b-ubuntu-evidence",
+      "digest": "sha256:db1974b2e1d691bc144a1c45534bcdd6b76652452333ee0fe52bb0c289849dd9",
+      "size": 37502,
+      "expiresAt": "2027-01-10T11:32:34Z",
+      "archiveVerified": false
+    },
+    {
+      "id": 11743819990,
+      "name": "phase5c-ubuntu-evidence",
+      "digest": "sha256:316dd24dc06f4e62c20170e4d39fcdfd175ff66fce2d637e97c08a8e0c31ab3e",
+      "size": 26606,
+      "expiresAt": "2027-01-10T11:32:34Z",
+      "archiveVerified": false
+    }
+  ],
+  "fullAdmission": "Both original approved Canonical 0.3 applications PASS; see full-admission.json and retained raw report",
+  "newInventorySourceCI": "NOT_CLAIMED; reviewed commit CI only. New task source hashes and local tests are recorded independently.",
+  "earlierEvidence": "PRESERVED_UNCHANGED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

@@ -1,0 +1,50 @@
+{
+  "classification": "NEWLY_CONSTRUCTED_SYNTHETIC_REFERENCE_TEST_DEPLOYMENT",
+  "containerId": "34de0144661eb4c3427dd39add8fe154c271d4f225f4a859914dc1e0af884304",
+  "image": "postgres:18.6",
+  "imageDigest": "sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336",
+  "binding": "127.0.0.1:54349",
+  "authentication": "Disposable loopback trust with pre-existing postgres bootstrap user; no password, key or new credential created",
+  "schemaOperations": "Only exact sealed predecessor V1 initial/V2 delivery jobs/V3 privacy lifecycle bootstrap in empty isolated databases. No proposed evolution SQL or accepted plan executed.",
+  "freeze": "Both databases default_transaction_read_only=on; seed processes completed; capture transactions repeatable-read read-only",
+  "applications": {
+    "payment": {
+      "database": "payment_inventory",
+      "seedSource": "tooling/integration/retained_inventory_seed.py",
+      "seedSourceDigest": "sha256:a62587cb1b152a1a5ffe4918a55bf665259797b9de03bff0e623d6a07c7679ba",
+      "seedMechanism": "Existing phase6_reference_tests.seed_sql plus invocation_reference_tests exact approved-column clone; generated fixture JWT uses existing reference-only identity helper and is not production authentication evidence",
+      "tenantIsolation": "Wrong-tenant UC-TASK rejected; correct tenant committed existing update operation",
+      "runtimeEvidence": "Application outbox/idempotency/audit/lifecycle rows, not Canonical accepted-history journal receipts",
+      "files": {
+        "provenance.json": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0",
+        "seed.log": "sha256:de9e7e44c67662746d2bcbcad993bc0721ced42b27d179760e622778a02ca349",
+        "InventorySeedTest.java": "sha256:6d90c571f0d0fc976e840981c1f68af9c38d5a7eb83a06b3f0f2c3f8bb811df9",
+        "junit.xml": "sha256:a084a3e1fafd2c943a199c4d560e0b695ac80191d153be43be4727eccab8f247"
+      },
+      "retainedPredecessorArchive": {
+        "path": "payment-sealed-predecessor.tar",
+        "digest": "sha256:7ef88b587343d8d9c2c44d1719093bf9f90f1875d8e7d0a3ad0c5d98eb4851a9",
+        "contents": "Exact generated sealed predecessor artifacts and materialization ownership receipt; no runtime dependencies, test harnesses or compiled caches"
+      }
+    },
+    "case-management": {
+      "database": "case_inventory",
+      "seedSource": "tooling/integration/retained_inventory_seed.py",
+      "seedSourceDigest": "sha256:a62587cb1b152a1a5ffe4918a55bf665259797b9de03bff0e623d6a07c7679ba",
+      "seedMechanism": "Existing phase6_reference_tests.seed_sql plus invocation_reference_tests exact approved-column clone; generated fixture JWT uses existing reference-only identity helper and is not production authentication evidence",
+      "tenantIsolation": "Wrong-tenant UC-TASK rejected; correct tenant committed existing update operation",
+      "runtimeEvidence": "Application outbox/idempotency/audit/lifecycle rows, not Canonical accepted-history journal receipts",
+      "files": {
+        "provenance.json": "sha256:9695ebc12ac3f3fa2c73caa59789f16d64c47dcada083aaa4549704e94d3c4d9",
+        "seed.log": "sha256:cc4dae74e81015b9039564f17948ffab50d3197a075110620da3cd07864576db",
+        "InventorySeedTest.java": "sha256:9d7288e6e95ceed6caf26857492d13fb192116e11512c880138e941d6d61e9ac",
+        "junit.xml": "sha256:cd1a0ca600ec5b5c9520df1365de1486e8683e3e28db52d87c99fbfcacffd961"
+      },
+      "retainedPredecessorArchive": {
+        "path": "case-management-sealed-predecessor.tar",
+        "digest": "sha256:beb2e3be9209c55379cc1f7e526407ee895589f533f4b4171ab761d780354f06",
+        "contents": "Exact generated sealed predecessor artifacts and materialization ownership receipt; no runtime dependencies, test harnesses or compiled caches"
+      }
+    }
+  }
+}

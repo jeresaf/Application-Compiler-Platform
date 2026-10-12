@@ -1,0 +1,1020 @@
+{
+  "scope": [
+    "tooling",
+    "targets/spring-vue-postgres/worker",
+    "targets/spring-vue-postgres/templates"
+  ],
+  "sources": [
+    {
+      "path": "tooling/audit/admission.py",
+      "digest": "sha256:c1ec21e4e2cc04c257dadd7fd65013e11fa0941261144fae90c2f888b9f08192"
+    },
+    {
+      "path": "tooling/audit/criteria.py",
+      "digest": "sha256:065199c33e362e727d4e303e7219a987e1963fc852ba33065acd7d019af40e9f"
+    },
+    {
+      "path": "tooling/audit/package_audit.py",
+      "digest": "sha256:897918e41a6f938c41f9d3a163ad6dbfddcca45c211bd1e655d25c12f53b2ab0"
+    },
+    {
+      "path": "tooling/audit/phase6.py",
+      "digest": "sha256:f30e7a3ebd3b8ae893d3a1c0688a5a80382b055834575e5b273da284fde49e08"
+    },
+    {
+      "path": "tooling/audit/prepare_data_binding_review.py",
+      "digest": "sha256:65616cafdcc885e7be043d937ba5e290c310b94d6b6b7b1ef69bb77abb60e37c"
+    },
+    {
+      "path": "tooling/audit/prepare_evolution_review.py",
+      "digest": "sha256:246a48e64be57efea8157671808bf49e8c3c5a5516372a97f228db5afb1ebbcd"
+    },
+    {
+      "path": "tooling/audit/prepare_measured_binding_review.py",
+      "digest": "sha256:1866746963397267dcd750a9d1cd78a1158cf55612bfc2e306aae036c1d2d6a3"
+    },
+    {
+      "path": "tooling/audit/publish_evidence.py",
+      "digest": "sha256:427449bbaaa0618b26a712ac9903be7af1a80ac89ffb043ed1e4b8893b089230"
+    },
+    {
+      "path": "tooling/audit/publish_remediation.py",
+      "digest": "sha256:5ed170863e638e0e549a37185e04cb1199dab3cf68b64b7fda5295f3e0a5a91c"
+    },
+    {
+      "path": "tooling/audit/retained_inventory.py",
+      "digest": "sha256:c26ef6bb2e06176810b2d8446f5b3e9d706a380a26f614a7c184c1721ee221d1"
+    },
+    {
+      "path": "tooling/audit/security_review.py",
+      "digest": "sha256:c7627e925597254855f5dec5650f61c11b1708285336ef3e8e816aa3e582d2a0"
+    },
+    {
+      "path": "tooling/audit/semantic_content_decisions.py",
+      "digest": "sha256:c4226ecbc41abf9804bf7d3637057a36a40543721222c226e31f993c7339408a"
+    },
+    {
+      "path": "tooling/audit/verify_evolution_review.py",
+      "digest": "sha256:cc67b036dabf1918244c2b53856eaca71e7acfc06b849bbd017bc6fdbb306bb3"
+    },
+    {
+      "path": "tooling/canonical_contract.py",
+      "digest": "sha256:e877303b137347a7cb9eafa973a98bc5749270b82c26c8e11059bcf47f67d9f1"
+    },
+    {
+      "path": "tooling/canonical_fixtures.py",
+      "digest": "sha256:ce01c28f7e9d19dd63ae6f7b9972db5bda0adf2172932a4978101151472f2607"
+    },
+    {
+      "path": "tooling/canonical_ir.py",
+      "digest": "sha256:8c55daec7a90c0f117bcffe902784a31829c995e99655d3a6e32eac6dc1b6c18"
+    },
+    {
+      "path": "tooling/canonical_json.py",
+      "digest": "sha256:4c526ce2bce5e107fc2e0b198d18167fd14becc6a95295bfd2794a5a1e67a39a"
+    },
+    {
+      "path": "tooling/change_contract.py",
+      "digest": "sha256:31ded9b53a338c8c04f0ecd03d4a3619b234eec53b21b3dbe3531d0304009a43"
+    },
+    {
+      "path": "tooling/change_fixtures.py",
+      "digest": "sha256:5c30a8da2e14dc63f4617c9c547724e3a4668c1606d1034c83049a3aabbdacff"
+    },
+    {
+      "path": "tooling/changes.py",
+      "digest": "sha256:cfdd5515cedabc141517e53e4e2822dad035f0c169bad934692716e17f789428"
+    },
+    {
+      "path": "tooling/check_delivery_job_components.py",
+      "digest": "sha256:9ec01fdbc793b268e0db454ee22e13bc74e02c9e5c4c8ee5dec84b6b5f7f9648"
+    },
+    {
+      "path": "tooling/check_execution_components.py",
+      "digest": "sha256:ce962d5a1df801406b93af6abfd13e656f513609b4a827bb269a51a2af9d1015"
+    },
+    {
+      "path": "tooling/check_invocation_components.py",
+      "digest": "sha256:0aeb84e9d9d52debd57775699a3812a277ec70b71488ee02e3abf5558770bb0f"
+    },
+    {
+      "path": "tooling/check_phase6_target.py",
+      "digest": "sha256:093bb37f6986ea95d2838c254cbb17130b87537f5dd54edac8793b13483faa53"
+    },
+    {
+      "path": "tooling/check_privacy_lifecycle_components.py",
+      "digest": "sha256:15371bb88ac29aeab1ce6d39649979263568a206d7614dfdfeda1a21313a9fb2"
+    },
+    {
+      "path": "tooling/check_privacy_profile_upgrade.py",
+      "digest": "sha256:2c0e6c54bab5211ada5def64d08fbfb55940d7c488ad40384fbab45bd3c03f7a"
+    },
+    {
+      "path": "tooling/check_repository.py",
+      "digest": "sha256:f3e0e1da443999a3803402d2d03f8745e8f49cb1f8f118a011ead2c2fd6bb3f3"
+    },
+    {
+      "path": "tooling/check_target_profile_upgrade.py",
+      "digest": "sha256:18601b2fa79c502c9bca43b8fad5c53b34d5f94f741ef9881330a4a74bb63776"
+    },
+    {
+      "path": "tooling/check_target_release.py",
+      "digest": "sha256:0e643c43d5078e2ead141eb74e36b5e6607ba70ecc56c2a8f5b1028cf6f4f17f"
+    },
+    {
+      "path": "tooling/check_task_interface.py",
+      "digest": "sha256:8f6570464a8098a21e5be31cdf302f60e1cc996bf697cda654d62f3585bfdd4f"
+    },
+    {
+      "path": "tooling/compiler_contracts.py",
+      "digest": "sha256:b9aee32b55d24bb92a3d8625af9a62595e353d91927c451999297032f7caaae2"
+    },
+    {
+      "path": "tooling/compiler_core.py",
+      "digest": "sha256:dbdae559589d6607370f7771d99056240bd2c94be79ae07a8fd312bf3594e8a7"
+    },
+    {
+      "path": "tooling/compiler_diagnostics.py",
+      "digest": "sha256:c968f0c32d02a984170130b97d4394b841012f144a9ff3eb204a8b766ff75001"
+    },
+    {
+      "path": "tooling/compiler_fixtures.py",
+      "digest": "sha256:3cee8af591c85b18b80fe4578ca7eeeadda9f00cb5d9422520c33b40813221a5"
+    },
+    {
+      "path": "tooling/compiler_ports.py",
+      "digest": "sha256:8b0f99bb964e0e876e380986992e9464646751ee57d3bfaa601a8e843d969e8b"
+    },
+    {
+      "path": "tooling/compiler_reference.py",
+      "digest": "sha256:869a205cdfc40eba43f75f0373cd09770894ab2349c140883afdc376d9e95ed4"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "digest": "sha256:b42600213f136b76939d46111af2175b32e95873c86b9a7bb1b6a3cb4ceea06b"
+    },
+    {
+      "path": "tooling/design_bindings.py",
+      "digest": "sha256:f48faa1a611fbb5c14a5fbaf0a4e4fea090862a5e93d2f594c271f8a0648b3c6"
+    },
+    {
+      "path": "tooling/deterministic_approval.py",
+      "digest": "sha256:dba6b1232c750309f227ac2041e27b4bec47ea5419003803a63f2b0d5c585c5c"
+    },
+    {
+      "path": "tooling/deterministic_canonical.py",
+      "digest": "sha256:10d4d25d528657e847db4fc369a22e68e44e448242dc25915a05afb5fe885be2"
+    },
+    {
+      "path": "tooling/deterministic_contract.py",
+      "digest": "sha256:815a43bec36b3328f080fb27cb1ab2ddac609c63e70173263397e4d6295e10bd"
+    },
+    {
+      "path": "tooling/deterministic_failure_reference.py",
+      "digest": "sha256:e766b15a3f91a2c27649e240b8d0ce45442b08a78204b740339d1b2fea7d7da6"
+    },
+    {
+      "path": "tooling/deterministic_failures.py",
+      "digest": "sha256:63471ac9ce766cb62ef55eb557839a5c5684e9b91f425adc8748684348a3ef98"
+    },
+    {
+      "path": "tooling/deterministic_fixtures.py",
+      "digest": "sha256:c6a5b9a87a2cc8725e53ab2b16f48e7a49933d703280b5739011ab02b1266315"
+    },
+    {
+      "path": "tooling/deterministic_invocation.py",
+      "digest": "sha256:1dbe44672bfbbabe57e67e55b7c18a617b6bc4e3bcf290a0c671dfc4c914f661"
+    },
+    {
+      "path": "tooling/deterministic_model.py",
+      "digest": "sha256:f1dda8e517b06884c95b4182d119a8b4560a0ee03ed9e997dd07f2e5ba128d85"
+    },
+    {
+      "path": "tooling/deterministic_reference.py",
+      "digest": "sha256:1ab06d214fd263e9049aba0f8cc67d294ff7c372eb86388f312debaff59103fd"
+    },
+    {
+      "path": "tooling/evidence_semantics.py",
+      "digest": "sha256:411cdf0080e821a94274a8a99eea3bb0c48156429e72e7db7c959d33479726af"
+    },
+    {
+      "path": "tooling/execution_approval.py",
+      "digest": "sha256:fba7ad27e27122ec95bccf7de9b7c4205987d562d70e72838f60dc34498a69e5"
+    },
+    {
+      "path": "tooling/execution_canonical.py",
+      "digest": "sha256:c4889b47a73c260486ba46f9fe6d7734b3700008ebaae4087d222f4e60ccd0f2"
+    },
+    {
+      "path": "tooling/execution_contract.py",
+      "digest": "sha256:f3b37bea3a1fb2f8b353d9e94feb9964357cce4cd0bfd33a1a96f84070bd71b9"
+    },
+    {
+      "path": "tooling/execution_fixtures.py",
+      "digest": "sha256:c8fc0c7d6fd51e27a128e6ec6e8e6648b85fc98f8f753d1a69d625c2ee5e45dc"
+    },
+    {
+      "path": "tooling/execution_model.py",
+      "digest": "sha256:ce3f1f1f69e1e9d77976287ab30aba8d4fb9706ee31f3462df339dc397a87351"
+    },
+    {
+      "path": "tooling/execution_reference.py",
+      "digest": "sha256:45939151fddffff3d655d966c706bc72cc532d16817a9823e39bc6cae8ff0310"
+    },
+    {
+      "path": "tooling/execution_semantics.py",
+      "digest": "sha256:5cb6cc0b8abd44c39bcf4c5efa90ca39b846737685795c6a6756358973caf87e"
+    },
+    {
+      "path": "tooling/filesystem_artifacts.py",
+      "digest": "sha256:bfd8346b702772d3e5550a09f7e3c30088a926dfaf4504df872cc80303fe0ab3"
+    },
+    {
+      "path": "tooling/history_experiment.py",
+      "digest": "sha256:9eb64f4d03d010e7e86f046fea4a0b13896b5e992c138e6373566babe89b8932"
+    },
+    {
+      "path": "tooling/history_repository.py",
+      "digest": "sha256:42d8f3efccf51c50a0c3cb891c46e11894ec016dff5ce90b3dfb9e2bf87120fa"
+    },
+    {
+      "path": "tooling/integration/oidc.py",
+      "digest": "sha256:c0771adadab92697e90b1e2412d153620faca1984d62580dfa6bd7dceb262785"
+    },
+    {
+      "path": "tooling/integration/release_upgrade.py",
+      "digest": "sha256:b3bb8c6c45f52bcae3af3d0315664fffa412edf02012c617043fdb6ff08f6fe4"
+    },
+    {
+      "path": "tooling/integration/retained_inventory_seed.py",
+      "digest": "sha256:a62587cb1b152a1a5ffe4918a55bf665259797b9de03bff0e623d6a07c7679ba"
+    },
+    {
+      "path": "tooling/invocation_reference_tests.py",
+      "digest": "sha256:efb6adc5fe8349e79f59ea3c1cb91eaab237a21e2acbde4531bf925211a295cb"
+    },
+    {
+      "path": "tooling/package_target_tzdb.py",
+      "digest": "sha256:24cfc60b8e98203f9caca7424db1de57808d002496d488b7e7d7c41e3dfed3c4"
+    },
+    {
+      "path": "tooling/phase1_cases.py",
+      "digest": "sha256:e9840095ca57b978685c2588b00bb24c4529174838a6202d5bd2159b3448ccf5"
+    },
+    {
+      "path": "tooling/phase1_contract.py",
+      "digest": "sha256:311acea65de988ccd0474ca2a2d4044af3b561dfacba5f055f03234c6fab911a"
+    },
+    {
+      "path": "tooling/phase1_semantics.py",
+      "digest": "sha256:71d38ab2dad364c6c2e78beadba79f1dcc50d702f5a1d12034bd07f76d9b7382"
+    },
+    {
+      "path": "tooling/phase6_open_state.py",
+      "digest": "sha256:3fe0bdd00b9193477f056156e18aa6b381ff0f732a6d0c6af89e71dd595a0811"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "digest": "sha256:3e9ddcfb277b84283ae29625d6889f6fd84b8205ad068a05b556aba6dd3ed913"
+    },
+    {
+      "path": "tooling/privacy_lifecycle_reference_tests.py",
+      "digest": "sha256:7718eb30d359ff8b1ae9ee7288946db30aa7e43b9d3f72693b89db760e753db3"
+    },
+    {
+      "path": "tooling/quality_semantics.py",
+      "digest": "sha256:7eabd219ed5963ebed9d8583c219b088db6236335c5ed7aa1f7fee2f62e8c178"
+    },
+    {
+      "path": "tooling/reference_authority.py",
+      "digest": "sha256:36f608f142b6441d4b9e4df82edba65670069b1253b452727dc7cec5a453eb1b"
+    },
+    {
+      "path": "tooling/reference_models.py",
+      "digest": "sha256:8d3e377e4f8152ccbef72bf5710d0413f12cdaecde0b39bfc3d6a6ec18b739d3"
+    },
+    {
+      "path": "tooling/security_semantics.py",
+      "digest": "sha256:d12ea555a1f91ff87fb6da0ed43b32483f15bf898fe456e8d8bbfa7393d7e26f"
+    },
+    {
+      "path": "tooling/target_migrations.py",
+      "digest": "sha256:7013419f834187f8e831cecd829da08de3c9d04d5d51a756ce4aa5032539acfa"
+    },
+    {
+      "path": "tooling/target_provenance.py",
+      "digest": "sha256:36f1a7657fef929de0049fdade341a2344c31eac17960f53c8c1628b47d95c68"
+    },
+    {
+      "path": "tooling/target_release.py",
+      "digest": "sha256:1b0f99e4f7c956830507f8136b66b7af2b55c1b745f9c18fce655d9b701dc642"
+    },
+    {
+      "path": "tooling/target_worker.py",
+      "digest": "sha256:aad55a36be601479797adccc0f6bebc7ca93f53c138bb484adb69e05bef5e41d"
+    },
+    {
+      "path": "tooling/task_ui_browser.py",
+      "digest": "sha256:a2c57fb23adca6d2a4be95999187c4d3c1d82d360c2ea654141f3bb4e72d6fb1"
+    },
+    {
+      "path": "tooling/tests/delivery_components.py",
+      "digest": "sha256:837b16f3f5a467df6245ed53a7fb4b8a4273721960463a08d632f955eb142632"
+    },
+    {
+      "path": "tooling/tests/invocation_upgrade.py",
+      "digest": "sha256:8990b20db5621a8163580abb27c312294cd1eedee6b926f12e0b646e27c5a525"
+    },
+    {
+      "path": "tooling/tests/phase6_gates.py",
+      "digest": "sha256:05a43fcfd01fce56ae1a910a468fa3119d0a5f2f86183739842a58b9a62b82a2"
+    },
+    {
+      "path": "tooling/tests/task_ui_http_outcomes.py",
+      "digest": "sha256:7907998aabef9b999443140d24568035e54f266a10a13d2189b14958e23b3a84"
+    },
+    {
+      "path": "tooling/tests/task_ui_upgrade.py",
+      "digest": "sha256:9ff7cc95977828de334d18338963c92f5fbb752a12735896bd4547616e6da030"
+    },
+    {
+      "path": "tooling/tests/test_canonical.py",
+      "digest": "sha256:95779876a14aef782c3d015e27dd903465b2310de0aecd3392a601b74bc40081"
+    },
+    {
+      "path": "tooling/tests/test_canonical03_migrations.py",
+      "digest": "sha256:51b0762167a60dc2b8bf8b36c0e12807878fa577ce79416deb01100e23d81c38"
+    },
+    {
+      "path": "tooling/tests/test_changes.py",
+      "digest": "sha256:8596ac4ed228b90b66dd736676213b7f6af83e446ad1a6911f5ce2ac04b03e5d"
+    },
+    {
+      "path": "tooling/tests/test_closure_evaluator.py",
+      "digest": "sha256:260975e1a57ae2e262c5abb6938d449b68c92f59dbce429c0f672bf26775d07b"
+    },
+    {
+      "path": "tooling/tests/test_compiler.py",
+      "digest": "sha256:aa222fe3d31183ed3e39e26f948fd5be018faaa2d24b82d9e3c3cd6a03431802"
+    },
+    {
+      "path": "tooling/tests/test_contracts.py",
+      "digest": "sha256:aa1a56a273955d65bf250c1d0dfd033c3b1949a9a7e1a80eabf8b970dcadf174"
+    },
+    {
+      "path": "tooling/tests/test_delivery_job_target.py",
+      "digest": "sha256:fd1bf7bc42e0379d693a20df4e361f0e1ff248a3438971f192d133cb34acd1c4"
+    },
+    {
+      "path": "tooling/tests/test_deterministic_approval.py",
+      "digest": "sha256:66235305a7e2429a5c729f7b40831dba08675883124259a8e0b5eb761dbb3ed8"
+    },
+    {
+      "path": "tooling/tests/test_deterministic_failures.py",
+      "digest": "sha256:170b8a36a2547c50c264803e904dfe7b96c6e4346263dc14ad73d35dff0345c0"
+    },
+    {
+      "path": "tooling/tests/test_deterministic_invocation.py",
+      "digest": "sha256:ee4a351e89e88f02b742cda93812b62769e8d7e3534ee3a944a23ff1451db46c"
+    },
+    {
+      "path": "tooling/tests/test_deterministic_v04.py",
+      "digest": "sha256:a28317f8ce0d7adff29ea78b38b454e104283b0074240a5fd551101817cf8fcb"
+    },
+    {
+      "path": "tooling/tests/test_evolution_review_order.py",
+      "digest": "sha256:71c72aa970e9a21b2cd39a91d71cb19181bfcdb47e6de0a900a378b03afb8f08"
+    },
+    {
+      "path": "tooling/tests/test_execution_approval.py",
+      "digest": "sha256:b125dc215fac8ce2143a7bb0a7f55305f5b5ba40c49153e46566442511902a84"
+    },
+    {
+      "path": "tooling/tests/test_execution_v03.py",
+      "digest": "sha256:d0302dd86c3032acb00d94c97cc463f84c0b8e9f3f2eba2115ff95cd0e55810b"
+    },
+    {
+      "path": "tooling/tests/test_execution_v03_evolution.py",
+      "digest": "sha256:4104ccc2b0561e6d84a70516ecce2e928e378dd76ffae2a5606f851626f94749"
+    },
+    {
+      "path": "tooling/tests/test_frontend_diagnostics.py",
+      "digest": "sha256:ae885774e5656728ad0e50328d7561dcf4d5fe1ad9ac2d409fc8530cedaa94b0"
+    },
+    {
+      "path": "tooling/tests/test_invocation_target.py",
+      "digest": "sha256:db64408d29bedb424ae25d819fc25da04e54842af501b7cfc8be12729ae5fcc9"
+    },
+    {
+      "path": "tooling/tests/test_materializer_faults.py",
+      "digest": "sha256:bcc4306f8058fc5b6fc784e0a53b7d9b7319f98e60a0776dd45195305d28f393"
+    },
+    {
+      "path": "tooling/tests/test_phase1.py",
+      "digest": "sha256:354957b78253e86b9f8b09912a3489ac7281bdc5499e7933d1315eacb1ac9d58"
+    },
+    {
+      "path": "tooling/tests/test_phase6_capability_honesty.py",
+      "digest": "sha256:e4fb0e1971c861a4ed4bf8bc14a575bd7e3527b8154ad4c3b59fa824a6ed241e"
+    },
+    {
+      "path": "tooling/tests/test_phase6_execution_lowering.py",
+      "digest": "sha256:5b4df868a7daa77aabe33b23321e3f2f2760f36e2ee546a5c54c717c3a94b918"
+    },
+    {
+      "path": "tooling/tests/test_phase6_foundations.py",
+      "digest": "sha256:ec2de450d997c6af1a8a172fed8e318b3df4e4692ccbb9b87e3d989e2e668cff"
+    },
+    {
+      "path": "tooling/tests/test_phase6_open_state.py",
+      "digest": "sha256:c7795f55b650fcc180d506cca978cf81b5c591d283416049746243e3ce371f25"
+    },
+    {
+      "path": "tooling/tests/test_privacy_lifecycle_target.py",
+      "digest": "sha256:025efa8ffe57b1dfbb8371be37df8d8dd6ff009470927f0e4110ba207cf382d9"
+    },
+    {
+      "path": "tooling/tests/test_retained_inventory.py",
+      "digest": "sha256:25b82df80af7e4977f18cfb3e52bb72a7cbea0e373ab7ba29eb6e9180248a386"
+    },
+    {
+      "path": "tooling/tests/test_semantic_content_decisions.py",
+      "digest": "sha256:60aa01817f39759794788810662af768064e35d9a673d18d6d1cc325adc2ba6c"
+    },
+    {
+      "path": "tooling/tests/test_target_migrations.py",
+      "digest": "sha256:422daa6c37802c873a0e8c2e522c3e3378b1e8b52e9629322deff5e7f0f5435c"
+    },
+    {
+      "path": "tooling/tests/test_target_worker_faults.py",
+      "digest": "sha256:f8f20c84c4236dfb21e2bc5a593569c1dad2881a54482410892c503e4412aacb"
+    },
+    {
+      "path": "tooling/tests/test_task_interface.py",
+      "digest": "sha256:4d000a0abe55960b3b4c2a48a8860993878a5ca7b25e73c463a28a114feee304"
+    },
+    {
+      "path": "tooling/type_semantics.py",
+      "digest": "sha256:0137cd40ebf861b473b7d9bb28fc0b3ca95b79d80abcf287a97bd18dd4649c5a"
+    },
+    {
+      "path": "tooling/ui_semantics.py",
+      "digest": "sha256:74380c1053f90c14ed00bda297730aa9786bfd27edccbacc67fc0f263cda86f7"
+    },
+    {
+      "path": "tooling/validate.py",
+      "digest": "sha256:87fc1c3be8331b8a0a1d6167ea8a13382ff4fd560222bd9cabfe70fde8e81def"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/capability_contract.py",
+      "digest": "sha256:cd288410882bf1dee9a6566bb7fdf283fbafeb9065d211c3a2b4a9f0cccff131"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/delivery_jobs.py",
+      "digest": "sha256:1463b0d0589ca088d055fd803f6a5bd5f2fe565f4204670ee10b13bba20dd99f"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/execution_codegen.py",
+      "digest": "sha256:fd512fce711007d32b3ae29963e01c7448b6a0584eaf29de6de93298caab2955"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/generation.py",
+      "digest": "sha256:71380a57446ec6e12efae007299e6a4255e473480dae65c28e813ecff6122b84"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/main.py",
+      "digest": "sha256:4e1b35521c94e18708c109b61425ffdb5e7cc5c992958e0ceac2ed9036539897"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/model.py",
+      "digest": "sha256:2828aa750ab863f016adbbb0e19fd53d86882a0d833c4e818aea748b4a6cd3f2"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/privacy_lifecycle.py",
+      "digest": "sha256:ecb59dadaa0c038426cfd1f75bca4e122735fa5752fec0664dd84038b78e6a49"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/relations.py",
+      "digest": "sha256:af6c706d9dd403b0e1bd1c55e57b54a28027831445484fa1973769f64dca6266"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/task_ui.py",
+      "digest": "sha256:321c043df5a36a27db6b119becf54f45471cadbe0097dbc6ddab5573b2221909"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/typed_contracts.py",
+      "digest": "sha256:3506d4788378ddd2d3061031d7c68ac9cd3f8408eacf8d4fe5278a8540deb17f"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/Application.java",
+      "digest": "sha256:e954b9b5cc482874d51ccecfbc5911e4a9acd260273d6e6e8385ff8f1ffa51a5"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/Errors.java",
+      "digest": "sha256:59f6efb8f9e03b7b298d1a7bf8b022087674670d6a5e75f402f0cd6a5804dc65"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/FailureMapping.java",
+      "digest": "sha256:c0056d6574bbfdbf9452e4475d25a9beae5227b67cb2549b1ac3da7341aa4c44"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/TaskController.java",
+      "digest": "sha256:0140c30ed0dfd362ffccb096a53db33dfde7e2dc3b5e04bfba8a8386c4808c06"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/TypedJsonConfiguration.java",
+      "digest": "sha256:ae6f64e5f86e30c627bf44c00ae8070b2c64a68bab8f072c1de5bab5dcf18a56"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/application/TaskService.java",
+      "digest": "sha256:15168d5879adb651783fa2b491487313a98c0a993dc1e686685cbd69b392b2f1"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/domain/ExactDecimal.java",
+      "digest": "sha256:9828cec7792024dcccac12b322f2daac14bd2c02e330bac14eaaf00fd9eb2900"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/domain/Expressions.java",
+      "digest": "sha256:645f45dda01d1a8f9a3239aae88e89904a86d114a71264e196915a99091c14aa"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/DeliveryRuntime.java",
+      "digest": "sha256:22a92bce08f9a0e4270257705d73eb99c0570b3f10dfde90d4d0d2e17166fa99"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/ExecutionStore.java",
+      "digest": "sha256:c3916e4866c3aaecbc8b3d3df1b23fdaf625a98961eea35a316740bf2ed2788b"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/InvocationCore.java",
+      "digest": "sha256:b9145a3f35c32bcd626b71cf51fb2e4df8b2910e041c13f745776e7de51537c8"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/JobRuntime.java",
+      "digest": "sha256:e6a6736d1e71dffbb47de86bee569b8eae434ed6678da78afce43bbd3485adb3"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+      "digest": "sha256:efcdc401b1bed24a2f34a0b7f005b3826dff7a71c11b2f165867e4fc2735dc74"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/PinnedSchedule.java",
+      "digest": "sha256:eeb6475ede8b3107f9d61b37bf85eb56ace8fb07e96dfeab9d70e641ff6de640"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/RuntimeBootstrap.java",
+      "digest": "sha256:c6489f9a1bdb5f52d7b9a045bb270f4b429a923dee3c5503a602e13b21a67bfb"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/RuntimeConfigurationContract.java",
+      "digest": "sha256:cf03272be5a2b322061798c0f6c89d2aa49f74a1f940cff234ff20b53ead8c34"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/SemanticFailure.java",
+      "digest": "sha256:edf8fe2be830922496532bd353996ef5c4c7a8a9e9680330a72a1348d083d41d"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/TargetModel.java",
+      "digest": "sha256:f12904a9987a52cfc9c102f47c4ae3ec52378ca4f5bc25f4de8b3c65d58f83d9"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/security/ApplicationPolicy.java",
+      "digest": "sha256:6aa6044e35efd2bfdf25e76d057a73c4f4b7c2497b872e1b99ff81063a9416dc"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/security/Observability.java",
+      "digest": "sha256:5ed47cacba7692d2488eb7bf1e2de782305b49ed8e86e0bc1278f3f0ad0fb6b9"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/security/PrivacyGuards.java",
+      "digest": "sha256:568e389ff8fb12c589c0ced8a5fec7e11813e870af8ebe5d5ad2ae4bba259f54"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/security/SecurityConfiguration.java",
+      "digest": "sha256:87f53f432af128e610b549c85009421329ad690f3506d076730e769bd2186390"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/security/SessionGate.java",
+      "digest": "sha256:9692b6b8bde341cc328a9bdf025ee758414aad682ed4c6abe683e109c4802ef0"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/ApplicationPolicyTest.java",
+      "digest": "sha256:2e2d69a19e32c737b6aa4f25d11081f2cc69124550b375888aa754c86b7e7e83"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/ClassificationAuditTest.java",
+      "digest": "sha256:91bab4bccd4ee10b3fb2d85d09b097e472ef326e284a14692b1be9a3aadfbdab"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/ExactDecimalTest.java",
+      "digest": "sha256:f0ed913b1de762d519d3233b822820428f3f6587f7df6303d6fa34f58111f68e"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/FailureMappingTest.java",
+      "digest": "sha256:a91a9e208e0216ebcfe4ad34251ffa85ed290c75ec65d4b69ed41a3a14a1d524"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/MigrationTest.java",
+      "digest": "sha256:457677928f0eda6e8a7b55ea6d2dbee09adb237d194aff84edab2dd2b4f24d63"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/ObservabilityNonDisclosureTest.java",
+      "digest": "sha256:41aa5a7b91c0098ca79b1d87577e2feadb72d99258181ca4c15f565b87dfe586"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/PortableFaultMappingTest.java",
+      "digest": "sha256:7c3dffa4beb3b8cffb20187fceccf3c1993245e84e6522135c16e5aaad02d322"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/PrivacyGuardsTest.java",
+      "digest": "sha256:cb40dc745ceb5ea1bd85a6fa09eaa02c91ff2a3a916dabf739529330882c0ba0"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/RuntimeConfigurationContractTest.java",
+      "digest": "sha256:83016ab6ec51a167b317c48ace79e64dee904ff6e54650b84cf90fa69fdb849b"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/test/java/acp/domain/SessionGateTest.java",
+      "digest": "sha256:89b61edb60bc8db621525013dedd1985adbb520e58971bd315a2bde917989aee"
+    }
+  ],
+  "insertionAndProvisioningSites": [
+    {
+      "path": "tooling/audit/prepare_evolution_review.py",
+      "line": 155,
+      "lineDigest": "sha256:27762a737add321706f107e43f689b4261dd9301926634df2e7585f0be92b99e",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/check_privacy_profile_upgrade.py",
+      "line": 27,
+      "lineDigest": "sha256:df391f371f296cc3f5751aba93e6a3e28861cb453dae1382603813deec6e3697",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/check_target_profile_upgrade.py",
+      "line": 27,
+      "lineDigest": "sha256:df391f371f296cc3f5751aba93e6a3e28861cb453dae1382603813deec6e3697",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 114,
+      "lineDigest": "sha256:b2f47258259ac173bb9789e2965798d516e0a82a578a0ddb723ed51186eeb47e",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 133,
+      "lineDigest": "sha256:e2278494daa56ab4bcf8e36ac885fabe594268b1229a0e2493d4ad67b347c38f",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 134,
+      "lineDigest": "sha256:89b8c52ee5a635e5f2e07e27348f1d1f037591e79092d2da0ade9e2ad6284fd7",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 135,
+      "lineDigest": "sha256:c3b9962d5bb1b826595448272e2f0568f4b7e46f3f927a41a46784b7a9112676",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 136,
+      "lineDigest": "sha256:d93da4e3c555d045df89fc9d94feb3fae46fccda2a9284ffdb24751f8d6a2339",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 167,
+      "lineDigest": "sha256:1c89eda2b2b359df6536cef0ffbfd8ca956d8ba50d503389a9ecf99b73c21443",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/history_repository.py",
+      "line": 68,
+      "lineDigest": "sha256:d9f1cd54302d1aca9c22a3fd573bf04329ff85b57cd6437e352f52d62517fa65",
+      "classification": "HISTORY_NOT_DOMAIN"
+    },
+    {
+      "path": "tooling/history_repository.py",
+      "line": 106,
+      "lineDigest": "sha256:56b655ba75ef5c9095541ef347c43f1b4736984e1586b636965b00b437189447",
+      "classification": "HISTORY_NOT_DOMAIN"
+    },
+    {
+      "path": "tooling/history_repository.py",
+      "line": 226,
+      "lineDigest": "sha256:32caea62f4555c5749e1f1e96f8e7e90df5d5aa91ae120a5e770ba5214e14c29",
+      "classification": "HISTORY_NOT_DOMAIN"
+    },
+    {
+      "path": "tooling/history_repository.py",
+      "line": 457,
+      "lineDigest": "sha256:c3e683fbb34a014f96c31c7c142fe053f4bde141e93e90cfb7aae58ec62a2c42",
+      "classification": "HISTORY_NOT_DOMAIN"
+    },
+    {
+      "path": "tooling/history_repository.py",
+      "line": 462,
+      "lineDigest": "sha256:28496a486db1a5b79bf6f922b6a50b569c4bd0c95053b9adffd89f4fff22a057",
+      "classification": "HISTORY_NOT_DOMAIN"
+    },
+    {
+      "path": "tooling/integration/retained_inventory_seed.py",
+      "line": 14,
+      "lineDigest": "sha256:99bf002b4bb5970dfc489e37abcf0159d1500e69b796a3cdeb9c82500c0a3fd6",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/integration/retained_inventory_seed.py",
+      "line": 16,
+      "lineDigest": "sha256:02845629076920a68210c813816423948351057341fa13204495c8ffd4fb7da6",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/invocation_reference_tests.py",
+      "line": 140,
+      "lineDigest": "sha256:4178775a74820b0dc1eb6de243abf992ede7b1ccb6aadaba8addcadd4ceaed7e",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/invocation_reference_tests.py",
+      "line": 142,
+      "lineDigest": "sha256:c3c22ba2cec057aa3060583568e40b1e4f52c24d9c92c91eb57c3f6bf18cab66",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/invocation_reference_tests.py",
+      "line": 144,
+      "lineDigest": "sha256:f643569489d46e1d4be612086b6de12d442e99103c7fc529163d3881ec242081",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 15,
+      "lineDigest": "sha256:e0d958cd39bfdc560329e26135961e59245dad46045f8b1189f79b5e3d64c29a",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 27,
+      "lineDigest": "sha256:bb35e806da1359ba1f6acedb40a8d18a53870a896e51501034a86b967e7f02ec",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 28,
+      "lineDigest": "sha256:0b5c4647510dfab731c2598e81f2f4f9174f4c37e34cc6c9e062e270dd9fae13",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 29,
+      "lineDigest": "sha256:010c6fb94098493414757538b4b658a18e16a3e69708079eb09c8699dc212948",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 31,
+      "lineDigest": "sha256:39cc96ae3d2fca62f3844a0c42e3113dc049414ed1517b67ae6b7c923522e921",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 52,
+      "lineDigest": "sha256:f1bc8508f118184281cbf8b2ec15893286a2d58155f6023a0028b49275313495",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 125,
+      "lineDigest": "sha256:3f224bf8835154a754343b738d036a0f1283240531f518b7ed4628966d37dd3f",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 126,
+      "lineDigest": "sha256:b63df302d8fdef0e7c738e78bf2573376526588cc621a228e4426ca4da4f1f3c",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 131,
+      "lineDigest": "sha256:0cb3bb2ad2334b1575b238f38d9fea431abbebc28466eb07e62615eb46596007",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 132,
+      "lineDigest": "sha256:d232af090b7e189ca06cd5f73ad80fc151bf52f150fe9e513ab438fe20e3b97d",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 135,
+      "lineDigest": "sha256:cf34f4fdba14af8bb7196096a4b3bcea24926d6d4c0eb17aa105694abb904bfe",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "line": 357,
+      "lineDigest": "sha256:49b31e5952a9ea6bdee02094e43f58ec73bb2f74b7e7dee42d90b62a9f96f167",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/privacy_lifecycle_reference_tests.py",
+      "line": 118,
+      "lineDigest": "sha256:89f31b47438a6fa32a2298e96a022f127d48b42168b8ad0f1c5b28456b7442d7",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/task_ui_browser.py",
+      "line": 8,
+      "lineDigest": "sha256:07d43355b8f31085de17ba409b76c1baba98eaf00aed2f6f01a02dd67b33f240",
+      "classification": "FIXTURE_PROVISIONING_OR_CALLER"
+    },
+    {
+      "path": "tooling/tests/test_canonical03_migrations.py",
+      "line": 71,
+      "lineDigest": "sha256:5373fb3e4b88da803dcecc7aec70fab0db801fb61f573292afdffc53f71e1746",
+      "classification": "TEST_PROBE_NOT_DOMAIN"
+    },
+    {
+      "path": "tooling/tests/test_canonical03_migrations.py",
+      "line": 77,
+      "lineDigest": "sha256:cc1812abe564472809696e74dc7897fb96a9ea5d31ab0243fc0c0935fc8bd3b8",
+      "classification": "TEST_PROBE_NOT_DOMAIN"
+    },
+    {
+      "path": "tooling/tests/test_canonical03_migrations.py",
+      "line": 96,
+      "lineDigest": "sha256:8b97103702f70141be6cc223cf5bb8961a4ae967664409abf7b60d74c8db4120",
+      "classification": "TEST_PROBE_NOT_DOMAIN"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/privacy_lifecycle.py",
+      "line": 58,
+      "lineDigest": "sha256:eeff58a3dfa1db29b8874d5a9c4bec564895bc9f06e273ca6c45fcc98c787147",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/application/TaskService.java",
+      "line": 90,
+      "lineDigest": "sha256:adbf2ddee20bfd8ef17edc7b4c529832dbc77f5f907e10b2010ad2dfcd2c625e",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/application/TaskService.java",
+      "line": 94,
+      "lineDigest": "sha256:4c108ff1d67072352a4202ba32cb9e740b0d609a68ef09be7c3c466874300234",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/DeliveryRuntime.java",
+      "line": 57,
+      "lineDigest": "sha256:03007b4e5644d8ec8a02142d7f0349e17cf9fc2e91676a4ca3d6ddc0f800ff71",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/ExecutionStore.java",
+      "line": 52,
+      "lineDigest": "sha256:a6184e65779c6625f63d9ea41b7a15a29be0a0d1aab28e65b8a75035cf3965cb",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/ExecutionStore.java",
+      "line": 57,
+      "lineDigest": "sha256:f8e711ea569c86186254de41be83fd276d40f30fc4a40a087e3ff63e6b65e93a",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/ExecutionStore.java",
+      "line": 64,
+      "lineDigest": "sha256:8b88680e132c0613b62b13e1d3e127eba305d708b632a9a62002fd8c0bff7394",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/ExecutionStore.java",
+      "line": 91,
+      "lineDigest": "sha256:5b3dfd8353cd7dca8d5f5979a2e4dc4ceba0f8bd9e707232bdc95cc7c8f67a9c",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/ExecutionStore.java",
+      "line": 101,
+      "lineDigest": "sha256:6a6cda77d2bb34d11bf129fda7b1e6c3598c4d4176ae49dda1d30b44325c4959",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/InvocationCore.java",
+      "line": 92,
+      "lineDigest": "sha256:6b52c669d884421001edef012e9a80a03d5e551126aaba060a04544b16e31007",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/InvocationCore.java",
+      "line": 99,
+      "lineDigest": "sha256:a3486c12d4412cc5c943a5b2315dbfd6055225268bce50aa8747b78cb3972b2d",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/InvocationCore.java",
+      "line": 138,
+      "lineDigest": "sha256:6d6b55f75a9dafc3a6296be4208cdc1556a0d473437739edd9b6ac7f857c9e05",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/InvocationCore.java",
+      "line": 157,
+      "lineDigest": "sha256:c163fd1424186b5423a0df228d63bdd34657a2a2e15ed89b9838b9f36a8ec08e",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/InvocationCore.java",
+      "line": 183,
+      "lineDigest": "sha256:42c0533f0a3bca21fcdf78aef655111bc16c40f65c5c16b1678b4a981988fe31",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/JobRuntime.java",
+      "line": 37,
+      "lineDigest": "sha256:7ab499831fb35c6215b19dba547efaca4cfeb4b155d5e07b539114b3fc3e03fb",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/JobRuntime.java",
+      "line": 39,
+      "lineDigest": "sha256:6ce2b9f9e438f89e846c880414029856ca7e95de4785412a0c151cfcb3588505",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/JobRuntime.java",
+      "line": 56,
+      "lineDigest": "sha256:df9cc50216158c5c35520cf61d0982c799fd6058a0ad992ce5757d7c49d32ac4",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+      "line": 87,
+      "lineDigest": "sha256:d1eb89ab7c435622df0c6cdc2c4c6152e7b6736783b93306dfeb164a5b9c7cec",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+      "line": 89,
+      "lineDigest": "sha256:9abb6f4a26f248297196e2aed1b135f98998bd1afe77cd5ef232324fe61590cb",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/infrastructure/LifecycleRuntime.java",
+      "line": 100,
+      "lineDigest": "sha256:6f0d8f905fad2003318cf68cda7470895414e49045ba284a329490aca9888ab7",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    },
+    {
+      "path": "targets/spring-vue-postgres/templates/backend/src/main/java/acp/security/SessionGate.java",
+      "line": 59,
+      "lineDigest": "sha256:86f16b36e10463c316c1d8f136e5b93bdc96dbe7c0766881d2c4c5e4a799284c",
+      "classification": "RUNTIME_OR_SCHEMA_BOOTSTRAP"
+    }
+  ],
+  "externalWriters": "UNAVAILABLE_NOT_ASSERTED_ABSENT; inventory is restricted to repository and isolated reference deployments",
+  "domainWriters": [
+    {
+      "path": "tooling/phase6_reference_tests.py",
+      "operation": "seed_sql and relationship/child fixture inserts",
+      "omitsProposedField": true,
+      "newSchemaCompatibility": "INCOMPATIBLE_WHERE_OWNER_ROW_IS_CREATED"
+    },
+    {
+      "path": "tooling/invocation_reference_tests.py",
+      "operation": "explicit approved-snapshot column clone insert(String id)",
+      "omitsProposedField": true,
+      "newSchemaCompatibility": "INCOMPATIBLE"
+    },
+    {
+      "path": "tooling/integration/retained_inventory_seed.py",
+      "operation": "existing seed_sql and existing clone, multi-tenant harness",
+      "omitsProposedField": true,
+      "newSchemaCompatibility": "INCOMPATIBLE"
+    }
+  ],
+  "supportedCommands": {
+    "payment": [
+      "CMD-RECORD"
+    ],
+    "case-management": [
+      "CMD-REVIEW",
+      "CMD-APPROVE",
+      "CMD-ARCHIVE"
+    ]
+  },
+  "commandCreationBehavior": "Existing-row locking and UPDATE only; Commands and UC-TASK do not provision new resources",
+  "importPaths": "No supported domain import endpoint found in target source; external provisioning is unknown and must be inventoried before rollout",
+  "runtimeWriters": "Session, rate, idempotency, outbox, audit, job, delivery and lifecycle rows do not create owner resources; proposed owner field does not apply",
+  "futureNewRecords": "Explicit required non-null valid UTF-8 String, empty String allowed; no backfill-derived default; switch/fence every provisioning writer before contract"
+}

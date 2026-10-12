@@ -1,0 +1,273 @@
+{
+  "sourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+  "boundary": "All tooling Python provider imports and generated Java clone helpers; exact complete source boundary is writers.json",
+  "callers": [
+    {
+      "path": "tooling/audit/admission.py",
+      "line": 14,
+      "sourceDigest": "sha256:c1ec21e4e2cc04c257dadd7fd65013e11fa0941261144fae90c2f888b9f08192",
+      "statement": "import delivery_job_reference_tests"
+    },
+    {
+      "path": "tooling/audit/prepare_evolution_review.py",
+      "line": 98,
+      "sourceDigest": "sha256:246a48e64be57efea8157671808bf49e8c3c5a5516372a97f228db5afb1ebbcd",
+      "statement": "'incompatibleKnownWriters':['tooling/phase6_reference_tests.py: seed_sql/source seed INSERT',"
+    },
+    {
+      "path": "tooling/audit/retained_inventory.py",
+      "line": 12,
+      "sourceDigest": "sha256:c26ef6bb2e06176810b2d8446f5b3e9d706a380a26f614a7c184c1721ee221d1",
+      "statement": "from phase6_reference_tests import symbol"
+    },
+    {
+      "path": "tooling/audit/retained_inventory.py",
+      "line": 44,
+      "sourceDigest": "sha256:c26ef6bb2e06176810b2d8446f5b3e9d706a380a26f614a7c184c1721ee221d1",
+      "statement": "{'path':'tooling/phase6_reference_tests.py','operation':'seed_sql and relationship/child fixture inserts','omitsProposedField':True,'newSchemaCompatibility':'INCOMPATIBLE_WHERE_OWNER_ROW_IS_CREATED'},"
+    },
+    {
+      "path": "tooling/check_delivery_job_components.py",
+      "line": 13,
+      "sourceDigest": "sha256:9ec01fdbc793b268e0db454ee22e13bc74e02c9e5c4c8ee5dec84b6b5f7f9648",
+      "statement": "from invocation_reference_tests import source,variants,http_source"
+    },
+    {
+      "path": "tooling/check_delivery_job_components.py",
+      "line": 14,
+      "sourceDigest": "sha256:9ec01fdbc793b268e0db454ee22e13bc74e02c9e5c4c8ee5dec84b6b5f7f9648",
+      "statement": "from delivery_job_reference_tests import source as delivery_source"
+    },
+    {
+      "path": "tooling/check_execution_components.py",
+      "line": 14,
+      "sourceDigest": "sha256:ce962d5a1df801406b93af6abfd13e656f513609b4a827bb269a51a2af9d1015",
+      "statement": "from phase6_reference_tests import source as test_source, variants, http_source"
+    },
+    {
+      "path": "tooling/check_invocation_components.py",
+      "line": 13,
+      "sourceDigest": "sha256:0aeb84e9d9d52debd57775699a3812a277ec70b71488ee02e3abf5558770bb0f",
+      "statement": "from invocation_reference_tests import source,variants,http_source"
+    },
+    {
+      "path": "tooling/check_phase6_target.py",
+      "line": 21,
+      "sourceDigest": "sha256:093bb37f6986ea95d2838c254cbb17130b87537f5dd54edac8793b13483faa53",
+      "statement": "from phase6_reference_tests import source as test_source, http_source, variants"
+    },
+    {
+      "path": "tooling/check_privacy_lifecycle_components.py",
+      "line": 13,
+      "sourceDigest": "sha256:15371bb88ac29aeab1ce6d39649979263568a206d7614dfdfeda1a21313a9fb2",
+      "statement": "from invocation_reference_tests import source,variants,http_source"
+    },
+    {
+      "path": "tooling/check_privacy_lifecycle_components.py",
+      "line": 14,
+      "sourceDigest": "sha256:15371bb88ac29aeab1ce6d39649979263568a206d7614dfdfeda1a21313a9fb2",
+      "statement": "from delivery_job_reference_tests import source as delivery_source"
+    },
+    {
+      "path": "tooling/check_privacy_profile_upgrade.py",
+      "line": 23,
+      "sourceDigest": "sha256:2c0e6c54bab5211ada5def64d08fbfb55940d7c488ad40384fbab45bd3c03f7a",
+      "statement": "from invocation_reference_tests import source as prior"
+    },
+    {
+      "path": "tooling/check_privacy_profile_upgrade.py",
+      "line": 24,
+      "sourceDigest": "sha256:2c0e6c54bab5211ada5def64d08fbfb55940d7c488ad40384fbab45bd3c03f7a",
+      "statement": "from phase6_reference_tests import symbol"
+    },
+    {
+      "path": "tooling/check_privacy_profile_upgrade.py",
+      "line": 68,
+      "sourceDigest": "sha256:2c0e6c54bab5211ada5def64d08fbfb55940d7c488ad40384fbab45bd3c03f7a",
+      "statement": "seed_code=\"\"\"import sys;from pathlib import Path;sys.path.insert(0,'tooling');from delivery_job_reference_tests import source"
+    },
+    {
+      "path": "tooling/check_target_profile_upgrade.py",
+      "line": 22,
+      "sourceDigest": "sha256:18601b2fa79c502c9bca43b8fad5c53b34d5f94f741ef9881330a4a74bb63776",
+      "statement": "from delivery_job_reference_tests import source"
+    },
+    {
+      "path": "tooling/check_target_profile_upgrade.py",
+      "line": 23,
+      "sourceDigest": "sha256:18601b2fa79c502c9bca43b8fad5c53b34d5f94f741ef9881330a4a74bb63776",
+      "statement": "from invocation_reference_tests import source as prior"
+    },
+    {
+      "path": "tooling/check_target_profile_upgrade.py",
+      "line": 24,
+      "sourceDigest": "sha256:18601b2fa79c502c9bca43b8fad5c53b34d5f94f741ef9881330a4a74bb63776",
+      "statement": "from phase6_reference_tests import symbol"
+    },
+    {
+      "path": "tooling/check_target_profile_upgrade.py",
+      "line": 64,
+      "sourceDigest": "sha256:18601b2fa79c502c9bca43b8fad5c53b34d5f94f741ef9881330a4a74bb63776",
+      "statement": "seed_code=\"\"\"import sys;from pathlib import Path;sys.path.insert(0,'tooling');from invocation_reference_tests import source;from phase6_reference_tests import symbol"
+    },
+    {
+      "path": "tooling/check_task_interface.py",
+      "line": 13,
+      "sourceDigest": "sha256:8f6570464a8098a21e5be31cdf302f60e1cc996bf697cda654d62f3585bfdd4f",
+      "statement": "from invocation_reference_tests import source,http_source,variants"
+    },
+    {
+      "path": "tooling/check_task_interface.py",
+      "line": 14,
+      "sourceDigest": "sha256:8f6570464a8098a21e5be31cdf302f60e1cc996bf697cda654d62f3585bfdd4f",
+      "statement": "from delivery_job_reference_tests import source as delivery_source"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 3,
+      "sourceDigest": "sha256:b42600213f136b76939d46111af2175b32e95873c86b9a7bb1b6a3cb4ceea06b",
+      "statement": "from invocation_reference_tests import source as invocation_source"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 4,
+      "sourceDigest": "sha256:b42600213f136b76939d46111af2175b32e95873c86b9a7bb1b6a3cb4ceea06b",
+      "statement": "from phase6_reference_tests import symbol"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 113,
+      "sourceDigest": "sha256:b42600213f136b76939d46111af2175b32e95873c86b9a7bb1b6a3cb4ceea06b",
+      "statement": "from phase6_reference_tests import seed_sql"
+    },
+    {
+      "path": "tooling/delivery_job_reference_tests.py",
+      "line": 166,
+      "sourceDigest": "sha256:b42600213f136b76939d46111af2175b32e95873c86b9a7bb1b6a3cb4ceea06b",
+      "statement": "from invocation_reference_tests import source as original"
+    },
+    {
+      "path": "tooling/integration/release_upgrade.py",
+      "line": 13,
+      "sourceDigest": "sha256:b3bb8c6c45f52bcae3af3d0315664fffa412edf02012c617043fdb6ff08f6fe4",
+      "statement": "from invocation_reference_tests import source"
+    },
+    {
+      "path": "tooling/integration/release_upgrade.py",
+      "line": 14,
+      "sourceDigest": "sha256:b3bb8c6c45f52bcae3af3d0315664fffa412edf02012c617043fdb6ff08f6fe4",
+      "statement": "from check_target_profile_upgrade import after_source"
+    },
+    {
+      "path": "tooling/integration/release_upgrade.py",
+      "line": 15,
+      "sourceDigest": "sha256:b3bb8c6c45f52bcae3af3d0315664fffa412edf02012c617043fdb6ff08f6fe4",
+      "statement": "from phase6_reference_tests import symbol"
+    },
+    {
+      "path": "tooling/integration/retained_inventory_seed.py",
+      "line": 6,
+      "sourceDigest": "sha256:a62587cb1b152a1a5ffe4918a55bf665259797b9de03bff0e623d6a07c7679ba",
+      "statement": "from invocation_reference_tests import source"
+    },
+    {
+      "path": "tooling/integration/retained_inventory_seed.py",
+      "line": 7,
+      "sourceDigest": "sha256:a62587cb1b152a1a5ffe4918a55bf665259797b9de03bff0e623d6a07c7679ba",
+      "statement": "from phase6_reference_tests import seed_sql,symbol"
+    },
+    {
+      "path": "tooling/invocation_reference_tests.py",
+      "line": 7,
+      "sourceDigest": "sha256:efb6adc5fe8349e79f59ea3c1cb91eaab237a21e2acbde4531bf925211a295cb",
+      "statement": "from phase6_reference_tests import source as old_source, symbol"
+    },
+    {
+      "path": "tooling/invocation_reference_tests.py",
+      "line": 270,
+      "sourceDigest": "sha256:efb6adc5fe8349e79f59ea3c1cb91eaab237a21e2acbde4531bf925211a295cb",
+      "statement": "from phase6_reference_tests import http_source as previous"
+    },
+    {
+      "path": "tooling/privacy_lifecycle_reference_tests.py",
+      "line": 3,
+      "sourceDigest": "sha256:7718eb30d359ff8b1ae9ee7288946db30aa7e43b9d3f72693b89db760e753db3",
+      "statement": "from invocation_reference_tests import source as invocation_source"
+    },
+    {
+      "path": "tooling/privacy_lifecycle_reference_tests.py",
+      "line": 4,
+      "sourceDigest": "sha256:7718eb30d359ff8b1ae9ee7288946db30aa7e43b9d3f72693b89db760e753db3",
+      "statement": "from phase6_reference_tests import symbol"
+    },
+    {
+      "path": "tooling/privacy_lifecycle_reference_tests.py",
+      "line": 160,
+      "sourceDigest": "sha256:7718eb30d359ff8b1ae9ee7288946db30aa7e43b9d3f72693b89db760e753db3",
+      "statement": "from invocation_reference_tests import http_source as previous"
+    },
+    {
+      "path": "tooling/task_ui_browser.py",
+      "line": 3,
+      "sourceDigest": "sha256:a2c57fb23adca6d2a4be95999187c4d3c1d82d360c2ea654141f3bb4e72d6fb1",
+      "statement": "from phase6_reference_tests import seed_sql,symbol"
+    },
+    {
+      "path": "tooling/tests/invocation_upgrade.py",
+      "line": 13,
+      "sourceDigest": "sha256:8990b20db5621a8163580abb27c312294cd1eedee6b926f12e0b646e27c5a525",
+      "statement": "import check_target_profile_upgrade as upgrade"
+    },
+    {
+      "path": "tooling/tests/phase6_gates.py",
+      "line": 11,
+      "sourceDigest": "sha256:05a43fcfd01fce56ae1a910a468fa3119d0a5f2f86183739842a58b9a62b82a2",
+      "statement": "import delivery_job_reference_tests"
+    },
+    {
+      "path": "tooling/tests/task_ui_upgrade.py",
+      "line": 27,
+      "sourceDigest": "sha256:9ff7cc95977828de334d18338963c92f5fbb752a12735896bd4547616e6da030",
+      "statement": "code=\"\"\"import sys;from pathlib import Path;sys.path.insert(0,'tooling');from invocation_reference_tests import source;from phase6_reference_tests import symbol"
+    }
+  ],
+  "findings": [
+    {
+      "provider": "phase6_reference_tests.seed_sql/source/http_source",
+      "writes": "tenant/actor/owner and relationship fixtures; related-child provisioning",
+      "proposedOwnerField": "OMITTED",
+      "compatibility": "Owner INSERT incompatible after final required-column enforcement; unrelated entities/relationships not applicable"
+    },
+    {
+      "provider": "invocation_reference_tests.source insert(String id)",
+      "writes": "Owner clone using explicit original approved Field column list; relation insert for PAYMENT",
+      "proposedOwnerField": "OMITTED",
+      "compatibility": "INCOMPATIBLE for owner INSERT; no implicit DEFAULT"
+    },
+    {
+      "provider": "delivery_job_reference_tests.source",
+      "writes": "Reuses original seed/clone and creates operational upgrade witness rows",
+      "proposedOwnerField": "OMITTED_BY_INHERITED_OWNER_WRITERS",
+      "compatibility": "Owner seed/clone incompatible; operational-only inserts not applicable"
+    },
+    {
+      "provider": "check_target_profile_upgrade/check_privacy_profile_upgrade/task_ui_upgrade/release_upgrade",
+      "writes": "Existing original-snapshot seed/clone through generated Java tests",
+      "proposedOwnerField": "OMITTED_BY_INHERITED_OWNER_WRITERS",
+      "compatibility": "Owner provisioners incompatible; tests must be updated or fenced before future contract"
+    },
+    {
+      "provider": "Generated target Commands/UseCases/UI",
+      "writes": "Lock and UPDATE existing resource; no supported owner create/upsert/import endpoint",
+      "proposedOwnerField": "NOT_A_CREATION_INPUT",
+      "compatibility": "Existing updates preserve note after an authorized migration; this task does not prove a migrated deployment"
+    },
+    {
+      "provider": "External import/clone/provisioning",
+      "writes": "UNKNOWN; no external registry or deployment supplied",
+      "proposedOwnerField": "UNKNOWN",
+      "compatibility": "REVIEW_REQUIRED; blocks any complete production writer claim"
+    }
+  ],
+  "sourceWriterInventoryFileDigest": "sha256:8adea723cc8113f9de1d00ec88557543a90378963edbe5d1acd50fbbb9f5c61f"
+}

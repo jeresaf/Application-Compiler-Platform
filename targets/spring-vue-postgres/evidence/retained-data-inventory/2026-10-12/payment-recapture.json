@@ -1,0 +1,2769 @@
+{
+  "body": {
+    "format": "acp-retained-inventory/1",
+    "classification": "NEWLY_CONSTRUCTED_SYNTHETIC_REFERENCE_TEST_DEPLOYMENT",
+    "domain": "payment",
+    "applicationId": "APP-FIXTURE",
+    "sourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+    "predecessor": {
+      "target": "acp-spring-vue-postgres/0.4.0",
+      "generator": "acp-spring-vue-generator/0.4.0",
+      "sourceCommit": "7e4e3438179e7a446c5f3737ad1d6d9cb07a96ea",
+      "bundleDigest": "61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+      "provenanceDigest": "sha256:56cf49ff0f2b95cd2646b7d81031b2b67ea12d4bd4ca5657b3b174a47a045ac0",
+      "build": {
+        "browserProfile": {
+          "axe": "4.13.0",
+          "engine": "chromium",
+          "manualAccessibility": "OUTSTANDING",
+          "otherBrowsers": "OUTSTANDING",
+          "playwright": "1.63.0",
+          "version": "1.0.0",
+          "viewports": {
+            "COMPACT": {
+              "height": 844,
+              "width": 390
+            },
+            "EXPANDED": {
+              "height": 900,
+              "width": 1280
+            }
+          }
+        },
+        "bundleDigest": "sha256:61c4647cfbe38cdbd97d03305685b3903f3ff24cfdb20d7c5b4502b478a0e06a",
+        "canonicalSnapshotDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+        "canonicalVersion": "0.3.0",
+        "compiler": "acp-reference-compiler/0.1.0",
+        "deploymentRequirements": {
+          "path": "acp/deployment-requirements.json",
+          "sha256": "a24dca192886a59afd6ca4f18e9a99e8b446cfcb484d0b4b2054e92385e30017"
+        },
+        "features": [
+          "acp.deterministic-execution.0.4"
+        ],
+        "generator": "acp-spring-vue-generator/0.4.0",
+        "migrationDigests": {
+          "database/V1__initial.sql": "6ef8bb0feb489303e43a87f45a41477f8970a7fe2d831248769593ca1e1e7445",
+          "database/V2__delivery_jobs.sql": "747a656c7004fd3b9ea784fcbfa678068b9469f283f8a2381fcb26671df139ad",
+          "database/V3__privacy_lifecycle.sql": "d3bb4cc5c0ece8a5d8fdef490c24749d2b5a66256d36397b71580d47609c52f9"
+        },
+        "pipeline": "acp-reference-pipeline/0.1.0",
+        "protocol": "acp-target-worker/0.1.0",
+        "semanticModelVersion": "0.4.0",
+        "targetIRVersion": "0.2.0",
+        "targetProfile": "acp-spring-vue-postgres/0.4.0",
+        "taskUIModel": {
+          "path": "acp/task-ui-model.json",
+          "sha256": "2ee663d2a0511e05fc13bbed68d82562e3b72968e9783a6b77a6a943190ccdae"
+        },
+        "tzdb": {
+          "artifact": "acp-tzdb-2026d.json",
+          "sha256": "839f9dccf008ceb252b844ac98da295b20224f68fa257d7f86e93d6e3a68065e",
+          "version": "2026d"
+        }
+      },
+      "sealedArtifactsVerified": 68
+    },
+    "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+    "database": {
+      "database": "payment_inventory",
+      "databaseOid": "16388",
+      "schema": "acp_retained_inventory",
+      "schemaOid": "16390",
+      "systemIdentifier": "7695745124246855724",
+      "version": "PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit",
+      "versionNumber": "180006",
+      "encoding": "UTF8",
+      "readOnly": "on",
+      "defaultReadOnly": "on",
+      "captureTimestamp": "2026-10-12 11:55:16.381332+00",
+      "transactionSnapshot": "826:826:"
+    },
+    "columns": [
+      {
+        "table_name": "acp_audit",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_audit",
+        "column_name": "tenant",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_audit",
+        "column_name": "subject",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_audit",
+        "column_name": "operation",
+        "ordinal_position": 4,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_audit",
+        "column_name": "resource",
+        "ordinal_position": 5,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_audit",
+        "column_name": "occurred_at",
+        "ordinal_position": 6,
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP"
+      },
+      {
+        "table_name": "acp_classification_audit",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_classification_audit",
+        "column_name": "tenant",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_classification_audit",
+        "column_name": "subject",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_classification_audit",
+        "column_name": "operation",
+        "ordinal_position": 4,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_classification_audit",
+        "column_name": "resource",
+        "ordinal_position": 5,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_classification_audit",
+        "column_name": "field",
+        "ordinal_position": 6,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_classification_audit",
+        "column_name": "mode",
+        "ordinal_position": 7,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_classification_audit",
+        "column_name": "occurred_at",
+        "ordinal_position": 8,
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "is_nullable": "NO",
+        "column_default": "CURRENT_TIMESTAMP"
+      },
+      {
+        "table_name": "acp_delivery_attempt",
+        "column_name": "occurrence",
+        "ordinal_position": 1,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_delivery_attempt",
+        "column_name": "attempt",
+        "ordinal_position": 2,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_delivery_attempt",
+        "column_name": "started_ns",
+        "ordinal_position": 3,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_delivery_attempt",
+        "column_name": "finished_ns",
+        "ordinal_position": 4,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_delivery_attempt",
+        "column_name": "result",
+        "ordinal_position": 5,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_delivery_attempt",
+        "column_name": "acknowledged",
+        "ordinal_position": 6,
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "is_nullable": "NO",
+        "column_default": "false"
+      },
+      {
+        "table_name": "acp_delivery_barrier",
+        "column_name": "tenant",
+        "ordinal_position": 1,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_delivery_barrier",
+        "column_name": "aggregate_id",
+        "ordinal_position": 2,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_delivery_barrier",
+        "column_name": "resource",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "identity",
+        "ordinal_position": 1,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "input_digest",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "owner",
+        "ordinal_position": 3,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "status",
+        "ordinal_position": 4,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "result",
+        "ordinal_position": 5,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "commit_xid",
+        "ordinal_position": 6,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "commit_ns",
+        "ordinal_position": 7,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "attempt_xid",
+        "ordinal_position": 8,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_idempotency",
+        "column_name": "job_occurrence",
+        "ordinal_position": 9,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_charge",
+        "column_name": "occurrence",
+        "ordinal_position": 1,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_charge",
+        "column_name": "rate_identity",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_invocation_attempt",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_invocation_attempt",
+        "column_name": "occurrence",
+        "ordinal_position": 2,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_invocation_attempt",
+        "column_name": "attempt",
+        "ordinal_position": 3,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_invocation_attempt",
+        "column_name": "started_ns",
+        "ordinal_position": 4,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_invocation_attempt",
+        "column_name": "completed_ns",
+        "ordinal_position": 5,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_invocation_attempt",
+        "column_name": "outcome",
+        "ordinal_position": 6,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_invocation_attempt",
+        "column_name": "failure_id",
+        "ordinal_position": 7,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_invocation_attempt",
+        "column_name": "failure_revision",
+        "ordinal_position": 8,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "identity",
+        "ordinal_position": 1,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "job",
+        "ordinal_position": 2,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "revision",
+        "ordinal_position": 3,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "schedule",
+        "ordinal_position": 4,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "schedule_revision",
+        "ordinal_position": 5,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "scope",
+        "ordinal_position": 6,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "scheduled_ns",
+        "ordinal_position": 7,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "status",
+        "ordinal_position": 8,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "owner",
+        "ordinal_position": 9,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "attempt",
+        "ordinal_position": 10,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": "0"
+      },
+      {
+        "table_name": "acp_job_occurrence",
+        "column_name": "result",
+        "ordinal_position": 11,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_skip_range",
+        "column_name": "job",
+        "ordinal_position": 1,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_skip_range",
+        "column_name": "revision",
+        "ordinal_position": 2,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_skip_range",
+        "column_name": "scope",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_skip_range",
+        "column_name": "from_ns",
+        "ordinal_position": 4,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_job_skip_range",
+        "column_name": "to_ns",
+        "ordinal_position": 5,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "lifecycle",
+        "ordinal_position": 1,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "revision",
+        "ordinal_position": 2,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "tenant",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "resource",
+        "ordinal_position": 4,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "entity",
+        "ordinal_position": 5,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "machine",
+        "ordinal_position": 6,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "machine_revision",
+        "ordinal_position": 7,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "closing_state",
+        "ordinal_position": 8,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "state_revision",
+        "ordinal_position": 9,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "anchor_xid",
+        "ordinal_position": 10,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "anchor_ns",
+        "ordinal_position": 11,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "root_version",
+        "ordinal_position": 12,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "last_ns",
+        "ordinal_position": 13,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "status",
+        "ordinal_position": 14,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "attempt_xid",
+        "ordinal_position": 15,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_anchor",
+        "column_name": "completed_ns",
+        "ordinal_position": 16,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_attempt",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_attempt",
+        "column_name": "lifecycle",
+        "ordinal_position": 2,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_attempt",
+        "column_name": "revision",
+        "ordinal_position": 3,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_attempt",
+        "column_name": "tenant",
+        "ordinal_position": 4,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_attempt",
+        "column_name": "resource",
+        "ordinal_position": 5,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_attempt",
+        "column_name": "observed_ns",
+        "ordinal_position": 6,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_attempt",
+        "column_name": "result",
+        "ordinal_position": 7,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_attempt",
+        "column_name": "action_xid",
+        "ordinal_position": 8,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "lifecycle",
+        "ordinal_position": 1,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "revision",
+        "ordinal_position": 2,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "tenant",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "resource",
+        "ordinal_position": 4,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "hold",
+        "ordinal_position": 5,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "hold_revision",
+        "ordinal_position": 6,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "permission",
+        "ordinal_position": 7,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "permission_revision",
+        "ordinal_position": 8,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "subject",
+        "ordinal_position": 9,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_lifecycle_release_audit",
+        "column_name": "action_xid",
+        "ordinal_position": 10,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "tenant",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "event",
+        "ordinal_position": 3,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "resource",
+        "ordinal_position": 4,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "aggregate_version",
+        "ordinal_position": 5,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "payload",
+        "ordinal_position": 6,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": "'\\x7b7d'::bytea"
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "delivered_at",
+        "ordinal_position": 7,
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "operation",
+        "ordinal_position": 8,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "operation_revision",
+        "ordinal_position": 9,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "event_revision",
+        "ordinal_position": 10,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "aggregate_id",
+        "ordinal_position": 11,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "aggregate_revision",
+        "ordinal_position": 12,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "commit_sequence",
+        "ordinal_position": 13,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "step_ordinal",
+        "ordinal_position": 14,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "emission_ordinal",
+        "ordinal_position": 15,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "commit_xid",
+        "ordinal_position": 16,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "commit_ns",
+        "ordinal_position": 17,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "delivery_status",
+        "ordinal_position": 18,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": "'LEGACY_UNPROVEN'::text"
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "attempts",
+        "ordinal_position": 19,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": "0"
+      },
+      {
+        "table_name": "acp_outbox",
+        "column_name": "claim_owner",
+        "ordinal_position": 20,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_rate",
+        "column_name": "identity",
+        "ordinal_position": 1,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_rate",
+        "column_name": "tokens",
+        "ordinal_position": 2,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_rate",
+        "column_name": "last_ns",
+        "ordinal_position": 3,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_scheduler",
+        "column_name": "job",
+        "ordinal_position": 1,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_scheduler",
+        "column_name": "revision",
+        "ordinal_position": 2,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_scheduler",
+        "column_name": "scope",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_scheduler",
+        "column_name": "activation_ns",
+        "ordinal_position": 4,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_scheduler",
+        "column_name": "last_ns",
+        "ordinal_position": 5,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_scheduler",
+        "column_name": "last_date",
+        "ordinal_position": 6,
+        "data_type": "date",
+        "udt_name": "date",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_sessions",
+        "column_name": "tenant",
+        "ordinal_position": 1,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_sessions",
+        "column_name": "subject",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_sessions",
+        "column_name": "sid",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_sessions",
+        "column_name": "started_at",
+        "ordinal_position": 4,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_sessions",
+        "column_name": "last_seen",
+        "ordinal_position": 5,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_sessions",
+        "column_name": "authenticated_at",
+        "ordinal_position": 6,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "acp_sessions",
+        "column_name": "revoked",
+        "ordinal_position": 7,
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "e_2f6d38b95ca9030968971abd",
+        "column_name": "f_ce4f5e6c05433529cf6a3cbb",
+        "ordinal_position": 1,
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "e_2f6d38b95ca9030968971abd",
+        "column_name": "f_8306508e7c606f32081c13bb",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "e_2f6d38b95ca9030968971abd",
+        "column_name": "f_55326825932184ca370c199a",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "e_2f6d38b95ca9030968971abd",
+        "column_name": "f_a3c92c5b2195fe53206f71ca",
+        "ordinal_position": 4,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "e_2f6d38b95ca9030968971abd",
+        "column_name": "acp_version",
+        "ordinal_position": 5,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": "0"
+      },
+      {
+        "table_name": "e_2f6d38b95ca9030968971abd",
+        "column_name": "acp_state",
+        "ordinal_position": 6,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "e_47560209428de42ddef6e4ef",
+        "column_name": "f_4030c1b112c7ddba35dca3cf",
+        "ordinal_position": 1,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "e_47560209428de42ddef6e4ef",
+        "column_name": "acp_version",
+        "ordinal_position": 2,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": "0"
+      },
+      {
+        "table_name": "e_47560209428de42ddef6e4ef",
+        "column_name": "acp_state",
+        "ordinal_position": 3,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "e_52ec36081d245a500ce7f793",
+        "column_name": "f_5601399494015f9997f1279c",
+        "ordinal_position": 1,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "e_52ec36081d245a500ce7f793",
+        "column_name": "f_db1033babd768a7d95553905",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "e_52ec36081d245a500ce7f793",
+        "column_name": "acp_version",
+        "ordinal_position": 3,
+        "data_type": "bigint",
+        "udt_name": "int8",
+        "is_nullable": "NO",
+        "column_default": "0"
+      },
+      {
+        "table_name": "e_52ec36081d245a500ce7f793",
+        "column_name": "acp_state",
+        "ordinal_position": 4,
+        "data_type": "text",
+        "udt_name": "text",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "installed_rank",
+        "ordinal_position": 1,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "version",
+        "ordinal_position": 2,
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "description",
+        "ordinal_position": 3,
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "type",
+        "ordinal_position": 4,
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "script",
+        "ordinal_position": 5,
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "checksum",
+        "ordinal_position": 6,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "installed_by",
+        "ordinal_position": 7,
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "installed_on",
+        "ordinal_position": 8,
+        "data_type": "timestamp without time zone",
+        "udt_name": "timestamp",
+        "is_nullable": "NO",
+        "column_default": "now()"
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "execution_time",
+        "ordinal_position": 9,
+        "data_type": "integer",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "flyway_schema_history",
+        "column_name": "success",
+        "ordinal_position": 10,
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "r_e9dd06913e0eb39901f20920",
+        "column_name": "tenant",
+        "ordinal_position": 1,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "r_e9dd06913e0eb39901f20920",
+        "column_name": "source_id",
+        "ordinal_position": 2,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "r_e9dd06913e0eb39901f20920",
+        "column_name": "target_id",
+        "ordinal_position": 3,
+        "data_type": "bytea",
+        "udt_name": "bytea",
+        "is_nullable": "NO",
+        "column_default": null
+      }
+    ],
+    "schemaDefinition": {
+      "constraints": [
+        {
+          "table_name": "acp_audit",
+          "name": "acp_audit_id_not_null",
+          "definition": "NOT NULL id"
+        },
+        {
+          "table_name": "acp_audit",
+          "name": "acp_audit_occurred_at_not_null",
+          "definition": "NOT NULL occurred_at"
+        },
+        {
+          "table_name": "acp_audit",
+          "name": "acp_audit_operation_not_null",
+          "definition": "NOT NULL operation"
+        },
+        {
+          "table_name": "acp_audit",
+          "name": "acp_audit_pkey",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "acp_audit",
+          "name": "acp_audit_resource_not_null",
+          "definition": "NOT NULL resource"
+        },
+        {
+          "table_name": "acp_audit",
+          "name": "acp_audit_subject_not_null",
+          "definition": "NOT NULL subject"
+        },
+        {
+          "table_name": "acp_audit",
+          "name": "acp_audit_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_field_not_null",
+          "definition": "NOT NULL field"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_id_not_null",
+          "definition": "NOT NULL id"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_mode_check",
+          "definition": "CHECK (mode = ANY (ARRAY['READ'::text, 'WRITE'::text]))"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_mode_not_null",
+          "definition": "NOT NULL mode"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_occurred_at_not_null",
+          "definition": "NOT NULL occurred_at"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_operation_not_null",
+          "definition": "NOT NULL operation"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_pkey",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_resource_not_null",
+          "definition": "NOT NULL resource"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_subject_not_null",
+          "definition": "NOT NULL subject"
+        },
+        {
+          "table_name": "acp_classification_audit",
+          "name": "acp_classification_audit_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "acp_delivery_attempt",
+          "name": "acp_delivery_attempt_acknowledged_not_null",
+          "definition": "NOT NULL acknowledged"
+        },
+        {
+          "table_name": "acp_delivery_attempt",
+          "name": "acp_delivery_attempt_attempt_not_null",
+          "definition": "NOT NULL attempt"
+        },
+        {
+          "table_name": "acp_delivery_attempt",
+          "name": "acp_delivery_attempt_occurrence_fkey",
+          "definition": "FOREIGN KEY (occurrence) REFERENCES acp_retained_inventory.acp_outbox(id)"
+        },
+        {
+          "table_name": "acp_delivery_attempt",
+          "name": "acp_delivery_attempt_occurrence_not_null",
+          "definition": "NOT NULL occurrence"
+        },
+        {
+          "table_name": "acp_delivery_attempt",
+          "name": "acp_delivery_attempt_pkey",
+          "definition": "PRIMARY KEY (occurrence, attempt)"
+        },
+        {
+          "table_name": "acp_delivery_attempt",
+          "name": "acp_delivery_attempt_result_not_null",
+          "definition": "NOT NULL result"
+        },
+        {
+          "table_name": "acp_delivery_attempt",
+          "name": "acp_delivery_attempt_started_ns_not_null",
+          "definition": "NOT NULL started_ns"
+        },
+        {
+          "table_name": "acp_delivery_barrier",
+          "name": "acp_delivery_barrier_aggregate_id_not_null",
+          "definition": "NOT NULL aggregate_id"
+        },
+        {
+          "table_name": "acp_delivery_barrier",
+          "name": "acp_delivery_barrier_pkey",
+          "definition": "PRIMARY KEY (tenant, aggregate_id, resource)"
+        },
+        {
+          "table_name": "acp_delivery_barrier",
+          "name": "acp_delivery_barrier_resource_not_null",
+          "definition": "NOT NULL resource"
+        },
+        {
+          "table_name": "acp_delivery_barrier",
+          "name": "acp_delivery_barrier_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "acp_idempotency",
+          "name": "acp_idempotency_check",
+          "definition": "CHECK ((status = 'COMMITTED_RESULT'::text) = (result IS NOT NULL AND commit_xid IS NOT NULL))"
+        },
+        {
+          "table_name": "acp_idempotency",
+          "name": "acp_idempotency_identity_not_null",
+          "definition": "NOT NULL identity"
+        },
+        {
+          "table_name": "acp_idempotency",
+          "name": "acp_idempotency_input_digest_not_null",
+          "definition": "NOT NULL input_digest"
+        },
+        {
+          "table_name": "acp_idempotency",
+          "name": "acp_idempotency_owner_not_null",
+          "definition": "NOT NULL owner"
+        },
+        {
+          "table_name": "acp_idempotency",
+          "name": "acp_idempotency_pkey",
+          "definition": "PRIMARY KEY (identity)"
+        },
+        {
+          "table_name": "acp_idempotency",
+          "name": "acp_idempotency_status_check",
+          "definition": "CHECK (status = ANY (ARRAY['IN_FLIGHT'::text, 'INDETERMINATE'::text, 'COMMITTED_RESULT'::text]))"
+        },
+        {
+          "table_name": "acp_idempotency",
+          "name": "acp_idempotency_status_not_null",
+          "definition": "NOT NULL status"
+        },
+        {
+          "table_name": "acp_job_charge",
+          "name": "acp_job_charge_occurrence_not_null",
+          "definition": "NOT NULL occurrence"
+        },
+        {
+          "table_name": "acp_job_charge",
+          "name": "acp_job_charge_pkey",
+          "definition": "PRIMARY KEY (occurrence, rate_identity)"
+        },
+        {
+          "table_name": "acp_job_charge",
+          "name": "acp_job_charge_rate_identity_not_null",
+          "definition": "NOT NULL rate_identity"
+        },
+        {
+          "table_name": "acp_job_invocation_attempt",
+          "name": "acp_job_invocation_attempt_attempt_not_null",
+          "definition": "NOT NULL attempt"
+        },
+        {
+          "table_name": "acp_job_invocation_attempt",
+          "name": "acp_job_invocation_attempt_id_not_null",
+          "definition": "NOT NULL id"
+        },
+        {
+          "table_name": "acp_job_invocation_attempt",
+          "name": "acp_job_invocation_attempt_occurrence_not_null",
+          "definition": "NOT NULL occurrence"
+        },
+        {
+          "table_name": "acp_job_invocation_attempt",
+          "name": "acp_job_invocation_attempt_outcome_not_null",
+          "definition": "NOT NULL outcome"
+        },
+        {
+          "table_name": "acp_job_invocation_attempt",
+          "name": "acp_job_invocation_attempt_pkey",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "acp_job_invocation_attempt",
+          "name": "acp_job_invocation_attempt_started_ns_not_null",
+          "definition": "NOT NULL started_ns"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_attempt_not_null",
+          "definition": "NOT NULL attempt"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_identity_not_null",
+          "definition": "NOT NULL identity"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_job_not_null",
+          "definition": "NOT NULL job"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_job_revision_schedule_schedule_revision__key",
+          "definition": "UNIQUE (job, revision, schedule, schedule_revision, scope, scheduled_ns)"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_pkey",
+          "definition": "PRIMARY KEY (identity)"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_revision_not_null",
+          "definition": "NOT NULL revision"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_schedule_not_null",
+          "definition": "NOT NULL schedule"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_schedule_revision_not_null",
+          "definition": "NOT NULL schedule_revision"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_scheduled_ns_not_null",
+          "definition": "NOT NULL scheduled_ns"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_scope_not_null",
+          "definition": "NOT NULL scope"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_status_check",
+          "definition": "CHECK (status = ANY (ARRAY['SCHEDULED'::text, 'STARTED'::text, 'COMPLETED'::text, 'FAILED'::text, 'SKIPPED'::text, 'INDETERMINATE'::text]))"
+        },
+        {
+          "table_name": "acp_job_occurrence",
+          "name": "acp_job_occurrence_status_not_null",
+          "definition": "NOT NULL status"
+        },
+        {
+          "table_name": "acp_job_skip_range",
+          "name": "acp_job_skip_range_job_not_null",
+          "definition": "NOT NULL job"
+        },
+        {
+          "table_name": "acp_job_skip_range",
+          "name": "acp_job_skip_range_revision_not_null",
+          "definition": "NOT NULL revision"
+        },
+        {
+          "table_name": "acp_job_skip_range",
+          "name": "acp_job_skip_range_scope_not_null",
+          "definition": "NOT NULL scope"
+        },
+        {
+          "table_name": "acp_job_skip_range",
+          "name": "acp_job_skip_range_to_ns_not_null",
+          "definition": "NOT NULL to_ns"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_closing_state_not_null",
+          "definition": "NOT NULL closing_state"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_entity_not_null",
+          "definition": "NOT NULL entity"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_lifecycle_not_null",
+          "definition": "NOT NULL lifecycle"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_machine_not_null",
+          "definition": "NOT NULL machine"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_machine_revision_not_null",
+          "definition": "NOT NULL machine_revision"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_pkey",
+          "definition": "PRIMARY KEY (lifecycle, revision, tenant, resource)"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_resource_not_null",
+          "definition": "NOT NULL resource"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_revision_not_null",
+          "definition": "NOT NULL revision"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_root_version_not_null",
+          "definition": "NOT NULL root_version"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_state_revision_not_null",
+          "definition": "NOT NULL state_revision"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_status_not_null",
+          "definition": "NOT NULL status"
+        },
+        {
+          "table_name": "acp_lifecycle_anchor",
+          "name": "acp_lifecycle_anchor_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "acp_lifecycle_attempt",
+          "name": "acp_lifecycle_attempt_id_not_null",
+          "definition": "NOT NULL id"
+        },
+        {
+          "table_name": "acp_lifecycle_attempt",
+          "name": "acp_lifecycle_attempt_lifecycle_not_null",
+          "definition": "NOT NULL lifecycle"
+        },
+        {
+          "table_name": "acp_lifecycle_attempt",
+          "name": "acp_lifecycle_attempt_observed_ns_not_null",
+          "definition": "NOT NULL observed_ns"
+        },
+        {
+          "table_name": "acp_lifecycle_attempt",
+          "name": "acp_lifecycle_attempt_pkey",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "acp_lifecycle_attempt",
+          "name": "acp_lifecycle_attempt_resource_not_null",
+          "definition": "NOT NULL resource"
+        },
+        {
+          "table_name": "acp_lifecycle_attempt",
+          "name": "acp_lifecycle_attempt_result_not_null",
+          "definition": "NOT NULL result"
+        },
+        {
+          "table_name": "acp_lifecycle_attempt",
+          "name": "acp_lifecycle_attempt_revision_not_null",
+          "definition": "NOT NULL revision"
+        },
+        {
+          "table_name": "acp_lifecycle_attempt",
+          "name": "acp_lifecycle_attempt_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_action_xid_not_null",
+          "definition": "NOT NULL action_xid"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_hold_not_null",
+          "definition": "NOT NULL hold"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_hold_revision_not_null",
+          "definition": "NOT NULL hold_revision"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_lifecycle_not_null",
+          "definition": "NOT NULL lifecycle"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_permission_not_null",
+          "definition": "NOT NULL permission"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_permission_revision_not_null",
+          "definition": "NOT NULL permission_revision"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_resource_not_null",
+          "definition": "NOT NULL resource"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_revision_not_null",
+          "definition": "NOT NULL revision"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_subject_not_null",
+          "definition": "NOT NULL subject"
+        },
+        {
+          "table_name": "acp_lifecycle_release_audit",
+          "name": "acp_lifecycle_release_audit_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_aggregate_version_not_null",
+          "definition": "NOT NULL aggregate_version"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_attempts_not_null",
+          "definition": "NOT NULL attempts"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_delivery_status_not_null",
+          "definition": "NOT NULL delivery_status"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_event_not_null",
+          "definition": "NOT NULL event"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_id_not_null",
+          "definition": "NOT NULL id"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_payload_not_null",
+          "definition": "NOT NULL payload"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_pkey",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_resource_not_null",
+          "definition": "NOT NULL resource"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "acp_outbox_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "acp_outbox",
+          "name": "delivery_status_check",
+          "definition": "CHECK (delivery_status = ANY (ARRAY['LEGACY_UNPROVEN'::text, 'PENDING'::text, 'CLAIMED'::text, 'ACKNOWLEDGED'::text, 'UNSATISFIED'::text]))"
+        },
+        {
+          "table_name": "acp_rate",
+          "name": "acp_rate_identity_not_null",
+          "definition": "NOT NULL identity"
+        },
+        {
+          "table_name": "acp_rate",
+          "name": "acp_rate_last_ns_not_null",
+          "definition": "NOT NULL last_ns"
+        },
+        {
+          "table_name": "acp_rate",
+          "name": "acp_rate_pkey",
+          "definition": "PRIMARY KEY (identity)"
+        },
+        {
+          "table_name": "acp_rate",
+          "name": "acp_rate_tokens_check",
+          "definition": "CHECK (tokens >= 0::numeric)"
+        },
+        {
+          "table_name": "acp_rate",
+          "name": "acp_rate_tokens_not_null",
+          "definition": "NOT NULL tokens"
+        },
+        {
+          "table_name": "acp_scheduler",
+          "name": "acp_scheduler_activation_ns_not_null",
+          "definition": "NOT NULL activation_ns"
+        },
+        {
+          "table_name": "acp_scheduler",
+          "name": "acp_scheduler_job_not_null",
+          "definition": "NOT NULL job"
+        },
+        {
+          "table_name": "acp_scheduler",
+          "name": "acp_scheduler_last_date_not_null",
+          "definition": "NOT NULL last_date"
+        },
+        {
+          "table_name": "acp_scheduler",
+          "name": "acp_scheduler_last_ns_not_null",
+          "definition": "NOT NULL last_ns"
+        },
+        {
+          "table_name": "acp_scheduler",
+          "name": "acp_scheduler_pkey",
+          "definition": "PRIMARY KEY (job, revision, scope)"
+        },
+        {
+          "table_name": "acp_scheduler",
+          "name": "acp_scheduler_revision_not_null",
+          "definition": "NOT NULL revision"
+        },
+        {
+          "table_name": "acp_scheduler",
+          "name": "acp_scheduler_scope_not_null",
+          "definition": "NOT NULL scope"
+        },
+        {
+          "table_name": "acp_sessions",
+          "name": "acp_sessions_authenticated_at_not_null",
+          "definition": "NOT NULL authenticated_at"
+        },
+        {
+          "table_name": "acp_sessions",
+          "name": "acp_sessions_last_seen_not_null",
+          "definition": "NOT NULL last_seen"
+        },
+        {
+          "table_name": "acp_sessions",
+          "name": "acp_sessions_pkey",
+          "definition": "PRIMARY KEY (tenant, subject, sid)"
+        },
+        {
+          "table_name": "acp_sessions",
+          "name": "acp_sessions_revoked_not_null",
+          "definition": "NOT NULL revoked"
+        },
+        {
+          "table_name": "acp_sessions",
+          "name": "acp_sessions_sid_not_null",
+          "definition": "NOT NULL sid"
+        },
+        {
+          "table_name": "acp_sessions",
+          "name": "acp_sessions_started_at_not_null",
+          "definition": "NOT NULL started_at"
+        },
+        {
+          "table_name": "acp_sessions",
+          "name": "acp_sessions_subject_not_null",
+          "definition": "NOT NULL subject"
+        },
+        {
+          "table_name": "acp_sessions",
+          "name": "acp_sessions_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "check_3c6657d298c6f5f6cf012dc7",
+          "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "ck_3e72950b83ecf53bf1863841",
+          "definition": "CHECK (f_ce4f5e6c05433529cf6a3cbb > 0::numeric)"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "e_2f6d38b95ca9030968971abd_acp_version_check",
+          "definition": "CHECK (acp_version >= 0)"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "e_2f6d38b95ca9030968971abd_acp_version_not_null",
+          "definition": "NOT NULL acp_version"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "e_2f6d38b95ca9030968971abd_f_55326825932184ca370c199a_f_830_key",
+          "definition": "UNIQUE (f_55326825932184ca370c199a, f_8306508e7c606f32081c13bb)"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "e_2f6d38b95ca9030968971abd_f_55326825932184ca370c199a_not_null",
+          "definition": "NOT NULL f_55326825932184ca370c199a"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "e_2f6d38b95ca9030968971abd_f_8306508e7c606f32081c13bb_not_null",
+          "definition": "NOT NULL f_8306508e7c606f32081c13bb"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "e_2f6d38b95ca9030968971abd_f_a3c92c5b2195fe53206f71ca_not_null",
+          "definition": "NOT NULL f_a3c92c5b2195fe53206f71ca"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "e_2f6d38b95ca9030968971abd_f_ce4f5e6c05433529cf6a3cbb_not_null",
+          "definition": "NOT NULL f_ce4f5e6c05433529cf6a3cbb"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "e_2f6d38b95ca9030968971abd_pkey",
+          "definition": "PRIMARY KEY (f_8306508e7c606f32081c13bb)"
+        },
+        {
+          "table_name": "e_2f6d38b95ca9030968971abd",
+          "name": "fk_55326825932184ca370c199a",
+          "definition": "FOREIGN KEY (f_55326825932184ca370c199a) REFERENCES acp_retained_inventory.e_47560209428de42ddef6e4ef(f_4030c1b112c7ddba35dca3cf) ON DELETE RESTRICT"
+        },
+        {
+          "table_name": "e_47560209428de42ddef6e4ef",
+          "name": "e_47560209428de42ddef6e4ef_acp_version_check",
+          "definition": "CHECK (acp_version >= 0)"
+        },
+        {
+          "table_name": "e_47560209428de42ddef6e4ef",
+          "name": "e_47560209428de42ddef6e4ef_acp_version_not_null",
+          "definition": "NOT NULL acp_version"
+        },
+        {
+          "table_name": "e_47560209428de42ddef6e4ef",
+          "name": "e_47560209428de42ddef6e4ef_f_4030c1b112c7ddba35dca3cf_not_null",
+          "definition": "NOT NULL f_4030c1b112c7ddba35dca3cf"
+        },
+        {
+          "table_name": "e_47560209428de42ddef6e4ef",
+          "name": "e_47560209428de42ddef6e4ef_pkey",
+          "definition": "PRIMARY KEY (f_4030c1b112c7ddba35dca3cf)"
+        },
+        {
+          "table_name": "e_52ec36081d245a500ce7f793",
+          "name": "check_ea8699804d9d21011e8fbc4a",
+          "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED"
+        },
+        {
+          "table_name": "e_52ec36081d245a500ce7f793",
+          "name": "e_52ec36081d245a500ce7f793_acp_version_check",
+          "definition": "CHECK (acp_version >= 0)"
+        },
+        {
+          "table_name": "e_52ec36081d245a500ce7f793",
+          "name": "e_52ec36081d245a500ce7f793_acp_version_not_null",
+          "definition": "NOT NULL acp_version"
+        },
+        {
+          "table_name": "e_52ec36081d245a500ce7f793",
+          "name": "e_52ec36081d245a500ce7f793_f_5601399494015f9997f1279c_not_null",
+          "definition": "NOT NULL f_5601399494015f9997f1279c"
+        },
+        {
+          "table_name": "e_52ec36081d245a500ce7f793",
+          "name": "e_52ec36081d245a500ce7f793_f_db1033babd768a7d95553905_f_560_key",
+          "definition": "UNIQUE (f_db1033babd768a7d95553905, f_5601399494015f9997f1279c)"
+        },
+        {
+          "table_name": "e_52ec36081d245a500ce7f793",
+          "name": "e_52ec36081d245a500ce7f793_f_db1033babd768a7d95553905_not_null",
+          "definition": "NOT NULL f_db1033babd768a7d95553905"
+        },
+        {
+          "table_name": "e_52ec36081d245a500ce7f793",
+          "name": "e_52ec36081d245a500ce7f793_pkey",
+          "definition": "PRIMARY KEY (f_5601399494015f9997f1279c)"
+        },
+        {
+          "table_name": "e_52ec36081d245a500ce7f793",
+          "name": "fk_db1033babd768a7d95553905",
+          "definition": "FOREIGN KEY (f_db1033babd768a7d95553905) REFERENCES acp_retained_inventory.e_47560209428de42ddef6e4ef(f_4030c1b112c7ddba35dca3cf) ON DELETE RESTRICT"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_description_not_null",
+          "definition": "NOT NULL description"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_execution_time_not_null",
+          "definition": "NOT NULL execution_time"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_installed_by_not_null",
+          "definition": "NOT NULL installed_by"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_installed_on_not_null",
+          "definition": "NOT NULL installed_on"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_installed_rank_not_null",
+          "definition": "NOT NULL installed_rank"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_pk",
+          "definition": "PRIMARY KEY (installed_rank)"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_script_not_null",
+          "definition": "NOT NULL script"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_success_not_null",
+          "definition": "NOT NULL success"
+        },
+        {
+          "table_name": "flyway_schema_history",
+          "name": "flyway_schema_history_type_not_null",
+          "definition": "NOT NULL type"
+        },
+        {
+          "table_name": "r_e9dd06913e0eb39901f20920",
+          "name": "check_1a4e69a96c11717d47bf8ae9",
+          "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED"
+        },
+        {
+          "table_name": "r_e9dd06913e0eb39901f20920",
+          "name": "r_e9dd06913e0eb39901f20920_pkey",
+          "definition": "PRIMARY KEY (tenant, source_id, target_id)"
+        },
+        {
+          "table_name": "r_e9dd06913e0eb39901f20920",
+          "name": "r_e9dd06913e0eb39901f20920_source_id_not_null",
+          "definition": "NOT NULL source_id"
+        },
+        {
+          "table_name": "r_e9dd06913e0eb39901f20920",
+          "name": "r_e9dd06913e0eb39901f20920_target_id_not_null",
+          "definition": "NOT NULL target_id"
+        },
+        {
+          "table_name": "r_e9dd06913e0eb39901f20920",
+          "name": "r_e9dd06913e0eb39901f20920_tenant_not_null",
+          "definition": "NOT NULL tenant"
+        },
+        {
+          "table_name": "r_e9dd06913e0eb39901f20920",
+          "name": "r_e9dd06913e0eb39901f20920_tenant_source_id_fkey",
+          "definition": "FOREIGN KEY (tenant, source_id) REFERENCES acp_retained_inventory.e_52ec36081d245a500ce7f793(f_db1033babd768a7d95553905, f_5601399494015f9997f1279c) ON DELETE RESTRICT DEFERRABLE INITIALLY DEFERRED"
+        },
+        {
+          "table_name": "r_e9dd06913e0eb39901f20920",
+          "name": "r_e9dd06913e0eb39901f20920_tenant_target_id_fkey",
+          "definition": "FOREIGN KEY (tenant, target_id) REFERENCES acp_retained_inventory.e_2f6d38b95ca9030968971abd(f_55326825932184ca370c199a, f_8306508e7c606f32081c13bb) ON DELETE RESTRICT DEFERRABLE INITIALLY DEFERRED"
+        },
+        {
+          "table_name": "r_e9dd06913e0eb39901f20920",
+          "name": "r_e9dd06913e0eb39901f20920_tenant_target_id_key",
+          "definition": "UNIQUE (tenant, target_id) DEFERRABLE INITIALLY DEFERRED"
+        }
+      ],
+      "sequences": [
+        {
+          "sequencename": "acp_audit_id_seq",
+          "data_type": "bigint",
+          "start_value": "1",
+          "min_value": "1",
+          "max_value": "9223372036854775807",
+          "increment_by": "1",
+          "cycle": false,
+          "cache_size": "1",
+          "last_value": "1"
+        },
+        {
+          "sequencename": "acp_classification_audit_id_seq",
+          "data_type": "bigint",
+          "start_value": "1",
+          "min_value": "1",
+          "max_value": "9223372036854775807",
+          "increment_by": "1",
+          "cycle": false,
+          "cache_size": "1",
+          "last_value": "2"
+        },
+        {
+          "sequencename": "acp_job_invocation_attempt_id_seq",
+          "data_type": "bigint",
+          "start_value": "1",
+          "min_value": "1",
+          "max_value": "9223372036854775807",
+          "increment_by": "1",
+          "cycle": false,
+          "cache_size": "1",
+          "last_value": null
+        },
+        {
+          "sequencename": "acp_lifecycle_attempt_id_seq",
+          "data_type": "bigint",
+          "start_value": "1",
+          "min_value": "1",
+          "max_value": "9223372036854775807",
+          "increment_by": "1",
+          "cycle": false,
+          "cache_size": "1",
+          "last_value": null
+        }
+      ],
+      "indexes": [
+        {
+          "tablename": "acp_audit",
+          "indexname": "acp_audit_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_audit_pkey ON acp_retained_inventory.acp_audit USING btree (id)"
+        },
+        {
+          "tablename": "acp_classification_audit",
+          "indexname": "acp_classification_audit_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_classification_audit_pkey ON acp_retained_inventory.acp_classification_audit USING btree (id)"
+        },
+        {
+          "tablename": "acp_delivery_attempt",
+          "indexname": "acp_delivery_attempt_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_delivery_attempt_pkey ON acp_retained_inventory.acp_delivery_attempt USING btree (occurrence, attempt)"
+        },
+        {
+          "tablename": "acp_delivery_barrier",
+          "indexname": "acp_delivery_barrier_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_delivery_barrier_pkey ON acp_retained_inventory.acp_delivery_barrier USING btree (tenant, aggregate_id, resource)"
+        },
+        {
+          "tablename": "acp_idempotency",
+          "indexname": "acp_idempotency_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_idempotency_pkey ON acp_retained_inventory.acp_idempotency USING btree (identity)"
+        },
+        {
+          "tablename": "acp_job_charge",
+          "indexname": "acp_job_charge_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_job_charge_pkey ON acp_retained_inventory.acp_job_charge USING btree (occurrence, rate_identity)"
+        },
+        {
+          "tablename": "acp_job_invocation_attempt",
+          "indexname": "acp_job_invocation_attempt_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_job_invocation_attempt_pkey ON acp_retained_inventory.acp_job_invocation_attempt USING btree (id)"
+        },
+        {
+          "tablename": "acp_job_occurrence",
+          "indexname": "acp_job_occurrence_job_revision_schedule_schedule_revision__key",
+          "indexdef": "CREATE UNIQUE INDEX acp_job_occurrence_job_revision_schedule_schedule_revision__key ON acp_retained_inventory.acp_job_occurrence USING btree (job, revision, schedule, schedule_revision, scope, scheduled_ns)"
+        },
+        {
+          "tablename": "acp_job_occurrence",
+          "indexname": "acp_job_occurrence_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_job_occurrence_pkey ON acp_retained_inventory.acp_job_occurrence USING btree (identity)"
+        },
+        {
+          "tablename": "acp_lifecycle_anchor",
+          "indexname": "acp_lifecycle_anchor_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_lifecycle_anchor_pkey ON acp_retained_inventory.acp_lifecycle_anchor USING btree (lifecycle, revision, tenant, resource)"
+        },
+        {
+          "tablename": "acp_lifecycle_attempt",
+          "indexname": "acp_lifecycle_attempt_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_lifecycle_attempt_pkey ON acp_retained_inventory.acp_lifecycle_attempt USING btree (id)"
+        },
+        {
+          "tablename": "acp_outbox",
+          "indexname": "acp_occurrence_position",
+          "indexdef": "CREATE UNIQUE INDEX acp_occurrence_position ON acp_retained_inventory.acp_outbox USING btree (tenant, aggregate_id, resource, commit_sequence, step_ordinal, emission_ordinal) WHERE (commit_sequence IS NOT NULL)"
+        },
+        {
+          "tablename": "acp_outbox",
+          "indexname": "acp_outbox_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_outbox_pkey ON acp_retained_inventory.acp_outbox USING btree (id)"
+        },
+        {
+          "tablename": "acp_rate",
+          "indexname": "acp_rate_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_rate_pkey ON acp_retained_inventory.acp_rate USING btree (identity)"
+        },
+        {
+          "tablename": "acp_scheduler",
+          "indexname": "acp_scheduler_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_scheduler_pkey ON acp_retained_inventory.acp_scheduler USING btree (job, revision, scope)"
+        },
+        {
+          "tablename": "acp_sessions",
+          "indexname": "acp_sessions_pkey",
+          "indexdef": "CREATE UNIQUE INDEX acp_sessions_pkey ON acp_retained_inventory.acp_sessions USING btree (tenant, subject, sid)"
+        },
+        {
+          "tablename": "e_2f6d38b95ca9030968971abd",
+          "indexname": "e_2f6d38b95ca9030968971abd_f_55326825932184ca370c199a_f_830_key",
+          "indexdef": "CREATE UNIQUE INDEX e_2f6d38b95ca9030968971abd_f_55326825932184ca370c199a_f_830_key ON acp_retained_inventory.e_2f6d38b95ca9030968971abd USING btree (f_55326825932184ca370c199a, f_8306508e7c606f32081c13bb)"
+        },
+        {
+          "tablename": "e_2f6d38b95ca9030968971abd",
+          "indexname": "e_2f6d38b95ca9030968971abd_pkey",
+          "indexdef": "CREATE UNIQUE INDEX e_2f6d38b95ca9030968971abd_pkey ON acp_retained_inventory.e_2f6d38b95ca9030968971abd USING btree (f_8306508e7c606f32081c13bb)"
+        },
+        {
+          "tablename": "e_2f6d38b95ca9030968971abd",
+          "indexname": "ix_2f6d38b95ca9030968971abd",
+          "indexdef": "CREATE INDEX ix_2f6d38b95ca9030968971abd ON acp_retained_inventory.e_2f6d38b95ca9030968971abd USING btree (f_55326825932184ca370c199a)"
+        },
+        {
+          "tablename": "e_47560209428de42ddef6e4ef",
+          "indexname": "e_47560209428de42ddef6e4ef_pkey",
+          "indexdef": "CREATE UNIQUE INDEX e_47560209428de42ddef6e4ef_pkey ON acp_retained_inventory.e_47560209428de42ddef6e4ef USING btree (f_4030c1b112c7ddba35dca3cf)"
+        },
+        {
+          "tablename": "e_52ec36081d245a500ce7f793",
+          "indexname": "e_52ec36081d245a500ce7f793_f_db1033babd768a7d95553905_f_560_key",
+          "indexdef": "CREATE UNIQUE INDEX e_52ec36081d245a500ce7f793_f_db1033babd768a7d95553905_f_560_key ON acp_retained_inventory.e_52ec36081d245a500ce7f793 USING btree (f_db1033babd768a7d95553905, f_5601399494015f9997f1279c)"
+        },
+        {
+          "tablename": "e_52ec36081d245a500ce7f793",
+          "indexname": "e_52ec36081d245a500ce7f793_pkey",
+          "indexdef": "CREATE UNIQUE INDEX e_52ec36081d245a500ce7f793_pkey ON acp_retained_inventory.e_52ec36081d245a500ce7f793 USING btree (f_5601399494015f9997f1279c)"
+        },
+        {
+          "tablename": "e_52ec36081d245a500ce7f793",
+          "indexname": "ix_52ec36081d245a500ce7f793",
+          "indexdef": "CREATE INDEX ix_52ec36081d245a500ce7f793 ON acp_retained_inventory.e_52ec36081d245a500ce7f793 USING btree (f_db1033babd768a7d95553905)"
+        },
+        {
+          "tablename": "flyway_schema_history",
+          "indexname": "flyway_schema_history_pk",
+          "indexdef": "CREATE UNIQUE INDEX flyway_schema_history_pk ON acp_retained_inventory.flyway_schema_history USING btree (installed_rank)"
+        },
+        {
+          "tablename": "flyway_schema_history",
+          "indexname": "flyway_schema_history_s_idx",
+          "indexdef": "CREATE INDEX flyway_schema_history_s_idx ON acp_retained_inventory.flyway_schema_history USING btree (success)"
+        },
+        {
+          "tablename": "r_e9dd06913e0eb39901f20920",
+          "indexname": "r_e9dd06913e0eb39901f20920_pkey",
+          "indexdef": "CREATE UNIQUE INDEX r_e9dd06913e0eb39901f20920_pkey ON acp_retained_inventory.r_e9dd06913e0eb39901f20920 USING btree (tenant, source_id, target_id)"
+        },
+        {
+          "tablename": "r_e9dd06913e0eb39901f20920",
+          "indexname": "r_e9dd06913e0eb39901f20920_tenant_target_id_key",
+          "indexdef": "CREATE UNIQUE INDEX r_e9dd06913e0eb39901f20920_tenant_target_id_key ON acp_retained_inventory.r_e9dd06913e0eb39901f20920 USING btree (tenant, target_id)"
+        }
+      ]
+    },
+    "cellEncoding": "SQL NULL => JSON null; bytea => exact lowercase hex; all other SQL values => database text, never rounded JSON numbers",
+    "fieldColumnMap": {
+      "FLD-AMOUNT": "f_ce4f5e6c05433529cf6a3cbb",
+      "FLD-MEMBER-ID": "f_5601399494015f9997f1279c",
+      "FLD-MEMBER-TENANT": "f_db1033babd768a7d95553905",
+      "FLD-PAYMENT-ID": "f_8306508e7c606f32081c13bb",
+      "FLD-PAYMENT-TENANT": "f_55326825932184ca370c199a",
+      "FLD-TASK-SUMMARY": "f_a3c92c5b2195fe53206f71ca",
+      "FLD-TENANT-ID": "f_4030c1b112c7ddba35dca3cf",
+      "INPUT-TASK-RESOURCE": "f_e7b57753ec9f285a96fb2f3e",
+      "INPUT-TASK-TEXT": "f_347ddac30084d7e07a116384",
+      "OPERATION-TEXT": "f_deec9bdbe82e43bdd713decc",
+      "OUTPUT-TASK-TEXT": "f_dd38e57e1fff01860a1d756d",
+      "QUERY-TEXT": "f_d456657b12367788740f9907",
+      "RESULT-TEXT": "f_76ef0afed24f454088596039"
+    },
+    "tables": {
+      "acp_audit": [
+        {
+          "id": "1",
+          "tenant": "74656e616e742d6f6e65",
+          "subject": "666978747572653a6f70657261746f72",
+          "resource": "666978747572652d7265736f75726365",
+          "operation": "CMD-RECORD",
+          "occurred_at": "2026-10-12 11:49:49.200019+00"
+        }
+      ],
+      "acp_classification_audit": [
+        {
+          "id": "1",
+          "mode": "READ",
+          "field": "FLD-AMOUNT",
+          "tenant": "74656e616e742d6f6e65",
+          "subject": "666978747572653a6f70657261746f72",
+          "resource": "666978747572652d7265736f75726365",
+          "operation": "CMD-RECORD",
+          "occurred_at": "2026-10-12 11:49:49.200019+00"
+        },
+        {
+          "id": "2",
+          "mode": "WRITE",
+          "field": "FLD-TASK-SUMMARY",
+          "tenant": "74656e616e742d6f6e65",
+          "subject": "666978747572653a6f70657261746f72",
+          "resource": "666978747572652d7265736f75726365",
+          "operation": "CMD-RECORD",
+          "occurred_at": "2026-10-12 11:49:49.200019+00"
+        }
+      ],
+      "acp_delivery_attempt": [],
+      "acp_delivery_barrier": [],
+      "acp_idempotency": [
+        {
+          "owner": "a5db9fa9-d998-4257-b522-59e2c3e1ea61",
+          "result": "7b22636f6d706c6574696f6e223a7b226f7574707574223a7b22524553554c542d54455854223a22696e76656e746f727920636f6d706c6574656420f09fa68b227d2c227265736f757263654964223a22666978747572652d7265736f75726365222c2276657273696f6e223a312c227374617465223a2253544154452d504f53544544227d7d",
+          "status": "COMMITTED_RESULT",
+          "identity": "c6e005e3403e433fff3c97a10b019e8dcd52ca1b792c5c0ab4e4a009f3d52acc",
+          "commit_ns": null,
+          "commit_xid": "782",
+          "attempt_xid": "782",
+          "input_digest": "ce3b66d9607ff47cd7c7519202c3aa769b703c64ab93a15bcee54a4568004697",
+          "job_occurrence": null
+        }
+      ],
+      "acp_job_charge": [],
+      "acp_job_invocation_attempt": [],
+      "acp_job_occurrence": [],
+      "acp_job_skip_range": [],
+      "acp_lifecycle_anchor": [
+        {
+          "entity": "ENT-PAYMENT",
+          "status": "ANCHORED",
+          "tenant": "74656e616e742d6f6e65",
+          "last_ns": null,
+          "machine": "WF-PAYMENT",
+          "resource": "666978747572652d7265736f75726365",
+          "revision": "3",
+          "anchor_ns": null,
+          "lifecycle": "LIFECYCLE-ENT-PAYMENT",
+          "anchor_xid": "782",
+          "attempt_xid": null,
+          "completed_ns": null,
+          "root_version": "1",
+          "closing_state": "STATE-POSTED",
+          "state_revision": "2",
+          "machine_revision": "2"
+        }
+      ],
+      "acp_lifecycle_attempt": [],
+      "acp_lifecycle_release_audit": [],
+      "acp_outbox": [
+        {
+          "id": "18f682da5df0713937dbb4715374a8d0efe4e4b855aa032f95119bfb6658be64",
+          "event": "EVT-RECORDED",
+          "tenant": "74656e616e742d6f6e65",
+          "payload": "7b22464c442d414d4f554e54223a2231322e3530227d",
+          "attempts": "0",
+          "resource": "666978747572652d7265736f75726365",
+          "commit_ns": null,
+          "operation": "CMD-RECORD",
+          "commit_xid": "782",
+          "claim_owner": null,
+          "aggregate_id": "AGG-ENT-PAYMENT",
+          "delivered_at": null,
+          "step_ordinal": "0",
+          "event_revision": "2",
+          "commit_sequence": "1",
+          "delivery_status": "PENDING",
+          "emission_ordinal": "0",
+          "aggregate_version": "1",
+          "aggregate_revision": "2",
+          "operation_revision": "3"
+        }
+      ],
+      "acp_rate": [
+        {
+          "tokens": "540000000000",
+          "last_ns": "1791805789140961919",
+          "identity": "a85338cd82b9e9c5216d503dbd5f040e64e237a473da97829463fc74e4359793"
+        }
+      ],
+      "acp_scheduler": [],
+      "acp_sessions": [
+        {
+          "sid": "7265666572656e63652d73657373696f6e",
+          "tenant": "74656e616e742d6f6e65",
+          "revoked": "false",
+          "subject": "666978747572653a6f70657261746f72",
+          "last_seen": "1791805789",
+          "started_at": "1791805789",
+          "authenticated_at": "1791805789"
+        },
+        {
+          "sid": "7265666572656e63652d73657373696f6e",
+          "tenant": "74656e616e742d74776f",
+          "revoked": "false",
+          "subject": "666978747572653a6f70657261746f722d74776f",
+          "last_seen": "1791805789",
+          "started_at": "1791805789",
+          "authenticated_at": "1791805789"
+        }
+      ],
+      "e_2f6d38b95ca9030968971abd": [
+        {
+          "acp_state": null,
+          "acp_version": "0",
+          "f_55326825932184ca370c199a": "74656e616e742d6f6e65",
+          "f_8306508e7c606f32081c13bb": "72657461696e65642d73616d652d74656e616e74",
+          "f_a3c92c5b2195fe53206f71ca": "6f6c64",
+          "f_ce4f5e6c05433529cf6a3cbb": "12.50"
+        },
+        {
+          "acp_state": null,
+          "acp_version": "0",
+          "f_55326825932184ca370c199a": "74656e616e742d74776f",
+          "f_8306508e7c606f32081c13bb": "72657461696e65642d74656e616e742d74776f",
+          "f_a3c92c5b2195fe53206f71ca": "6f6c64",
+          "f_ce4f5e6c05433529cf6a3cbb": "12.50"
+        },
+        {
+          "acp_state": "STATE-POSTED",
+          "acp_version": "1",
+          "f_55326825932184ca370c199a": "74656e616e742d6f6e65",
+          "f_8306508e7c606f32081c13bb": "666978747572652d7265736f75726365",
+          "f_a3c92c5b2195fe53206f71ca": "696e76656e746f727920636f6d706c6574656420f09fa68b",
+          "f_ce4f5e6c05433529cf6a3cbb": "12.50"
+        }
+      ],
+      "e_47560209428de42ddef6e4ef": [
+        {
+          "acp_state": null,
+          "acp_version": "0",
+          "f_4030c1b112c7ddba35dca3cf": "74656e616e742d6f6e65"
+        },
+        {
+          "acp_state": null,
+          "acp_version": "0",
+          "f_4030c1b112c7ddba35dca3cf": "74656e616e742d74776f"
+        }
+      ],
+      "e_52ec36081d245a500ce7f793": [
+        {
+          "acp_state": null,
+          "acp_version": "0",
+          "f_5601399494015f9997f1279c": "666978747572653a6f70657261746f722d74776f",
+          "f_db1033babd768a7d95553905": "74656e616e742d74776f"
+        },
+        {
+          "acp_state": null,
+          "acp_version": "0",
+          "f_5601399494015f9997f1279c": "666978747572653a6f70657261746f72",
+          "f_db1033babd768a7d95553905": "74656e616e742d6f6e65"
+        }
+      ],
+      "flyway_schema_history": [
+        {
+          "type": "SCHEMA",
+          "script": "\"acp_retained_inventory\"",
+          "success": "true",
+          "version": null,
+          "checksum": null,
+          "description": "<< Flyway Schema Creation >>",
+          "installed_by": "postgres",
+          "installed_on": "2026-10-12 14:49:48.662199",
+          "execution_time": "0",
+          "installed_rank": "0"
+        },
+        {
+          "type": "SQL",
+          "script": "V1__initial.sql",
+          "success": "true",
+          "version": "1",
+          "checksum": "293726815",
+          "description": "initial",
+          "installed_by": "postgres",
+          "installed_on": "2026-10-12 14:49:48.682865",
+          "execution_time": "31",
+          "installed_rank": "1"
+        },
+        {
+          "type": "SQL",
+          "script": "V2__delivery_jobs.sql",
+          "success": "true",
+          "version": "2",
+          "checksum": "1158498443",
+          "description": "delivery jobs",
+          "installed_by": "postgres",
+          "installed_on": "2026-10-12 14:49:48.77034",
+          "execution_time": "19",
+          "installed_rank": "2"
+        },
+        {
+          "type": "SQL",
+          "script": "V3__privacy_lifecycle.sql",
+          "success": "true",
+          "version": "3",
+          "checksum": "-2016875167",
+          "description": "privacy lifecycle",
+          "installed_by": "postgres",
+          "installed_on": "2026-10-12 14:49:48.806986",
+          "execution_time": "8",
+          "installed_rank": "3"
+        }
+      ],
+      "r_e9dd06913e0eb39901f20920": [
+        {
+          "tenant": "74656e616e742d6f6e65",
+          "source_id": "666978747572653a6f70657261746f72",
+          "target_id": "666978747572652d7265736f75726365"
+        },
+        {
+          "tenant": "74656e616e742d6f6e65",
+          "source_id": "666978747572653a6f70657261746f72",
+          "target_id": "72657461696e65642d73616d652d74656e616e74"
+        },
+        {
+          "tenant": "74656e616e742d74776f",
+          "source_id": "666978747572653a6f70657261746f722d74776f",
+          "target_id": "72657461696e65642d74656e616e742d74776f"
+        }
+      ]
+    },
+    "rowCounts": {
+      "acp_audit": 1,
+      "acp_classification_audit": 2,
+      "acp_delivery_attempt": 0,
+      "acp_delivery_barrier": 0,
+      "acp_idempotency": 1,
+      "acp_job_charge": 0,
+      "acp_job_invocation_attempt": 0,
+      "acp_job_occurrence": 0,
+      "acp_job_skip_range": 0,
+      "acp_lifecycle_anchor": 1,
+      "acp_lifecycle_attempt": 0,
+      "acp_lifecycle_release_audit": 0,
+      "acp_outbox": 1,
+      "acp_rate": 1,
+      "acp_scheduler": 0,
+      "acp_sessions": 2,
+      "e_2f6d38b95ca9030968971abd": 3,
+      "e_47560209428de42ddef6e4ef": 2,
+      "e_52ec36081d245a500ce7f793": 2,
+      "flyway_schema_history": 4,
+      "r_e9dd06913e0eb39901f20920": 3
+    },
+    "population": [
+      {
+        "resourceHex": "72657461696e65642d73616d652d74656e616e74",
+        "tenantHex": "74656e616e742d6f6e65"
+      },
+      {
+        "resourceHex": "72657461696e65642d74656e616e742d74776f",
+        "tenantHex": "74656e616e742d74776f"
+      },
+      {
+        "resourceHex": "666978747572652d7265736f75726365",
+        "tenantHex": "74656e616e742d6f6e65"
+      }
+    ],
+    "ownerTable": "e_2f6d38b95ca9030968971abd",
+    "tenantIdentifiers": [
+      "tenant-one",
+      "tenant-two"
+    ],
+    "writerInventoryDigest": "sha256:d06ca0051cdac536d899672b55b7bfc9737894861f1ce43a3517f4fee5987f7d",
+    "freeze": "Seed harness exited; database default read-only enabled; repeatable-read read-only snapshot; recapture must match before any future approval/execution. Local superuser can remove fence, so artifacts and live drift check are required.",
+    "migrationExecuted": false,
+    "populationApproved": false,
+    "historyStatus": "AUTHENTIC_HISTORY_UNAVAILABLE",
+    "populationDigest": "sha256:a9a55cb23e425b6fb58b695b5ab894e57d3b201fd7c26e91a8b088e8d03674c1"
+  },
+  "inventoryDigest": "sha256:233888d3e6962389c8453ec52b3a7c2f3fb1d98adaab065ecf69c9113c973117"
+}

@@ -1,0 +1,47 @@
+{
+  "runId": 38243318747,
+  "sourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+  "artifactId": 11746323564,
+  "artifactDigest": "sha256:67b9258aeec8fb9b01651f6dc7076f4537dbe5e02161bea1b70c90dbd7716410",
+  "artifactArchiveVerified": true,
+  "reportDigest": "sha256:9f831e3f45a3d1ba224f625350a8777f93d53943a8c93b2b9cd65be680e42070",
+  "mode": "FULL_TASK_INTERFACE_ADMISSION",
+  "domains": {
+    "payment": {
+      "canonicalDigest": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d",
+      "admission": {
+        "operation": "lower",
+        "result": "ACCEPTED"
+      },
+      "blockers": [],
+      "checks": {
+        "backend": "PASS",
+        "frontend-lock": "PASS",
+        "frontend-types": "PASS",
+        "frontend-tests": "PASS",
+        "frontend-build": "PASS",
+        "real-browser": "PASS"
+      },
+      "humanExtensionPreservation": "PASS",
+      "compilerOwnedRegeneration": "PASS"
+    },
+    "case-management": {
+      "canonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+      "admission": {
+        "operation": "lower",
+        "result": "ACCEPTED"
+      },
+      "blockers": [],
+      "checks": {
+        "backend": "PASS",
+        "frontend-lock": "PASS",
+        "frontend-types": "PASS",
+        "frontend-tests": "PASS",
+        "frontend-build": "PASS",
+        "real-browser": "PASS"
+      },
+      "humanExtensionPreservation": "PASS",
+      "compilerOwnedRegeneration": "PASS"
+    }
+  }
+}

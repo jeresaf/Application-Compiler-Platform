@@ -1,0 +1,22 @@
+{
+  "sourceCommit": "9c29727148dd6f9fd563722bd9c5fbffd9dd5699",
+  "status": "MEASURED_NOT_APPROVED",
+  "domains": {
+    "payment": {
+      "applicationId": "APP-FIXTURE",
+      "packageDigest": "sha256:702adb31db7e7007c4dd120490a3c441a9102c57826438d5f2dcf2a9d382f8df",
+      "notesDigest": "sha256:580db9ea597aa76d8f02ccb4a3bcf17d1f6a2283e78ec0f78ed8e71b641be84e",
+      "inventoryDigest": "sha256:58e981019343c35ddd5e22aeb1260b972cad1d9e3abc0f69a5895ba05c0885e6",
+      "populationDigest": "sha256:a9a55cb23e425b6fb58b695b5ab894e57d3b201fd7c26e91a8b088e8d03674c1",
+      "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481"
+    },
+    "case-management": {
+      "applicationId": "APP-CASE-MANAGEMENT",
+      "packageDigest": "sha256:008606b30cf7634614c40200161fdb75d150b2b4d50ed298a1d053d18ca2f07b",
+      "notesDigest": "sha256:b6b82e12599516bbb85cbba6973e92e59e81145d6f36712cdb2bc762f3d4efe0",
+      "inventoryDigest": "sha256:248bc448998ab0a7bf4e76045e3916bf412239591831f53a80177e086f33b688",
+      "populationDigest": "sha256:2d02a964cf774d928d6ce2c973ba2c2992a0354267a64c3d5b1e2aa52ac665d0",
+      "bindingDigest": "sha256:2a584b4d5ca471d1f1686db24e3b094e1a91f7e69e4d9f4775fcad1607c49481"
+    }
+  }
+}
