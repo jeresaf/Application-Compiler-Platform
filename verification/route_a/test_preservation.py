@@ -12,12 +12,14 @@ class PreservationTests(unittest.TestCase):
         allowed=('engineering/route_a_gateway/','verification/route_a/',
                  'docs/phase6-route-a-',
                  'proposals/phase6-route-a-implementation-review/security-remediation/')
-        # CI needs no modification: discovery already includes the new regressions.
+        # Explicit CI-only authorization at 0057b008 permits a checked scheduling delta.
+        from engineering.ci.parity import verify
+        verify()
         listing=subprocess.check_output(['git','ls-tree','-r',BASELINE],cwd=ROOT,text=True)
         checked=0
         for row in listing.splitlines():
             metadata,name=row.split('\t',1)
-            if name.startswith(allowed):continue
+            if name.startswith(allowed) or name == '.github/workflows/acp-contracts.yml':continue
             expected=metadata.split()[2]
             self.assertTrue((ROOT/name).is_file(),name)
             actual=subprocess.check_output(['git','hash-object','--path='+name,name],cwd=ROOT,text=True).strip()
