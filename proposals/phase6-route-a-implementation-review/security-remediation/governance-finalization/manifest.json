@@ -1,0 +1,24 @@
+{
+  "format": "acp-route-a-governance-finalization-evidence/1",
+  "reviewedCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+  "runId": 38365033881,
+  "files": {
+    "README.md": "sha256:5effd03cb6bcb57894e17dce268df032f168a0f41b5573177f2fd80ed49a891e",
+    "hosted/38365033881/ci-artifacts.json": "sha256:543afccc55b95129aea6c03c2a37308229f2450a069d6583c7285758eb5c4cba",
+    "hosted/38365033881/ci-jobs.json": "sha256:fe0f54b8f944021f9f02f5b817493c85c4066fef13c16d61a284d0b9835d1dce",
+    "hosted/38365033881/ci-run.json": "sha256:b32a09419965c25fa6bbd24242aa057ef88d4e1a7c78bf9cc234b0763d2bee8d",
+    "hosted/38365033881/closure-job.log": "sha256:92ccbee64d9cc94ca9fa8c2459e384021be61587786553899be24f107d6976af",
+    "hosted/38365033881/closure-report.json.gz": "sha256:ad11475964d6eb5143241c14b56634e22af01ee99375f39c228307ba8f21467b",
+    "hosted/38365033881/closure-summary.json": "sha256:c43eade12f0bc709315c33c41e95aa44c11dc874723e61e3d9a274d460f54826",
+    "hosted/38365033881/contracts-job.log": "sha256:6c700f87d859088bee48efbd290ee9afb007e1aa7ff114cf863c2a22cc0445ed",
+    "hosted/38365033881/observation.json": "sha256:a59224c4f30e3f6df4a75f5c88b88fef0062cc9dd568e363c4adae9ed56fbd03",
+    "preservation.json": "sha256:4f4506cc5e2f18498741a9fbcda75dded2f082c08b6e825af5c77ae38c5749eb",
+    "repository-check.log": "sha256:c4137e2af6826157e9ca3a60cabad1b1821ead489252e1daa8aa649ad19783b4",
+    "scope-and-state.json": "sha256:3d8c6f2347b5c795b0a679ebbbef3f479bc4b7ef27232f82b5045a29ca3aa4f4",
+    "sealed-release.json": "sha256:24acb6a34de64412525609de789b8f5ea99d79f3ec7908c968e102ae4c47a0a2"
+  },
+  "cryptographicApprovalIssued": false,
+  "authorizationExpansion": false,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

@@ -1,0 +1,66 @@
+{
+  "format": "acp-route-a-exact-source-hosted-observation/1",
+  "sourceCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+  "runId": 38365033881,
+  "attempt": 1,
+  "runStatus": "COMPLETED",
+  "jobs": {
+    "phase5-experiments": "success",
+    "contracts": "success",
+    "phase5c-hard-gates": "success",
+    "phase6-target": "success",
+    "phase6-closure-audit": "failure"
+  },
+  "ordinaryEngineeringJobs": "PASS",
+  "overallWorkflowConclusion": "failure",
+  "overallCI": "NOT_GREEN_CLOSURE_GATE_FAILED",
+  "closure": {
+    "auditIdentity": "phase6-remediation-0.5.0/20261013T084042325223Z",
+    "sealedBundleAfterAudit": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+    "allBlockerExecutionAndEvaluationCommits": "5860f20455f130b13ce32e9c955564febf68c223",
+    "auditExecution": {
+      "status": "PERFORMED",
+      "exception": null
+    },
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "exitCode": 2,
+    "blockerCount": 21,
+    "completeReport": "closure-report.json.gz",
+    "uncompressedReportDigest": "sha256:434d7001e2ac8ba7a5d079bc70f803a947dc1b1765d5e6aacf943cd2d94c81ea",
+    "compressedReportDigest": "sha256:ad11475964d6eb5143241c14b56634e22af01ee99375f39c228307ba8f21467b",
+    "artifactEntry": "phase6-final-closure.json",
+    "archiveDigestVerified": "sha256:ab3b94bfbe1794a65c84e237a81ea57855b2301352c941db535f1524317ead27",
+    "artifact": {
+      "id": 11800411319,
+      "node_id": "MDg6QXJ0aWZhY3QxMTgwMDQxMTMxOQ==",
+      "name": "phase6-remediation-0.5.0-closure-audit",
+      "size_in_bytes": 62555228,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11800411319",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11800411319/zip",
+      "expired": false,
+      "digest": "sha256:ab3b94bfbe1794a65c84e237a81ea57855b2301352c941db535f1524317ead27",
+      "created_at": "2026-10-13T09:02:58Z",
+      "updated_at": "2026-10-13T09:02:58Z",
+      "expires_at": "2027-01-11T07:48:27Z",
+      "workflow_run": {
+        "id": 38365033881,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "5860f20455f130b13ce32e9c955564febf68c223"
+      }
+    }
+  },
+  "t08SkipEvidence": [
+    "2026-10-13T07:49:41.4221922Z test_real_postgresql_storage_presence_required_and_rollback (test_canonical03_migrations.PostgreSQL03MigrationTests.test_real_postgresql_storage_presence_required_and_rollback) ... skipped 'requires explicit disposable PostgreSQL'"
+  ],
+  "canonicalVectorEvidence": [
+    "2026-10-13T08:05:56.1257531Z Canonical byte profile PASS: 9 positive, 13 negative, 2 snapshot hashes; v24.21.0",
+    "2026-10-13T08:05:56.2179622Z Canonical byte profile PASS: 9 positive, 13 negative, 2 snapshot hashes; v24.21.0",
+    "2026-10-13T08:05:56.3161872Z Canonical byte profile PASS: 9 positive, 13 negative, 2 snapshot hashes; v24.21.0"
+  ],
+  "newFinalizationDraftsHostedValidated": false,
+  "observedAt": "2026-10-13T09:06:18.092403+00:00",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

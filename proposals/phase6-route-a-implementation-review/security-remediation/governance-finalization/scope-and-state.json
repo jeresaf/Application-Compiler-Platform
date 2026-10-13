@@ -1,0 +1,70 @@
+{
+  "format": "acp-route-a-governance-finalization-state/1",
+  "reviewedCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+  "technicalReviewVerdict": {
+    "sourceKind": "TECHNICAL_REVIEW_VERDICT_RELAYED_IN_CURRENT_INSTRUCTION",
+    "subject": {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/provenance-clarification.json",
+      "sourceCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+      "digest": "sha256:6ad80eb494733e496dc005b385e463d381b15850ab98d200074fe537bef099c7"
+    },
+    "verdict": "APPEND_ONLY_PROVENANCE_CORRECTION_ACCEPTED_AS_DOCUMENTARY_ENGINEERING_CHECKPOINT",
+    "newHumanProjectAuthorityGrant": false,
+    "authenticatedReviewerIdentity": "NOT_ESTABLISHED"
+  },
+  "provenanceReaderRule": "Prior attribution remains corrected only by the append-only clarification. No original record, digest or scope is rewritten.",
+  "existingImplementationOnlyAuthorization": {
+    "record": {
+      "path": "proposals/phase6-route-a-implementation-review/human-decision.json",
+      "sourceCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+      "digest": "sha256:2b92f4db96bb61cda4aad450107c2aaa0b7d443dda3631bd5e960552047324fa"
+    },
+    "scope": "IMPLEMENTATION_AND_ISOLATED_TESTING_ONLY",
+    "authentication": "DOCUMENTARY_NOT_CRYPTOGRAPHIC",
+    "expanded": false
+  },
+  "outstandingControls": {
+    "A06-06": "INCOMPLETE",
+    "A09-08": "BLOCKED",
+    "A14-06": "INCOMPLETE",
+    "A17-16": "INCOMPLETE",
+    "A19-01": "PENDING_FORMAL_REVIEW_DISPOSITION"
+  },
+  "originalRegister": {
+    "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/outstanding-controls.json",
+    "sourceCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+    "digest": "sha256:50db0755055cd0736201ad774da2256cf76efcc1feb672e792674055470214b2"
+  },
+  "T08": {
+    "authorization": "NOT_AUTHORIZED",
+    "execution": "NOT_EXECUTED",
+    "request": {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/t08-request.json",
+      "sourceCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+      "digest": "sha256:c1c8a08ea68a81de0cef468a5e0f65d56c1e1db67cbe68c36a8f63c2d80b520d"
+    }
+  },
+  "T09": {
+    "status": "PENDING_FORMAL_REVIEW_DISPOSITION",
+    "request": {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/t09-request.json",
+      "sourceCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+      "digest": "sha256:9b6274388eb9412f29d9eca03e8386aaa72b54e8eba62891235db67d624f07db"
+    }
+  },
+  "P1P5": "NOT_STARTED_NOT_AUTHORIZED",
+  "operationalTrustArchitecture": "REQUIRES_SEPARATE_HUMAN_DECISIONS",
+  "operationalImplementation": "NOT_AUTHORIZED",
+  "operationalSecurity": "NOT_ESTABLISHED",
+  "fullOperationalImplementationGate": "REVIEW_REQUIRED",
+  "realProjectAuthoritySigningKeys": "NOT_CREATED",
+  "cryptographicallyAuthenticatedOperationalApprovals": "NOT_ISSUED",
+  "operationalHistory": "NOT_INITIALIZED",
+  "paymentOrCaseGenesis": "NOT_AUTHORIZED",
+  "acceptedSemanticTransitions": "NOT_AUTHORIZED",
+  "independentDataBindings": "NOT_APPROVED",
+  "applicationMigrationSQL": "NOT_AUTHORIZED",
+  "applicationDeployment": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}
