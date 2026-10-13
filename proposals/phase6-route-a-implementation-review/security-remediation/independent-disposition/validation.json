@@ -1,0 +1,14 @@
+{
+  "documentaryChecks": "PASS",
+  "requiredUnresolvedControlStates": "PRESERVED",
+  "priorImplementationEvidenceManifest": "PASS",
+  "evidenceCommitOwnHostedRun": 38349532713,
+  "newRuntimeSourceChanges": false,
+  "newRuntimeTests": "NOT_NEEDED_DOCUMENTARY_AND_EVIDENCE_ONLY",
+  "repositoryCheck": "PASS",
+  "sealedReleaseVerification": "sealed-release.json",
+  "hashesProvide": "INTEGRITY_NOT_HUMAN_CRYPTOGRAPHIC_AUTHENTICATION",
+  "broaderWorkStarted": false,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

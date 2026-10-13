@@ -1,0 +1,30 @@
+{
+  "format": "acp-route-a-independent-review-disposition/1",
+  "reviewedSource": "0d0aae6e9d0dda530f3a123238318cf39d901605",
+  "files": {
+    "README.md": "sha256:c621b700e5e96472bd4f7df8e943e8816c45c523a59cd23007ef1d996f98e6a8",
+    "hosted/38349532713/ci-artifacts.json": "sha256:2cfaecd9bffaf44f629372626d2177cd66b1b31ccbd590c8377c823ec203303b",
+    "hosted/38349532713/ci-jobs.json": "sha256:4c7a9d7750c7507e306e44b53ffb9ee8015c6dc5e8e602d6a49b4b7421074147",
+    "hosted/38349532713/ci-run.json": "sha256:366a2122ca4fe67e883a5aff51c3c7214419dffe8f34cde62ec01d639cb8745d",
+    "hosted/38349532713/closure-job.log": "sha256:d133eadd27f4a9f919a26f8cf0ad9c2ec8fc6b011fd6697ec29f545498fe056d",
+    "hosted/38349532713/closure-summary.json": "sha256:69b21ddff4edd93644e6dab5c610c341241b1f6ea4bcc21376c0696965a75ca5",
+    "hosted/38349532713/contracts-job.log": "sha256:c569b3458424eaaf7d3f69c5c9a20db4636a8b8b4eb01e76b9175898e70a4374",
+    "hosted/38349532713/observation.json": "sha256:a9c8f302c3d43cb0f694e4e608988cf7963655e4c5b40fd78f07272424936458",
+    "hosted/38349532713/route-a-tests.log": "sha256:890056ef27e355d088dce4b1e34ecc909094e608ddb99d5b1cceeb0c5f390f56",
+    "human-review-decision.json": "sha256:a0d00aaf908f1f49fd9c6a8fca7726315035f9e3c82a556b8899c0ffa26d657e",
+    "next-authorization-request.json": "sha256:ea33e62f2406ff3b974be886c25cb9e7c4a9d426a23d35d351ba24a9329b4c7c",
+    "outstanding-controls.json": "sha256:50db0755055cd0736201ad774da2256cf76efcc1feb672e792674055470214b2",
+    "preservation.json": "sha256:9d703186a113c1e8d1d7ccd0c530bec61d5a02b531ea897dfc0944cdc98e8d4f",
+    "repository-check.log": "sha256:c4137e2af6826157e9ca3a60cabad1b1821ead489252e1daa8aa649ad19783b4",
+    "sealed-release.json": "sha256:24acb6a34de64412525609de789b8f5ea99d79f3ec7908c968e102ae4c47a0a2",
+    "validation.json": "sha256:5d6de89544a02e27b48cc4b373d5f73ec276994656dd2698f9c0f69ea788372f"
+  },
+  "scopeDocument": {
+    "path": "docs/phase6-route-a-next-authorization-gate.md",
+    "digest": "sha256:546b924c7db2e42e44ef958c267410db5aac15113e7013dddc95c43b069cf77e"
+  },
+  "cryptographicApproval": false,
+  "stop": "HUMAN_REVIEW",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

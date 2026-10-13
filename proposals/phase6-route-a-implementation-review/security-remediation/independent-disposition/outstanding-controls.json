@@ -1,0 +1,66 @@
+{
+  "format": "acp-route-a-outstanding-control-disposition/1",
+  "reviewedEvidenceCommit": "0d0aae6e9d0dda530f3a123238318cf39d901605",
+  "previousMatrix": "../hosted/38344618535/control-matrix.hosted.json",
+  "documentaryAcceptance": "human-review-decision.json",
+  "historicalMatrixRewritten": false,
+  "controls": [
+    {
+      "id": "A06-06",
+      "status": "INCOMPLETE",
+      "category": "OPERATIONAL_SECURITY_AND_HUMAN_TRUST_DECISIONS",
+      "laboratoryEvidence": "Pinned Ed25519 laboratory identities and signed freshness responses are accepted within the engineering checkpoint.",
+      "remaining": "Select operational issuer/algorithm/provider, registration policy, custody and configuration/key rotation. No operational trust has been established.",
+      "humanDecisions": ["T01", "T02", "T03", "T04"],
+      "passRequires": "Separately authorized implementation, independent operational security review and exact deployment-specific authenticated evidence."
+    },
+    {
+      "id": "A09-08",
+      "status": "BLOCKED",
+      "category": "OPERATIONAL_SECURITY_AND_INFRASTRUCTURE",
+      "laboratoryEvidence": "Cooperating independent processes, termination, lock replacement detection, stale epochs and recovery tests are accepted.",
+      "remaining": "Actual confinement against privileged same-UID/root access and cross-host writer safety are not established. Boundary detection is not enforcement.",
+      "humanDecisions": ["T05", "T07"],
+      "passRequires": "Chosen threat boundary and separately enforced operational controls, reviewed with adversarial infrastructure evidence; unsupported threats must remain explicit."
+    },
+    {
+      "id": "A14-06",
+      "status": "INCOMPLETE",
+      "category": "OPERATIONAL_SECURITY_AND_BACKUP_CUSTODY",
+      "laboratoryEvidence": "Pinned-configuration quarantined export/restore and fresh external revocation verification are accepted.",
+      "remaining": "Portable multi-version authority chronology, bounded-memory large-history export, independently governed backup and observer custody remain unsupported.",
+      "humanDecisions": ["T04", "T06", "T07"],
+      "passRequires": "Approved external archive successor contract, independently verified complete authority chronology, stale/fork/tamper rejection and measured large-history recovery."
+    },
+    {
+      "id": "A17-16",
+      "status": "INCOMPLETE",
+      "category": "LABORATORY_ENGINEERING_EVIDENCE",
+      "laboratoryEvidence": "270 compiler tests completed with one explicitly skipped opt-in disposable PostgreSQL test; 112 Route A tests passed.",
+      "remaining": "test_real_postgresql_storage_presence_required_and_rollback was not executed. It is not converted to PASS by bounded acceptance or other PostgreSQL CI jobs.",
+      "humanDecisions": ["T08"],
+      "passRequires": "Explicit authorization and evidence for that exact disposable PostgreSQL test, preserving the prohibition on application migration and production data access."
+    },
+    {
+      "id": "A19-01",
+      "status": "PENDING_FORMAL_REVIEW_DISPOSITION",
+      "category": "HUMAN_REVIEW_DECISION",
+      "laboratoryEvidence": "Bounded engineering deliverable acceptance is documented in human-review-decision.json.",
+      "remaining": "The user explicitly retains this control pending formal review disposition. This record does not infer PASS from acceptance of the checkpoint.",
+      "humanDecisions": ["T09"],
+      "passRequires": "Explicit later control-specific human disposition of the exact deliverables and hashes; no automatic status promotion."
+    }
+  ],
+  "phase6ReleaseClosure": {
+    "category": "PHASE6_RELEASE_CLOSURE_REQUIREMENTS",
+    "status": "UNRESOLVED",
+    "preservedImplementationAudit": "../hosted/38344618535/closure-summary.json",
+    "preservedBlockerCount": 21,
+    "latestEvidenceCommitAudit": "hosted/38349532713/observation.json",
+    "rule": "Keep every performed audit and blocker immutable. Bounded engineering acceptance and future trust/infrastructure work do not waive release criteria or establish accepted semantic evolution."
+  },
+  "fullOperationalImplementationGate": "REVIEW_REQUIRED",
+  "operationalSecurity": "NOT_ESTABLISHED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

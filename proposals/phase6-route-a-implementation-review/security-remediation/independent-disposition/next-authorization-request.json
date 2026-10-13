@@ -1,0 +1,56 @@
+{
+  "format": "acp-route-a-next-authorization-gate/1",
+  "status": "PROPOSED_NOT_GRANTED",
+  "executionReadiness": "BLOCKED_PENDING_HUMAN_CHOICES_AND_EXACT_CONTRACT_REVIEW",
+  "reviewedSource": "0d0aae6e9d0dda530f3a123238318cf39d901605",
+  "scopeDocument": "docs/phase6-route-a-next-authorization-gate.md",
+  "scopeDocumentDigest": "sha256:546b924c7db2e42e44ef958c267410db5aac15113e7013dddc95c43b069cf77e",
+  "documentaryAcceptanceDigest": "sha256:a0d00aaf908f1f49fd9c6a8fca7726315035f9e3c82a556b8899c0ffa26d657e",
+  "humanChoices": {
+    "T01": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION",
+    "T02": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION",
+    "T03": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION",
+    "T04": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION",
+    "T05": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION",
+    "T06": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION",
+    "T07": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION",
+    "T08": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION",
+    "T09": "UNRESOLVED_REQUIRES_EXPLICIT_HUMAN_DECISION"
+  },
+  "workPackages": {
+    "P1": "Provider/configuration external integration",
+    "P2": "Registration/custody protocol dry-run",
+    "P3": "Enforced storage/fencing",
+    "P4": "Portable authority history/archive successor",
+    "P5": "Infrastructure evidence plan"
+  },
+  "proposedSourcePaths": [
+    "engineering/route_a_gateway/operational/",
+    "verification/route_a/operational/",
+    "proposals/phase6-route-a-operational-infrastructure/"
+  ],
+  "proposedExternalContracts": [
+    "acp-route-a-operational-host/1",
+    "acp-route-a-authority-status/2",
+    "acp-route-a-registration-request/1",
+    "repository-bound writer capability",
+    "external archive/2"
+  ],
+  "contractApproval": "NOT_GRANTED_FIELD_LEVEL_BYTES_REQUIRE_SEPARATE_REVIEW",
+  "nativeCanonicalCompilerContracts": "NO_CHANGES_PROPOSED",
+  "approval2EventBinding": "PRESERVED",
+  "sealed050": "PRESERVED",
+  "broaderImplementationStarted": false,
+  "infrastructureProvisioning": "NOT_AUTHORIZED",
+  "operationalRegistration": "NOT_AUTHORIZED",
+  "realProjectAuthorityKeys": "NOT_AUTHORIZED",
+  "realApprovalIssuance": "NOT_AUTHORIZED",
+  "operationalHistoryInitialization": "NOT_AUTHORIZED",
+  "paymentOrCaseGenesis": "NOT_AUTHORIZED",
+  "acceptedSemanticTransitions": "NOT_AUTHORIZED",
+  "independentDataBindings": "NOT_APPROVED",
+  "applicationMigrationSQL": "NOT_AUTHORIZED",
+  "applicationDeployment": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}
