@@ -1,0 +1,26 @@
+{
+  "artifact": {
+    "id": 11779799807,
+    "node_id": "MDg6QXJ0aWZhY3QxMTc3OTc5OTgwNw==",
+    "name": "phase6-remediation-0.5.0-closure-audit",
+    "size_in_bytes": 62554537,
+    "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11779799807",
+    "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11779799807/zip",
+    "expired": false,
+    "digest": "sha256:9d477ea179dae01f9fa96498157b8bdd6511f72eb5414f9d9d874ee26e44e0c1",
+    "created_at": "2026-10-12T23:57:38Z",
+    "updated_at": "2026-10-12T23:57:38Z",
+    "expires_at": "2027-01-10T22:48:24Z",
+    "workflow_run": {
+      "id": 38318733625,
+      "repository_id": 1371285836,
+      "head_repository_id": 1371285836,
+      "head_branch": "codex/phase6-production-remediation",
+      "head_sha": "a02986bc2cebf3ab0ee5d12c5d11fff2f86a4025"
+    }
+  },
+  "downloadedArchiveDigest": "sha256:9d477ea179dae01f9fa96498157b8bdd6511f72eb5414f9d9d874ee26e44e0c1",
+  "entry": "phase6-final-closure.json",
+  "entryDigest": "sha256:a1b47817a648cf41d09fcdeeff0d5799c9a66afd7489af6827a49b04153f81c8",
+  "blockerCount": 21
+}

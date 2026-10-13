@@ -1,0 +1,44 @@
+{
+  "observedAt": "2026-10-12T23:59:33.221904+00:00",
+  "runId": 38318733625,
+  "sourceCommit": "a02986bc2cebf3ab0ee5d12c5d11fff2f86a4025",
+  "branch": "codex/phase6-production-remediation",
+  "runAttempt": 1,
+  "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38318733625",
+  "status": "completed",
+  "conclusion": "failure",
+  "jobs": {
+    "phase5-experiments": "success",
+    "contracts": "success",
+    "phase5c-hard-gates": "success",
+    "phase6-target": "success",
+    "phase6-closure-audit": "failure"
+  },
+  "ordinaryEngineeringJobs": "PASS",
+  "closure": {
+    "auditExecution": {
+      "status": "PERFORMED",
+      "exception": null
+    },
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "blockerCount": 21,
+    "exitCode": 2
+  },
+  "hostedTests": {
+    "routeA": {
+      "tests": 78,
+      "result": "PASS",
+      "seconds": 194.586
+    },
+    "compiler": {
+      "tests": 270,
+      "seconds": 813.226,
+      "skipped": 1,
+      "result": "OK_WITH_ONE_EXISTING_OPT_IN_POSTGRESQL_SKIP"
+    },
+    "canonicalVectors": "ALL_THREE_CORPORA_PASS"
+  },
+  "scope": "Validates the exact implementation commit. Later evidence-only commits are separate observations, not additional tested runtime source.",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

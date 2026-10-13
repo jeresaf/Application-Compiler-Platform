@@ -1,0 +1,19 @@
+{
+  "format": "acp-route-a-post-push-observation/1",
+  "sourceCommit": "a02986bc2cebf3ab0ee5d12c5d11fff2f86a4025",
+  "runId": 38318733625,
+  "originalImplementationManifestDigest": "sha256:994193bb949cb08b9f0b9c11e17ecccd8d1575405e45b960d0432f3af10aa510",
+  "files": {
+    "ci-artifacts.json": "sha256:2cd029d7cd53a95951a5ae2913eaed75d30418b2186dea9153ddff74d74fc0a5",
+    "ci-jobs.json": "sha256:a3337a344c13f3371edd915127831fa975378d1a55ecf3ee0561db1fe43cb2b2",
+    "ci-run.json": "sha256:28fe258cf75d56dcd3f29d3d27e315606363d404f9ea99010623de92e1e1ae56",
+    "closure-artifact-observation.json": "sha256:1597feb8cbb1481a648d91c7617f1f5db1496744faf23b12e6d3ba3b8479b1c2",
+    "closure-job.log": "sha256:d0031cc9e69df552f321817c7970eee4355524443e5c9d0f0720b4854348d8c7",
+    "closure-summary.json": "sha256:ed7cdb19f1bec560abbda4da07bf524309d81e239ce9efb801326d73d7d274ba",
+    "contracts-job.log": "sha256:ef573c5057fb7abce6b50cfb5fc85e0f60de3f27ae4bb37a858b8224255d2854",
+    "hosted-observation.json": "sha256:21cc838ccb5411e350b943db656ab5d5d5dad17221df734ab65ab9b6f9bf259f",
+    "review-disposition.json": "sha256:b493f82b360338c75c6831a234519b33d3bd5a883d76da21c4c9e5bdc44e6055",
+    "route-a-artifact-observation.json": "sha256:3a1f95d1ea10f6d7923ca4ef25bda47818b68a83aa20b3fc3e628f4185362fdd",
+    "route-a-tests.log": "sha256:410d0b80373fddd9e2d09c410d3cf11338cb2b21231048323b3b3211e075a05b"
+  }
+}
