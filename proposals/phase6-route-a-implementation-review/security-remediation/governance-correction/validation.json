@@ -1,0 +1,17 @@
+{
+  "recordDigestBinding": "PASS",
+  "originalDispositionManifest": "PASS",
+  "oldNextGateScopeDigest": "UNCHANGED",
+  "controlStatuses": "EXACT_UNCHANGED_COPY",
+  "completeClosureReports": "EXACT_BYTES_AND_ARCHIVE_DIGESTS_VERIFIED",
+  "t08Inspection": "STATIC_AST_AND_SOURCE_ONLY_NO_IMPORT_OR_TEST_EXECUTION",
+  "runtimeTests": "NOT_RUN_GOVERNANCE_ONLY",
+  "T08": "NOT_AUTHORIZED_NOT_EXECUTED",
+  "T09": "NOT_APPROVED",
+  "repositoryCheck": "PASS",
+  "priorFilePreservation": "PASS",
+  "noRuntimeOrCompilerContractChanges": true,
+  "noOperationalWork": true,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

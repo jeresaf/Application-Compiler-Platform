@@ -1,0 +1,150 @@
+{
+  "format": "acp-route-a-t08-disposable-postgresql-request/1",
+  "decisionId": "T08",
+  "status": "PROPOSED_NOT_GRANTED",
+  "execution": "NOT_AUTHORIZED_NOT_EXECUTED",
+  "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+  "test": "tooling.tests.test_canonical03_migrations.PostgreSQL03MigrationTests.test_real_postgresql_storage_presence_required_and_rollback",
+  "sourceBindings": [
+    {
+      "path": "tooling/tests/test_canonical03_migrations.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:51b0762167a60dc2b8bf8b36c0e12807878fa577ce79416deb01100e23d81c38",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/tests/test_target_migrations.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:422daa6c37802c873a0e8c2e522c3e3378b1e8b52e9629322deff5e7f0f5435c",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/target_migrations.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:7013419f834187f8e831cecd829da08de3c9d04d5d51a756ce4aa5032539acfa",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/change_fixtures.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:5c30a8da2e14dc63f4617c9c547724e3a4668c1606d1034c83049a3aabbdacff",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/changes.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:cfdd5515cedabc141517e53e4e2822dad035f0c169bad934692716e17f789428",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/deterministic_approval.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:dba6b1232c750309f227ac2041e27b4bec47ea5419003803a63f2b0d5c585c5c",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/deterministic_fixtures.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:c6a5b9a87a2cc8725e53ab2b16f48e7a49933d703280b5739011ab02b1266315",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/canonical_json.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:4c526ce2bce5e107fc2e0b198d18167fd14becc6a95295bfd2794a5a1e67a39a",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/compiler_contracts.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:b9aee32b55d24bb92a3d8625af9a62595e353d91927c451999297032f7caaae2",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "tooling/requirements.txt",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:36637d22364f7e70895bee4d452b867c6436c6e27a899f65edb6b84aa3f748c2",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "targets/spring-vue-postgres/worker/relations.py",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:af6c706d9dd403b0e1bd1c55e57b54a28027831445484fa1973769f64dca6266",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    }
+  ],
+  "scopeDocument": {
+    "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/t08-review.md",
+    "digest": "sha256:29099c5a4b3516cab2f778d466390df8a15f545027becb8daf7b81fe28811e77",
+    "role": "NEW_UNCOMMITTED_REVIEW_ARTIFACT"
+  },
+  "command": [
+    ".venv/bin/python3.14",
+    "-m",
+    "unittest",
+    "tooling.tests.test_canonical03_migrations.PostgreSQL03MigrationTests.test_real_postgresql_storage_presence_required_and_rollback",
+    "-v"
+  ],
+  "workingDirectory": "REPOSITORY_ROOT_AT_REVIEWED_COMMIT",
+  "environmentVariableNames": [
+    "ACP_TEST_DATABASE_URL",
+    "ACP_TEST_DATABASE_USER",
+    "ACP_TEST_DATABASE_PASSWORD"
+  ],
+  "environmentValues": "NOT_SELECTED_HUMAN_MUST_BIND_A_VERIFIED_EMPTY_DISPOSABLE_DATABASE",
+  "runtimeRequirements": {
+    "python": "3.14.7",
+    "postgresql": "18.6",
+    "serverVersionNum": "180006",
+    "psqlVersion": "RECORD_AT_AUTHORIZED_EXECUTION"
+  },
+  "actualSqlEffects": [
+    "CREATE random acp_migration_<uuid> schemas and fixture tables",
+    "INSERT synthetic fixture row",
+    "BEGIN compiler-generated fixture DDL/backfill/constraint verification COMMIT",
+    "Negative required-field INSERT and presence/value checks",
+    "Reject incompatible text storage",
+    "Induce invalid-hex fixture backfill failure and verify transactional DDL rollback",
+    "DROP own random fixture schemas CASCADE in finally"
+  ],
+  "syntheticFixture": {
+    "history": "FixtureAcceptedHistory IN_MEMORY_TEST_ORACLE_NOT_AUTHENTIC_HISTORY",
+    "proposal": "TEST_ONLY_EVOLUTION-required-field",
+    "retainedTestRowHex": "65cc8100f09fa68b27",
+    "humanSemanticApproval": false,
+    "independentDataBindingApproval": false,
+    "productionDefault": false,
+    "newRecordDefault": false
+  },
+  "humanPrerequisites": [
+    "Explicit separate grant bound to request digest and reviewed source",
+    "Actual isolated empty database identity/owner/version/isolation evidence",
+    "Independent reviewer confirms destination, SQL effects and privileges",
+    "Existing disposable environment or separately authorized provisioning",
+    "Ephemeral fixture credentials supplied without recording secrets",
+    "Explicit cleanup/crash-disposal scope; no implicit retries or changed test/source"
+  ],
+  "requiredResults": [
+    "Named test executes without skip and completes OK",
+    "Exact source/test/request hashes and environment identity",
+    "Redacted command, timestamps, return code and full assertion log",
+    "Schema inventory before/after and failure/cleanup evidence"
+  ],
+  "notAuthorized": [
+    "Test execution now",
+    "Database/server/container/role provisioning now",
+    "Application migration SQL",
+    "Existing retained populations or production data",
+    "Operational authority or real approvals/keys",
+    "Authentic accepted history or genesis",
+    "Independent data-binding approvals",
+    "Semantic transitions",
+    "Deployment",
+    "Release closure"
+  ],
+  "control": "A17-16",
+  "controlStatus": "INCOMPLETE",
+  "newAuthorityProof": null,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

@@ -1,0 +1,209 @@
+{
+  "format": "acp-route-a-human-selection-dependency-map/1",
+  "status": "SELECTIONS_UNRESOLVED_NO_EXECUTION_GRANTED",
+  "reviewedCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+  "prioritySequence": [
+    {
+      "priority": "A",
+      "action": "Review exact-bound append-only provenance clarification before interpreting any acceptance"
+    },
+    {
+      "priority": "B",
+      "action": "Review standalone T08 request; no test execution without separate authorization"
+    },
+    {
+      "priority": "C",
+      "action": "Review T09 exact dossier and criteria; retain skip/pending T08 without inventing outcome"
+    },
+    {
+      "priority": "D",
+      "action": "Review T01\u2013T07 selections independently; resolve dependencies before final binding"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "T01",
+      "status": "UNRESOLVED",
+      "selectionScope": "Repository/application ownership and environment boundary",
+      "finalBindingDependencies": [],
+      "humanInputsRequired": [
+        "Actual repository/application identifiers",
+        "Ownership evidence",
+        "Permitted environment boundary"
+      ],
+      "independentReviewerRoles": [
+        "Project architecture/ownership reviewer",
+        "Independent infrastructure reviewer"
+      ],
+      "actualReviewerIdentities": "NOT_DESIGNATED",
+      "selectionGrantsProvisioning": false,
+      "selectionGrantsOperation": false,
+      "requiresLaterExactBoundExecutionAuthorization": true
+    },
+    {
+      "id": "T02",
+      "status": "UNRESOLVED",
+      "selectionScope": "Identity/issuer/provider/roles/registration policy",
+      "finalBindingDependencies": [
+        "T01"
+      ],
+      "humanInputsRequired": [
+        "Actual proposed provider/issuer/audience",
+        "Author/reviewer/read separation",
+        "Registration and revocation policy"
+      ],
+      "independentReviewerRoles": [
+        "Independent identity/security reviewer",
+        "Project-authority policy reviewer"
+      ],
+      "actualReviewerIdentities": "NOT_DESIGNATED",
+      "selectionGrantsProvisioning": false,
+      "selectionGrantsOperation": false,
+      "requiresLaterExactBoundExecutionAuthorization": true
+    },
+    {
+      "id": "T03",
+      "status": "UNRESOLVED",
+      "selectionScope": "Algorithms/custody/rotation/compromise",
+      "finalBindingDependencies": [
+        "T01",
+        "T02"
+      ],
+      "humanInputsRequired": [
+        "Algorithm policy alternatives",
+        "Custody and recovery responsibility",
+        "Rotation/compromise procedure"
+      ],
+      "independentReviewerRoles": [
+        "Independent cryptography/custody reviewer",
+        "Separate governance reviewer"
+      ],
+      "actualReviewerIdentities": "NOT_DESIGNATED",
+      "selectionGrantsProvisioning": false,
+      "selectionGrantsOperation": false,
+      "requiresLaterExactBoundExecutionAuthorization": true
+    },
+    {
+      "id": "T04",
+      "status": "UNRESOLVED",
+      "selectionScope": "Configuration/revocation/clock/freshness/observer policy",
+      "finalBindingDependencies": [
+        "T01",
+        "T02",
+        "T03"
+      ],
+      "humanInputsRequired": [
+        "Authority-version chain design",
+        "Revocation chronology retention",
+        "Freshness and clock bounds",
+        "Independent observer custody"
+      ],
+      "independentReviewerRoles": [
+        "Independent identity/security reviewer",
+        "Audit reviewer"
+      ],
+      "actualReviewerIdentities": "NOT_DESIGNATED",
+      "selectionGrantsProvisioning": false,
+      "selectionGrantsOperation": false,
+      "requiresLaterExactBoundExecutionAuthorization": true
+    },
+    {
+      "id": "T05",
+      "status": "UNRESOLVED",
+      "selectionScope": "Topology/threat boundary/enforced storage fencing",
+      "finalBindingDependencies": [
+        "T01",
+        "T02",
+        "T03",
+        "T04"
+      ],
+      "humanInputsRequired": [
+        "Single-host or cross-host choice",
+        "Service-account/access boundaries",
+        "Actual stale-writer enforcement design",
+        "Unsupported privileged threats"
+      ],
+      "independentReviewerRoles": [
+        "Infrastructure security reviewer",
+        "Independent distributed-storage reviewer"
+      ],
+      "actualReviewerIdentities": "NOT_DESIGNATED",
+      "selectionGrantsProvisioning": false,
+      "selectionGrantsOperation": false,
+      "requiresLaterExactBoundExecutionAuthorization": true
+    },
+    {
+      "id": "T06",
+      "status": "UNRESOLVED",
+      "selectionScope": "Authority-history/backup/recovery custody",
+      "finalBindingDependencies": [
+        "T03",
+        "T04",
+        "T05"
+      ],
+      "humanInputsRequired": [
+        "Archive version and completeness",
+        "Custodians/retention/encryption policy",
+        "RPO/RTO and quarantine release",
+        "Independent checkpoint policy"
+      ],
+      "independentReviewerRoles": [
+        "Backup/recovery reviewer",
+        "Independent security/audit reviewer"
+      ],
+      "actualReviewerIdentities": "NOT_DESIGNATED",
+      "selectionGrantsProvisioning": false,
+      "selectionGrantsOperation": false,
+      "requiresLaterExactBoundExecutionAuthorization": true
+    },
+    {
+      "id": "T07",
+      "status": "UNRESOLVED",
+      "selectionScope": "Exact infrastructure inventory/ownership/rollback",
+      "finalBindingDependencies": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06"
+      ],
+      "humanInputsRequired": [
+        "Actual environment inventory",
+        "Human-designated accountable owners/operators",
+        "Configuration digests",
+        "Rollback/decommission plan"
+      ],
+      "independentReviewerRoles": [
+        "Independent infrastructure change reviewer",
+        "Security reviewer"
+      ],
+      "actualReviewerIdentities": "NOT_DESIGNATED",
+      "selectionGrantsProvisioning": false,
+      "selectionGrantsOperation": false,
+      "requiresLaterExactBoundExecutionAuthorization": true
+    }
+  ],
+  "parallelPaperDesign": "T05 topology alternatives may be studied after T01; final binding waits for T02\u2013T04. Early T06 paper alternatives do not permit backup operations.",
+  "compatibilityReview": [
+    "T02",
+    "T03",
+    "T04"
+  ],
+  "T08RequiresOperationalT01T07Selection": false,
+  "T08RequiresSeparatelyBoundDisposableTestEnvironment": true,
+  "noInventedValues": [
+    "issuer",
+    "host",
+    "provider",
+    "custodian",
+    "reviewer",
+    "signing key",
+    "endpoint"
+  ],
+  "selectionVsExecution": "Record each actual human selection separately with proposal/configuration hashes. Then prepare a distinct provisioning/registration/operation request if requested. No dependency inherits a grant.",
+  "noControlPromotion": true,
+  "noClosureWaiver": true,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

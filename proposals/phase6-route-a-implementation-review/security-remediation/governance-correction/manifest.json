@@ -1,0 +1,50 @@
+{
+  "format": "acp-route-a-governance-correction-evidence/1",
+  "reviewedHead": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+  "files": {
+    "README.md": "sha256:b2be52547bf1fb2fe45db4f631d53dda38e9be79d572b1f6c566f56f9d4b9708",
+    "ci-reconciliation.json": "sha256:ccb1665ecdb95fe4a37db21a29ec7deccc64717809eae2ee59f5927d4d35bbf3",
+    "hosted/38349532713/ci-artifacts.json": "sha256:17e13f5c62e47e24df058f271bf3937d0f3fd16a569200c03df6f2ae50c077e6",
+    "hosted/38349532713/ci-jobs.json": "sha256:5af04ce1773cb8bae8a6eccce736690902f6250f4bc9163d47dce5a19c9d7cc7",
+    "hosted/38349532713/ci-run.json": "sha256:09836812a2a31ebc58a6dd1e3cbb34b5f542fb2afb27593907a455288a093b8b",
+    "hosted/38349532713/closure-job.log": "sha256:d133eadd27f4a9f919a26f8cf0ad9c2ec8fc6b011fd6697ec29f545498fe056d",
+    "hosted/38349532713/closure-report.json.gz": "sha256:e3b95d2fa21a64615bff71863ba87ee476e15c2a6f6556578cb0d873f372d59e",
+    "hosted/38349532713/closure-summary.json": "sha256:69b21ddff4edd93644e6dab5c610c341241b1f6ea4bcc21376c0696965a75ca5",
+    "hosted/38349532713/contracts-job.log": "sha256:c569b3458424eaaf7d3f69c5c9a20db4636a8b8b4eb01e76b9175898e70a4374",
+    "hosted/38349532713/observation.json": "sha256:1dda7ec4e531243363f339a0125e07856a15f1cb100a7df133d589130daf7d20",
+    "hosted/38355244432/ci-artifacts.json": "sha256:d5e5aaefe11245122db066dcac3352c18de6e94eb69c37605de654ec09261bb1",
+    "hosted/38355244432/ci-jobs.json": "sha256:31ab446fe22810816f82a963533ebf08b03f7c02adbca1828564bbfe356f4fd9",
+    "hosted/38355244432/ci-run.json": "sha256:41b8ad46f0c946384b5fca913808699397c6f21a2b16c44e0ac9cc3a9372ce63",
+    "hosted/38355244432/closure-job.log": "sha256:99f6b901c4358ac22214b137e14126138f1dd952f3dd8363a3a8eb616c346d98",
+    "hosted/38355244432/closure-report.json.gz": "sha256:6f7b8573dc89b44c96d6ebafd06c09b4a5f41f38b9c56b8d57040a704fec3f14",
+    "hosted/38355244432/closure-summary.json": "sha256:945910b46a2d0fcf11fbccf860f4696126c4bb80ef39b15f78c01cf2f52d1b30",
+    "hosted/38355244432/contracts-job.log": "sha256:95dae5f3c61b3fad721476e6312eb67373d354684a80fff3445cc92cb7f80bef",
+    "hosted/38355244432/observation.json": "sha256:425d40e37503e3c23b6c0a4f63cfb37b911a59f4594fbca9086e37e5bdcfe1a5",
+    "outstanding-controls.unchanged.json": "sha256:50db0755055cd0736201ad774da2256cf76efcc1feb672e792674055470214b2",
+    "preservation.json": "sha256:dc66ca00e6957946fa5e4cd198a7275bf92579ffc19e6acff7b878f196a99472",
+    "provenance-clarification.json": "sha256:6ad80eb494733e496dc005b385e463d381b15850ab98d200074fe537bef099c7",
+    "repository-check.log": "sha256:c4137e2af6826157e9ca3a60cabad1b1821ead489252e1daa8aa649ad19783b4",
+    "sealed-release.json": "sha256:24acb6a34de64412525609de789b8f5ea99d79f3ec7908c968e102ae4c47a0a2",
+    "t01-t07-dependencies.json": "sha256:0430a99327ce05a9ee11cf4cfec89cd2743a358e9d2e258e360cb249e0fad403",
+    "t08-request.json": "sha256:c1c8a08ea68a81de0cef468a5e0f65d56c1e1db67cbe68c36a8f63c2d80b520d",
+    "t08-review.md": "sha256:29099c5a4b3516cab2f778d466390df8a15f545027becb8daf7b81fe28811e77",
+    "t09-request.json": "sha256:9b6274388eb9412f29d9eca03e8386aaa72b54e8eba62891235db67d624f07db",
+    "t09-review.md": "sha256:4357878c6ad13f2dba61297ab26ca77915aeefcf3a6d0dd296c30ff7755b0738",
+    "validation.json": "sha256:efee868cc31f95507659bcd890bf2df4f39bf9801332437a431e48986f00b7b7"
+  },
+  "newDocument": {
+    "path": "docs/phase6-route-a-governance-correction.md",
+    "digest": "sha256:23b75b373cfb1eb2638a710a2a2e38e9db4b37b6accb44cc9cce987a11a25c91",
+    "role": "NEW_UNCOMMITTED_REVIEW_ARTIFACT"
+  },
+  "oldRecord": {
+    "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/human-review-decision.json",
+    "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+    "digest": "sha256:a0d00aaf908f1f49fd9c6a8fca7726315035f9e3c82a556b8899c0ffa26d657e",
+    "measurement": "EXACT_COMMITTED_BYTES"
+  },
+  "hashesAre": "INTEGRITY_NOT_HUMAN_AUTHENTICATION",
+  "approvalIssued": false,
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

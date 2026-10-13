@@ -1,0 +1,99 @@
+{
+  "artifacts": [
+    {
+      "id": 11794807943,
+      "name": "phase6-remediation-0.5.0-closure-audit",
+      "size_in_bytes": 62555218,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11794807943",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11794807943/zip",
+      "expired": false,
+      "created_at": "2026-10-13T07:16:04Z",
+      "expires_at": "2027-01-11T06:10:27Z",
+      "updated_at": "2026-10-13T07:16:04Z",
+      "digest": "sha256:d70b5f1072aaac4930ea5b1150126b08bc835e61a2997d8ee52ccdb375e6f9d7",
+      "workflow_run": {
+        "id": 38355244432,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "f5793fbab115ceb3ea814a73c38434dd2335be50"
+      }
+    },
+    {
+      "id": 11794177531,
+      "name": "phase6-target-ubuntu-evidence",
+      "size_in_bytes": 1500561,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11794177531",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11794177531/zip",
+      "expired": false,
+      "created_at": "2026-10-13T06:55:40Z",
+      "expires_at": "2027-01-11T06:10:27Z",
+      "updated_at": "2026-10-13T06:55:40Z",
+      "digest": "sha256:86ed62706067144c5c6e9a033c7438ccf0661c624c1a90bb3ed0dbaa26fc2c32",
+      "workflow_run": {
+        "id": 38355244432,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "f5793fbab115ceb3ea814a73c38434dd2335be50"
+      }
+    },
+    {
+      "id": 11793067690,
+      "name": "phase5c-ubuntu-evidence",
+      "size_in_bytes": 26580,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11793067690",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11793067690/zip",
+      "expired": false,
+      "created_at": "2026-10-13T06:22:57Z",
+      "expires_at": "2027-01-11T06:10:27Z",
+      "updated_at": "2026-10-13T06:22:57Z",
+      "digest": "sha256:583b1caf9730bb01cf092eea5afe13c833978489f5939d8ed3aa403b422770fd",
+      "workflow_run": {
+        "id": 38355244432,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "f5793fbab115ceb3ea814a73c38434dd2335be50"
+      }
+    },
+    {
+      "id": 11792813617,
+      "name": "phase5b-ubuntu-evidence",
+      "size_in_bytes": 37495,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11792813617",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11792813617/zip",
+      "expired": false,
+      "created_at": "2026-10-13T06:22:59Z",
+      "expires_at": "2027-01-11T06:10:27Z",
+      "updated_at": "2026-10-13T06:22:59Z",
+      "digest": "sha256:2246d0cc5278aa7f35ff7a7ff012ccf142d02ef0ba4919542d5d1e71c8e9929c",
+      "workflow_run": {
+        "id": 38355244432,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "f5793fbab115ceb3ea814a73c38434dd2335be50"
+      }
+    },
+    {
+      "id": 11792184526,
+      "name": "route-a-engineering-test-evidence",
+      "size_in_bytes": 3112,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11792184526",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11792184526/zip",
+      "expired": false,
+      "created_at": "2026-10-13T06:26:39Z",
+      "expires_at": "2027-01-11T06:10:27Z",
+      "updated_at": "2026-10-13T06:26:39Z",
+      "digest": "sha256:33e966c3f6afaeb35ae7c7d9774e9065217ac10987ef645ac7195bfc7edbe670",
+      "workflow_run": {
+        "id": 38355244432,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "f5793fbab115ceb3ea814a73c38434dd2335be50"
+      }
+    }
+  ]
+}

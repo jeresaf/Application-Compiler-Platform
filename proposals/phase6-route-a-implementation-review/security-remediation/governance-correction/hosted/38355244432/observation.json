@@ -1,0 +1,55 @@
+{
+  "runId": 38355244432,
+  "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+  "sourceRole": "REVIEWED_HEAD",
+  "attempt": 1,
+  "status": "COMPLETED",
+  "jobs": {
+    "contracts": "success",
+    "phase5-experiments": "success",
+    "phase5c-hard-gates": "success",
+    "phase6-target": "success",
+    "phase6-closure-audit": "failure"
+  },
+  "overallWorkflowConclusion": "failure",
+  "ordinaryEngineeringJobs": "PASS",
+  "overallCI": "NOT_GREEN_CLOSURE_GATE_FAILED",
+  "closureAudit": {
+    "status": "PERFORMED",
+    "recommendation": "PHASE6_CLOSURE_BLOCKED",
+    "exitCode": 2,
+    "blockerCount": 21,
+    "summary": "closure-summary.json",
+    "completeReport": "closure-report.json.gz",
+    "uncompressedReportDigest": "sha256:0795c3fa993d075d088dbfc4befd45eee39a3118f1824b25150981d1622c158c",
+    "compressedReportDigest": "sha256:6f7b8573dc89b44c96d6ebafd06c09b4a5f41f38b9c56b8d57040a704fec3f14",
+    "artifactEntry": "phase6-final-closure.json",
+    "archiveDigestVerified": "sha256:d70b5f1072aaac4930ea5b1150126b08bc835e61a2997d8ee52ccdb375e6f9d7",
+    "artifact": {
+      "id": 11794807943,
+      "name": "phase6-remediation-0.5.0-closure-audit",
+      "size_in_bytes": 62555218,
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11794807943",
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/11794807943/zip",
+      "expired": false,
+      "created_at": "2026-10-13T07:16:04Z",
+      "expires_at": "2027-01-11T06:10:27Z",
+      "updated_at": "2026-10-13T07:16:04Z",
+      "digest": "sha256:d70b5f1072aaac4930ea5b1150126b08bc835e61a2997d8ee52ccdb375e6f9d7",
+      "workflow_run": {
+        "id": 38355244432,
+        "repository_id": 1371285836,
+        "head_repository_id": 1371285836,
+        "head_branch": "codex/phase6-production-remediation",
+        "head_sha": "f5793fbab115ceb3ea814a73c38434dd2335be50"
+      }
+    }
+  },
+  "t08": {
+    "status": "SKIPPED_NOT_EXECUTED",
+    "logLine": "2026-10-13T06:11:30.3672687Z test_real_postgresql_storage_presence_required_and_rollback (test_canonical03_migrations.PostgreSQL03MigrationTests.test_real_postgresql_storage_presence_required_and_rollback) ... skipped 'requires explicit disposable PostgreSQL'"
+  },
+  "observedAt": "2026-10-13T07:41:18.363365+00:00",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

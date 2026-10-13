@@ -1,0 +1,88 @@
+{
+  "format": "acp-route-a-append-only-provenance-clarification/1",
+  "reviewedCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+  "affectedRecord": {
+    "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/human-review-decision.json",
+    "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+    "digest": "sha256:a0d00aaf908f1f49fd9c6a8fca7726315035f9e3c82a556b8899c0ffa26d657e",
+    "measurement": "EXACT_COMMITTED_BYTES"
+  },
+  "recordIntroducedAt": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+  "preservePriorBytesAndHashes": true,
+  "correctionKind": "ATTRIBUTION_ONLY_NOT_A_NEW_APPROVAL",
+  "incorrectFields": {
+    "recordKind": "DOCUMENTARY_USER_REVIEW_DISPOSITION",
+    "decisionSource": "Explicit human disposition in the current user message"
+  },
+  "correctInterpretation": "The bounded checkpoint acceptance was an independent assistant technical-review verdict. Its relay in a user message did not independently grant project-authority approval.",
+  "assistantError": "The prior assistant incorrectly promoted relayed technical-review wording to an explicit human disposition.",
+  "authorityClasses": {
+    "A": {
+      "kind": "EXPLICIT_USER_IMPLEMENTATION_ONLY_AUTHORIZATION_PREVIOUSLY_GRANTED",
+      "decision": {
+        "path": "proposals/phase6-route-a-implementation-review/human-decision.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:2b92f4db96bb61cda4aad450107c2aaa0b7d443dda3631bd5e960552047324fa",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      "instruction": {
+        "path": "proposals/phase6-route-a-implementation-review/human-instruction.txt",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:c70816820653858b6f0803ff07ede6f4d06057486d594b8fd9d544b688607ea1",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      "introducedAt": "a02986bc2cebf3ab0ee5d12c5d11fff2f86a4025",
+      "requestDigest": "sha256:44805966e05af1db2c4faa3b786361737495025b0eb9e30bfbafe35c701c2eab",
+      "scope": "IMPLEMENTATION_AND_ISOLATED_TESTING_ONLY",
+      "authentication": "DOCUMENTARY_NOT_CRYPTOGRAPHIC"
+    },
+    "B": {
+      "kind": "INDEPENDENT_ASSISTANT_TECHNICAL_REVIEW_VERDICT",
+      "implementation": "8d34eff20ee51c2117fb8b9f29d93d39ae109a70",
+      "implementationRun": 38344618535,
+      "verdict": "BOUNDED_LABORATORY_ENGINEERING_CHECKPOINT_ACCEPTED",
+      "reviewerAuthenticatedIdentity": "NOT_ESTABLISHED",
+      "humanAuthorityGranted": false,
+      "provenance": "Independent assistant technical review, distinguished by current governance-correction instruction; not a human approval."
+    },
+    "C": {
+      "kind": "FORMAL_PROJECT_AUTHORITY_OPERATIONAL_APPROVAL",
+      "status": "NOT_GRANTED"
+    },
+    "D": {
+      "kind": "GENUINE_CRYPTOGRAPHICALLY_AUTHENTICATED_ROUTE_A_PROJECT_AUTHORITY_APPROVALS",
+      "status": "NOT_ISSUED"
+    }
+  },
+  "derivativeReferencesRequiringClarification": [
+    {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/README.md",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:c621b700e5e96472bd4f7df8e943e8816c45c523a59cd23007ef1d996f98e6a8",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/next-authorization-request.json",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:ea33e62f2406ff3b974be886c25cb9e7c4a9d426a23d35d351ba24a9329b4c7c",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    },
+    {
+      "path": "docs/phase6-route-a-next-authorization-gate.md",
+      "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+      "digest": "sha256:546b924c7db2e42e44ef958c267410db5aac15113e7013dddc95c43b069cf77e",
+      "measurement": "EXACT_COMMITTED_BYTES"
+    }
+  ],
+  "readerRule": "Read the preserved record and derivative references with this clarification. Their human-acceptance attribution is incorrect and cannot establish a grant. No old digest, status or evidence is silently rewritten.",
+  "authorizationExpansion": false,
+  "cryptographicSignature": null,
+  "authorityGrant": null,
+  "operationalReceipt": null,
+  "journalEntry": null,
+  "fullOperationalImplementationGate": "REVIEW_REQUIRED",
+  "operationalImplementation": "NOT_AUTHORIZED",
+  "operationalSecurity": "NOT_ESTABLISHED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

@@ -1,0 +1,380 @@
+{
+  "format": "acp-route-a-a19-formal-review-request/1",
+  "decisionId": "T09",
+  "control": "A19-01",
+  "status": "PENDING_FORMAL_REVIEW_DISPOSITION",
+  "approvalRecorded": false,
+  "reviewedCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+  "implementationCommit": "8d34eff20ee51c2117fb8b9f29d93d39ae109a70",
+  "implementationRun": 38344618535,
+  "originalLimitedAuthorization": {
+    "path": "proposals/phase6-route-a-implementation-review/human-decision.json",
+    "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+    "digest": "sha256:2b92f4db96bb61cda4aad450107c2aaa0b7d443dda3631bd5e960552047324fa",
+    "measurement": "EXACT_COMMITTED_BYTES"
+  },
+  "originalInstruction": {
+    "path": "proposals/phase6-route-a-implementation-review/human-instruction.txt",
+    "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+    "digest": "sha256:c70816820653858b6f0803ff07ede6f4d06057486d594b8fd9d544b688607ea1",
+    "measurement": "EXACT_COMMITTED_BYTES"
+  },
+  "correctedProvenance": {
+    "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/provenance-clarification.json",
+    "digest": "sha256:6ad80eb494733e496dc005b385e463d381b15850ab98d200074fe537bef099c7",
+    "role": "NEW_UNCOMMITTED_REVIEW_ARTIFACT"
+  },
+  "t08Request": {
+    "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/t08-request.json",
+    "digest": "sha256:c1c8a08ea68a81de0cef468a5e0f65d56c1e1db67cbe68c36a8f63c2d80b520d",
+    "role": "NEW_UNCOMMITTED_REVIEW_ARTIFACT"
+  },
+  "reviewCriteria": {
+    "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/t09-review.md",
+    "digest": "sha256:4357878c6ad13f2dba61297ab26ca77915aeefcf3a6d0dd296c30ff7755b0738",
+    "role": "NEW_UNCOMMITTED_REVIEW_ARTIFACT"
+  },
+  "existingDeliverablesByAuthorizationSection19": {
+    "A": [
+      {
+        "path": "engineering/route_a_gateway/__init__.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:43c6d8b9a56bb6bf22b4c2eca6c70ff0b7ba5ecf3f9857a48a1e15b08ae22587",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/archive.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:5aa39ffd72fb076020ba2c48e7d2b7bec35221bdc04cf7c4361ac3f10522e710",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/evidence.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:7cba21ccf27437d7242211049a83f2e358c39236513798909e8b7b0c9c205300",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/freshness.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:a69d70413e1a15d57c15d608d1de94b9389c1b8296726dcbd522f0d28aef55fa",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/gateway.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:cc03fb00fe299d91eaf3846b759aebd3894928bd426316a8bc9efdc1535803e7",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/security.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:78948570588dba22c125e5001c698c30841a096dc0af462516367ef40da0719c",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/storage.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:df927be6b62b59147ecf9f04e20794c18db16b99711e28027776ca0a33aaa224",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "B": [
+      {
+        "path": "verification/route_a/test_gateway_contract.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:ad63760b267131856e1d438e03eb23afc6e16bb90e20614fe8a954a894eeeff4",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "verification/route_a/test_gateway_integration.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:b0dcd87aa3dadc96cd6a89bac33823ee575cd17d143421a9c4a14b1dde5e2089",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "verification/route_a/test_preservation.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:6a306296e08e229ea06634153c3389ed3dbe6c949469bf41e6aad4f4535efda7",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "verification/route_a/test_replay.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:86ea66afc5ff8a1f74ae5556b2261a9237951b43f1df6d6275ec0c880703e6d3",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "verification/route_a/test_security_remediation.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:e2c32823658d6a3d2f32a4aa288648b06506c590b087dd81fcd922ce42c71aa5",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "C": [
+      {
+        "path": "verification/route_a/lab_provider.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:81ea0b0e455199a6a2920e77f0cff9cf9474bbb735f6d6a37702e10d727d69fa",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "D": [
+      {
+        "path": "engineering/route_a_gateway/storage.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:df927be6b62b59147ecf9f04e20794c18db16b99711e28027776ca0a33aaa224",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "E": [
+      {
+        "path": "engineering/route_a_gateway/security.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:78948570588dba22c125e5001c698c30841a096dc0af462516367ef40da0719c",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/freshness.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:a69d70413e1a15d57c15d608d1de94b9389c1b8296726dcbd522f0d28aef55fa",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "F": [
+      {
+        "path": "engineering/route_a_gateway/evidence.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:7cba21ccf27437d7242211049a83f2e358c39236513798909e8b7b0c9c205300",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/gateway.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:cc03fb00fe299d91eaf3846b759aebd3894928bd426316a8bc9efdc1535803e7",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "G": [
+      {
+        "path": "verification/route_a/test_gateway_integration.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:b0dcd87aa3dadc96cd6a89bac33823ee575cd17d143421a9c4a14b1dde5e2089",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "verification/route_a/test_security_remediation.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:e2c32823658d6a3d2f32a4aa288648b06506c590b087dd81fcd922ce42c71aa5",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "engineering/route_a_gateway/archive.py",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:5aa39ffd72fb076020ba2c48e7d2b7bec35221bdc04cf7c4361ac3f10522e710",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "H": [
+      {
+        "path": "docs/phase6-route-a-security-threat-model.md",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:534696cd3d2f24e86b1d56e65f0af2dca8581e272afb2dc22dde8f0cb7c2f1a9",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "docs/phase6-route-a-recovery-matrix.md",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:3e9a1c2eef4d0df16f61ac10582d275c1b5a31f7bc0e566723db1db1438bdad4",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "docs/phase6-route-a-security-remediation.md",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:c4323a41ef6d188f8c74b7fe84a773b61a36544ecae7478205f220bbc4931c3c",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "I": [
+      {
+        "path": "engineering/route_a_gateway/requirements.txt",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:42b8adf26480e2d393c9ff801359a706b40bd85ff10bed67fc037f7d82679daa",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/evidence/dependencies.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:5fc8aa977ffad45b8d1d15bd2d86f14197ef50d9550af41586465059c0fbc426",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/evidence/licenses/cffi-LICENSE",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/evidence/licenses/cryptography-LICENSE",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/evidence/licenses/cryptography-LICENSE.APACHE",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/evidence/licenses/cryptography-LICENSE.BSD",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/evidence/licenses/pycparser-LICENSE",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:0a9e78156ae8b96caf1b4f11ac2df424b83de29736f9e757630548a6272fdf90",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "J": [
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/local-validation.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:70ba2078d703d9c35c4d705dc2b4957ce5e3633c8e2f393cdf6d6a386150d4c0",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/evidence/compiler-tests.log",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:6a8cb654590e5377d151aa95534b0bf201e12f57ceaf940746d342854b964a85",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/evidence/route-a-tests.log",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:0ce0cb37175bfff2e46c9fbe6df2a23cf2840ad333a8c28455d53e5e3e0d5812",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/hosted/38344618535/observation.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:17f300c245e42f68281778b5afbcb1ebfb3b2383c3d6f84b8a63d5824710c5a3",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/hosted/38344618535/control-matrix.hosted.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:43943f570bd3aa465286c0fd510eb633158c9f2525302c8c861ba6efc26ca0d8",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/hosted/38344618535/route-a-tests.log",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:c979f97e0a26a5864c7476cfa91cae6f15c053e9a45dacd96db64cf4d0725b7d",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/hosted/38344618535/contracts-job.log",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:1828fe67db7611d56515c71e2cb499a663f92b982c078c7f9756a9748f20a6c6",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/hosted/38349532713/observation.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:a9c8f302c3d43cb0f694e4e608988cf7963655e4c5b40fd78f07272424936458",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "K": [
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/changed-source-hashes.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:7566408d3aa0c8de21bbf563dbf9da6b5b2d3defd22b2769f1a9e77f9092b7ef",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/manifest.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:d6586ae96d1d2598248164134bd04a8c2b58e8b2ee5070f52dc0d161fd5a81bb",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "L": [
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/outstanding-controls.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:50db0755055cd0736201ad774da2256cf76efcc1feb672e792674055470214b2",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "docs/phase6-route-a-security-remediation.md",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:c4323a41ef6d188f8c74b7fe84a773b61a36544ecae7478205f220bbc4931c3c",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ],
+    "M": [
+      {
+        "path": "proposals/phase6-route-a-implementation-review/manifest.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:994193bb949cb08b9f0b9c11e17ecccd8d1575405e45b960d0432f3af10aa510",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/manifest.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:26b6580275b31a1cedb82d22277d586572493cf506ab1d1edf8313e6e9c7cdfc",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      },
+      {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/hosted/38344618535/manifest.json",
+        "sourceCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50",
+        "digest": "sha256:8ba7143ffc904cc4a3895ce4c048f0609ce56f0ab97c1dc4acd9e0f34ce7294e",
+        "measurement": "EXACT_COMMITTED_BYTES"
+      }
+    ]
+  },
+  "freshRunEvidence": [
+    {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/hosted/38349532713/observation.json",
+      "digest": "sha256:1dda7ec4e531243363f339a0125e07856a15f1cb100a7df133d589130daf7d20",
+      "role": "NEW_UNCOMMITTED_REVIEW_ARTIFACT"
+    },
+    {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/hosted/38355244432/observation.json",
+      "digest": "sha256:425d40e37503e3c23b6c0a4f63cfb37b911a59f4594fbca9086e37e5bdcfe1a5",
+      "role": "NEW_UNCOMMITTED_REVIEW_ARTIFACT"
+    }
+  ],
+  "t08Status": "PROPOSED_NOT_GRANTED_TEST_REMAINS_SKIPPED",
+  "requiredHumanInputs": [
+    "Actual independent human reviewer identity and review capacity",
+    "Exact evidence/request/manifest digests checked",
+    "A19-01-specific decision text with accepted scope, reservations and missing evidence",
+    "Explicit preservation of unresolved controls and closure blockers"
+  ],
+  "permittedReviewOutcomes": [
+    "REQUEST_CHANGES",
+    "DEFER",
+    "EXPLICIT_CONTROL_SPECIFIC_DISPOSITION_WITH_SCOPE_AND_RESERVATIONS"
+  ],
+  "automaticPass": false,
+  "operationalAuthorizationGranted": false,
+  "cryptographicApprovalIssued": false,
+  "constraints": [
+    "No assistant verdict substituted for project authority",
+    "No unexecuted T08 result invented",
+    "No waiver of A06-06 A09-08 A14-06 A17-16",
+    "No closure blocker waived",
+    "No registration/provisioning/real keys/approval/history/genesis/bindings/migration/deployment"
+  ],
+  "packageManifest": "manifest.json \u2014 human must verify its actual digest; not embedded here to avoid a self-reference cycle",
+  "fullOperationalImplementationGate": "REVIEW_REQUIRED",
+  "operationalSecurity": "NOT_ESTABLISHED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}
