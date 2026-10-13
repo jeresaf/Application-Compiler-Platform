@@ -1,0 +1,131 @@
+{
+  "format": "acp-route-a-t09-documentary-human-decision/1",
+  "recordKind": "APPEND_ONLY_DOCUMENTARY_HUMAN_DECISION",
+  "decisionId": "T09",
+  "control": "A19-01",
+  "status": "HUMAN_DECISION_RECORDED",
+  "disposition": "ACCEPT_DELIVERABLES_WITH_RESERVATIONS",
+  "scope": "LABORATORY_ENGINEERING_DELIVERABLES_ONLY",
+  "reviewedImplementationCommit": "8d34eff20ee51c2117fb8b9f29d93d39ae109a70",
+  "t09Request": {
+    "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/t09-request.json",
+    "digest": "sha256:9b6274388eb9412f29d9eca03e8386aaa72b54e8eba62891235db67d624f07db",
+    "reviewedCommit": "f5793fbab115ceb3ea814a73c38434dd2335be50"
+  },
+  "recordedAgainstBranchHead": "6bca893f9207a68173c64e969104d93173eb5fb5",
+  "decisionSource": "Explicit documentary human-review decision conveyed in the current ChatGPT user instruction, which authorizes documentation only.",
+  "reviewer": {
+    "assertedRole": "DESIGNATED_INDEPENDENT_HUMAN_REVIEWER",
+    "roleBasis": "SELF_ATTESTATION",
+    "identity": null,
+    "organization": null,
+    "selfAttestation": "Acting as the designated independent human reviewer.",
+    "identityIndependentlyAuthenticated": false,
+    "organizationalIndependenceIndependentlyAuthenticated": false,
+    "authenticationLimit": "The ChatGPT conversation does not independently authenticate reviewer identity or organizational independence."
+  },
+  "authentication": "DOCUMENTARY_SELF_ATTESTED_NOT_CRYPTOGRAPHICALLY_AUTHENTICATED",
+  "cryptographicSignature": null,
+  "authorityGrant": null,
+  "operationalReceipt": null,
+  "journalEntry": null,
+  "documentationAuthorized": true,
+  "authorizationExpansion": false,
+  "a19Disposition": {
+    "humanDecisionStatus": "HUMAN_DECISION_RECORDED",
+    "deliverables": "ACCEPTED_WITH_RESERVATIONS_LABORATORY_ONLY",
+    "unqualifiedOperationalPass": false,
+    "operationalGate": "REVIEW_REQUIRED",
+    "historicalPendingRecords": "PRESERVED_UNCHANGED; this separate record documents the subsequent bounded disposition."
+  },
+  "acknowledgedRemainingControls": {
+    "A06-06": "INCOMPLETE",
+    "A09-08": "BLOCKED",
+    "A14-06": "INCOMPLETE",
+    "A17-16": "INCOMPLETE"
+  },
+  "phase6Closure": {
+    "status": "PHASE6_CLOSURE_BLOCKED",
+    "blockerCount": 21,
+    "evidence": {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-finalization/hosted/38365033881/observation.json",
+      "sourceCommit": "6bca893f9207a68173c64e969104d93173eb5fb5",
+      "digest": "sha256:a59224c4f30e3f6df4a75f5c88b88fef0062cc9dd568e363c4adae9ed56fbd03"
+    },
+    "waiverGranted": false,
+    "fullHostedReleaseVerification": "MANDATORY"
+  },
+  "preservedAuthorityAndEvidence": {
+    "originalImplementationAuthorization": {
+      "path": "proposals/phase6-route-a-implementation-review/human-decision.json",
+      "sourceCommit": "6bca893f9207a68173c64e969104d93173eb5fb5",
+      "digest": "sha256:2b92f4db96bb61cda4aad450107c2aaa0b7d443dda3631bd5e960552047324fa"
+    },
+    "originalImplementationInstruction": {
+      "path": "proposals/phase6-route-a-implementation-review/human-instruction.txt",
+      "sourceCommit": "6bca893f9207a68173c64e969104d93173eb5fb5",
+      "digest": "sha256:c70816820653858b6f0803ff07ede6f4d06057486d594b8fd9d544b688607ea1"
+    },
+    "correctedProvenance": {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-correction/provenance-clarification.json",
+      "sourceCommit": "6bca893f9207a68173c64e969104d93173eb5fb5",
+      "digest": "sha256:6ad80eb494733e496dc005b385e463d381b15850ab98d200074fe537bef099c7"
+    },
+    "technicalReviewAndBoundaries": {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-finalization/scope-and-state.json",
+      "sourceCommit": "6bca893f9207a68173c64e969104d93173eb5fb5",
+      "digest": "sha256:3d8c6f2347b5c795b0a679ebbbef3f479bc4b7ef27232f82b5045a29ca3aa4f4"
+    },
+    "reviewedSourceHashes": {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/changed-source-hashes.json",
+      "sourceCommit": "6bca893f9207a68173c64e969104d93173eb5fb5",
+      "digest": "sha256:7566408d3aa0c8de21bbf563dbf9da6b5b2d3defd22b2769f1a9e77f9092b7ef"
+    },
+    "existingControlRegister": {
+      "path": "proposals/phase6-route-a-implementation-review/security-remediation/independent-disposition/outstanding-controls.json",
+      "sourceCommit": "6bca893f9207a68173c64e969104d93173eb5fb5",
+      "digest": "sha256:50db0755055cd0736201ad774da2256cf76efcc1feb672e792674055470214b2"
+    },
+    "modificationOfExistingRecords": false
+  },
+  "t08": {
+    "authorizationGrantedByThisDecision": false,
+    "testInvokedByThisTask": false,
+    "priorExecutionEvidenceFinding": {
+      "findingSource": "ASSISTANT_LOCAL_INSPECTION_OF_RETAINED_HOSTED_ARTIFACT; not an additional human attestation or decision",
+      "runId": 38365033881,
+      "sourceCommit": "5860f20455f130b13ce32e9c955564febf68c223",
+      "completeReport": {
+        "path": "proposals/phase6-route-a-implementation-review/security-remediation/governance-finalization/hosted/38365033881/closure-report.json.gz",
+        "sourceCommit": "6bca893f9207a68173c64e969104d93173eb5fb5",
+        "digest": "sha256:ad11475964d6eb5143241c14b56634e22af01ee99375f39c228307ba8f21467b"
+      },
+      "artifactArchiveDigest": "sha256:ab3b94bfbe1794a65c84e237a81ea57855b2301352c941db535f1524317ead27",
+      "entry": "remediation-regressions.log",
+      "entryDigest": "sha256:b4cc82bcc0ba23e9ded5d2c72100018cabaef0299ad4310406d4a8796b120523",
+      "observation": "The closure-audit log reports test_real_postgresql_storage_presence_required_and_rollback ... ok, despite the contracts-job skip.",
+      "commandExitCode": 0,
+      "implication": "Prior global NOT_EXECUTED statements were incorrect. Execution provenance and authorization under the standalone T08 request require separate reconciliation; no retroactive authorization or control PASS is inferred."
+    }
+  },
+  "prohibitedActions": [
+    "Operational authority registration",
+    "Operational infrastructure provisioning",
+    "Real project-authority signing keys or cryptographic approval issuance",
+    "PAYMENT or CASE MANAGEMENT genesis",
+    "Operational accepted-history initialization",
+    "Accepted semantic transitions",
+    "Independent data-binding approvals",
+    "Migration SQL",
+    "Application deployment",
+    "P1-P5 operational implementation"
+  ],
+  "operationalImplementation": "NOT_AUTHORIZED",
+  "operationalSecurity": "NOT_ESTABLISHED",
+  "fullOperationalImplementationGate": "REVIEW_REQUIRED",
+  "publication": "HOLD_IN_WORKING_BRANCH_FOR_NEXT_APPROPRIATELY_AUTHORIZED_SUBSTANTIVE_ENGINEERING_CHECKPOINT",
+  "evidenceOnlyPushChain": "DO_NOT_CREATE_FOR_THIS_DECISION",
+  "ciWorkflowBehavior": "UNCHANGED; optimization is a separate proposal, not authorized implementation.",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}
