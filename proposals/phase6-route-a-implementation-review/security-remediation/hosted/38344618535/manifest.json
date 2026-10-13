@@ -1,0 +1,18 @@
+{
+  "sourceCommit": "8d34eff20ee51c2117fb8b9f29d93d39ae109a70",
+  "runId": 38344618535,
+  "frozenLocalManifestDigest": "sha256:26b6580275b31a1cedb82d22277d586572493cf506ab1d1edf8313e6e9c7cdfc",
+  "files": {
+    "ci-artifacts.json": "sha256:a5d58df3ab3597572b969876517c2f3da54fcf92ad37b190c3da2973f9389cbe",
+    "ci-jobs.json": "sha256:c0d2dcabcb13c616a33314e3c46d03fa41f449fc8e50be812bec367beeddf52a",
+    "ci-run.json": "sha256:6b897cf0576865645c41b5b740c2a2ecd519eae2015a6dfd6fa19789cb9da5cd",
+    "closure-job.log": "sha256:9d3feeb05883ee44d036a7187a62206c95c5389fd1b96ba5fbd022cf4e4173e6",
+    "closure-summary.json": "sha256:9a9b7ab00cb2c0ecf2bba5149140812dd3be637b645aace1aa28b9eda8547bac",
+    "contracts-job.log": "sha256:1828fe67db7611d56515c71e2cb499a663f92b982c078c7f9756a9748f20a6c6",
+    "control-matrix.hosted.json": "sha256:43943f570bd3aa465286c0fd510eb633158c9f2525302c8c861ba6efc26ca0d8",
+    "observation.json": "sha256:17f300c245e42f68281778b5afbcb1ebfb3b2383c3d6f84b8a63d5824710c5a3",
+    "review-disposition.json": "sha256:b42b0ca708d699644710d40137b300452c7e3d07e45196c5c1b1c0a8905af7ba",
+    "review-summary.md": "sha256:5789c269e803ac7a8c3da9652a5b7666aad7435286ec5be6e39296492d751551",
+    "route-a-tests.log": "sha256:c979f97e0a26a5864c7476cfa91cae6f15c053e9a45dacd96db64cf4d0725b7d"
+  }
+}

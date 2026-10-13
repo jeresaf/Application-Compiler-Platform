@@ -1,0 +1,57 @@
+{
+  "sourceCommit": "8d34eff20ee51c2117fb8b9f29d93d39ae109a70",
+  "review": "STOP_FOR_INDEPENDENT_SECURITY_REVIEW",
+  "coverageCounts": {
+    "PASS": 131,
+    "BLOCKED": 1,
+    "INCOMPLETE": 4
+  },
+  "ordinaryEngineeringJobs": "PASS",
+  "closure": "PHASE6_CLOSURE_BLOCKED",
+  "closureBlockerCount": 21,
+  "fullOperationalSecurity": "NOT_ESTABLISHED",
+  "fullImplementationGate": "REVIEW_REQUIRED",
+  "remainingControlDecisions": [
+    {
+      "id": "A06-06",
+      "control": "Operational algorithm/issuer/root/custody configurability",
+      "status": "INCOMPLETE",
+      "limitation": "INCOMPLETE: laboratory-only Host enables Ed25519; production provider selection, custody and online configuration/key rotation are not established or authorized."
+    },
+    {
+      "id": "A09-08",
+      "control": "Privileged same-UID/root and cross-host confinement",
+      "status": "BLOCKED",
+      "limitation": "BLOCKED: no operational confinement/cross-host deployment is authorized. Replaced inode is detected at boundaries; a privileged writer can bypass cooperative fencing."
+    },
+    {
+      "id": "A14-06",
+      "control": "Portable multi-version authority-policy history and large-history backup",
+      "status": "INCOMPLETE",
+      "limitation": "INCOMPLETE: one immutable registered configuration is exported. Fresh dynamic revocation evidence is independently retained and must be fetched again; online multi-version rotation and streaming backups are unsupported."
+    },
+    {
+      "id": "A17-16",
+      "control": "N: complete existing compiler/regression suite",
+      "status": "INCOMPLETE",
+      "limitation": "INCOMPLETE: one existing opt-in disposable PostgreSQL test is explicitly skipped, never silently counted as passed; complete measured suite results are retained separately."
+    },
+    {
+      "id": "A19-01",
+      "control": "Required source/test/provider/ledger/crypto/witness/recovery/review/dependency/hash deliverables",
+      "status": "INCOMPLETE",
+      "limitation": "Artifact/hash inspection and independent review required; documents are not executable security evidence."
+    }
+  ],
+  "request": "Review exact engineering source and evidence; no operational construction or genesis authorization requested.",
+  "existingApprovals": "PRESERVED",
+  "sealed050": "UNCHANGED",
+  "authorityRegistration": "NOT_AUTHORIZED",
+  "genesis": "NOT_AUTHORIZED",
+  "acceptedSemanticTransitions": "NOT_AUTHORIZED",
+  "dataBindings": "NOT_APPROVED",
+  "migrationSQL": "NOT_AUTHORIZED",
+  "deployment": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

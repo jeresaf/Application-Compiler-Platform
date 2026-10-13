@@ -1,0 +1,797 @@
+﻿2026-10-13T04:41:11.1574010Z Current runner version: '2.337.0'
+2026-10-13T04:41:11.1595602Z ##[group]Runner Image Provisioner
+2026-10-13T04:41:11.1596325Z Hosted Compute Agent
+2026-10-13T04:41:11.1596875Z Version: 20261002.596
+2026-10-13T04:41:11.1597429Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-13T04:41:11.1598004Z Build Date: 2026-10-02T22:28:27Z
+2026-10-13T04:41:11.1598646Z Worker ID: {50ba68eb-20cf-4115-afeb-2155806a55cb}
+2026-10-13T04:41:11.1599223Z Region: eastus
+2026-10-13T04:41:11.1599962Z Cloud: Azure
+2026-10-13T04:41:11.1600625Z ##[endgroup]
+2026-10-13T04:41:11.1602017Z ##[group]Operating System
+2026-10-13T04:41:11.1602552Z Ubuntu
+2026-10-13T04:41:11.1602986Z 24.04.5
+2026-10-13T04:41:11.1603452Z LTS
+2026-10-13T04:41:11.1603905Z ##[endgroup]
+2026-10-13T04:41:11.1604361Z ##[group]Runner Image
+2026-10-13T04:41:11.1604947Z Image: ubuntu-24.04
+2026-10-13T04:41:11.1605415Z Version: 20261004.327.1
+2026-10-13T04:41:11.1606508Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-13T04:41:11.1607729Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-13T04:41:11.1608609Z ##[endgroup]
+2026-10-13T04:41:11.1609595Z ##[group]GITHUB_TOKEN Permissions
+2026-10-13T04:41:11.1611500Z Contents: read
+2026-10-13T04:41:11.1612042Z Metadata: read
+2026-10-13T04:41:11.1612594Z ##[endgroup]
+2026-10-13T04:41:11.1614582Z Secret source: Actions
+2026-10-13T04:41:11.1615429Z Cache mode: write
+2026-10-13T04:41:11.1616215Z Prepare workflow directory
+2026-10-13T04:41:11.1954379Z Prepare all required actions
+2026-10-13T04:41:11.1993720Z Getting action download info
+2026-10-13T04:41:11.3850439Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+2026-10-13T04:41:11.5258327Z Download action repository 'actions/setup-python@v7.0.0' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+2026-10-13T04:41:11.6401245Z Download action repository 'actions/setup-node@v7' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-10-13T04:41:11.8953281Z Download action repository 'actions/setup-java@v5' (SHA:b6effb05e454b25005698d916606bdc6ffcbf961)
+2026-10-13T04:41:12.3248822Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-13T04:41:12.7137040Z Complete job name: phase6-closure-audit
+2026-10-13T04:41:12.7604993Z ##[group]Checking docker version
+2026-10-13T04:41:12.7615731Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-10-13T04:41:13.0270567Z '1.48'
+2026-10-13T04:41:13.0283623Z Docker daemon API version: '1.48'
+2026-10-13T04:41:13.0284070Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-10-13T04:41:13.0426164Z '1.48'
+2026-10-13T04:41:13.0438639Z Docker client API version: '1.48'
+2026-10-13T04:41:13.0443488Z ##[endgroup]
+2026-10-13T04:41:13.0445298Z ##[group]Clean up resources from previous jobs
+2026-10-13T04:41:13.0450159Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=4c2387"
+2026-10-13T04:41:13.0572152Z ##[command]/usr/bin/docker network prune --force --filter "label=4c2387"
+2026-10-13T04:41:13.0682515Z ##[endgroup]
+2026-10-13T04:41:13.0682957Z ##[group]Create local container network
+2026-10-13T04:41:13.0690637Z ##[command]/usr/bin/docker network create --label 4c2387 github_network_bd94e9e66c5f4bef970011eb8f2f4c58
+2026-10-13T04:41:13.2278828Z b85af9bd350ca99398b0a9a1cbc5065d282796e85275da9c895f065f642889e4
+2026-10-13T04:41:13.2295405Z ##[endgroup]
+2026-10-13T04:41:13.2316382Z ##[group]Starting postgres service container
+2026-10-13T04:41:13.2337650Z ##[command]/usr/bin/docker pull postgres:18.6
+2026-10-13T04:41:13.6729528Z 18.6: Pulling from library/postgres
+2026-10-13T04:41:13.7468650Z ecc510c1e359: Pulling fs layer
+2026-10-13T04:41:13.7469611Z 4a3cafbebf6d: Pulling fs layer
+2026-10-13T04:41:13.7470201Z 28ced28a309b: Pulling fs layer
+2026-10-13T04:41:13.7470756Z ab69e2551985: Pulling fs layer
+2026-10-13T04:41:13.7471184Z 1f04dfa92b9f: Pulling fs layer
+2026-10-13T04:41:13.7471942Z 5a487c9461a5: Pulling fs layer
+2026-10-13T04:41:13.7472447Z e0d4a6e58470: Pulling fs layer
+2026-10-13T04:41:13.7472877Z 496ce2ef5b2f: Pulling fs layer
+2026-10-13T04:41:13.7473238Z c8145e79cc2b: Pulling fs layer
+2026-10-13T04:41:13.7473587Z 06ea90d3bcc9: Pulling fs layer
+2026-10-13T04:41:13.7473905Z dc25540d793f: Pulling fs layer
+2026-10-13T04:41:13.7474233Z 7967f593457f: Pulling fs layer
+2026-10-13T04:41:13.7474548Z d23c975c4693: Pulling fs layer
+2026-10-13T04:41:13.7474853Z ab69e2551985: Waiting
+2026-10-13T04:41:13.7475182Z 1f04dfa92b9f: Waiting
+2026-10-13T04:41:13.7475481Z 5a487c9461a5: Waiting
+2026-10-13T04:41:13.7475765Z e0d4a6e58470: Waiting
+2026-10-13T04:41:13.7476047Z 496ce2ef5b2f: Waiting
+2026-10-13T04:41:13.7476324Z c8145e79cc2b: Waiting
+2026-10-13T04:41:13.7476609Z 7967f593457f: Waiting
+2026-10-13T04:41:13.7476894Z 06ea90d3bcc9: Waiting
+2026-10-13T04:41:13.7477178Z d23c975c4693: Waiting
+2026-10-13T04:41:13.7477460Z dc25540d793f: Waiting
+2026-10-13T04:41:13.7990543Z 4a3cafbebf6d: Verifying Checksum
+2026-10-13T04:41:13.7992118Z 4a3cafbebf6d: Download complete
+2026-10-13T04:41:13.8233278Z 28ced28a309b: Verifying Checksum
+2026-10-13T04:41:13.8233913Z 28ced28a309b: Download complete
+2026-10-13T04:41:13.8376841Z ab69e2551985: Verifying Checksum
+2026-10-13T04:41:13.8377881Z ab69e2551985: Download complete
+2026-10-13T04:41:13.8857361Z 5a487c9461a5: Verifying Checksum
+2026-10-13T04:41:13.8858744Z 5a487c9461a5: Download complete
+2026-10-13T04:41:13.8863808Z 1f04dfa92b9f: Verifying Checksum
+2026-10-13T04:41:13.8865071Z 1f04dfa92b9f: Download complete
+2026-10-13T04:41:13.8944288Z ecc510c1e359: Verifying Checksum
+2026-10-13T04:41:13.8945789Z ecc510c1e359: Download complete
+2026-10-13T04:41:13.9392552Z e0d4a6e58470: Verifying Checksum
+2026-10-13T04:41:13.9393134Z e0d4a6e58470: Download complete
+2026-10-13T04:41:13.9393596Z 496ce2ef5b2f: Download complete
+2026-10-13T04:41:13.9625126Z 06ea90d3bcc9: Verifying Checksum
+2026-10-13T04:41:13.9625723Z 06ea90d3bcc9: Download complete
+2026-10-13T04:41:13.9666200Z dc25540d793f: Verifying Checksum
+2026-10-13T04:41:13.9667642Z dc25540d793f: Download complete
+2026-10-13T04:41:13.9890627Z 7967f593457f: Verifying Checksum
+2026-10-13T04:41:13.9891281Z 7967f593457f: Download complete
+2026-10-13T04:41:13.9981128Z d23c975c4693: Verifying Checksum
+2026-10-13T04:41:13.9981773Z d23c975c4693: Download complete
+2026-10-13T04:41:14.5194235Z c8145e79cc2b: Verifying Checksum
+2026-10-13T04:41:14.5194622Z c8145e79cc2b: Download complete
+2026-10-13T04:41:14.8653742Z ecc510c1e359: Pull complete
+2026-10-13T04:41:16.0953708Z 4a3cafbebf6d: Pull complete
+2026-10-13T04:41:16.3249044Z 28ced28a309b: Pull complete
+2026-10-13T04:41:16.4234910Z ab69e2551985: Pull complete
+2026-10-13T04:41:16.8713713Z 1f04dfa92b9f: Pull complete
+2026-10-13T04:41:17.0525892Z 5a487c9461a5: Pull complete
+2026-10-13T04:41:17.0583009Z e0d4a6e58470: Pull complete
+2026-10-13T04:41:17.0658181Z 496ce2ef5b2f: Pull complete
+2026-10-13T04:41:21.3143281Z c8145e79cc2b: Pull complete
+2026-10-13T04:41:21.3302342Z 06ea90d3bcc9: Pull complete
+2026-10-13T04:41:21.3448555Z dc25540d793f: Pull complete
+2026-10-13T04:41:21.3525405Z 7967f593457f: Pull complete
+2026-10-13T04:41:21.3588865Z d23c975c4693: Pull complete
+2026-10-13T04:41:21.3621808Z Digest: sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+2026-10-13T04:41:21.3634938Z Status: Downloaded newer image for postgres:18.6
+2026-10-13T04:41:21.3648556Z docker.io/library/postgres:18.6
+2026-10-13T04:41:21.3703664Z ##[command]/usr/bin/docker create --name 032eadf43c42450d808b5ec2fba7c9b4_postgres186_7493b7 --label 4c2387 --network github_network_bd94e9e66c5f4bef970011eb8f2f4c58 --network-alias postgres -p 5432:5432 --health-cmd "pg_isready -U acp_test -d acp_test" --health-interval 5s --health-timeout 5s --health-retries 12 -e "POSTGRES_DB=acp_test" -e "POSTGRES_USER=acp_test" -e "POSTGRES_PASSWORD=ephemeral-test-only" -e GITHUB_ACTIONS=true -e CI=true postgres:18.6
+2026-10-13T04:41:21.3919808Z 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:41:21.3940245Z ##[command]/usr/bin/docker start 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:41:21.7232466Z 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:41:21.7257411Z ##[command]/usr/bin/docker ps --all --filter id=1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-10-13T04:41:21.7376523Z 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61 Up Less than a second (health: starting)
+2026-10-13T04:41:21.7394443Z ##[command]/usr/bin/docker port 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:41:21.8357641Z 5432/tcp -> 0.0.0.0:5432
+2026-10-13T04:41:21.8358166Z 5432/tcp -> [::]:5432
+2026-10-13T04:41:21.8399822Z ##[endgroup]
+2026-10-13T04:41:21.8407142Z ##[group]Waiting for all services to be ready
+2026-10-13T04:41:21.8418589Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:41:21.8556309Z starting
+2026-10-13T04:41:21.8578325Z postgres service is starting, waiting 2 seconds before checking again.
+2026-10-13T04:41:23.8579669Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:41:23.8684213Z starting
+2026-10-13T04:41:23.8695859Z postgres service is starting, waiting 3 seconds before checking again.
+2026-10-13T04:41:27.4839676Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:41:27.4953976Z healthy
+2026-10-13T04:41:27.4958964Z postgres service is healthy.
+2026-10-13T04:41:27.4959772Z ##[endgroup]
+2026-10-13T04:41:27.5185980Z ##[group]Run actions/checkout@v6
+2026-10-13T04:41:27.5186372Z with:
+2026-10-13T04:41:27.5186545Z   fetch-depth: 0
+2026-10-13T04:41:27.5186786Z   repository: jeresaf/Application-Compiler-Platform
+2026-10-13T04:41:27.5188962Z   token: ***
+2026-10-13T04:41:27.5189138Z   ssh-strict: true
+2026-10-13T04:41:27.5189305Z   ssh-user: git
+2026-10-13T04:41:27.5189671Z   persist-credentials: true
+2026-10-13T04:41:27.5189864Z   clean: true
+2026-10-13T04:41:27.5190043Z   sparse-checkout-cone-mode: true
+2026-10-13T04:41:27.5190274Z   fetch-tags: false
+2026-10-13T04:41:27.5190446Z   show-progress: true
+2026-10-13T04:41:27.5190621Z   lfs: false
+2026-10-13T04:41:27.5190784Z   submodules: false
+2026-10-13T04:41:27.5190958Z   set-safe-directory: true
+2026-10-13T04:41:27.5191161Z   allow-unsafe-pr-checkout: false
+2026-10-13T04:41:27.5191538Z env:
+2026-10-13T04:41:27.5191782Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:41:27.5192124Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:41:27.5192361Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:41:27.5192600Z ##[endgroup]
+2026-10-13T04:41:27.6027649Z Syncing repository: jeresaf/Application-Compiler-Platform
+2026-10-13T04:41:27.6028769Z ##[group]Getting Git version info
+2026-10-13T04:41:27.6029204Z Working directory is '/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform'
+2026-10-13T04:41:27.6030030Z [command]/usr/bin/git version
+2026-10-13T04:41:27.6978177Z git version 2.55.0
+2026-10-13T04:41:27.6996049Z ##[endgroup]
+2026-10-13T04:41:27.7008489Z Temporarily overriding HOME='/home/runner/work/_temp/33c2c544-6666-4b7c-bf4d-e12cb881dbff' before making global git config changes
+2026-10-13T04:41:27.7009603Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-13T04:41:27.7013056Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform
+2026-10-13T04:41:27.8457280Z Deleting the contents of '/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform'
+2026-10-13T04:41:27.8461627Z ##[group]Determining repository object format
+2026-10-13T04:41:27.8463320Z ##[endgroup]
+2026-10-13T04:41:27.8463755Z ##[group]Initializing the repository
+2026-10-13T04:41:27.8467696Z [command]/usr/bin/git init /home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform
+2026-10-13T04:41:27.9110264Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-13T04:41:27.9110984Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-13T04:41:27.9113047Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-13T04:41:27.9113688Z hint: call:
+2026-10-13T04:41:27.9113925Z hint:
+2026-10-13T04:41:27.9114274Z hint: 	git config --global init.defaultBranch <name>
+2026-10-13T04:41:27.9114651Z hint:
+2026-10-13T04:41:27.9115057Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-13T04:41:27.9115655Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-13T04:41:27.9116127Z hint:
+2026-10-13T04:41:27.9116365Z hint: 	git branch -m <name>
+2026-10-13T04:41:27.9116634Z hint:
+2026-10-13T04:41:27.9117023Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-13T04:41:27.9117895Z Initialized empty Git repository in /home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git/
+2026-10-13T04:41:27.9124178Z [command]/usr/bin/git remote add origin https://github.com/jeresaf/Application-Compiler-Platform
+2026-10-13T04:41:27.9176268Z ##[endgroup]
+2026-10-13T04:41:27.9176751Z ##[group]Disabling automatic garbage collection
+2026-10-13T04:41:27.9180872Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-13T04:41:27.9213434Z ##[endgroup]
+2026-10-13T04:41:27.9213856Z ##[group]Setting up auth
+2026-10-13T04:41:27.9215348Z Removing SSH command configuration
+2026-10-13T04:41:27.9220732Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T04:41:27.9249777Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-13T04:41:28.1425939Z Removing HTTP extra header
+2026-10-13T04:41:28.1432633Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T04:41:28.1470820Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-13T04:41:28.1668711Z Removing includeIf entries pointing to credentials config files
+2026-10-13T04:41:28.1674727Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T04:41:28.1709186Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-13T04:41:28.1927580Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-13T04:41:28.1966907Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git.path /home/runner/work/_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:41:28.1996919Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:41:28.2029710Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:41:28.2059259Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:41:28.2092367Z ##[endgroup]
+2026-10-13T04:41:28.2092684Z ##[group]Fetching the repository
+2026-10-13T04:41:28.2098935Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+2026-10-13T04:41:28.9256817Z From https://github.com/jeresaf/Application-Compiler-Platform
+2026-10-13T04:41:28.9257324Z  * [new branch]      codex/linux-environment-baseline -> origin/codex/linux-environment-baseline
+2026-10-13T04:41:28.9257806Z  * [new branch]      codex/phase4-compiler-core -> origin/codex/phase4-compiler-core
+2026-10-13T04:41:28.9258371Z  * [new branch]      codex/phase5-technology-evaluation -> origin/codex/phase5-technology-evaluation
+2026-10-13T04:41:28.9259025Z  * [new branch]      codex/phase5b-evidence-closure -> origin/codex/phase5b-evidence-closure
+2026-10-13T04:41:28.9259843Z  * [new branch]      codex/phase5c-final-selection -> origin/codex/phase5c-final-selection
+2026-10-13T04:41:28.9260532Z  * [new branch]      codex/phase6-delivery-jobs -> origin/codex/phase6-delivery-jobs
+2026-10-13T04:41:28.9261114Z  * [new branch]      codex/phase6-invocation-core -> origin/codex/phase6-invocation-core
+2026-10-13T04:41:28.9261555Z  * [new branch]      codex/phase6-privacy-lifecycle -> origin/codex/phase6-privacy-lifecycle
+2026-10-13T04:41:28.9262058Z  * [new branch]      codex/phase6-production-remediation -> origin/codex/phase6-production-remediation
+2026-10-13T04:41:28.9262549Z  * [new branch]      codex/phase6-task-interface -> origin/codex/phase6-task-interface
+2026-10-13T04:41:28.9262889Z  * [new branch]      main       -> origin/main
+2026-10-13T04:41:28.9268007Z [command]/usr/bin/git branch --list --remote origin/codex/phase6-production-remediation
+2026-10-13T04:41:28.9295605Z   origin/codex/phase6-production-remediation
+2026-10-13T04:41:28.9309111Z [command]/usr/bin/git rev-parse refs/remotes/origin/codex/phase6-production-remediation
+2026-10-13T04:41:28.9327672Z 8d34eff20ee51c2117fb8b9f29d93d39ae109a70
+2026-10-13T04:41:28.9330864Z ##[endgroup]
+2026-10-13T04:41:28.9331258Z ##[group]Determining the checkout info
+2026-10-13T04:41:28.9332048Z ##[endgroup]
+2026-10-13T04:41:28.9335830Z [command]/usr/bin/git sparse-checkout disable
+2026-10-13T04:41:28.9383068Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-13T04:41:28.9409565Z ##[group]Checking out the ref
+2026-10-13T04:41:28.9412987Z [command]/usr/bin/git checkout --progress --force -B codex/phase6-production-remediation refs/remotes/origin/codex/phase6-production-remediation
+2026-10-13T04:41:29.0450944Z Switched to a new branch 'codex/phase6-production-remediation'
+2026-10-13T04:41:29.0454863Z branch 'codex/phase6-production-remediation' set up to track 'origin/codex/phase6-production-remediation'.
+2026-10-13T04:41:29.0468085Z ##[endgroup]
+2026-10-13T04:41:29.0510330Z [command]/usr/bin/git log -1 --format=%H
+2026-10-13T04:41:29.0534537Z 8d34eff20ee51c2117fb8b9f29d93d39ae109a70
+2026-10-13T04:41:29.0736868Z ##[group]Run actions/setup-python@v7.0.0
+2026-10-13T04:41:29.0737104Z with:
+2026-10-13T04:41:29.0737273Z   python-version: 3.14.7
+2026-10-13T04:41:29.0737463Z   check-latest: false
+2026-10-13T04:41:29.0739716Z   token: ***
+2026-10-13T04:41:29.0739906Z   update-environment: true
+2026-10-13T04:41:29.0740105Z   allow-prereleases: false
+2026-10-13T04:41:29.0740288Z   freethreaded: false
+2026-10-13T04:41:29.0740460Z env:
+2026-10-13T04:41:29.0740691Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:41:29.0740989Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:41:29.0741219Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:41:29.0741459Z ##[endgroup]
+2026-10-13T04:41:29.1638355Z ##[group]Installed versions
+2026-10-13T04:41:29.1652928Z Version 3.14.7 was not found in the local cache
+2026-10-13T04:41:29.7091842Z Version 3.14.7 is available for downloading
+2026-10-13T04:41:29.7093071Z Download from "https://github.com/actions/python-versions/releases/download/3.14.7-31064857500/python-3.14.7-linux-24.04-x64.tar.gz"
+2026-10-13T04:41:30.2073144Z Extract downloaded archive
+2026-10-13T04:41:30.2175732Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/92501988-4e77-47af-9079-436d58d6c54b -f /home/runner/work/_temp/9a666bc1-837b-4182-b73d-a97d59fa6e65
+2026-10-13T04:41:32.1278729Z Execute installation script
+2026-10-13T04:41:32.1364384Z Check if Python hostedtoolcache folder exist...
+2026-10-13T04:41:32.1364777Z Create Python 3.14.7 folder
+2026-10-13T04:41:32.1376088Z Copy Python binaries to hostedtoolcache folder
+2026-10-13T04:41:32.5274188Z Create additional symlinks (Required for the UsePythonVersion Azure Pipelines task and the setup-python GitHub Action)
+2026-10-13T04:41:32.5307649Z Upgrading pip...
+2026-10-13T04:41:34.1647995Z Collecting pip
+2026-10-13T04:41:34.2193875Z Downloading pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)
+2026-10-13T04:41:34.2337054Z Downloading pip-26.2.1-py3-none-any.whl (1.8 MB)
+2026-10-13T04:41:34.3600899Z ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 16.6 MB/s  0:00:00
+2026-10-13T04:41:34.3601398Z 
+2026-10-13T04:41:34.4467629Z Installing collected packages: pip
+2026-10-13T04:41:34.4468241Z Attempting uninstall: pip
+2026-10-13T04:41:34.4495177Z Found existing installation: pip 26.2.1
+2026-10-13T04:41:34.4734278Z Uninstalling pip-26.2.1:
+2026-10-13T04:41:34.4780070Z Successfully uninstalled pip-26.2.1
+2026-10-13T04:41:35.4076665Z Successfully installed pip-26.2.1
+2026-10-13T04:41:35.4707791Z Create complete file
+2026-10-13T04:41:35.4737177Z Successfully set up CPython (3.14.7)
+2026-10-13T04:41:35.4738381Z ##[endgroup]
+2026-10-13T04:41:35.4881794Z ##[group]Run actions/setup-node@v7
+2026-10-13T04:41:35.4882011Z with:
+2026-10-13T04:41:35.4882183Z   node-version: 24.21.0
+2026-10-13T04:41:35.4882385Z   package-manager-cache: false
+2026-10-13T04:41:35.4882580Z   check-latest: false
+2026-10-13T04:41:35.4884601Z   token: ***
+2026-10-13T04:41:35.4884762Z env:
+2026-10-13T04:41:35.4884993Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:41:35.4885306Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:41:35.4885545Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:41:35.4885829Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:35.4886163Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+2026-10-13T04:41:35.4886484Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:35.4886769Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:35.4887075Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:35.4887358Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+2026-10-13T04:41:35.4887607Z ##[endgroup]
+2026-10-13T04:41:35.5847938Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+2026-10-13T04:41:35.6660530Z ##[group]Environment details
+2026-10-13T04:41:35.9608956Z node: v24.21.0
+2026-10-13T04:41:35.9609300Z npm: 11.19.0
+2026-10-13T04:41:35.9610061Z yarn: 1.22.22
+2026-10-13T04:41:35.9610620Z ##[endgroup]
+2026-10-13T04:41:35.9743225Z ##[group]Run actions/setup-java@v5
+2026-10-13T04:41:35.9743460Z with:
+2026-10-13T04:41:35.9743626Z   distribution: temurin
+2026-10-13T04:41:35.9743806Z   java-version: 21
+2026-10-13T04:41:35.9743973Z   java-package: jdk
+2026-10-13T04:41:35.9744146Z   check-latest: false
+2026-10-13T04:41:35.9744319Z   set-default: true
+2026-10-13T04:41:35.9744490Z   verify-signature: false
+2026-10-13T04:41:35.9744676Z   server-id: github
+2026-10-13T04:41:35.9744851Z   server-username: GITHUB_ACTOR
+2026-10-13T04:41:35.9745072Z   server-password: GITHUB_TOKEN
+2026-10-13T04:41:35.9745274Z   overwrite-settings: true
+2026-10-13T04:41:35.9745465Z   job-status: success
+2026-10-13T04:41:35.9747480Z   token: ***
+2026-10-13T04:41:35.9747659Z   show-download-progress: false
+2026-10-13T04:41:35.9747860Z env:
+2026-10-13T04:41:35.9748094Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:41:35.9748387Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:41:35.9748825Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:41:35.9749120Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:35.9749657Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+2026-10-13T04:41:35.9749985Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:35.9750271Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:35.9750555Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:35.9750846Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+2026-10-13T04:41:35.9751098Z ##[endgroup]
+2026-10-13T04:41:36.0941126Z ##[group]Installed distributions
+2026-10-13T04:41:36.1472781Z Resolved Java 21.0.12+1 from tool-cache
+2026-10-13T04:41:36.1473137Z Setting Java 21.0.12+1 as the default
+2026-10-13T04:41:36.1476957Z Creating toolchains.xml for JDK version 21 from temurin
+2026-10-13T04:41:36.1531871Z Writing to /home/runner/.m2/toolchains.xml
+2026-10-13T04:41:36.1532178Z 
+2026-10-13T04:41:36.1532334Z Java configuration:
+2026-10-13T04:41:36.1532638Z   Distribution: temurin
+2026-10-13T04:41:36.1532932Z   Version: 21.0.12+1
+2026-10-13T04:41:36.1533385Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:41:36.1533739Z 
+2026-10-13T04:41:36.1534074Z ##[endgroup]
+2026-10-13T04:41:36.1538422Z Creating settings.xml with server-id: github
+2026-10-13T04:41:36.1549824Z Writing to /home/runner/.m2/settings.xml
+2026-10-13T04:41:36.1559905Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+2026-10-13T04:41:36.1679337Z ##[group]Run sudo apt-get update
+2026-10-13T04:41:36.1679854Z [36;1msudo apt-get update[0m
+2026-10-13T04:41:36.1680164Z [36;1msudo apt-get install --yes libseccomp2 postgresql-client openssl[0m
+2026-10-13T04:41:36.1680539Z [36;1mpython3.14 -m pip install -r tooling/requirements.txt[0m
+2026-10-13T04:41:36.1888744Z shell: /usr/bin/bash -e {0}
+2026-10-13T04:41:36.1888988Z env:
+2026-10-13T04:41:36.1889271Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:41:36.1889810Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:41:36.1890052Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:41:36.1890346Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:36.1890667Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+2026-10-13T04:41:36.1890988Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:36.1891275Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:36.1891622Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:36.1891911Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+2026-10-13T04:41:36.1892238Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:41:36.1892600Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:41:36.1892903Z   MAVEN_ARGS: -ntp
+2026-10-13T04:41:36.1893077Z ##[endgroup]
+2026-10-13T04:41:36.2564806Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-13T04:41:36.2780651Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-10-13T04:41:36.2793380Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-10-13T04:41:36.2836025Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-10-13T04:41:36.2845238Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-10-13T04:41:36.2935945Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-10-13T04:41:36.4341048Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1397 kB]
+2026-10-13T04:41:36.4485263Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [308 kB]
+2026-10-13T04:41:36.4520758Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1702 kB]
+2026-10-13T04:41:36.4577192Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [342 kB]
+2026-10-13T04:41:36.4598559Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1805 kB]
+2026-10-13T04:41:36.4694637Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [411 kB]
+2026-10-13T04:41:36.4720548Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [50.7 kB]
+2026-10-13T04:41:36.4729136Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [14.0 kB]
+2026-10-13T04:41:36.4883997Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Packages [748 B]
+2026-10-13T04:41:36.5390887Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1122 kB]
+2026-10-13T04:41:36.5793796Z Get:24 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [571 kB]
+2026-10-13T04:41:36.5859758Z Get:25 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.3 kB]
+2026-10-13T04:41:36.5861630Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [228 kB]
+2026-10-13T04:41:36.5876555Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1220 kB]
+2026-10-13T04:41:36.5881889Z Get:26 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [513 kB]
+2026-10-13T04:41:36.5930544Z Get:27 https://packages.microsoft.com/ubuntu/24.04/prod noble/main all Packages [640 B]
+2026-10-13T04:41:36.5934308Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [245 kB]
+2026-10-13T04:41:36.5950283Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1674 kB]
+2026-10-13T04:41:36.6026589Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [383 kB]
+2026-10-13T04:41:36.6048368Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [45.4 kB]
+2026-10-13T04:41:36.6056219Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse Translation-en [12.1 kB]
+2026-10-13T04:41:43.2820091Z Fetched 12.4 MB in 1s (11.4 MB/s)
+2026-10-13T04:41:43.9766809Z Reading package lists...
+2026-10-13T04:41:44.0033899Z Reading package lists...
+2026-10-13T04:41:44.2141223Z Building dependency tree...
+2026-10-13T04:41:44.2147802Z Reading state information...
+2026-10-13T04:41:44.3701457Z libseccomp2 is already the newest version (2.5.5-1ubuntu3.1).
+2026-10-13T04:41:44.3702019Z libseccomp2 set to manually installed.
+2026-10-13T04:41:44.3702406Z openssl is already the newest version (3.0.13-0ubuntu3.16).
+2026-10-13T04:41:44.3702906Z The following NEW packages will be installed:
+2026-10-13T04:41:44.3703182Z   postgresql-client
+2026-10-13T04:41:44.3850160Z 0 upgraded, 1 newly installed, 0 to remove and 29 not upgraded.
+2026-10-13T04:41:44.3850644Z Need to get 11.6 kB of archives.
+2026-10-13T04:41:44.3851000Z After this operation, 17.4 kB of additional disk space will be used.
+2026-10-13T04:41:44.3851410Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-13T04:41:44.4843037Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 postgresql-client all 16+257build1.1 [11.6 kB]
+2026-10-13T04:41:44.7021786Z Fetched 11.6 kB in 0s (107 kB/s)
+2026-10-13T04:41:44.7206146Z Selecting previously unselected package postgresql-client.
+2026-10-13T04:41:44.7434782Z (Reading database ... 
+2026-10-13T04:41:44.7435122Z (Reading database ... 5%
+2026-10-13T04:41:44.7435436Z (Reading database ... 10%
+2026-10-13T04:41:44.7435773Z (Reading database ... 15%
+2026-10-13T04:41:44.7436056Z (Reading database ... 20%
+2026-10-13T04:41:44.7436351Z (Reading database ... 25%
+2026-10-13T04:41:44.7440490Z (Reading database ... 30%
+2026-10-13T04:41:44.7440861Z (Reading database ... 35%
+2026-10-13T04:41:44.7441211Z (Reading database ... 40%
+2026-10-13T04:41:44.7441816Z (Reading database ... 45%
+2026-10-13T04:41:44.7442143Z (Reading database ... 50%
+2026-10-13T04:41:44.7480285Z (Reading database ... 55%
+2026-10-13T04:41:44.8222256Z (Reading database ... 60%
+2026-10-13T04:41:45.0284095Z (Reading database ... 65%
+2026-10-13T04:41:45.2351155Z (Reading database ... 70%
+2026-10-13T04:41:45.4194519Z (Reading database ... 75%
+2026-10-13T04:41:45.5382431Z (Reading database ... 80%
+2026-10-13T04:41:45.6774745Z (Reading database ... 85%
+2026-10-13T04:41:45.8190436Z (Reading database ... 90%
+2026-10-13T04:41:45.9261468Z (Reading database ... 95%
+2026-10-13T04:41:45.9261897Z (Reading database ... 100%
+2026-10-13T04:41:45.9262457Z (Reading database ... 203191 files and directories currently installed.)
+2026-10-13T04:41:45.9307288Z Preparing to unpack .../postgresql-client_16+257build1.1_all.deb ...
+2026-10-13T04:41:45.9328568Z Unpacking postgresql-client (16+257build1.1) ...
+2026-10-13T04:41:45.9655887Z Setting up postgresql-client (16+257build1.1) ...
+2026-10-13T04:41:46.5793298Z 
+2026-10-13T04:41:46.5793827Z Running kernel seems to be up-to-date.
+2026-10-13T04:41:46.5794057Z 
+2026-10-13T04:41:46.5794196Z No services need to be restarted.
+2026-10-13T04:41:46.5794346Z 
+2026-10-13T04:41:46.5794477Z No containers need to be restarted.
+2026-10-13T04:41:46.5794627Z 
+2026-10-13T04:41:46.5794799Z No user sessions are running outdated binaries.
+2026-10-13T04:41:46.5794983Z 
+2026-10-13T04:41:46.5795216Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-13T04:41:47.7959337Z Collecting jsonschema==4.26.0 (from -r tooling/requirements.txt (line 2))
+2026-10-13T04:41:47.8484061Z   Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+2026-10-13T04:41:47.8604391Z Collecting attrs==26.1.0 (from -r tooling/requirements.txt (line 3))
+2026-10-13T04:41:47.8688803Z   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-13T04:41:47.9335898Z Collecting jsonschema-specifications==2025.9.1 (from -r tooling/requirements.txt (line 4))
+2026-10-13T04:41:47.9419774Z   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+2026-10-13T04:41:47.9555540Z Collecting referencing==0.37.0 (from -r tooling/requirements.txt (line 5))
+2026-10-13T04:41:47.9638939Z   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+2026-10-13T04:41:48.1418911Z Collecting rpds-py==2026.6.3 (from -r tooling/requirements.txt (line 6))
+2026-10-13T04:41:48.1517761Z   Downloading rpds_py-2026.6.3-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+2026-10-13T04:41:48.1616141Z Collecting tzdata==2026.4 (from -r tooling/requirements.txt (line 7))
+2026-10-13T04:41:48.1707063Z   Downloading tzdata-2026.4-py2.py3-none-any.whl.metadata (1.4 kB)
+2026-10-13T04:41:48.1852640Z Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+2026-10-13T04:41:48.2058883Z Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-13T04:41:48.2167463Z Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+2026-10-13T04:41:48.2264421Z Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+2026-10-13T04:41:48.2360995Z Downloading rpds_py-2026.6.3-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (367 kB)
+2026-10-13T04:41:48.2602311Z Downloading tzdata-2026.4-py2.py3-none-any.whl (347 kB)
+2026-10-13T04:41:48.2999768Z Installing collected packages: tzdata, rpds-py, attrs, referencing, jsonschema-specifications, jsonschema
+2026-10-13T04:41:48.5120011Z 
+2026-10-13T04:41:48.5132121Z Successfully installed attrs-26.1.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 referencing-0.37.0 rpds-py-2026.6.3 tzdata-2026.4
+2026-10-13T04:41:48.5801992Z ##[group]Run docker exec "1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61" psql -U acp_test -d acp_test -c "ALTER SYSTEM SET track_commit_timestamp = on"
+2026-10-13T04:41:48.5802943Z [36;1mdocker exec "1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61" psql -U acp_test -d acp_test -c "ALTER SYSTEM SET track_commit_timestamp = on"[0m
+2026-10-13T04:41:48.5803788Z [36;1mdocker restart "1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61"[0m
+2026-10-13T04:41:48.5804154Z [36;1mfor attempt in $(seq 1 30); do[0m
+2026-10-13T04:41:48.5804637Z [36;1m  if docker exec "1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61" pg_isready -U acp_test -d acp_test; then break; fi[0m
+2026-10-13T04:41:48.5805121Z [36;1m  sleep 1[0m
+2026-10-13T04:41:48.5805291Z [36;1mdone[0m
+2026-10-13T04:41:48.5805784Z [36;1mdocker exec "1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61" psql -U acp_test -d acp_test -c "SHOW track_commit_timestamp"[0m
+2026-10-13T04:41:48.5863319Z shell: /usr/bin/bash -e {0}
+2026-10-13T04:41:48.5863534Z env:
+2026-10-13T04:41:48.5863791Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:41:48.5864102Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:41:48.5864335Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:41:48.5864624Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:48.5864957Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+2026-10-13T04:41:48.5865269Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:48.5865552Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:48.5865833Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:48.5866121Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+2026-10-13T04:41:48.5866458Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:41:48.5866830Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:41:48.5867122Z   MAVEN_ARGS: -ntp
+2026-10-13T04:41:48.5867294Z ##[endgroup]
+2026-10-13T04:41:48.6542121Z ALTER SYSTEM
+2026-10-13T04:41:48.8956942Z 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:41:48.9758714Z /var/run/postgresql:5432 - accepting connections
+2026-10-13T04:41:49.0397551Z  track_commit_timestamp 
+2026-10-13T04:41:49.0398231Z ------------------------
+2026-10-13T04:41:49.0400463Z  on
+2026-10-13T04:41:49.0401001Z (1 row)
+2026-10-13T04:41:49.0401452Z 
+2026-10-13T04:41:49.0468460Z ##[group]Run python3.14 tooling/audit/phase6.py --output /tmp/acp-phase6-final-audit
+2026-10-13T04:41:49.0468935Z [36;1mpython3.14 tooling/audit/phase6.py --output /tmp/acp-phase6-final-audit[0m
+2026-10-13T04:41:49.0525886Z shell: /usr/bin/bash -e {0}
+2026-10-13T04:41:49.0526096Z env:
+2026-10-13T04:41:49.0526348Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:41:49.0526658Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:41:49.0526893Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:41:49.0527184Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:49.0527509Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+2026-10-13T04:41:49.0527830Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:49.0528131Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:49.0528420Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:41:49.0528731Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+2026-10-13T04:41:49.0529068Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:41:49.0529602Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:41:49.0529901Z   MAVEN_ARGS: -ntp
+2026-10-13T04:41:49.0530073Z ##[endgroup]
+2026-10-13T04:58:45.0803183Z PHASE6_CLOSURE_BLOCKED
+2026-10-13T04:58:45.1145206Z ##[error]Process completed with exit code 2.
+2026-10-13T04:58:45.1192680Z ##[group]Run python3.14 tooling/audit/security_review.py --source /tmp/acp-phase6-final-audit
+2026-10-13T04:58:45.1193193Z [36;1mpython3.14 tooling/audit/security_review.py --source /tmp/acp-phase6-final-audit[0m
+2026-10-13T04:58:45.1250216Z shell: /usr/bin/bash -e {0}
+2026-10-13T04:58:45.1250417Z env:
+2026-10-13T04:58:45.1250860Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:58:45.1251164Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:58:45.1251398Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:58:45.1251689Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:58:45.1252008Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+2026-10-13T04:58:45.1252323Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:58:45.1252610Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:58:45.1252890Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:58:45.1253208Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+2026-10-13T04:58:45.1253538Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:58:45.1253902Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:58:45.1254191Z   MAVEN_ARGS: -ntp
+2026-10-13T04:58:45.1254366Z ##[endgroup]
+2026-10-13T04:58:45.7451636Z Retained advisory records: 7 previous dispositions: 7
+2026-10-13T04:58:45.7631761Z ##[group]Run actions/upload-artifact@v4
+2026-10-13T04:58:45.7632009Z with:
+2026-10-13T04:58:45.7632208Z   name: phase6-remediation-0.5.0-closure-audit
+2026-10-13T04:58:45.7633778Z   path: /tmp/acp-phase6-final-audit/*.json
+/tmp/acp-phase6-final-audit/*.log
+/tmp/acp-phase6-final-audit/*-production-1.tar
+/tmp/acp-phase6-final-audit/admission/task-interface-report.json
+/tmp/acp-phase6-final-audit/admission/*.log
+/tmp/acp-phase6-final-audit/admission/supplemental-http/
+/tmp/acp-phase6-final-audit/admission/*/frontend/browser-results.json
+/tmp/acp-phase6-final-audit/admission/*/frontend/test-results/
+/tmp/acp-phase6-final-audit/admission/*/backend/target/surefire-reports/
+/tmp/acp-phase6-final-audit/oidc/
+
+2026-10-13T04:58:45.7635229Z   if-no-files-found: warn
+2026-10-13T04:58:45.7635416Z   compression-level: 6
+2026-10-13T04:58:45.7635591Z   overwrite: false
+2026-10-13T04:58:45.7635777Z   include-hidden-files: false
+2026-10-13T04:58:45.7635959Z env:
+2026-10-13T04:58:45.7636223Z   ACP_TEST_DATABASE_URL: jdbc:postgresql://127.0.0.1:5432/acp_test
+2026-10-13T04:58:45.7636517Z   ACP_TEST_DATABASE_USER: acp_test
+2026-10-13T04:58:45.7636741Z   ACP_TEST_DATABASE_PASSWORD: ephemeral-test-only
+2026-10-13T04:58:45.7637021Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:58:45.7637330Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib/pkgconfig
+2026-10-13T04:58:45.7637635Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:58:45.7637912Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:58:45.7638190Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.7/x64
+2026-10-13T04:58:45.7638463Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.7/x64/lib
+2026-10-13T04:58:45.7638781Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:58:45.7639141Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+2026-10-13T04:58:45.7639597Z   MAVEN_ARGS: -ntp
+2026-10-13T04:58:45.7639763Z ##[endgroup]
+2026-10-13T04:58:45.9032803Z (node:17966) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-13T04:58:45.9033459Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-13T04:58:45.9675686Z With the provided path, there will be 158 files uploaded
+2026-10-13T04:58:45.9677115Z Artifact name is valid!
+2026-10-13T04:58:45.9677786Z Root directory input is valid!
+2026-10-13T04:58:46.1362029Z Beginning upload of artifact content to blob storage
+2026-10-13T04:58:46.4973576Z (node:17966) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-13T04:58:46.7342235Z Uploaded bytes 8388608
+2026-10-13T04:58:46.8911325Z Uploaded bytes 16777216
+2026-10-13T04:58:47.1671898Z Uploaded bytes 25165824
+2026-10-13T04:58:47.4082016Z Uploaded bytes 33554432
+2026-10-13T04:58:47.6106292Z Uploaded bytes 41943040
+2026-10-13T04:58:47.8646634Z Uploaded bytes 50331648
+2026-10-13T04:58:48.2070511Z Uploaded bytes 58720256
+2026-10-13T04:58:48.3046769Z Uploaded bytes 62554758
+2026-10-13T04:58:48.3236597Z Finished uploading artifact content to blob storage!
+2026-10-13T04:58:48.3239780Z SHA256 digest of uploaded artifact zip is 59f9d823829c4aced14762d5f2d2cde11c80f8983d6db2681020598997d9de8a
+2026-10-13T04:58:48.3241616Z Finalizing artifact upload
+2026-10-13T04:58:48.5510097Z Artifact phase6-remediation-0.5.0-closure-audit.zip successfully finalized. Artifact ID 11788844738
+2026-10-13T04:58:48.5510926Z Artifact phase6-remediation-0.5.0-closure-audit has been successfully uploaded! Final size is 62554758 bytes. Artifact ID is 11788844738
+2026-10-13T04:58:48.5517281Z Artifact download URL: https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/38344618535/artifacts/11788844738
+2026-10-13T04:58:48.5698590Z Post job cleanup.
+2026-10-13T04:58:48.6851084Z Post job cleanup.
+2026-10-13T04:58:48.7560032Z [command]/usr/bin/git version
+2026-10-13T04:58:48.7594612Z git version 2.55.0
+2026-10-13T04:58:48.7624683Z Temporarily overriding HOME='/home/runner/work/_temp/17309a09-77af-4d36-be83-28ec1bd749e7' before making global git config changes
+2026-10-13T04:58:48.7626023Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-13T04:58:48.7629293Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform
+2026-10-13T04:58:48.7656080Z Removing SSH command configuration
+2026-10-13T04:58:48.7661888Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T04:58:48.7691231Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-13T04:58:48.7902743Z Removing HTTP extra header
+2026-10-13T04:58:48.7907560Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T04:58:48.7945196Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-13T04:58:48.8162265Z Removing includeIf entries pointing to credentials config files
+2026-10-13T04:58:48.8171444Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T04:58:48.8208699Z includeif.gitdir:/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git.path
+2026-10-13T04:58:48.8209678Z includeif.gitdir:/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git/worktrees/*.path
+2026-10-13T04:58:48.8210282Z includeif.gitdir:/github/workspace/.git.path
+2026-10-13T04:58:48.8210696Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-13T04:58:48.8221750Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git.path
+2026-10-13T04:58:48.8243360Z /home/runner/work/_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:58:48.8253012Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git.path /home/runner/work/_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:58:48.8298070Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git/worktrees/*.path
+2026-10-13T04:58:48.8322562Z /home/runner/work/_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:58:48.8332140Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Application-Compiler-Platform/Application-Compiler-Platform/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:58:48.8364076Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-13T04:58:48.8386906Z /github/runner_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:58:48.8394561Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:58:48.8427870Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-13T04:58:48.8450794Z /github/runner_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:58:48.8457704Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config
+2026-10-13T04:58:48.8525761Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-13T04:58:48.8722891Z Removing credentials config '/home/runner/work/_temp/git-credentials-5a4d6f7c-f3dc-49a0-89dc-5f168efb7ff1.config'
+2026-10-13T04:58:48.8847020Z Print service container logs: 032eadf43c42450d808b5ec2fba7c9b4_postgres186_7493b7
+2026-10-13T04:58:48.8850770Z ##[command]/usr/bin/docker logs --details 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:58:48.8957666Z  The files belonging to this database system will be owned by user "postgres".
+2026-10-13T04:58:48.8959734Z  initdb: warning: enabling "trust" authentication for local connections
+2026-10-13T04:58:48.8960479Z  This user must also own the server process.
+2026-10-13T04:58:48.8965482Z  initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+2026-10-13T04:58:48.8966387Z  
+2026-10-13T04:58:48.8966957Z  The database cluster will be initialized with locale "en_US.utf8".
+2026-10-13T04:58:48.8982514Z  The default database encoding has accordingly been set to "UTF8".
+2026-10-13T04:58:48.8983106Z  The default text search configuration will be set to "english".
+2026-10-13T04:58:48.8983478Z  
+2026-10-13T04:58:48.8983647Z  Data page checksums are enabled.
+2026-10-13T04:58:48.8983858Z  
+2026-10-13T04:58:48.8984122Z  fixing permissions on existing directory /var/lib/postgresql/18/docker ... ok
+2026-10-13T04:58:48.8984449Z  creating subdirectories ... ok
+2026-10-13T04:58:48.8984709Z  selecting dynamic shared memory implementation ... posix
+2026-10-13T04:58:48.8984988Z  selecting default "max_connections" ... 100
+2026-10-13T04:58:48.8985234Z  selecting default "shared_buffers" ... 128MB
+2026-10-13T04:58:48.8985468Z  selecting default time zone ... Etc/UTC
+2026-10-13T04:58:48.8985697Z  creating configuration files ... ok
+2026-10-13T04:58:48.8985916Z  running bootstrap script ... ok
+2026-10-13T04:58:48.8986152Z  performing post-bootstrap initialization ... ok
+2026-10-13T04:58:48.8986397Z  syncing data to disk ... ok
+2026-10-13T04:58:48.8986589Z  
+2026-10-13T04:58:48.8986729Z  
+2026-10-13T04:58:48.8986914Z  Success. You can now start the database server using:
+2026-10-13T04:58:48.8987153Z  
+2026-10-13T04:58:48.8987358Z      pg_ctl -D /var/lib/postgresql/18/docker -l logfile start
+2026-10-13T04:58:48.8987609Z  
+2026-10-13T04:58:48.8988116Z  waiting for server to start....2026-10-13 04:41:22.598 UTC [54] LOG:  starting PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-10-13T04:58:48.8988798Z  2026-10-13 04:41:22.599 UTC [54] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-13T04:58:48.8989221Z  2026-10-13 04:41:22.601 UTC [60] LOG:  database system was shut down at 2026-10-13 04:41:22 UTC
+2026-10-13T04:58:48.8989774Z  2026-10-13 04:41:22.604 UTC [54] LOG:  database system is ready to accept connections
+2026-10-13T04:58:48.8990281Z   done
+2026-10-13T04:58:48.8990502Z  server started
+2026-10-13T04:58:48.8990692Z  CREATE DATABASE
+2026-10-13T04:58:48.8990847Z  
+2026-10-13T04:58:48.8990982Z  
+2026-10-13T04:58:48.8991237Z  /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+2026-10-13T04:58:48.8991536Z  
+2026-10-13T04:58:48.8991811Z  waiting for server to shut down...2026-10-13 04:41:22.785 UTC [54] LOG:  received fast shutdown request
+2026-10-13T04:58:48.8992216Z  .2026-10-13 04:41:22.785 UTC [54] LOG:  aborting any active transactions
+2026-10-13T04:58:48.8992656Z  2026-10-13 04:41:22.787 UTC [54] LOG:  background worker "logical replication launcher" (PID 63) exited with exit code 1
+2026-10-13T04:58:48.8993056Z  2026-10-13 04:41:22.788 UTC [58] LOG:  shutting down
+2026-10-13T04:58:48.8993358Z  2026-10-13 04:41:22.788 UTC [58] LOG:  checkpoint starting: shutdown immediate
+2026-10-13T04:58:48.8994205Z  2026-10-13 04:41:22.901 UTC [58] LOG:  checkpoint complete: wrote 943 buffers (5.8%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.075 s, sync=0.037 s, total=0.113 s; sync files=303, longest=0.030 s, average=0.001 s; distance=4352 kB, estimate=4352 kB; lsn=0/1BA1BE8, redo lsn=0/1BA1BE8
+2026-10-13T04:58:48.8995220Z  2026-10-13 04:41:22.911 UTC [54] LOG:  database system is shut down
+2026-10-13T04:58:48.8995490Z   done
+2026-10-13T04:58:48.8995653Z  server stopped
+2026-10-13T04:58:48.8995827Z  
+2026-10-13T04:58:48.8996028Z  PostgreSQL init process complete; ready for start up.
+2026-10-13T04:58:48.8996269Z  
+2026-10-13T04:58:48.8996405Z  
+2026-10-13T04:58:48.8996667Z  PostgreSQL Database directory appears to contain a database; Skipping initialization
+2026-10-13T04:58:48.8996981Z  
+2026-10-13T04:58:48.8997412Z  2026-10-13 04:41:23.012 UTC [1] LOG:  starting PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-10-13T04:58:48.8997948Z  2026-10-13 04:41:23.012 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-10-13T04:58:48.8998299Z  2026-10-13 04:41:23.012 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-10-13T04:58:48.8998688Z  2026-10-13 04:41:23.013 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-13T04:58:48.8999135Z  2026-10-13 04:41:23.016 UTC [76] LOG:  database system was shut down at 2026-10-13 04:41:22 UTC
+2026-10-13T04:58:48.8999682Z  2026-10-13 04:41:23.019 UTC [1] LOG:  database system is ready to accept connections
+2026-10-13T04:58:48.9000029Z  2026-10-13 04:41:48.683 UTC [1] LOG:  received fast shutdown request
+2026-10-13T04:58:48.9000350Z  2026-10-13 04:41:48.683 UTC [1] LOG:  aborting any active transactions
+2026-10-13T04:58:48.9000773Z  2026-10-13 04:41:48.685 UTC [1] LOG:  background worker "logical replication launcher" (PID 79) exited with exit code 1
+2026-10-13T04:58:48.9001166Z  2026-10-13 04:41:48.686 UTC [74] LOG:  shutting down
+2026-10-13T04:58:48.9001470Z  2026-10-13 04:41:48.687 UTC [74] LOG:  checkpoint starting: shutdown immediate
+2026-10-13T04:58:48.9002283Z  2026-10-13 04:41:48.689 UTC [74] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.003 s; sync files=3, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/1BA1FE0, redo lsn=0/1BA1FE0
+2026-10-13T04:58:48.9003060Z  2026-10-13 04:41:48.696 UTC [1] LOG:  database system is shut down
+2026-10-13T04:58:48.9003562Z  2026-10-13 04:41:48.942 UTC [1] LOG:  starting PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-10-13T04:58:48.9004071Z  2026-10-13 04:41:48.943 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-10-13T04:58:48.9004421Z  2026-10-13 04:41:48.943 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-10-13T04:58:48.9004801Z  2026-10-13 04:41:48.944 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-13T04:58:48.9005341Z  2026-10-13 04:41:48.947 UTC [38] LOG:  database system was shut down at 2026-10-13 04:41:48 UTC
+2026-10-13T04:58:48.9005718Z  2026-10-13 04:41:48.950 UTC [1] LOG:  database system is ready to accept connections
+2026-10-13T04:58:48.9006105Z  2026-10-13 04:43:28.712 UTC [212] FATAL:  terminating connection due to administrator command
+2026-10-13T04:58:48.9006459Z  2026-10-13 04:43:29.159 UTC [245] ERROR:  private injected data
+2026-10-13T04:58:48.9006815Z  2026-10-13 04:43:29.159 UTC [245] CONTEXT:  PL/pgSQL function invocation_fault() line 1 at RAISE
+2026-10-13T04:58:48.9007570Z  2026-10-13 04:43:29.159 UTC [245] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9008248Z  2026-10-13 04:43:29.188 UTC [250] ERROR:  private injected data
+2026-10-13T04:58:48.9008597Z  2026-10-13 04:43:29.188 UTC [250] CONTEXT:  PL/pgSQL function invocation_fault() line 1 at RAISE
+2026-10-13T04:58:48.9009555Z  2026-10-13 04:43:29.188 UTC [250] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9010257Z  2026-10-13 04:43:29.213 UTC [253] ERROR:  private injected data
+2026-10-13T04:58:48.9010598Z  2026-10-13 04:43:29.213 UTC [253] CONTEXT:  PL/pgSQL function invocation_fault() line 1 at RAISE
+2026-10-13T04:58:48.9011327Z  2026-10-13 04:43:29.213 UTC [253] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9012022Z  2026-10-13 04:43:29.299 UTC [265] ERROR:  not dependency
+2026-10-13T04:58:48.9012361Z  2026-10-13 04:43:29.299 UTC [265] CONTEXT:  PL/pgSQL function invocation_fault() line 1 at RAISE
+2026-10-13T04:58:48.9013129Z  2026-10-13 04:43:29.299 UTC [265] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9013831Z  2026-10-13 04:43:38.147 UTC [628] ERROR:  SENSITIVE_SENTINEL_PROVIDER
+2026-10-13T04:58:48.9014198Z  2026-10-13 04:43:38.147 UTC [628] CONTEXT:  PL/pgSQL function privacy_fail() line 1 at RAISE
+2026-10-13T04:58:48.9014900Z  2026-10-13 04:43:38.147 UTC [628] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_ce4f5e6c05433529cf6a3cbb=$1,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$2 AND f_55326825932184ca370c199a=$3 AND acp_version=$4
+2026-10-13T04:58:48.9015585Z  2026-10-13 04:43:40.735 UTC [876] ERROR:  SENSITIVE_SENTINEL_PROVIDER
+2026-10-13T04:58:48.9015969Z  2026-10-13 04:43:40.735 UTC [876] CONTEXT:  PL/pgSQL function privacy_diagnostic_fail() line 1 at RAISE
+2026-10-13T04:58:48.9016714Z  2026-10-13 04:43:40.735 UTC [876] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_ce4f5e6c05433529cf6a3cbb=$1,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$2 AND f_55326825932184ca370c199a=$3 AND acp_version=$4
+2026-10-13T04:58:48.9017426Z  2026-10-13 04:44:15.995 UTC [1338] FATAL:  terminating connection due to administrator command
+2026-10-13T04:58:48.9017807Z  2026-10-13 04:44:15.995 UTC [1338] CONTEXT:  SQL statement "SELECT pg_sleep(35)"
+2026-10-13T04:58:48.9018122Z  	PL/pgSQL function job_timeout() line 1 at PERFORM
+2026-10-13T04:58:48.9018783Z  2026-10-13 04:44:15.995 UTC [1338] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9019574Z  2026-10-13 04:44:48.989 UTC [1770] ERROR:  private fault
+2026-10-13T04:58:48.9019905Z  2026-10-13 04:44:48.989 UTC [1770] CONTEXT:  PL/pgSQL function job_fault() line 1 at RAISE
+2026-10-13T04:58:48.9020740Z  2026-10-13 04:44:48.989 UTC [1770] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9021406Z  2026-10-13 04:44:49.020 UTC [1777] ERROR:  private fault
+2026-10-13T04:58:48.9021720Z  2026-10-13 04:44:49.020 UTC [1777] CONTEXT:  PL/pgSQL function job_fault() line 1 at RAISE
+2026-10-13T04:58:48.9022434Z  2026-10-13 04:44:49.020 UTC [1777] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9023097Z  2026-10-13 04:44:49.049 UTC [1782] ERROR:  private fault
+2026-10-13T04:58:48.9023414Z  2026-10-13 04:44:49.049 UTC [1782] CONTEXT:  PL/pgSQL function job_fault() line 1 at RAISE
+2026-10-13T04:58:48.9024128Z  2026-10-13 04:44:49.049 UTC [1782] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9024808Z  2026-10-13 04:44:49.435 UTC [1816] ERROR:  unbound provider fault
+2026-10-13T04:58:48.9025265Z  2026-10-13 04:44:49.435 UTC [1816] CONTEXT:  PL/pgSQL function internal_job_fault() line 1 at RAISE
+2026-10-13T04:58:48.9026005Z  2026-10-13 04:44:49.435 UTC [1816] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9026694Z  2026-10-13 04:44:52.300 UTC [2019] ERROR:  SENSITIVE_ACTUAL_HTTP_SENTINEL
+2026-10-13T04:58:48.9027067Z  2026-10-13 04:44:52.300 UTC [2019] CONTEXT:  PL/pgSQL function privacy_http_fail() line 1 at RAISE
+2026-10-13T04:58:48.9027796Z  2026-10-13 04:44:52.300 UTC [2019] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9028480Z  2026-10-13 04:44:52.734 UTC [2019] ERROR:  SECRET_ACTUAL_HTTP_SENTINEL
+2026-10-13T04:58:48.9028839Z  2026-10-13 04:44:52.734 UTC [2019] CONTEXT:  PL/pgSQL function privacy_http_fail() line 1 at RAISE
+2026-10-13T04:58:48.9029793Z  2026-10-13 04:44:52.734 UTC [2019] STATEMENT:  UPDATE e_2f6d38b95ca9030968971abd SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_8306508e7c606f32081c13bb=$3 AND f_55326825932184ca370c199a=$4 AND acp_version=$5
+2026-10-13T04:58:48.9030481Z  2026-10-13 04:46:48.620 UTC [36] LOG:  checkpoint starting: time
+2026-10-13T04:58:48.9030828Z  2026-10-13 04:47:37.760 UTC [2393] FATAL:  terminating connection due to administrator command
+2026-10-13T04:58:48.9031183Z  2026-10-13 04:47:38.303 UTC [2433] ERROR:  private injected data
+2026-10-13T04:58:48.9031533Z  2026-10-13 04:47:38.303 UTC [2433] CONTEXT:  PL/pgSQL function invocation_fault() line 1 at RAISE
+2026-10-13T04:58:48.9032270Z  2026-10-13 04:47:38.303 UTC [2433] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9032941Z  2026-10-13 04:47:38.327 UTC [2438] ERROR:  private injected data
+2026-10-13T04:58:48.9033280Z  2026-10-13 04:47:38.327 UTC [2438] CONTEXT:  PL/pgSQL function invocation_fault() line 1 at RAISE
+2026-10-13T04:58:48.9034004Z  2026-10-13 04:47:38.327 UTC [2438] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9034676Z  2026-10-13 04:47:38.349 UTC [2441] ERROR:  private injected data
+2026-10-13T04:58:48.9035134Z  2026-10-13 04:47:38.349 UTC [2441] CONTEXT:  PL/pgSQL function invocation_fault() line 1 at RAISE
+2026-10-13T04:58:48.9035865Z  2026-10-13 04:47:38.349 UTC [2441] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9036529Z  2026-10-13 04:47:38.436 UTC [2453] ERROR:  not dependency
+2026-10-13T04:58:48.9036860Z  2026-10-13 04:47:38.436 UTC [2453] CONTEXT:  PL/pgSQL function invocation_fault() line 1 at RAISE
+2026-10-13T04:58:48.9037587Z  2026-10-13 04:47:38.436 UTC [2453] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9038267Z  2026-10-13 04:47:48.793 UTC [2878] ERROR:  SENSITIVE_SENTINEL_PROVIDER
+2026-10-13T04:58:48.9038624Z  2026-10-13 04:47:48.793 UTC [2878] CONTEXT:  PL/pgSQL function privacy_fail() line 1 at RAISE
+2026-10-13T04:58:48.9039661Z  2026-10-13 04:47:48.793 UTC [2878] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_00dc7107adbf703eb0967a39=$1,present_00dc7107adbf703eb0967a39=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9040430Z  2026-10-13 04:47:51.712 UTC [3181] ERROR:  SENSITIVE_SENTINEL_PROVIDER
+2026-10-13T04:58:48.9040844Z  2026-10-13 04:47:51.712 UTC [3181] CONTEXT:  PL/pgSQL function privacy_diagnostic_fail() line 1 at RAISE
+2026-10-13T04:58:48.9041664Z  2026-10-13 04:47:51.712 UTC [3181] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_00dc7107adbf703eb0967a39=$1,present_00dc7107adbf703eb0967a39=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9042463Z  2026-10-13 04:48:28.713 UTC [3801] FATAL:  terminating connection due to administrator command
+2026-10-13T04:58:48.9042858Z  2026-10-13 04:48:28.713 UTC [3801] CONTEXT:  SQL statement "SELECT pg_sleep(35)"
+2026-10-13T04:58:48.9043164Z  	PL/pgSQL function job_timeout() line 1 at PERFORM
+2026-10-13T04:58:48.9043838Z  2026-10-13 04:48:28.713 UTC [3801] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9044513Z  2026-10-13 04:49:03.176 UTC [4321] ERROR:  private fault
+2026-10-13T04:58:48.9044836Z  2026-10-13 04:49:03.176 UTC [4321] CONTEXT:  PL/pgSQL function job_fault() line 1 at RAISE
+2026-10-13T04:58:48.9045576Z  2026-10-13 04:49:03.176 UTC [4321] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9046250Z  2026-10-13 04:49:03.204 UTC [4328] ERROR:  private fault
+2026-10-13T04:58:48.9046584Z  2026-10-13 04:49:03.204 UTC [4328] CONTEXT:  PL/pgSQL function job_fault() line 1 at RAISE
+2026-10-13T04:58:48.9047322Z  2026-10-13 04:49:03.204 UTC [4328] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9048005Z  2026-10-13 04:49:03.233 UTC [4333] ERROR:  private fault
+2026-10-13T04:58:48.9048326Z  2026-10-13 04:49:03.233 UTC [4333] CONTEXT:  PL/pgSQL function job_fault() line 1 at RAISE
+2026-10-13T04:58:48.9049039Z  2026-10-13 04:49:03.233 UTC [4333] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9049890Z  2026-10-13 04:49:03.594 UTC [4370] ERROR:  unbound provider fault
+2026-10-13T04:58:48.9050389Z  2026-10-13 04:49:03.594 UTC [4370] CONTEXT:  PL/pgSQL function internal_job_fault() line 1 at RAISE
+2026-10-13T04:58:48.9051142Z  2026-10-13 04:49:03.594 UTC [4370] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9051845Z  2026-10-13 04:49:07.792 UTC [4633] ERROR:  SENSITIVE_ACTUAL_HTTP_SENTINEL
+2026-10-13T04:58:48.9052438Z  2026-10-13 04:49:07.792 UTC [4633] CONTEXT:  PL/pgSQL function privacy_http_fail() line 1 at RAISE
+2026-10-13T04:58:48.9053374Z  2026-10-13 04:49:07.792 UTC [4633] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9054152Z  2026-10-13 04:49:08.658 UTC [4633] ERROR:  SECRET_ACTUAL_HTTP_SENTINEL
+2026-10-13T04:58:48.9054688Z  2026-10-13 04:49:08.658 UTC [4633] CONTEXT:  PL/pgSQL function privacy_http_fail() line 1 at RAISE
+2026-10-13T04:58:48.9055580Z  2026-10-13 04:49:08.658 UTC [4633] STATEMENT:  UPDATE e_d35114736c127b0a4f015cde SET f_a3c92c5b2195fe53206f71ca=$1,acp_state=$2,acp_version=acp_version+1 WHERE f_bf60325b4cdc299c2172f24c=$3 AND f_883bd4a687ba22abd76d5b51=$4 AND acp_version=$5
+2026-10-13T04:58:48.9057107Z  2026-10-13 04:50:16.711 UTC [36] LOG:  checkpoint complete: wrote 1931 buffers (11.8%), wrote 8 SLRU buffers; 0 WAL file(s) added, 2 removed, 2 recycled; write=207.549 s, sync=0.444 s, total=208.091 s; sync files=23031, longest=0.074 s, average=0.001 s; distance=61232 kB, estimate=61232 kB; lsn=0/C9B0090, redo lsn=0/576E3B0
+2026-10-13T04:58:48.9058074Z  2026-10-13 04:51:48.800 UTC [36] LOG:  checkpoint starting: time
+2026-10-13T04:58:48.9058730Z  2026-10-13 04:55:06.600 UTC [5344] ERROR:  null value in column "f_2f3dc35e157160e85f988b0c" of relation "e_52ec36081d245a500ce7f793" violates not-null constraint
+2026-10-13T04:58:48.9059555Z  2026-10-13 04:55:06.600 UTC [5344] DETAIL:  Failing row contains (2, null).
+2026-10-13T04:58:48.9060081Z  2026-10-13 04:55:06.600 UTC [5344] STATEMENT:  INSERT INTO e_52ec36081d245a500ce7f793(id) VALUES(2);
+2026-10-13T04:58:48.9060876Z  2026-10-13 04:55:21.154 UTC [5382] ERROR:  new row for relation "e_52ec36081d245a500ce7f793" violates check constraint "e_52ec36081d245a500ce7f793_check"
+2026-10-13T04:58:48.9061497Z  2026-10-13 04:55:21.154 UTC [5382] DETAIL:  Failing row contains (1, \x00, f).
+2026-10-13T04:58:48.9062202Z  2026-10-13 04:55:21.154 UTC [5382] STATEMENT:  UPDATE e_52ec36081d245a500ce7f793 SET present_2f3dc35e157160e85f988b0c=false,f_2f3dc35e157160e85f988b0c=decode('00','hex');
+2026-10-13T04:58:48.9062917Z  2026-10-13 04:55:25.805 UTC [5394] ERROR:  ACP_INCOMPATIBLE_STORAGE_REPRESENTATION
+2026-10-13T04:58:48.9063462Z  2026-10-13 04:55:25.805 UTC [5394] CONTEXT:  PL/pgSQL function inline_code_block line 1 at RAISE
+2026-10-13T04:58:48.9064656Z  2026-10-13 04:55:25.805 UTC [5394] STATEMENT:  DO $$ BEGIN IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema=current_schema() AND table_name='e_2f6d38b95ca9030968971abd' AND column_name='f_a3c92c5b2195fe53206f71ca' AND udt_name<>'bytea') THEN RAISE EXCEPTION 'ACP_INCOMPATIBLE_STORAGE_REPRESENTATION'; END IF; END $$;
+2026-10-13T04:58:48.9065738Z  2026-10-13 04:55:30.518 UTC [5406] ERROR:  invalid hexadecimal digit: "z"
+2026-10-13T04:58:48.9066460Z  2026-10-13 04:55:30.518 UTC [5406] STATEMENT:  UPDATE e_52ec36081d245a500ce7f793 SET f_2f3dc35e157160e85f988b0c=decode('zz','hex') WHERE f_2f3dc35e157160e85f988b0c IS NULL;
+2026-10-13T04:58:48.9067676Z  2026-10-13 04:56:18.301 UTC [36] LOG:  checkpoint complete: wrote 3391 buffers (20.7%), wrote 7 SLRU buffers; 0 WAL file(s) added, 0 removed, 7 recycled; write=269.289 s, sync=0.040 s, total=269.502 s; sync files=689, longest=0.002 s, average=0.001 s; distance=117879 kB, estimate=117879 kB; lsn=0/CF67140, redo lsn=0/CA8C108
+2026-10-13T04:58:48.9068671Z  2026-10-13 04:56:48.307 UTC [36] LOG:  checkpoint starting: time
+2026-10-13T04:58:48.9069940Z  2026-10-13 04:58:08.415 UTC [36] LOG:  checkpoint complete: wrote 799 buffers (4.9%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=80.072 s, sync=0.028 s, total=80.108 s; sync files=372, longest=0.001 s, average=0.001 s; distance=5528 kB, estimate=106644 kB; lsn=0/D31A200, redo lsn=0/CFF21B0
+2026-10-13T04:58:48.9075081Z Stop and remove container: 032eadf43c42450d808b5ec2fba7c9b4_postgres186_7493b7
+2026-10-13T04:58:48.9078930Z ##[command]/usr/bin/docker rm --force 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:58:49.9166420Z 1f9ade0efc0ced65dcfcd61d46ef9a0f544af37daa0354d94e5f63df1451cf61
+2026-10-13T04:58:49.9190805Z Remove container network: github_network_bd94e9e66c5f4bef970011eb8f2f4c58
+2026-10-13T04:58:49.9194233Z ##[command]/usr/bin/docker network rm github_network_bd94e9e66c5f4bef970011eb8f2f4c58
+2026-10-13T04:58:50.0149993Z github_network_bd94e9e66c5f4bef970011eb8f2f4c58
+2026-10-13T04:58:50.0213369Z Cleaning up orphan processes
+2026-10-13T04:58:50.0486131Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
