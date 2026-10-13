@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acp-phase6-evidence/human-registry/1",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "acp-phase6-evidence/human-registry/1"
+        },
+        "recordId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/recordId"
+        },
+        "repository": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/repository"
+        },
+        "issuedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "expiresAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "policyRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/trust-policyRef"
+        },
+        "registryId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/registry"
+        },
+        "sequence": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/integer"
+        },
+        "predecessorRef": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/human-registryRef"
+            }
+          ]
+        },
+        "grants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "grantId": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/grant"
+              },
+              "reviewerId": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/principal"
+              },
+              "keyIds": {
+                "type": "array",
+                "items": {
+                  "$ref": "urn:acp-phase6-evidence:common:1#/$defs/key"
+                },
+                "minItems": 1,
+                "maxItems": 4096,
+                "uniqueItems": true,
+                "x-set-key": []
+              },
+              "criteria": {
+                "type": "array",
+                "items": {
+                  "$ref": "urn:acp-phase6-evidence:common:1#/$defs/criterion"
+                },
+                "minItems": 1,
+                "maxItems": 4096,
+                "uniqueItems": true,
+                "x-set-key": []
+              },
+              "applications": {
+                "type": "array",
+                "items": {
+                  "$ref": "urn:acp-phase6-evidence:common:1#/$defs/application"
+                },
+                "minItems": 1,
+                "maxItems": 4096,
+                "uniqueItems": true,
+                "x-set-key": []
+              },
+              "role": {
+                "const": "DEPLOYMENT_REVIEWER"
+              },
+              "independenceEvidenceDigest": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+              },
+              "validFrom": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+              },
+              "validUntil": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+              }
+            },
+            "required": [
+              "grantId",
+              "reviewerId",
+              "keyIds",
+              "criteria",
+              "applications",
+              "role",
+              "independenceEvidenceDigest",
+              "validFrom",
+              "validUntil"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": [
+            "grantId"
+          ]
+        },
+        "decisionRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/human-decisionRef"
+          },
+          "minItems": 0,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": [
+            "payloadDigest"
+          ]
+        },
+        "revocationHeadRef": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/revocationRef"
+            }
+          ]
+        },
+        "revocationSequence": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/integer"
+        }
+      },
+      "required": [
+        "schema",
+        "recordId",
+        "repository",
+        "issuedAt",
+        "expiresAt",
+        "policyRef",
+        "registryId",
+        "sequence",
+        "predecessorRef",
+        "grants",
+        "decisionRefs",
+        "revocationHeadRef",
+        "revocationSequence"
+      ],
+      "additionalProperties": false
+    },
+    "payloadDigest": {
+      "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:acp-phase6-evidence:common:1#/$defs/signature"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "x-set-key": [
+        "signerId",
+        "keyId"
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "payloadDigest",
+    "signatures"
+  ],
+  "additionalProperties": false
+}

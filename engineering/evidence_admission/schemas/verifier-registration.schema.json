@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acp-phase6-evidence/verifier-registration/1",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "acp-phase6-evidence/verifier-registration/1"
+        },
+        "recordId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/recordId"
+        },
+        "repository": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/repository"
+        },
+        "issuedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "expiresAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "policyRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/trust-policyRef"
+        },
+        "verifierId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/verifier"
+        },
+        "source": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/source"
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/criterion"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "witnessContracts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "criterion": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/criterion"
+              },
+              "witnessId": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/witnessId"
+              },
+              "assertionContractDigest": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+              }
+            },
+            "required": [
+              "criterion",
+              "witnessId",
+              "assertionContractDigest"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": [
+            "criterion",
+            "witnessId"
+          ]
+        },
+        "requiredApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/application"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "environmentContractDigest": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+        },
+        "executorIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/executor"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "technicalReviewDigests": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "securityReviewDigests": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "supersedes": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/verifier-registrationRef"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "recordId",
+        "repository",
+        "issuedAt",
+        "expiresAt",
+        "policyRef",
+        "verifierId",
+        "source",
+        "criteria",
+        "witnessContracts",
+        "requiredApplications",
+        "environmentContractDigest",
+        "executorIds",
+        "technicalReviewDigests",
+        "securityReviewDigests",
+        "supersedes"
+      ],
+      "additionalProperties": false
+    },
+    "payloadDigest": {
+      "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:acp-phase6-evidence:common:1#/$defs/signature"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "x-set-key": [
+        "signerId",
+        "keyId"
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "payloadDigest",
+    "signatures"
+  ],
+  "additionalProperties": false
+}

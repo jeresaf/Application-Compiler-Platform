@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acp-phase6-evidence/execution-attestation/1",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "acp-phase6-evidence/execution-attestation/1"
+        },
+        "recordId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/recordId"
+        },
+        "repository": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/repository"
+        },
+        "issuedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "expiresAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "policyRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/trust-policyRef"
+        },
+        "executionId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/recordId"
+        },
+        "challengeRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/execution-challengeRef"
+        },
+        "registrationRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/verifier-registrationRef"
+        },
+        "binding": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/binding"
+        },
+        "subjects": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/subjects"
+        },
+        "executorId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/executor"
+        },
+        "collectorId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/collector"
+        },
+        "environmentManifestDigest": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+        },
+        "startedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "finishedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "termination": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/termination"
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/case"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": [
+            "application",
+            "witnessId",
+            "caseId"
+          ]
+        },
+        "manifestRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/artifact-manifestRef"
+        },
+        "collectorSourceDigest": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+        },
+        "candidateEventDigest": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+        }
+      },
+      "required": [
+        "schema",
+        "recordId",
+        "repository",
+        "issuedAt",
+        "expiresAt",
+        "policyRef",
+        "executionId",
+        "challengeRef",
+        "registrationRef",
+        "binding",
+        "subjects",
+        "executorId",
+        "collectorId",
+        "environmentManifestDigest",
+        "startedAt",
+        "finishedAt",
+        "termination",
+        "cases",
+        "manifestRef",
+        "collectorSourceDigest",
+        "candidateEventDigest"
+      ],
+      "additionalProperties": false
+    },
+    "payloadDigest": {
+      "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:acp-phase6-evidence:common:1#/$defs/signature"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "x-set-key": [
+        "signerId",
+        "keyId"
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "payloadDigest",
+    "signatures"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,626 @@
+{
+  "classification": "SYNTHETIC_STRUCTURE_ONLY_NO_AUTHORITY",
+  "records": {
+    "trust-policy": {
+      "payload": {
+        "schema": "acp-phase6-evidence/trust-policy/1",
+        "recordId": "00000000000000000000000000000001",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "predecessorPolicyRef": null,
+        "sequence": 0,
+        "supportedSchemas": [
+          "acp-phase6-evidence/admission-receipt/1",
+          "acp-phase6-evidence/admission-rejection/1",
+          "acp-phase6-evidence/artifact-manifest/1",
+          "acp-phase6-evidence/engineering-envelope/1",
+          "acp-phase6-evidence/execution-attestation/1",
+          "acp-phase6-evidence/execution-challenge/1",
+          "acp-phase6-evidence/human-decision/1",
+          "acp-phase6-evidence/human-registry/1",
+          "acp-phase6-evidence/revocation/1",
+          "acp-phase6-evidence/trust-policy/1",
+          "acp-phase6-evidence/trust-snapshot/1",
+          "acp-phase6-evidence/verifier-registration/1"
+        ],
+        "signerRoles": [
+          {
+            "signerId": "principal:synthetic-only",
+            "keyIds": [
+              "key:synthetic-only"
+            ],
+            "role": "REGISTRATION_CUSTODIAN"
+          }
+        ],
+        "thresholds": {
+          "policy": 1,
+          "registration": 1,
+          "humanRegistry": 1,
+          "humanDecision": 1
+        },
+        "criterionContracts": [
+          {
+            "criterion": 1,
+            "contractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "freshness": {
+          "maxEvidenceAgeSeconds": 1,
+          "maxFutureSkewSeconds": 0,
+          "maxChallengeAgeSeconds": 1,
+          "maxSnapshotAgeSeconds": 1
+        },
+        "independenceContractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "artifact-manifest": {
+      "payload": {
+        "schema": "acp-phase6-evidence/artifact-manifest/1",
+        "recordId": "00000000000000000000000000000002",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "executionId": "00000000000000000000000000000000",
+        "binding": {
+          "executionCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "evaluationCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "sourceTreeDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bundleDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "approvalDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "canonicalDigests": {
+            "payment": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "case-management": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "artifacts": [
+          {
+            "path": "evidence/synthetic.json",
+            "role": "LOG",
+            "mediaType": "application/json",
+            "size": 0,
+            "sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ]
+      },
+      "payloadDigest": "sha256:4fd641f912f085d22a01da30dfbc01035f73a7f91240b992fc35f0a2c169d6b4",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "verifier-registration": {
+      "payload": {
+        "schema": "acp-phase6-evidence/verifier-registration/1",
+        "recordId": "00000000000000000000000000000003",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "verifierId": "verifier:synthetic-only",
+        "source": {
+          "repository": "jeresaf/Application-Compiler-Platform",
+          "commit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "treeDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "entrypoint": "evidence/synthetic.json",
+          "dependencyManifestDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "criteria": [
+          1
+        ],
+        "witnessContracts": [
+          {
+            "criterion": 1,
+            "witnessId": "synthetic-only",
+            "assertionContractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "requiredApplications": [
+          "PAYMENT"
+        ],
+        "environmentContractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "executorIds": [
+          "executor:synthetic-only"
+        ],
+        "technicalReviewDigests": [
+          "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "securityReviewDigests": [
+          "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "supersedes": null
+      },
+      "payloadDigest": "sha256:71e1c07e0af2d1010d4a125da32b3cdaeb0bd3b7f3ea3c21ca668c90eb299848",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "execution-challenge": {
+      "payload": {
+        "schema": "acp-phase6-evidence/execution-challenge/1",
+        "recordId": "00000000000000000000000000000004",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "auditSessionId": "session:synthetic-only",
+        "nonce": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "binding": {
+          "executionCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "evaluationCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "sourceTreeDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bundleDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "approvalDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "canonicalDigests": {
+            "payment": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "case-management": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "subjects": [
+          {
+            "application": "PAYMENT",
+            "snapshotDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "packageDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "criteria": [
+          1
+        ],
+        "registrationRef": {
+          "schema": "acp-phase6-evidence/verifier-registration/1",
+          "payloadDigest": "sha256:71e1c07e0af2d1010d4a125da32b3cdaeb0bd3b7f3ea3c21ca668c90eb299848"
+        },
+        "issuerId": "principal:synthetic-only"
+      },
+      "payloadDigest": "sha256:14371091732d71c8600730e5f3e84d4beb74c792132f7d32ab38b0087eb0e45d",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "execution-attestation": {
+      "payload": {
+        "schema": "acp-phase6-evidence/execution-attestation/1",
+        "recordId": "00000000000000000000000000000005",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "executionId": "00000000000000000000000000000000",
+        "challengeRef": {
+          "schema": "acp-phase6-evidence/execution-challenge/1",
+          "payloadDigest": "sha256:14371091732d71c8600730e5f3e84d4beb74c792132f7d32ab38b0087eb0e45d"
+        },
+        "registrationRef": {
+          "schema": "acp-phase6-evidence/verifier-registration/1",
+          "payloadDigest": "sha256:71e1c07e0af2d1010d4a125da32b3cdaeb0bd3b7f3ea3c21ca668c90eb299848"
+        },
+        "binding": {
+          "executionCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "evaluationCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "sourceTreeDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bundleDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "approvalDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "canonicalDigests": {
+            "payment": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "case-management": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "subjects": [
+          {
+            "application": "PAYMENT",
+            "snapshotDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "packageDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "executorId": "executor:synthetic-only",
+        "collectorId": "collector:synthetic-only",
+        "environmentManifestDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "startedAt": "2026-10-13T12:00:00Z",
+        "finishedAt": "2026-10-13T12:00:00Z",
+        "termination": {
+          "kind": "NORMAL_EXIT",
+          "exitCode": 0
+        },
+        "cases": [
+          {
+            "witnessId": "synthetic-only",
+            "caseId": "synthetic-only",
+            "application": "PAYMENT",
+            "outcome": "PASSED",
+            "assertionArtifactDigests": [
+              "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ]
+          }
+        ],
+        "manifestRef": {
+          "schema": "acp-phase6-evidence/artifact-manifest/1",
+          "payloadDigest": "sha256:4fd641f912f085d22a01da30dfbc01035f73a7f91240b992fc35f0a2c169d6b4"
+        },
+        "collectorSourceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "candidateEventDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "payloadDigest": "sha256:c5df637542079caf4c7720d652165e3d8a177662c942cef312c5a6e5b585a95f",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "human-decision": {
+      "payload": {
+        "schema": "acp-phase6-evidence/human-decision/1",
+        "recordId": "00000000000000000000000000000006",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "reviewerId": "principal:synthetic-only",
+        "grantId": "grant:synthetic-only",
+        "scope": {
+          "criterion": 12,
+          "applicationSubjects": [
+            {
+              "application": "PAYMENT",
+              "snapshotDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "packageDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ],
+          "deploymentReviewDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceManifestRef": {
+            "schema": "acp-phase6-evidence/artifact-manifest/1",
+            "payloadDigest": "sha256:4fd641f912f085d22a01da30dfbc01035f73a7f91240b992fc35f0a2c169d6b4"
+          }
+        },
+        "disposition": "ACCEPT",
+        "reservations": [],
+        "exclusions": [],
+        "independenceEvidenceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "supersedes": null
+      },
+      "payloadDigest": "sha256:7941a12d1f23c1714a166d812dc50e5aaba517d95288612f8b3cb7ed2f0df119",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "revocation": {
+      "payload": {
+        "schema": "acp-phase6-evidence/revocation/1",
+        "recordId": "00000000000000000000000000000007",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "registryId": "registry:synthetic-only",
+        "sequence": 1,
+        "predecessorRef": null,
+        "action": "REVOKE",
+        "targetRef": {
+          "schema": "acp-phase6-evidence/verifier-registration/1",
+          "payloadDigest": "sha256:71e1c07e0af2d1010d4a125da32b3cdaeb0bd3b7f3ea3c21ca668c90eb299848"
+        },
+        "replacementRef": null,
+        "effectiveAt": "2026-10-13T12:00:00Z",
+        "reasonCode": "COMPROMISE"
+      },
+      "payloadDigest": "sha256:ecdf8010f7c2cd9d52e50c8829d864b426ba35d503b2e777a573a7fac1a10624",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "human-registry": {
+      "payload": {
+        "schema": "acp-phase6-evidence/human-registry/1",
+        "recordId": "00000000000000000000000000000008",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "registryId": "registry:synthetic-only",
+        "sequence": 0,
+        "predecessorRef": null,
+        "grants": [
+          {
+            "grantId": "grant:synthetic-only",
+            "reviewerId": "principal:synthetic-only",
+            "keyIds": [
+              "key:synthetic-only"
+            ],
+            "criteria": [
+              1
+            ],
+            "applications": [
+              "PAYMENT"
+            ],
+            "role": "DEPLOYMENT_REVIEWER",
+            "independenceEvidenceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "validFrom": "2026-10-13T12:00:00Z",
+            "validUntil": "2026-10-14T12:00:00Z"
+          }
+        ],
+        "decisionRefs": [
+          {
+            "schema": "acp-phase6-evidence/human-decision/1",
+            "payloadDigest": "sha256:7941a12d1f23c1714a166d812dc50e5aaba517d95288612f8b3cb7ed2f0df119"
+          }
+        ],
+        "revocationHeadRef": null,
+        "revocationSequence": 0
+      },
+      "payloadDigest": "sha256:3bec182f9cd66549d64363be17cff9fc1717990452c3d9deb341adf07432175e",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "trust-snapshot": {
+      "payload": {
+        "schema": "acp-phase6-evidence/trust-snapshot/1",
+        "recordId": "00000000000000000000000000000009",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "snapshotSequence": 0,
+        "predecessorRef": null,
+        "verifierRegistrationRefs": [
+          {
+            "schema": "acp-phase6-evidence/verifier-registration/1",
+            "payloadDigest": "sha256:71e1c07e0af2d1010d4a125da32b3cdaeb0bd3b7f3ea3c21ca668c90eb299848"
+          }
+        ],
+        "humanRegistryRef": {
+          "schema": "acp-phase6-evidence/human-registry/1",
+          "payloadDigest": "sha256:3bec182f9cd66549d64363be17cff9fc1717990452c3d9deb341adf07432175e"
+        },
+        "revocationHeads": [
+          {
+            "registryId": "registry:synthetic-only",
+            "sequence": 0,
+            "headRef": null
+          }
+        ]
+      },
+      "payloadDigest": "sha256:6f51b65c320422393c546629d0d89ce93287b137b6d3d9e8f5d918c9e5a7b1ce",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "engineering-envelope": {
+      "payload": {
+        "schema": "acp-phase6-evidence/engineering-envelope/1",
+        "recordId": "0000000000000000000000000000000a",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "binding": {
+          "executionCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "evaluationCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "sourceTreeDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bundleDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "approvalDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "canonicalDigests": {
+            "payment": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "case-management": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "subjects": [
+          {
+            "application": "PAYMENT",
+            "snapshotDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "packageDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "criteria": [
+          1
+        ],
+        "registrationRef": {
+          "schema": "acp-phase6-evidence/verifier-registration/1",
+          "payloadDigest": "sha256:71e1c07e0af2d1010d4a125da32b3cdaeb0bd3b7f3ea3c21ca668c90eb299848"
+        },
+        "attestationRef": {
+          "schema": "acp-phase6-evidence/execution-attestation/1",
+          "payloadDigest": "sha256:c5df637542079caf4c7720d652165e3d8a177662c942cef312c5a6e5b585a95f"
+        },
+        "manifestRef": {
+          "schema": "acp-phase6-evidence/artifact-manifest/1",
+          "payloadDigest": "sha256:4fd641f912f085d22a01da30dfbc01035f73a7f91240b992fc35f0a2c169d6b4"
+        },
+        "challengeRef": {
+          "schema": "acp-phase6-evidence/execution-challenge/1",
+          "payloadDigest": "sha256:14371091732d71c8600730e5f3e84d4beb74c792132f7d32ab38b0087eb0e45d"
+        }
+      },
+      "payloadDigest": "sha256:1bd8ad7bccfdd91e716bfa5063f463b1dce21ae2a9050f9740f25623e3804b3c",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "admission-receipt": {
+      "payload": {
+        "schema": "acp-phase6-evidence/admission-receipt/1",
+        "recordId": "0000000000000000000000000000000b",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "admissionId": "admission:synthetic-only",
+        "auditSessionId": "session:synthetic-only",
+        "envelopeRef": {
+          "schema": "acp-phase6-evidence/engineering-envelope/1",
+          "payloadDigest": "sha256:1bd8ad7bccfdd91e716bfa5063f463b1dce21ae2a9050f9740f25623e3804b3c"
+        },
+        "binding": {
+          "executionCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "evaluationCommit": "c1a201c779621963b0334a1bee4423b23315884f",
+          "sourceTreeDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "bundleDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "approvalDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "canonicalDigests": {
+            "payment": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "case-management": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "subjects": [
+          {
+            "application": "PAYMENT",
+            "snapshotDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "packageDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "criteria": [
+          1
+        ],
+        "verifierRegistrationRef": {
+          "schema": "acp-phase6-evidence/verifier-registration/1",
+          "payloadDigest": "sha256:71e1c07e0af2d1010d4a125da32b3cdaeb0bd3b7f3ea3c21ca668c90eb299848"
+        },
+        "trustSnapshotRef": {
+          "schema": "acp-phase6-evidence/trust-snapshot/1",
+          "payloadDigest": "sha256:6f51b65c320422393c546629d0d89ce93287b137b6d3d9e8f5d918c9e5a7b1ce"
+        },
+        "humanDecisionRefs": [
+          {
+            "schema": "acp-phase6-evidence/human-decision/1",
+            "payloadDigest": "sha256:7941a12d1f23c1714a166d812dc50e5aaba517d95288612f8b3cb7ed2f0df119"
+          }
+        ],
+        "manifestRef": {
+          "schema": "acp-phase6-evidence/artifact-manifest/1",
+          "payloadDigest": "sha256:4fd641f912f085d22a01da30dfbc01035f73a7f91240b992fc35f0a2c169d6b4"
+        },
+        "predicateResults": [
+          {
+            "criterion": 1,
+            "predicateContractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "result": "SATISFIED"
+          }
+        ],
+        "ledgerSequence": 1,
+        "predecessorReceiptRef": null
+      },
+      "payloadDigest": "sha256:c80f89a9162cf4365c732f30bd8a6899c7fa4fc6f91dc39eb225a4a701765868",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "admission-rejection": {
+      "payload": {
+        "schema": "acp-phase6-evidence/admission-rejection/1",
+        "recordId": "0000000000000000000000000000000c",
+        "repository": "jeresaf/Application-Compiler-Platform",
+        "issuedAt": "2026-10-13T12:00:00Z",
+        "expiresAt": "2026-10-14T12:00:00Z",
+        "policyRef": {
+          "schema": "acp-phase6-evidence/trust-policy/1",
+          "payloadDigest": "sha256:88a41d619f3ec249f4c70a65b2a038b57b5ccda509e047f553aa34f1cf079959"
+        },
+        "auditSessionId": "session:synthetic-only",
+        "submittedObjectDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage": "PARSE",
+        "reasonCodes": [
+          "INVALID_STRUCTURE"
+        ],
+        "relatedRefs": [],
+        "trustSnapshotRef": null,
+        "ledgerSequence": 1,
+        "predecessorRecordRef": null
+      },
+      "payloadDigest": "sha256:e56930d250e860398049cc98379063454875a38a734e1efc98907e85616e5a00",
+      "signatures": [
+        {
+          "signerId": "principal:synthetic-only",
+          "keyId": "key:synthetic-only",
+          "algorithm": "Ed25519",
+          "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    }
+  }
+}

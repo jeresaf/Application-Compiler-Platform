@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acp-phase6-evidence/admission-receipt/1",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "acp-phase6-evidence/admission-receipt/1"
+        },
+        "recordId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/recordId"
+        },
+        "repository": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/repository"
+        },
+        "issuedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "expiresAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "policyRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/trust-policyRef"
+        },
+        "admissionId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/admission"
+        },
+        "auditSessionId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/session"
+        },
+        "envelopeRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/engineering-envelopeRef"
+        },
+        "binding": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/binding"
+        },
+        "subjects": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/subjects"
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/criterion"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "verifierRegistrationRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/verifier-registrationRef"
+        },
+        "trustSnapshotRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/trust-snapshotRef"
+        },
+        "humanDecisionRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/human-decisionRef"
+          },
+          "minItems": 0,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": [
+            "payloadDigest"
+          ]
+        },
+        "manifestRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/artifact-manifestRef"
+        },
+        "predicateResults": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "criterion": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/criterion"
+              },
+              "predicateContractDigest": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+              },
+              "result": {
+                "const": "SATISFIED"
+              }
+            },
+            "required": [
+              "criterion",
+              "predicateContractDigest",
+              "result"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": [
+            "criterion"
+          ]
+        },
+        "ledgerSequence": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+        },
+        "predecessorReceiptRef": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/admission-receiptRef"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "recordId",
+        "repository",
+        "issuedAt",
+        "expiresAt",
+        "policyRef",
+        "admissionId",
+        "auditSessionId",
+        "envelopeRef",
+        "binding",
+        "subjects",
+        "criteria",
+        "verifierRegistrationRef",
+        "trustSnapshotRef",
+        "humanDecisionRefs",
+        "manifestRef",
+        "predicateResults",
+        "ledgerSequence",
+        "predecessorReceiptRef"
+      ],
+      "additionalProperties": false
+    },
+    "payloadDigest": {
+      "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:acp-phase6-evidence:common:1#/$defs/signature"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "x-set-key": [
+        "signerId",
+        "keyId"
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "payloadDigest",
+    "signatures"
+  ],
+  "additionalProperties": false
+}

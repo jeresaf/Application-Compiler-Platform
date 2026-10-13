@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acp-phase6-evidence/revocation/1",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "acp-phase6-evidence/revocation/1"
+        },
+        "recordId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/recordId"
+        },
+        "repository": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/repository"
+        },
+        "issuedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "expiresAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "policyRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/trust-policyRef"
+        },
+        "registryId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/registry"
+        },
+        "sequence": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+        },
+        "predecessorRef": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/revocationRef"
+            }
+          ]
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "REVOKE",
+            "REPLACE"
+          ]
+        },
+        "targetRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/anyRecordRef"
+        },
+        "replacementRef": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/anyRecordRef"
+            }
+          ]
+        },
+        "effectiveAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "reasonCode": {
+          "type": "string",
+          "enum": [
+            "COMPROMISE",
+            "AUTHORIZATION_REMOVED",
+            "SUPERSEDED",
+            "ERROR_CORRECTION"
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "recordId",
+        "repository",
+        "issuedAt",
+        "expiresAt",
+        "policyRef",
+        "registryId",
+        "sequence",
+        "predecessorRef",
+        "action",
+        "targetRef",
+        "replacementRef",
+        "effectiveAt",
+        "reasonCode"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "REVOKE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "replacementRef": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "replacementRef": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/anyRecordRef"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "payloadDigest": {
+      "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:acp-phase6-evidence:common:1#/$defs/signature"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "x-set-key": [
+        "signerId",
+        "keyId"
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "payloadDigest",
+    "signatures"
+  ],
+  "additionalProperties": false
+}

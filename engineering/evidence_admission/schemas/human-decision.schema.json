@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acp-phase6-evidence/human-decision/1",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "acp-phase6-evidence/human-decision/1"
+        },
+        "recordId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/recordId"
+        },
+        "repository": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/repository"
+        },
+        "issuedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "expiresAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "policyRef": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/trust-policyRef"
+        },
+        "reviewerId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/principal"
+        },
+        "grantId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/grant"
+        },
+        "scope": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/scope"
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "ACCEPT",
+            "ACCEPT_WITH_RESERVATIONS",
+            "REJECT"
+          ]
+        },
+        "reservations": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/text"
+          },
+          "minItems": 0,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:acp-phase6-evidence:common:1#/$defs/text"
+          },
+          "minItems": 0,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "independenceEvidenceDigest": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+        },
+        "supersedes": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/human-decisionRef"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "recordId",
+        "repository",
+        "issuedAt",
+        "expiresAt",
+        "policyRef",
+        "reviewerId",
+        "grantId",
+        "scope",
+        "disposition",
+        "reservations",
+        "exclusions",
+        "independenceEvidenceDigest",
+        "supersedes"
+      ],
+      "additionalProperties": false
+    },
+    "payloadDigest": {
+      "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:acp-phase6-evidence:common:1#/$defs/signature"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "x-set-key": [
+        "signerId",
+        "keyId"
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "payloadDigest",
+    "signatures"
+  ],
+  "additionalProperties": false
+}

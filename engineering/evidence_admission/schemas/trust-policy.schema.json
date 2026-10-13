@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acp-phase6-evidence/trust-policy/1",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "acp-phase6-evidence/trust-policy/1"
+        },
+        "recordId": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/recordId"
+        },
+        "repository": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/repository"
+        },
+        "issuedAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "expiresAt": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/timestamp"
+        },
+        "predecessorPolicyRef": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/trust-policyRef"
+            }
+          ]
+        },
+        "sequence": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/integer"
+        },
+        "supportedSchemas": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "acp-phase6-evidence/engineering-envelope/1",
+              "acp-phase6-evidence/verifier-registration/1",
+              "acp-phase6-evidence/execution-attestation/1",
+              "acp-phase6-evidence/artifact-manifest/1",
+              "acp-phase6-evidence/human-decision/1",
+              "acp-phase6-evidence/human-registry/1",
+              "acp-phase6-evidence/revocation/1",
+              "acp-phase6-evidence/admission-receipt/1",
+              "acp-phase6-evidence/admission-rejection/1",
+              "acp-phase6-evidence/trust-policy/1",
+              "acp-phase6-evidence/trust-snapshot/1",
+              "acp-phase6-evidence/execution-challenge/1"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": []
+        },
+        "signerRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "signerId": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/identity"
+              },
+              "keyIds": {
+                "type": "array",
+                "items": {
+                  "$ref": "urn:acp-phase6-evidence:common:1#/$defs/key"
+                },
+                "minItems": 1,
+                "maxItems": 4096,
+                "uniqueItems": true,
+                "x-set-key": []
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "REGISTRATION_CUSTODIAN",
+                  "HUMAN_REGISTRY_CUSTODIAN",
+                  "REVIEWER",
+                  "EXECUTOR",
+                  "COLLECTOR",
+                  "CHALLENGE_ISSUER",
+                  "EVALUATOR",
+                  "POLICY_CUSTODIAN",
+                  "REVOCATION_CUSTODIAN"
+                ]
+              }
+            },
+            "required": [
+              "signerId",
+              "keyIds",
+              "role"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": [
+            "signerId",
+            "role"
+          ]
+        },
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "policy": {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+            },
+            "registration": {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+            },
+            "humanRegistry": {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+            },
+            "humanDecision": {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+            }
+          },
+          "required": [
+            "policy",
+            "registration",
+            "humanRegistry",
+            "humanDecision"
+          ],
+          "additionalProperties": false
+        },
+        "criterionContracts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "criterion": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/criterion"
+              },
+              "contractDigest": {
+                "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+              }
+            },
+            "required": [
+              "criterion",
+              "contractDigest"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true,
+          "x-set-key": [
+            "criterion"
+          ]
+        },
+        "freshness": {
+          "type": "object",
+          "properties": {
+            "maxEvidenceAgeSeconds": {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+            },
+            "maxFutureSkewSeconds": {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/integer"
+            },
+            "maxChallengeAgeSeconds": {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+            },
+            "maxSnapshotAgeSeconds": {
+              "$ref": "urn:acp-phase6-evidence:common:1#/$defs/positive"
+            }
+          },
+          "required": [
+            "maxEvidenceAgeSeconds",
+            "maxFutureSkewSeconds",
+            "maxChallengeAgeSeconds",
+            "maxSnapshotAgeSeconds"
+          ],
+          "additionalProperties": false
+        },
+        "independenceContractDigest": {
+          "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+        }
+      },
+      "required": [
+        "schema",
+        "recordId",
+        "repository",
+        "issuedAt",
+        "expiresAt",
+        "predecessorPolicyRef",
+        "sequence",
+        "supportedSchemas",
+        "signerRoles",
+        "thresholds",
+        "criterionContracts",
+        "freshness",
+        "independenceContractDigest"
+      ],
+      "additionalProperties": false
+    },
+    "payloadDigest": {
+      "$ref": "urn:acp-phase6-evidence:common:1#/$defs/digest"
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:acp-phase6-evidence:common:1#/$defs/signature"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "x-set-key": [
+        "signerId",
+        "keyId"
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "payloadDigest",
+    "signatures"
+  ],
+  "additionalProperties": false
+}
