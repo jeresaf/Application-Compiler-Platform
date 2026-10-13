@@ -1,0 +1,34 @@
+{
+  "suites": {
+    "route-a": {
+      "tests": 112,
+      "seconds": 370.92,
+      "logDigest": "sha256:0ce0cb37175bfff2e46c9fbe6df2a23cf2840ad333a8c28455d53e5e3e0d5812",
+      "skipLines": [],
+      "resourceWarnings": [],
+      "result": "PASS"
+    },
+    "compiler": {
+      "tests": 270,
+      "seconds": 1153.136,
+      "logDigest": "sha256:6a8cb654590e5377d151aa95534b0bf201e12f57ceaf940746d342854b964a85",
+      "skipLines": [
+        "test_real_postgresql_storage_presence_required_and_rollback (test_canonical03_migrations.PostgreSQL03MigrationTests.test_real_postgresql_storage_presence_required_and_rollback) ... skipped 'requires explicit disposable PostgreSQL'"
+      ],
+      "resourceWarnings": [],
+      "result": "PASS"
+    }
+  },
+  "scope": "IMPLEMENTATION_AND_ISOLATED_TESTING_ONLY",
+  "additionalEvidence": [
+    "canonical-vectors.log",
+    "execution-v03-vectors.log",
+    "deterministic-v04-vectors.log",
+    "sealed-release.json",
+    "dependency-check.log",
+    "repository-check.log"
+  ],
+  "optInPostgresqlSkip": "Explicit disposable PostgreSQL compiler test not enabled; no application migration SQL authorized.",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

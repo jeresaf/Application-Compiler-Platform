@@ -10,16 +10,22 @@ from .evidence import verify_receipt, CHECKPOINT
 
 
 class HistoricalAuthority:
-    def __init__(self,host,entries,operations):
+    def __init__(self,host,entries,operations,clock):
         self.host=host
+        self.clock=clock
         self.index=[]
         previous='EMPTY_UNINITIALIZED'
+        seen=set()
         for row in entries:
             seq,cid,jd,entry=row
             require(seq==len(self.index),'noncontiguous journal')
             matches=[o for o in operations if o['plan']==entry['plan'] and o['proof']==entry['approval']['proof']]
             require(len(matches)==1,'missing or ambiguous durable authority subject')
             op=matches[0]
+            for label in ('approvalId','nonce'):
+                identity=(label,op['proof']['body'][label])
+                require(identity not in seen,'duplicate historical approval identity')
+                seen.add(identity)
             require(op['subject']['expectedHead']==previous,'proof self-declared predecessor rejected')
             require(entry['previousDigest']==(None if seq==0 else previous['journalDigest']),'changed predecessor chain')
             decision=op['bindings'].get('migrationDecision')
@@ -31,7 +37,7 @@ class HistoricalAuthority:
     def verify_historical(self,proof,expected,committed_at):
         matches=[c for p,r,t,c in self.index if p==fingerprint(proof,'proof') and r==expected and t==committed_at]
         require(len(matches)==1,'missing or ambiguous historical proof context')
-        return Authority(matches[0],lambda:committed_at).verify_historical(proof,expected,committed_at)
+        return Authority(matches[0],self.clock).verify_historical(proof,expected,committed_at)
 
 
 def audit_locked(gateway,fence):
@@ -45,7 +51,7 @@ def audit_locked(gateway,fence):
     require(all(o['state'] in {'PUBLISHED','REJECTED','EXPIRED'} for o in operations),'unfinished ledger operations')
     accepted=[o for o in operations if o['state']=='PUBLISHED']
     require(len(accepted)==len(rows),'missing committed operations')
-    auth=HistoricalAuthority(gateway.host,rows,accepted)
+    auth=HistoricalAuthority(gateway.host,rows,accepted,gateway.clock)
     result=gateway._repo.audit(authority=auth)
     seen=set()
     for op in operations:
@@ -59,13 +65,14 @@ def audit_locked(gateway,fence):
         commit=gateway._commit(op,fence)
         require(op['bindings'].get('commit')==commit,'changed durable commit evidence')
         raw=canonical_bytes(op['bindings']['receipt'])
-        rd=verify_receipt(gateway.host,raw,commit)
+        rd=verify_receipt(gateway.host,raw,commit,gateway.clock())
         checkpoint_raw=canonical_bytes(op['bindings']['checkpoint'])
         observed=op['bindings']['checkpoint']['body']['observedAt']
         body,_=gateway.host.signed(checkpoint_raw,CHECKPOINT,'witness',observed)
+        gateway.host.current_authority(gateway.clock()).key(body['keyId'],observed)
         gateway.host.identity(body)
         require(body['checkpoint']=={'head':commit['newHead'],'receiptDigest':rd},'invalid retained witness checkpoint')
-        verify_receipt(gateway.host,raw,commit,observed)
+        require(decode(raw)['body']['issuedAt']<=observed,'receipt postdates retained witness')
     latest,_=gateway.witness.latest()
     require(latest is not None and latest['head']==gateway._head(),'truncated or stale witnessed history')
     final=next(o for o in accepted if o['bindings']['commit']['newHead']==latest['head'])
@@ -105,6 +112,11 @@ def verify_export_attestation(host,raw,manifest,at):
     require(type(captured) is int and captured<=at,'invalid export capture time')
     host.check_registration(captured)
     body,signer=host.signed(raw,'acp-route-a-export-attestation/1','receipt',captured)
+    observation=host.current_authority(at)
+    observation.historical(host,captured)
+    observation.key(body['keyId'],captured)
+    observation.principal(manifest['exporter'],captured)
+    observation.grants(host,manifest['exporter'],'EXPORT_READ',(),captured)
     closed(body,'classification algorithm issuer audience keyId manifest')
     require(signer==host.config['serviceId'] and body['manifest']==manifest,'export service attestation changed')
     host.grant(manifest['exporter'],'EXPORT_READ',(),captured)

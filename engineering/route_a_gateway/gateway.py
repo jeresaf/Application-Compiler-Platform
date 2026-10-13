@@ -20,7 +20,7 @@ def event_ref(host,row):
 class Gateway:
     def __init__(self,directory,host,witness,receipt_signer,clock,failpoint=None):
         require(type(host) is Host,'trusted immutable host required')
-        host.check_registration(clock())
+        host.current_authority(clock())
         self.directory=Path(directory)
         self.directory.mkdir(mode=0o700,parents=True,exist_ok=True)
         require(not self.directory.is_symlink(),'symlink repository forbidden')
@@ -33,6 +33,7 @@ class Gateway:
         with Fence(self.lock_path) as fence:
             self._repo=HistoryRepository(self.directory/'native.sqlite')
             self.ledger=Ledger(self.directory/'ledger.sqlite',host)
+            self.ledger.validate()
             existing=self.ledger.export()
             self.witness.verify_ledger(existing,require_checkpoint=bool(existing['operations']))
 
@@ -43,7 +44,8 @@ class Gateway:
     def _context(self,s,session,action,plan=None,migration_decision=None):
         caller,evidence=self._caller(session,action)
         return Context(self.host,canonical_bytes(s),caller,evidence,action,
-                       canonical_bytes(plan) if plan is not None else None,migration_decision)
+                       canonical_bytes(plan) if plan is not None else None,migration_decision,
+                       self.host.current_authority(self.clock()).raw)
 
     def _authority(self,s,session,action,plan=None,migration_decision=None):
         return Authority(self._context(s,session,action,plan,migration_decision),self.clock)
@@ -55,6 +57,7 @@ class Gateway:
         return {'sequence':row[0],'digest':row[3]['plan']['candidate']['contentDigest'],'journalDigest':row[2]}
 
     def _published_head(self,fence):
+        self.ledger.validate()
         existing=self.ledger.export()
         self.witness.verify_ledger(existing,require_checkpoint=bool(existing['operations']))
         for row in self.ledger.export()['operations']:
@@ -71,7 +74,7 @@ class Gateway:
             matches=[self.ledger.get(r[0]) for r in rows if self.ledger.get(r[0])['bindings'].get('commit',{}).get('newHead')==head]
             require(len(matches)==1 and matches[0]['state']=='PUBLISHED','head not durably published')
             receipt=canonical_bytes(matches[0]['bindings']['receipt'])
-            require(verify_receipt(self.host,receipt,matches[0]['bindings']['commit']) == checkpoint['receiptDigest'],'witness receipt mismatch')
+            require(verify_receipt(self.host,receipt,matches[0]['bindings']['commit'],self.clock()) == checkpoint['receiptDigest'],'witness receipt mismatch')
         return head
 
     def _event(self,change_id,state):
@@ -133,8 +136,8 @@ class Gateway:
             return plan,subject(self.host,plan,operation,'EMPTY_UNINITIALIZED',genesis_retry=retry)
 
     def approve(self,operation,change_id,expected_event,proof_raw,session,migration_decision=None):
+        self._caller(session,'APPROVE')
         with Fence(self.lock_path) as fence:
-            epoch=self.ledger.epoch(fence)
             head=self._published_head(fence)
             row,_=self._event(change_id,'REVIEW_REQUIRED')
             require(event_ref(self.host,row)==expected_event,'changed reviewed version')
@@ -144,6 +147,7 @@ class Gateway:
             proof=decode(proof_raw)
             verdict=auth.verify(proof,request(plan),self.clock())
             require(auth.context.caller==verdict['principal'],'wrong authenticated reviewer')
+            epoch=self.ledger.epoch(fence)
             self.ledger.reserve(s,plan,proof,fence,epoch)
             if migration_decision is not None:
                 self.ledger.bind(operation,'migrationDecision',decode(migration_decision),fence)
@@ -171,14 +175,15 @@ class Gateway:
         return ref
 
     def bootstrap(self,source,author,operation,retry,proof_raw,session):
+        self._caller(session,'BOOTSTRAP')
         with Fence(self.lock_path) as fence:
-            epoch=self.ledger.epoch(fence)
             require(self._published_head(fence)=='EMPTY_UNINITIALIZED','duplicate genesis')
             plan=genesis(source,author)
             s=subject(self.host,plan,operation,'EMPTY_UNINITIALIZED',genesis_retry=retry)
             auth=self._authority(decode(s),session,'BOOTSTRAP')
             require(auth.context.caller==author,'wrong genesis author')
             proof=decode(proof_raw);auth.verify(proof,request(plan),self.clock())
+            epoch=self.ledger.epoch(fence)
             self.ledger.reserve(s,plan,proof,fence,epoch)
             self.ledger.bind(operation,'retry',retry,fence)
             self.witness.remember_ledger(self.ledger.export())
@@ -191,8 +196,10 @@ class Gateway:
                 self._recovery(operation,fence,epoch,error);raise
 
     def apply(self,operation,retry,session):
+        self._caller(session,'APPLY')
         with Fence(self.lock_path) as fence:
-            epoch=self.ledger.epoch(fence)
+            self.ledger.validate()
+            self.witness.verify_ledger(self.ledger.export(),require_checkpoint=True)
             op=self.ledger.get(operation);s=op['subject']
             decision=op['bindings'].get('migrationDecision')
             auth=self._authority(s,session,'APPLY',op['plan'],canonical_bytes(decision) if decision else None)
@@ -206,6 +213,7 @@ class Gateway:
             row,_=self._event(s['proposalBinding']['changeId'],'APPROVED')
             require(event_ref(self.host,row)==ref,'changed approved event')
             require(type(retry) is str and 0<len(retry)<=128,'invalid retry identity')
+            epoch=self.ledger.epoch(fence)
             self.ledger.bind(operation,'retry',retry,fence)
             self.witness.remember_ledger(self.ledger.export())
             try:
@@ -252,6 +260,7 @@ class Gateway:
         self.failpoint('after_'+target.lower())
 
     def _finish(self,operation,fence,epoch):
+        self.host.current_authority(self.clock())
         op=self.ledger.get(operation)
         commit=self._commit(op,fence)
         self.ledger.bind(operation,'commit',commit,fence)
@@ -267,7 +276,7 @@ class Gateway:
             self._move(operation,'RECEIPT_STORED',epoch,{'receipt':rd},fence)
         op=self.ledger.get(operation)
         if op['state']=='RECEIPT_STORED':
-            rd=verify_receipt(self.host,canonical_bytes(op['bindings']['receipt']),commit)
+            rd=verify_receipt(self.host,canonical_bytes(op['bindings']['receipt']),commit,self.clock())
             exported=self._repo.export_records()
             row=next(r for r in exported['journal'] if r[2]==commit['newHead']['journalDigest'])
             proposals=[]
@@ -281,6 +290,7 @@ class Gateway:
             self._move(operation,'WITNESSED',epoch,{'checkpoint':hashed(raw)},fence)
         op=self.ledger.get(operation)
         if op['state']=='WITNESSED':
+            self.host.current_authority(self.clock())
             checkpoint,_=self.witness.latest()
             if checkpoint!={'head':commit['newHead'],'receiptDigest':hashed(canonical_bytes(op['bindings']['receipt']))}:
                 raise WitnessConflict('witness fork before publication')
@@ -291,6 +301,8 @@ class Gateway:
     def recover(self,operation,session):
         self._caller(session,'RECOVER')
         with Fence(self.lock_path) as fence:
+            self.ledger.validate()
+            self.witness.verify_ledger(self.ledger.export(),require_checkpoint=True)
             epoch=self.ledger.epoch(fence);op=self.ledger.get(operation)
             require(op['state'] not in {'QUARANTINED','REJECTED','EXPIRED','PUBLISHED'},'no automatic terminal recovery')
             try:
@@ -349,7 +361,7 @@ class Gateway:
             from .archive import audit_locked
             audit_locked(self,fence)
             commit=self._commit(op,fence)
-            raw=canonical_bytes(op['bindings']['receipt']);rd=verify_receipt(self.host,raw,commit)
+            raw=canonical_bytes(op['bindings']['receipt']);rd=verify_receipt(self.host,raw,commit,self.clock())
             latest,_=self.witness.latest()
             # Authenticated full audit verifies retained per-operation checkpoint below.
             require(latest is not None and latest['head']==self._head(),'stale latest checkpoint')

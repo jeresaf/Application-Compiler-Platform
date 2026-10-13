@@ -44,6 +44,7 @@ class Host:
     raw: bytes
     registration: bytes | None = None
     registration_root: bytes | None = None
+    freshness: object | None = None
 
     def __post_init__(self):
         c = decode(self.raw)
@@ -123,7 +124,7 @@ class Host:
         return b, k['principal']
 
     def authenticate(self, session, at, action, scopes=()):
-        self.check_registration(at)
+        observation = self.current_authority(at)
         b, signer = self.signed(session, 'acp-route-a-session/1', 'authentication', at)
         closed(b, 'classification algorithm issuer audience keyId repositoryId applicationId serviceId principal issuedAt notBefore expiresAt sessionId')
         self.identity(b)
@@ -132,7 +133,16 @@ class Host:
         require(at - b['issuedAt'] <= self.config['maxSessionAge'], 'stale authentication')
         require(bool(signer) and bool(b['sessionId']), 'missing authenticated identity')
         self.grant(b['principal'], action, scopes, at)
+        observation.key(b['keyId'], at)
+        observation.principal(b['principal'], at)
+        observation.grants(self, b['principal'], action, scopes, at)
         return b['principal'], hashed(session)
+
+    def current_authority(self, at):
+        self.check_registration(at)
+        from .freshness import FreshnessClient
+        require(type(self.freshness) is FreshnessClient, 'authenticated current authority provider required')
+        return self.freshness.check(self, at)
 
     def identity(self, body):
         c = self.config
@@ -155,6 +165,7 @@ class Context:
     action: str
     plan_bytes: bytes | None = None
     migration_decision: bytes | None = None
+    authority_observation: bytes | None = None
 
     def __post_init__(self):
         s = decode(self.subject)
@@ -164,6 +175,10 @@ class Context:
             p=decode(self.plan_bytes)
             require(p['planDigest']==s['planDigest'],'context plan changed')
         if self.migration_decision is not None:decode(self.migration_decision)
+        if self.authority_observation is not None:
+            b=decode(self.authority_observation)['body']
+            self.host.identity(b)
+            require(b['configurationDigest']==self.host.digest,'wrong invocation authority observation')
 
 
 SUBJECT_KEYS = ('repositoryId applicationId authorityConfigurationDigest operationId action request '
@@ -202,6 +217,9 @@ class Authority:
         return principal
 
     def verify(self, proof, expected, now):
+        return self._verify(proof, expected, now, self.context.host.current_authority(now))
+
+    def _verify(self, proof, expected, now, observation):
         c = self.context
         c.host.check_registration(now)
         b, signer = c.host.signed(canonical_bytes(proof), 'acp-route-a-approval/2', 'approval', now)
@@ -211,6 +229,13 @@ class Authority:
         require(b['verificationPolicyVersion'] == c.host.config['policyVersion'], 'unknown historical policy')
         require(b['reviewerPrincipal'] == signer and signer != s['authorPrincipal'], 'independent reviewer required')
         times(b, now)
+        observation.key(b['keyId'], now)
+        observation.key(b['keyId'], b['issuedAt'])
+        observation.principal(signer, now)
+        observation.principal(s['authorPrincipal'], now)
+        observation.grants(c.host, signer, 'APPROVE', s['requiredScopes'], now)
+        observation.grants(c.host, signer, 'APPROVE', s['requiredScopes'], b['issuedAt'])
+        observation.grants(c.host, s['authorPrincipal'], 'AUTHOR', (), now)
         require(b['expiresAt']-b['issuedAt'] <= c.host.config['maxProofLifetime'],'approval lifetime exceeds trusted policy')
         # Key and grant validity must hold both at signing and at use. Historical
         # audit supplies commit time, never current policy substituted retroactively.
@@ -230,6 +255,8 @@ class Authority:
             decision,reviewer=c.host.signed(c.migration_decision,'acp-route-a-migration-declaration/1','approval',now)
             closed(decision,'classification algorithm issuer audience keyId repositoryId applicationId authorityConfigurationDigest planDigest migrationDeclarationDigest reviewerPrincipal issuedAt notBefore expiresAt permittedUse decision')
             c.host.identity(decision);times(decision,now)
+            observation.key(decision['keyId'],now)
+            observation.key(decision['keyId'],decision['issuedAt'])
             c.host.signed(c.migration_decision,'acp-route-a-migration-declaration/1','approval',decision['issuedAt'])
             c.host.grant(reviewer,'APPROVE',['MIGRATION'],decision['issuedAt'])
             require(decision['authorityConfigurationDigest']==c.host.digest and decision['planDigest']==s['planDigest']
@@ -243,4 +270,6 @@ class Authority:
 
     def verify_historical(self, proof, expected, committed_at):
         # The historical adapter is separately constructed from verified native rows.
-        return self.verify(proof, expected, committed_at)
+        observation=self.context.host.current_authority(self.clock())
+        observation.historical(self.context.host, committed_at)
+        return self._verify(proof, expected, committed_at, observation)

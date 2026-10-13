@@ -33,12 +33,16 @@ def commit_evidence(host, subject, plan, proof, row, approved_event, retry):
         'committedAt':entry['committedAt'],'serviceId':host.config['serviceId']}
 
 
-def verify_receipt(host, raw, expected, at=None):
+def verify_receipt(host, raw, expected, at):
+    require(type(at) is int,'trusted current verification time required')
     preliminary=decode(raw)['body']
     issued=preliminary['issuedAt']
-    require(type(issued) is int and issued>=expected['committedAt'] and (at is None or issued<=at),'invalid receipt signing time')
+    require(type(issued) is int and issued>=expected['committedAt'] and issued<=at,'invalid receipt signing time')
     host.check_registration(issued)
     b,signer=host.signed(raw,RECEIPT,'receipt',issued)
+    observation=host.current_authority(at)
+    observation.historical(host, issued)
+    observation.key(b['keyId'], issued)
     closed(b,'classification algorithm issuer audience keyId commit issuedAt')
     host.identity(b['commit'])
     require(b['commit'] == expected and signer == host.config['serviceId'],'receipt binding mismatch')
@@ -119,11 +123,12 @@ class WitnessClient:
             db.execute('INSERT INTO checkpoints VALUES (?,?)',(sequence,raw))
 
     def response(self, method, *args):
-        self.host.check_registration(self.clock())
+        observation=self.host.current_authority(self.clock())
         challenge=secrets.token_hex(32)
         raw=getattr(self.provider,method)(challenge,*args)
         now=self.clock()
         b,signer=self.host.signed(raw,CHECKPOINT,'witness',now)
+        observation.key(b['keyId'], now)
         closed(b,'classification algorithm issuer audience keyId repositoryId applicationId challenge observedAt checkpoint')
         self.host.identity(b)
         require(b['challenge']==challenge and type(b['observedAt']) is int
@@ -148,7 +153,7 @@ class WitnessClient:
         return checkpoint,raw
 
 
-def verify_witness_submission(host,commit,receipt_raw,bundle,previous_checkpoint,previous_entry):
+def verify_witness_submission(host,commit,receipt_raw,bundle,previous_checkpoint,previous_entry,now):
     """Witness-side validation: a service signature alone cannot approve semantics."""
     closed(bundle,'row proposals migrationDecision')
     row=bundle['row'];entry=row[3];plan=entry['plan'];proof=entry['approval']['proof']
@@ -175,8 +180,15 @@ def verify_witness_submission(host,commit,receipt_raw,bundle,previous_checkpoint
     decision=bundle['migrationDecision']
     ctx=Context(host,s,'WITNESS_VERIFIER',hashed(canonical_bytes(row)),'AUDIT_READ',
                 canonical_bytes(plan),canonical_bytes(decision) if decision is not None else None)
-    require(Authority(ctx,lambda:entry['committedAt']).verify_historical(proof,request(plan),entry['committedAt'])
+    require(Authority(ctx,lambda:now).verify_historical(proof,request(plan),entry['committedAt'])
             ==entry['approval']['verdict'],'witness approval authenticity failed')
+    # An unseen head has no independently witnessed commit-time evidence yet.
+    # A service credential must not backdate it to bypass live revocation/expiry.
+    # Exact already-witnessed retries are resolved by provider durable state.
+    require(Authority(ctx,lambda:now).verify(proof,request(plan),now)
+            ==entry['approval']['verdict'],'new witness acceptance requires current approval')
+    receipt_body,_=host.signed(receipt_raw,RECEIPT,'receipt',now)
+    host.current_authority(now).key(receipt_body['keyId'],now)
     reconstructed=commit_evidence(host,decode(s),plan,proof,row,commit['approvedEvent'],commit['retryIdentity'])
     require(reconstructed==commit,'witness actual commit evidence changed')
-    return verify_receipt(host,receipt_raw,commit)
+    return verify_receipt(host,receipt_raw,commit,now)

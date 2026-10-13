@@ -1,0 +1,18 @@
+{
+  "authorization": "IMPLEMENTATION_AND_ISOLATED_TESTING_ONLY",
+  "requestDigest": "sha256:44805966e05af1db2c4faa3b786361737495025b0eb9e30bfbafe35c701c2eab",
+  "reviewedImplementation": "a02986bc2cebf3ab0ee5d12c5d11fff2f86a4025",
+  "reviewedHead": "27cbccb34a9ae771c27c7720a967984d0c2d8fdc",
+  "classification": "NON_AUTHORITATIVE_TEST_ONLY",
+  "originalHumanDecision": "../human-decision.json",
+  "fullImplementationGate": "REVIEW_REQUIRED",
+  "operationalAuthority": "NOT_REGISTERED",
+  "operationalHistory": "NOT_INITIALIZED",
+  "referenceGenesis": "NOT_AUTHORIZED",
+  "acceptedSemanticTransitions": "NOT_AUTHORIZED",
+  "independentDataBindings": "NOT_APPROVED",
+  "migrationSQL": "NOT_AUTHORIZED",
+  "deployment": "NOT_AUTHORIZED",
+  "phase6": "IN_PROGRESS",
+  "phase7": "NOT_STARTED"
+}

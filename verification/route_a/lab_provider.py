@@ -16,14 +16,18 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from canonical_json import canonical_bytes,loads
 from engineering.route_a_gateway.security import Host,LABEL,require,hashed,decode
 from engineering.route_a_gateway.evidence import CHECKPOINT,verify_receipt,verify_witness_submission
+from engineering.route_a_gateway.freshness import FreshnessClient, STATUS
 
 
 class Lab:
     def __init__(self,directory):
         self.now=1000
-        self.keys={p:Ed25519PrivateKey.generate() for p in ('authentication','approval','receipt','witness')}
+        self.keys={p:Ed25519PrivateKey.generate() for p in ('authentication','approval','receipt','witness','authority-status')}
         self.registration_key=Ed25519PrivateKey.generate()
-        principals={'authentication':'LAB-IDP','approval':'LAB-REVIEWER','receipt':'LAB-SERVICE','witness':'LAB-WITNESS'}
+        principals={'authentication':'LAB-IDP','approval':'LAB-REVIEWER','receipt':'LAB-SERVICE','witness':'LAB-WITNESS','authority-status':'LAB-AUTHORITY-PROVIDER'}
+        self.directory=directory
+        self.authority_outage=False
+        self.authority_overrides={}
         grants=[]
         for principal,actions,scopes in [
             ('author',['AUTHOR','PROPOSE','REVIEW','BOOTSTRAP','APPLY','RECEIPT_READ','RECOVER','AUDIT_READ','EXPORT_READ','RECOVERY_OPERATOR'],[]),
@@ -49,6 +53,10 @@ class Lab:
                 try:
                     require(not lab.outage,'laboratory witness unavailable')
                     req=decode(self.rfile.read(int(self.headers['Content-Length'])))
+                    if self.path=='/authority-status':
+                        raw=lab.status(req['challenge'])
+                        self.send_response(200);self.end_headers();self.wfile.write(raw)
+                        return
                     with closing(sqlite3.connect(lab.witness_path)) as db, db:
                         db.execute('BEGIN IMMEDIATE')
                         row=db.execute('SELECT body FROM checkpoints ORDER BY sequence DESC LIMIT 1').fetchone()
@@ -59,7 +67,11 @@ class Lab:
                             new={'head':commit['newHead'],'receiptDigest':rd}
                             if checkpoint!=new:
                                 prior=db.execute('SELECT body FROM entries ORDER BY sequence DESC LIMIT 1').fetchone()
-                                verify_witness_submission(lab.host,commit,receipt,req['nativeBundle'],checkpoint,loads(prior[0]) if prior else None)
+                                verify_witness_submission(lab.host,commit,receipt,req['nativeBundle'],checkpoint,loads(prior[0]) if prior else None,lab.now)
+                                approved=req['nativeBundle']['row'][3]['approval']['proof']['body']
+                                used=[loads(r[0])['approval']['proof']['body'] for r in db.execute('SELECT body FROM entries')]
+                                require(all(p['approvalId']!=approved['approvalId'] and p['nonce']!=approved['nonce'] for p in used),
+                                        'independent witness approval identity already consumed')
                                 require((checkpoint is None and commit['previousHead']=='EMPTY_UNINITIALIZED'
                                          and commit['newHead']['sequence']==0) or
                                         (checkpoint is not None and checkpoint['head']==commit['previousHead']
@@ -89,7 +101,13 @@ class Lab:
         signature=self.registration_key.sign(b'acp-route-a-host-registration/1\0'+canonical_bytes(body))
         registration=canonical_bytes({'proofVersion':'acp-route-a-host-registration/1','body':body,
             'signature':base64.b64encode(signature).decode()})
-        return Host(raw,registration,self.registration_key.public_key().public_bytes_raw())
+        provider=AuthorityProvider(self,config)
+        # Configuration-specific observer paths keep deliberately different test hosts separate.
+        freshness=FreshnessClient(provider,str(self.directory/('authority-observer-'+hashed(raw)[7:]+'.sqlite')))
+        return Host(raw,registration,self.registration_key.public_key().public_bytes_raw(),freshness)
+
+    def status(self,challenge):
+        return self.host.freshness.provider.status(challenge)
 
     def sign(self,purpose,version,body):
         body={'classification':LABEL,'algorithm':'Ed25519','issuer':self.host.config['issuer'],
@@ -141,3 +159,26 @@ class RemoteWitness:
     def latest(self,challenge):return self._call('/latest',{'challenge':challenge})
     def advance(self,challenge,commit,receipt_raw,native_bundle):
         return self._call('/advance',{'challenge':challenge,'commit':commit,'receipt':receipt_raw.hex(),'nativeBundle':native_bundle})
+    def status(self,challenge):return self._call('/authority-status',{'challenge':challenge})
+
+
+class AuthorityProvider:
+    """NON_AUTHORITATIVE_TEST_ONLY: signed provider responses, never a Boolean verifier."""
+    def __init__(self,lab,config):
+        self.lab=lab
+        self.raw_config=canonical_bytes(config)
+
+    def status(self,challenge):
+        lab=self.lab;require(not lab.authority_outage,'laboratory authority outage')
+        config=decode(self.raw_config)
+        body={'classification':LABEL,'algorithm':config['algorithm'],'issuer':config['issuer'],
+              'audience':config['audience'],'keyId':'LAB-KEY-authority-status',
+              'repositoryId':config['repositoryId'],'applicationId':config['applicationId'],
+              'configurationDigest':hashed(self.raw_config),'policyVersion':config['policyVersion'],
+              'authorityRevision':1,'challenge':challenge,'observedAt':lab.now,
+              'configurationExpiresAt':100000,'historicalConfigurations':[hashed(self.raw_config)],
+              'historicalKeys':[k['id'] for k in config['keys']],
+              'historicalGrants':[g['id'] for g in config['grants']],
+              'revokedPrincipals':[],'revokedKeys':[],'revokedGrants':[],**lab.authority_overrides}
+        signature=lab.keys['authority-status'].sign(STATUS.encode()+b'\0'+canonical_bytes(body))
+        return canonical_bytes({'proofVersion':STATUS,'body':body,'signature':base64.b64encode(signature).decode()})

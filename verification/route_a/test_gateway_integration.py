@@ -26,7 +26,9 @@ import base64
 
 
 def crash_worker(directory,host_raw,registration,registration_root,port,key_raw,now,operation,retry,session,point,bootstrap=None):
-    host=Host(host_raw,registration,registration_root)
+    from engineering.route_a_gateway.freshness import FreshnessClient
+    freshness=FreshnessClient(RemoteWitness(port),str(Path(directory).parent/('authority-observer-'+hashed(host_raw)[7:]+'.sqlite')))
+    host=Host(host_raw,registration,registration_root,freshness)
     key=Ed25519PrivateKey.from_private_bytes(key_raw)
     def signer(version,body):
         body={'classification':'NON_AUTHORITATIVE_TEST_ONLY','algorithm':'Ed25519',
@@ -245,7 +247,7 @@ class IntegrationTests(unittest.TestCase):
     def test_receipt_corruption_and_witness_fork_stale_outage(self):
         _,_,raw=self.bootstrap();op=self.g.ledger.get('LAB-GENESIS')
         bad=decode(raw);bad['body']['commit']['planDigest']='OTHER'
-        self.denied(lambda:verify_receipt(self.lab.host,canonical_bytes(bad),op['bindings']['commit']))
+        self.denied(lambda:verify_receipt(self.lab.host,canonical_bytes(bad),op['bindings']['commit'],self.lab.now))
         for flag in ('fork','stale'):
             setattr(self.lab,flag,True)
             with self.subTest(flag=flag):self.denied(lambda:audit(self.g,self.lab.session()))
@@ -455,7 +457,7 @@ class IntegrationTests(unittest.TestCase):
         from engineering.route_a_gateway.evidence import verify_witness_submission
         checkpoint,_=self.witness.latest()
         previous=exported['journal'][0][3]
-        self.denied(lambda:verify_witness_submission(self.lab.host,op['bindings']['commit'],canonical_bytes(op['bindings']['receipt']),bundle,checkpoint,previous))
+        self.denied(lambda:verify_witness_submission(self.lab.host,op['bindings']['commit'],canonical_bytes(op['bindings']['receipt']),bundle,checkpoint,previous,self.lab.now))
         self.assertEqual(0,self.witness.latest()[0]['head']['sequence'])
 
     def _genesis_crash(self,point):

@@ -32,7 +32,12 @@ class Fence:
             os.close(fd)
             raise Denied('competing writer') from None
         self.fd, self.pid = fd, os.getpid()
-        self.assert_owned()
+        try:
+            self.assert_owned()
+        except BaseException:
+            os.close(fd)
+            self.fd = None
+            raise
         return self
 
     def assert_owned(self):

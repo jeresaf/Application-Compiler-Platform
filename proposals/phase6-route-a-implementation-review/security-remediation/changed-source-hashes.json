@@ -1,0 +1,18 @@
+{
+  "baselineCommit": "27cbccb34a9ae771c27c7720a967984d0c2d8fdc",
+  "algorithm": "SHA-256 exact working-file bytes",
+  "files": {
+    "docs/phase6-route-a-security-remediation.md": "sha256:c4323a41ef6d188f8c74b7fe84a773b61a36544ecae7478205f220bbc4931c3c",
+    "engineering/route_a_gateway/archive.py": "sha256:5aa39ffd72fb076020ba2c48e7d2b7bec35221bdc04cf7c4361ac3f10522e710",
+    "engineering/route_a_gateway/evidence.py": "sha256:7cba21ccf27437d7242211049a83f2e358c39236513798909e8b7b0c9c205300",
+    "engineering/route_a_gateway/freshness.py": "sha256:a69d70413e1a15d57c15d608d1de94b9389c1b8296726dcbd522f0d28aef55fa",
+    "engineering/route_a_gateway/gateway.py": "sha256:cc03fb00fe299d91eaf3846b759aebd3894928bd426316a8bc9efdc1535803e7",
+    "engineering/route_a_gateway/security.py": "sha256:78948570588dba22c125e5001c698c30841a096dc0af462516367ef40da0719c",
+    "engineering/route_a_gateway/storage.py": "sha256:df927be6b62b59147ecf9f04e20794c18db16b99711e28027776ca0a33aaa224",
+    "verification/route_a/lab_provider.py": "sha256:81ea0b0e455199a6a2920e77f0cff9cf9474bbb735f6d6a37702e10d727d69fa",
+    "verification/route_a/security_coverage.py": "sha256:f1969fcb0acd06ab0ec0b4f8fc9e62e2569555852fb9a3a9892ac9cc4ccc049d",
+    "verification/route_a/test_gateway_integration.py": "sha256:b0dcd87aa3dadc96cd6a89bac33823ee575cd17d143421a9c4a14b1dde5e2089",
+    "verification/route_a/test_preservation.py": "sha256:6a306296e08e229ea06634153c3389ed3dbe6c949469bf41e6aad4f4535efda7",
+    "verification/route_a/test_security_remediation.py": "sha256:e2c32823658d6a3d2f32a4aa288648b06506c590b087dd81fcd922ce42c71aa5"
+  }
+}
