@@ -82,6 +82,11 @@ class AggregationTests(unittest.TestCase):
             with self.subTest(change=old), patch.object(Path, 'read_text', return_value=workflow.replace(old, new)):
                 with self.assertRaises(AssertionError): verify()
 
+    def test_hidden_aggregate_evidence_requires_explicit_upload(self):
+        workflow = Path('.github/workflows/acp-contracts.yml').read_text()
+        with patch.object(Path, 'read_text', return_value=workflow.replace('          include-hidden-files: true\n', '')):
+            with self.assertRaisesRegex(AssertionError, 'HIDDEN_EVIDENCE_NOT_RETAINED'): verify()
+
     def test_original_workflow_parity(self):
         self.assertEqual(verify()['originalJobs'], 5)
 

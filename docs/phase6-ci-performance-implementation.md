@@ -29,7 +29,9 @@ required artifact, verifies GitHub SHA-256 archive digests and ZIP CRCs, and
 checks the performed exact-source closure report. Failed, skipped, cancelled,
 missing, malformed, stale or wrong-source evidence fails closed. Exit 2 remains
 failure. Engineering validation and release closure are reported separately.
-The final job cannot override an upstream failure. Cancellation of the entire
+The final job cannot override an upstream failure. Its upload explicitly enables
+hidden files for the dedicated `.ci-evidence` directory; only generated CI
+observations are written there, and authentication tokens are never persisted. Cancellation of the entire
 workflow can stop even `always()` jobs; it never yields release success.
 Configure branch protection to require `final-ci-aggregate` as well as existing
 required checks; repository protection changes are outside this implementation.

@@ -441,4 +441,5 @@ jobs:
         with:
           name: final-ci-aggregate-evidence
           path: .ci-evidence/
+          include-hidden-files: true
           if-no-files-found: error

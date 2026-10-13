@@ -34,6 +34,7 @@ def verify():
     final = new['final-ci-aggregate']
     assert 'run: python3.14 engineering/ci/aggregate.py hosted' in final, 'AGGREGATOR_NOT_WIRED'
     assert 'EXPECTED_NEEDS: ${{ toJSON(needs) }}' in final, 'ACTUAL_NEEDS_NOT_BOUND'
+    assert '          include-hidden-files: true' in final, 'AGGREGATE_HIDDEN_EVIDENCE_NOT_RETAINED'
     assert '    if: always()' in final
     assert '    needs: [contracts, phase5-experiments, phase5c-hard-gates, phase6-target, phase6-closure-audit]' in final
     assert 'continue-on-error' not in current
