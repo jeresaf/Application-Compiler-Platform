@@ -18,6 +18,17 @@ BASELINE='c1a201c779621963b0334a1bee4423b23315884f'
 ALLOWED=('engineering/evidence_admission/', 'verification/evidence_admission/')
 DOC='docs/phase6-evidence-admission-contract.md'
 BLOCKERS=[5,8,9,10,12,13,14,15,18,20,21,22,24,25,26,27,28,30,31,32,33]
+STAGE2A_FILES={
+ 'engineering/evidence_admission/signatures.py',
+ 'engineering/evidence_admission/trust.py',
+ 'engineering/evidence_admission/registration.py',
+ 'engineering/evidence_admission/requirements.txt',
+ 'verification/evidence_admission/stage2a/lab_fixtures.py',
+ 'verification/evidence_admission/stage2a/test_signatures.py',
+ 'verification/evidence_admission/stage2a/test_trust.py',
+ 'verification/evidence_admission/stage2a/test_registration.py',
+ 'docs/phase6-evidence-admission-stage2a.md',
+}
 # Existing local checkout representations, observed without rewriting any corpus.
 # Fresh LF checkouts must match the Git blob; only these exact existing byte
 # hashes are permitted as alternatives, never arbitrary normalized file changes.
@@ -37,13 +48,46 @@ CHECKOUT_FORMS={
 
 
 class PreservationTests(unittest.TestCase):
+    def test_stage2a_exact_inventory_preserves_accepted_stage1(self):
+        accepted='f44f8952ba7e86f879b0c21e1b56de9fbd3d01aa'
+        additions=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        additions.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
+        # Retain only the pre-existing, separately validated transient exception.
+        if '.ci-evidence/contracts.json' in additions:
+            head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+            self.check_source_additions(['.ci-evidence/contracts.json'],[],head)
+            self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
+            additions.remove('.ci-evidence/contracts.json')
+        self.assertEqual(additions,STAGE2A_FILES)
+        modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py'})
+        path='verification/evidence_admission/test_preservation.py'
+        before=ast.parse(subprocess.check_output(['git','show',accepted+':'+path],cwd=ROOT,text=True))
+        after=ast.parse((ROOT/path).read_text())
+        old_class=next(n for n in before.body if isinstance(n,ast.ClassDef))
+        new_class=next(n for n in after.body if isinstance(n,ast.ClassDef))
+        methods={n.name:n for n in new_class.body if isinstance(n,ast.FunctionDef)}
+        for method in old_class.body:
+            if isinstance(method,ast.FunctionDef):
+                if method.name=='check_source_additions':
+                    calls=[n for n in ast.walk(method) if isinstance(n,ast.Call) and
+                           isinstance(n.func,ast.Attribute) and n.func.attr=='assertTrue']
+                    self.assertEqual(len(calls),2)
+                    for call in calls:
+                        self.assertIsInstance(call.args[0],ast.BoolOp)
+                        call.args[0].values.append(ast.parse('path in STAGE2A_FILES',mode='eval').body)
+                self.assertEqual(ast.dump(method),ast.dump(methods[method.name]),method.name)
+        for node in before.body:
+            if not isinstance(node,ast.ClassDef):
+                self.assertIn(ast.dump(node),[ast.dump(n) for n in after.body])
+
     def check_source_additions(self, untracked, added, head):
         # Committed or staged additions never receive the transient exception.
-        for path in added:self.assertTrue(path.startswith(ALLOWED) or path==DOC,path)
+        for path in added:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES,path)
         for path in untracked:
             if path == '.ci-evidence/contracts.json':
                 self.check_contracts_binding(ROOT/path,head)
-            else:self.assertTrue(path.startswith(ALLOWED) or path==DOC,path)
+            else:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES,path)
 
     def check_contracts_binding(self, path, head):
         self.assertFalse(path.parent.is_symlink(),'SYMLINK_EVIDENCE_DIRECTORY')
