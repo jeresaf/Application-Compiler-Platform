@@ -29,6 +29,51 @@ STAGE2A_FILES={
  'verification/evidence_admission/stage2a/test_registration.py',
  'docs/phase6-evidence-admission-stage2a.md',
 }
+CI_STAGE2A_STEPS=b"""      - name: Install isolated Stage 2A laboratory dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-stage2a-venv"
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: --report "$RUNNER_TEMP/acp-stage2a-install.json" -r engineering/evidence_admission/requirements.txt
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m pip check
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m pip list --format=json > "$RUNNER_TEMP/acp-stage2a-packages.json"
+          cat "$RUNNER_TEMP/acp-stage2a-packages.json"
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import importlib.metadata as metadata
+          import json, os, platform
+          from pathlib import Path
+          from cryptography.hazmat.backends.openssl.backend import backend
+          assert platform.python_version() == '3.14.7', 'WRONG_PYTHON'
+          requirements = Path('engineering/evidence_admission/requirements.txt').read_text().splitlines()
+          expected = dict(line.split()[0].split('==') for line in requirements if line and not line.startswith('#'))
+          for name, version in expected.items():
+              assert metadata.version(name) == version, ('WRONG_PACKAGE', name)
+          report = json.loads((Path(os.environ['RUNNER_TEMP']) / 'acp-stage2a-install.json').read_text())
+          installed = report['install']
+          assert len(installed) == len(expected), 'INCOMPLETE_WHEEL_INSTALL'
+          for item in installed:
+              download = item['download_info']
+              assert download['url'].split('?')[0].endswith('.whl'), 'SOURCE_BUILD_FORBIDDEN'
+              assert 'sha256' in download['archive_info']['hashes'], 'MISSING_WHEEL_HASH'
+          openssl = backend.openssl_version_text()
+          assert openssl == 'OpenSSL 4.0.3 29 Sep 2026', ('WRONG_BUNDLED_OPENSSL', openssl)
+          print(json.dumps({'python': platform.python_version(), 'lockedPackages': expected, 'bundledOpenSSL': openssl}, sort_keys=True))
+          PYTHON
+      - name: Verify Stage 2A laboratory verifier registration
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import unittest
+          from pathlib import Path
+          directory = Path('verification/evidence_admission/stage2a')
+          expected = {'test_signatures.py', 'test_trust.py', 'test_registration.py'}
+          assert {path.name for path in directory.glob('test*.py')} == expected, 'STAGE2A_TEST_FILES'
+          suite = unittest.defaultTestLoader.discover(str(directory))
+          assert suite.countTestCases() == 52, 'STAGE2A_TEST_COUNT'
+          PYTHON
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/stage2a -v
+"""
 # Existing local checkout representations, observed without rewriting any corpus.
 # Fresh LF checkouts must match the Git blob; only these exact existing byte
 # hashes are permitted as alternatives, never arbitrary normalized file changes.
@@ -60,7 +105,7 @@ class PreservationTests(unittest.TestCase):
             additions.remove('.ci-evidence/contracts.json')
         self.assertEqual(additions,STAGE2A_FILES)
         modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
-        self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py'})
+        self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
         path='verification/evidence_admission/test_preservation.py'
         before=ast.parse(subprocess.check_output(['git','show',accepted+':'+path],cwd=ROOT,text=True))
         after=ast.parse((ROOT/path).read_text())
@@ -76,10 +121,33 @@ class PreservationTests(unittest.TestCase):
                     for call in calls:
                         self.assertIsInstance(call.args[0],ast.BoolOp)
                         call.args[0].values.append(ast.parse('path in STAGE2A_FILES',mode='eval').body)
+                if method.name=='test_baseline_bytes_and_pinned_existing_checkout_forms':
+                    class AuthorizedInsertion(ast.NodeTransformer):
+                        def visit_BinOp(self,node):
+                            if ast.dump(node)==ast.dump(ast.parse('step+marker',mode='eval').body):
+                                return ast.parse('step+CI_STAGE2A_STEPS+marker',mode='eval').body
+                            return self.generic_visit(node)
+                    method=AuthorizedInsertion().visit(method)
                 self.assertEqual(ast.dump(method),ast.dump(methods[method.name]),method.name)
         for node in before.body:
             if not isinstance(node,ast.ClassDef):
                 self.assertIn(ast.dump(node),[ast.dump(n) for n in after.body])
+
+    def test_stage2a_workflow_insertion_rejects_weakened_commands(self):
+        workflow=ROOT/'.github/workflows/acp-contracts.yml'
+        original=workflow.read_bytes()
+        for old,new in ((b'--require-hashes',b''), (b'--only-binary=:all:',b''),
+                        (b"suite.countTestCases() == 52",b"suite.countTestCases() >= 0"),
+                        (b"'3.14.7', 'WRONG_PYTHON'",b"'3.14.6', 'WRONG_PYTHON'"),
+                        (b'"$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest',b'python3.14 -m unittest'),
+                        (b'      - name: Verify Stage 2A laboratory verifier registration',
+                         b'      - continue-on-error: true\n        name: Verify Stage 2A laboratory verifier registration')):
+            self.assertIn(old,original)
+            changed=original.replace(old,new,1)
+            real_read=Path.read_bytes
+            with self.subTest(change=old),patch.object(Path,'read_bytes',lambda path:changed if path==workflow else real_read(path)):
+                probe=PreservationTests('test_baseline_bytes_and_pinned_existing_checkout_forms')
+                with self.assertRaises(AssertionError):probe.test_baseline_bytes_and_pinned_existing_checkout_forms()
 
     def check_source_additions(self, untracked, added, head):
         # Committed or staged additions never receive the transient exception.
@@ -217,7 +285,7 @@ class PreservationTests(unittest.TestCase):
                     step=(b'      - name: Verify Stage 1 evidence contract structures\n'
                           b'        run: python3.14 -m unittest discover -s verification/evidence_admission -v\n')
                     self.assertEqual(expected.count(marker),1)
-                    expected=expected.replace(marker,step+marker,1)
+                    expected=expected.replace(marker,step+CI_STAGE2A_STEPS+marker,1)
                 actual=path.read_bytes()
                 if actual != expected:
                     self.assertEqual(hashlib.sha256(actual).hexdigest(),CHECKOUT_FORMS.get(name.decode()))

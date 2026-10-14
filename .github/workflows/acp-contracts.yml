@@ -72,6 +72,50 @@ jobs:
           if-no-files-found: error
       - name: Verify Stage 1 evidence contract structures
         run: python3.14 -m unittest discover -s verification/evidence_admission -v
+      - name: Install isolated Stage 2A laboratory dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-stage2a-venv"
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: --report "$RUNNER_TEMP/acp-stage2a-install.json" -r engineering/evidence_admission/requirements.txt
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m pip check
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m pip list --format=json > "$RUNNER_TEMP/acp-stage2a-packages.json"
+          cat "$RUNNER_TEMP/acp-stage2a-packages.json"
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import importlib.metadata as metadata
+          import json, os, platform
+          from pathlib import Path
+          from cryptography.hazmat.backends.openssl.backend import backend
+          assert platform.python_version() == '3.14.7', 'WRONG_PYTHON'
+          requirements = Path('engineering/evidence_admission/requirements.txt').read_text().splitlines()
+          expected = dict(line.split()[0].split('==') for line in requirements if line and not line.startswith('#'))
+          for name, version in expected.items():
+              assert metadata.version(name) == version, ('WRONG_PACKAGE', name)
+          report = json.loads((Path(os.environ['RUNNER_TEMP']) / 'acp-stage2a-install.json').read_text())
+          installed = report['install']
+          assert len(installed) == len(expected), 'INCOMPLETE_WHEEL_INSTALL'
+          for item in installed:
+              download = item['download_info']
+              assert download['url'].split('?')[0].endswith('.whl'), 'SOURCE_BUILD_FORBIDDEN'
+              assert 'sha256' in download['archive_info']['hashes'], 'MISSING_WHEEL_HASH'
+          openssl = backend.openssl_version_text()
+          assert openssl == 'OpenSSL 4.0.3 29 Sep 2026', ('WRONG_BUNDLED_OPENSSL', openssl)
+          print(json.dumps({'python': platform.python_version(), 'lockedPackages': expected, 'bundledOpenSSL': openssl}, sort_keys=True))
+          PYTHON
+      - name: Verify Stage 2A laboratory verifier registration
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import unittest
+          from pathlib import Path
+          directory = Path('verification/evidence_admission/stage2a')
+          expected = {'test_signatures.py', 'test_trust.py', 'test_registration.py'}
+          assert {path.name for path in directory.glob('test*.py')} == expected, 'STAGE2A_TEST_FILES'
+          suite = unittest.defaultTestLoader.discover(str(directory))
+          assert suite.countTestCases() == 52, 'STAGE2A_TEST_COUNT'
+          PYTHON
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/stage2a -v
 
   phase5-experiments:
     runs-on: ubuntu-24.04
