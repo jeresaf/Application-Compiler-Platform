@@ -34,6 +34,53 @@ class ChallengeTests(unittest.TestCase):
         self.assertEqual(authenticate_challenge(f.raw, f.context, f.ledger), digest)
         self.assertEqual(f.ledger.checkpoint(), before)
 
+    def test_signed_challenge_cannot_outlive_current_revocation_checkpoint(self):
+        f=self.f;payload=copy.deepcopy(f.payload)
+        payload['expiresAt']='2026-10-14T12:11:00Z'
+        self.assertLess(NOW,f.context.trust.revocation.expires_at)
+        with self.assertRaisesRegex(LabVerificationError,'CHALLENGE_OUTLIVES_AUTHORITY'):
+            validate_challenge(f.sign(payload),f.context)
+        self.assertEqual(f.ledger.checkpoint().sequence,0)
+
+    def test_signed_challenge_cannot_outlive_policy_or_registration(self):
+        for authority in ['policy','registration']:
+            f=Fixture(self)
+            if authority=='policy':
+                f.base.policy['expiresAt']='2026-10-14T12:05:00Z';f.base.repin_policy()
+                f.contract['policyDigest']=f.base.context.policy_digest
+                f.contract['registrationDigest']=parse_canonical(f.base.raw)['payloadDigest']
+            else:
+                f.base.payload['expiresAt']='2026-10-14T12:05:00Z';f.base.refresh()
+                f.contract['registrationDigest']=parse_canonical(f.base.raw)['payloadDigest']
+            f.refresh_context()
+            payload=construct_challenge_payload(f.context,'b'*32)
+            self.assertEqual(payload['expiresAt'],'2026-10-14T12:05:00Z')
+            payload['expiresAt']='2026-10-14T12:06:00Z'
+            with self.subTest(authority=authority),self.assertRaisesRegex(LabVerificationError,'CHALLENGE_OUTLIVES_AUTHORITY'):
+                validate_challenge(f.sign(payload),f.context)
+
+    def test_signed_challenge_cannot_outlive_actual_issuer_key(self):
+        f=self.f
+        keys=tuple(replace(key,valid_until=NOW+timedelta(minutes=5)) if key.principal_id=='principal:issuer' else key
+                   for key in f.context.trust.keys)
+        context=replace(f.context,trust=replace(f.context.trust,keys=keys))
+        payload=construct_challenge_payload(context,'b'*32)
+        self.assertEqual(payload['expiresAt'],'2026-10-14T12:05:00Z')
+        payload['expiresAt']='2026-10-14T12:06:00Z'
+        with self.assertRaisesRegex(LabVerificationError,'CHALLENGE_OUTLIVES_ISSUER_KEY'):
+            validate_challenge(f.sign(payload),context)
+
+    def test_exact_expiry_boundaries_and_fresh_reservation_time(self):
+        f=self.f
+        # Equality with the checkpoint expiry is allowed while time is earlier.
+        validate_challenge(f.raw,f.context)
+        f.issue()
+        fresh=replace(f.context,trust=replace(f.context.trust,now=NOW+timedelta(minutes=10)))
+        with self.assertRaises(LabVerificationError):f.ledger.reserve(f.raw,fresh,'a'*32)
+        # Caller-controlled/reused time is not a trustworthy clock provider.
+        self.assertEqual(f.context.trust.now,NOW)
+        self.assertEqual(f.ledger.observe(parse_canonical(f.raw)['payloadDigest'])['state'],'EXPIRED')
+
     def test_unknown_issuer(self):
         f=self.f; payload=copy.deepcopy(f.payload);payload['issuerId']='principal:unknown'
         with self.assertRaises(LabVerificationError):validate_challenge(f.sign(payload),f.context)

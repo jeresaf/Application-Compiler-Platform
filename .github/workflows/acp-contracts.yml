@@ -116,6 +116,28 @@ jobs:
           assert suite.countTestCases() == 52, 'STAGE2A_TEST_COUNT'
           PYTHON
           "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/stage2a -v
+      - name: Verify Stage 2B-1 laboratory challenges and durable reservations
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import unittest
+          from pathlib import Path
+          directory = Path('verification/evidence_admission/stage2b')
+          expected = {'test_challenge.py', 'test_execution_ledger.py'}
+          assert {path.name for path in directory.glob('test*.py')} == expected, 'STAGE2B_TEST_FILES'
+          assert all((directory / name).is_file() and not (directory / name).is_symlink() for name in expected), 'STAGE2B_TEST_FILES'
+          suite = unittest.defaultTestLoader.discover(str(directory))
+          assert suite.countTestCases() == 47, 'STAGE2B_TEST_COUNT'
+          PYTHON
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/stage2b -v 2>&1 | tee "$RUNNER_TEMP/acp-stage2b-tests.log"
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import os, re
+          from pathlib import Path
+          log = (Path(os.environ['RUNNER_TEMP']) / 'acp-stage2b-tests.log').read_text()
+          assert re.findall(r'^Ran ([0-9]+) tests in .+$', log, re.MULTILINE) == ['47'], 'STAGE2B_EXECUTED_COUNT'
+          assert log.rstrip().splitlines()[-1] == 'OK', 'STAGE2B_FAILURE_OR_SKIP'
+          PYTHON
 
   phase5-experiments:
     runs-on: ubuntu-24.04

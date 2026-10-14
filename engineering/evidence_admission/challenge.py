@@ -28,6 +28,18 @@ def bindings(context):
     return contract
 
 
+
+def issuer_keys(context):
+    """Only independently configured, currently eligible issuer keys."""
+    view = check_revocation(context.trust)
+    keys = tuple(k for k in context.trust.keys if k.principal_id == context.issuer_id and
+                 'CHALLENGE_ISSUER' in k.roles and k.key_id not in view.revoked_keys and
+                 k.principal_id not in view.revoked_principals and
+                 k.valid_from <= context.trust.now < k.valid_until)
+    require(keys, 'AUTHORIZED_ISSUER_KEY_REQUIRED')
+    return keys
+
+
 def construct_challenge_payload(context, record_id, reservation_seconds=900):
     """Unsigned proposed payload only; issuer must authenticate and durably issue it."""
     contract = bindings(context)
@@ -38,7 +50,8 @@ def construct_challenge_payload(context, record_id, reservation_seconds=900):
     policy = parse_canonical(context.policy_raw)['payload']
     registration = parse_canonical(context.registration_raw)['payload']
     expires = min(now + timedelta(seconds=reservation_seconds), utc(policy['expiresAt']), utc(registration['expiresAt']),
-                  context.trust.revocation.expires_at, now + timedelta(seconds=policy['freshness']['maxChallengeAgeSeconds']))
+                  context.trust.revocation.expires_at, now + timedelta(seconds=policy['freshness']['maxChallengeAgeSeconds']),
+                  min(key.valid_until for key in issuer_keys(context)))
     require(now < expires, 'NO_VALID_CHALLENGE_WINDOW')
     return {'schema': SCHEMA, 'recordId': record_id, 'repository': contract['repository'],
             'issuedAt': now.strftime('%Y-%m-%dT%H:%M:%SZ'), 'expiresAt': expires.strftime('%Y-%m-%dT%H:%M:%SZ'),
@@ -50,7 +63,11 @@ def construct_challenge_payload(context, record_id, reservation_seconds=900):
 
 
 def validate_challenge(raw, context):
-    """Authenticated content only. Durable issuance/reservation remains mandatory."""
+    """Authenticated content only. Durable issuance/reservation remains mandatory.
+
+    The host must independently refresh trusted time at every reservation.
+    Reusing a frozen laboratory context cannot establish real-time freshness.
+    """
     require(validate_structure(raw).status == 'STRUCTURE_VALID_UNTRUSTED', 'INVALID_CHALLENGE_STRUCTURE')
     contract = bindings(context)
     record = parse_canonical(raw); payload = record['payload']; trust = context.trust
@@ -66,9 +83,13 @@ def validate_challenge(raw, context):
     require(SCHEMA in policy['supportedSchemas'], 'UNSUPPORTED_POLICY_SCHEMA')
     start, end = utc(payload['issuedAt']), utc(payload['expiresAt'])
     require(start <= trust.now < end and (end-start).total_seconds() <= min(900, policy['freshness']['maxChallengeAgeSeconds']), 'EXPIRED_OR_INVALID_CHALLENGE')
-    require(end <= min(utc(policy['expiresAt']), utc(parse_canonical(context.registration_raw)['payload']['expiresAt'])), 'CHALLENGE_OUTLIVES_AUTHORITY')
+    require(end <= min(utc(policy['expiresAt']), utc(parse_canonical(context.registration_raw)['payload']['expiresAt']),
+                       view.expires_at), 'CHALLENGE_OUTLIVES_AUTHORITY')
     signers = verify_record_signatures(raw, trust.keys, 'CHALLENGE_ISSUER', 1, trust.now, view.revoked_keys, view.revoked_principals)
     require(signers == (context.issuer_id,), 'UNAUTHORIZED_ISSUER_SIGNERS')
+    keys = {key.key_id: key for key in issuer_keys(context)}
+    require(all(signature['keyId'] in keys and end <= keys[signature['keyId']].valid_until
+                for signature in record['signatures']), 'CHALLENGE_OUTLIVES_ISSUER_KEY')
     return {'schema': 'acp-phase6-lab-issuance/1', 'repository': payload['repository'],
             'auditSessionId': payload['auditSessionId'], 'challengeDigest': record['payloadDigest'],
             'recordId': payload['recordId'], 'nonce': payload['nonce'], 'contractDigest': context.expected_contract_digest,

@@ -340,3 +340,76 @@ Phase 7 = NOT_STARTED
 Operational security = NOT ESTABLISHED
 
 Release closure = BLOCKED
+
+
+## F20 correction and mandatory CI integration
+
+The final verification increment bounds both construction and independent
+validation by the applicable trusted policy, authenticated registration and
+current revocation checkpoint expiry. It additionally bounds expiry by the actual
+CHALLENGE_ISSUER signing key. Construction conservatively uses the earliest
+expiry of all currently eligible keys for the selected issuer; validation checks
+the actual supplied signing key after accepted signature/role verification.
+The existing schema and Stage 2A interfaces are unchanged.
+
+Properly signed synthetic negatives test a still-current checkpoint at 12:00
+whose expiry is 12:10 against a challenge expiring at 12:11. Separate tests use
+policy, registration and issuer-key expiry at 12:05 with a challenge at 12:06.
+Equality with an authority expiry is permitted before that deadline; validation
+and reservation at challenge expiry are rejected. The reservation window remains
+at most 15 minutes and does not become an execution-duration limit.
+
+Every reservation requires newly and independently supplied trusted UTC time
+and a current revocation view from the trusted host. The immutable laboratory
+context stores a time observation, not a live clock. Reusing it cannot establish
+real-time freshness or detect elapsed wall time. The existing ledger receives
+that externally refreshed context; no operational clock/provider or confinement
+is implemented. No post-expiry signing or final-verification exception is granted.
+
+The contracts job now reuses the isolated RUNNER_TEMP Stage 2A interpreter to
+run explicit Stage 2B discovery. The exact two test-module names, regular files
+and 47 discovered tests are checked first. The existing unittest command executes
+once under bash pipefail, retaining its log in RUNNER_TEMP. The post-run check
+requires exactly 47 executed cases and the final plain OK summary; skipped tests
+produce an annotated summary and fail this check. No continue-on-error, new job,
+dependency, artifact, trigger or release-policy change is introduced. Stage 1
+and Stage 2A commands, source capture and final aggregation are preserved.
+This is mandatory workflow wiring; repository branch-protection settings remain
+unchanged.
+
+Current reviewed test inventory: 24 challenge/contract tests and 23 ledger tests,
+47 total. The four F20 regressions supplement the original 43 Stage 2B-1 tests.
+Stage 1 additionally gains exact current-baseline/F20 byte preservation and
+Stage 2B workflow mutation probes. Earlier result counts in this document remain
+historical local checkpoint observations. New local results and fault-probe logs
+are reported separately; no hosted validation is claimed before commit/push.
+
+Only five existing files change: challenge.py, stage2b/test_challenge.py,
+test_preservation.py, acp-contracts.yml and this document. F20 source/test/document
+bytes are pinned by exact hashes in the preservation guard; the workflow permits
+only the exact inserted Stage 2B step. All other accepted bytes, modes, Canonical
+snapshots, 39 criteria and generator seal remain checked. No directory exclusion
+is added. No Stage 2B-2 capabilities are implemented.
+
+
+Final local verification: Python 3.14.7, SQLite 3.46.1, unchanged Stage 2A
+nine-package lock and bundled OpenSSL 4.0.3 29 Sep 2026. Stage 1/preservation
+46 PASS, Stage 2A 52 PASS, Stage 2B-1 47 PASS, CI parity/aggregation 26 PASS:
+171 total, zero failures and zero skipped tests. Actual SQLite concurrency,
+process-crash, restart, replay and replacement regressions remain in the unchanged
+23 ledger tests. The new CI shell body also passes when executed exactly with
+the existing isolated environment. Separate temporary-copy probes return exit 1
+for a missing module, extra module, missing case, required skipped case, failing
+case and incorrect dependency hash. Existing aggregation rejects failed
+contracts and intentionally blocked closure evidence. These are local synthetic
+observations, not hosted job conclusions. Full hosted validation remains pending.
+
+Ephemeral fault evidence: `/tmp/acp-stage2b-f20-probes/results.json` and sibling
+logs. The skip probe runs 47 cases, reports `OK (skipped=1)`, then is rejected by
+STAGE2B_FAILURE_OR_SKIP. The failure probe runs 47 cases with exactly one
+intentional failure and propagates exit 1 through pipefail. No fault is injected
+into repository tests or the actual workflow failure policy. Incorrect-hash
+installation uses a temporary modified lock and local binary wheel cache; the
+real dependency lock is unchanged. `pip check`, YAML parsing and Git whitespace
+checks pass. No candidate workload, operational authority or Stage 2B-2 work
+is performed. No commit or push is made under this correction authorization.

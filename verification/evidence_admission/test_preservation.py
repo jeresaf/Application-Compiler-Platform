@@ -83,6 +83,30 @@ CI_STAGE2A_STEPS=b"""      - name: Install isolated Stage 2A laboratory dependen
           PYTHON
           "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/stage2a -v
 """
+CI_STAGE2B_STEPS=b"""      - name: Verify Stage 2B-1 laboratory challenges and durable reservations
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import unittest
+          from pathlib import Path
+          directory = Path('verification/evidence_admission/stage2b')
+          expected = {'test_challenge.py', 'test_execution_ledger.py'}
+          assert {path.name for path in directory.glob('test*.py')} == expected, 'STAGE2B_TEST_FILES'
+          assert all((directory / name).is_file() and not (directory / name).is_symlink() for name in expected), 'STAGE2B_TEST_FILES'
+          suite = unittest.defaultTestLoader.discover(str(directory))
+          assert suite.countTestCases() == 47, 'STAGE2B_TEST_COUNT'
+          PYTHON
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/stage2b -v 2>&1 | tee "$RUNNER_TEMP/acp-stage2b-tests.log"
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import os, re
+          from pathlib import Path
+          log = (Path(os.environ['RUNNER_TEMP']) / 'acp-stage2b-tests.log').read_text()
+          assert re.findall(r'^Ran ([0-9]+) tests in .+$', log, re.MULTILINE) == ['47'], 'STAGE2B_EXECUTED_COUNT'
+          assert log.rstrip().splitlines()[-1] == 'OK', 'STAGE2B_FAILURE_OR_SKIP'
+          PYTHON
+"""
+F20_EXACT_HASHES={'engineering/evidence_admission/challenge.py': '65fab7f23f1fce5fd45c4cae9e03889c91c365b93178073297872ce0a77b376d', 'verification/evidence_admission/stage2b/test_challenge.py': '543bc6f5d539e063b4bb6ff905c1597d9b7054750c351e64f218ad4b9ac1c873', 'docs/phase6-evidence-admission-stage2b.md': '59fd5f545cb11a3d39383f0149d63b877bd619bd4c7a3f633b7a083cba91d027'}
 # Existing local checkout representations, observed without rewriting any corpus.
 # Fresh LF checkouts must match the Git blob; only these exact existing byte
 # hashes are permitted as alternatives, never arbitrary normalized file changes.
@@ -102,6 +126,51 @@ CHECKOUT_FORMS={
 
 
 class PreservationTests(unittest.TestCase):
+    def test_stage2b_final_exact_correction_and_workflow(self):
+        accepted='ea5683c36300481f9d3a7a473290ec3e5923af6d'
+        expected_changes=set(F20_EXACT_HASHES)|{'.github/workflows/acp-contracts.yml','verification/evidence_admission/test_preservation.py'}
+        changes=set(subprocess.check_output(['git','diff','--name-only',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        self.assertEqual(changes,expected_changes)
+        additions=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
+        for addition in additions:
+            self.assertEqual(addition,'.ci-evidence/contracts.json')
+            head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+            self.check_source_additions([addition],[],head)
+        self.assertEqual(set(F20_EXACT_HASHES),{'engineering/evidence_admission/challenge.py',
+            'verification/evidence_admission/stage2b/test_challenge.py','docs/phase6-evidence-admission-stage2b.md'})
+        for relative,digest in F20_EXACT_HASHES.items():
+            self.assertEqual(hashlib.sha256((ROOT/relative).read_bytes()).hexdigest(),digest,relative)
+        workflow='.github/workflows/acp-contracts.yml'
+        baseline=subprocess.check_output(['git','show',accepted+':'+workflow],cwd=ROOT)
+        self.assertEqual((ROOT/workflow).read_bytes(),baseline.replace(b'\n  phase5-experiments:',CI_STAGE2B_STEPS+b'\n  phase5-experiments:',1))
+        # Every other accepted tracked byte and mode is still enforced by the
+        # earlier baseline comparisons, plus this exact current-baseline pass.
+        listing=subprocess.check_output(['git','ls-tree','-r','-z',accepted],cwd=ROOT)
+        for row in listing.split(b'\0'):
+            if not row:continue
+            metadata,name=row.split(b'\t',1);relative=name.decode()
+            if relative in expected_changes:continue
+            mode,kind,digest=metadata.split();path=ROOT/relative
+            expected=subprocess.check_output(['git','cat-file','blob',digest.decode()],cwd=ROOT)
+            actual=path.read_bytes()
+            with self.subTest(path=relative):
+                self.assertFalse(path.is_symlink());self.assertEqual(kind,b'blob')
+                if actual!=expected:
+                    self.assertEqual(hashlib.sha256(actual).hexdigest(),CHECKOUT_FORMS.get(relative))
+                    self.assertEqual(actual.replace(b'\r\n',b'\n'),expected.replace(b'\r\n',b'\n'))
+                self.assertEqual(bool(path.stat().st_mode & 0o111),mode==b'100755')
+
+    def test_stage2b_ci_rejects_weakened_guards(self):
+        workflow=ROOT/'.github/workflows/acp-contracts.yml';original=workflow.read_bytes()
+        for old,new in [(b"suite.countTestCases() == 47",b"suite.countTestCases() >= 0"),
+                        (b"{'test_challenge.py', 'test_execution_ledger.py'}",b"{'test_challenge.py'}"),
+                        (b"log.rstrip().splitlines()[-1] == 'OK'",b"True"),
+                        (b'-s verification/evidence_admission/stage2b -v 2>&1 | tee',b'-s missing-tests -v 2>&1 | tee')]:
+            self.assertIn(old,original);changed=original.replace(old,new,1);real_read=Path.read_bytes
+            with self.subTest(change=old),patch.object(Path,'read_bytes',lambda path:changed if path==workflow else real_read(path)):
+                probe=PreservationTests('test_baseline_bytes_and_pinned_existing_checkout_forms')
+                with self.assertRaises(AssertionError):probe.test_baseline_bytes_and_pinned_existing_checkout_forms()
+
     def test_stage2b1_exact_inventory_and_accepted_methods(self):
         accepted='1db415af4486bb03392978d07091afd609fe9f02'
         additions=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
@@ -113,7 +182,7 @@ class PreservationTests(unittest.TestCase):
             additions.remove('.ci-evidence/contracts.json')
         self.assertEqual(additions,STAGE2B1_FILES)
         modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
-        self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py'})
+        self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
         path='verification/evidence_admission/test_preservation.py'
         before=subprocess.check_output(['git','show',accepted+':'+path],cwd=ROOT,text=True)
         # These three exact inventory predicate changes are the entire exception.
@@ -122,6 +191,7 @@ class PreservationTests(unittest.TestCase):
         before=before.replace("call.args[0].values.append(ast.parse('path in STAGE2A_FILES',mode='eval').body)",
                               "call.args[0].values.append(ast.parse('path in STAGE2A_FILES',mode='eval').body)\n                        call.args[0].values.append(ast.parse('path in STAGE2B1_FILES',mode='eval').body)",1)
         before=before.replace('or path in STAGE2A_FILES,path', 'or path in STAGE2A_FILES or path in STAGE2B1_FILES,path')
+        before=before.replace('step+CI_STAGE2A_STEPS+marker','step+CI_STAGE2A_STEPS+CI_STAGE2B_STEPS+marker')
         old=ast.parse(before);new=ast.parse((ROOT/path).read_text())
         new_methods={n.name:ast.dump(n) for c in new.body if isinstance(c,ast.ClassDef) for n in c.body if isinstance(n,ast.FunctionDef)}
         for node in old.body:
@@ -138,6 +208,8 @@ class PreservationTests(unittest.TestCase):
             if relative==path:continue
             mode,kind,digest=metadata.split()
             expected=subprocess.check_output(['git','cat-file','blob',digest.decode()],cwd=ROOT)
+            if relative=='.github/workflows/acp-contracts.yml':
+                expected=expected.replace(b'\n  phase5-experiments:',CI_STAGE2B_STEPS+b'\n  phase5-experiments:',1)
             actual=(ROOT/relative).read_bytes()
             with self.subTest(path=relative):
                 self.assertFalse((ROOT/relative).is_symlink());self.assertEqual(kind,b'blob')
@@ -179,7 +251,7 @@ class PreservationTests(unittest.TestCase):
                     class AuthorizedInsertion(ast.NodeTransformer):
                         def visit_BinOp(self,node):
                             if ast.dump(node)==ast.dump(ast.parse('step+marker',mode='eval').body):
-                                return ast.parse('step+CI_STAGE2A_STEPS+marker',mode='eval').body
+                                return ast.parse('step+CI_STAGE2A_STEPS+CI_STAGE2B_STEPS+marker',mode='eval').body
                             return self.generic_visit(node)
                     method=AuthorizedInsertion().visit(method)
                 self.assertEqual(ast.dump(method),ast.dump(methods[method.name]),method.name)
@@ -339,7 +411,7 @@ class PreservationTests(unittest.TestCase):
                     step=(b'      - name: Verify Stage 1 evidence contract structures\n'
                           b'        run: python3.14 -m unittest discover -s verification/evidence_admission -v\n')
                     self.assertEqual(expected.count(marker),1)
-                    expected=expected.replace(marker,step+CI_STAGE2A_STEPS+marker,1)
+                    expected=expected.replace(marker,step+CI_STAGE2A_STEPS+CI_STAGE2B_STEPS+marker,1)
                 actual=path.read_bytes()
                 if actual != expected:
                     self.assertEqual(hashlib.sha256(actual).hexdigest(),CHECKOUT_FORMS.get(name.decode()))
