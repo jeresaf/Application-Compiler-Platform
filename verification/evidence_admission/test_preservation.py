@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[2]
 BASELINE='c1a201c779621963b0334a1bee4423b23315884f'
@@ -33,6 +34,31 @@ CHECKOUT_FORMS={
 
 
 class PreservationTests(unittest.TestCase):
+    def test_only_exact_ci_insertion_is_allowed(self):
+        workflow=ROOT/'.github/workflows/acp-contracts.yml'
+        original=workflow.read_bytes()
+        mutations=[
+            (workflow,b'node tooling/check_canonical_vectors.mjs',b'true'),
+            (workflow,b'needs: [contracts, phase5c-hard-gates]',b'needs: [contracts]'),
+            (workflow,b'path: .ci-evidence/contracts.json',b'path: omitted.json'),
+            (workflow,b'contents: read',b'contents: write'),
+            (workflow,b'run: python3.14 engineering/ci/aggregate.py hosted',b'run: true'),
+            (workflow,b'      - name: Verify Stage 1 evidence contract structures\n',b'      - name: Renamed Stage 1 check\n'),
+            (ROOT/'tooling/target_worker.py',b'def bundle_digest():',b'def changed_digest():'),
+            (ROOT/'test-corpus/deterministic-v04/payment-canonical-candidate.json',None,None),
+        ]
+        real_read=Path.read_bytes
+        for target,old,new in mutations:
+            before=real_read(target)
+            if old is not None:
+                self.assertIn(old,before);changed=before.replace(old,new,1)
+            else:changed=before+b' '
+            def read(path):return changed if path==target else real_read(path)
+            with self.subTest(path=target,change=old),patch.object(Path,'read_bytes',read):
+                probe=PreservationTests('test_baseline_bytes_and_pinned_existing_checkout_forms')
+                with self.assertRaises(AssertionError):probe.test_baseline_bytes_and_pinned_existing_checkout_forms()
+        self.assertEqual(workflow.read_bytes(),original)
+
     def test_baseline_bytes_and_pinned_existing_checkout_forms(self):
         listing=subprocess.check_output(['git','ls-tree','-r','-z',BASELINE],cwd=ROOT)
         rows=[row.split(b'\t',1) for row in listing.split(b'\0') if row]
@@ -46,6 +72,12 @@ class PreservationTests(unittest.TestCase):
             with self.subTest(path=name.decode()):
                 self.assertEqual(kind,b'blob')
                 self.assertTrue(path.is_file());self.assertFalse(path.is_symlink())
+                if name == b'.github/workflows/acp-contracts.yml':
+                    marker=b'\n  phase5-experiments:'
+                    step=(b'      - name: Verify Stage 1 evidence contract structures\n'
+                          b'        run: python3.14 -m unittest discover -s verification/evidence_admission -v\n')
+                    self.assertEqual(expected.count(marker),1)
+                    expected=expected.replace(marker,step+marker,1)
                 actual=path.read_bytes()
                 if actual != expected:
                     self.assertEqual(hashlib.sha256(actual).hexdigest(),CHECKOUT_FORMS.get(name.decode()))
@@ -53,7 +85,7 @@ class PreservationTests(unittest.TestCase):
                 mode=metadata.split()[0]
                 self.assertEqual(bool(path.stat().st_mode & 0o111),mode==b'100755')
         self.assertEqual(stream.read(),b'')
-        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--'],cwd=ROOT,check=True,capture_output=True)
+        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml'],cwd=ROOT,check=True,capture_output=True)
         added=subprocess.check_output(['git','diff','--name-only','--diff-filter=A',BASELINE,'--'],cwd=ROOT,text=True).splitlines()
         new=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
         for path in new+added:self.assertTrue(path.startswith(ALLOWED) or path==DOC,path)

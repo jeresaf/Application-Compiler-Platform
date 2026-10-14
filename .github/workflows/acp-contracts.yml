@@ -70,6 +70,8 @@ jobs:
           name: ci-source-contracts
           path: .ci-evidence/contracts.json
           if-no-files-found: error
+      - name: Verify Stage 1 evidence contract structures
+        run: python3.14 -m unittest discover -s verification/evidence_admission -v
 
   phase5-experiments:
     runs-on: ubuntu-24.04

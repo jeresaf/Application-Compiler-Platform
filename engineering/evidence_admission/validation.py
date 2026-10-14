@@ -195,6 +195,21 @@ def validate_bundle(records):
                 for binding in ('binding', 'subjects', 'policyRef', 'executionId'):
                     if binding in payload and binding in target and payload[binding] != target[binding]:
                         raise ValueError('REFERENCE_BINDING_MISMATCH')
+                # Shared execution references identify records, not merely
+                # manifests with similar contents. walk() resolves each typed
+                # reference first, preserving missing/digest/type rejection.
+                for shared in ('challengeRef', 'registrationRef', 'manifestRef'):
+                    if shared in payload and shared in target and payload[shared] != target[shared]:
+                        raise ValueError('INCONSISTENT_EXECUTION_REFERENCE:' + shared)
+                if field == 'challengeRef' and 'criteria' in payload:
+                    if payload['criteria'] != target['criteria']:
+                        raise ValueError('INCONSISTENT_EXECUTION_SCOPE')
+                if field == 'registrationRef' and 'criteria' in payload:
+                    if not set(payload['criteria']) <= set(target['criteria']):
+                        raise ValueError('INCONSISTENT_EXECUTION_SCOPE')
+                if field == 'envelopeRef':
+                    if payload['criteria'] != target['criteria'] or payload['verifierRegistrationRef'] != target['registrationRef']:
+                        raise ValueError('INCONSISTENT_EXECUTION_SCOPE')
     except (EncodingError, ValidationError, ValueError) as error:
         reason = 'SCHEMA_VIOLATION' if isinstance(error, ValidationError) else str(error)
         return StructuralResult('STRUCTURE_INVALID', (reason,))

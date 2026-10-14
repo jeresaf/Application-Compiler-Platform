@@ -3,6 +3,9 @@ import copy
 import json
 from pathlib import Path
 import unittest
+import subprocess
+import sys
+from unittest.mock import patch
 
 from engineering.evidence_admission.encoding import canonicalize, payload_digest
 from engineering.evidence_admission.validation import KINDS, validate_structure, validate_bundle
@@ -20,7 +23,149 @@ def encoded(record):
     return canonicalize(record)
 
 
+def graph_bytes(examples):
+    """Recompute the synthetic DAG after a mutation; do not fake stale hashes.
+
+    References initially address the original payloads. Rebuild dependencies
+    recursively so rejection tests isolate consistency rather than hash errors.
+    """
+    original=records()
+    objects={original[k]['payloadDigest'] if k in original else v['payloadDigest']: v
+             for k,v in examples.items()}
+    rebuilt={}
+    def build(digest):
+        if digest in rebuilt:return rebuilt[digest]
+        record=copy.deepcopy(objects[digest])
+        def walk(value):
+            if isinstance(value,dict):
+                if set(value)=={'schema','payloadDigest'}:
+                    if value['payloadDigest'] in objects:
+                        value['payloadDigest']=build(value['payloadDigest'])['payloadDigest']
+                else:
+                    for child in value.values():walk(child)
+            elif isinstance(value,list):
+                for child in value:walk(child)
+        walk(record['payload'])
+        record['payloadDigest']=payload_digest(record['payload'])
+        rebuilt[digest]=record
+        return record
+    return [canonicalize(build(digest)) for digest in objects]
+
+
 class StructuralTests(unittest.TestCase):
+    def consistent_graph(self):
+        examples=records()
+        self.assertEqual(validate_bundle(graph_bytes(examples)).status,'STRUCTURE_VALID_UNTRUSTED')
+        return examples
+
+    def clone_reference(self, examples, kind):
+        clone=copy.deepcopy(examples[kind]);clone['payload']['recordId']='f'*32
+        clone['payloadDigest']=payload_digest(clone['payload'])
+        examples['second-'+kind]=clone
+        return {'schema':clone['payload']['schema'],'payloadDigest':clone['payloadDigest']}
+
+    def test_envelope_attestation_manifest_identity_mismatch(self):
+        examples=self.consistent_graph()
+        examples['execution-attestation']['payload']['manifestRef']=self.clone_reference(examples,'artifact-manifest')
+        self.assertEqual(validate_bundle(graph_bytes(examples)).errors,
+                         ('INCONSISTENT_EXECUTION_REFERENCE:manifestRef',))
+
+    def test_envelope_challenge_criterion_mismatch(self):
+        for scope in ([9],[8,9],[]):
+            examples=self.consistent_graph();examples['execution-challenge']['payload']['criteria']=scope
+            with self.subTest(scope=scope):
+                self.assertEqual(validate_bundle(graph_bytes(examples)).status,'STRUCTURE_INVALID')
+
+    def test_registration_reference_identity_mismatch(self):
+        for kind in ('execution-attestation','execution-challenge'):
+            examples=self.consistent_graph()
+            examples[kind]['payload']['registrationRef']=self.clone_reference(examples,'verifier-registration')
+            with self.subTest(record=kind):
+                self.assertEqual(validate_bundle(graph_bytes(examples)).errors,
+                                 ('INCONSISTENT_EXECUTION_REFERENCE:registrationRef',))
+
+    def test_attestation_challenge_identity_mismatch(self):
+        examples=self.consistent_graph()
+        examples['execution-attestation']['payload']['challengeRef']=self.clone_reference(examples,'execution-challenge')
+        self.assertEqual(validate_bundle(graph_bytes(examples)).errors,
+                         ('INCONSISTENT_EXECUTION_REFERENCE:challengeRef',))
+
+    def test_registration_scope_must_cover_execution(self):
+        examples=self.consistent_graph()
+        registration=examples['verifier-registration']['payload']
+        registration['criteria']=[9];registration['witnessContracts'][0]['criterion']=9
+        self.assertEqual(validate_bundle(graph_bytes(examples)).errors,('INCONSISTENT_EXECUTION_SCOPE',))
+        examples=self.consistent_graph();registration=examples['verifier-registration']['payload']
+        registration['criteria']=[registration['criteria'][0],9]
+        witness=copy.deepcopy(registration['witnessContracts'][0]);witness['criterion']=9
+        registration['witnessContracts'].append(witness)
+        # Registration may describe more witnesses than this execution selects.
+        self.assertEqual(validate_bundle(graph_bytes(examples)).status,'STRUCTURE_VALID_UNTRUSTED')
+
+    def test_missing_wrong_type_and_modified_binding_in_consistent_graph(self):
+        examples=self.consistent_graph()
+        examples['engineering-envelope']['payload']['manifestRef']['payloadDigest']='sha256:'+'b'*64
+        self.assertEqual(validate_bundle(graph_bytes(examples)).errors,('MISSING_REFERENCE',))
+        examples=self.consistent_graph()
+        examples['engineering-envelope']['payload']['attestationRef']['schema']='acp-phase6-evidence/human-decision/1'
+        self.assertEqual(validate_bundle(graph_bytes(examples)).status,'STRUCTURE_INVALID')
+        examples=self.consistent_graph()
+        examples['execution-attestation']['payload']['binding']['executionCommit']='b'*40
+        self.assertEqual(validate_bundle(graph_bytes(examples)).errors,('REFERENCE_BINDING_MISMATCH',))
+
+    def test_cross_application_reference_confusion(self):
+        examples=self.consistent_graph()
+        examples['execution-attestation']['payload']['subjects'][0]['application']='CASE_MANAGEMENT'
+        self.assertEqual(validate_bundle(graph_bytes(examples)).errors,('REFERENCE_BINDING_MISMATCH',))
+
+    def test_duplicate_and_conflicting_record_identities(self):
+        examples=self.consistent_graph();raw=graph_bytes(examples)
+        self.assertEqual(validate_bundle(raw+[raw[0]]).errors,('DUPLICATE_RECORD',))
+        examples=self.consistent_graph()
+        clone=copy.deepcopy(examples['artifact-manifest']);clone['payload']['artifacts'][0]['size']=1
+        clone['payloadDigest']=payload_digest(clone['payload']);examples['conflict']=clone
+        self.assertEqual(validate_bundle(graph_bytes(examples)).errors,('DUPLICATE_RECORD_IDENTITY',))
+
+    def test_receipt_cannot_restate_different_execution_references(self):
+        examples=self.consistent_graph()
+        examples['admission-receipt']['payload']['manifestRef']=self.clone_reference(examples,'artifact-manifest')
+        self.assertEqual(validate_bundle(graph_bytes(examples)).status,'STRUCTURE_INVALID')
+
+    def test_ci_step_failure_propagation(self):
+        from engineering.ci.aggregate import JOBS,ARTIFACTS,evaluate
+        root=Path(__file__).resolve().parents[2]
+        workflow=(root/'.github/workflows/acp-contracts.yml').read_text()
+        command='python3.14 -m unittest discover -s verification/evidence_admission -v'
+        step='      - name: Verify Stage 1 evidence contract structures\n        run: '+command+'\n'
+        self.assertEqual(workflow.count(step),1)
+        contracts=workflow.split('  contracts:\n',1)[1].split('  phase5-experiments:',1)[0]
+        self.assertGreater(contracts.index(step),contracts.index('name: ci-source-contracts'))
+        self.assertNotIn('continue-on-error',contracts)
+        # Execute the exact workflow command with an isolated synthetic suite
+        # whose discovery always fails. This is a local shell simulation, not a
+        # hosted job claim. No source file or workflow is modified.
+        shim="""import sys, unittest
+suite=unittest.TestSuite([unittest.FunctionTestCase(lambda: (_ for _ in ()).throw(AssertionError('intentional Stage 1 failure')))])
+unittest.TestLoader.discover=lambda *args,**kwargs: suite
+sys.argv=['unittest']+sys.argv[1:]
+unittest.main(module=None)
+"""
+        import shlex
+        simulated=command.replace('python3.14 -m unittest',shlex.quote(sys.executable)+' -c '+shlex.quote(shim),1)
+        result=subprocess.run(['bash','--noprofile','--norc','-e','-o','pipefail','-c',simulated],capture_output=True,text=True)
+        self.assertNotEqual(result.returncode,0)
+        self.assertIn('intentional Stage 1 failure',result.stderr)
+        source='a'*40
+        jobs=[{'name':n,'conclusion':'failure' if n=='contracts' else 'success'} for n in JOBS]
+        bindings={n:{'source':source,'run':'1','attempt':'1','job':n} for n in JOBS}
+        artifacts={n:{'source':source,'valid':True} for n in ARTIFACTS}
+        closure={'baseline':{'auditExecutionCommit':source},'auditExecution':{'status':'PERFORMED'},
+                 'recommendation':'PHASE6_CLOSURE_RECOMMENDED','blockers':[],
+                 'criteria':[{'requirement':i,'status':'PASS','evaluationProvenance':{'executionCommit':source,'evaluationCommit':source}} for i in range(1,40)]}
+        verdict=evaluate(source,'1','1',jobs,bindings,artifacts,closure)
+        self.assertFalse(verdict['releasePassed'])
+        self.assertIn('JOB_NOT_SUCCESS:contracts',verdict['errors'])
+
     def invalid(self, record):
         result = validate_structure(encoded(record))
         self.assertEqual(result.status, 'STRUCTURE_INVALID', result)
