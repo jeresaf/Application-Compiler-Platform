@@ -38,6 +38,14 @@ STAGE2B1_FILES={
  'verification/evidence_admission/stage2b/test_execution_ledger.py',
  'docs/phase6-evidence-admission-stage2b.md',
 }
+STAGE2B2_FILES={
+ 'engineering/evidence_admission/host_capabilities.py',
+ 'engineering/evidence_admission/isolation.py',
+ 'verification/evidence_admission/stage2b2/lab_fixtures.py',
+ 'verification/evidence_admission/stage2b2/test_host_capabilities.py',
+ 'verification/evidence_admission/stage2b2/test_isolation.py',
+ 'docs/phase6-evidence-admission-stage2b2.md',
+}
 CI_STAGE2A_STEPS=b"""      - name: Install isolated Stage 2A laboratory dependencies
         shell: bash
         run: |
@@ -126,13 +134,39 @@ CHECKOUT_FORMS={
 
 
 class PreservationTests(unittest.TestCase):
+    def test_stage2b2_exact_inventory_and_accepted_source(self):
+        accepted='91181e1c62cfc6be6b82d64bc86f8d4f7166d09c'
+        additions=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        additions.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
+        if '.ci-evidence/contracts.json' in additions:
+            self.check_source_additions(['.ci-evidence/contracts.json'],[],subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
+            self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
+            additions.remove('.ci-evidence/contracts.json')
+        self.assertEqual(additions,STAGE2B2_FILES)
+        self.assertEqual(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines()),{'verification/evidence_admission/test_preservation.py'})
+        listing=subprocess.check_output(['git','ls-tree','-r','-z',accepted],cwd=ROOT)
+        for row in listing.split(b'\0'):
+            if not row:continue
+            metadata,name=row.split(b'\t',1);relative=name.decode()
+            if relative=='verification/evidence_admission/test_preservation.py':continue
+            mode,kind,digest=metadata.split();path=ROOT/relative
+            expected=subprocess.check_output(['git','cat-file','blob',digest.decode()],cwd=ROOT)
+            actual=path.read_bytes()
+            with self.subTest(path=relative):
+                self.assertFalse(path.is_symlink());self.assertEqual(kind,b'blob')
+                if actual!=expected:
+                    self.assertEqual(hashlib.sha256(actual).hexdigest(),CHECKOUT_FORMS.get(relative))
+                    self.assertEqual(actual.replace(b'\r\n',b'\n'),expected.replace(b'\r\n',b'\n'))
+                self.assertEqual(bool(path.stat().st_mode & 0o111),mode==b'100755')
+
     def test_stage2b_final_exact_correction_and_workflow(self):
         accepted='ea5683c36300481f9d3a7a473290ec3e5923af6d'
         expected_changes=set(F20_EXACT_HASHES)|{'.github/workflows/acp-contracts.yml','verification/evidence_admission/test_preservation.py'}
         changes=set(subprocess.check_output(['git','diff','--name-only',accepted,'--'],cwd=ROOT,text=True).splitlines())
-        self.assertEqual(changes,expected_changes)
+        self.assertEqual(changes-STAGE2B2_FILES,expected_changes)
         additions=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
         for addition in additions:
+            if addition in STAGE2B2_FILES:continue
             self.assertEqual(addition,'.ci-evidence/contracts.json')
             head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
             self.check_source_additions([addition],[],head)
@@ -180,18 +214,22 @@ class PreservationTests(unittest.TestCase):
             self.check_source_additions(['.ci-evidence/contracts.json'],[],head)
             self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
             additions.remove('.ci-evidence/contracts.json')
-        self.assertEqual(additions,STAGE2B1_FILES)
+        self.assertEqual(additions,STAGE2B1_FILES | STAGE2B2_FILES)
         modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
         self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
         path='verification/evidence_admission/test_preservation.py'
         before=subprocess.check_output(['git','show',accepted+':'+path],cwd=ROOT,text=True)
         # These three exact inventory predicate changes are the entire exception.
         before=before.replace('self.assertEqual(additions,STAGE2A_FILES)',
-                              'self.assertEqual(additions,STAGE2A_FILES | STAGE2B1_FILES)',1)
+                              'self.assertEqual(additions,STAGE2A_FILES | STAGE2B1_FILES | STAGE2B2_FILES)',1)
         before=before.replace("call.args[0].values.append(ast.parse('path in STAGE2A_FILES',mode='eval').body)",
                               "call.args[0].values.append(ast.parse('path in STAGE2A_FILES',mode='eval').body)\n                        call.args[0].values.append(ast.parse('path in STAGE2B1_FILES',mode='eval').body)",1)
-        before=before.replace('or path in STAGE2A_FILES,path', 'or path in STAGE2A_FILES or path in STAGE2B1_FILES,path')
+        before=before.replace('or path in STAGE2A_FILES,path', 'or path in STAGE2A_FILES or path in STAGE2B1_FILES or path in STAGE2B2_FILES,path')
         before=before.replace('step+CI_STAGE2A_STEPS+marker','step+CI_STAGE2A_STEPS+CI_STAGE2B_STEPS+marker')
+        before=before.replace('self.assertEqual(additions,STAGE2A_FILES | STAGE2B1_FILES)',
+                              'self.assertEqual(additions,STAGE2A_FILES | STAGE2B1_FILES | STAGE2B2_FILES)',1)
+        before=before.replace("call.args[0].values.append(ast.parse('path in STAGE2B1_FILES',mode='eval').body)",
+                              "call.args[0].values.append(ast.parse('path in STAGE2B1_FILES',mode='eval').body)\n                        call.args[0].values.append(ast.parse('path in STAGE2B2_FILES',mode='eval').body)",1)
         old=ast.parse(before);new=ast.parse((ROOT/path).read_text())
         new_methods={n.name:ast.dump(n) for c in new.body if isinstance(c,ast.ClassDef) for n in c.body if isinstance(n,ast.FunctionDef)}
         for node in old.body:
@@ -228,7 +266,7 @@ class PreservationTests(unittest.TestCase):
             self.check_source_additions(['.ci-evidence/contracts.json'],[],head)
             self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
             additions.remove('.ci-evidence/contracts.json')
-        self.assertEqual(additions,STAGE2A_FILES | STAGE2B1_FILES)
+        self.assertEqual(additions,STAGE2A_FILES | STAGE2B1_FILES | STAGE2B2_FILES)
         modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
         self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
         path='verification/evidence_admission/test_preservation.py'
@@ -247,6 +285,7 @@ class PreservationTests(unittest.TestCase):
                         self.assertIsInstance(call.args[0],ast.BoolOp)
                         call.args[0].values.append(ast.parse('path in STAGE2A_FILES',mode='eval').body)
                         call.args[0].values.append(ast.parse('path in STAGE2B1_FILES',mode='eval').body)
+                        call.args[0].values.append(ast.parse('path in STAGE2B2_FILES',mode='eval').body)
                 if method.name=='test_baseline_bytes_and_pinned_existing_checkout_forms':
                     class AuthorizedInsertion(ast.NodeTransformer):
                         def visit_BinOp(self,node):
@@ -277,11 +316,11 @@ class PreservationTests(unittest.TestCase):
 
     def check_source_additions(self, untracked, added, head):
         # Committed or staged additions never receive the transient exception.
-        for path in added:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES or path in STAGE2B1_FILES,path)
+        for path in added:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES or path in STAGE2B1_FILES or path in STAGE2B2_FILES,path)
         for path in untracked:
             if path == '.ci-evidence/contracts.json':
                 self.check_contracts_binding(ROOT/path,head)
-            else:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES or path in STAGE2B1_FILES,path)
+            else:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES or path in STAGE2B1_FILES or path in STAGE2B2_FILES,path)
 
     def check_contracts_binding(self, path, head):
         self.assertFalse(path.parent.is_symlink(),'SYMLINK_EVIDENCE_DIRECTORY')
