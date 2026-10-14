@@ -4,9 +4,12 @@ import gzip
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
+import re
 import subprocess
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -34,6 +37,99 @@ CHECKOUT_FORMS={
 
 
 class PreservationTests(unittest.TestCase):
+    def check_source_additions(self, untracked, added, head):
+        # Committed or staged additions never receive the transient exception.
+        for path in added:self.assertTrue(path.startswith(ALLOWED) or path==DOC,path)
+        for path in untracked:
+            if path == '.ci-evidence/contracts.json':
+                self.check_contracts_binding(ROOT/path,head)
+            else:self.assertTrue(path.startswith(ALLOWED) or path==DOC,path)
+
+    def check_contracts_binding(self, path, head):
+        self.assertFalse(path.parent.is_symlink(),'SYMLINK_EVIDENCE_DIRECTORY')
+        self.assertFalse(path.is_symlink(),'SYMLINK_EVIDENCE_FILE')
+        self.assertTrue(path.is_file(),'BINDING_FILE_REQUIRED')
+        self.assertLessEqual(path.stat().st_size,4096,'OVERSIZED_SOURCE_BINDING')
+        def unique_pairs(pairs):
+            result={}
+            for key,value in pairs:
+                self.assertNotIn(key,result,'DUPLICATE_BINDING_KEY')
+                result[key]=value
+            return result
+        value=json.loads(path.read_bytes().decode('utf-8'),object_pairs_hook=unique_pairs)
+        self.assertIs(type(value),dict)
+        self.assertEqual(set(value),{'source','run','attempt','job'})
+        for item in value.values():self.assertIs(type(item),str)
+        self.assertIsNotNone(re.fullmatch(r'[0-9a-f]{40}',value['source']))
+        self.assertEqual(value['source'],head,'WRONG_CHECKOUT_SOURCE')
+        self.assertEqual(value['job'],'contracts','WRONG_BINDING_JOB')
+        for key in ('run','attempt'):
+            self.assertIsNotNone(re.fullmatch(r'[1-9][0-9]*',value[key]),'INVALID_CI_IDENTITY')
+        for key,variable in (('source','GITHUB_SHA'),('run','GITHUB_RUN_ID'),
+                             ('attempt','GITHUB_RUN_ATTEMPT'),('job','GITHUB_JOB')):
+            if variable in os.environ:
+                self.assertEqual(value[key],os.environ[variable],'WRONG_'+variable)
+
+    def test_transient_contracts_binding_has_exact_structure_and_identity(self):
+        head='a'*40
+        binding={'source':head,'run':'123','attempt':'2','job':'contracts'}
+        environment={'GITHUB_SHA':head,'GITHUB_RUN_ID':'123','GITHUB_RUN_ATTEMPT':'2','GITHUB_JOB':'contracts'}
+        with tempfile.TemporaryDirectory() as directory,patch.dict(os.environ,environment):
+            path=Path(directory)/'contracts.json';path.write_text(json.dumps(binding))
+            self.check_contracts_binding(path,head)
+            for variable in environment:
+                with self.subTest(environment=variable),patch.dict(os.environ,{variable:'wrong-current-identity'}):
+                    with self.assertRaises(AssertionError):self.check_contracts_binding(path,head)
+            for key,bad in (('source','b'*40),('run','124'),('attempt','3'),('job','phase6-target'),
+                            ('run',123),('run','01'),('attempt','0'),('attempt','2\n'),('source',head+'\n')):
+                value=dict(binding);value[key]=bad;path.write_text(json.dumps(value))
+                with self.subTest(key=key,bad=bad),self.assertRaises(AssertionError):
+                    self.check_contracts_binding(path,head)
+            for missing in binding:
+                value=dict(binding);del value[missing];path.write_text(json.dumps(value))
+                with self.subTest(missing=missing),self.assertRaises(AssertionError):
+                    self.check_contracts_binding(path,head)
+            malformed=[json.dumps(dict(binding,extra=True)), 'null', '[]', '{bad',
+                       '{"source":"'+head+'","source":"'+head+'","run":"123","attempt":"2","job":"contracts"}']
+            for raw in malformed:
+                path.write_text(raw)
+                with self.subTest(raw=raw),self.assertRaises((AssertionError,ValueError)):
+                    self.check_contracts_binding(path,head)
+            path.write_bytes(b'\xff')
+            with self.assertRaises(UnicodeError):self.check_contracts_binding(path,head)
+            path.write_bytes(b' ' * 4097)
+            with self.assertRaises(AssertionError):self.check_contracts_binding(path,head)
+
+    def test_transient_exception_never_allows_tracked_or_other_files(self):
+        head='a'*40
+        with tempfile.TemporaryDirectory() as directory,patch(__name__+'.ROOT',Path(directory)):
+            path=ROOT/'.ci-evidence/contracts.json';path.parent.mkdir()
+            path.write_text(json.dumps({'source':head,'run':'123','attempt':'2','job':'contracts'}))
+            # Clear only hosted identity variables for this synthetic local case.
+            with patch.dict(os.environ):
+                for key in ('GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB'):os.environ.pop(key,None)
+                self.check_source_additions(['.ci-evidence/contracts.json'],[],head)
+                for untracked,added in (([],['.ci-evidence/contracts.json']),
+                                         (['.ci-evidence/contracts.json'],['.ci-evidence/contracts.json']),
+                                         (['.ci-evidence/other.json'],[]),
+                                         (['.ci-evidence/contracts.json.bak'],[]),
+                                         (['unauthorized-source.py'],[]),
+                                         ([],['unauthorized-source.py'])):
+                    with self.subTest(untracked=untracked,added=added),self.assertRaises(AssertionError):
+                        self.check_source_additions(untracked,added,head)
+                path.write_text('{}')
+                with self.assertRaises(AssertionError):self.check_source_additions(['.ci-evidence/contracts.json'],[],head)
+
+    def test_transient_binding_rejects_symlinks(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);target=root/'target.json'
+            target.write_text(json.dumps({'source':'a'*40,'run':'123','attempt':'2','job':'contracts'}))
+            link=root/'contracts.json';link.symlink_to(target)
+            with self.assertRaises(AssertionError):self.check_contracts_binding(link,'a'*40)
+            real=root/'real';real.mkdir();(real/'contracts.json').write_bytes(target.read_bytes())
+            alias=root/'alias';alias.symlink_to(real,target_is_directory=True)
+            with self.assertRaises(AssertionError):self.check_contracts_binding(alias/'contracts.json','a'*40)
+
     def test_only_exact_ci_insertion_is_allowed(self):
         workflow=ROOT/'.github/workflows/acp-contracts.yml'
         original=workflow.read_bytes()
@@ -88,7 +184,8 @@ class PreservationTests(unittest.TestCase):
         subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml'],cwd=ROOT,check=True,capture_output=True)
         added=subprocess.check_output(['git','diff','--name-only','--diff-filter=A',BASELINE,'--'],cwd=ROOT,text=True).splitlines()
         new=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
-        for path in new+added:self.assertTrue(path.startswith(ALLOWED) or path==DOC,path)
+        head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+        self.check_source_additions(new,added,head)
 
     def test_all_39_criterion_definitions_and_historical_blockers_preserved(self):
         source=(ROOT/'tooling/audit/criteria.py').read_text()
