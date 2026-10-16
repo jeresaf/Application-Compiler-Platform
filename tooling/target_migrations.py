@@ -152,10 +152,15 @@ def plan_upgrade(previous, current, accepted_plan, bindings, history):
         for prior in old.values():
             if prior['kind'] != 'Field':continue
             field=prior['data'];typ=field['type']
+            # ValueObject fields are inputs/results, not persisted Entity columns.
+            if old[field['owner']['id']]['kind'] != 'Entity':
+                continue
             if typ['kind']=='Nullable':typ=typ['item']
             if typ['kind']!='String':continue
             table=identifier(field['owner']['id'],'e');column=identifier(prior['id'],'f')
-            checks.append(f"DO $$ BEGIN IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema=current_schema() AND table_name='{table}' AND column_name='{column}' AND udt_name<>'bytea') THEN RAISE EXCEPTION 'ACP_INCOMPATIBLE_STORAGE_REPRESENTATION'; END IF; END $$;")
+            # Require the old storage to exist with the exact representation.
+            # Looking only for a mismatching type accepts missing columns/tables.
+            checks.append(f"DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema=current_schema() AND table_name='{table}' AND column_name='{column}' AND udt_name='bytea') THEN RAISE EXCEPTION 'ACP_INCOMPATIBLE_STORAGE_REPRESENTATION'; END IF; END $$;")
         sql=checks+sql
     return Document.of({"version": "0.1.0", "phase3PlanDigest": digest,
         "previousSnapshot": before["contentDigest"], "nextSnapshot": after["contentDigest"],

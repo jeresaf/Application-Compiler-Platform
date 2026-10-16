@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0.0",
+  "active": false,
+  "status": "STAGED_NOT_EXECUTED",
+  "proposedBranch": "codex/phase6-controlled-integration-candidate",
+  "triggers": "NONE; separate explicitly authorized human invocation only",
+  "existingWorkflow": ".github/workflows/acp-contracts.yml \u2014 unchanged",
+  "baselineCommit": "2b03d2d35b517f5a073bf83a3cb7a4e6126118cf",
+  "wave3PatchSHA256": "9706ba0c436f57560b0e8ace897cee7f1f258c2d40870e8bf1c9c2da70b791c8",
+  "inputs": [
+    "externally reviewed manifest SHA256",
+    "externally reviewed candidate source digest",
+    "exact Wave3 patch",
+    "ephemeral Ubuntu 24.04 runner identity",
+    "new specific execution authorization"
+  ],
+  "runner": {
+    "host": "ephemeral Ubuntu 24.04",
+    "python": "CPython 3.14.7 preinstalled",
+    "postgresql": "18.6 preinstalled exact paths/SHA256",
+    "node": "24.21.0 preinstalled for separately authorized app integration",
+    "network": "disabled",
+    "permissions": "contents read; no inherited secrets",
+    "downloadsOrInstalls": false,
+    "services": []
+  },
+  "jobs": {
+    "offline": {
+      "argv": [
+        "<pinned-python>",
+        "engineering/ci/phase6_qualification.py",
+        "--offline",
+        "--source",
+        "<candidate>",
+        "--patch",
+        "<wave3-patch>",
+        "--manifest",
+        "<candidate>/engineering/ci/phase6-qualification-manifest.json",
+        "--manifest-sha256",
+        "<reviewed-manifest-sha256>",
+        "--candidate-sha256",
+        "<reviewed-candidate-sha256>",
+        "--scratch",
+        "<private-scratch>",
+        "--output",
+        "<private-results>/offline.json",
+        "--python",
+        "<pinned-python>"
+      ],
+      "timeoutSeconds": 1560,
+      "meaning": "Exit 0 is offline success only; overall remains NOT_QUALIFIED"
+    },
+    "physical": {
+      "enabled": false,
+      "entrypoint": "engineering.ci.phase6_postgresql.execute_future",
+      "requires": [
+        "new explicitly scoped execution authorization",
+        "reviewed policy SHA256",
+        "trusted host-only authorization callback",
+        "exact allowed binary paths/versions/hashes",
+        "new exclusive root/private socket/role/db",
+        "same-process PID/start-token ownership and server probes",
+        "no default/ambient libpq credentials",
+        "pg_ctl -p binds exact reviewed postgres binary; reserve bounded setup/teardown time outside 600-second test window",
+        "launcher-bound acp-owned-postgresql/2 record with exact psql and interpreter executable identity",
+        "test client rejects missing/path/hash/owner/mode/token substitutions before connecting"
+      ],
+      "testArgv": [
+        "<pinned-python>",
+        "-B",
+        "-m",
+        "unittest",
+        "test_phase6_physical_capture.PhysicalCapturedTests",
+        "-v"
+      ],
+      "count": 4,
+      "evidence": [
+        "exact process and DB identity",
+        "tests.log",
+        "sql-observations.jsonl including row/catalog bytes and SHA256",
+        "launcher-result.json",
+        "preserved pgdata/server logs"
+      ],
+      "unavailablePrerequisite": "No production or laboratory execution authorizer has been configured by this assignment",
+      "testTimeoutSeconds": 600,
+      "jobTimeoutSeconds": 1800
+    },
+    "generated-app": {
+      "enabled": false,
+      "status": "NOT_RUN",
+      "entrypointsForSeparateReview": [
+        {
+          "argv": [
+            "<pinned-python>",
+            "tooling/check_privacy_profile_upgrade.py",
+            "--output",
+            "<new-private-upgrade-evidence>",
+            "--new-projects",
+            "<bound-generated-projects>"
+          ],
+          "scope": "supported sealed target 0.2 to 0.3 retained runtime data; existing script needs read-only historical Git artifacts and explicit owned JDBC fence"
+        },
+        {
+          "argv": [
+            "<pinned-python>",
+            "tooling/integration/release_upgrade.py",
+            "--projects",
+            "<bound-generated-projects>",
+            "--output",
+            "<new-private-release-evidence>"
+          ],
+          "scope": "sealed 0.4 to 0.5 unchanged approved specification; DOES NOT prove semantic evolution"
+        },
+        {
+          "argv": [
+            "<pinned-python>",
+            "tooling/check_task_interface.py",
+            "--output",
+            "<new-private-application-evidence>",
+            "--run-builds"
+          ],
+          "scope": "reference full application admission entrypoint; actual build/browser execution requires separately bounded invocation after source/bundle admission is resolved"
+        }
+      ],
+      "constraints": [
+        "candidate is UNSEALED_CANDIDATE and existing production admission must reject it",
+        "do not rewrite 0.5.0 seal or bypass admission",
+        "review a separate laboratory-only candidate admission path before app generation",
+        "no install/download; preapproved locked dependencies and tool identities must be preprovisioned",
+        "no production target 0.1 upgrade",
+        "owned database identity must be adapted to Java/JDBC before running old app scripts",
+        "read-only exact retained predecessor archives required; tracked source copy has no Git history",
+        "check_task_interface.py --run-builds currently includes npm ci and Playwright install; review/adapt to preprovisioned dependencies before any later no-install execution"
+      ],
+      "expectedArtifacts": [
+        "database/V1__initial.sql",
+        "database/V2__delivery_jobs.sql",
+        "database/V3__privacy_lifecycle.sql",
+        "backend/src/main/resources/acp-model.json",
+        "frontend/src/task-contract.ts",
+        "frontend/src/extensions/identity.ts",
+        "acp/provenance.json",
+        "JUnit reports",
+        "frontend build and browser reports"
+      ],
+      "assertions": [
+        "old tenant/resource rows and runtime-state byte/count digests retained",
+        "no destructive DDL or clean between seed and upgrade",
+        "exact not-null/presence/empty/NUL/Unicode storage",
+        "HUMAN extension and inventory preserved across accepted/rejected regeneration",
+        "strict real ArtifactPlan origin subset and provenance input/materialized digest linkage",
+        "post-upgrade behavior and failure recovery",
+        "ACCEPTED_DEPLOYED_UPGRADE_NOT_PROVEN unless independent authenticated history and bindings are supplied"
+      ]
+    }
+  },
+  "releaseGates": "UNCHANGED; 39 criteria/21 blockers/T09 reservations; no CI admission or release qualification",
+  "dependencies": {
+    "profileStack": {
+      "java": "21",
+      "springBoot": "4.1.1",
+      "postgresql": "18.6",
+      "postgresqlDriver": "42.7.13",
+      "flyway": "12.4.0",
+      "vue": "3.5.43",
+      "typescript": "6.0.3",
+      "vite": "8.3.3",
+      "vuePlugin": "6.0.9",
+      "vueTsc": "3.3.12",
+      "vitest": "5.0.3",
+      "vueTestUtils": "2.5.1",
+      "playwright": "1.63.0",
+      "axePlaywright": "4.13.0",
+      "junit": "6.0.3",
+      "mavenCompiler": "3.15.0",
+      "mavenSurefire": "3.5.6",
+      "node": "24.21.0",
+      "happyDom": "20.14.5"
+    },
+    "inputs": {
+      "tooling/requirements.txt": "36637d22364f7e70895bee4d452b867c6436c6e27a899f65edb6b84aa3f748c2",
+      "targets/spring-vue-postgres/templates/frontend/package-lock.json": "1f3732e03779b65a9194958d92802f0505f7b37469d6f2332bd7d5d91f429153",
+      "targets/spring-vue-postgres/templates/backend/pom.xml": "f001883364ec2bbe1ef4ed32f9c995101cab3236614017308e66b3f49ad1b976"
+    }
+  }
+}
