@@ -1,0 +1,817 @@
+--- a/tooling/target_migrations.py
++++ b/tooling/target_migrations.py
+@@ -152,10 +152,15 @@
+         for prior in old.values():
+             if prior['kind'] != 'Field':continue
+             field=prior['data'];typ=field['type']
++            # ValueObject fields are inputs/results, not persisted Entity columns.
++            if old[field['owner']['id']]['kind'] != 'Entity':
++                continue
+             if typ['kind']=='Nullable':typ=typ['item']
+             if typ['kind']!='String':continue
+             table=identifier(field['owner']['id'],'e');column=identifier(prior['id'],'f')
+-            checks.append(f"DO $$ BEGIN IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema=current_schema() AND table_name='{table}' AND column_name='{column}' AND udt_name<>'bytea') THEN RAISE EXCEPTION 'ACP_INCOMPATIBLE_STORAGE_REPRESENTATION'; END IF; END $$;")
++            # Require the old storage to exist with the exact representation.
++            # Looking only for a mismatching type accepts missing columns/tables.
++            checks.append(f"DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema=current_schema() AND table_name='{table}' AND column_name='{column}' AND udt_name='bytea') THEN RAISE EXCEPTION 'ACP_INCOMPATIBLE_STORAGE_REPRESENTATION'; END IF; END $$;")
+         sql=checks+sql
+     return Document.of({"version": "0.1.0", "phase3PlanDigest": digest,
+         "previousSnapshot": before["contentDigest"], "nextSnapshot": after["contentDigest"],
+--- a/tooling/target_provenance.py
++++ b/tooling/target_provenance.py
+@@ -1,11 +1,33 @@
+ """Digest-bound generated artifact maps; no general source intelligence."""
+ from pathlib import Path
++import hashlib
++
++
++def _origins(value):
++    if (type(value) is not list or not value or any(type(o) is not dict or set(o) != {"id", "revision"}
++        or type(o["id"]) is not str or not o["id"] or type(o["revision"]) is not int or o["revision"] < 1 for o in value)
++        or len({o["id"] for o in value}) != len(value)):
++        raise ValueError("PROVENANCE_ORIGINS")
++    return {(o["id"], o["revision"]) for o in value}
++
++
++def _target_id(origin):
++    return "target_" + hashlib.sha256(origin.encode()).hexdigest()[:24]
++
+ 
+ from compiler_core import safe_path
+ from filesystem_artifacts import byte_digest
+ 
+ 
+ def inspect_mapping(root, mapping, *, semantic_revisions=None):
++    try:
++        _origins(mapping['origins'])
++        if mapping.get('locationConfidence') not in {'ARTIFACT_ONLY', 'EXACT_TEST_FIXTURE'} or type(mapping.get('locations')) is not list:
++            raise ValueError('PROVENANCE_CONFIDENCE')
++        if mapping['locationConfidence'] == 'ARTIFACT_ONLY' and mapping['locations']:
++            raise ValueError('PROVENANCE_CONFIDENCE')
++    except (KeyError, TypeError, ValueError):
++        return {'status': 'INVALID_MAPPING', 'locations': []}
+     relative = safe_path(mapping["artifact"])
+     root = Path(root).absolute()
+     path = root / relative
+@@ -31,7 +53,79 @@
+             key=mapping['originSet']
+             if key not in sets:raise ValueError('PROVENANCE_ORIGIN_SET')
+             origins=sets[key]
+-            if not origins or len({o['id'] for o in origins})!=len(origins) or any(type(o['revision']) is not int or o['revision']<1 for o in origins):raise ValueError('PROVENANCE_ORIGINS')
++            _origins(origins)
++            # The shared set is a dictionary, not each artifact's origin list.
++            # Current generator output identifies its applicable subset here.
++            if 'targetObjects' in mapping:
++                targets = mapping['targetObjects']
++                index = {_target_id(o['id']): o for o in origins}
++                if (type(targets) is not list or not targets or any(type(t) is not str for t in targets)
++                    or len(set(targets)) != len(targets) or any(t not in index for t in targets)):
++                    raise ValueError('PROVENANCE_TARGET_OBJECTS')
++                origins = [index[t] for t in targets]
++            # Retain compatibility for older v0.3 records without targetObjects;
++            # strict plan verification below still requires exact applicable IDs.
+             mapping['origins']=origins
+     elif value['version']!='0.2.0':raise ValueError('PROVENANCE_VERSION')
+     return value
++
++
++def verify_plan_provenance(root, plan, document, *, target, request, required_origins=()):
++    """Reconcile expanded sidecars with a trusted host plan/TargetIR/request.
++
++    Pure offline integrity checking, NOT authority/admission or runtime proof.
++    HUMAN paths omitted by the generator are not blanket-exempted mappings:
++    callers must scope required_origins to genuinely generated semantic objects.
++    The provenance sidecar itself is the sole non-self-referential artifact.
++    """
++    from compiler_contracts import Owner, Stage, fingerprint
++    from filesystem_artifacts import FilesystemArtifactStore, source_bytes
++    artifacts = {a.path: a for a in plan.artifacts}
++    if len(artifacts) != len(plan.artifacts):
++        raise ValueError('PROVENANCE_DUPLICATE_ARTIFACT')
++    inventory = {a.path: a for a in FilesystemArtifactStore(root).inventory()}
++    nodes = {o.provenance.origins[0].id: o for o in target.objects}
++    revisions = {n['id']: n['revision'] for n in target.target_model.read()['nodes']}
++    if document['build']['canonicalSnapshotDigest'] != request.snapshot_digest or document['build']['generator'] != request.generator.split('+sha256:')[0]:
++        raise ValueError('PROVENANCE_BUILD')
++    mappings = {}
++    for mapping in document['artifacts']:
++        path = mapping['artifact']
++        if path in mappings:
++            raise ValueError('PROVENANCE_DUPLICATE_ARTIFACT')
++        mappings[path] = mapping
++    expected_paths = {p for p,a in artifacts.items() if not (p == 'acp/provenance.json' and a.role == 'PROVENANCE')}
++    if set(mappings) != expected_paths:
++        raise ValueError('PROVENANCE_ARTIFACT_COVERAGE')
++    covered = set()
++    for path, artifact in artifacts.items():
++        if artifact.content_digest != fingerprint(artifact.content, 'artifact-content') or 'target-source-integrity' not in artifact.verification:
++            raise ValueError('PROVENANCE_ARTIFACT')
++        if type(artifact.owner) is not Owner or path not in inventory or inventory[path].owner != artifact.owner or inventory[path].digest != artifact.content_digest:
++            raise ValueError('PROVENANCE_OWNERSHIP')
++        origins = {(o.id,o.revision) for o in artifact.mappings}
++        if (not origins or len(origins) != len(artifact.mappings) or artifact.mappings != artifact.provenance.origins
++            or any(revisions.get(id) != rev or id not in nodes or nodes[id].provenance.origins != (origin,)
++                   for origin in artifact.mappings for id,rev in ((origin.id,origin.revision),))):
++            raise ValueError('PROVENANCE_PLAN_ORIGINS')
++        expected_inputs = tuple(sorted((*[fingerprint(nodes[o.id]) for o in artifact.mappings],
++            fingerprint(target.target_model,'target-model'),fingerprint(request.generator,'generator-manifest'))))
++        if artifact.provenance.stage != Stage.GENERATE or artifact.provenance.inputs != expected_inputs or artifact.provenance.compiler != request.compiler or artifact.provenance.pipeline != request.pipeline:
++            raise ValueError('PROVENANCE_INPUTS')
++        if byte_digest((Path(root)/path).read_bytes()) != byte_digest(source_bytes(artifact.content)):
++            raise ValueError('PROVENANCE_BYTES')
++        if path not in mappings:
++            continue
++        mapping = mappings[path]
++        if (_origins(mapping['origins']) != origins or mapping.get('ownership') != str(artifact.owner)
++            or mapping.get('targetRole') != artifact.role or mapping.get('generator') != document['build']['generator']):
++            raise ValueError('PROVENANCE_MAPPING_BINDING')
++        if inspect_mapping(root,mapping,semantic_revisions=revisions)['status'] != 'CURRENT':
++            raise ValueError('PROVENANCE_MAPPING_INTEGRITY')
++        covered.update(origins)
++    required = {(o.id,o.revision) for o in required_origins}
++    if not required <= covered:
++        raise ValueError('PROVENANCE_SEMANTIC_COVERAGE')
++    return {'status':'VERIFIED_OFFLINE','artifacts':len(mappings),'origins':len(covered),
++            'verification':sorted({v for a in plan.artifacts for v in a.verification}),
++            'runtime':'NOT_PROVEN'}
+--- a/tooling/tests/test_canonical03_migrations.py
++++ b/tooling/tests/test_canonical03_migrations.py
+@@ -54,12 +54,96 @@
+         with self.assertRaisesRegex(MigrationBlocked,'FIELD_TYPE_UPGRADE_UNSUPPORTED'):plan_upgrade(*fixture(typ={'kind':'Integer'}))
+ 
+ 
+-@unittest.skipUnless(os.environ.get('ACP_TEST_DATABASE_URL'),'requires explicit disposable PostgreSQL')
++def assert_encoded_rows(output, expected):
++    """Parse complete tuples-only id|hex output, never headings or sliced rows."""
++    import re
++    rows = {}
++    for line in output.splitlines():
++        parts = line.split('|')
++        if len(parts) != 2 or not re.fullmatch(r'[1-9][0-9]*', parts[0]):
++            raise ValueError('INVALID_ROW')
++        key = int(parts[0]); value = parts[1]
++        if key in rows:
++            raise ValueError('DUPLICATE_ROW')
++        if value == '<NULL>':
++            value = None
++        elif not re.fullmatch(r'(?:[0-9a-f]{2})*', value):
++            raise ValueError('INVALID_HEX')
++        rows[key] = value
++    if not expected or rows != expected:
++        raise ValueError('ROW_POPULATION_OR_BYTES_MISMATCH')
++    return rows
++
++
++def owned_psql(sql, check=True):
++    """Test-only fence: no URL/default connection or inherited libpq credentials.
++
++    The launcher must have created the private root/cluster and recorded its PID.
++    This is a local laboratory safety check, not authenticated runtime evidence.
++    """
++    import json
++    root = Path(os.environ['ACP_WAVE2_ROOT']).resolve(strict=True)
++    if not root.name.startswith('acp-phase6-wave2-'):
++        raise ValueError('TASK_ROOT_REQUIRED')
++    data = root / 'pgdata'; socket = root / 'pgsocket'
++    for directory in (data, socket):
++        if directory.is_symlink() or directory.resolve(strict=True).parent != root:
++            raise ValueError('PRIVATE_DIRECTORY_REQUIRED')
++        if directory.stat().st_mode & 0o077 or directory.stat().st_uid != os.getuid():
++            raise ValueError('PRIVATE_DIRECTORY_REQUIRED')
++    identity = json.loads((root / 'owned-postgresql.json').read_text())
++    if set(identity) != {'pid', 'port', 'database', 'role'}:
++        raise ValueError('OWNED_IDENTITY_REQUIRED')
++    if (not isinstance(identity['pid'], int) or identity['pid'] <= 0
++        or not isinstance(identity['port'], int) or not 1024 <= identity['port'] <= 65535
++        or not all(isinstance(identity[k], str) and identity[k].startswith('acp_wave2_')
++                   and identity[k].replace('_', '').isalnum() for k in ('database', 'role'))):
++        raise ValueError('OWNED_IDENTITY_REQUIRED')
++    pid = (data / 'postmaster.pid').read_text().splitlines()
++    if len(pid) < 6 or pid[0] != str(identity['pid']) or pid[1] != str(data) or pid[3] != str(identity['port']) or pid[4] != str(socket) or pid[5] != '':
++        raise ValueError('OWNED_POSTMASTER_REQUIRED')
++    env = {k: v for k, v in os.environ.items() if not k.startswith(('PG', 'ACP_TEST_DATABASE'))}
++    env.update(PGHOST=str(socket), PGPORT=str(identity['port']), PGDATABASE=identity['database'],
++               PGUSER=identity['role'], PGPASSFILE='/dev/null', PGSERVICEFILE='/dev/null', PGCONNECT_TIMEOUT='5')
++    command = ['/usr/lib/postgresql/18/bin/psql', '-X', '-A', '-t', '-v', 'ON_ERROR_STOP=1',
++               '-h', str(socket), '-p', str(identity['port']), '-U', identity['role'], '-d', identity['database']]
++    probe = "SELECT json_build_array(current_setting('data_directory'),current_setting('listen_addresses'),current_setting('unix_socket_directories'),inet_server_addr() IS NULL,current_setting('server_version_num'),current_database(),current_user);"
++    observed = subprocess.run(command, input=probe, text=True, capture_output=True, env=env, check=True, timeout=15)
++    expected = [str(data), '', str(socket), True, '180006', identity['database'], identity['role']]
++    if json.loads(observed.stdout.strip()) != expected:
++        raise ValueError('OWNED_SERVER_MISMATCH')
++    return subprocess.run(command, input=sql, text=True, capture_output=True, env=env, check=check, timeout=60)
++
++
++@unittest.skipUnless(os.environ.get('ACP_WAVE2_ROOT'), 'requires newly owned Wave 2 PostgreSQL')
+ class PostgreSQL03MigrationTests(unittest.TestCase):
+-    def psql(self,sql,check=True):
+-        env=os.environ.copy();env['PGUSER']=env['ACP_TEST_DATABASE_USER'];env['PGPASSWORD']=env['ACP_TEST_DATABASE_PASSWORD']
+-        url=env['ACP_TEST_DATABASE_URL'].removeprefix('jdbc:')
+-        return subprocess.run(['psql','-X','-A','-t','-v','ON_ERROR_STOP=1',url],input=sql,text=True,capture_output=True,env=env,check=check)
++    def psql(self, sql, check=True):
++        return owned_psql(sql, check)
++
++    def storage_setup(self, snapshot, schema, incompatible=None):
++        # Model the complete pre-existing String storage, not just the table
++        # receiving the new field. Missing old columns must fail admission.
++        columns = {}
++        nodes = {n['id']: n for n in snapshot['content']['nodes']}
++        for node in nodes.values():
++            if node['kind'] != 'Field':
++                continue
++            field = node['data']; typ = field['type']
++            if nodes[field['owner']['id']]['kind'] != 'Entity':
++                continue
++            if typ['kind'] == 'Nullable':
++                typ = typ['item']
++            if typ['kind'] != 'String':
++                continue
++            table = identifier(field['owner']['id'], 'e')
++            column = identifier(node['id'], 'f')
++            storage = 'text' if incompatible == (table, column) else 'bytea'
++            columns.setdefault(table, []).append(column + ' ' + storage)
++        sql = f'CREATE SCHEMA {schema}; SET search_path={schema};'
++        for table, fields in sorted(columns.items()):
++            sql += f'CREATE TABLE {table}(id integer PRIMARY KEY,' + ','.join(fields) + ');'
++            sql += f'INSERT INTO {table}(id) VALUES(1);'
++        return sql
+ 
+     def test_real_postgresql_storage_presence_required_and_rollback(self):
+         self.assertEqual('180006',self.psql('SHOW server_version_num;').stdout.strip())
+@@ -68,7 +152,7 @@
+             field=next(n for n in args[1].read()['content']['nodes'] if n['id']=='EVOLUTION-required-field')
+             table=identifier(field['data']['owner']['id'],'e');column=identifier(field['id'],'f');presence=identifier(field['id'],'present')
+             schema='acp_migration_'+uuid.uuid4().hex
+-            setup=f'CREATE SCHEMA {schema}; SET search_path={schema}; CREATE TABLE {table}(id integer PRIMARY KEY); INSERT INTO {table} VALUES(1);'
++            setup=self.storage_setup(args[0].read(),schema)
+             try:
+                 self.psql(setup+'BEGIN;'+migration['sql']+'COMMIT;')
+                 prefix=f'SET search_path={schema};'
+@@ -86,19 +170,83 @@
+         prior=next(n for n in before['content']['nodes'] if n['kind']=='Field' and n['data']['type']['kind']=='String' and next(o for o in before['content']['nodes'] if o['id']==n['data']['owner']['id'])['kind']=='Entity')
+         old_table=identifier(prior['data']['owner']['id'],'e');old_column=identifier(prior['id'],'f');schema='acp_migration_'+uuid.uuid4().hex
+         try:
+-            self.psql(f'CREATE SCHEMA {schema};SET search_path={schema};CREATE TABLE {old_table}({old_column} text);')
++            self.psql(self.storage_setup(before,schema,incompatible=(old_table,old_column)))
+             result=self.psql(f'SET search_path={schema};BEGIN;'+plan_upgrade(*args).read()['sql']+'COMMIT;',False)
+             self.assertNotEqual(0,result.returncode);self.assertIn('ACP_INCOMPATIBLE_STORAGE_REPRESENTATION',result.stderr)
+         finally:self.psql(f'DROP SCHEMA {schema} CASCADE;')
+         args=fixture();sql=plan_upgrade(*args).read()['sql'];field=args[2].read()['change']['operations'][0]['node'];table=identifier(field['data']['owner']['id'],'e');column=identifier(field['id'],'f')
+         schema='acp_migration_'+uuid.uuid4().hex
+         try:
+-            self.psql(f'CREATE SCHEMA {schema};SET search_path={schema};CREATE TABLE {table}(id integer);INSERT INTO {table} VALUES(1);')
++            self.psql(self.storage_setup(args[0].read(),schema))
+             # Force a real database backfill failure, then verify transactional DDL rollback.
+             broken=sql.replace("decode('65cc8100f09fa68b27','hex')","decode('zz','hex')")
+             self.assertNotEqual(0,self.psql(f'SET search_path={schema};BEGIN;'+broken+'COMMIT;',False).returncode)
+             self.assertEqual('0',self.psql(f"SELECT count(*) FROM information_schema.columns WHERE table_schema='{schema}' AND column_name='{column}';").stdout.strip())
+         finally:self.psql(f'DROP SCHEMA {schema} CASCADE;')
+ 
++    def test_missing_persisted_column_rejects_before_expand(self):
++        args=fixture(); before=args[0].read(); nodes={n['id']:n for n in before['content']['nodes']}
++        old=next(n for n in nodes.values() if n['kind']=='Field' and n['data']['type']['kind']=='String' and nodes[n['data']['owner']['id']]['kind']=='Entity')
++        table=identifier(old['data']['owner']['id'],'e'); column=identifier(old['id'],'f')
++        schema='acp_migration_'+uuid.uuid4().hex
++        try:
++            self.psql(self.storage_setup(before,schema)+f'ALTER TABLE {table} DROP COLUMN {column};')
++            prefix=f'SET search_path={schema};'
++            catalog=f"SELECT column_name,udt_name,is_nullable,column_default FROM information_schema.columns WHERE table_schema='{schema}' ORDER BY table_name,ordinal_position;"
++            prior=self.psql(catalog).stdout
++            result=self.psql(prefix+'BEGIN;'+plan_upgrade(*args).read()['sql']+'COMMIT;',False)
++            self.assertNotEqual(0,result.returncode)
++            self.assertIn('ACP_INCOMPATIBLE_STORAGE_REPRESENTATION',result.stderr)
++            self.assertEqual(prior,self.psql(catalog).stdout)
++        finally:self.psql(f'DROP SCHEMA {schema} CASCADE;')
++
++    def test_wrong_text_storage_rejects_without_catalog_change(self):
++        args=fixture(); before=args[0].read(); nodes={n['id']:n for n in before['content']['nodes']}
++        old=next(n for n in nodes.values() if n['kind']=='Field' and n['data']['type']['kind']=='String' and nodes[n['data']['owner']['id']]['kind']=='Entity')
++        table=identifier(old['data']['owner']['id'],'e'); column=identifier(old['id'],'f')
++        schema='acp_migration_'+uuid.uuid4().hex
++        try:
++            self.psql(self.storage_setup(before,schema,incompatible=(table,column)))
++            catalog=f"SELECT column_name,udt_name,is_nullable,column_default FROM information_schema.columns WHERE table_schema='{schema}' ORDER BY table_name,ordinal_position;"
++            prior=self.psql(catalog).stdout
++            result=self.psql(f'SET search_path={schema};BEGIN;'+plan_upgrade(*args).read()['sql']+'COMMIT;',False)
++            self.assertNotEqual(0,result.returncode)
++            self.assertIn('ACP_INCOMPATIBLE_STORAGE_REPRESENTATION',result.stderr)
++            self.assertEqual(prior,self.psql(catalog).stdout)
++        finally:self.psql(f'DROP SCHEMA {schema} CASCADE;')
++
++    def test_cross_version_retained_bytes_and_rollback_both_domains(self):
++        from test_core_wave1 import cross_version
++        for domain in ('payment','case-management'):
++            args=cross_version(domain=domain); sql=plan_upgrade(*args).read()['sql']
++            nodes={n['id']:n for n in args[0].read()['content']['nodes']}
++            fields=[n for n in nodes.values() if n['kind']=='Field' and n['data']['type']['kind']=='String' and nodes[n['data']['owner']['id']]['kind']=='Entity']
++            schema='acp_migration_'+uuid.uuid4().hex
++            try:
++                self.psql(self.storage_setup(args[0].read(),schema))
++                prefix=f'SET search_path={schema};'; probes=[]
++                for field in fields:
++                    table=identifier(field['data']['owner']['id'],'e'); column=identifier(field['id'],'f')
++                    self.psql(prefix+f"UPDATE {table} SET {column}=decode('65cc8100f09fa68b27','hex');INSERT INTO {table}(id,{column}) VALUES(2,decode('','hex')),(3,decode('27','hex'));") if not any(p[0]==table for p in probes) else self.psql(prefix+f"UPDATE {table} SET {column}=CASE id WHEN 1 THEN decode('65cc8100f09fa68b27','hex') WHEN 2 THEN decode('','hex') ELSE decode('27','hex') END;")
++                    probes.append((table,column))
++                observation=''.join(f"SELECT id,encode({column},'hex') FROM {table} ORDER BY id;" for table,column in probes)
++                prior=self.psql(prefix+observation).stdout
++                broken=sql.replace("decode('65cc8100f09fa68b27','hex')","decode('zz','hex')")
++                self.assertNotEqual(sql,broken)
++                self.assertNotEqual(0,self.psql(prefix+'BEGIN;'+broken+'COMMIT;',False).returncode)
++                self.assertEqual(prior,self.psql(prefix+observation).stdout)
++                newcolumn=identifier('EVOLUTION-required-field','f')
++                self.assertEqual('0',self.psql(f"SELECT count(*) FROM information_schema.columns WHERE table_schema='{schema}' AND column_name='{newcolumn}';").stdout.strip())
++                self.psql(prefix+'BEGIN;'+sql+'COMMIT;')
++                self.assertEqual(prior,self.psql(prefix+observation).stdout)
++                self.assertEqual('bytea|NO|',self.psql(f"SELECT udt_name,is_nullable,column_default FROM information_schema.columns WHERE table_schema='{schema}' AND column_name='{newcolumn}';").stdout.strip())
++                newfield=next(n for n in args[1].read()['content']['nodes'] if n['id']=='EVOLUTION-required-field')
++                table=identifier(newfield['data']['owner']['id'],'e')
++                # Keep SET's command tag out of the tuples-only observation.
++                query=f"SELECT id,COALESCE(encode({newcolumn},'hex'),'<NULL>') FROM {schema}.{table} ORDER BY id;"
++                assert_encoded_rows(self.psql(query).stdout,{1:'65cc8100f09fa68b27',2:'65cc8100f09fa68b27',3:'65cc8100f09fa68b27'})
++                self.assertNotEqual(0,self.psql(prefix+f'INSERT INTO {table}(id) VALUES(4);',False).returncode)
++            finally:self.psql(f'DROP SCHEMA {schema} CASCADE;')
++
+ 
+ if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tooling/tests/test_core_wave1.py
+@@ -0,0 +1,165 @@
++"""Offline Wave 1 tests. History/data authority and artifact trace are test only."""
++from dataclasses import replace
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++
++sys.path[:0] = [str(Path(__file__).resolve().parents[1]), str(Path(__file__).resolve().parent)]
++from canonical_json import load
++from change_fixtures import evolution_change
++from changes import prepare
++from compiler_contracts import Artifact, ArtifactPlan, Document, Owner, Provenance, Stage, Subject, fingerprint
++from compiler_core import CompilerFault
++from filesystem_artifacts import FilesystemArtifactStore, StoreConflict, byte_digest
++from target_migrations import MigrationBlocked, identifier, plan_upgrade
++from target_provenance import inspect_mapping
++from target_release import verify_production_upgrade
++from test_canonical03_migrations import fixture
++from test_target_migrations import FixtureAcceptedHistory
++
++
++def cross_version(value="e\u0301\x00🦋'", *, domain="payment"):
++    before = load(Path(__file__).resolve().parents[2] / f"test-corpus/execution-v03/{domain}-canonical.json")
++    # Canonical 0.3 requires the explicit deterministic semantic revisions,
++    # not just a schemaVersion relabel. Clone the historical proposal as inert
++    # fixture data and add a TEST-ONLY field/backfill; no real approval is issued.
++    proposal = load(Path(__file__).resolve().parents[2] / f"test-corpus/deterministic-v04/{domain}-change.json")
++    addition = evolution_change(before, proposal["base"], "required-field")
++    proposal["id"] = "TEST-CORE-W1-UPGRADE"
++    proposal["intent"] = "TEST ONLY canonical 0.2 to 0.3 storage witness"
++    proposal["operations"].extend(addition["operations"])
++    proposal["migration"] = addition["migration"]
++    plan = Document.of(prepare(before, proposal))
++    bindings = Document.of({"requiredFieldBackfills": {"EVOLUTION-required-field": value}})
++    return Document.of(before), Document.of(plan.read()["candidate"]), plan, bindings, FixtureAcceptedHistory(plan, bindings)
++
++
++def migration_artifact(args, text=None, prior=None, owner=Owner.COMPILER, path="backend/migration.sql"):
++    migration = plan_upgrade(*args).read()
++    field = next(n for n in args[1].read()["content"]["nodes"] if n["id"] == "EVOLUTION-required-field")
++    origin = Subject(args[1].read()["content"]["applicationId"], field["id"], field["revision"])
++    content = Document.of({"encoding": "UTF-8", "text": migration["sql"] if text is None else text})
++    digest = fingerprint(content, "artifact-content")
++    provenance = Provenance((origin,), Stage.GENERATE, "compiler/0.1.0", "pipeline/0.1.0",
++        (migration["previousSnapshot"], migration["nextSnapshot"], migration["phase3PlanDigest"], migration["bindingsDigest"]))
++    return Artifact(path, "TEST_MIGRATION_TRACE", content, digest, owner, provenance, (origin,),
++        "CREATE" if prior is None else "NO_OP" if digest == prior.digest else "UPDATE",
++        None if prior is None else prior.digest, "COMPARE_AND_SWAP",
++        ("test_binary_property_to_migration_artifact_trace",))
++
++
++class CoreWave1Tests(unittest.TestCase):
++    def test_existing_storage_must_be_present_and_bytea_before_expand(self):
++        args = fixture()
++        sql = plan_upgrade(*args).read()["sql"]
++        guard = sql.splitlines()[0]
++        # EXISTS(udt_name <> bytea) wrongly succeeds when a column is missing.
++        self.assertIn("IF NOT EXISTS (SELECT 1 FROM information_schema.columns", guard)
++        self.assertIn("udt_name='bytea'", guard)
++        self.assertIn("ACP_INCOMPATIBLE_STORAGE_REPRESENTATION", guard)
++        self.assertLess(sql.index("ACP_INCOMPATIBLE_STORAGE_REPRESENTATION"), sql.index("ADD COLUMN"))
++        self.assertNotIn("::bytea", sql)  # No inferred conversion of legacy text.
++        nodes = {n["id"]: n for n in args[0].read()["content"]["nodes"]}
++        persistent = [n for n in nodes.values() if n["kind"] == "Field"
++            and n["data"]["type"]["kind"] == "String"
++            and nodes[n["data"]["owner"]["id"]]["kind"] == "Entity"]
++        self.assertEqual(len(persistent), sql.count("information_schema.columns"))
++        for node in nodes.values():
++            if node["kind"] == "Field" and nodes[node["data"]["owner"]["id"]]["kind"] == "ValueObject":
++                self.assertNotIn(identifier(node["data"]["owner"]["id"], "e"), sql)
++
++    def test_canonical02_to03_preserves_exact_binary_backfill(self):
++        for value in ("e\u0301\x00🦋'", "", "'\\n"):
++            with self.subTest(value=value):
++                args = cross_version(value)
++                result = plan_upgrade(*args).read()
++                self.assertEqual("0.2.0", args[0].read()["content"]["schemaVersion"])
++                self.assertEqual("0.3.0", args[1].read()["content"]["schemaVersion"])
++                column = identifier("EVOLUTION-required-field", "f")
++                self.assertIn(column + " bytea;", result["sql"])
++                self.assertNotIn(column + " text", result["sql"])
++                self.assertIn("decode('" + value.encode("utf-8").hex() + "','hex')", result["sql"])
++                self.assertIn("SET NOT NULL", result["sql"])
++                self.assertNotIn("DEFAULT", result["sql"])
++                self.assertEqual(["EXPAND", "BACKFILL", "VERIFY", "SWITCH"], result["changes"][0]["phases"])
++
++    def test_binary_backfill_wrong_type_and_missing_authority_rejected(self):
++        with self.assertRaisesRegex(MigrationBlocked, "BACKFILL_TYPE"):
++            plan_upgrade(*fixture(value=False))
++        args = list(cross_version()); args[-1].revoked = True
++        with self.assertRaisesRegex(MigrationBlocked, "UNACCEPTED_HISTORY"):
++            plan_upgrade(*args)
++        args = list(cross_version()); args[3] = Document.of({"requiredFieldBackfills": {}})
++        with self.assertRaisesRegex(MigrationBlocked, "UNAPPROVED_DATA_BINDINGS"):
++            plan_upgrade(*args)
++
++    def test_boolean_and_presence_storage_contract_is_preserved(self):
++        sql = plan_upgrade(*fixture(value=True, typ={"kind": "Boolean"})).read()["sql"]
++        self.assertIn(identifier("EVOLUTION-required-field", "f") + " boolean;", sql)
++        self.assertIn("=TRUE WHERE", sql)
++        sql = plan_upgrade(*fixture(optional=True, nullable=True)).read()["sql"]
++        self.assertIn("boolean NOT NULL DEFAULT false", sql)
++        self.assertIn("ADD CHECK", sql)
++        self.assertNotIn("SET NOT NULL", sql)
++
++    def test_generator_upgrade_preserves_human_file_and_rejects_ai_candidate(self):
++        args = cross_version()
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary) / "application"
++            store = FilesystemArtifactStore(root)
++            first = migration_artifact(args, text="-- predecessor migration\n")
++            manual = migration_artifact(args, text="manual extension\n", path="frontend/src/extensions/manual.txt")
++            store.apply(ArtifactPlan((first, manual), ()))
++            store.adopt_human(manual.path)
++            (root / manual.path).write_text("human-maintained extension\n")
++            inventory = {a.path: a for a in store.inventory()}
++            updated = migration_artifact(args, prior=inventory[first.path])
++            keep = migration_artifact(args, text=(root / manual.path).read_text(),
++                prior=inventory[manual.path], owner=Owner.HUMAN, path=manual.path)
++            store.apply(ArtifactPlan((updated, keep), ()))
++            self.assertEqual(updated.content.read()["text"], (root / first.path).read_text())
++            self.assertEqual("human-maintained extension\n", (root / manual.path).read_text())
++            inventory = {a.path: a for a in store.inventory()}
++            forbidden = migration_artifact(args, text="overwrite\n", prior=inventory[manual.path],
++                owner=Owner.HUMAN, path=manual.path)
++            with self.assertRaises(CompilerFault):
++                store.apply(ArtifactPlan((forbidden,), ()))
++            ai = migration_artifact(args, owner=Owner.AI, path="backend/ai.sql")
++            with self.assertRaisesRegex(StoreConflict, "AI_APPROVAL_REQUIRED"):
++                store.apply(ArtifactPlan((ai,), ()))
++            self.assertFalse((root / ai.path).exists())
++            self.assertEqual("human-maintained extension\n", (root / manual.path).read_text())
++
++    def test_binary_property_to_migration_artifact_trace(self):
++        args = cross_version(); item = migration_artifact(args)
++        field = next(n for n in args[1].read()["content"]["nodes"] if n["id"] == "EVOLUTION-required-field")
++        nodes = {n["id"]: n for n in args[1].read()["content"]["nodes"]}
++        self.assertTrue(any(nodes[r["id"]]["kind"] == "Requirement" for r in field["basis"]))
++        self.assertEqual((field["id"], field["revision"]), (item.mappings[0].id, item.mappings[0].revision))
++        self.assertEqual(item.mappings, item.provenance.origins)
++        self.assertIn(args[2].read()["planDigest"], item.provenance.inputs)
++        self.assertIn(identifier(field["id"], "f") + " bytea;", item.content.read()["text"])
++        self.assertEqual((self._testMethodName,), item.verification)
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary) / "application"
++            FilesystemArtifactStore(root).apply(ArtifactPlan((item,), ()))
++            mapping = {"artifact": item.path, "artifactDigest": byte_digest((root / item.path).read_bytes()),
++                "origins": [{"id": field["id"], "revision": field["revision"]}],
++                "locations": [{"line": next(i for i, s in enumerate(item.content.read()["text"].splitlines(), 1)
++                    if identifier(field["id"], "f") + " bytea;" in s)}], "locationConfidence": "EXACT_TEST_FIXTURE"}
++            self.assertEqual("CURRENT", inspect_mapping(root, mapping, semantic_revisions={field["id"]: field["revision"]})["status"])
++            self.assertEqual("STALE_SEMANTICS", inspect_mapping(root, mapping, semantic_revisions={field["id"]: field["revision"]+1})["status"])
++            (root / item.path).write_text("tampered\n")
++            self.assertEqual("STALE_ARTIFACT", inspect_mapping(root, mapping)["status"])
++
++    def test_policy_c_still_rejects_production01(self):
++        for old in ("0.2.0", "0.3.0", "0.4.0"):
++            self.assertEqual("C", verify_production_upgrade("acp-spring-vue-postgres/" + old,
++                "acp-spring-vue-postgres/0.5.0")["policy"])
++        with self.assertRaisesRegex(ValueError, "PRODUCTION_UPGRADE_OUTSIDE_WINDOW"):
++            verify_production_upgrade("acp-spring-vue-postgres/0.1.0", "acp-spring-vue-postgres/0.5.0")
++
++
++if __name__ == "__main__":
++    unittest.main()
+--- /dev/null
++++ b/tooling/tests/test_core_wave2.py
+@@ -0,0 +1,102 @@
++"""Offline integration witnesses; all histories/bindings are synthetic, not approvals."""
++import json
++import os
++from pathlib import Path
++import subprocess
++import tempfile
++import unittest
++from unittest.mock import patch
++from test_core_wave1 import cross_version, migration_artifact
++from test_canonical03_migrations import owned_psql
++from compiler_contracts import ArtifactPlan, Owner
++from compiler_core import CompilerFault
++from filesystem_artifacts import FilesystemArtifactStore, StoreConflict, byte_digest
++from target_migrations import plan_upgrade, identifier
++from target_provenance import inspect_mapping
++
++
++class Wave2IntegrationTests(unittest.TestCase):
++    def test_both_domains_exact_bytes_ownership_and_trace(self):
++        for domain in ('payment', 'case-management'):
++            for value in ('e\u0301\x00🦋\'', '', "'\\"):
++                with self.subTest(domain=domain,value=value):
++                    args=cross_version(value,domain=domain)
++                    migration=plan_upgrade(*args).read()
++                    self.assertEqual(('0.2.0','0.3.0'),tuple(a.read()['content']['schemaVersion'] for a in args[:2]))
++                    self.assertIn("decode('"+value.encode().hex()+"','hex')",migration['sql'])
++                    self.assertNotIn('DEFAULT',migration['sql'])
++                    item=migration_artifact(args)
++                    with tempfile.TemporaryDirectory() as temp:
++                        root=Path(temp)/'app'; store=FilesystemArtifactStore(root)
++                        manual=migration_artifact(args,text='human original\n',path='frontend/src/extensions/manual.txt')
++                        store.apply(ArtifactPlan((item,manual),()))
++                        store.adopt_human(manual.path)
++                        (root/manual.path).write_text('human retained\n')
++                        inventory={a.path:a for a in store.inventory()}
++                        keep=migration_artifact(args,text='human retained\n',prior=inventory[manual.path],owner=Owner.HUMAN,path=manual.path)
++                        current=migration_artifact(args,prior=inventory[item.path])
++                        store.apply(ArtifactPlan((current,keep),()))
++                        self.assertEqual('human retained\n',(root/manual.path).read_text())
++                        self.assertEqual(item.content.read()['text'].encode(),(root/item.path).read_bytes())
++                        mapping={'artifact':item.path,'artifactDigest':byte_digest((root/item.path).read_bytes()),'origins':[{'id':o.id,'revision':o.revision} for o in item.mappings], 'locations':[{'line':next(i for i,line in enumerate(item.content.read()['text'].splitlines(),1) if identifier('EVOLUTION-required-field','f')+' bytea;' in line)}], 'locationConfidence':'EXACT_TEST_FIXTURE'}
++                        revisions={o.id:o.revision for o in item.mappings}
++                        self.assertEqual('CURRENT',inspect_mapping(root,mapping,semantic_revisions=revisions)['status'])
++                        print('WAVE2_TRACE '+json.dumps({'domain':domain,'fixtureAuthority':'SYNTHETIC_TEST_ONLY',
++                            'beforeSnapshot':migration['previousSnapshot'],'afterSnapshot':migration['nextSnapshot'],
++                            'planDigest':migration['phase3PlanDigest'],'bindingsDigest':migration['bindingsDigest'],
++                            'sqlArtifactDigest':mapping['artifactDigest'],'origins':mapping['origins'],
++                            'testIdentity':self.id(),'retainedRows':'DB_NOT_RUN','newValueHex':value.encode().hex()}),flush=True)
++                        self.assertEqual('STALE_SEMANTICS',inspect_mapping(root,mapping,semantic_revisions={k:v+1 for k,v in revisions.items()})['status'])
++                        ai=migration_artifact(args,owner=Owner.AI,path='backend/ai.sql')
++                        with self.assertRaisesRegex(StoreConflict,'AI_APPROVAL_REQUIRED'):store.apply(ArtifactPlan((ai,),()))
++                        forbidden=migration_artifact(args,text='overwrite',prior=inventory[manual.path],owner=Owner.HUMAN,path=manual.path)
++                        with self.assertRaises(CompilerFault):store.apply(ArtifactPlan((forbidden,),()))
++                        self.assertFalse((root/ai.path).exists())
++                        (root/item.path).write_text('tampered\n')
++                        self.assertEqual('STALE_ARTIFACT',inspect_mapping(root,mapping)['status'])
++
++
++class OwnedConnectionTests(unittest.TestCase):
++    def context(self,temp):
++        root=Path(temp)/'acp-phase6-wave2-fixture';root.mkdir()
++        for name in ('pgdata','pgsocket'):(root/name).mkdir(mode=0o700)
++        identity={'pid':12345,'port':55439,'database':'acp_wave2_test','role':'acp_wave2_role'}
++        (root/'owned-postgresql.json').write_text(json.dumps(identity))
++        (root/'pgdata/postmaster.pid').write_text(f"12345\n{root}/pgdata\n0\n55439\n{root}/pgsocket\n\n")
++        expected=[str(root/'pgdata'),'',str(root/'pgsocket'),True,'180006',identity['database'],identity['role']]
++        return root,expected
++
++    def test_no_default_or_legacy_url_connection(self):
++        with patch.dict(os.environ,{'ACP_TEST_DATABASE_URL':'postgresql://unrelated'},clear=True),patch('subprocess.run') as run:
++            with self.assertRaises(KeyError):owned_psql('CREATE SCHEMA forbidden;')
++            run.assert_not_called()
++
++    def test_explicit_private_connection_and_scrubbed_environment(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root,expected=self.context(temp)
++            with patch.dict(os.environ,{'ACP_WAVE2_ROOT':str(root),'PGPASSWORD':'unrelated','PGOPTIONS':'unsafe','ACP_TEST_DATABASE_URL':'unrelated'},clear=True),patch('subprocess.run',side_effect=[subprocess.CompletedProcess([],0,json.dumps(expected),''),subprocess.CompletedProcess([],0,'ok','')]) as run:
++                self.assertEqual('ok',owned_psql('SELECT 1;').stdout)
++                for call in run.call_args_list:
++                    self.assertIn(str(root/'pgsocket'),call.args[0]);self.assertIn('acp_wave2_test',call.args[0])
++                    self.assertNotIn('PGPASSWORD',call.kwargs['env']);self.assertNotIn('PGOPTIONS',call.kwargs['env'])
++                    self.assertNotIn('ACP_TEST_DATABASE_URL',call.kwargs['env'])
++                    self.assertIn('timeout',call.kwargs)
++
++    def test_all_wrong_server_identities_reject_before_schema(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root,expected=self.context(temp)
++            for index,replacement in enumerate(('/elsewhere','localhost','/tmp',False,'170000','other','other')):
++                observed=expected.copy();observed[index]=replacement
++                with self.subTest(index=index),patch.dict(os.environ,{'ACP_WAVE2_ROOT':str(root)},clear=True),patch('subprocess.run',return_value=subprocess.CompletedProcess([],0,json.dumps(observed),'')) as run:
++                    with self.assertRaisesRegex(ValueError,'OWNED_SERVER_MISMATCH'):owned_psql('CREATE SCHEMA forbidden;')
++                    self.assertEqual(1,run.call_count)
++
++    def test_changed_pid_and_public_socket_rejected_without_connection(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root,_=self.context(temp)
++            with patch.dict(os.environ,{'ACP_WAVE2_ROOT':str(root)},clear=True),patch('subprocess.run') as run:
++                pid=root/'pgdata/postmaster.pid';original=pid.read_text();pid.write_text(original.replace('12345','99999'))
++                with self.assertRaisesRegex(ValueError,'OWNED_POSTMASTER_REQUIRED'):owned_psql('SELECT 1;')
++                pid.write_text(original);(root/'pgsocket').chmod(0o755)
++                with self.assertRaisesRegex(ValueError,'PRIVATE_DIRECTORY_REQUIRED'):owned_psql('SELECT 1;')
++                run.assert_not_called()
+--- /dev/null
++++ b/tooling/tests/test_core_wave3.py
+@@ -0,0 +1,206 @@
++"""Wave 3: pure production planning boundary; no worker launch/build/database."""
++import copy
++from dataclasses import replace
++import hashlib
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++from types import SimpleNamespace
++sys.path[:0]=[str(Path(__file__).resolve().parents[1]),str(Path(__file__).resolve().parent)]
++from compiler_contracts import ArtifactPlan, Document, Derived, Owner, Provenance, Stage, Subject, TargetIR, fingerprint
++from compiler_core import _ownership, CompilerFault
++from filesystem_artifacts import FilesystemArtifactStore, StoreConflict, source_bytes, byte_digest
++from target_worker import ProductionTarget, PROFILE
++from target_provenance import read_provenance, inspect_mapping
++ROOT=Path(__file__).resolve().parents[2]
++WORKER=ROOT/'targets/spring-vue-postgres/worker'
++sys.path.insert(0,str(WORKER))
++from model import lower
++from generation import plan as generate, validate_plan as validate_rows
++
++
++def real_plan(domain,version='0.3.0',inventory=()):
++    directory='deterministic-v04' if version=='0.3.0' else 'execution-v03'
++    suffix='canonical-candidate' if version=='0.3.0' else 'canonical'
++    snapshot=json.loads((ROOT/f'test-corpus/{directory}/{domain}-{suffix}.json').read_text())
++    model=lower(snapshot['content']['nodes'],PROFILE,version)
++    objects=tuple(Derived(n['id'],'LOWER',Document.of(n),Provenance((Subject(snapshot['content']['applicationId'],n['id'],n['revision']),),Stage.LOWER,'compiler/test','pipeline/test',(snapshot['contentDigest'],))) for n in model['nodes'])
++    target=TargetIR(PROFILE['profile'],objects,(),(),target_model=Document.of(model))
++    request=SimpleNamespace(compiler='compiler/test',pipeline='pipeline/test',snapshot_digest=snapshot['contentDigest'],features=(),generator=PROFILE['generator']+'+sha256:UNSEALED_CANDIDATE')
++    templates={p.relative_to(WORKER.parent/'templates').as_posix():p.read_text() for p in (WORKER.parent/'templates').rglob('*') if p.is_file()}
++    adapter=object.__new__(ProductionTarget);adapter.bundle='UNSEALED_CANDIDATE'
++    def call(operation,payload):
++        if operation=='plan':return generate(payload['model'],templates,PROFILE,payload['inventory'],build=payload['build'])
++        if operation=='validate-plan':return validate_rows(payload['artifacts'])
++        raise AssertionError('Unexpected worker operation')
++    # Real host ArtifactPlan adaptation, with pure generator port instead of a
++    # subprocess. No release verification, worker confinement or runtime claim.
++    with patch.object(adapter,'_call',side_effect=call):
++        result=adapter.plan(target,request,inventory=inventory)
++    return snapshot,target,request,result
++
++
++def materialize(plan,root):
++    FilesystemArtifactStore(root).apply(plan)
++    return read_provenance(root/'acp/provenance.json')
++
++
++class ProvenanceRedBeforeTests(unittest.TestCase):
++    def test_real_generator_subset_is_not_expanded_to_all_nodes(self):
++        _,_,_,plan=real_plan('payment')
++        with tempfile.TemporaryDirectory() as temp:
++            doc=materialize(plan,Path(temp)/'app')
++            by_path={a.path:a for a in plan.artifacts}
++            narrowed=[m for m in doc['artifacts'] if len(by_path[m['artifact']].mappings)<len(doc['originSets']['canonical-model'])]
++            self.assertTrue(narrowed)
++            for mapping in narrowed:
++                expected={(o.id,o.revision) for o in by_path[mapping['artifact']].mappings}
++                self.assertEqual(expected,{(o['id'],o['revision']) for o in mapping['origins']})
++
++
++class Wave3ParserTests(unittest.TestCase):
++    def test_complete_rows_and_first_row_attack(self):
++        from test_canonical03_migrations import assert_encoded_rows
++        expected={1:'65cc8100f09fa68b27',2:'',3:'27'}
++        self.assertEqual(expected,assert_encoded_rows('1|65cc8100f09fa68b27\n2|\n3|27\n',expected))
++        # Old [1:] loses this wrong first row; exact IDs/cardinality must reject.
++        for text in ('1|ff\n2|\n3|27\n','2|\n3|27\n','1|65cc8100f09fa68b27\n2|\n3|27\n4|27\n','1|65cc8100f09fa68b27\n2|<NULL>\n3|27\n','1|65cc8100f09fa68b27\n2|\n2|27\n','1|zz\n2|\n3|27\n','1|65CC8100F09FA68B27\n2|\n3|27\n'):
++            with self.subTest(text=text),self.assertRaises(ValueError):assert_encoded_rows(text,expected)
++        self.assertEqual({1:None,2:''},assert_encoded_rows('1|<NULL>\n2|\n',{1:None,2:''}))
++
++
++def tree_identity(root):
++    return {p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
++
++
++class Wave3CompilerIntegrationTests(unittest.TestCase):
++    def test_real_plans_upgrade_ownership_and_strict_provenance_both_domains(self):
++        from target_provenance import verify_plan_provenance
++        for domain in ('payment','case-management'):
++            with self.subTest(domain=domain),tempfile.TemporaryDirectory() as temp:
++                root=Path(temp)/'app';store=FilesystemArtifactStore(root)
++                old_snapshot,_,_,old=real_plan(domain,'0.2.0')
++                store.apply(old)
++                extension='frontend/src/extensions/identity.ts'
++                original_extension=next(a for a in old.artifacts if a.path==extension)
++                store.adopt_human(extension)
++                human=b'// HUMAN retained exact extension\nexport const identity = "human";\n'
++                (root/extension).write_bytes(human)
++                inventory=store.inventory()
++                snapshot,target,request,new=real_plan(domain,inventory=inventory)
++                self.assertNotEqual(old_snapshot['contentDigest'],snapshot['contentDigest'])
++                self.assertNotIn(extension,{a.path for a in new.artifacts})
++                new=_ownership(new,inventory)
++                changed=[a for a in new.artifacts if a.intent=='UPDATE' and a.owner==Owner.COMPILER]
++                self.assertTrue(changed)
++                before=tree_identity(root)
++                ai=replace(changed[0],path='frontend/src/extensions/ai-candidate.ts',owner=Owner.AI,intent='CREATE',expected_digest=None)
++                attempt=replace(new,artifacts=(*new.artifacts,ai))
++                frameworks=tuple(a.path for a in new.artifacts if a.owner==Owner.FRAMEWORK and a.intent=='UPDATE')
++                with self.assertRaisesRegex(StoreConflict,'AI_APPROVAL_REQUIRED'):store.apply(attempt,framework_upgrades=frameworks)
++                self.assertEqual(before,tree_identity(root))
++                self.assertEqual(inventory,store.inventory())
++                store.apply(new,framework_upgrades=frameworks)
++                self.assertEqual(human,(root/extension).read_bytes())
++                self.assertNotEqual(before,tree_identity(root))
++                document=read_provenance(root/'acp/provenance.json')
++                required=tuple(Subject(snapshot['content']['applicationId'],n['id'],n['revision']) for n in snapshot['content']['nodes'] if n['kind'] in {'Field','Requirement'})
++                result=verify_plan_provenance(root,new,document,target=target,request=request,required_origins=required)
++                self.assertEqual('VERIFIED_OFFLINE',result['status'])
++                after=tree_identity(root);post_inventory=store.inventory()
++                common=dict(target=target,request=request,required_origins=required)
++                # Each independent mutation must reject, never a CURRENT shortcut.
++                for kind in ('missing','extra','duplicate','stale','digest','ownership','confidence','origin-duplicate','unknown-target'):
++                    mutated=copy.deepcopy(document);row=mutated['artifacts'][0]
++                    if kind=='missing':mutated['artifacts'].pop()
++                    elif kind=='extra':mutated['artifacts'].append({**copy.deepcopy(row),'artifact':'orphan.txt'})
++                    elif kind=='duplicate':mutated['artifacts'].append(copy.deepcopy(row))
++                    elif kind=='stale':row['origins'][0]['revision']+=1
++                    elif kind=='digest':row['artifactDigest']='sha256:'+'0'*64
++                    elif kind=='ownership':row['ownership']='HUMAN_OWNED'
++                    elif kind=='confidence':row['locationConfidence']='UNKNOWN'
++                    elif kind=='origin-duplicate':row['origins'].append(copy.deepcopy(row['origins'][0]))
++                    else:row['origins'][0]['id']='UNKNOWN-SEMANTIC-OBJECT'
++                    with self.subTest(mutation=kind),self.assertRaises(ValueError):verify_plan_provenance(root,new,mutated,**common)
++                with self.assertRaisesRegex(ValueError,'PROVENANCE_SEMANTIC_COVERAGE'):
++                    verify_plan_provenance(root,new,document,target=target,request=request,required_origins=(*required,Subject(snapshot['content']['applicationId'],'MISSING',1)))
++                bad=replace(new,artifacts=(replace(new.artifacts[0],provenance=replace(new.artifacts[0].provenance,inputs=('wrong',))),*new.artifacts[1:]))
++                with self.assertRaisesRegex(ValueError,'PROVENANCE_INPUTS'):verify_plan_provenance(root,bad,document,**common)
++                for mutation in ('stale-cas','reassigned','unknown-owner','human-overwrite'):
++                    current=_ownership(new,post_inventory)
++                    item=next(a for a in current.artifacts if a.owner==Owner.COMPILER)
++                    if mutation=='stale-cas':bad=replace(item,expected_digest='sha256:'+'0'*64)
++                    elif mutation=='reassigned':bad=replace(item,owner=Owner.AI)
++                    elif mutation=='unknown-owner':bad=replace(item,owner='UNKNOWN')
++                    else:
++                        prior=next(a for a in post_inventory if a.path==extension)
++                        bad=replace(original_extension,owner=Owner.HUMAN,intent='UPDATE',expected_digest=prior.digest)
++                    with self.subTest(mutation=mutation),self.assertRaises(CompilerFault):store.apply(ArtifactPlan((bad,),()))
++                    self.assertEqual(after,tree_identity(root));self.assertEqual(post_inventory,store.inventory())
++                # Direct filesystem tampering is independently rejected; the
++                # failed publication must preserve the observed tampered tree.
++                item=changed[0];(root/item.path).write_bytes(b'tampered\n');tampered=tree_identity(root)
++                with self.assertRaisesRegex(StoreConflict,'MANUAL_EDIT'):store.apply(_ownership(new,post_inventory))
++                self.assertEqual(tampered,tree_identity(root));self.assertEqual(human,(root/extension).read_bytes())
++                print('WAVE3_COMPILER_EVIDENCE '+json.dumps({'domain':domain,'oldSnapshot':old_snapshot['contentDigest'],'newSnapshot':snapshot['contentDigest'],'updatedCompilerFiles':[a.path for a in changed],'beforeTree':before,'afterTree':after,'humanExtensionSHA256':hashlib.sha256(human).hexdigest(),'linkage':result,'authority':'TRACKED_APPROVED_REFERENCE_SEMANTICS_NOT_DEPLOYED_HISTORY','plannerBoundary':'PURE_GENERATOR_AND_REAL_PRODUCTION_TARGET_PLAN_ADAPTER','candidate':'UNSEALED_CANDIDATE'}),flush=True)
++
++    def test_unknown_confidence_and_duplicate_origins_are_not_current(self):
++        _,_,_,plan=real_plan('payment')
++        with tempfile.TemporaryDirectory() as temp:
++            root=Path(temp)/'app';doc=materialize(plan,root)
++            for kind in ('confidence','duplicate'):
++                mapping=copy.deepcopy(doc['artifacts'][0])
++                if kind=='confidence':mapping['locationConfidence']='UNKNOWN'
++                else:mapping['origins'].append(copy.deepcopy(mapping['origins'][0]))
++                self.assertEqual('INVALID_MAPPING',inspect_mapping(root,mapping)['status'])
++
++    def test_legacy_provenance_read_preserved_and_target_sets_fail_closed(self):
++        with tempfile.TemporaryDirectory() as temp:
++            p=Path(temp)/'provenance.json'
++            legacy={'version':'0.2.0','artifacts':[]};p.write_text(json.dumps(legacy));self.assertEqual(legacy,read_provenance(p))
++            for targets in (['unknown'],['target_x','target_x'],[],[False]):
++                value={'version':'0.3.0','originSets':{'set':[{'id':'FIELD','revision':1}]},'artifacts':[{'originSet':'set','targetObjects':targets}]}
++                p.write_text(json.dumps(value))
++                with self.assertRaisesRegex(ValueError,'PROVENANCE_TARGET_OBJECTS'):read_provenance(p)
++
++
++class Wave3HistoryTests(unittest.TestCase):
++    def test_reference_history_classification_and_exact_replay_both_domains(self):
++        from execution_approval import approved_snapshot as execution_snapshot
++        from deterministic_approval import approved_snapshot as deterministic_snapshot
++        from changes import prepare
++        for domain in ('payment','case-management'):
++            old=execution_snapshot(domain);new=deterministic_snapshot(domain)
++            change_path=ROOT/f'test-corpus/deterministic-v04/{domain}-change.json'
++            change=json.loads(change_path.read_text())
++            stored=json.loads((ROOT/f'test-corpus/deterministic-v04/{domain}-plan.json').read_text())
++            replay=prepare(old,change)
++            self.assertEqual(new,replay['candidate']);self.assertEqual(stored['planDigest'],replay['planDigest'])
++            self.assertEqual(old['contentDigest'],change['base']['digest'])
++            old_nodes={n['id']:n for n in old['content']['nodes']};new_nodes={n['id']:n for n in new['content']['nodes']}
++            for id,node in old_nodes.items():
++                if node['kind']=='Field' and id in new_nodes:
++                    # References legitimately advance their semantic revisions.
++                    # Admission above validates exact current references; compare
++                    # the type structure/IDs rather than freezing old revisions.
++                    def shape(value):
++                        if isinstance(value,dict):return {k:shape(v) for k,v in value.items() if k!='revision'}
++                        if isinstance(value,list):return [shape(v) for v in value]
++                        return value
++                    self.assertEqual(shape(node['data']['type']),shape(new_nodes[id]['data']['type']))
++            paths=[f'test-corpus/execution-v03/{domain}-{suffix}.json' for suffix in ('canonical','change','plan','authoring')]
++            paths += [f'test-corpus/deterministic-v04/{domain}-{suffix}.json' for suffix in ('canonical-candidate','change','plan','proposal-authoring')]
++            paths += [f'test-corpus/{corpus}/human-approval.json' for corpus in ('execution-v03','deterministic-v04')]
++            paths += [f'proposals/phase6-measured-data-binding-review/{domain}.json','proposals/phase6-evolution-review/historical-authority-inventory.json','docs/phase6-retained-data-inventory-review.md']
++            inputs=[]
++            for path in paths:
++                data=(ROOT/path).read_bytes();value=json.loads(data) if path.endswith('.json') else {}
++                version=value.get('content',{}).get('schemaVersion',value.get('changeVersion',value.get('planVersion',value.get('modelVersion',value.get('versions','UNVERSIONED_DOCUMENT')))))
++                inputs.append({'path':path,'sha256':hashlib.sha256(data).hexdigest(),'version':version,'offlineReadable':True,'acceptance':'DOCUMENTARY_REFERENCE_ONLY_NOT_DEPLOYED_HISTORY'})
++            binding=json.loads((ROOT/f'proposals/phase6-measured-data-binding-review/{domain}.json').read_text())
++            self.assertEqual('REVIEW_REQUIRED',binding['status'])
++            self.assertIn('AUTHENTIC_HISTORY_UNAVAILABLE',(ROOT/'docs/phase6-retained-data-inventory-review.md').read_text())
++            print('WAVE3_HISTORY '+json.dumps({'domain':domain,'inputs':inputs,'semanticContent':'EXISTING_APPROVED_REFERENCE_SEMANTICS','authentication':'EXISTING_PUBLIC_TEST_AUTHORITY_PROOFS_VERIFIED_HISTORICALLY_NOT_OPERATIONAL_HUMAN_AUTHENTICATION','referenceReplay':'EXACT_CANDIDATE_AND_PLAN_DIGEST','planDigest':replay['planDigest'],'baseDigest':old['contentDigest'],'candidateDigest':new['contentDigest'],'anchor':change['base'],'independentDataBindings':'REVIEW_REQUIRED_NOT_APPROVED','syntheticWave12Backfills':'SYNTHETIC_TEST_ONLY','authenticHistory':'AUTHENTIC_HISTORY_UNAVAILABLE_IN_TRACKED_INPUTS','deployment':'ACCEPTED_DEPLOYED_UPGRADE_NOT_PROVEN','offlineSteps':['historical reference proof verification','exact prepare replay','pure generator plans','artifact store materialization'],'unrun':['live PostgreSQL','accepted deployed journal verification','runtime verification']}),flush=True)

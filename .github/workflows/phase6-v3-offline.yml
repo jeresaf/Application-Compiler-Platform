@@ -1,0 +1,63 @@
+name: ACP Phase 6 verified V3 offline qualification
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  phase6-v3-offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # The reviewed commit must be present even on pull-request merge refs.
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - name: Verify preserved patch and reviewed commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -m 700 "$RUNNER_TEMP/acp-v3-results"
+          git cat-file -e '584ca9edce76886ff351fd93edef9d3343a5a61c^{commit}'
+          echo '9706ba0c436f57560b0e8ace897cee7f1f258c2d40870e8bf1c9c2da70b791c8  engineering/ci/inputs/phase6-wave3-cumulative.patch' | sha256sum --check --strict
+      - name: Provision exact qualification dependencies on disposable runner only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -c 'import platform; assert platform.python_implementation() == "CPython" and platform.python_version() == "3.14.7", "WRONG_PINNED_PYTHON"'
+          git show '584ca9edce76886ff351fd93edef9d3343a5a61c:tooling/requirements.txt' > "$RUNNER_TEMP/acp-v3-requirements.txt"
+          echo "36637d22364f7e70895bee4d452b867c6436c6e27a899f65edb6b84aa3f748c2  $RUNNER_TEMP/acp-v3-requirements.txt" | sha256sum --check --strict
+          python3.14 -m venv "$RUNNER_TEMP/acp-v3-venv"
+          "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -m pip install --only-binary=:all: -r "$RUNNER_TEMP/acp-v3-requirements.txt" 2>&1 | tee "$RUNNER_TEMP/acp-v3-results/install.log"
+          "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -m pip check
+          "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -m pip list --format=json > "$RUNNER_TEMP/acp-v3-results/packages.json"
+      - name: Verify export and fail-closed prerequisite regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -B -m unittest discover -s verification/phase6_v3_ci -v 2>&1 | tee "$RUNNER_TEMP/acp-v3-results/ci-regressions.log"
+      - name: Qualify exact reviewed export without physical execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -B engineering/ci/phase6_v3_hosted.py \
+            --repository "$GITHUB_WORKSPACE" \
+            --patch "$GITHUB_WORKSPACE/engineering/ci/inputs/phase6-wave3-cumulative.patch" \
+            --export "$RUNNER_TEMP/acp-v3-source" \
+            --scratch "$RUNNER_TEMP/acp-v3-scratch" \
+            --output "$RUNNER_TEMP/acp-v3-results/offline.json" \
+            2>&1 | tee "$RUNNER_TEMP/acp-v3-results/qualification.log"
+      - name: Retain offline qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase6-v3-offline-qualification
+          path: ${{ runner.temp }}/acp-v3-results/
+          if-no-files-found: error
