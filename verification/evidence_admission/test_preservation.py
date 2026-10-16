@@ -133,7 +133,56 @@ CHECKOUT_FORMS={
 }
 
 
+# Exact reviewed CI-only additions; no directory-wide exception.
+V3_CI_HASHES = {'.github/workflows/phase6-v3-offline.yml': '9517940c14fa95ad7e18bebc5d0c967b9181f82b0452243f68569cbbc2f91fe8', 'engineering/ci/PHASE6-QUALIFICATION.md': '39123fef8ac3a409e369c0b8a4f2ac979e793306983ebc56ec2d57eb0e037791', 'engineering/ci/inputs/.gitattributes': '83c5641d9288aad3c12c13948066115cf115c27ca77b5f86ef986b11b6f9d1cb', 'engineering/ci/inputs/phase6-wave3-cumulative.patch': '9706ba0c436f57560b0e8ace897cee7f1f258c2d40870e8bf1c9c2da70b791c8', 'engineering/ci/phase6-qualification-ci.json': 'c15dbb6fa1226fb22eb28a406ef54f12a1455013d350014794ae0570a6dc90fd', 'engineering/ci/phase6-qualification-manifest.json': '5033d915410e8f2eaf4d53f4a041795c931bb57c36abdf105ba88f57298176e6', 'engineering/ci/phase6_postgresql.py': 'ab32cc6d2146bcf0a5063b06c13e899a8c970e348c32b00380ec5e4b1efe32ec', 'engineering/ci/phase6_qualification.py': '4c01248510d0196af8d1255d3b000d49e6a7d23893daa40f8e0bf0354b0021e9', 'engineering/ci/phase6_v3_hosted.py': 'a60fcccb86b9736f9e620c268eb18617b7b9147d23048801c7ab9add083e1fd5', 'verification/phase6_v3_ci/test_phase6_v3_hosted.py': 'c790db7475c0d95e3fe377c141c2823892ed519df7395fac9895eb802d0a3844'}
+
+
+def ci_legacy_tree(tree):
+    """Project only the exact CI allowance out of historical method comparisons."""
+    import copy
+    predicate = ast.dump(ast.parse('self.verified_ci_additions()', mode='eval').body)
+    class Projection(ast.NodeTransformer):
+        def visit_BinOp(self, node):
+            if isinstance(node.op, ast.Sub) and ast.dump(node.right) == predicate:
+                return self.visit(node.left)
+            return self.generic_visit(node)
+        def visit_BoolOp(self, node):
+            node = self.generic_visit(node)
+            node.values = [value for value in node.values
+                           if not (isinstance(value, ast.Compare) and len(value.comparators) == 1
+                                   and isinstance(value.ops[0], ast.In)
+                                   and ast.dump(value.comparators[0]) == predicate)]
+            return node.values[0] if len(node.values) == 1 else node
+        def visit_Call(self, node):
+            if isinstance(node.func, ast.Name) and node.func.id == 'ci_legacy_tree':
+                return self.visit(node.args[0])
+            return self.generic_visit(node)
+    return Projection().visit(copy.deepcopy(tree))
+
+
 class PreservationTests(unittest.TestCase):
+    def verified_ci_additions(self):
+        for relative, expected in V3_CI_HASHES.items():
+            path = ROOT / relative
+            self.assertFalse(path.is_symlink(), relative)
+            self.assertTrue(path.is_file(), relative)
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), expected, relative)
+            self.assertFalse(path.stat().st_mode & 0o111, relative)
+        return set(V3_CI_HASHES)
+
+    def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
+        self.assertEqual(len(self.verified_ci_additions()), 10)
+        path = ROOT / 'engineering/ci/inputs/phase6-wave3-cumulative.patch'
+        original_read = Path.read_bytes
+        with patch.object(Path, 'read_bytes', lambda item: b'changed' if item == path else original_read(item)):
+            with self.assertRaises(AssertionError):self.verified_ci_additions()
+        original_file = Path.is_file
+        with patch.object(Path, 'is_file', lambda item: False if item == path else original_file(item)):
+            with self.assertRaises(AssertionError):self.verified_ci_additions()
+        original_link = Path.is_symlink
+        with patch.object(Path, 'is_symlink', lambda item: True if item == path else original_link(item)):
+            with self.assertRaises(AssertionError):self.verified_ci_additions()
+
     def test_stage2b2_exact_inventory_and_accepted_source(self):
         accepted='91181e1c62cfc6be6b82d64bc86f8d4f7166d09c'
         additions=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
@@ -142,7 +191,7 @@ class PreservationTests(unittest.TestCase):
             self.check_source_additions(['.ci-evidence/contracts.json'],[],subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
             self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
             additions.remove('.ci-evidence/contracts.json')
-        self.assertEqual(additions,STAGE2B2_FILES)
+        self.assertEqual(additions-self.verified_ci_additions(),STAGE2B2_FILES)
         self.assertEqual(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines()),{'verification/evidence_admission/test_preservation.py'})
         listing=subprocess.check_output(['git','ls-tree','-r','-z',accepted],cwd=ROOT)
         for row in listing.split(b'\0'):
@@ -163,10 +212,10 @@ class PreservationTests(unittest.TestCase):
         accepted='ea5683c36300481f9d3a7a473290ec3e5923af6d'
         expected_changes=set(F20_EXACT_HASHES)|{'.github/workflows/acp-contracts.yml','verification/evidence_admission/test_preservation.py'}
         changes=set(subprocess.check_output(['git','diff','--name-only',accepted,'--'],cwd=ROOT,text=True).splitlines())
-        self.assertEqual(changes-STAGE2B2_FILES,expected_changes)
+        self.assertEqual(changes-STAGE2B2_FILES-self.verified_ci_additions(),expected_changes)
         additions=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
         for addition in additions:
-            if addition in STAGE2B2_FILES:continue
+            if addition in STAGE2B2_FILES or addition in self.verified_ci_additions():continue
             self.assertEqual(addition,'.ci-evidence/contracts.json')
             head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
             self.check_source_additions([addition],[],head)
@@ -214,7 +263,7 @@ class PreservationTests(unittest.TestCase):
             self.check_source_additions(['.ci-evidence/contracts.json'],[],head)
             self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
             additions.remove('.ci-evidence/contracts.json')
-        self.assertEqual(additions,STAGE2B1_FILES | STAGE2B2_FILES)
+        self.assertEqual(additions-self.verified_ci_additions(),STAGE2B1_FILES | STAGE2B2_FILES)
         modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
         self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
         path='verification/evidence_admission/test_preservation.py'
@@ -231,7 +280,7 @@ class PreservationTests(unittest.TestCase):
         before=before.replace("call.args[0].values.append(ast.parse('path in STAGE2B1_FILES',mode='eval').body)",
                               "call.args[0].values.append(ast.parse('path in STAGE2B1_FILES',mode='eval').body)\n                        call.args[0].values.append(ast.parse('path in STAGE2B2_FILES',mode='eval').body)",1)
         old=ast.parse(before);new=ast.parse((ROOT/path).read_text())
-        new_methods={n.name:ast.dump(n) for c in new.body if isinstance(c,ast.ClassDef) for n in c.body if isinstance(n,ast.FunctionDef)}
+        new_methods={n.name:ast.dump(ci_legacy_tree(n)) for c in new.body if isinstance(c,ast.ClassDef) for n in c.body if isinstance(n,ast.FunctionDef)}
         for node in old.body:
             if isinstance(node,ast.ClassDef):
                 for method in node.body:
@@ -266,7 +315,7 @@ class PreservationTests(unittest.TestCase):
             self.check_source_additions(['.ci-evidence/contracts.json'],[],head)
             self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
             additions.remove('.ci-evidence/contracts.json')
-        self.assertEqual(additions,STAGE2A_FILES | STAGE2B1_FILES | STAGE2B2_FILES)
+        self.assertEqual(additions-self.verified_ci_additions(),STAGE2A_FILES | STAGE2B1_FILES | STAGE2B2_FILES)
         modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
         self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
         path='verification/evidence_admission/test_preservation.py'
@@ -293,7 +342,7 @@ class PreservationTests(unittest.TestCase):
                                 return ast.parse('step+CI_STAGE2A_STEPS+CI_STAGE2B_STEPS+marker',mode='eval').body
                             return self.generic_visit(node)
                     method=AuthorizedInsertion().visit(method)
-                self.assertEqual(ast.dump(method),ast.dump(methods[method.name]),method.name)
+                self.assertEqual(ast.dump(method),ast.dump(ci_legacy_tree(methods[method.name])),method.name)
         for node in before.body:
             if not isinstance(node,ast.ClassDef):
                 self.assertIn(ast.dump(node),[ast.dump(n) for n in after.body])
@@ -316,11 +365,11 @@ class PreservationTests(unittest.TestCase):
 
     def check_source_additions(self, untracked, added, head):
         # Committed or staged additions never receive the transient exception.
-        for path in added:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES or path in STAGE2B1_FILES or path in STAGE2B2_FILES,path)
+        for path in added:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES or path in STAGE2B1_FILES or path in STAGE2B2_FILES or path in self.verified_ci_additions(),path)
         for path in untracked:
             if path == '.ci-evidence/contracts.json':
                 self.check_contracts_binding(ROOT/path,head)
-            else:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES or path in STAGE2B1_FILES or path in STAGE2B2_FILES,path)
+            else:self.assertTrue(path.startswith(ALLOWED) or path==DOC or path in STAGE2A_FILES or path in STAGE2B1_FILES or path in STAGE2B2_FILES or path in self.verified_ci_additions(),path)
 
     def check_contracts_binding(self, path, head):
         self.assertFalse(path.parent.is_symlink(),'SYMLINK_EVIDENCE_DIRECTORY')

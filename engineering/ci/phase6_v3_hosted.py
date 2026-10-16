@@ -2,13 +2,16 @@
 import argparse
 import hashlib
 import importlib.metadata
+import importlib.util
 import io
 import json
 from pathlib import Path
 import platform
+import shutil
 import subprocess
 import sys
 import tarfile
+import tempfile
 
 COMMIT = '584ca9edce76886ff351fd93edef9d3343a5a61c'
 CANDIDATE = '325265709357b355a1644e8411c13e701d5e0786e5f5fd6ecfa43ba2ce9dfd0c'
@@ -74,6 +77,51 @@ def export_candidate(repository, destination, patch):
     return destination
 
 
+def verify_negative_bindings(source, patch):
+    """Exercise corrected exact-V3 rejection checks without altering the export."""
+    source = Path(source)
+    spec = importlib.util.spec_from_file_location(
+        'reviewed_v3_qualification', source / 'engineering/ci/phase6_qualification.py')
+    qualification = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(qualification)
+    manifest = source / MANIFEST_PATH
+    identities = dict(expected_manifest=MANIFEST, expected_candidate=CANDIDATE)
+    qualification.validate_candidate(source, patch, manifest, **identities)
+    checked = []
+
+    def reject(label, root, supplied_patch, supplied_manifest, expected_error, **overrides):
+        try:
+            qualification.validate_candidate(root, supplied_patch, supplied_manifest,
+                                             **{**identities, **overrides})
+        except ValueError as error:
+            if str(error) != expected_error:
+                raise AssertionError('UNEXPECTED_BINDING_REJECTION:' + label) from error
+            checked.append(label)
+        else:
+            raise AssertionError('BINDING_ACCEPTED_INVALID_INPUT:' + label)
+
+    reject('wrong-baseline', source, patch, manifest,
+           'BASELINE_PATCH_OR_MANIFEST_MISMATCH', baseline='wrong')
+    reject('changed-candidate-digest', source, patch, manifest,
+           'CANDIDATE_IDENTITY_MISMATCH', expected_candidate='0' * 64)
+    with tempfile.TemporaryDirectory(prefix='acp-v3-binding-negatives-') as temporary:
+        temporary = Path(temporary)
+        wrong = temporary / 'wrong.patch'
+        wrong.write_bytes(b'not the verified patch')
+        reject('changed-patch', source, wrong, manifest,
+               'BASELINE_PATCH_OR_MANIFEST_MISMATCH')
+        wrong_manifest = temporary / 'wrong-manifest.json'
+        wrong_manifest.write_bytes(manifest.read_bytes() + b' ')
+        reject('changed-manifest', source, patch, wrong_manifest,
+               'BASELINE_PATCH_OR_MANIFEST_MISMATCH')
+        damaged = temporary / 'damaged-source'
+        shutil.copytree(source, damaged)
+        (damaged / '.gitattributes').unlink()
+        reject('missing-source-file', damaged, patch, damaged / MANIFEST_PATH,
+               'CANDIDATE_IDENTITY_MISMATCH')
+    return checked
+
+
 def prerequisites(source):
     if platform.python_implementation() != 'CPython' or platform.python_version() != '3.14.7':
         raise ValueError('MISSING_PINNED_CPYTHON_3_14_7')
@@ -100,6 +148,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     source = export_candidate(args.repository, args.export, args.patch)
     versions = prerequisites(source)
+    negative_bindings = verify_negative_bindings(source, args.patch)
     command = [sys.executable, '-B', str(source / 'engineering/ci/phase6_qualification.py'),
                '--offline', '--source', str(source), '--patch', str(Path(args.patch).resolve()),
                '--manifest', str(source / MANIFEST_PATH), '--manifest-sha256', MANIFEST,
@@ -108,6 +157,7 @@ def main(argv=None):
     print(json.dumps({'qualificationCommit': COMMIT, 'candidateSHA256': CANDIDATE,
                       'manifestSHA256': MANIFEST, 'patchSHA256': PATCH,
                       'python': platform.python_version(), 'packages': versions,
+                      'negativeBindingsPassed': negative_bindings,
                       'argv': command}), flush=True)
     return subprocess.run(command, check=False).returncode
 

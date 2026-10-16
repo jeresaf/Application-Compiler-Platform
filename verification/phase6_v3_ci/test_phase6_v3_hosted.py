@@ -27,6 +27,9 @@ class V3HostedTests(unittest.TestCase):
             digest = hashlib.sha256(json.dumps(files, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
             self.assertEqual(hosted.CANDIDATE, digest)
             self.assertEqual(hosted.MANIFEST, files[hosted.MANIFEST_PATH])
+            self.assertEqual(['wrong-baseline', 'changed-candidate-digest', 'changed-patch',
+                              'changed-manifest', 'missing-source-file'],
+                             hosted.verify_negative_bindings(source, external))
             self.assertNotIn('engineering/ci/phase6_v3_hosted.py', files)
             with self.assertRaises(FileExistsError):
                 hosted.export_candidate(ROOT, source, external)
