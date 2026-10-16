@@ -43,6 +43,23 @@ jobs:
         run: |
           set -euo pipefail
           "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -B -m unittest discover -s verification/phase6_v3_ci -v 2>&1 | tee "$RUNNER_TEMP/acp-v3-results/ci-regressions.log"
+      - name: Verify unsealed successor engineering candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite = unittest.defaultTestLoader.discover('verification/generator_candidates')
+          assert suite.countTestCases() == 13, 'SUCCESSOR_TEST_COUNT'
+          PYTHON
+          "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -B -m unittest discover -s verification/generator_candidates -v 2>&1 | tee "$RUNNER_TEMP/acp-v3-results/successor-tests.log"
+          "$RUNNER_TEMP/acp-v3-venv/bin/python3.14" -B - <<'PYTHON'
+          import os, re
+          from pathlib import Path
+          log = (Path(os.environ['RUNNER_TEMP']) / 'acp-v3-results/successor-tests.log').read_text()
+          assert re.findall(r'^Ran ([0-9]+) tests in .+$', log, re.MULTILINE) == ['13'], 'SUCCESSOR_EXECUTED_COUNT'
+          assert log.rstrip().splitlines()[-1] == 'OK', 'SUCCESSOR_FAILURE_OR_SKIP'
+          PYTHON
       - name: Qualify exact reviewed export without physical execution
         shell: bash
         run: |

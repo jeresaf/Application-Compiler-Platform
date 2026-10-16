@@ -134,8 +134,9 @@ CHECKOUT_FORMS={
 
 
 # Exact reviewed CI-only additions; no directory-wide exception.
-V3_CI_HASHES = {'.github/workflows/phase6-v3-offline.yml': '9517940c14fa95ad7e18bebc5d0c967b9181f82b0452243f68569cbbc2f91fe8', 'engineering/ci/PHASE6-QUALIFICATION.md': '39123fef8ac3a409e369c0b8a4f2ac979e793306983ebc56ec2d57eb0e037791', 'engineering/ci/inputs/.gitattributes': '83c5641d9288aad3c12c13948066115cf115c27ca77b5f86ef986b11b6f9d1cb', 'engineering/ci/inputs/phase6-wave3-cumulative.patch': '9706ba0c436f57560b0e8ace897cee7f1f258c2d40870e8bf1c9c2da70b791c8', 'engineering/ci/phase6-qualification-ci.json': 'c15dbb6fa1226fb22eb28a406ef54f12a1455013d350014794ae0570a6dc90fd', 'engineering/ci/phase6-qualification-manifest.json': '5033d915410e8f2eaf4d53f4a041795c931bb57c36abdf105ba88f57298176e6', 'engineering/ci/phase6_postgresql.py': 'ab32cc6d2146bcf0a5063b06c13e899a8c970e348c32b00380ec5e4b1efe32ec', 'engineering/ci/phase6_qualification.py': '4c01248510d0196af8d1255d3b000d49e6a7d23893daa40f8e0bf0354b0021e9', 'engineering/ci/phase6_v3_hosted.py': 'a60fcccb86b9736f9e620c268eb18617b7b9147d23048801c7ab9add083e1fd5', 'verification/phase6_v3_ci/test_phase6_v3_hosted.py': 'c790db7475c0d95e3fe377c141c2823892ed519df7395fac9895eb802d0a3844'}
+V3_CI_HASHES = {'.github/workflows/phase6-v3-offline.yml': '474db35a857d238d7dd7e4b09e984db33a787cc20cdb96301b29b475634cb2ce', 'engineering/ci/PHASE6-QUALIFICATION.md': '39123fef8ac3a409e369c0b8a4f2ac979e793306983ebc56ec2d57eb0e037791', 'engineering/ci/inputs/.gitattributes': '83c5641d9288aad3c12c13948066115cf115c27ca77b5f86ef986b11b6f9d1cb', 'engineering/ci/inputs/phase6-wave3-cumulative.patch': '9706ba0c436f57560b0e8ace897cee7f1f258c2d40870e8bf1c9c2da70b791c8', 'engineering/ci/phase6-qualification-ci.json': 'c15dbb6fa1226fb22eb28a406ef54f12a1455013d350014794ae0570a6dc90fd', 'engineering/ci/phase6-qualification-manifest.json': '5033d915410e8f2eaf4d53f4a041795c931bb57c36abdf105ba88f57298176e6', 'engineering/ci/phase6_postgresql.py': 'ab32cc6d2146bcf0a5063b06c13e899a8c970e348c32b00380ec5e4b1efe32ec', 'engineering/ci/phase6_qualification.py': '4c01248510d0196af8d1255d3b000d49e6a7d23893daa40f8e0bf0354b0021e9', 'engineering/ci/phase6_v3_hosted.py': 'a60fcccb86b9736f9e620c268eb18617b7b9147d23048801c7ab9add083e1fd5', 'verification/phase6_v3_ci/test_phase6_v3_hosted.py': 'c790db7475c0d95e3fe377c141c2823892ed519df7395fac9895eb802d0a3844'}
 
+SUCCESSOR_HASHES = {'engineering/generator_candidates/spring_vue_postgres_0_6/__init__.py': '39f14a327ca0cc2561f37b4a69113b4816f03a70c902061e1e87ee1dd458c4c0', 'engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py': '6f7cbf6cffb632decdde1674665bdc81459a2078bb6c41b55085d91f10077807', 'engineering/generator_candidates/spring_vue_postgres_0_6/migrations.py': 'a9f95f769d9c05e56893e381db53d835ac8a8479a0aedffdcdb5be6c1df64628', 'engineering/generator_candidates/spring_vue_postgres_0_6/provenance.py': '4750708bf0eec9e152a5d7b72f073d15ff893a699c17de5df9a83978846d017b', 'engineering/generator_candidates/spring_vue_postgres_0_6/ancestry.json': '425476de76847fe426aadebbe9d4de3cbb408765e793441317c2c679406e76f5', 'engineering/generator_candidates/spring_vue_postgres_0_6/profile.json': '2ce1bd59fa29034725fa5e0813e2f424f6fb56c580499c0c19ba009a1b09c0fd', 'verification/generator_candidates/test_successor.py': 'dd2a22bb17d7064bad300a4233b170299d223bab0f6df6ea42676c63150c6bce'}
 
 def ci_legacy_tree(tree):
     """Project only the exact CI allowance out of historical method comparisons."""
@@ -162,16 +163,18 @@ def ci_legacy_tree(tree):
 
 class PreservationTests(unittest.TestCase):
     def verified_ci_additions(self):
-        for relative, expected in V3_CI_HASHES.items():
+        for relative, expected in {**V3_CI_HASHES, **SUCCESSOR_HASHES}.items():
             path = ROOT / relative
             self.assertFalse(path.is_symlink(), relative)
             self.assertTrue(path.is_file(), relative)
             self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), expected, relative)
             self.assertFalse(path.stat().st_mode & 0o111, relative)
-        return set(V3_CI_HASHES)
+        return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES)
 
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
-        self.assertEqual(len(self.verified_ci_additions()), 10)
+        self.assertEqual(len(V3_CI_HASHES), 10)
+        self.assertEqual(len(SUCCESSOR_HASHES), 7)
+        self.assertEqual(len(self.verified_ci_additions()), 17)
         path = ROOT / 'engineering/ci/inputs/phase6-wave3-cumulative.patch'
         original_read = Path.read_bytes
         with patch.object(Path, 'read_bytes', lambda item: b'changed' if item == path else original_read(item)):
@@ -181,6 +184,13 @@ class PreservationTests(unittest.TestCase):
             with self.assertRaises(AssertionError):self.verified_ci_additions()
         original_link = Path.is_symlink
         with patch.object(Path, 'is_symlink', lambda item: True if item == path else original_link(item)):
+            with self.assertRaises(AssertionError):self.verified_ci_additions()
+
+    def test_exact_successor_inputs_reject_unreviewed_edits(self):
+        self.verified_ci_additions()
+        path = ROOT / 'engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py'
+        original_read = Path.read_bytes
+        with patch.object(Path, 'read_bytes', lambda item: b'unreviewed' if item == path else original_read(item)):
             with self.assertRaises(AssertionError):self.verified_ci_additions()
 
     def test_stage2b2_exact_inventory_and_accepted_source(self):

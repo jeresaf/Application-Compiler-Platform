@@ -1,0 +1,23 @@
+{
+  "status": "UNSEALED_CANDIDATE",
+  "sourceCommit": "584ca9edce76886ff351fd93edef9d3343a5a61c",
+  "parentProfile": "acp-spring-vue-postgres/0.5.0",
+  "parentBundleDigest": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+  "releaseContractSHA256": "2f2a10ea29c4f6083352c8b49e5d2d715b0797bdd36b6cad3db762a03d7e4605",
+  "corrections": {
+    "migrations.py": {
+      "path": "tooling/target_migrations.py",
+      "sha256": "a9f95f769d9c05e56893e381db53d835ac8a8479a0aedffdcdb5be6c1df64628",
+      "sourceSHA256": "20c0691d32139e24b23b14deb26fe01e037f77e7ccaae1396d806bf2cee753b0",
+      "relocation": {
+        "before": "Path(__file__).resolve().parents[1] / 'targets/spring-vue-postgres/worker/relations.py'",
+        "after": "Path(__file__).resolve().parents[3] / 'targets/spring-vue-postgres/worker/relations.py'"
+      }
+    },
+    "provenance.py": {
+      "path": "tooling/target_provenance.py",
+      "sha256": "4750708bf0eec9e152a5d7b72f073d15ff893a699c17de5df9a83978846d017b",
+      "sourceSHA256": "4750708bf0eec9e152a5d7b72f073d15ff893a699c17de5df9a83978846d017b"
+    }
+  }
+}
