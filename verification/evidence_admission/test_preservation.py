@@ -259,8 +259,31 @@ class PreservationTests(unittest.TestCase):
                 with self.assertRaises(AssertionError):preserved_bytes(path)
         accepted = '17ab4b2a533bc112cfbc8d73796347de94d938b6'
         changes = set(subprocess.check_output(['git','diff','--name-only',accepted,'--'],cwd=ROOT,text=True).splitlines())
-        changes.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
-        self.assertEqual(changes, set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
+        untracked = set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
+        added = set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        head = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+        self.check_b0_changes(changes | untracked, untracked, added, head)
+
+    def check_b0_changes(self, changes, untracked, added, head):
+        transient = {'.ci-evidence/contracts.json'}
+        self.check_source_additions(set(untracked) & transient, set(added) & transient, head)
+        self.assertEqual(set(changes) - (set(untracked) & transient), set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
+
+    def test_b0_change_inventory_validates_transient_output_before_exclusion(self):
+        head='a'*40
+        expected=set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
+        transient='.ci-evidence/contracts.json'
+        with tempfile.TemporaryDirectory() as directory,patch(__name__+'.ROOT',Path(directory)),patch.dict(os.environ):
+            for key in ('GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB'):os.environ.pop(key,None)
+            path=ROOT/transient;path.parent.mkdir()
+            binding={'source':head,'run':'123','attempt':'2','job':'contracts'}
+            path.write_text(json.dumps(binding))
+            self.check_b0_changes(expected|{transient},{transient},set(),head)
+            with self.assertRaises(AssertionError):self.check_b0_changes(expected|{transient},set(),{transient},head)
+            with self.assertRaises(AssertionError):self.check_b0_changes(expected|{transient,'unexpected.py'},{transient,'unexpected.py'},set(),head)
+            for value in (dict(binding,source='b'*40),dict(binding,extra='untrusted')):
+                path.write_text(json.dumps(value))
+                with self.assertRaises(AssertionError):self.check_b0_changes(expected|{transient},{transient},set(),head)
 
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)
