@@ -17,12 +17,9 @@ def source(domain):
     method = text[start:end]
     if method.count(DECLARATION) != 1 or method.count(WORKER_IDENTITY) != 1:
         raise ValueError('SEALED_PRIVACY_FIXTURE_SHAPE_CHANGED')
-    method = method.replace(DECLARATION, 'close();due();var runtime=lifecycle();var jwt=identity("tenant-one","fixture:operator");try(var pool=', 1)
-    method = method.replace(WORKER_IDENTITY, 'workerJwt,release());}));}gate.countDown();', 1)
-    loop = 'for(int i=0;i<2;i++)calls.add(pool.submit('
-    if method.count(loop) != 1:
-        raise ValueError('SEALED_PRIVACY_FIXTURE_LOOP_CHANGED')
-    method = method.replace(loop, 'for(int i=0;i<2;i++){var workerJwt=workerIdentity(jwt,i);calls.add(pool.submit(', 1)
+    # Retain the sealed final-state assertions; replace only its execution harness.
+    tail = method[method.index('assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_release_audit"'):]
+    method = '    @Test void concurrentWorkersFenceOneSuccessfulLogicalDisposal() throws Exception {\n        contentionProof(2, false, 10_000);' + tail
     text = text[:start] + method + text[end:]
     # Exercise the real, unchanged SessionGate and lifecycle against PostgreSQL.
     tests = '''
@@ -36,6 +33,84 @@ def source(domain):
             .header("alg","none").subject("fixture:operator").claim("tenant","tenant-one")
             .claim("sid",sid).claim("amr",java.util.List.of("pwd","otp"))
             .claim("auth_time",at.getEpochSecond()).issuedAt(at).expiresAt(at.plusSeconds(600)).build();
+    }
+    void contentionProof(int threads,boolean abort,long competitorTimeoutMillis) throws Exception {
+        close();due();
+        var event=identity("tenant-one","fixture:operator");
+        var first=workerIdentity(event,0);var second=workerIdentity(event,1);
+        assertNotEquals(first.getClaimAsString("sid"),second.getClaimAsString("sid"));
+        for(var worker:java.util.List.of(first,second)) {
+            policy.actor(worker); // Real SessionGate commits its independent session transaction.
+            assertFalse(org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
+            assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_sessions WHERE tenant=? AND subject=? AND sid=? AND authenticated_at=? AND NOT revoked",Integer.class,
+                ExecutionStore.bytes(worker.getClaimAsString("tenant")),ExecutionStore.bytes(worker.getSubject()),ExecutionStore.bytes(worker.getClaimAsString("sid")),((Number)worker.getClaims().get("auth_time")).longValue()));
+            System.out.println("CONTENTION SESSION_COMMITTED sid="+worker.getClaimAsString("sid"));
+        }
+        var acquired=new java.util.concurrent.CountDownLatch(1);var releaseFence=new java.util.concurrent.CountDownLatch(1);
+        var permitted=new java.util.concurrent.atomic.AtomicBoolean(false);
+        var winner=new java.util.concurrent.atomic.AtomicReference<String>();
+        var delegate=new LifecycleActions(store);
+        var actions=new LifecycleRuntime.Actions() {
+            public LifecycleRuntime.Snapshot lock(String life,String resource,org.springframework.security.oauth2.jwt.Jwt principal) {
+                assertEquals(first.getClaimAsString("sid"),principal.getClaimAsString("sid"));
+                var snapshot=delegate.lock(life,resource,principal);
+                winner.set(jdbc.queryForObject("SELECT pg_current_xact_id()::text",String.class));
+                System.out.println("CONTENTION FENCE_ACQUIRED sid="+principal.getClaimAsString("sid")+" xid="+winner.get());acquired.countDown();
+                try { if(!releaseFence.await(30,java.util.concurrent.TimeUnit.SECONDS))throw new IllegalStateException("FENCE_RELEASE_TIMEOUT"); }
+                catch(InterruptedException failure){Thread.currentThread().interrupt();throw new IllegalStateException("FENCE_INTERRUPTED",failure);}
+                if(!permitted.get())throw new IllegalStateException("PROOF_ABORTED");
+                return snapshot;
+            }
+            public void apply(String life,String resource,org.springframework.security.oauth2.jwt.Jwt principal) {
+                assertEquals(first.getClaimAsString("sid"),principal.getClaimAsString("sid"));delegate.apply(life,resource,principal);
+            }
+        };
+        var held=new LifecycleRuntime(jdbc,new DataSourceTransactionManager(ds),model,policy,new Expressions(model),time,actions);
+        var pool=java.util.concurrent.Executors.newFixedThreadPool(threads);
+        java.util.concurrent.Future<LifecycleRuntime.Result> owner=null,competitor=null;
+        try {
+            owner=pool.submit(()->held.dispose(LIFECYCLE,"fixture-resource",first,release()));
+            assertTrue(acquired.await(10,java.util.concurrent.TimeUnit.SECONDS),"FIRST_FENCE_NOT_ACQUIRED");
+            assertFalse(owner.isDone());assertEquals(1,releaseFence.getCount());
+            competitor=pool.submit(()->{
+                System.out.println("CONTENTION COMPETITOR_ATTEMPT sid="+second.getClaimAsString("sid"));
+                return lifecycle().dispose(LIFECYCLE,"fixture-resource",second,release());
+            });
+            assertEquals(LifecycleRuntime.Result.BUSY,competitor.get(competitorTimeoutMillis,java.util.concurrent.TimeUnit.MILLISECONDS));
+            assertFalse(owner.isDone());assertEquals(1,releaseFence.getCount());
+            System.out.println("CONTENTION COMPETITOR_BUSY fenceStillHeld=true");
+            if(abort)throw new IllegalStateException("INJECTED_PROOF_FAILURE");
+            permitted.set(true);releaseFence.countDown();
+            assertEquals(LifecycleRuntime.Result.COMPLETED,owner.get(10,java.util.concurrent.TimeUnit.SECONDS));
+            var anchor=jdbc.queryForMap("SELECT * FROM acp_lifecycle_anchor WHERE lifecycle=? AND tenant=? AND resource=?",LIFECYCLE,ExecutionStore.bytes("tenant-one"),ExecutionStore.bytes("fixture-resource"));
+            assertEquals("COMPLETED",anchor.get("status"));assertNotNull(anchor.get("completed_ns"));
+            assertEquals(winner.get(),anchor.get("attempt_xid"));
+            assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_attempt WHERE lifecycle=? AND action_xid=? AND result='COMPLETED'",Integer.class,LIFECYCLE,winner.get()));
+            assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_release_audit WHERE lifecycle=? AND tenant=? AND resource=? AND subject=? AND action_xid=?",Integer.class,LIFECYCLE,ExecutionStore.bytes("tenant-one"),ExecutionStore.bytes("fixture-resource"),ExecutionStore.bytes(first.getSubject()),winner.get()));
+            assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_release_audit",Integer.class));
+            System.out.println("CONTENTION OWNER_COMPLETED sid="+first.getClaimAsString("sid")+" xid="+winner.get()+" anchor=COMPLETED releases=1");
+        } finally {
+            if(competitor!=null && !competitor.isDone())competitor.cancel(true);
+            releaseFence.countDown();
+            pool.shutdown();
+            if(!pool.awaitTermination(10,java.util.concurrent.TimeUnit.SECONDS)) {
+                pool.shutdownNow();assertTrue(pool.awaitTermination(10,java.util.concurrent.TimeUnit.SECONDS),"WORKER_CLEANUP_FAILED");
+            }
+            assertTrue(pool.isTerminated());
+        }
+    }
+    @Test void serializedDisposalCannotSatisfyContentionProofAndCleansUp() throws Exception {
+        assertThrows(java.util.concurrent.TimeoutException.class,()->contentionProof(1,false,250));
+        assertEquals(0,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_release_audit",Integer.class));
+        assertEquals(LifecycleRuntime.Result.COMPLETED,dispose(release()));
+        assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_release_audit",Integer.class));
+    }
+    @Test void failedContentionProofReleasesFenceAndRollsBack() throws Exception {
+        var failure=assertThrows(IllegalStateException.class,()->contentionProof(2,true,10_000));
+        assertEquals("INJECTED_PROOF_FAILURE",failure.getMessage());
+        assertEquals(0,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_release_audit",Integer.class));
+        assertEquals(LifecycleRuntime.Result.COMPLETED,dispose(release()));
+        assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_release_audit",Integer.class));
     }
     @Test void olderAuthenticationAfterNewerSameSessionIsRejectedBeforeDisposal() throws Exception {
         close();due();

@@ -14,22 +14,26 @@ class PrivacyFixtureTests(unittest.TestCase):
     def setUpClass(cls):
         cls.originals = {domain: privacy_fixture.sealed_source(domain) for domain in ('payment','case-management')}
 
-    def test_only_concurrency_identity_changes_and_all_assertions_remain(self):
+    def test_only_concurrency_harness_changes_and_final_assertions_remain(self):
         for domain in ('payment','case-management'):
             original = self.originals[domain]
             with patch.object(privacy_fixture,'sealed_source',return_value=original):
                 fixed = privacy_fixture.source(domain)
-            original_body = original[original.index('    @Test void concurrentWorkersFence'):original.index('    @Test void domainRootLock')]
-            fixed_body = fixed[fixed.index('    @Test void concurrentWorkersFence'):fixed.index('    @Test void domainRootLock')]
-            restored = fixed_body.replace('var jwt=identity("tenant-one","fixture:operator");','',1).replace('workerJwt,release());}));}gate.countDown();', privacy_fixture.WORKER_IDENTITY,1).replace('for(int i=0;i<2;i++){var workerJwt=workerIdentity(jwt,i);calls.add(pool.submit(', 'for(int i=0;i<2;i++)calls.add(pool.submit(',1)
-            self.assertEqual(restored,original_body)
+            start = '    @Test void concurrentWorkersFence'
+            end = '    @Test void domainRootLock'
+            original_body = original[original.index(start):original.index(end)]
+            fixed_body = fixed[fixed.index(start):fixed.index(end)]
+            tail = original_body[original_body.index('assertEquals(1,jdbc.queryForObject("SELECT count(*) FROM acp_lifecycle_release_audit"'):]
+            self.assertTrue(fixed_body.endswith(tail))
+            self.assertIn('contentionProof(2, false, 10_000)',fixed_body)
             prefix = fixed[:fixed.index('    org.springframework.security.oauth2.jwt.Jwt workerIdentity')]
-            prefix = prefix.replace(fixed_body, original_body, 1)
-            self.assertEqual(prefix.rstrip(), original.rstrip()[:-1].rstrip())
-            for token in ('LifecycleRuntime.Result.COMPLETED,LifecycleRuntime.Result.BUSY','call.get()', 'SELECT count(*) FROM acp_lifecycle_release_audit'):
-                self.assertIn(token,fixed_body)
-            self.assertEqual(fixed.count('@Test'),original.count('@Test')+3)
-            self.assertEqual(fixed[:fixed.index('    @Test void concurrentWorkersFence')], original[:original.index('    @Test void concurrentWorkersFence')])
+            self.assertEqual(prefix.replace(fixed_body,original_body,1).rstrip(),original.rstrip()[:-1].rstrip())
+            self.assertEqual(fixed.count('@Test'),original.count('@Test')+5)
+            self.assertLess(fixed.index('policy.actor(worker)'),fixed.index('owner=pool.submit'))
+            self.assertLess(fixed.index('acquired.await('),fixed.index('competitor=pool.submit'))
+            self.assertLess(fixed.index('competitor.get('),fixed.index('permitted.set(true)'))
+            self.assertIn('contentionProof(1,false,250)',fixed)
+            self.assertIn('pool.isTerminated()',fixed)
 
     def test_unknown_sealed_fixture_shape_fails_closed(self):
         original=self.originals['payment']
