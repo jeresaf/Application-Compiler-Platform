@@ -46,6 +46,7 @@ STAGE2B2_FILES={
  'verification/evidence_admission/stage2b2/test_isolation.py',
  'docs/phase6-evidence-admission-stage2b2.md',
 }
+CI_B0_STEPS = b'      - name: Verify Stage B0 laboratory evidence admission\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<\'PYTHON\'\n          import platform, unittest\n          from pathlib import Path\n          assert platform.python_version() == \'3.14.7\', \'B0_WRONG_PYTHON\'\n          directory = Path(\'verification/evidence_admission/scoped\')\n          expected = {\'test_manifest.py\', \'test_witnesses.py\', \'test_human_reviews.py\', \'test_adversarial.py\', \'test_bridge.py\'}\n          assert {p.name for p in directory.glob(\'test*.py\')} == expected, \'B0_TEST_FILES\'\n          assert all((directory / name).is_file() and not (directory / name).is_symlink() for name in expected), \'B0_TEST_FILES\'\n          assert unittest.defaultTestLoader.discover(str(directory)).countTestCases() == 60, \'B0_TEST_COUNT\'\n          PYTHON\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/scoped -v 2>&1 | tee "$RUNNER_TEMP/acp-b0-tests.log"\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<\'PYTHON\'\n          import os, re\n          from pathlib import Path\n          log = (Path(os.environ[\'RUNNER_TEMP\']) / \'acp-b0-tests.log\').read_text()\n          assert re.findall(r\'^Ran ([0-9]+) tests in .+$\', log, re.MULTILINE) == [\'60\'], \'B0_EXECUTED_COUNT\'\n          assert log.rstrip().splitlines()[-1] == \'OK\', \'B0_FAILURE_OR_SKIP\'\n          assert all(re.search(r\'^test_N%02d_reject .* \\.\\.\\. ok$\' % n, log, re.MULTILINE) for n in range(1, 33)), \'B0_ADVERSARIAL_COVERAGE\'\n          PYTHON\n      - name: Retain Stage B0 laboratory verification log\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: stage-b0-laboratory-verification\n          path: ${{ runner.temp }}/acp-b0-tests.log\n          if-no-files-found: error\n'
 CI_STAGE2A_STEPS=b"""      - name: Install isolated Stage 2A laboratory dependencies
         shell: bash
         run: |
@@ -157,6 +158,9 @@ def preserved_bytes(path):
     if relative in B0_MODIFIED_HASHES:
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == B0_MODIFIED_HASHES[relative], relative
         return subprocess.check_output(['git', 'show', '17ab4b2a533bc112cfbc8d73796347de94d938b6:' + relative], cwd=ROOT)
+    if relative == '.github/workflows/acp-contracts.yml':
+        assert actual.count(CI_B0_STEPS) == 1, 'EXACT_B0_CI_INSERTION_REQUIRED'
+        actual = actual.replace(CI_B0_STEPS, b'', 1)
     if relative in PRIVACY_MODIFIED_HASHES:
         assert hashlib.sha256(actual).hexdigest() == PRIVACY_MODIFIED_HASHES[relative], relative
         return subprocess.check_output(['git', 'show', 'a668696d4068f5afe2ab919a7378eec9cdf48e10:' + relative], cwd=ROOT)
@@ -220,6 +224,17 @@ class PreservationTests(unittest.TestCase):
             self.assertFalse(path.stat().st_mode & 0o111, relative)
         return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES)
 
+    def test_b0_ci_allows_only_exact_append_and_preserves_failure_policy(self):
+        workflow = ROOT / '.github/workflows/acp-contracts.yml'
+        raw = workflow.read_bytes()
+        accepted = subprocess.check_output(['git', 'show', '1e43974:.github/workflows/acp-contracts.yml'], cwd=ROOT)
+        self.assertEqual(raw, accepted.replace(b'\n  phase5-experiments:', CI_B0_STEPS+b'\n  phase5-experiments:', 1))
+        preserved_bytes(workflow)
+        real_read = Path.read_bytes
+        for changed in (raw.replace(b'== 60', b'>= 0'), raw.replace(b'set -euo pipefail', b'set -eu'), raw.replace(b'B0_FAILURE_OR_SKIP', b'UNREVIEWED'), raw.replace(CI_B0_STEPS,b'')):
+            with patch.object(Path, 'read_bytes', lambda item: changed if item == workflow else real_read(item)):
+                with self.assertRaises(AssertionError):preserved_bytes(workflow)
+
     def test_b0_exact_inventory_and_changed_source_rejection(self):
         self.assertEqual(len(B0_NEW_HASHES), 15)
         self.assertEqual(set(B0_MODIFIED_HASHES), {'tooling/audit/criteria.py', 'tooling/audit/phase6.py'})
@@ -233,7 +248,7 @@ class PreservationTests(unittest.TestCase):
         accepted = '17ab4b2a533bc112cfbc8d73796347de94d938b6'
         changes = set(subprocess.check_output(['git','diff','--name-only',accepted,'--'],cwd=ROOT,text=True).splitlines())
         changes.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
-        self.assertEqual(changes, set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | {'verification/evidence_admission/test_preservation.py'})
+        self.assertEqual(changes, set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
 
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)

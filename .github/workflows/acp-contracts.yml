@@ -138,6 +138,36 @@ jobs:
           assert re.findall(r'^Ran ([0-9]+) tests in .+$', log, re.MULTILINE) == ['47'], 'STAGE2B_EXECUTED_COUNT'
           assert log.rstrip().splitlines()[-1] == 'OK', 'STAGE2B_FAILURE_OR_SKIP'
           PYTHON
+      - name: Verify Stage B0 laboratory evidence admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import platform, unittest
+          from pathlib import Path
+          assert platform.python_version() == '3.14.7', 'B0_WRONG_PYTHON'
+          directory = Path('verification/evidence_admission/scoped')
+          expected = {'test_manifest.py', 'test_witnesses.py', 'test_human_reviews.py', 'test_adversarial.py', 'test_bridge.py'}
+          assert {p.name for p in directory.glob('test*.py')} == expected, 'B0_TEST_FILES'
+          assert all((directory / name).is_file() and not (directory / name).is_symlink() for name in expected), 'B0_TEST_FILES'
+          assert unittest.defaultTestLoader.discover(str(directory)).countTestCases() == 60, 'B0_TEST_COUNT'
+          PYTHON
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/scoped -v 2>&1 | tee "$RUNNER_TEMP/acp-b0-tests.log"
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import os, re
+          from pathlib import Path
+          log = (Path(os.environ['RUNNER_TEMP']) / 'acp-b0-tests.log').read_text()
+          assert re.findall(r'^Ran ([0-9]+) tests in .+$', log, re.MULTILINE) == ['60'], 'B0_EXECUTED_COUNT'
+          assert log.rstrip().splitlines()[-1] == 'OK', 'B0_FAILURE_OR_SKIP'
+          assert all(re.search(r'^test_N%02d_reject .* \.\.\. ok$' % n, log, re.MULTILINE) for n in range(1, 33)), 'B0_ADVERSARIAL_COVERAGE'
+          PYTHON
+      - name: Retain Stage B0 laboratory verification log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-b0-laboratory-verification
+          path: ${{ runner.temp }}/acp-b0-tests.log
+          if-no-files-found: error
 
   phase5-experiments:
     runs-on: ubuntu-24.04
