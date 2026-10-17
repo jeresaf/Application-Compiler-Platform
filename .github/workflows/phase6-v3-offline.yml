@@ -118,3 +118,46 @@ jobs:
             ${{ runner.temp }}/acp-successor-build.log
             ${{ runner.temp }}/acp-successor-builds/results.json
           if-no-files-found: error
+
+  successor-application-runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Provision compiler dependencies on disposable runner
+        run: |
+          python3.14 -m venv "$RUNNER_TEMP/acp-build-venv"
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -m pip install --only-binary=:all: -r tooling/requirements.txt
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -m pip check
+      - name: Verify build runner contracts
+        run: '"$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B -m unittest discover -s verification/generator_runtime -v'
+      - name: Obtain exact disposable PostgreSQL runtime
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Exercise both generated applications with fresh isolated databases
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B engineering/generator_builds/runtime.py --workspace "$RUNNER_TEMP/acp-successor-runtime" 2>&1 | tee "$RUNNER_TEMP/acp-successor-runtime.log"
+      - name: Retain runtime results and browser logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: successor-application-runtime
+          path: |
+            ${{ runner.temp }}/acp-successor-runtime.log
+            ${{ runner.temp }}/acp-successor-runtime/runtime-results.json
+            ${{ runner.temp }}/acp-successor-runtime/*-runtime/
+          if-no-files-found: error
