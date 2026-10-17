@@ -48,7 +48,10 @@ def validate_record(number,record,root,binding,now):
     return files
 
 
-def junit(files,required,execution_commit=None):
+def junit(files,required,execution_commit=None,*,external_registration=None):
+    if external_registration is not None:
+        from engineering.evidence_admission.scoped.witnesses import external_junit
+        return external_junit(files,required,execution_commit,external_registration)
     found=set();classes={}
     for path in files.values():
         if path.suffix!='.xml':continue

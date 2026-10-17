@@ -260,6 +260,12 @@ def run(args):
     return 1 if report.get('executionError') else 2 if report['blockers'] else 0
 
 
+def laboratory_evidence_notice(raw):
+    """Read-only structural notice; never merges records or accepted_reviews."""
+    from tooling.audit.scoped_admission import inspect_submission
+    return inspect_submission(raw)
+
+
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);p.add_argument('--resume',action='store_true',help='Revalidate and reuse identical-bundle full admission; rerun remaining audit producers with separate provenance')
     args=p.parse_args()

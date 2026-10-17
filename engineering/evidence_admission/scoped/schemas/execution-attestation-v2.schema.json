@@ -1,0 +1,565 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "acp-phase6-evidence/execution-attestation/2",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "acp-phase6-evidence/execution-attestation/2"
+        },
+        "laboratory": {
+          "const": true
+        },
+        "release": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "SEALED_RELEASE"
+                },
+                "profile": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "generator": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "releaseContractDigest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "bundleSeal": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "kind",
+                "profile",
+                "generator",
+                "releaseContractDigest",
+                "bundleSeal"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "UNSEALED_CANDIDATE"
+                },
+                "profile": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "generator": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "candidateSourceDigest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "ancestryDigest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "parentProfile": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "parentBundleSeal": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "kind",
+                "profile",
+                "generator",
+                "candidateSourceDigest",
+                "ancestryDigest",
+                "parentProfile",
+                "parentBundleSeal"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "applicationSource": {
+          "type": "object",
+          "properties": {
+            "commit": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            },
+            "treeDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "inventory": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9_-][A-Za-z0-9._-]*/)*[A-Za-z0-9_-][A-Za-z0-9._-]*$"
+            }
+          },
+          "required": [
+            "commit",
+            "treeDigest",
+            "inventory"
+          ],
+          "additionalProperties": false
+        },
+        "evaluator": {
+          "type": "object",
+          "properties": {
+            "commit": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            },
+            "treeDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "predicateSetDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "commit",
+            "treeDigest",
+            "predicateSetDigest"
+          ],
+          "additionalProperties": false
+        },
+        "auditSessionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "execution": {
+          "type": "object",
+          "properties": {
+            "executionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contractDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "challengeRef": {
+              "type": "object",
+              "properties": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "payloadDigest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "schema",
+                "payloadDigest"
+              ],
+              "additionalProperties": false
+            },
+            "executorId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "collectorId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "environmentDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "startedAt": {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+            },
+            "finishedAt": {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+            },
+            "provider": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "GITHUB_ACTIONS"
+                    },
+                    "repository": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 512
+                    },
+                    "runId": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "attempt": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "jobId": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "workflowPath": {
+                      "type": "string",
+                      "pattern": "^(?:[A-Za-z0-9_-][A-Za-z0-9._-]*/)*[A-Za-z0-9_-][A-Za-z0-9._-]*$"
+                    },
+                    "workflowCommit": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{40}$"
+                    },
+                    "testedCommit": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{40}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "repository",
+                    "runId",
+                    "attempt",
+                    "jobId",
+                    "workflowPath",
+                    "workflowCommit",
+                    "testedCommit"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "ISOLATED_EXECUTOR"
+                    },
+                    "hostConfigurationDigest": {
+                      "type": "string",
+                      "pattern": "^sha256:[0-9a-f]{64}$"
+                    },
+                    "supervisorDigest": {
+                      "type": "string",
+                      "pattern": "^sha256:[0-9a-f]{64}$"
+                    },
+                    "sessionId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 512
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "hostConfigurationDigest",
+                    "supervisorDigest",
+                    "sessionId"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "executionId",
+            "contractDigest",
+            "challengeRef",
+            "executorId",
+            "collectorId",
+            "environmentDigest",
+            "startedAt",
+            "finishedAt",
+            "provider"
+          ],
+          "additionalProperties": false
+        },
+        "manifestDigest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "registrationRef": {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "payloadDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "schema",
+            "payloadDigest"
+          ],
+          "additionalProperties": false
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "issuedAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+        },
+        "monotonicDurationNanoseconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "termination": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "NORMAL_EXIT"
+                },
+                "exitCode": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "kind",
+                "exitCode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "SIGNAL"
+                },
+                "signalNumber": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                "coreDumped": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "kind",
+                "signalNumber",
+                "coreDumped"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resourceLimitEvents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 0,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "descendantCleanup": {
+          "enum": [
+            "COMPLETE",
+            "INCOMPLETE"
+          ]
+        },
+        "observedInputs": {
+          "type": "object",
+          "properties": {
+            "executableDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "argv": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              "minItems": 1,
+              "maxItems": 4096,
+              "uniqueItems": false
+            },
+            "workingDirectory": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9_-][A-Za-z0-9._-]*/)*[A-Za-z0-9_-][A-Za-z0-9._-]*$"
+            },
+            "environmentDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "dependencyDigest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "executableDigest",
+            "argv",
+            "workingDirectory",
+            "environmentDigest",
+            "dependencyDigest"
+          ],
+          "additionalProperties": false
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "witnessId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              "caseId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              "application": {
+                "enum": [
+                  "PAYMENT",
+                  "CASE_MANAGEMENT"
+                ]
+              },
+              "outcome": {
+                "enum": [
+                  "PASSED",
+                  "FAILED",
+                  "ERROR",
+                  "SKIPPED"
+                ]
+              },
+              "assertionArtifactPaths": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:[A-Za-z0-9_-][A-Za-z0-9._-]*/)*[A-Za-z0-9_-][A-Za-z0-9._-]*$"
+                },
+                "minItems": 1,
+                "maxItems": 4096,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "witnessId",
+              "caseId",
+              "application",
+              "outcome",
+              "assertionArtifactPaths"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "isolationProfileDigest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "schema",
+        "laboratory",
+        "release",
+        "applicationSource",
+        "evaluator",
+        "auditSessionId",
+        "execution",
+        "manifestDigest",
+        "registrationRef",
+        "nonce",
+        "issuedAt",
+        "expiresAt",
+        "monotonicDurationNanoseconds",
+        "termination",
+        "resourceLimitEvents",
+        "descendantCleanup",
+        "observedInputs",
+        "cases",
+        "isolationProfileDigest"
+      ],
+      "additionalProperties": false
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "signerId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "keyId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "algorithm": {
+            "const": "Ed25519"
+          },
+          "signature": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{86}$"
+          }
+        },
+        "required": [
+          "signerId",
+          "keyId",
+          "algorithm",
+          "signature"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "payload",
+    "signatures"
+  ],
+  "additionalProperties": false
+}
