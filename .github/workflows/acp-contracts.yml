@@ -168,6 +168,33 @@ jobs:
           name: stage-b0-laboratory-verification
           path: ${{ runner.temp }}/acp-b0-tests.log
           if-no-files-found: error
+      - name: Verify inactive release-admission engineering boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import platform, unittest
+          from pathlib import Path
+          assert platform.python_version() == '3.14.7'
+          directory = Path('verification/release_admission')
+          assert {p.name for p in directory.glob('test*.py')} == {'test_release.py'}
+          assert unittest.defaultTestLoader.discover(str(directory)).countTestCases() == 19
+          PYTHON
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/release_admission -v 2>&1 | tee "$RUNNER_TEMP/acp-release-admission-tests.log"
+          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<'PYTHON'
+          import os, re
+          from pathlib import Path
+          log = (Path(os.environ['RUNNER_TEMP']) / 'acp-release-admission-tests.log').read_text()
+          assert re.findall(r'^Ran ([0-9]+) tests in .+$', log, re.MULTILINE) == ['19']
+          assert log.rstrip().splitlines()[-1] == 'OK'
+          PYTHON
+      - name: Retain release-admission engineering log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-admission-engineering-verification
+          path: ${{ runner.temp }}/acp-release-admission-tests.log
+          if-no-files-found: error
 
   phase5-experiments:
     runs-on: ubuntu-24.04
