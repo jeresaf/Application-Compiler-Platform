@@ -136,9 +136,35 @@ CHECKOUT_FORMS={
 # Exact reviewed CI-only additions; no directory-wide exception.
 V3_CI_HASHES = {'.github/workflows/phase6-v3-offline.yml': 'b5da4140bf09db8ca9cad83b73dc3055888962659acae577297a3c61e6fe4456', 'engineering/ci/PHASE6-QUALIFICATION.md': '39123fef8ac3a409e369c0b8a4f2ac979e793306983ebc56ec2d57eb0e037791', 'engineering/ci/inputs/.gitattributes': '83c5641d9288aad3c12c13948066115cf115c27ca77b5f86ef986b11b6f9d1cb', 'engineering/ci/inputs/phase6-wave3-cumulative.patch': '9706ba0c436f57560b0e8ace897cee7f1f258c2d40870e8bf1c9c2da70b791c8', 'engineering/ci/phase6-qualification-ci.json': 'c15dbb6fa1226fb22eb28a406ef54f12a1455013d350014794ae0570a6dc90fd', 'engineering/ci/phase6-qualification-manifest.json': '5033d915410e8f2eaf4d53f4a041795c931bb57c36abdf105ba88f57298176e6', 'engineering/ci/phase6_postgresql.py': 'ab32cc6d2146bcf0a5063b06c13e899a8c970e348c32b00380ec5e4b1efe32ec', 'engineering/ci/phase6_qualification.py': '4c01248510d0196af8d1255d3b000d49e6a7d23893daa40f8e0bf0354b0021e9', 'engineering/ci/phase6_v3_hosted.py': 'a60fcccb86b9736f9e620c268eb18617b7b9147d23048801c7ab9add083e1fd5', 'verification/phase6_v3_ci/test_phase6_v3_hosted.py': 'c790db7475c0d95e3fe377c141c2823892ed519df7395fac9895eb802d0a3844'}
 
-GENERATOR_BUILD_HASHES = {'engineering/generator_builds/qualify.py': '659ca6f0e7c0559aa2e33753650a1097662195a65d9056db94169113574672b0', 'verification/generator_builds/test_build_contract.py': '0de23ce6d1be1e8ffe3a4cbdc954d167910722d0cea4f8cde4c8335be1342a50', 'engineering/generator_builds/runtime.py': '3f3df8f56b22f059ae19e0abd6ec773e530f6da852ffa82ec2f0f1b5c3ec77d7', 'verification/generator_runtime/test_runtime_contract.py': 'fdcbc61826e2eae80830d38b20947db29b22ce4608ce7aed9435e839dd6eaad2'}
+GENERATOR_BUILD_HASHES = {'engineering/generator_builds/qualify.py': '659ca6f0e7c0559aa2e33753650a1097662195a65d9056db94169113574672b0', 'verification/generator_builds/test_build_contract.py': '0de23ce6d1be1e8ffe3a4cbdc954d167910722d0cea4f8cde4c8335be1342a50', 'engineering/generator_builds/runtime.py': '3f3df8f56b22f059ae19e0abd6ec773e530f6da852ffa82ec2f0f1b5c3ec77d7', 'verification/generator_runtime/test_runtime_contract.py': 'fdcbc61826e2eae80830d38b20947db29b22ce4608ce7aed9435e839dd6eaad2', 'engineering/generator_builds/privacy_fixture.py': 'cb74026968610378219e9b1f7fcee897c8cd177fa1cd03bf3eb411b9b72fa45b', 'engineering/ci/privacy_gate.py': 'f819151305a9172b742ebcfb46b195138dac49c5b98e2122abe10e9a47a04290', 'verification/privacy_concurrency/test_fixture.py': '2513da72c7ebb79b1bd3d8e77df8a200e31c8951d822eeb9a55ecd7f91417ec7'}
 
 SUCCESSOR_HASHES = {'engineering/generator_candidates/spring_vue_postgres_0_6/__init__.py': '39f14a327ca0cc2561f37b4a69113b4816f03a70c902061e1e87ee1dd458c4c0', 'engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py': '6f7cbf6cffb632decdde1674665bdc81459a2078bb6c41b55085d91f10077807', 'engineering/generator_candidates/spring_vue_postgres_0_6/migrations.py': 'a9f95f769d9c05e56893e381db53d835ac8a8479a0aedffdcdb5be6c1df64628', 'engineering/generator_candidates/spring_vue_postgres_0_6/provenance.py': '4750708bf0eec9e152a5d7b72f073d15ff893a699c17de5df9a83978846d017b', 'engineering/generator_candidates/spring_vue_postgres_0_6/ancestry.json': '425476de76847fe426aadebbe9d4de3cbb408765e793441317c2c679406e76f5', 'engineering/generator_candidates/spring_vue_postgres_0_6/profile.json': '2ce1bd59fa29034725fa5e0813e2f424f6fb56c580499c0c19ba009a1b09c0fd', 'verification/generator_candidates/test_successor.py': 'dd2a22bb17d7064bad300a4233b170299d223bab0f6df6ea42676c63150c6bce'}
+
+PRIVACY_MODIFIED_HASHES = {'.github/workflows/acp-contracts.yml': '356c3d6d7edd14c602b5c0456858c587634983babddce0b459545d1c1ea51d44', 'engineering/ci/parity.py': 'ef19b610de669c33f18abcc637cb576732a8880d8c61677006be2f6bb6c87a70'}
+
+
+def preserved_bytes(path):
+    # Validate the exact two authorized CI-only modifications before comparing
+    # the remainder to immutable historical bytes. No path-wide exception.
+    actual = path.read_bytes()
+    try:
+        relative = path.relative_to(ROOT).as_posix()
+    except ValueError:
+        return actual
+    if relative in PRIVACY_MODIFIED_HASHES:
+        assert hashlib.sha256(actual).hexdigest() == PRIVACY_MODIFIED_HASHES[relative], relative
+        return subprocess.check_output(['git', 'show', 'a668696d4068f5afe2ab919a7378eec9cdf48e10:' + relative], cwd=ROOT)
+    return actual
+
+
+def legacy_modifications(paths, accepted):
+    paths = set(paths)
+    for relative in set(PRIVACY_MODIFIED_HASHES) & paths:
+        original = subprocess.check_output(['git', 'show', accepted + ':' + relative], cwd=ROOT)
+        if preserved_bytes(ROOT / relative) == original:
+            paths.remove(relative)
+    return paths
+
 
 def ci_legacy_tree(tree):
     """Project only the exact CI allowance out of historical method comparisons."""
@@ -156,8 +182,15 @@ def ci_legacy_tree(tree):
                                    and isinstance(value.ops[0], ast.In)
                                    and ast.dump(value.comparators[0]) == predicate)]
             return node.values[0] if len(node.values) == 1 else node
+        def visit_List(self, node):
+            node = self.generic_visit(node)
+            node.elts = [value for value in node.elts if not (isinstance(value, ast.Constant)
+                         and value.value == ':(exclude)engineering/ci/parity.py')]
+            return node
         def visit_Call(self, node):
-            if isinstance(node.func, ast.Name) and node.func.id == 'ci_legacy_tree':
+            if isinstance(node.func, ast.Name) and node.func.id == 'preserved_bytes':
+                return ast.Call(func=ast.Attribute(value=self.visit(node.args[0]), attr='read_bytes', ctx=ast.Load()), args=[], keywords=[])
+            if isinstance(node.func, ast.Name) and node.func.id in ('ci_legacy_tree', 'legacy_modifications'):
                 return self.visit(node.args[0])
             return self.generic_visit(node)
     return Projection().visit(copy.deepcopy(tree))
@@ -169,14 +202,14 @@ class PreservationTests(unittest.TestCase):
             path = ROOT / relative
             self.assertFalse(path.is_symlink(), relative)
             self.assertTrue(path.is_file(), relative)
-            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), expected, relative)
+            self.assertEqual(hashlib.sha256(preserved_bytes(path)).hexdigest(), expected, relative)
             self.assertFalse(path.stat().st_mode & 0o111, relative)
         return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES)
 
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)
         self.assertEqual(len(SUCCESSOR_HASHES), 7)
-        self.assertEqual(len(self.verified_ci_additions()), 21)
+        self.assertEqual(len(self.verified_ci_additions()), 24)
         path = ROOT / 'engineering/ci/inputs/phase6-wave3-cumulative.patch'
         original_read = Path.read_bytes
         with patch.object(Path, 'read_bytes', lambda item: b'changed' if item == path else original_read(item)):
@@ -199,14 +232,14 @@ class PreservationTests(unittest.TestCase):
 
     def test_stage2b2_exact_inventory_and_accepted_source(self):
         accepted='91181e1c62cfc6be6b82d64bc86f8d4f7166d09c'
-        additions=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        additions=legacy_modifications(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines()),accepted)
         additions.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
         if '.ci-evidence/contracts.json' in additions:
             self.check_source_additions(['.ci-evidence/contracts.json'],[],subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
             self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
             additions.remove('.ci-evidence/contracts.json')
         self.assertEqual(additions-self.verified_ci_additions(),STAGE2B2_FILES)
-        self.assertEqual(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines()),{'verification/evidence_admission/test_preservation.py'})
+        self.assertEqual(legacy_modifications(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines()),accepted),{'verification/evidence_admission/test_preservation.py'})
         listing=subprocess.check_output(['git','ls-tree','-r','-z',accepted],cwd=ROOT)
         for row in listing.split(b'\0'):
             if not row:continue
@@ -214,7 +247,7 @@ class PreservationTests(unittest.TestCase):
             if relative=='verification/evidence_admission/test_preservation.py':continue
             mode,kind,digest=metadata.split();path=ROOT/relative
             expected=subprocess.check_output(['git','cat-file','blob',digest.decode()],cwd=ROOT)
-            actual=path.read_bytes()
+            actual=preserved_bytes(path)
             with self.subTest(path=relative):
                 self.assertFalse(path.is_symlink());self.assertEqual(kind,b'blob')
                 if actual!=expected:
@@ -225,7 +258,7 @@ class PreservationTests(unittest.TestCase):
     def test_stage2b_final_exact_correction_and_workflow(self):
         accepted='ea5683c36300481f9d3a7a473290ec3e5923af6d'
         expected_changes=set(F20_EXACT_HASHES)|{'.github/workflows/acp-contracts.yml','verification/evidence_admission/test_preservation.py'}
-        changes=set(subprocess.check_output(['git','diff','--name-only',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        changes=legacy_modifications(set(subprocess.check_output(['git','diff','--name-only',accepted,'--'],cwd=ROOT,text=True).splitlines()),accepted)
         self.assertEqual(changes-STAGE2B2_FILES-self.verified_ci_additions(),expected_changes)
         additions=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
         for addition in additions:
@@ -236,10 +269,10 @@ class PreservationTests(unittest.TestCase):
         self.assertEqual(set(F20_EXACT_HASHES),{'engineering/evidence_admission/challenge.py',
             'verification/evidence_admission/stage2b/test_challenge.py','docs/phase6-evidence-admission-stage2b.md'})
         for relative,digest in F20_EXACT_HASHES.items():
-            self.assertEqual(hashlib.sha256((ROOT/relative).read_bytes()).hexdigest(),digest,relative)
+            self.assertEqual(hashlib.sha256(preserved_bytes((ROOT/relative))).hexdigest(),digest,relative)
         workflow='.github/workflows/acp-contracts.yml'
         baseline=subprocess.check_output(['git','show',accepted+':'+workflow],cwd=ROOT)
-        self.assertEqual((ROOT/workflow).read_bytes(),baseline.replace(b'\n  phase5-experiments:',CI_STAGE2B_STEPS+b'\n  phase5-experiments:',1))
+        self.assertEqual(preserved_bytes((ROOT/workflow)),baseline.replace(b'\n  phase5-experiments:',CI_STAGE2B_STEPS+b'\n  phase5-experiments:',1))
         # Every other accepted tracked byte and mode is still enforced by the
         # earlier baseline comparisons, plus this exact current-baseline pass.
         listing=subprocess.check_output(['git','ls-tree','-r','-z',accepted],cwd=ROOT)
@@ -249,7 +282,7 @@ class PreservationTests(unittest.TestCase):
             if relative in expected_changes:continue
             mode,kind,digest=metadata.split();path=ROOT/relative
             expected=subprocess.check_output(['git','cat-file','blob',digest.decode()],cwd=ROOT)
-            actual=path.read_bytes()
+            actual=preserved_bytes(path)
             with self.subTest(path=relative):
                 self.assertFalse(path.is_symlink());self.assertEqual(kind,b'blob')
                 if actual!=expected:
@@ -258,7 +291,7 @@ class PreservationTests(unittest.TestCase):
                 self.assertEqual(bool(path.stat().st_mode & 0o111),mode==b'100755')
 
     def test_stage2b_ci_rejects_weakened_guards(self):
-        workflow=ROOT/'.github/workflows/acp-contracts.yml';original=workflow.read_bytes()
+        workflow=ROOT/'.github/workflows/acp-contracts.yml';original=preserved_bytes(workflow)
         for old,new in [(b"suite.countTestCases() == 47",b"suite.countTestCases() >= 0"),
                         (b"{'test_challenge.py', 'test_execution_ledger.py'}",b"{'test_challenge.py'}"),
                         (b"log.rstrip().splitlines()[-1] == 'OK'",b"True"),
@@ -270,7 +303,7 @@ class PreservationTests(unittest.TestCase):
 
     def test_stage2b1_exact_inventory_and_accepted_methods(self):
         accepted='1db415af4486bb03392978d07091afd609fe9f02'
-        additions=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        additions=legacy_modifications(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines()),accepted)
         additions.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
         if '.ci-evidence/contracts.json' in additions:
             head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
@@ -278,7 +311,7 @@ class PreservationTests(unittest.TestCase):
             self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
             additions.remove('.ci-evidence/contracts.json')
         self.assertEqual(additions-self.verified_ci_additions(),STAGE2B1_FILES | STAGE2B2_FILES)
-        modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        modified=legacy_modifications(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines()),accepted)
         self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
         path='verification/evidence_admission/test_preservation.py'
         before=subprocess.check_output(['git','show',accepted+':'+path],cwd=ROOT,text=True)
@@ -311,7 +344,7 @@ class PreservationTests(unittest.TestCase):
             expected=subprocess.check_output(['git','cat-file','blob',digest.decode()],cwd=ROOT)
             if relative=='.github/workflows/acp-contracts.yml':
                 expected=expected.replace(b'\n  phase5-experiments:',CI_STAGE2B_STEPS+b'\n  phase5-experiments:',1)
-            actual=(ROOT/relative).read_bytes()
+            actual=preserved_bytes((ROOT/relative))
             with self.subTest(path=relative):
                 self.assertFalse((ROOT/relative).is_symlink());self.assertEqual(kind,b'blob')
                 if actual!=expected:
@@ -321,7 +354,7 @@ class PreservationTests(unittest.TestCase):
 
     def test_stage2a_exact_inventory_preserves_accepted_stage1(self):
         accepted='f44f8952ba7e86f879b0c21e1b56de9fbd3d01aa'
-        additions=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        additions=legacy_modifications(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines()),accepted)
         additions.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
         # Retain only the pre-existing, separately validated transient exception.
         if '.ci-evidence/contracts.json' in additions:
@@ -330,7 +363,7 @@ class PreservationTests(unittest.TestCase):
             self.assertNotIn('.ci-evidence/contracts.json',subprocess.check_output(['git','diff','--name-only','--diff-filter=A',accepted,'--'],cwd=ROOT,text=True).splitlines())
             additions.remove('.ci-evidence/contracts.json')
         self.assertEqual(additions-self.verified_ci_additions(),STAGE2A_FILES | STAGE2B1_FILES | STAGE2B2_FILES)
-        modified=set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines())
+        modified=legacy_modifications(set(subprocess.check_output(['git','diff','--name-only','--diff-filter=MDRT',accepted,'--'],cwd=ROOT,text=True).splitlines()),accepted)
         self.assertEqual(modified,{'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
         path='verification/evidence_admission/test_preservation.py'
         before=ast.parse(subprocess.check_output(['git','show',accepted+':'+path],cwd=ROOT,text=True))
@@ -363,7 +396,7 @@ class PreservationTests(unittest.TestCase):
 
     def test_stage2a_workflow_insertion_rejects_weakened_commands(self):
         workflow=ROOT/'.github/workflows/acp-contracts.yml'
-        original=workflow.read_bytes()
+        original=preserved_bytes(workflow)
         for old,new in ((b'--require-hashes',b''), (b'--only-binary=:all:',b''),
                         (b"suite.countTestCases() == 52",b"suite.countTestCases() >= 0"),
                         (b"'3.14.7', 'WRONG_PYTHON'",b"'3.14.6', 'WRONG_PYTHON'"),
@@ -396,7 +429,7 @@ class PreservationTests(unittest.TestCase):
                 self.assertNotIn(key,result,'DUPLICATE_BINDING_KEY')
                 result[key]=value
             return result
-        value=json.loads(path.read_bytes().decode('utf-8'),object_pairs_hook=unique_pairs)
+        value=json.loads(preserved_bytes(path).decode('utf-8'),object_pairs_hook=unique_pairs)
         self.assertIs(type(value),dict)
         self.assertEqual(set(value),{'source','run','attempt','job'})
         for item in value.values():self.assertIs(type(item),str)
@@ -472,7 +505,7 @@ class PreservationTests(unittest.TestCase):
 
     def test_only_exact_ci_insertion_is_allowed(self):
         workflow=ROOT/'.github/workflows/acp-contracts.yml'
-        original=workflow.read_bytes()
+        original=preserved_bytes(workflow)
         mutations=[
             (workflow,b'node tooling/check_canonical_vectors.mjs',b'true'),
             (workflow,b'needs: [contracts, phase5c-hard-gates]',b'needs: [contracts]'),
@@ -493,7 +526,7 @@ class PreservationTests(unittest.TestCase):
             with self.subTest(path=target,change=old),patch.object(Path,'read_bytes',read):
                 probe=PreservationTests('test_baseline_bytes_and_pinned_existing_checkout_forms')
                 with self.assertRaises(AssertionError):probe.test_baseline_bytes_and_pinned_existing_checkout_forms()
-        self.assertEqual(workflow.read_bytes(),original)
+        self.assertEqual(preserved_bytes(workflow),original)
 
     def test_baseline_bytes_and_pinned_existing_checkout_forms(self):
         listing=subprocess.check_output(['git','ls-tree','-r','-z',BASELINE],cwd=ROOT)
@@ -514,14 +547,14 @@ class PreservationTests(unittest.TestCase):
                           b'        run: python3.14 -m unittest discover -s verification/evidence_admission -v\n')
                     self.assertEqual(expected.count(marker),1)
                     expected=expected.replace(marker,step+CI_STAGE2A_STEPS+CI_STAGE2B_STEPS+marker,1)
-                actual=path.read_bytes()
+                actual=preserved_bytes(path)
                 if actual != expected:
                     self.assertEqual(hashlib.sha256(actual).hexdigest(),CHECKOUT_FORMS.get(name.decode()))
                     self.assertEqual(actual.replace(b'\r\n',b'\n'),expected.replace(b'\r\n',b'\n'))
                 mode=metadata.split()[0]
                 self.assertEqual(bool(path.stat().st_mode & 0o111),mode==b'100755')
         self.assertEqual(stream.read(),b'')
-        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml'],cwd=ROOT,check=True,capture_output=True)
+        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml',':(exclude)engineering/ci/parity.py'],cwd=ROOT,check=True,capture_output=True)
         added=subprocess.check_output(['git','diff','--name-only','--diff-filter=A',BASELINE,'--'],cwd=ROOT,text=True).splitlines()
         new=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
         head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()

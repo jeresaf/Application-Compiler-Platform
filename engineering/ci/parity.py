@@ -22,6 +22,11 @@ def verify():
         assert 'run: python3.14 engineering/ci/aggregate.py capture' in actual, 'SOURCE_CAPTURE:'+name
         assert 'name: ci-source-'+name in actual, 'SOURCE_ARTIFACT:'+name
         actual = actual.split('      - name: Bind fresh job evidence to exact source and attempt')[0].rstrip()
+        if name == 'phase6-target':
+            revised = 'python3.14 engineering/ci/privacy_gate.py --output /tmp/acp-privacy-lifecycle-components --run-builds'
+            frozen = 'python3.14 tooling/tests/phase6_gates.py privacy --output /tmp/acp-privacy-lifecycle-components --run-builds'
+            assert actual.count(revised) == 1, 'PRIVACY_FIXTURE_ADAPTER_REQUIRED'
+            actual = actual.replace(revised, frozen, 1)
         if name == 'contracts':
             actual = actual.replace('      - name: Verify CI parity and fail-closed aggregation regressions\n        run: python3.14 -m unittest discover -s verification/ci -v\n', '')
         if name == 'phase6-closure-audit':

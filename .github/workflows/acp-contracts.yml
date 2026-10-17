@@ -347,7 +347,7 @@ jobs:
       - name: Verify durable delivery and scheduling against PostgreSQL
         run: python3.14 tooling/tests/delivery_components.py --output /tmp/acp-delivery-job-components --run-builds
       - name: Verify privacy lifecycle, redaction, deployment obligations and concurrent disposal
-        run: python3.14 tooling/tests/phase6_gates.py privacy --output /tmp/acp-privacy-lifecycle-components --run-builds
+        run: python3.14 engineering/ci/privacy_gate.py --output /tmp/acp-privacy-lifecycle-components --run-builds
       - name: Upgrade actual accepted target 0.2 applications and exercise lifecycle in place
         run: python3.14 tooling/check_privacy_profile_upgrade.py --output /tmp/acp-privacy-profile-upgrade --new-projects /tmp/acp-privacy-lifecycle-components
       - name: Verify forensic target 0.1 upgrade evidence outside production support window
