@@ -46,6 +46,7 @@ STAGE2B2_FILES={
  'verification/evidence_admission/stage2b2/test_isolation.py',
  'docs/phase6-evidence-admission-stage2b2.md',
 }
+CI_WRITER_TEST_HASHES = {'tooling/tests/test_retained_inventory.py': '37697d420ce5d80b552e483e956db19b4d4b95914bf0d99f45c4cf4cbcd3364d'}
 CI_B0_STEPS = b'      - name: Verify Stage B0 laboratory evidence admission\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<\'PYTHON\'\n          import platform, unittest\n          from pathlib import Path\n          assert platform.python_version() == \'3.14.7\', \'B0_WRONG_PYTHON\'\n          directory = Path(\'verification/evidence_admission/scoped\')\n          expected = {\'test_manifest.py\', \'test_witnesses.py\', \'test_human_reviews.py\', \'test_adversarial.py\', \'test_bridge.py\'}\n          assert {p.name for p in directory.glob(\'test*.py\')} == expected, \'B0_TEST_FILES\'\n          assert all((directory / name).is_file() and not (directory / name).is_symlink() for name in expected), \'B0_TEST_FILES\'\n          assert unittest.defaultTestLoader.discover(str(directory)).countTestCases() == 60, \'B0_TEST_COUNT\'\n          PYTHON\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/evidence_admission/scoped -v 2>&1 | tee "$RUNNER_TEMP/acp-b0-tests.log"\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<\'PYTHON\'\n          import os, re\n          from pathlib import Path\n          log = (Path(os.environ[\'RUNNER_TEMP\']) / \'acp-b0-tests.log\').read_text()\n          assert re.findall(r\'^Ran ([0-9]+) tests in .+$\', log, re.MULTILINE) == [\'60\'], \'B0_EXECUTED_COUNT\'\n          assert log.rstrip().splitlines()[-1] == \'OK\', \'B0_FAILURE_OR_SKIP\'\n          assert all(re.search(r\'^test_N%02d_reject .* \\.\\.\\. ok$\' % n, log, re.MULTILINE) for n in range(1, 33)), \'B0_ADVERSARIAL_COVERAGE\'\n          PYTHON\n      - name: Retain Stage B0 laboratory verification log\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: stage-b0-laboratory-verification\n          path: ${{ runner.temp }}/acp-b0-tests.log\n          if-no-files-found: error\n'
 CI_STAGE2A_STEPS=b"""      - name: Install isolated Stage 2A laboratory dependencies
         shell: bash
@@ -155,6 +156,9 @@ def preserved_bytes(path):
         relative = path.relative_to(ROOT).as_posix()
     except ValueError:
         return actual
+    if relative in CI_WRITER_TEST_HASHES:
+        assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == CI_WRITER_TEST_HASHES[relative], relative
+        return subprocess.check_output(['git', 'show', '17ab4b2a533bc112cfbc8d73796347de94d938b6:' + relative], cwd=ROOT)
     if relative in B0_MODIFIED_HASHES:
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == B0_MODIFIED_HASHES[relative], relative
         return subprocess.check_output(['git', 'show', '17ab4b2a533bc112cfbc8d73796347de94d938b6:' + relative], cwd=ROOT)
@@ -169,7 +173,7 @@ def preserved_bytes(path):
 
 def legacy_modifications(paths, accepted):
     paths = set(paths)
-    for relative in (set(PRIVACY_MODIFIED_HASHES) | set(B0_MODIFIED_HASHES)) & paths:
+    for relative in (set(PRIVACY_MODIFIED_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_WRITER_TEST_HASHES)) & paths:
         original = subprocess.check_output(['git', 'show', accepted + ':' + relative], cwd=ROOT)
         if preserved_bytes(ROOT / relative) == original:
             paths.remove(relative)
@@ -203,7 +207,7 @@ def ci_legacy_tree(tree):
         def visit_List(self, node):
             node = self.generic_visit(node)
             node.elts = [value for value in node.elts if not (isinstance(value, ast.Constant)
-                         and value.value in (':(exclude)engineering/ci/parity.py', ':(exclude)tooling/audit/criteria.py', ':(exclude)tooling/audit/phase6.py'))]
+                         and value.value in (':(exclude)engineering/ci/parity.py', ':(exclude)tooling/audit/criteria.py', ':(exclude)tooling/audit/phase6.py',':(exclude)tooling/tests/test_retained_inventory.py'))]
             return node
         def visit_Call(self, node):
             if isinstance(node.func, ast.Name) and node.func.id == 'preserved_bytes':
@@ -223,6 +227,14 @@ class PreservationTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(preserved_bytes(path)).hexdigest(), expected, relative)
             self.assertFalse(path.stat().st_mode & 0o111, relative)
         return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES)
+
+    def test_retained_writer_test_fix_is_exact_and_mutations_are_rejected(self):
+        real_read = Path.read_bytes
+        for relative in CI_WRITER_TEST_HASHES:
+            path = ROOT / relative
+            preserved_bytes(path)
+            with patch.object(Path, 'read_bytes', lambda item: real_read(item)+b'unreviewed' if item == path else real_read(item)):
+                with self.assertRaises(AssertionError):preserved_bytes(path)
 
     def test_b0_ci_allows_only_exact_append_and_preserves_failure_policy(self):
         workflow = ROOT / '.github/workflows/acp-contracts.yml'
@@ -248,7 +260,7 @@ class PreservationTests(unittest.TestCase):
         accepted = '17ab4b2a533bc112cfbc8d73796347de94d938b6'
         changes = set(subprocess.check_output(['git','diff','--name-only',accepted,'--'],cwd=ROOT,text=True).splitlines())
         changes.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines())
-        self.assertEqual(changes, set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
+        self.assertEqual(changes, set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_WRITER_TEST_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
 
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)
@@ -598,7 +610,7 @@ class PreservationTests(unittest.TestCase):
                 mode=metadata.split()[0]
                 self.assertEqual(bool(path.stat().st_mode & 0o111),mode==b'100755')
         self.assertEqual(stream.read(),b'')
-        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml',':(exclude)engineering/ci/parity.py',':(exclude)tooling/audit/criteria.py',':(exclude)tooling/audit/phase6.py'],cwd=ROOT,check=True,capture_output=True)
+        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml',':(exclude)engineering/ci/parity.py',':(exclude)tooling/audit/criteria.py',':(exclude)tooling/audit/phase6.py',':(exclude)tooling/tests/test_retained_inventory.py'],cwd=ROOT,check=True,capture_output=True)
         added=subprocess.check_output(['git','diff','--name-only','--diff-filter=A',BASELINE,'--'],cwd=ROOT,text=True).splitlines()
         new=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
         head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()

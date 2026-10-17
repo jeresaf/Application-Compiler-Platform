@@ -1,5 +1,5 @@
 """Retained population verification rejects independently rehashed drift."""
-import copy,json,sys,tempfile,unittest
+import copy,hashlib,io,json,subprocess,sys,tarfile,tempfile,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'audit'))
 from retained_inventory import digest,population_digest,verify,writer_inventory
@@ -42,11 +42,27 @@ class PublishedReferenceInventoryTests(unittest.TestCase):
   from prepare_measured_binding_review import negative_checks
   evidence=ROOT/'targets/spring-vue-postgres/evidence/retained-data-inventory/2026-10-12'
   writers=json.loads((evidence/'writers.json').read_bytes())
-  self.assertEqual(writers,writer_inventory())
+  # These are immutable historical captures, not acceptance of today's sources.
+  baseline='17ab4b2a533bc112cfbc8d73796347de94d938b6'
+  with tempfile.TemporaryDirectory() as directory:
+   archive=subprocess.check_output(['git','archive',baseline,'tooling','targets/spring-vue-postgres/worker','targets/spring-vue-postgres/templates'],cwd=ROOT)
+   with tarfile.open(fileobj=io.BytesIO(archive)) as files:files.extractall(directory,filter='data')
+   self.assertEqual(writers,writer_inventory(Path(directory)))
+  current=writer_inventory()
+  old={row['path']:row['digest'] for row in writers['sources']}
+  new={row['path']:row['digest'] for row in current['sources']}
+  self.assertEqual(set(old)-set(new),set())
+  self.assertEqual(set(new)-set(old),{'tooling/audit/scoped_admission.py'})
+  self.assertEqual({p for p in old if old[p]!=new[p]}, {'tooling/audit/criteria.py','tooling/audit/phase6.py','tooling/tests/test_retained_inventory.py'})
+  for path in ('tooling/audit/criteria.py','tooling/audit/phase6.py','tooling/audit/scoped_admission.py'):
+   accepted=subprocess.check_output(['git','show','1e43974820427b8b1058cda2b00b8479b6b53de2:'+path],cwd=ROOT)
+   self.assertEqual(new[path],'sha256:'+hashlib.sha256(accepted).hexdigest())
   for domain in ('payment','case-management'):
    frozen=json.loads((evidence/(domain+'.json')).read_bytes())
    recapture=json.loads((evidence/(domain+'-recapture.json')).read_bytes())
    self.assertEqual('PASS',verify(frozen,recapture,writers)['result'])
+   # The real changed writer inventory remains inadmissible for either capture.
+   with self.assertRaisesRegex(ValueError,'WRITER_DRIFT'):verify(frozen,recapture,current)
    self.assertEqual(3,len(frozen['body']['population']))
    checks=negative_checks(frozen,writers)
    self.assertEqual(9,len(checks));self.assertTrue(all(x['result']=='REJECTED' for x in checks.values()))
