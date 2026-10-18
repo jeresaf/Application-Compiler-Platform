@@ -359,3 +359,59 @@ jobs:
             ${{ runner.temp }}/acp-recovery/*/backend/src/test/java/acp/browser/
             ${{ runner.temp }}/acp-recovery/*/backend/src/test/java/acp/recovery/
           if-no-files-found: error
+
+  successor-security-readiness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Provision isolated pinned compiler dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -c 'import platform; assert platform.python_version() == "3.14.7"'
+          python3.14 -m venv "$RUNNER_TEMP/acp-security-venv"
+          "$RUNNER_TEMP/acp-security-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt
+          "$RUNNER_TEMP/acp-security-venv/bin/python3.14" -m pip check
+      - name: Verify fail-closed security assessment and protocol regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-security-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite = unittest.defaultTestLoader.discover('verification/security')
+          assert suite.countTestCases() == 9
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun == 9 and not result.skipped
+          PYTHON
+          "$RUNNER_TEMP/acp-security-venv/bin/python3.14" -B -m unittest discover -s tooling/tests -p test_target_worker_faults.py -v
+      - name: Exercise real worker limits and generated package startup contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-security-venv/bin/python3.14" -B engineering/security/qualification.py --workspace "$RUNNER_TEMP/acp-security" 2>&1 | tee "$RUNNER_TEMP/acp-security.log"
+      - name: Retain assessment findings without claiming release acceptance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: successor-security-readiness
+          path: |
+            ${{ runner.temp }}/acp-security.log
+            ${{ runner.temp }}/acp-security/*.json
+            ${{ runner.temp }}/acp-security/*-scan/
+            ${{ runner.temp }}/acp-security/*.log
+            ${{ runner.temp }}/acp-security/*/backend/target/surefire-reports/
+          if-no-files-found: error
