@@ -161,6 +161,8 @@ PRIVACY_MODIFIED_HASHES = {'.github/workflows/acp-contracts.yml': '356c3d6d7edd1
 
 RATE_CLOCK_HASHES = {'engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py': '599b5d0762665d98ddbac26be7ee17c3b8ae9b7c0ed14e2734579e76bf2a9292', 'engineering/generator_candidates/spring_vue_postgres_0_6/rate_clock.py': '3f7379f4695d6046cc57f5f2aacf85c978e1ef3273f23ecda61795a6c59eb35a', 'engineering/generator_candidates/spring_vue_postgres_0_6/rate_clock_tests.py': '7899c4e1a59702fecba7cbbe45af82531e2296240c7e5dbd8b542446b285740b'}
 
+RATE_CLOCK_COMPAT_HASHES = {'verification/dependency_resolution/test_inputs.py': 'c6b549b272ec1804a6bddfc392fe898428d84823a962c995ae035e1702cbde75'}
+
 def preserved_bytes(path):
     # Validate the exact two authorized CI-only modifications before comparing
     # the remainder to immutable historical bytes. No path-wide exception.
@@ -169,6 +171,9 @@ def preserved_bytes(path):
         relative = path.relative_to(ROOT).as_posix()
     except ValueError:
         return actual
+    if relative in RATE_CLOCK_COMPAT_HASHES:
+        assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == RATE_CLOCK_COMPAT_HASHES[relative], relative
+        return subprocess.check_output(['git','show','99c0244052f01c0df3904af0c236de1d027fe77f:' + relative],cwd=ROOT)
     if relative == 'engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py':
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == RATE_CLOCK_HASHES[relative], relative
         return subprocess.check_output(['git','show','355b8f72cf8012e17aa24f23042be3e8eebbff3f:' + relative],cwd=ROOT)

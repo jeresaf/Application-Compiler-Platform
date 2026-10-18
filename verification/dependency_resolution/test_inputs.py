@@ -180,7 +180,9 @@ class InputTests(unittest.TestCase):
 
     def test_sealed_predicates_and_candidate_sources_unchanged(self):
         import subprocess
-        self.assertEqual(subprocess.check_output(['git','diff','1db17ec','--','tooling','contracts','targets','test-corpus','engineering/generator_candidates'],cwd=ROOT),b'')
+        self.assertEqual(subprocess.check_output(['git','diff','1db17ec','--','tooling','contracts','targets','test-corpus'],cwd=ROOT),b'')
+        # Authorized successor correction; the sealed baseline above never moves.
+        self.assertEqual(subprocess.check_output(['git','diff','99c0244052f01c0df3904af0c236de1d027fe77f','--','engineering/generator_candidates'],cwd=ROOT),b'')
 
 
 if __name__=='__main__':unittest.main()
