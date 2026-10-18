@@ -163,6 +163,9 @@ RATE_CLOCK_HASHES = {'engineering/generator_candidates/spring_vue_postgres_0_6/c
 
 RATE_CLOCK_COMPAT_HASHES = {'verification/dependency_resolution/test_inputs.py': 'c6b549b272ec1804a6bddfc392fe898428d84823a962c995ae035e1702cbde75'}
 
+RECOVERY_NEW_HASHES = {'engineering/recovery/fixtures.py': '521eecda15075848f6cb0a08fa8a8b5dfa02d358758660f512733a68c4140238', 'engineering/recovery/qualify.py': 'd33a0ff87f67cacf6a14433c4f2f75b3152fdaa8e597ee46cb3dcaffe0f3ef11', 'verification/recovery/test_recovery.py': 'a80b4ab98843a05ca1f01e64c2fb0f648ad2fb24b28a2a63de5372accd093347'}
+RECOVERY_CI_JOB = b'\n  successor-deployment-recovery:\n    runs-on: ubuntu-24.04\n    timeout-minutes: 40\n    steps:\n      - uses: actions/checkout@v6\n        with:\n          fetch-depth: 0\n          persist-credentials: false\n      - uses: actions/setup-python@v7.0.0\n        with:\n          python-version: \'3.14.7\'\n      - uses: actions/setup-java@v5\n        with:\n          distribution: temurin\n          java-version: \'21\'\n      - name: Provision pinned compiler dependencies on disposable runner\n        shell: bash\n        run: |\n          set -euo pipefail\n          python3.14 -c \'import platform; assert platform.python_version() == "3.14.7"\'\n          python3.14 -m venv "$RUNNER_TEMP/acp-recovery-venv"\n          "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt\n          "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -m pip check\n      - name: Reject incomplete recovery outcomes and unsafe cleanup\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -B - <<\'PYTHON\'\n          import unittest\n          suite = unittest.defaultTestLoader.discover(\'verification/recovery\')\n          assert suite.countTestCases() == 10, \'RECOVERY_TEST_COUNT\'\n          result = unittest.TextTestRunner(verbosity=2).run(suite)\n          assert result.wasSuccessful() and result.testsRun == 10 and not result.skipped\n          PYTHON\n      - name: Obtain exact disposable PostgreSQL runtime\n        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336\n      - name: Exercise migration failures and fresh JVM committed-state recovery\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -B engineering/recovery/qualify.py --workspace "$RUNNER_TEMP/acp-recovery" 2>&1 | tee "$RUNNER_TEMP/acp-recovery.log"\n      - name: Retain exact recovery states failures source and cleanup evidence\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: successor-deployment-recovery\n          path: |\n            ${{ runner.temp }}/acp-recovery.log\n            ${{ runner.temp }}/acp-recovery/*.json\n            ${{ runner.temp }}/acp-recovery/*-logs/\n            ${{ runner.temp }}/acp-recovery/*-migration-inputs/\n            ${{ runner.temp }}/acp-recovery/*/backend/src/test/java/acp/browser/\n            ${{ runner.temp }}/acp-recovery/*/backend/src/test/java/acp/recovery/\n          if-no-files-found: error\n'
+
 def preserved_bytes(path):
     # Validate the exact two authorized CI-only modifications before comparing
     # the remainder to immutable historical bytes. No path-wide exception.
@@ -178,6 +181,8 @@ def preserved_bytes(path):
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == RATE_CLOCK_HASHES[relative], relative
         return subprocess.check_output(['git','show','355b8f72cf8012e17aa24f23042be3e8eebbff3f:' + relative],cwd=ROOT)
     if relative == '.github/workflows/phase6-v3-offline.yml':
+        assert actual.endswith(RECOVERY_CI_JOB) and actual.count(RECOVERY_CI_JOB)==1, 'EXACT_RECOVERY_JOB_REQUIRED'
+        actual=actual[:-len(RECOVERY_CI_JOB)]
         assert actual.endswith(PERFORMANCE_CI_JOB) and actual.count(PERFORMANCE_CI_JOB)==1, 'EXACT_PERFORMANCE_JOB_REQUIRED'
         actual=actual[:-len(PERFORMANCE_CI_JOB)]
         assert actual.count(TRACEABILITY_NEW_JOB) == 1, 'EXACT_TRACEABILITY_JOB_REQUIRED'
@@ -220,7 +225,7 @@ def ci_legacy_tree(tree):
             if node.name == 'test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input':
                 for call in ast.walk(node):
                     if isinstance(call, ast.Call) and isinstance(call.func, ast.Attribute) and call.func.attr == 'assertEqual' and len(call.args) == 2:
-                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46, 49, 51, 56, 59):
+                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46, 49, 51, 56, 59, 62):
                             call.args[1].value = 24
             return node
         def visit_BinOp(self, node):
@@ -250,13 +255,13 @@ def ci_legacy_tree(tree):
 
 class PreservationTests(unittest.TestCase):
     def verified_ci_additions(self):
-        for relative, expected in {**V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES, **TRACEABILITY_NEW_HASHES, **PERFORMANCE_NEW_HASHES, **{p:h for p,h in RATE_CLOCK_HASHES.items() if p not in SUCCESSOR_HASHES}}.items():
+        for relative, expected in {**V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES, **TRACEABILITY_NEW_HASHES, **PERFORMANCE_NEW_HASHES, **RECOVERY_NEW_HASHES, **{p:h for p,h in RATE_CLOCK_HASHES.items() if p not in SUCCESSOR_HASHES}}.items():
             path = ROOT / relative
             self.assertFalse(path.is_symlink(), relative)
             self.assertTrue(path.is_file(), relative)
             self.assertEqual(hashlib.sha256(preserved_bytes(path)).hexdigest(), expected, relative)
             self.assertFalse(path.stat().st_mode & 0o111, relative)
-        return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RATE_CLOCK_HASHES)
+        return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(RATE_CLOCK_HASHES)
 
     def test_dependency_qualification_additions_and_job_are_exact(self):
         self.assertEqual(set(DEPENDENCY_NEW_HASHES), {'engineering/dependency_resolution/compiler-requirements.txt','engineering/dependency_resolution/inputs.py','engineering/dependency_resolution/qualify.py','engineering/dependency_resolution/maven-artifacts.lock.json','verification/dependency_resolution/test_inputs.py'})
@@ -315,11 +320,11 @@ class PreservationTests(unittest.TestCase):
     def check_b0_changes(self, changes, untracked, added, head):
         transient = {'.ci-evidence/contracts.json'}
         self.check_source_additions(set(untracked) & transient, set(added) & transient, head)
-        self.assertEqual(set(changes) - (set(untracked) & transient), set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
+        self.assertEqual(set(changes) - (set(untracked) & transient), set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
 
     def test_b0_change_inventory_validates_transient_output_before_exclusion(self):
         head='a'*40
-        expected=set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
+        expected=set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
         transient='.ci-evidence/contracts.json'
         with tempfile.TemporaryDirectory() as directory,patch(__name__+'.ROOT',Path(directory)),patch.dict(os.environ):
             for key in ('GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB'):os.environ.pop(key,None)
@@ -336,7 +341,7 @@ class PreservationTests(unittest.TestCase):
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)
         self.assertEqual(len(SUCCESSOR_HASHES), 7)
-        self.assertEqual(len(self.verified_ci_additions()), 59)
+        self.assertEqual(len(self.verified_ci_additions()), 62)
         path = ROOT / 'engineering/ci/inputs/phase6-wave3-cumulative.patch'
         original_read = Path.read_bytes
         with patch.object(Path, 'read_bytes', lambda item: b'changed' if item == path else original_read(item)):
