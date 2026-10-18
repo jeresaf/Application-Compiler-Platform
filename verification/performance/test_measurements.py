@@ -30,7 +30,7 @@ class Measurements(unittest.TestCase):
     def test_valid_larger_fixture_preserves_original_business_nodes(self):
         for domain in ('payment','case-management'):
             original=load(ROOT/f'test-corpus/deterministic-v04/{domain}-canonical-candidate.json')
-            for size in (0,8,16,32):
+            for size in (0,3,8,16,32):
                 model=fixture(domain,size);snapshot=normalize_candidate(model)
                 by={n['id']:n for n in model['nodes']}
                 self.assertEqual(len(by),len(original['content']['nodes'])+size)
