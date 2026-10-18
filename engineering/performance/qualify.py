@@ -14,6 +14,7 @@ sys.path[:0]=[str(ROOT),str(ROOT/'tooling')]
 from engineering.performance.runtime import qualify as performance
 from engineering.performance.scaling import compile_fixture, measure_curve
 from engineering.performance.measure import digest
+from engineering.performance.rate_regression import qualify as rate_regression
 from engineering.generator_builds import runtime as existing
 from engineering.generator_builds.qualify import run, sha
 from filesystem_artifacts import FilesystemArtifactStore
@@ -91,11 +92,13 @@ def qualify(workspace):
     bound={p.relative_to(ROOT).as_posix():sha(p) for folder in ('engineering/performance','verification/performance') for p in sorted((ROOT/folder).glob('*.py'))}
     started=datetime.now(timezone.utc).isoformat()
     with existing.supervised_processes():
+        rate_results=rate_regression(workspace/'rate-regressions')
         performance_result=performance(workspace/'applications')
         rows=measure_curve(workspace/'scaling')
         applications=scaled_applications(workspace,rows,workspace/'applications')
     if bound!={p:sha(ROOT/p) for p in bound}:raise ValueError('MEASUREMENT_SOURCE_CHANGED')
     failures=sum(v['concurrent']['failures'] for app in performance_result['applications'].values() for trial in app['trials'] for v in trial['views'].values())
+    if failures:raise ValueError('CONCURRENT_REQUEST_FAILURE')
     result={'scope':'QUALIFICATION_ONLY','releaseAcceptance':'NOT_GRANTED','phase6':'IN_PROGRESS','phase7':'NOT_STARTED',
         'releaseClosure':'BLOCKED','sourceCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         'execution':{k:os.environ.get(k) for k in ('GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_SHA','RUNNER_OS','RUNNER_ARCH')},
@@ -103,15 +106,15 @@ def qualify(workspace):
         'sealedParent':'sha256:'+bundle_digest(),'candidate':performance_result['candidate'],
         'performanceResultSHA256':sha(workspace/'applications/performance-results.json'),
         'scalingResultSHA256':sha(workspace/'scaling/compiler-scaling.json'),'scalingBuilds':applications,
-        'criteria':{'30':'MEASURED_WITH_CONCURRENT_CLOCK_FAILURES' if failures else 'BOUNDED_BASELINE_MEASURED',
+        'criteria':{'30':'BOUNDED_BASELINE_MEASURED',
                     '31':'BOUNDED_VALID_FIXTURE_SCALING_MEASURED'},
         'limitations':['No production SLO or arbitrary population capacity established.',
                       'The existing UI supports exactly one task table column; storage-field growth preserves that contract.',
                       'Compiler byte/node/depth limits compose; a 2000-node ceiling does not guarantee every 2000-node plan fits one MiB.',
                       'Host caches are not forcibly evicted; cold means new process/context.',
-                      'Concurrent invocation clock-order failures are observed, not retried or hidden.',
+                      'Every timed in-capacity request must succeed; overload admits only HTTP 200 or 429, without retry.',
                       'No candidate result is sealed 0.5.0 release acceptance.'],
-        'concurrentClockFailures':failures}
+        'concurrentClockFailures':failures,'rateRegressions':rate_results}
     result['resultSHA256']=digest(result)
     (workspace/'qualification-results.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\n')
     return result

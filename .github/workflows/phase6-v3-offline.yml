@@ -275,9 +275,9 @@ jobs:
           "$RUNNER_TEMP/acp-performance-venv/bin/python3.14" -B - <<'PYTHON'
           import unittest
           suite = unittest.defaultTestLoader.discover('verification/performance')
-          assert suite.countTestCases() == 11, 'PERFORMANCE_TEST_COUNT'
+          assert suite.countTestCases() == 14, 'PERFORMANCE_TEST_COUNT'
           result = unittest.TextTestRunner(verbosity=2).run(suite)
-          assert result.wasSuccessful() and result.testsRun == 11 and not result.skipped
+          assert result.wasSuccessful() and result.testsRun == 14 and not result.skipped
           PYTHON
       - name: Obtain exact disposable PostgreSQL runtime
         run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
@@ -296,6 +296,10 @@ jobs:
             ${{ runner.temp }}/acp-performance/qualification-results.json
             ${{ runner.temp }}/acp-performance/applications/performance-results.json
             ${{ runner.temp }}/acp-performance/applications/*-trial-*/
+            ${{ runner.temp }}/acp-performance/rate-regressions/results.json
+            ${{ runner.temp }}/acp-performance/rate-regressions/*/maven.log
+            ${{ runner.temp }}/acp-performance/rate-regressions/*/backend/src/
+            ${{ runner.temp }}/acp-performance/rate-regressions/*/backend/target/surefire-reports/
             ${{ runner.temp }}/acp-performance/scaling/*.json
             ${{ runner.temp }}/acp-performance/*-larger-logs/
             ${{ runner.temp }}/acp-performance/*-build.zip

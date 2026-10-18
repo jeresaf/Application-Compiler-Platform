@@ -115,7 +115,7 @@ def measure_curve(workspace):
     workspace=Path(workspace);workspace.mkdir(mode=0o700,exist_ok=False)
     rows=[]
     for domain in ('payment','case-management'):
-        for extra in (0,3,8,32,64):
+        for extra in (0,1,3,8,32,64):
             trials=[]
             for repetition in range(3):
                 completed=subprocess.run([sys.executable,'-B',str(Path(__file__).resolve()),domain,str(extra)],cwd=ROOT,

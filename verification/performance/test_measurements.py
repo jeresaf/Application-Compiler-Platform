@@ -43,7 +43,8 @@ class Measurements(unittest.TestCase):
             with self.assertRaises(ValueError):fixture('payment',size)
     def test_bounded_workloads_preserve_rate_and_real_assertions(self):
         self.assertIn('expect(r.status()).toBe(200)',BROWSER)
-        self.assertIn('expect([200,429,500]).toContain(r.status())',BROWSER)
+        self.assertIn('expect([200,429]).toContain(Number(status))',BROWSER)
+        self.assertIn("expect(results.concurrentStatuses).toEqual({'200':200})",BROWSER)
         self.assertNotIn('sleep',BROWSER);self.assertNotIn('retry',BROWSER)
         self.assertIn("expect(facts.events).toBe(EVENTS)",BROWSER)
 
@@ -97,3 +98,33 @@ class SchedulingVariability(unittest.TestCase):
             validate_trials([timeout],baseline=True)
         with self.assertRaisesRegex(ValueError,'INVALID_SCALING_FIXTURE'):
             validate_trials([{'status':'REJECTED','diagnostics':['ACP-COMPILER-INPUT']}])
+
+class RateOrdering(unittest.TestCase):
+    def test_successor_transform_preserves_exact_parent_and_orders_one_clock(self):
+        from engineering.generator_candidates.spring_vue_postgres_0_6 import rate_clock
+        path=ROOT/'targets/spring-vue-postgres/templates'/rate_clock.PATH
+        before=path.read_bytes();result=rate_clock.apply({rate_clock.PATH:before.decode()})[rate_clock.PATH]
+        self.assertEqual(path.read_bytes(),before)
+        self.assertIn('lockRates(keys);',result)
+        admission=result[result.index('private BigInteger admission('):]
+        self.assertLess(admission.index('lockRates(keys)'),admission.index('time.now()'))
+        self.assertEqual(admission[:admission.index('private BigInteger commitTime')].count('time.now()'),1)
+        self.assertIn('instant=admission(operation,jwt);claim=reserve(call,jwt,instant)',result)
+        self.assertIn('throw new Outcome("CLOCK_REVERSED")',result)
+        self.assertIn('pg_advisory_xact_lock',result)
+        self.assertNotIn('synchronized',rate_clock.TOKEN)
+        self.assertNotIn('Thread.sleep',rate_clock.TOKEN)
+    def test_unknown_template_ancestry_is_rejected(self):
+        from engineering.generator_candidates.spring_vue_postgres_0_6 import rate_clock
+        original=(ROOT/'targets/spring-vue-postgres/templates'/rate_clock.PATH).read_text()
+        with self.assertRaisesRegex(ValueError,'SUCCESSOR_RATE_ANCESTRY'):
+            rate_clock.apply({rate_clock.PATH:original.replace('claim=reserve(call,jwt,instant)','claim=unknown')})
+    def test_deterministic_counterexample_and_cleanup_remain_in_hosted_path(self):
+        from engineering.generator_candidates.spring_vue_postgres_0_6.rate_clock_tests import sources
+        java=sources('payment')['backend/src/test/java/acp/generated/RateClockTest.java']
+        self.assertIn('frozenTemplateDeterministicallyReproducesClockReversal',java)
+        self.assertIn('successorOrdersClockSamplingAfterPartitionAdmission',java)
+        self.assertIn('unrelatedPartitionsProgressWhileFirstClockIsHeld',java)
+        self.assertIn('pool.shutdownNow()',java)
+        self.assertNotIn('Thread.sleep',java)
+        self.assertIn("rate_results=rate_regression(workspace/'rate-regressions')",(ROOT/'engineering/performance/qualify.py').read_text())

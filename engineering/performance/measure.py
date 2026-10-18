@@ -37,8 +37,9 @@ import fs from 'node:fs';
 import {ui} from '../src/task-ui-model';
 const headers={Authorization:'Bearer browser-authorized'};
 test('bounded real application performance',async({page,request,browser})=>{
- const results:any={browser:browser.version(),viewport:page.viewportSize(),pages:[],query:[],action:[],concurrent:[],concurrentStatuses:{},concurrentSuccess:[],failures:0};
+ const results:any={browser:browser.version(),viewport:page.viewportSize(),pages:[],requests:[],query:[],action:[],concurrent:[],concurrentStatuses:{},concurrentSuccess:[],concurrentErrors:[],failures:0};
  const reset=async()=>expect((await request.post('/__test/reset',{headers})).status()).toBe(200);
+ try {
  await reset();
  for(let i=0;i<10;i++){
   const started=performance.now();await page.goto('/');
@@ -47,11 +48,11 @@ test('bounded real application performance',async({page,request,browser})=>{
  }
  const query=(worker?:number)=>request.post(ui.queryPath,{headers:worker===undefined?headers:{Authorization:'Bearer browser-perf-'+worker},data:{'QUERY-TEXT':''}});
  await reset();expect((await query()).status()).toBe(200);
- for(let i=0;i<100;i++){if(i%8===0)await reset();const start=performance.now();const r=await query();results.query.push(performance.now()-start);expect(r.status()).toBe(200);}
+ for(let i=0;i<100;i++){if(i%8===0)await reset();const start=performance.now();const r=await query();const duration=performance.now()-start;results.query.push(duration);results.requests.push({phase:"query",index:i,status:r.status(),durationMs:duration});expect(r.status()).toBe(200);}
  for(let i=0;i<20;i++){
   await reset();const start=performance.now();
   const r=await request.post(ui.actionPath,{headers,data:{expectedVersion:0,idempotencyKey:'perf-'+i,input:{[ui.resourceInputField]:'fixture-resource',[ui.textInputField]:'performance note'}}});
-  results.action.push(performance.now()-start);expect(r.status()).toBe(200);
+  const duration=performance.now()-start;results.action.push(duration);results.requests.push({phase:"action",index:i,status:r.status(),durationMs:duration});expect(r.status()).toBe(200);
   const facts=await (await request.get('/__test/facts',{headers})).json();expect(facts.events).toBe(EVENTS);
  }
  results.concurrentElapsedMs=0;
@@ -59,21 +60,23 @@ test('bounded real application performance',async({page,request,browser})=>{
   await reset();for(let worker=0;worker<4;worker++)expect((await query(worker)).status()).toBe(200);
   const start=performance.now();
   await Promise.all(Array.from({length:4},async(_,worker)=>{for(let i=0;i<1;i++){
-   const begin=performance.now();const r=await query(worker);const duration=performance.now()-begin;results.concurrent.push(duration);
+   const begin=performance.now();const r=await query(worker);const duration=performance.now()-begin;results.concurrent.push(duration);results.requests.push({phase:"concurrent",batch,worker,index:i,status:r.status(),durationMs:duration});
    results.concurrentStatuses[r.status()]=(results.concurrentStatuses[r.status()]||0)+1;
-   if(r.status()===200)results.concurrentSuccess.push(duration);
-   else {expect(r.status()).toBe(500);expect((await r.json()).code).toBe('CLOCK_REVERSED');results.failures++;}
+   if(r.status()===200)results.concurrentSuccess.push(duration);else{results.failures++;results.concurrentErrors.push({status:r.status(),body:await r.text()});}
   }}));results.concurrentElapsedMs+=performance.now()-start;
  }results.concurrency=4;results.burstSize=4;
  await reset();for(let worker=0;worker<4;worker++)expect((await query(worker)).status()).toBe(200);
  results.overload={statuses:{},samples:[]};
  const overloadStart=performance.now();
  await Promise.all(Array.from({length:4},async(_,worker)=>{for(let i=0;i<50;i++){
-  const begin=performance.now();const r=await query(worker);results.overload.samples.push(performance.now()-begin);
+  const begin=performance.now();const r=await query(worker);const duration=performance.now()-begin;results.overload.samples.push(duration);results.requests.push({phase:"overload",worker,index:i,status:r.status(),durationMs:duration});
   results.overload.statuses[r.status()]=(results.overload.statuses[r.status()]||0)+1;
-  expect([200,429,500]).toContain(r.status());if(r.status()===500)expect((await r.json()).code).toBe('CLOCK_REVERSED');
+  if(![200,429].includes(r.status()))(results.overload.errors??=[]).push({status:r.status(),body:await r.text()});
  }}));results.overload.elapsedMs=performance.now()-overloadStart;
  expect((await request.get('/__test/facts',{headers})).status()).toBe(200);
- fs.writeFileSync('performance-'+test.info().project.name+'.json',JSON.stringify(results));
+ expect(results.concurrentStatuses).toEqual({'200':200});expect(results.failures).toBe(0);
+ for(const status of Object.keys(results.overload.statuses))expect([200,429]).toContain(Number(status));
+ expect(results.overload.samples).toHaveLength(200);
+ } finally {fs.writeFileSync('performance-'+test.info().project.name+'.json',JSON.stringify(results));}
 });
 '''

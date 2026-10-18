@@ -67,7 +67,7 @@ def qualify(workspace):
               'concurrency':4,'burstSize':4,'sessionWarmupRequests':4,'overloadRequests':200,'pageSamplesPerView':10,'population':'1 resource, 1 actor, 2 tenants; fresh reset excluded from latency',
               'authentication':'existing trusted-JWT test component; one fixed authenticated event per server; not cryptographic issuer qualification',
               'coldDefinition':'first new JVM and browser context; OS/filesystem caches not evicted', 'warmDefinition':'later samples and new JVM trials using warm host caches',
-              'knownLimitation':'concurrent requests can produce CLOCK_REVERSED when rate-clock sampling precedes row-lock order; recorded as failed requests, no retry or serialization',
+              'rateAdmission':'partition-scoped transaction ordering before one shared invocation instant; unexpected HTTP status fails qualification',
               'limits':'unaltered actor token bucket: 100/minute, burst 10; bounded bursts reset fixture between batches; four independent worker sessions initialized before timing'}}
     try:
         for domain in ('payment','case-management'):
@@ -99,6 +99,12 @@ def qualify(workspace):
                         rawpath=project/'frontend'/f'performance-{view}.json'
                         raw=json.loads(rawpath.read_text());(logs/rawpath.name).write_bytes(rawpath.read_bytes())
                         if (len(raw['query']),len(raw['action']),len(raw['concurrent']),len(raw['pages']))!=(100,20,200,10):raise ValueError('MISSING_ACTUAL_SAMPLES')
+                        from collections import Counter
+                        for phase,count in (('query',100),('action',20),('concurrent',200),('overload',200)):
+                            observations=[r for r in raw['requests'] if r['phase']==phase]
+                            if len(observations)!=count or any(r['status'] not in ((200,429) if phase=='overload' else (200,)) for r in observations):raise ValueError('UNEXPECTED_REQUEST_STATUS:'+phase)
+                            if phase=='concurrent' and dict(Counter(str(r['status']) for r in observations))!=raw['concurrentStatuses']:raise ValueError('STATUS_INVENTORY_MISMATCH')
+                        if len(raw['requests'])!=520 or raw['failures']!=0:raise ValueError('REQUEST_INVENTORY_FAILURE')
                         trial['views'][view]={'rawSHA256':sha(rawpath),'browser':raw['browser'], 'viewport':raw['viewport'],
                            'query':summarize(raw['query']),'action':summarize(raw['action']),
                            'pages':{'coldContextFirstMs':raw['pages'][0],'warm':summarize(raw['pages'][1:])},
