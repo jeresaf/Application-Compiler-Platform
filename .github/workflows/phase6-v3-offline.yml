@@ -198,9 +198,9 @@ jobs:
           folder = Path('verification/dependency_resolution')
           assert {p.name for p in folder.glob('test*.py')} == {'test_inputs.py'}
           suite = unittest.defaultTestLoader.discover(str(folder))
-          assert suite.countTestCases() == 22
+          assert suite.countTestCases() == 24
           result = unittest.TextTestRunner(verbosity=2).run(suite)
-          assert result.wasSuccessful() and result.testsRun == 22 and not result.skipped
+          assert result.wasSuccessful() and result.testsRun == 24 and not result.skipped
           PYTHON
       - name: Resolve once and freeze all runtime compiler and plugin inputs
         shell: bash

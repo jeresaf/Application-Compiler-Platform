@@ -19,7 +19,7 @@ import zipfile
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path[:0]=[str(ROOT),str(ROOT/'tooling')]
-from engineering.dependency_resolution.inputs import (require,encode,digest,file_hash,inventory,verify_tree,load_lock,npm_lock,maven_closure,wheel_inputs,compare_packages,installed_npm,seed_maven,plugin_selection,verify_maven_resolution,embedded_jars,packaged_dependencies)
+from engineering.dependency_resolution.inputs import (require,encode,digest,file_hash,inventory,verify_tree,load_lock,npm_lock,maven_closure,wheel_inputs,compare_packages,installed_npm,seed_maven,plugin_selection,verify_maven_resolution,embedded_jars,packaged_dependencies,tool_inventory)
 
 DEPENDENCY='org.apache.maven.plugins:maven-dependency-plugin:3.10.0:'
 JAR='org.apache.maven.plugins:maven-jar-plugin:3.5.1:jar'
@@ -50,7 +50,7 @@ def toolchains():
     roots={'jdk-bin':Path(result['java']).parent,'jdk-lib':Path(result['java']).parents[1]/'lib',
            'maven':Path(result['mvn']).parents[1],'npm':Path(result['npm']).parents[1]}
     files={}
-    for label,root in roots.items():files[label]={'root':str(root),'files':inventory(root)}
+    for label,root in roots.items():files[label]={'root':str(root),'files':tool_inventory(root)}
     files['node']={'path':result['node'],'sha256':file_hash(result['node'])}
     files['python']={'path':str(Path(sys.executable).resolve()),'sha256':file_hash(Path(sys.executable).resolve())}
     versions={n:subprocess.check_output(cmd,stderr=subprocess.STDOUT,text=True).strip() for n,cmd in {
@@ -66,7 +66,7 @@ def verify_tools(locked):
     for item in locked['inventories'].values():
         if 'runtimeFiles' in item:
             for logical,row in item['runtimeFiles'].items():require(str(Path(logical).resolve())==row['target'] and file_hash(Path(row['target']))==row['sha256'],'PYTHON_RUNTIME_SUBSTITUTION')
-        elif 'root' in item:verify_tree(Path(item['root']),item['files'])
+        elif 'root' in item:require(tool_inventory(Path(item['root']))==item['files'],'TOOLCHAIN_INPUT_SUBSTITUTION')
         else:require(file_hash(Path(item['path']))==item['sha256'],'TOOLCHAIN_SUBSTITUTION')
 
 

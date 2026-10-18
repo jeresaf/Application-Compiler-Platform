@@ -164,6 +164,20 @@ class InputTests(unittest.TestCase):
         p.write_bytes(b'changed plugin')
         with self.assertRaisesRegex(ValueError,'EMBEDDED_CONTAINER_SUBSTITUTION'):embedded_jars(repo,files)
 
+    def test_host_toolchain_links_are_pinned_without_weakening_other_inputs(self):
+        tool=self.root/'tool';tool.mkdir();target=self.root/'os-managed';target.write_bytes(b'exact host input');link=tool/'declared';link.symlink_to(target)
+        expected=tool_inventory(tool);self.assertEqual(expected['declared']['target'],str(target));self.assertEqual(expected['declared']['sha256'],file_hash(target))
+        with self.assertRaisesRegex(ValueError,'SYMLINK_INPUT'):inventory(tool)
+        target.write_bytes(b'changed host input');self.assertNotEqual(tool_inventory(tool),expected)
+        target.write_bytes(b'exact host input');other=self.root/'retargeted';other.write_bytes(b'exact host input');link.unlink();link.symlink_to(other)
+        self.assertNotEqual(tool_inventory(tool),expected)
+
+    def test_host_directory_links_are_explicit_and_cycles_rejected(self):
+        tool=self.root/'tool';tool.mkdir();external=self.root/'external';external.mkdir();(external/'config').write_bytes(b'pinned');(tool/'conf').symlink_to(external,target_is_directory=True)
+        captured=tool_inventory(tool);self.assertEqual(captured['conf']['directoryTarget'],str(external));self.assertEqual(captured['conf/config']['sha256'],file_hash(external/'config'))
+        (external/'cycle').symlink_to(tool,target_is_directory=True)
+        with self.assertRaisesRegex(ValueError,'TOOLCHAIN_LINK_CYCLE'):tool_inventory(tool)
+
     def test_sealed_predicates_and_candidate_sources_unchanged(self):
         import subprocess
         self.assertEqual(subprocess.check_output(['git','diff','1db17ec','--','tooling','contracts','targets','test-corpus','engineering/generator_candidates'],cwd=ROOT),b'')

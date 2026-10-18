@@ -233,3 +233,35 @@ def packaged_dependencies(path,maven_files,embedded):
             h=digest(z.read(name));require(h in origins,'UNLOCKED_PACKAGED_DEPENDENCY:'+name)
             result[name]={'sha256':h,'lockedOrigins':sorted(origins[h])}
     require(result,'NO_RUNTIME_DEPENDENCIES');return result
+
+
+def tool_inventory(root):
+    """Installed host tools may have declared OS-managed links.
+
+    Record the logical link, exact resolved target and bytes. This function is
+    never used for dependency caches, wheels, application or compiler source.
+    """
+    root=Path(root);require(root.is_dir() and not root.is_symlink(),'TOOLCHAIN_ROOT')
+    found={}
+    def stamp(s):return (s.st_dev,s.st_ino,s.st_mode,s.st_mtime_ns,s.st_ctime_ns)
+    def visit(directory,prefix,ancestors):
+        identity=directory.stat();key=(identity.st_dev,identity.st_ino)
+        require(key not in ancestors and len(ancestors)<64,'TOOLCHAIN_LINK_CYCLE')
+        ancestors=ancestors|{key}
+        for p in sorted(directory.iterdir()):
+            require(len(found)<30000,'TOOLCHAIN_FILE_LIMIT');name=prefix+p.name
+            before=p.lstat()
+            if p.is_symlink():
+                try:target=p.resolve(strict=True)
+                except (OSError,RuntimeError):raise ValueError('TOOLCHAIN_LINK_TARGET')
+                link=os.readlink(p)
+                if target.is_dir():
+                    found[name]={'link':link,'directoryTarget':str(target)};visit(target,name+'/',ancestors)
+                else:
+                    require(target.is_file(),'TOOLCHAIN_NONREGULAR_LINK')
+                    found[name]={'link':link,'target':str(target),'sha256':file_hash(target),'size':target.stat().st_size}
+                require(stamp(before)==stamp(p.lstat()) and os.readlink(p)==link,'TOOLCHAIN_LINK_CHANGED')
+            elif p.is_dir():visit(p,name+'/',ancestors)
+            else:found[name]={'sha256':file_hash(p),'size':p.stat().st_size}
+        require(stamp(identity)==stamp(directory.stat()),'TOOLCHAIN_DIRECTORY_CHANGED')
+    visit(root,'',set());require(found,'EMPTY_TOOLCHAIN');return found
