@@ -143,6 +143,9 @@ GENERATOR_BUILD_HASHES = {'engineering/generator_builds/qualify.py': '659ca6f0e7
 SUCCESSOR_HASHES = {'engineering/generator_candidates/spring_vue_postgres_0_6/__init__.py': '39f14a327ca0cc2561f37b4a69113b4816f03a70c902061e1e87ee1dd458c4c0', 'engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py': '6f7cbf6cffb632decdde1674665bdc81459a2078bb6c41b55085d91f10077807', 'engineering/generator_candidates/spring_vue_postgres_0_6/migrations.py': 'a9f95f769d9c05e56893e381db53d835ac8a8479a0aedffdcdb5be6c1df64628', 'engineering/generator_candidates/spring_vue_postgres_0_6/provenance.py': '4750708bf0eec9e152a5d7b72f073d15ff893a699c17de5df9a83978846d017b', 'engineering/generator_candidates/spring_vue_postgres_0_6/ancestry.json': '425476de76847fe426aadebbe9d4de3cbb408765e793441317c2c679406e76f5', 'engineering/generator_candidates/spring_vue_postgres_0_6/profile.json': '2ce1bd59fa29034725fa5e0813e2f424f6fb56c580499c0c19ba009a1b09c0fd', 'verification/generator_candidates/test_successor.py': 'dd2a22bb17d7064bad300a4233b170299d223bab0f6df6ea42676c63150c6bce'}
 
 RELEASE_CI_STEPS = b'      - name: Verify inactive release-admission engineering boundary\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<\'PYTHON\'\n          import platform, unittest\n          from pathlib import Path\n          assert platform.python_version() == \'3.14.7\'\n          directory = Path(\'verification/release_admission\')\n          assert {p.name for p in directory.glob(\'test*.py\')} == {\'test_release.py\'}\n          assert unittest.defaultTestLoader.discover(str(directory)).countTestCases() == 19\n          PYTHON\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" -m unittest discover -s verification/release_admission -v 2>&1 | tee "$RUNNER_TEMP/acp-release-admission-tests.log"\n          "$RUNNER_TEMP/acp-stage2a-venv/bin/python3.14" - <<\'PYTHON\'\n          import os, re\n          from pathlib import Path\n          log = (Path(os.environ[\'RUNNER_TEMP\']) / \'acp-release-admission-tests.log\').read_text()\n          assert re.findall(r\'^Ran ([0-9]+) tests in .+$\', log, re.MULTILINE) == [\'19\']\n          assert log.rstrip().splitlines()[-1] == \'OK\'\n          PYTHON\n      - name: Retain release-admission engineering log\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: release-admission-engineering-verification\n          path: ${{ runner.temp }}/acp-release-admission-tests.log\n          if-no-files-found: error\n'
+DEPENDENCY_CI_JOB = b'\n  successor-dependency-determinism:\n    runs-on: ubuntu-24.04\n    timeout-minutes: 45\n    steps:\n      - uses: actions/checkout@v6\n        with:\n          fetch-depth: 0\n          persist-credentials: false\n      - uses: actions/setup-python@v7.0.0\n        with:\n          python-version: \'3.14.7\'\n      - uses: actions/setup-node@v7\n        with:\n          node-version: \'24.21.0\'\n      - uses: actions/setup-java@v5\n        with:\n          distribution: temurin\n          java-version: \'21\'\n      - name: Provision existing hash-pinned compiler wheels in disposable runner\n        shell: bash\n        run: |\n          set -euo pipefail\n          python3.14 -m venv "$RUNNER_TEMP/acp-dependency-venv"\n          python3.14 -m pip download --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt -d "$RUNNER_TEMP/acp-compiler-wheels"\n          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -m pip install --no-index --find-links "$RUNNER_TEMP/acp-compiler-wheels" --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt\n          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -m pip check\n      - name: Reject dependency substitutions and mutable resolution\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B - <<\'PYTHON\'\n          import unittest\n          from pathlib import Path\n          folder = Path(\'verification/dependency_resolution\')\n          assert {p.name for p in folder.glob(\'test*.py\')} == {\'test_inputs.py\'}\n          suite = unittest.defaultTestLoader.discover(str(folder))\n          assert suite.countTestCases() == 22\n          result = unittest.TextTestRunner(verbosity=2).run(suite)\n          assert result.wasSuccessful() and result.testsRun == 22 and not result.skipped\n          PYTHON\n      - name: Resolve once and freeze all runtime compiler and plugin inputs\n        shell: bash\n        run: |\n          set -euo pipefail\n          mkdir "$RUNNER_TEMP/acp-empty-m2" "$RUNNER_TEMP/acp-empty-npm"\n          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B engineering/dependency_resolution/qualify.py prepare --workspace "$RUNNER_TEMP/acp-dependency-qualification" --maven-seed "$RUNNER_TEMP/acp-empty-m2" --npm-seed "$RUNNER_TEMP/acp-empty-npm" --wheels "$RUNNER_TEMP/acp-compiler-wheels" --online-acquire 2>&1 | tee "$RUNNER_TEMP/acp-dependency-prepare.log"\n      - name: Build both applications twice offline from independently clean exports\n        shell: bash\n        run: |\n          set -euo pipefail\n          read -r lock_digest < "$RUNNER_TEMP/acp-dependency-qualification/dependency-lock.sha256"\n          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B engineering/dependency_resolution/qualify.py qualify --workspace "$RUNNER_TEMP/acp-dependency-qualification" --expected "$lock_digest" 2>&1 | tee "$RUNNER_TEMP/acp-dependency-qualify.log"\n      - name: Preserve exact inputs and independent clean-build outcomes\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: successor-dependency-determinism\n          path: |\n            ${{ runner.temp }}/acp-dependency-prepare.log\n            ${{ runner.temp }}/acp-dependency-qualify.log\n            ${{ runner.temp }}/acp-dependency-qualification/*.json\n            ${{ runner.temp }}/acp-dependency-qualification/*.sha256\n            ${{ runner.temp }}/acp-dependency-qualification/*.log\n            ${{ runner.temp }}/acp-dependency-qualification/clean-*/*.log\n            ${{ runner.temp }}/acp-dependency-qualification/clean-*/results.json\n          if-no-files-found: error\n'
+DEPENDENCY_NEW_HASHES = {'engineering/dependency_resolution/compiler-requirements.txt': '19395336638abc94735840687a2774ae5c208ca358a2fd589e4b9c5fb8472f28', 'engineering/dependency_resolution/inputs.py': 'aa6519a1e85c2a7aa7893af6b5b2ceeab6872e2118e196d96b44adeb2181948a', 'engineering/dependency_resolution/qualify.py': 'e2ca299b16481392fa4df7db351003dedcbb139610dcebb62ab59bfcf80c66e5', 'engineering/dependency_resolution/maven-artifacts.lock.json': 'c95e0ca5e043d8a1e2e80cbe42394943e963de5d5a96dff98df1bae45588ec72', 'verification/dependency_resolution/test_inputs.py': '93754d534b62e9e40bf55c2f30f78cb1f76691fd8ecc8a8a9adef3b5bd7dadbd'}
+
 RELEASE_NEW_HASHES = {'engineering/evidence_admission/release.py': 'c8f30adcb5ae77ba170966e1cd86936e2458728e10cbb9730f1ca3b9bc3db1f1', 'verification/release_admission/test_release.py': '0d215ba8258dd33f715a371acfe32cf32a5e8ba4dd3b2c634989d6e5fcfc0e10'}
 
 B0_NEW_HASHES = {'docs/phase6-evidence-admission-version-scoping.md': 'e072162c4f4eebe4b40b6d53857965d1f6dbf58cf7c2e18a79d02e9f1518e2ab', 'engineering/evidence_admission/scoped/context.py': 'af632774adb011fb77b1782b53557b87585b65d8a327b4a416b3e489d188db49', 'engineering/evidence_admission/scoped/human_reviews.py': 'ec51f21d3857f6ce7b3e322de5ed66ebaed0b9cc64cf72f794657330bc5ad1c1', 'engineering/evidence_admission/scoped/manifest.py': 'f995091471c61ae609a6df1f51fce09104d52186475768069a23d5a28865eb9e', 'engineering/evidence_admission/scoped/schemas/evaluation-manifest.schema.json': '204f4954663df4ee275915108937fcfbc8d5ca65d2d8c69b883b4179c2b38f7a', 'engineering/evidence_admission/scoped/schemas/execution-attestation-v2.schema.json': '42eac496732cef2c0f47373038449d7a89240bddd129a0321abba9d3d5bde563', 'engineering/evidence_admission/scoped/schemas/release-witness-scope.schema.json': 'c73dd556f96ad5d0fd3872bfda4216cf469667dba2e7cca4d89e4cfdaf6e8bbf', 'engineering/evidence_admission/scoped/verify.py': 'c4f17a0a2a4cb23ca6211d8135f0c90723440ecc04019ff10fd0d81a7b38a81c', 'engineering/evidence_admission/scoped/witnesses.py': 'c8425ab86261d5b104b0be9d3dcfdd8528b7696e041b2890763bd1b9b4effc15', 'tooling/audit/scoped_admission.py': 'f113aba688aeb43a75bbb1c47a72021c3c62affec3d6e4f8ba28e0d53c957c8f', 'verification/evidence_admission/scoped/test_adversarial.py': '083f90950b1bf7c1bbca5ae835d17d6fe155f9becb059942564f455b4bd310f8', 'verification/evidence_admission/scoped/test_bridge.py': 'fac46072ee367db330207b4617ae294a2c1536f3d50b035502100dd1fed5cd92', 'verification/evidence_admission/scoped/test_human_reviews.py': '090f14ed05102dc6fd6b12c999b8fc9e16f53824e0b1c62d757531dc13d7bea9', 'verification/evidence_admission/scoped/test_manifest.py': '27190e002601e69f618acd6a81b7fd8ad190b70539b8b94ccd4b4853176a6704', 'verification/evidence_admission/scoped/test_witnesses.py': 'ca24de9aa381575a1c73f4b807afde12d99781b2faf951b9439fd687ef5dbeab'}
@@ -159,6 +162,9 @@ def preserved_bytes(path):
         relative = path.relative_to(ROOT).as_posix()
     except ValueError:
         return actual
+    if relative == '.github/workflows/phase6-v3-offline.yml':
+        assert actual.endswith(DEPENDENCY_CI_JOB) and actual.count(DEPENDENCY_CI_JOB) == 1, 'EXACT_DEPENDENCY_JOB_REQUIRED'
+        return actual[:-len(DEPENDENCY_CI_JOB)]
     if relative in CI_PRESERVATION_FIX_HASHES:
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == CI_PRESERVATION_FIX_HASHES[relative], relative
         return subprocess.check_output(['git', 'show', '17ab4b2a533bc112cfbc8d73796347de94d938b6:' + relative], cwd=ROOT)
@@ -195,7 +201,7 @@ def ci_legacy_tree(tree):
             if node.name == 'test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input':
                 for call in ast.walk(node):
                     if isinstance(call, ast.Call) and isinstance(call.func, ast.Attribute) and call.func.attr == 'assertEqual' and len(call.args) == 2:
-                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41):
+                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46):
                             call.args[1].value = 24
             return node
         def visit_BinOp(self, node):
@@ -225,13 +231,22 @@ def ci_legacy_tree(tree):
 
 class PreservationTests(unittest.TestCase):
     def verified_ci_additions(self):
-        for relative, expected in {**V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES}.items():
+        for relative, expected in {**V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES}.items():
             path = ROOT / relative
             self.assertFalse(path.is_symlink(), relative)
             self.assertTrue(path.is_file(), relative)
             self.assertEqual(hashlib.sha256(preserved_bytes(path)).hexdigest(), expected, relative)
             self.assertFalse(path.stat().st_mode & 0o111, relative)
-        return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES)
+        return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES)
+
+    def test_dependency_qualification_additions_and_job_are_exact(self):
+        self.assertEqual(set(DEPENDENCY_NEW_HASHES), {'engineering/dependency_resolution/compiler-requirements.txt','engineering/dependency_resolution/inputs.py','engineering/dependency_resolution/qualify.py','engineering/dependency_resolution/maven-artifacts.lock.json','verification/dependency_resolution/test_inputs.py'})
+        self.verified_ci_additions()
+        real_read=Path.read_bytes
+        for relative in (*DEPENDENCY_NEW_HASHES,'.github/workflows/phase6-v3-offline.yml'):
+            path=ROOT/relative
+            with patch.object(Path,'read_bytes',lambda item: real_read(item)+b'unreviewed' if item==path else real_read(item)):
+                with self.assertRaises(AssertionError):self.verified_ci_additions()
 
     def test_release_admission_additions_are_exact_and_mutations_rejected(self):
         self.assertEqual(set(RELEASE_NEW_HASHES), {'engineering/evidence_admission/release.py', 'verification/release_admission/test_release.py'})
@@ -281,11 +296,11 @@ class PreservationTests(unittest.TestCase):
     def check_b0_changes(self, changes, untracked, added, head):
         transient = {'.ci-evidence/contracts.json'}
         self.check_source_additions(set(untracked) & transient, set(added) & transient, head)
-        self.assertEqual(set(changes) - (set(untracked) & transient), set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
+        self.assertEqual(set(changes) - (set(untracked) & transient), set(DEPENDENCY_NEW_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
 
     def test_b0_change_inventory_validates_transient_output_before_exclusion(self):
         head='a'*40
-        expected=set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
+        expected=set(DEPENDENCY_NEW_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
         transient='.ci-evidence/contracts.json'
         with tempfile.TemporaryDirectory() as directory,patch(__name__+'.ROOT',Path(directory)),patch.dict(os.environ):
             for key in ('GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB'):os.environ.pop(key,None)
@@ -302,7 +317,7 @@ class PreservationTests(unittest.TestCase):
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)
         self.assertEqual(len(SUCCESSOR_HASHES), 7)
-        self.assertEqual(len(self.verified_ci_additions()), 41)
+        self.assertEqual(len(self.verified_ci_additions()), 46)
         path = ROOT / 'engineering/ci/inputs/phase6-wave3-cumulative.patch'
         original_read = Path.read_bytes
         with patch.object(Path, 'read_bytes', lambda item: b'changed' if item == path else original_read(item)):

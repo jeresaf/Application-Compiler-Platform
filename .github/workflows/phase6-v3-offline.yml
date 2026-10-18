@@ -161,3 +161,70 @@ jobs:
             ${{ runner.temp }}/acp-successor-runtime/runtime-results.json
             ${{ runner.temp }}/acp-successor-runtime/*-runtime/
           if-no-files-found: error
+
+  successor-dependency-determinism:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Provision existing hash-pinned compiler wheels in disposable runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-dependency-venv"
+          python3.14 -m pip download --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt -d "$RUNNER_TEMP/acp-compiler-wheels"
+          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -m pip install --no-index --find-links "$RUNNER_TEMP/acp-compiler-wheels" --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt
+          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -m pip check
+      - name: Reject dependency substitutions and mutable resolution
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          from pathlib import Path
+          folder = Path('verification/dependency_resolution')
+          assert {p.name for p in folder.glob('test*.py')} == {'test_inputs.py'}
+          suite = unittest.defaultTestLoader.discover(str(folder))
+          assert suite.countTestCases() == 22
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun == 22 and not result.skipped
+          PYTHON
+      - name: Resolve once and freeze all runtime compiler and plugin inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/acp-empty-m2" "$RUNNER_TEMP/acp-empty-npm"
+          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B engineering/dependency_resolution/qualify.py prepare --workspace "$RUNNER_TEMP/acp-dependency-qualification" --maven-seed "$RUNNER_TEMP/acp-empty-m2" --npm-seed "$RUNNER_TEMP/acp-empty-npm" --wheels "$RUNNER_TEMP/acp-compiler-wheels" --online-acquire 2>&1 | tee "$RUNNER_TEMP/acp-dependency-prepare.log"
+      - name: Build both applications twice offline from independently clean exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          read -r lock_digest < "$RUNNER_TEMP/acp-dependency-qualification/dependency-lock.sha256"
+          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B engineering/dependency_resolution/qualify.py qualify --workspace "$RUNNER_TEMP/acp-dependency-qualification" --expected "$lock_digest" 2>&1 | tee "$RUNNER_TEMP/acp-dependency-qualify.log"
+      - name: Preserve exact inputs and independent clean-build outcomes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: successor-dependency-determinism
+          path: |
+            ${{ runner.temp }}/acp-dependency-prepare.log
+            ${{ runner.temp }}/acp-dependency-qualify.log
+            ${{ runner.temp }}/acp-dependency-qualification/*.json
+            ${{ runner.temp }}/acp-dependency-qualification/*.sha256
+            ${{ runner.temp }}/acp-dependency-qualification/*.log
+            ${{ runner.temp }}/acp-dependency-qualification/clean-*/*.log
+            ${{ runner.temp }}/acp-dependency-qualification/clean-*/results.json
+          if-no-files-found: error
