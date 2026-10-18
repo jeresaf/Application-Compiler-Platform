@@ -7,7 +7,7 @@ import sys
 import unittest
 from unittest.mock import patch,Mock
 ROOT=Path(__file__).resolve().parents[2];sys.path[:0]=[str(ROOT),str(ROOT/'tooling')]
-from engineering.recovery.qualify import EXPECTED,verify_observations,wait_until,stop,Lab
+from engineering.recovery.qualify import EXPECTED,verify_observations,wait_until,stop,Lab,authenticated_database_ready
 from engineering.recovery.fixtures import server,MIGRATOR
 
 class RecoveryTests(unittest.TestCase):
@@ -48,6 +48,19 @@ class RecoveryTests(unittest.TestCase):
         with patch('engineering.recovery.qualify.os.killpg') as kill:
             self.assertEqual(stop(process),-signal.SIGKILL)
             self.assertEqual(kill.call_args_list[0].args,(123,signal.SIGTERM));self.assertEqual(kill.call_args_list[1].args,(123,signal.SIGKILL))
+    def test_final_database_readiness_requires_authenticated_tcp_query(self):
+        states=[subprocess.CompletedProcess([],2,'','bootstrap socket gone'),subprocess.CompletedProcess([],0,'1\n','')]
+        with patch('engineering.recovery.qualify.subprocess.run',side_effect=states) as execute,patch('engineering.recovery.qualify.time.sleep'):
+            result=authenticated_database_ready('acp-06-runtime-owned','test-only')
+        self.assertEqual([r['exit'] for r in result['attempts']],[2,0])
+        for call in execute.call_args_list:
+            argv=call.args[0];self.assertIn('PGPASSWORD=test-only',argv);self.assertIn('127.0.0.1',argv);self.assertEqual(argv[-1],'SELECT 1')
+            self.assertNotIn('pg_isready',argv)
+    def test_unavailable_final_server_fails_closed_at_deadline(self):
+        state=subprocess.CompletedProcess([],2,'','connection refused')
+        with patch('engineering.recovery.qualify.subprocess.run',return_value=state),patch('engineering.recovery.qualify.time.sleep'),patch('engineering.recovery.qualify.time.monotonic',side_effect=[0,0,61]):
+            with self.assertRaisesRegex(TimeoutError,'POSTGRES_FINAL_TCP_READINESS'):authenticated_database_ready('acp-06-runtime-owned','test-only')
+
     def test_application_and_flyway_use_only_explicit_disposable_binding(self):
         lab=object.__new__(Lab);lab.cp='test';lab.schema='owned';lab.migrations=Path('/tmp/owned-migrations');lab.port=12345
         lab.env={'ACP_DATABASE_URL':'jdbc:postgresql://127.0.0.1:1234/owned','ACP_DATABASE_USER':'test-user','ACP_DATABASE_PASSWORD':'test-secret','SPRING_DATASOURCE_URL':'must-not-be-used'}

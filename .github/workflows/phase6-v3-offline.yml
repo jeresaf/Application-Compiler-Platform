@@ -335,9 +335,9 @@ jobs:
           "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -B - <<'PYTHON'
           import unittest
           suite = unittest.defaultTestLoader.discover('verification/recovery')
-          assert suite.countTestCases() == 10, 'RECOVERY_TEST_COUNT'
+          assert suite.countTestCases() == 12, 'RECOVERY_TEST_COUNT'
           result = unittest.TextTestRunner(verbosity=2).run(suite)
-          assert result.wasSuccessful() and result.testsRun == 10 and not result.skipped
+          assert result.wasSuccessful() and result.testsRun == 12 and not result.skipped
           PYTHON
       - name: Obtain exact disposable PostgreSQL runtime
         run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336

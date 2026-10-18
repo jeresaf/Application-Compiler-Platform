@@ -58,6 +58,19 @@ def wait_until(predicate, label, timeout=30):
     raise TimeoutError(label)
 
 
+def authenticated_database_ready(container, password):
+    require(container.startswith('acp-06-runtime-'),'NOT_OWNED_DISPOSABLE_DATABASE')
+    attempts=[]
+    def ready():
+        result=subprocess.run(['docker','exec','--env','PGPASSWORD='+password,container,'psql','-h','127.0.0.1','-p','5432','-U','acp_runtime','-d','acp_runtime','-v','ON_ERROR_STOP=1','-Atqc','SELECT 1'],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=5)
+        attempts.append({'exit':result.returncode,'stdout':result.stdout.strip(),'stderr':result.stderr.strip()})
+        return result.returncode==0 and result.stdout.strip()=='1'
+    # initdb's temporary server accepts Unix sockets only. A real authenticated
+    # TCP query establishes readiness of the final server and requested database.
+    wait_until(ready,'POSTGRES_FINAL_TCP_READINESS',60)
+    return {'mechanism':'AUTHENTICATED_TCP_SELECT','attempts':attempts}
+
+
 def stop(process, *, crash=False):
     if process.poll() is None:
         os.killpg(process.pid,signal.SIGKILL if crash else signal.SIGTERM)
@@ -320,6 +333,7 @@ def qualify(workspace):
         with (logs/'compile.log').open('wb') as out:subprocess.run(['mvn','-B','-ntp','test-compile','dependency:build-classpath','-Dmdep.outputFile=target/recovery-classpath'],cwd=backend,stdout=out,stderr=subprocess.STDOUT,check=True,timeout=900)
         text=(project/'frontend/src/task-ui-model.ts').read_text();ui=json.loads(text.split('=',1)[1].rsplit(' as const;',1)[0])
         with database() as container:
+            readiness=authenticated_database_ready(container,os.environ['ACP_TEST_DATABASE_PASSWORD'])
             lab=Lab(container,'acp_recovery_'+domain.replace('-','_'),backend,migration_dir,logs,domain)
             try:
                 first=lab.launch()
@@ -338,7 +352,7 @@ def qualify(workspace):
             finally:lab.close()
         require(generated=={p:sha((project/p).read_bytes()) for p in generated},'GENERATED_SOURCE_CHANGED')
         require(originals=={p:sha((migration_dir/p).read_bytes()) for p in originals},'HISTORICAL_MIGRATION_CHANGED')
-        result['applications'][domain]={'candidate':candidate.descriptor(),'snapshot':snapshot.read()['contentDigest'],'database':{'container':container,'schema':lab.schema,'postgres':version,'identity':lab.identity,'cleanup':'REMOVED'},'generatedSources':generated,'externalSources':{p:sha(v.encode()) for p,v in external.items()},'observations':observations,'tests':len(observations),'failures':0,'skipped':0,'migrationInputs':{p.name:sha(p.read_bytes()) for p in migration_dir.iterdir() if p.is_file()},'processCleanup':'REAPED','artifacts':{p.relative_to(workspace).as_posix():sha(p.read_bytes()) for p in sorted(logs.rglob('*')) if p.is_file()}}
+        result['applications'][domain]={'candidate':candidate.descriptor(),'snapshot':snapshot.read()['contentDigest'],'database':{'container':container,'schema':lab.schema,'postgres':version,'identity':lab.identity,'readiness':readiness,'cleanup':'REMOVED'},'generatedSources':generated,'externalSources':{p:sha(v.encode()) for p,v in external.items()},'observations':observations,'tests':len(observations),'failures':0,'skipped':0,'migrationInputs':{p.name:sha(p.read_bytes()) for p in migration_dir.iterdir() if p.is_file()},'processCleanup':'REAPED','artifacts':{p.relative_to(workspace).as_posix():sha(p.read_bytes()) for p in sorted(logs.rglob('*')) if p.is_file()}}
         (workspace/(domain+'-results.json')).write_text(json.dumps(result['applications'][domain],sort_keys=True,indent=2)+'\n')
     require(bindings=={p:sha((ROOT/p).read_bytes()) for p in bindings},'QUALIFICATION_SOURCE_CHANGED')
     result['sourceHashes']=bindings;result['sealedParent']='sha256:'+bundle_digest();result['criteria']={'24':'QUALIFICATION_ONLY','25':'QUALIFICATION_ONLY'}
