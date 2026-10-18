@@ -144,13 +144,25 @@ jobs:
           "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -m pip check
       - name: Verify build runner contracts
         run: '"$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B -m unittest discover -s verification/generator_runtime -v'
+      - name: Verify integrated ownership provenance and traceability regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite = unittest.defaultTestLoader.discover('verification/traceability')
+          assert suite.countTestCases() == 11, 'TRACEABILITY_TEST_COUNT'
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun == 11 and not result.skipped
+          PYTHON
       - name: Obtain exact disposable PostgreSQL runtime
         run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      # Wrap engineering/generator_builds/runtime.py without changing its assertions or cleanup.
       - name: Exercise both generated applications with fresh isolated databases
         shell: bash
         run: |
           set -euo pipefail
-          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B engineering/generator_builds/runtime.py --workspace "$RUNNER_TEMP/acp-successor-runtime" 2>&1 | tee "$RUNNER_TEMP/acp-successor-runtime.log"
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B engineering/traceability/runtime.py --workspace "$RUNNER_TEMP/acp-successor-runtime" 2>&1 | tee "$RUNNER_TEMP/acp-successor-runtime.log"
       - name: Retain runtime results and browser logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -159,6 +171,7 @@ jobs:
           path: |
             ${{ runner.temp }}/acp-successor-runtime.log
             ${{ runner.temp }}/acp-successor-runtime/runtime-results.json
+            ${{ runner.temp }}/acp-successor-runtime/traceability-results.json
             ${{ runner.temp }}/acp-successor-runtime/*-runtime/
           if-no-files-found: error
 
