@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 import unittest
 ROOT=Path(__file__).resolve().parents[2];sys.path[:0]=[str(ROOT),str(ROOT/'tooling')]
-from engineering.security.qualification import assess_response,sandbox_source,READINESS_TEST,https_json,sha,resolve_backend_components
+from engineering.security.qualification import assess_response,sandbox_source,READINESS_TEST,https_json,sha,resolve_backend_components,embedded_component_inventory,EMBEDDED_COMPONENTS,EMBEDDED_CONTAINER
 
 class SecurityTests(unittest.TestCase):
  def test_exact_sandbox_function_not_reimplementation(self):
@@ -33,6 +33,22 @@ class SecurityTests(unittest.TestCase):
   locked['two']={'sha256':'hash','lockedOrigins':['maven:other/group/lib/1.2/lib-1.2.jar']}
   self.assertNotIn('purl',resolve_backend_components([unknown()],locked)[0])
   self.assertNotIn('purl',resolve_backend_components([unknown()],{'wrong':{'sha256':'different','lockedOrigins':['maven:org/example/lib/1.2/lib-1.2.jar']}})[0])
+ def test_publisher_verified_embedded_identities_match_frozen_lock(self):
+  reference=json.loads((ROOT/'engineering/dependency_resolution/maven-artifacts.lock.json').read_bytes())['embeddedArtifacts']
+  rows,unknown=embedded_component_inventory(reference)
+  self.assertEqual(len(rows),2);self.assertEqual(unknown,[])
+  self.assertEqual({r['name'] for r in rows},{'org.springframework.boot:spring-boot-loader','org.springframework.boot:spring-boot-jarmode-tools'})
+  key=next(iter(reference));reference[key]['sha256']='0'*64
+  with self.assertRaisesRegex(ValueError,'EMBEDDED_IDENTITY_DRIFT'):embedded_component_inventory(reference)
+ def test_packaged_embedded_identity_requires_exact_content_and_origin(self):
+  entry='META-INF/jarmode/spring-boot-jarmode-tools.jar';pin=EMBEDDED_COMPONENTS[entry]
+  component={'hashes':[{'content':pin['sha256']}]};locked={'embedded':{'sha256':pin['sha256'],'lockedOrigins':['embedded:'+EMBEDDED_CONTAINER+'!/'+entry]}}
+  self.assertEqual(resolve_backend_components([component],locked)[0]['purl'],'pkg:maven/org.springframework.boot/spring-boot-jarmode-tools@4.1.1')
+  component={'hashes':[{'content':'0'*64}]}
+  self.assertNotIn('purl',resolve_backend_components([component],locked)[0])
+ def test_loader_variant_not_misrepresented_as_identical_published_archive(self):
+  pin=EMBEDDED_COMPONENTS['META-INF/loader/spring-boot-loader.jar']
+  self.assertNotEqual(pin['sha256'],pin['publisherJarSHA256']);self.assertEqual(pin['variant'],'PUBLISHED_CLASS_AND_RESOURCE_BYTES_WITH_CONTAINER_MANIFEST')
  def test_test_adapter_excluded_from_main_source(self):
   self.assertNotIn('@SpringBootApplication',READINESS_TEST);self.assertIn('assertNull(jdbc.getDataSource())',READINESS_TEST);self.assertIn('missingPrincipalRejectedBeforeDatabaseAccess',READINESS_TEST)
 

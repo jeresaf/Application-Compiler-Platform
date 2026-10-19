@@ -82,10 +82,37 @@ def confinement(output):
 def ctypes_string(value):return 'ctypes.c_char_p('+repr(os.fsencode(value))+')'
 
 
+# Publisher-authenticated identities, not an authority or execution registry.
+# Maven Central JAR+POM+SHA256 checked independently against sealed plugin bytes.
+# The loader variant has byte-identical classes/resources to the published loader;
+# only META-INF/MANIFEST.MF names the enclosing loader-tools module instead.
+EMBEDDED_CONTAINER='org/springframework/boot/spring-boot-loader-tools/4.1.1/spring-boot-loader-tools-4.1.1.jar'
+EMBEDDED_CONTAINER_SHA256='b26911978c785fcb894b398c5a781e409682309bf083b9587083fdd02be06a96'
+EMBEDDED_COMPONENTS={
+ 'META-INF/jarmode/spring-boot-jarmode-tools.jar':{
+  'artifact':'spring-boot-jarmode-tools','sha256':'062a9edf01809f4a2b48bfc2fe392fedd27448a3a57113bef510576673d4397f',
+  'publisherJarSHA256':'062a9edf01809f4a2b48bfc2fe392fedd27448a3a57113bef510576673d4397f','variant':'EXACT_PUBLISHED_JAR'},
+ 'META-INF/loader/spring-boot-loader.jar':{
+  'artifact':'spring-boot-loader','sha256':'1006db85adfa2ff98d22671ca631400bfe4a220e0dad336d5dc42519a5a3bafe',
+  'publisherJarSHA256':'44b15032ec77953fe1eaa7a895f2a7e0309ebe6556ea62abd289018a57031724','variant':'PUBLISHED_CLASS_AND_RESOURCE_BYTES_WITH_CONTAINER_MANIFEST'},
+}
+
+def embedded_component_inventory(reference):
+    rows=[];unknown=[]
+    for key,binding in reference.items():
+        pin=EMBEDDED_COMPONENTS.get(binding.get('entry'))
+        if pin is None or binding.get('container')!=EMBEDDED_CONTAINER:
+            unknown.append(key);continue
+        require(key==EMBEDDED_CONTAINER+'!/'+binding['entry'] and binding.get('containerSHA256')==EMBEDDED_CONTAINER_SHA256 and binding.get('sha256')==pin['sha256'],'EMBEDDED_IDENTITY_DRIFT')
+        rows.append({'ecosystem':'Maven','name':'org.springframework.boot:'+pin['artifact'],'version':'4.1.1','source':'EMBEDDED_BUILD_ARTIFACT','sha256':pin['sha256'],'publisherJarSHA256':pin['publisherJarSHA256'],'contentVariant':pin['variant'],'containerSHA256':EMBEDDED_CONTAINER_SHA256,'entry':binding['entry'],'publicationURL':'https://repo.maven.apache.org/maven2/org/springframework/boot/'+pin['artifact']+'/4.1.1/'})
+    require(all(EMBEDDED_CONTAINER+'!/'+entry in reference for entry in EMBEDDED_COMPONENTS),'MISSING_EMBEDDED_COMPONENT')
+    return rows,unknown
+
+
 def resolve_backend_components(components, locked):
     """Recover absent Maven metadata only from exact content-locked origins.
 
-    Never infer group/version from a display filename. Ambiguous or embedded-only
+    Never infer group/version from a display filename. Ambiguous or unpinned embedded
     identities remain unknown and block a clean assessment.
     """
     for component in components:
@@ -97,9 +124,12 @@ def resolve_backend_components(components, locked):
                 if origin.startswith('maven:'):
                     parts=Path(origin[len('maven:'):]).parts
                     identities.add(('.'.join(parts[:-3]),parts[-3],parts[-2]))
+                for entry,pin in EMBEDDED_COMPONENTS.items():
+                    if origin=='embedded:'+EMBEDDED_CONTAINER+'!/'+entry and row['sha256']==pin['sha256']:
+                        identities.add(('org.springframework.boot',pin['artifact'],'4.1.1'))
         if len(identities)==1:
             group,name,version=next(iter(identities));purl=f'pkg:maven/{group}/{name}@{version}'
-            component.update(group=group,name=name,version=version,purl=purl,**{'bom-ref':purl,'identitySource':'EXACT_SHA256_LOCKED_MAVEN_ORIGIN'})
+            component.update(group=group,name=name,version=version,purl=purl,**{'bom-ref':purl,'identitySource':'EXACT_SHA256_LOCKED_MAVEN_OR_PUBLISHER_VERIFIED_EMBEDDED_ORIGIN'})
     return components
 
 
@@ -140,6 +170,7 @@ def component_queries(root,package):
         if line and not line.startswith('#'):
             name,version=line.split('==');rows.append({'ecosystem':'PyPI','name':name,'version':version,'source':'COMPILER_LOCK'})
     reference=json.loads((ROOT/'engineering/dependency_resolution/maven-artifacts.lock.json').read_bytes())
+    embedded,_=embedded_component_inventory(reference['embeddedArtifacts']);rows.extend(embedded)
     for path,binding in reference['artifacts'].items():
         if not path.endswith('.jar'):continue
         parts=Path(path).parts;rows.append({'ecosystem':'Maven','name':'.'.join(parts[:-3])+':'+parts[-3],'version':parts[-2],'source':'MAVEN_BUILD_AND_TRANSITIVE_LOCK','sha256':binding['sha256']})
@@ -171,7 +202,7 @@ def assess_response(rows,response,fetch):
 
 def scan(root,package,output):
     rows=component_queries(root,package);save(output/'scanner-components.json',rows)
-    result={'scope':'QUALIFICATION_ONLY','scannedAt':datetime.now(timezone.utc).isoformat(),'transport':'HTTPS_SYSTEM_TRUST_VERIFICATION','service':'https://api.osv.dev','databaseTimestamp':'NOT_EXPOSED','componentCount':len(rows),'coverage':sorted({r['source'] for r in rows}),'unknown':package['unknownComponents'],'unresolvedEmbeddedBuildArtifacts':list(json.loads((ROOT/'engineering/dependency_resolution/maven-artifacts.lock.json').read_bytes())['embeddedArtifacts']),'findings':[],'status':'BLOCKED'}
+    result={'scope':'QUALIFICATION_ONLY','scannedAt':datetime.now(timezone.utc).isoformat(),'transport':'HTTPS_SYSTEM_TRUST_VERIFICATION','service':'https://api.osv.dev','databaseTimestamp':'NOT_EXPOSED','componentCount':len(rows),'coverage':sorted({r['source'] for r in rows}),'unknown':package['unknownComponents'],'unresolvedEmbeddedBuildArtifacts':embedded_component_inventory(json.loads((ROOT/'engineering/dependency_resolution/maven-artifacts.lock.json').read_bytes())['embeddedArtifacts'])[1],'findings':[],'status':'BLOCKED'}
     try:
         advisories={}
         # Bound batch size and retain exact request/response plus full advisories.
