@@ -5,7 +5,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock,patch
 ROOT=Path(__file__).resolve().parents[2];sys.path[:0]=[str(ROOT),str(ROOT/'tooling')]
 from engineering.demo.pipeline import inputs,PipelineCandidate,CandidatePort,request
-from engineering.demo.reference import bind_owned_backend,proxy_source,stable_server,verify_replay_state
+from engineering.demo.reference import bind_owned_backend,proxy_source,stable_server,verify_replay_state,dependencies as demo_dependencies
 from engineering.generator_candidates.spring_vue_postgres_0_6 import dependencies
 from compiler_contracts import STAGES,Document
 from filesystem_artifacts import FilesystemArtifactStore
@@ -35,6 +35,15 @@ class PipelineTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'DEPENDENCY_TEMPLATE_DRIFT'):dependencies.apply({dependencies.PATH:original+'tampered'})
 
 class RuntimeBoundaryTests(unittest.TestCase):
+ def test_default_acquisition_uses_a_private_empty_seed_and_restores_environment(self):
+  import os
+  with tempfile.TemporaryDirectory() as folder,patch('engineering.demo.reference.seed_maven') as acquire,patch.dict(os.environ,{'MAVEN_OPTS':'original'}):
+   with demo_dependencies(Path(folder)/'demo') as root:
+    seed,target,lock=acquire.call_args.args
+    self.assertEqual(seed,root/'empty-m2');self.assertTrue(seed.is_dir());self.assertEqual(list(seed.iterdir()),[])
+    self.assertEqual(target,root/'m2');self.assertTrue(lock['artifacts']);self.assertEqual(acquire.call_args.kwargs,{'online':True})
+    self.assertEqual(os.environ['npm_config_cache'],str(root/'npm'))
+   self.assertEqual(os.environ['MAVEN_OPTS'],'original')
  def test_backend_and_flyway_are_fenced_to_only_the_owned_database(self):
   env={'ACP_TEST_DATABASE_URL':'jdbc:postgresql://127.0.0.1:1234/acp_runtime','ACP_TEST_DATABASE_USER':'fixture','ACP_TEST_DATABASE_PASSWORD':'fixture-only'}
   actual={'ACP_DATABASE_URL':env['ACP_TEST_DATABASE_URL']+'?currentSchema=acp_browser_payment'}

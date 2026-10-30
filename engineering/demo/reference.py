@@ -52,6 +52,8 @@ def dependencies(workspace,maven_seed=None,npm_seed=None,offline=False):
     root=workspace.parent/(workspace.name+'-inputs');root.mkdir(mode=0o700,exist_ok=False)
     save(root/'owner.json',{'owner':'ACP Phase 6 internal demonstration','sourceWorkspace':str(ROOT),'classification':'TEMPORARY_EXECUTION','cleanup':'RETAIN_REQUIRED_EVIDENCE_BEFORE_REMOVAL'})
     reference=json.loads((ROOT/'engineering/dependency_resolution/maven-artifacts.lock.json').read_bytes())
+    if maven_seed is None:
+        maven_seed=root/'empty-m2';maven_seed.mkdir(mode=0o700)
     seed_maven(maven_seed,root/'m2',reference,online=not offline)
     if npm_seed:shutil.copytree(npm_seed,root/'npm')
     else:(root/'npm').mkdir(mode=0o700)
