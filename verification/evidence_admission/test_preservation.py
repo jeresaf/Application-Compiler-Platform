@@ -168,6 +168,10 @@ SECURITY_CI_JOB = b'\n  successor-security-readiness:\n    runs-on: ubuntu-24.04
 RECOVERY_NEW_HASHES = {'engineering/recovery/fixtures.py': '521eecda15075848f6cb0a08fa8a8b5dfa02d358758660f512733a68c4140238', 'engineering/recovery/qualify.py': '70bea7391f79164179dda038b5784f0ed5cb77c84df64667f68537663122d496', 'verification/recovery/test_recovery.py': '050bad6ac35b8ce77883cf6ade304289565f0e0d3eeb9d832fc5211731c6bbb0'}
 RECOVERY_CI_JOB = b'\n  successor-deployment-recovery:\n    runs-on: ubuntu-24.04\n    timeout-minutes: 40\n    steps:\n      - uses: actions/checkout@v6\n        with:\n          fetch-depth: 0\n          persist-credentials: false\n      - uses: actions/setup-python@v7.0.0\n        with:\n          python-version: \'3.14.7\'\n      - uses: actions/setup-java@v5\n        with:\n          distribution: temurin\n          java-version: \'21\'\n      - name: Provision pinned compiler dependencies on disposable runner\n        shell: bash\n        run: |\n          set -euo pipefail\n          python3.14 -c \'import platform; assert platform.python_version() == "3.14.7"\'\n          python3.14 -m venv "$RUNNER_TEMP/acp-recovery-venv"\n          "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt\n          "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -m pip check\n      - name: Reject incomplete recovery outcomes and unsafe cleanup\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -B - <<\'PYTHON\'\n          import unittest\n          suite = unittest.defaultTestLoader.discover(\'verification/recovery\')\n          assert suite.countTestCases() == 12, \'RECOVERY_TEST_COUNT\'\n          result = unittest.TextTestRunner(verbosity=2).run(suite)\n          assert result.wasSuccessful() and result.testsRun == 12 and not result.skipped\n          PYTHON\n      - name: Obtain exact disposable PostgreSQL runtime\n        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336\n      - name: Exercise migration failures and fresh JVM committed-state recovery\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -B engineering/recovery/qualify.py --workspace "$RUNNER_TEMP/acp-recovery" 2>&1 | tee "$RUNNER_TEMP/acp-recovery.log"\n      - name: Retain exact recovery states failures source and cleanup evidence\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: successor-deployment-recovery\n          path: |\n            ${{ runner.temp }}/acp-recovery.log\n            ${{ runner.temp }}/acp-recovery/*.json\n            ${{ runner.temp }}/acp-recovery/*-logs/\n            ${{ runner.temp }}/acp-recovery/*-migration-inputs/\n            ${{ runner.temp }}/acp-recovery/*/backend/src/test/java/acp/browser/\n            ${{ runner.temp }}/acp-recovery/*/backend/src/test/java/acp/recovery/\n          if-no-files-found: error\n'
 
+DELIVERY_NEW_HASHES = {'engineering/demo/pipeline.py': 'f140771d1ed7d4b95a5be2c0b53cb4a05611fcc46d7a6cc3014d9e15025c3a80', 'engineering/demo/reference.py': 'd5b5432dc575f2003c8d77def787bf2bbb7590150ed19dd5e856897f0f7b41a7', 'verification/demo/test_demo.py': '07db9e11ee9f95de410478455fa608bfcd9348fb4a3a2f83667f7d881c137b15', 'engineering/generator_candidates/spring_vue_postgres_0_6/dependencies.py': 'a6a5883a5daa7d977d6ef1056cc0177afed25dc24e9a55c02f2b86e99f82b38f'}
+DELIVERY_MODIFIED_HASHES = {'engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py': '8751d0fdf4393266154f8ba9f7ff5fcc2ed1d71514f4bfe21af86935054d784a', 'engineering/dependency_resolution/maven-artifacts.lock.json': '6afefcd376cf8229962d63305d6ff9b9530dd7c32013e1d4f1d14ddd34c0db9e', 'engineering/generator_builds/runtime.py': '692d72831adeece05aa6e5e3059843d9642cf7e87dbfb6307397f0be5a274185', 'DEV_LINUX.md': '09b824e40213da1fcf0efc68ffaff3366c60b3df12cc8af932aabc2001d08183', 'docs/roadmap.md': '2208939f5b357addaef548cf6783d90e4d19af1621f4d74077d93f878f55b1f3', 'verification/dependency_resolution/test_inputs.py': 'b3019e0a04d539b9cc9db365d2d5bd57734681e80a8da28710f9bd9d3c6ac3fc'}
+DELIVERY_CI_JOB = b'\n  successor-reference-demonstration:\n    runs-on: ubuntu-24.04\n    timeout-minutes: 50\n    steps:\n      - uses: actions/checkout@v6\n        with:\n          fetch-depth: 0\n          persist-credentials: false\n      - uses: actions/setup-python@v7.0.0\n        with:\n          python-version: \'3.14.7\'\n      - uses: actions/setup-node@v7\n        with:\n          node-version: \'24.21.0\'\n      - uses: actions/setup-java@v5\n        with:\n          distribution: temurin\n          java-version: \'21\'\n      - name: Provision hash-pinned compiler dependencies on disposable runner\n        shell: bash\n        run: |\n          set -euo pipefail\n          python3.14 -c \'import platform; assert platform.python_version() == "3.14.7"\'\n          python3.14 -m venv "$RUNNER_TEMP/acp-demo-venv"\n          "$RUNNER_TEMP/acp-demo-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt\n          "$RUNNER_TEMP/acp-demo-venv/bin/python3.14" -m pip check\n      - name: Verify compiler integration and owned-database boundaries\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-demo-venv/bin/python3.14" -B - <<\'PYTHON\'\n          import unittest\n          suite = unittest.defaultTestLoader.discover(\'verification/demo\')\n          assert suite.countTestCases() == 9, \'DEMO_TEST_COUNT\'\n          result = unittest.TextTestRunner(verbosity=2).run(suite)\n          assert result.wasSuccessful() and result.testsRun == 9 and not result.skipped\n          PYTHON\n      - name: Obtain exact disposable PostgreSQL runtime\n        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336\n      - name: Compile build browse restart and replay both approved applications\n        shell: bash\n        run: |\n          set -euo pipefail\n          "$RUNNER_TEMP/acp-demo-venv/bin/python3.14" -B engineering/demo/reference.py qualify --workspace "$RUNNER_TEMP/acp-demo" 2>&1 | tee "$RUNNER_TEMP/acp-demo.log"\n      - name: Retain actual compiler package browser restart and cleanup evidence\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: successor-reference-demonstration\n          path: |\n            ${{ runner.temp }}/acp-demo.log\n            ${{ runner.temp }}/acp-demo/*.json\n            ${{ runner.temp }}/acp-demo/*-runtime/\n            ${{ runner.temp }}/acp-demo/*/acp/provenance.json\n            ${{ runner.temp }}/acp-demo/*-runtime-outputs/frontend/browser-results.json\n            ${{ runner.temp }}/acp-demo/*-runtime-outputs/frontend/test-results/\n            ${{ runner.temp }}/acp-demo/*-runtime-outputs/backend/src/test/java/acp/browser/\n            ${{ runner.temp }}/acp-demo-inputs/owner.json\n          if-no-files-found: error\n'
+
 def preserved_bytes(path):
     # Validate the exact two authorized CI-only modifications before comparing
     # the remainder to immutable historical bytes. No path-wide exception.
@@ -176,6 +180,9 @@ def preserved_bytes(path):
         relative = path.relative_to(ROOT).as_posix()
     except ValueError:
         return actual
+    if relative in DELIVERY_MODIFIED_HASHES:
+        assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == DELIVERY_MODIFIED_HASHES[relative], relative
+        actual = subprocess.check_output(['git','show','3c10461c7bb5ee2042ccf4f36f949d748d359625:' + relative],cwd=ROOT)
     if relative in RATE_CLOCK_COMPAT_HASHES:
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == RATE_CLOCK_COMPAT_HASHES[relative], relative
         return subprocess.check_output(['git','show','99c0244052f01c0df3904af0c236de1d027fe77f:' + relative],cwd=ROOT)
@@ -183,6 +190,8 @@ def preserved_bytes(path):
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == RATE_CLOCK_HASHES[relative], relative
         return subprocess.check_output(['git','show','355b8f72cf8012e17aa24f23042be3e8eebbff3f:' + relative],cwd=ROOT)
     if relative == '.github/workflows/phase6-v3-offline.yml':
+        assert actual.endswith(DELIVERY_CI_JOB) and actual.count(DELIVERY_CI_JOB)==1, 'EXACT_DELIVERY_JOB_REQUIRED'
+        actual=actual[:-len(DELIVERY_CI_JOB)]
         assert actual.endswith(SECURITY_CI_JOB) and actual.count(SECURITY_CI_JOB)==1, 'EXACT_SECURITY_JOB_REQUIRED'
         actual=actual[:-len(SECURITY_CI_JOB)]
         assert actual.endswith(RECOVERY_CI_JOB) and actual.count(RECOVERY_CI_JOB)==1, 'EXACT_RECOVERY_JOB_REQUIRED'
@@ -212,7 +221,8 @@ def preserved_bytes(path):
 
 def legacy_modifications(paths, accepted):
     paths = set(paths)
-    for relative in (set(PRIVACY_MODIFIED_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES)) & paths:
+    for relative in (set(PRIVACY_MODIFIED_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | set(DELIVERY_MODIFIED_HASHES)) & paths:
+        if subprocess.run(['git','cat-file','-e',accepted+':'+relative],cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode:continue
         original = subprocess.check_output(['git', 'show', accepted + ':' + relative], cwd=ROOT)
         if preserved_bytes(ROOT / relative) == original:
             paths.remove(relative)
@@ -229,7 +239,7 @@ def ci_legacy_tree(tree):
             if node.name == 'test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input':
                 for call in ast.walk(node):
                     if isinstance(call, ast.Call) and isinstance(call.func, ast.Attribute) and call.func.attr == 'assertEqual' and len(call.args) == 2:
-                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46, 49, 51, 56, 59, 62, 64):
+                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46, 49, 51, 56, 59, 62, 64, 68):
                             call.args[1].value = 24
             return node
         def visit_BinOp(self, node):
@@ -245,6 +255,7 @@ def ci_legacy_tree(tree):
             return node.values[0] if len(node.values) == 1 else node
         def visit_List(self, node):
             node = self.generic_visit(node)
+            node.elts = [value for value in node.elts if not (isinstance(value, ast.Starred) and ast.unparse(value) == "*(':(exclude)' + name for name in DELIVERY_MODIFIED_HASHES)")]
             node.elts = [value for value in node.elts if not (isinstance(value, ast.Constant)
                          and value.value in (':(exclude)engineering/ci/parity.py', ':(exclude)tooling/audit/criteria.py', ':(exclude)tooling/audit/phase6.py',':(exclude)tooling/tests/test_retained_inventory.py',':(exclude)verification/route_a/test_preservation.py'))]
             return node
@@ -259,13 +270,26 @@ def ci_legacy_tree(tree):
 
 class PreservationTests(unittest.TestCase):
     def verified_ci_additions(self):
-        for relative, expected in {**V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES, **TRACEABILITY_NEW_HASHES, **PERFORMANCE_NEW_HASHES, **RECOVERY_NEW_HASHES, **SECURITY_NEW_HASHES, **{p:h for p,h in RATE_CLOCK_HASHES.items() if p not in SUCCESSOR_HASHES}}.items():
+        for relative, expected in {**DELIVERY_NEW_HASHES, **V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES, **TRACEABILITY_NEW_HASHES, **PERFORMANCE_NEW_HASHES, **RECOVERY_NEW_HASHES, **SECURITY_NEW_HASHES, **{p:h for p,h in RATE_CLOCK_HASHES.items() if p not in SUCCESSOR_HASHES}}.items():
             path = ROOT / relative
             self.assertFalse(path.is_symlink(), relative)
             self.assertTrue(path.is_file(), relative)
             self.assertEqual(hashlib.sha256(preserved_bytes(path)).hexdigest(), expected, relative)
             self.assertFalse(path.stat().st_mode & 0o111, relative)
-        return set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES)
+        return set(DELIVERY_NEW_HASHES) | set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES)
+
+    def test_delivery_changes_are_exact_and_reject_mutated_source_or_job(self):
+        self.assertEqual(len(DELIVERY_NEW_HASHES), 4)
+        self.assertEqual(len(DELIVERY_MODIFIED_HASHES), 6)
+        self.verified_ci_additions()
+        real_read = Path.read_bytes
+        for relative in (*DELIVERY_NEW_HASHES, *DELIVERY_MODIFIED_HASHES, '.github/workflows/phase6-v3-offline.yml'):
+            path = ROOT / relative
+            if relative in DELIVERY_MODIFIED_HASHES:preserved_bytes(path)
+            with patch.object(Path, 'read_bytes', lambda item: real_read(item)+b'unreviewed' if item == path else real_read(item)):
+                with self.assertRaises(AssertionError):
+                    if relative in DELIVERY_MODIFIED_HASHES:preserved_bytes(path)
+                    else:self.verified_ci_additions()
 
     def test_dependency_qualification_additions_and_job_are_exact(self):
         self.assertEqual(set(DEPENDENCY_NEW_HASHES), {'engineering/dependency_resolution/compiler-requirements.txt','engineering/dependency_resolution/inputs.py','engineering/dependency_resolution/qualify.py','engineering/dependency_resolution/maven-artifacts.lock.json','verification/dependency_resolution/test_inputs.py'})
@@ -324,11 +348,11 @@ class PreservationTests(unittest.TestCase):
     def check_b0_changes(self, changes, untracked, added, head):
         transient = {'.ci-evidence/contracts.json'}
         self.check_source_additions(set(untracked) & transient, set(added) & transient, head)
-        self.assertEqual(set(changes) - (set(untracked) & transient), set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
+        self.assertEqual(set(changes) - (set(untracked) & transient), set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
 
     def test_b0_change_inventory_validates_transient_output_before_exclusion(self):
         head='a'*40
-        expected=set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
+        expected=set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
         transient='.ci-evidence/contracts.json'
         with tempfile.TemporaryDirectory() as directory,patch(__name__+'.ROOT',Path(directory)),patch.dict(os.environ):
             for key in ('GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB'):os.environ.pop(key,None)
@@ -345,7 +369,7 @@ class PreservationTests(unittest.TestCase):
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)
         self.assertEqual(len(SUCCESSOR_HASHES), 7)
-        self.assertEqual(len(self.verified_ci_additions()), 64)
+        self.assertEqual(len(self.verified_ci_additions()), 68)
         path = ROOT / 'engineering/ci/inputs/phase6-wave3-cumulative.patch'
         original_read = Path.read_bytes
         with patch.object(Path, 'read_bytes', lambda item: b'changed' if item == path else original_read(item)):
@@ -690,7 +714,7 @@ class PreservationTests(unittest.TestCase):
                 mode=metadata.split()[0]
                 self.assertEqual(bool(path.stat().st_mode & 0o111),mode==b'100755')
         self.assertEqual(stream.read(),b'')
-        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml',':(exclude)engineering/ci/parity.py',':(exclude)tooling/audit/criteria.py',':(exclude)tooling/audit/phase6.py',':(exclude)tooling/tests/test_retained_inventory.py',':(exclude)verification/route_a/test_preservation.py'],cwd=ROOT,check=True,capture_output=True)
+        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml',':(exclude)engineering/ci/parity.py',':(exclude)tooling/audit/criteria.py',':(exclude)tooling/audit/phase6.py',':(exclude)tooling/tests/test_retained_inventory.py',':(exclude)verification/route_a/test_preservation.py', *(':(exclude)'+name for name in DELIVERY_MODIFIED_HASHES)],cwd=ROOT,check=True,capture_output=True)
         added=subprocess.check_output(['git','diff','--name-only','--diff-filter=A',BASELINE,'--'],cwd=ROOT,text=True).splitlines()
         new=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
         head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()

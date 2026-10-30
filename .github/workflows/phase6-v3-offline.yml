@@ -415,3 +415,63 @@ jobs:
             ${{ runner.temp }}/acp-security/*.log
             ${{ runner.temp }}/acp-security/*/backend/target/surefire-reports/
           if-no-files-found: error
+
+  successor-reference-demonstration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Provision hash-pinned compiler dependencies on disposable runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -c 'import platform; assert platform.python_version() == "3.14.7"'
+          python3.14 -m venv "$RUNNER_TEMP/acp-demo-venv"
+          "$RUNNER_TEMP/acp-demo-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt
+          "$RUNNER_TEMP/acp-demo-venv/bin/python3.14" -m pip check
+      - name: Verify compiler integration and owned-database boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-demo-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite = unittest.defaultTestLoader.discover('verification/demo')
+          assert suite.countTestCases() == 9, 'DEMO_TEST_COUNT'
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun == 9 and not result.skipped
+          PYTHON
+      - name: Obtain exact disposable PostgreSQL runtime
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Compile build browse restart and replay both approved applications
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-demo-venv/bin/python3.14" -B engineering/demo/reference.py qualify --workspace "$RUNNER_TEMP/acp-demo" 2>&1 | tee "$RUNNER_TEMP/acp-demo.log"
+      - name: Retain actual compiler package browser restart and cleanup evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: successor-reference-demonstration
+          path: |
+            ${{ runner.temp }}/acp-demo.log
+            ${{ runner.temp }}/acp-demo/*.json
+            ${{ runner.temp }}/acp-demo/*-runtime/
+            ${{ runner.temp }}/acp-demo/*/acp/provenance.json
+            ${{ runner.temp }}/acp-demo/*-runtime-outputs/frontend/browser-results.json
+            ${{ runner.temp }}/acp-demo/*-runtime-outputs/frontend/test-results/
+            ${{ runner.temp }}/acp-demo/*-runtime-outputs/backend/src/test/java/acp/browser/
+            ${{ runner.temp }}/acp-demo-inputs/owner.json
+          if-no-files-found: error

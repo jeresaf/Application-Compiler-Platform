@@ -95,12 +95,12 @@ def supervised_processes():
             except ProcessLookupError: pass
 
 
-def runtime(workspace):
+def runtime(workspace, *, candidate_factory=SuccessorCandidate, browser_runner=None, database_factory=database, request_factory=None):
     with supervised_processes():
-        return execute_runtime(workspace)
+        return execute_runtime(workspace,candidate_factory=candidate_factory,browser_runner=browser_runner,database_factory=database_factory,request_factory=request_factory)
 
 
-def execute_runtime(workspace):
+def execute_runtime(workspace, *, candidate_factory=SuccessorCandidate, browser_runner=None, database_factory=database, request_factory=None):
     workspace = Path(workspace).resolve()
     workspace.mkdir(mode=0o700, exist_ok=False)
     # Existing browser fixture uses fixed loopback ports; fail before starting if occupied.
@@ -109,15 +109,15 @@ def execute_runtime(workspace):
             sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             sock.bind(('127.0.0.1', port))
     run(['node', '-e', 'if(process.versions.node!=="24.21.0")process.exit(1)'], workspace)
-    candidate = SuccessorCandidate()
+    candidate = candidate_factory()
     result = {'candidate': candidate.descriptor(), 'image': IMAGE, 'applications': {},
               'scope': 'NEW_DISPOSABLE_LAB_RUNTIME_ONLY', 'deploymentAcceptance': 'NOT_GRANTED'}
     original_tests = browser_gate.tests
     try:
         for domain in ('payment', 'case-management'):
             snapshot = Document.of(load(ROOT / f'test-corpus/deterministic-v04/{domain}-canonical-candidate.json'))
-            request = SimpleNamespace(compiler='compiler/runtime-test', pipeline='pipeline/runtime-test',
-                                      snapshot_digest=snapshot.read()['contentDigest'], features=(), generator=candidate.generator)
+            request = (request_factory(candidate,snapshot) if request_factory else SimpleNamespace(compiler='compiler/runtime-test', pipeline='pipeline/runtime-test',
+                                      snapshot_digest=snapshot.read()['contentDigest'], features=(), generator=candidate.generator))
             plan = candidate.plan(snapshot, request)
             project = workspace / domain
             store = FilesystemArtifactStore(project)
@@ -137,9 +137,9 @@ def execute_runtime(workspace):
             run(['npm', 'ci', '--ignore-scripts', '--no-audit', '--no-fund'], project / 'frontend')
             if os.environ.get('CI') == 'true':
                 run(['npx', '--no-install', 'playwright', 'install', '--with-deps', 'chromium'], project / 'frontend')
-            with database() as container:
+            with database_factory() as container:
                 browser_gate.tests = lambda current: original_tests(current) + extra_tests(current)
-                report = browser_gate.browser(project, domain, logs)
+                report = (browser_runner or browser_gate.browser)(project, domain, logs)
                 verify_report(report, 14)
                 # Real RS256/JWKS/PKCE fixture, never an operational issuer.
                 # Existing adapter runs both domains; isolate this domain with its normal name.

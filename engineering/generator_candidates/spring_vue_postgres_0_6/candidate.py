@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import sys
 
-from . import migrations, provenance, rate_clock
+from . import migrations, provenance, rate_clock, dependencies
 
 PACKAGE = Path(__file__).resolve().parent
 ROOT = PACKAGE.parents[2]
@@ -111,7 +111,7 @@ class SuccessorCandidate:
                 raise ValueError('CANDIDATE_BUILD_IDENTITY')
             templates = {p.relative_to(WORKER.parent / 'templates').as_posix(): p.read_text()
                          for p in (WORKER.parent / 'templates').rglob('*') if p.is_file()}
-            templates = rate_clock.apply(templates)
+            templates = dependencies.apply(rate_clock.apply(templates))
             result = self._generation.plan(payload['model'], templates, self.profile,
                                            payload['inventory'], build=payload['build'])
             self._generation.validate_plan(result)

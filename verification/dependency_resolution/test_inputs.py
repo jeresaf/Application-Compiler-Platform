@@ -181,8 +181,14 @@ class InputTests(unittest.TestCase):
     def test_sealed_predicates_and_candidate_sources_unchanged(self):
         import subprocess
         self.assertEqual(subprocess.check_output(['git','diff','1db17ec','--','tooling','contracts','targets','test-corpus'],cwd=ROOT),b'')
-        # Authorized successor correction; the sealed baseline above never moves.
-        self.assertEqual(subprocess.check_output(['git','diff','99c0244052f01c0df3904af0c236de1d027fe77f','--','engineering/generator_candidates'],cwd=ROOT),b'')
+        # The narrowly authorized Tomcat overlay changes this unsealed candidate
+        # only. Exact fingerprint plus exact path inventory reject unrelated edits.
+        from engineering.generator_candidates.spring_vue_postgres_0_6 import SuccessorCandidate
+        self.assertEqual(SuccessorCandidate().descriptor()['sourceDigest'], '600a552287cc1121be7578c31ba2a379332c9b0d55c60a79b2a5d054c92271aa')
+        changed=set(subprocess.check_output(['git','diff','--name-only','99c0244052f01c0df3904af0c236de1d027fe77f','--','engineering/generator_candidates'],cwd=ROOT,text=True).splitlines())
+        changed.update(subprocess.check_output(['git','ls-files','--others','--exclude-standard','engineering/generator_candidates'],cwd=ROOT,text=True).splitlines())
+        prefix='engineering/generator_candidates/spring_vue_postgres_0_6/'
+        self.assertEqual(changed,{prefix+'candidate.py',prefix+'dependencies.py'})
 
 
 if __name__=='__main__':unittest.main()

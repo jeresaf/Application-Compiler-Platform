@@ -14,7 +14,7 @@ The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 throu
 | 7 Source intelligence | Symbol/reference/type graph, completeness, ownership, impact and drift regressions | Port contracts only; P-09/P-10 open |
 | 8 Verification | Isolated build/test/migration/security/traceability/evidence gates | Typed obligations and reference evidence checks only; P-11/P-12 open |
 | 9 MCP adapter | Mature semantic operations with bounded context, approvals and provenance | Deferred |
-| 10 Reference application | Generate and evolve a serious multi-tenant/workflow/document/report/UI/job application | Two synthetic semantic reference domains; no generated application |
+| 10 Reference application | Generate and evolve a serious multi-tenant/workflow/document/report/UI/job application | Two generated synthetic reference domains exercised in Phase 6; serious repeated application evolution remains outstanding |
 | 11 Hardening | Concurrency, recovery, scale, compatibility, supply chain, isolation and fault injection | Deferred |
 | 12 Production validation | Repeated create/modify/migrate/verify/deploy/maintain/recover releases passing all profile gates | Not claimed |
 
@@ -55,3 +55,30 @@ Historical delivery/Jobs checkpoint: The [delivery and Jobs tranche](phase6-deli
 Historical target capability work began against the accepted [explicit execution/dataflow successor](adr/0015-explicit-operation-effects-and-dataflow.md) and its [dedicated report](execution-v03-completion-report.md). Authoring 0.2 / Canonical 0.1 and historical Phase 1–5 closure remain preserved. Authoring 0.3.0 and Canonical 0.2.0 are APPROVED AND GREEN; ChangeSet 0.2 is GREEN; ADR-0015 is ACCEPTED; execution-v03 fixture decisions are APPROVED REFERENCE SEMANTICS (explicit human approval, 2026-10-08). Phase 6 remains IN PROGRESS; Phase 7 remains NOT STARTED. Phase 6 closure still requires negotiated generated enforcement and complete target gates.
 
 The current [production remediation tranche](phase6-production-remediation.md) introduces sealed target/generator 0.5.0, retaining Target IR 0.2.0 and all approved Canonical business semantics. It fixes scalar String migration storage, updates packaged Jackson dependency management, enforces production startup configuration and adds deployment-style OIDC integration and evidence-driven audit predicates. The first blocked closure audit is preserved. Phase 6 remains IN_PROGRESS; Phase 7 remains NOT_STARTED.
+
+## Current first-target delivery and next authorized boundary
+
+The unsealed 0.6.0 candidate now has an internal demonstration entrypoint in
+`engineering/demo/reference.py`. It connects the existing eight-stage compiler,
+capability negotiation, Target IR, ArtifactPlan and ownership-safe materialization
+to generated backend/frontend builds, disposable PostgreSQL, browser workflows and
+committed-state restart/replay checks for both exact approved reference snapshots.
+The candidate-only Tomcat 11.0.26 correction has source fingerprint
+`600a552287cc1121be7578c31ba2a379332c9b0d55c60a79b2a5d054c92271aa`;
+the earlier fingerprint remains historical evidence at commit `3c10461`.
+See [the Linux runbook](../DEV_LINUX.md) for execution and evidence locations.
+Engineering qualification and internal demonstration do not establish formal release
+acceptance. The sealed 0.5.0 identity and all 39 release predicates are unchanged.
+Phase 6 is IN_PROGRESS; release closure is BLOCKED; Phase 7 is NOT_STARTED.
+
+The first separately authorized Phase 7 slice should consume these existing
+ArtifactPlans, semantic ID/revision provenance and ownership inventories through
+the native Java/TypeScript source-analysis architecture accepted in ADR-0004.
+Its bounded output is a symbol/reference/type relationship graph with exact
+source/specification mappings and explicit incomplete/unknown confidence.
+Acceptance requires generated/custom source reconciliation, reference/rename
+impact and drift regressions against both generated domains, preserving HUMAN-owned
+extensions and rejecting stale or forged source mappings. Reuse the existing
+provenance and source-analysis ports; do not introduce a replacement Canonical IR,
+parallel parser framework or MCP-centred architecture. This handoff does not start
+Phase 7 or complete Phases 8–12.
