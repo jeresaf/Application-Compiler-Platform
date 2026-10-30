@@ -176,6 +176,10 @@ DELIVERY_CI_JOB = b'\n  successor-reference-demonstration:\n    runs-on: ubuntu-
 PHASE7_NEW_HASHES = {'.github/workflows/phase7-source-intelligence.yml': '97c17187c018f6352ce0ccdf49a38ec58596bfcc239ec2021b41448782aea815', 'docs/phase7-source-intelligence.md': '540996b8e88c603d8539d24f1e5beb6de78aa319eac2cf9b7c44826d69c4cab2', 'engineering/source_intelligence/NativeSource.java': 'dc4788fc47458111f8b337c3e88d137fb432490b3b723124d7d52bbaa0f27186', 'engineering/source_intelligence/analysis.py': '52ef63d3c1d22fac953ecc1ce0d62dd0aa5c39eff140f6ea80f33eea7f477ee3', 'engineering/source_intelligence/cli.py': 'cea46d24ce8c915d77c9733e9b7c6ad35e432164904589da3be57f4a586ce1f5', 'engineering/source_intelligence/model.py': 'aa303bdb245686082f5f813c533a4d575241783c39db55dca8f6a3728c42deca', 'engineering/source_intelligence/native.py': 'd7831d4ed9a568526b62b71403fb005aaf948ed2bdb20c8af3bb0cfd75ccb2c4', 'engineering/source_intelligence/qualification.py': 'b54c2f7df1bef409630a0aa0a07b237cbba4419a3465661f6110c523da758621', 'engineering/source_intelligence/typescript.mjs': '7824e5296f90f5f788270ba71d731008a2cea99fc3b649da20dbd8322742ea3f', 'verification/source_intelligence/test_graph.py': 'b2f035922b4c4137161844a98320e66b9fa5f5db265fb7f59fcb5d9007f08321', 'verification/source_intelligence/test_native.py': '6dd7b56bd149bf34d0b7422ca3bad07117aa72ad99d95a49a0163202af5b55ce'}
 PHASE7_MODIFIED_HASHES = {'DEV_LINUX.md': '5c695670cf16abc491a0e67814f738d933a21857e8984a2de9bdae012750262b', 'docs/roadmap.md': 'e624826a3de27f49d341a4f018eac1c6cbaaf4e27d5a67b22def7f12f67e75ad', 'verification/route_a/test_preservation.py': '6a769d06155c47cadbc002e3e487a49e13a3a6b38a93c083e22c8b78c5f9ad53', 'README.md': '45e74e0455a8b06f89df1a96f615c2f516dd2dfd28824fffbdfbef2541ede6b9'}
 
+# Authorized Phase 8 integration deltas; no release evidence or predicate changes.
+PHASE8_NEW_HASHES = {'.github/workflows/phase8-verification.yml': '83fddf6afa3d41e81235b4383c1d3bf813de109e27f3f66c03132e750d2d486a', 'docs/phase8-verification.md': '741c992614a447556d7fb5f21fcdbe6a80b0dcc02032b67c9e0954c9ba3fdf30', 'engineering/verification/cli.py': 'e293bf0ef280ffa59a2f4ad4f2b3e07655d719188eff808849f57da1665bff9e', 'engineering/verification/inputs.py': '39829feeb6bb4ea32dea520d3bba48b84585a2f381f51fa578cd378434ff5ea1', 'engineering/verification/integration.py': '31fef0758cef1335b907009f02e943887113a81ed6601114138b77ae929f68f8', 'engineering/verification/qualification.py': '604dd2cae738e276200c534a3c08c7da7ca20bb3b97117e983c42af242cf66dd', 'verification/verification/test_integration.py': 'e3713b5d34ade0422bbb36564d70fec65eaf1a5a8169aaaebc24a10ac37ce69a'}
+PHASE8_MODIFIED_HASHES = {'README.md': 'f509489a12080ffa69bb167ea4a1d7330f8f372c41fc60424de538ab18bc1623', 'DEV_LINUX.md': '039c6541c7858aca8f4bff7bac56c04776bbfaee7587f41b91f5ff1195371ff7', 'docs/roadmap.md': 'fa9b63945eab68c9ae565c3fd8535e0b202a86a17787ade9a731b3df75d3817e', 'verification/route_a/test_preservation.py': '8c68679979625838139546d9e8a2a62746c0ac2c4bb45940e6cef59be25bf0ff'}
+
 def preserved_bytes(path):
     # Validate the exact two authorized CI-only modifications before comparing
     # the remainder to immutable historical bytes. No path-wide exception.
@@ -184,6 +188,9 @@ def preserved_bytes(path):
         relative = path.relative_to(ROOT).as_posix()
     except ValueError:
         return actual
+    if relative in PHASE8_MODIFIED_HASHES:
+        assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == PHASE8_MODIFIED_HASHES[relative], relative
+        actual = subprocess.check_output(['git','show','8b351ce75ca44da2bf7516414ff4e94c645563f9:' + relative],cwd=ROOT)
     if relative in PHASE7_MODIFIED_HASHES:
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == PHASE7_MODIFIED_HASHES[relative], relative
         actual = subprocess.check_output(['git','show','c265466a23100054f48e9c53cbde7b33d65b81aa:' + relative],cwd=ROOT)
@@ -228,7 +235,7 @@ def preserved_bytes(path):
 
 def legacy_modifications(paths, accepted):
     paths = set(paths)
-    for relative in (set(PRIVACY_MODIFIED_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(PHASE7_MODIFIED_HASHES)) & paths:
+    for relative in (set(PRIVACY_MODIFIED_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(PHASE8_MODIFIED_HASHES)) & paths:
         if subprocess.run(['git','cat-file','-e',accepted+':'+relative],cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode:continue
         original = subprocess.check_output(['git', 'show', accepted + ':' + relative], cwd=ROOT)
         if preserved_bytes(ROOT / relative) == original:
@@ -246,7 +253,7 @@ def ci_legacy_tree(tree):
             if node.name == 'test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input':
                 for call in ast.walk(node):
                     if isinstance(call, ast.Call) and isinstance(call.func, ast.Attribute) and call.func.attr == 'assertEqual' and len(call.args) == 2:
-                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46, 49, 51, 56, 59, 62, 64, 68, 79):
+                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46, 49, 51, 56, 59, 62, 64, 68, 79, 86):
                             call.args[1].value = 24
             return node
         def visit_BinOp(self, node):
@@ -262,7 +269,7 @@ def ci_legacy_tree(tree):
             return node.values[0] if len(node.values) == 1 else node
         def visit_List(self, node):
             node = self.generic_visit(node)
-            node.elts = [value for value in node.elts if not (isinstance(value, ast.Starred) and ast.unparse(value) in ("*(':(exclude)' + name for name in DELIVERY_MODIFIED_HASHES)", "*(':(exclude)' + name for name in PHASE7_MODIFIED_HASHES)"))]
+            node.elts = [value for value in node.elts if not (isinstance(value, ast.Starred) and ast.unparse(value) in ("*(':(exclude)' + name for name in DELIVERY_MODIFIED_HASHES)", "*(':(exclude)' + name for name in PHASE7_MODIFIED_HASHES)", "*(':(exclude)' + name for name in PHASE8_MODIFIED_HASHES)"))]
             node.elts = [value for value in node.elts if not (isinstance(value, ast.Constant)
                          and value.value in (':(exclude)engineering/ci/parity.py', ':(exclude)tooling/audit/criteria.py', ':(exclude)tooling/audit/phase6.py',':(exclude)tooling/tests/test_retained_inventory.py',':(exclude)verification/route_a/test_preservation.py'))]
             return node
@@ -276,6 +283,18 @@ def ci_legacy_tree(tree):
 
 
 class PreservationTests(unittest.TestCase):
+    def test_phase8_exact_integration_and_document_changes_reject_mutation(self):
+        self.assertEqual(set(PHASE8_MODIFIED_HASHES), {'README.md','DEV_LINUX.md','docs/roadmap.md','verification/route_a/test_preservation.py'})
+        self.assertEqual(len(PHASE8_NEW_HASHES), 7)
+        self.verified_ci_additions()
+        real_read=Path.read_bytes
+        for name in (*PHASE8_NEW_HASHES,*PHASE8_MODIFIED_HASHES):
+            path=ROOT/name
+            with patch.object(Path,'read_bytes',lambda item: real_read(item)+b'unreviewed' if item==path else real_read(item)):
+                with self.assertRaises(AssertionError):
+                    if name in PHASE8_MODIFIED_HASHES:preserved_bytes(path)
+                    else:self.verified_ci_additions()
+
     def test_phase7_exact_source_and_document_changes_reject_mutation(self):
         self.assertEqual(set(PHASE7_MODIFIED_HASHES), {'README.md','DEV_LINUX.md','docs/roadmap.md','verification/route_a/test_preservation.py'})
         self.assertEqual(len(PHASE7_NEW_HASHES), 11)
@@ -289,13 +308,13 @@ class PreservationTests(unittest.TestCase):
                     else:self.verified_ci_additions()
 
     def verified_ci_additions(self):
-        for relative, expected in {**PHASE7_NEW_HASHES, **DELIVERY_NEW_HASHES, **V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES, **TRACEABILITY_NEW_HASHES, **PERFORMANCE_NEW_HASHES, **RECOVERY_NEW_HASHES, **SECURITY_NEW_HASHES, **{p:h for p,h in RATE_CLOCK_HASHES.items() if p not in SUCCESSOR_HASHES}}.items():
+        for relative, expected in {**PHASE8_NEW_HASHES, **PHASE7_NEW_HASHES, **DELIVERY_NEW_HASHES, **V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES, **TRACEABILITY_NEW_HASHES, **PERFORMANCE_NEW_HASHES, **RECOVERY_NEW_HASHES, **SECURITY_NEW_HASHES, **{p:h for p,h in RATE_CLOCK_HASHES.items() if p not in SUCCESSOR_HASHES}}.items():
             path = ROOT / relative
             self.assertFalse(path.is_symlink(), relative)
             self.assertTrue(path.is_file(), relative)
             self.assertEqual(hashlib.sha256(preserved_bytes(path)).hexdigest(), expected, relative)
             self.assertFalse(path.stat().st_mode & 0o111, relative)
-        return set(PHASE7_NEW_HASHES) | set(DELIVERY_NEW_HASHES) | set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES)
+        return set(PHASE8_NEW_HASHES) | set(PHASE7_NEW_HASHES) | set(DELIVERY_NEW_HASHES) | set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES)
 
     def test_delivery_changes_are_exact_and_reject_mutated_source_or_job(self):
         self.assertEqual(len(DELIVERY_NEW_HASHES), 4)
@@ -367,11 +386,11 @@ class PreservationTests(unittest.TestCase):
     def check_b0_changes(self, changes, untracked, added, head):
         transient = {'.ci-evidence/contracts.json'}
         self.check_source_additions(set(untracked) & transient, set(added) & transient, head)
-        self.assertEqual(set(changes) - (set(untracked) & transient), set(PHASE7_NEW_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
+        self.assertEqual(set(changes) - (set(untracked) & transient), set(PHASE8_NEW_HASHES) | set(PHASE8_MODIFIED_HASHES) | set(PHASE7_NEW_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
 
     def test_b0_change_inventory_validates_transient_output_before_exclusion(self):
         head='a'*40
-        expected=set(PHASE7_NEW_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
+        expected=set(PHASE8_NEW_HASHES) | set(PHASE8_MODIFIED_HASHES) | set(PHASE7_NEW_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
         transient='.ci-evidence/contracts.json'
         with tempfile.TemporaryDirectory() as directory,patch(__name__+'.ROOT',Path(directory)),patch.dict(os.environ):
             for key in ('GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB'):os.environ.pop(key,None)
@@ -388,7 +407,7 @@ class PreservationTests(unittest.TestCase):
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)
         self.assertEqual(len(SUCCESSOR_HASHES), 7)
-        self.assertEqual(len(self.verified_ci_additions()), 79)
+        self.assertEqual(len(self.verified_ci_additions()), 86)
         path = ROOT / 'engineering/ci/inputs/phase6-wave3-cumulative.patch'
         original_read = Path.read_bytes
         with patch.object(Path, 'read_bytes', lambda item: b'changed' if item == path else original_read(item)):
@@ -733,7 +752,7 @@ class PreservationTests(unittest.TestCase):
                 mode=metadata.split()[0]
                 self.assertEqual(bool(path.stat().st_mode & 0o111),mode==b'100755')
         self.assertEqual(stream.read(),b'')
-        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml',':(exclude)engineering/ci/parity.py',':(exclude)tooling/audit/criteria.py',':(exclude)tooling/audit/phase6.py',':(exclude)tooling/tests/test_retained_inventory.py',':(exclude)verification/route_a/test_preservation.py', *(':(exclude)'+name for name in DELIVERY_MODIFIED_HASHES), *(':(exclude)'+name for name in PHASE7_MODIFIED_HASHES)],cwd=ROOT,check=True,capture_output=True)
+        subprocess.run(['git','diff','--exit-code','--diff-filter=MDRT',BASELINE,'--',':(exclude).github/workflows/acp-contracts.yml',':(exclude)engineering/ci/parity.py',':(exclude)tooling/audit/criteria.py',':(exclude)tooling/audit/phase6.py',':(exclude)tooling/tests/test_retained_inventory.py',':(exclude)verification/route_a/test_preservation.py', *(':(exclude)'+name for name in DELIVERY_MODIFIED_HASHES), *(':(exclude)'+name for name in PHASE7_MODIFIED_HASHES), *(':(exclude)'+name for name in PHASE8_MODIFIED_HASHES)],cwd=ROOT,check=True,capture_output=True)
         added=subprocess.check_output(['git','diff','--name-only','--diff-filter=A',BASELINE,'--'],cwd=ROOT,text=True).splitlines()
         new=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
         head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()

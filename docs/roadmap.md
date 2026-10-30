@@ -12,7 +12,7 @@ The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 throu
 | 5 DSL/frontend evaluation | Comparative parser/editor/diagnostic/refactor/performance experiments and technology ADR | **CLOSED AND GREEN (bounded evaluation)**; Phase 5C accepts native worker and source-analysis architectures; core runtime/textual frontend independently DEFERRED; Xtext production REJECTED on provenance; [report](phase5-completion-report.md); [ADR-0004](adr/0004-technology-evaluation.md) |
 | 6 First target | Selected production stack, capability negotiation, Target IR, deterministic generation and migration/ownership tests | **IN PROGRESS, NOT CLOSED**; Java 21 / Spring Boot / Vue / PostgreSQL target prototype; [status](phase6-completion-report.md); P-08 acceptance outstanding |
 | 7 Source intelligence | Symbol/reference/type graph, completeness, ownership, impact and drift regressions | **IN_PROGRESS**: native Java/TypeScript graph, ownership/provenance, impact and drift first increment; [runbook](phase7-source-intelligence.md); bounded completeness, P-10 remains open |
-| 8 Verification | Isolated build/test/migration/security/traceability/evidence gates | Typed obligations and reference evidence checks only; P-11/P-12 open |
+| 8 Verification | Isolated build/test/migration/security/traceability/evidence gates | **IN_PROGRESS**: exact compiler/Target IR/artifact/Source Model integration and existing offline verification; [runbook](phase8-verification.md); runtime and operational evidence remain outstanding |
 | 9 MCP adapter | Mature semantic operations with bounded context, approvals and provenance | Deferred |
 | 10 Reference application | Generate and evolve a serious multi-tenant/workflow/document/report/UI/job application | Two generated synthetic reference domains exercised in Phase 6; serious repeated application evolution remains outstanding |
 | 11 Hardening | Concurrency, recovery, scale, compatibility, supply chain, isolation and fault injection | Deferred |
@@ -77,6 +77,8 @@ inventories using native javac and TypeScript compiler APIs. It provides exact-s
 symbol/reference/type graphs, conservative semantic-ID carrier mappings, ownership,
 impact and drift checks against both generated domains. Vue SFC bodies and dynamic
 runtime relationships remain explicitly unknown; full Phase 7 completion is not claimed.
-Historical Phase 6 checkpoint statements above retain their original status at the
-recorded time. Phases 8–12 remain NOT_STARTED. Operational security remains
+Bounded Phase 7 engineering acceptance is recommended against the original exit
+list; formal closure awaits approval. Phase 8 is now separately authorized and
+IN_PROGRESS. Historical checkpoint statements retain their status at the recorded
+time. Phases 9–12 remain NOT_STARTED. Operational security remains
 NOT_ESTABLISHED and production release remains NOT_AUTHORIZED.

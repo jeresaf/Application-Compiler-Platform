@@ -21,7 +21,13 @@ AUTHORIZED_ENGINEERING = {
 
 PHASE7_DOC_HASHES = {'DEV_LINUX.md': '5c695670cf16abc491a0e67814f738d933a21857e8984a2de9bdae012750262b', 'docs/roadmap.md': 'e624826a3de27f49d341a4f018eac1c6cbaaf4e27d5a67b22def7f12f67e75ad', 'README.md': '45e74e0455a8b06f89df1a96f615c2f516dd2dfd28824fffbdfbef2541ede6b9'}
 
+PHASE8_DOC_HASHES = {'README.md': 'f509489a12080ffa69bb167ea4a1d7330f8f372c41fc60424de538ab18bc1623', 'DEV_LINUX.md': '039c6541c7858aca8f4bff7bac56c04776bbfaee7587f41b91f5ff1195371ff7', 'docs/roadmap.md': 'fa9b63945eab68c9ae565c3fd8535e0b202a86a17787ade9a731b3df75d3817e'}
+
 def authorized_object(name, original):
+    if name in PHASE8_DOC_HASHES:
+        raw=(ROOT/name).read_bytes()
+        assert not (ROOT/name).is_symlink() and hashlib.sha256(raw).hexdigest()==PHASE8_DOC_HASHES[name], name
+        return subprocess.check_output(['git','hash-object','--stdin'],input=raw,cwd=ROOT).decode().strip()
     if name in PHASE7_DOC_HASHES:
         raw=(ROOT/name).read_bytes()
         assert not (ROOT/name).is_symlink() and hashlib.sha256(raw).hexdigest()==PHASE7_DOC_HASHES[name], name

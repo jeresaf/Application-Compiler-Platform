@@ -150,4 +150,12 @@ The first Phase 7 increment analyzes both generated references through native ja
 and TypeScript semantics. See the [verified CLI and focused qualification commands](docs/phase7-source-intelligence.md).
 It preserves human-owned extensions and reports partial completeness, exact source
 identity, impact and drift. It does not change Canonical semantics or release authority.
-Phases 8–12 remain NOT_STARTED; operational security is NOT_ESTABLISHED.
+Phase 8 is separately authorized and IN_PROGRESS; Phases 9–12 remain NOT_STARTED.
+Operational security is NOT_ESTABLISHED.
+
+## Verification integration
+
+The [Phase 8 runbook](docs/phase8-verification.md) documents the exact accepted
+Phase 7 archive input, reproducible qualification and existing-root CLI.
+It executes existing offline artifact/provenance checks and leaves missing behavior
+results NOT_RUN and operational requirements BLOCKED. It does not grant release approval.

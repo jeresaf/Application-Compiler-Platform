@@ -1,0 +1,56 @@
+name: ACP Phase 8 bounded verification
+on:
+  push:
+    branches: ['codex/phase8-verification-integration']
+  pull_request:
+    paths:
+      - 'engineering/verification/**'
+      - 'verification/verification/**'
+      - '.github/workflows/phase8-verification.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  bound-verification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - name: Provision existing hash-pinned compiler harness
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -c 'import platform; assert platform.python_version() == "3.14.7"'
+          python3.14 -m venv "$RUNNER_TEMP/acp-verification-venv"
+          "$RUNNER_TEMP/acp-verification-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt
+          "$RUNNER_TEMP/acp-verification-venv/bin/python3.14" -m pip check
+      - name: Obtain the exact previously verified Phase 7 results
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api repos/jeresaf/Application-Compiler-Platform/actions/artifacts/12988799586/zip > "$RUNNER_TEMP/acp-phase7-source.zip"
+          echo '55ae6a899cd429628563fe3c65e035038c4f9d32d595305f16253f93325e07fe  '"$RUNNER_TEMP/acp-phase7-source.zip" | sha256sum --check --strict
+      - name: Generate both references and execute existing integrity verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-verification-venv/bin/python3.14" -B engineering/verification/qualification.py --workspace "$RUNNER_TEMP/acp-verification" --phase7-archive "$RUNNER_TEMP/acp-phase7-source.zip" 2>&1 | tee "$RUNNER_TEMP/acp-verification.log"
+      - name: Retain exact bindings and unresolved obligations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase8-bounded-verification
+          path: |
+            ${{ runner.temp }}/acp-verification.log
+            ${{ runner.temp }}/acp-verification/execution-owner.json
+            ${{ runner.temp }}/acp-verification/qualification.json
+            ${{ runner.temp }}/acp-verification/*/verification-result.json
+          if-no-files-found: error
