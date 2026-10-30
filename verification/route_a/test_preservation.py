@@ -19,7 +19,13 @@ AUTHORIZED_ENGINEERING = {
 }
 
 
+PHASE7_DOC_HASHES = {'DEV_LINUX.md': '5c695670cf16abc491a0e67814f738d933a21857e8984a2de9bdae012750262b', 'docs/roadmap.md': 'e624826a3de27f49d341a4f018eac1c6cbaaf4e27d5a67b22def7f12f67e75ad', 'README.md': '45e74e0455a8b06f89df1a96f615c2f516dd2dfd28824fffbdfbef2541ede6b9'}
+
 def authorized_object(name, original):
+    if name in PHASE7_DOC_HASHES:
+        raw=(ROOT/name).read_bytes()
+        assert not (ROOT/name).is_symlink() and hashlib.sha256(raw).hexdigest()==PHASE7_DOC_HASHES[name], name
+        return subprocess.check_output(['git','hash-object','--stdin'],input=raw,cwd=ROOT).decode().strip()
     if name not in AUTHORIZED_ENGINEERING:return original
     commit=AUTHORIZED_ENGINEERING[name]
     raw=subprocess.check_output(['git','show',commit+':'+name],cwd=ROOT)

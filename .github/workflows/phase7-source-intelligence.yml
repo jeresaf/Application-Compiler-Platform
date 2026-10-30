@@ -1,0 +1,56 @@
+name: ACP Phase 7 Source Intelligence
+on:
+  push:
+    branches: ['codex/phase7-source-intelligence']
+  pull_request:
+    paths:
+      - 'engineering/source_intelligence/**'
+      - 'verification/source_intelligence/**'
+      - '.github/workflows/phase7-source-intelligence.yml'
+permissions:
+  contents: read
+jobs:
+  native-source-intelligence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Provision pinned compiler harness on disposable runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -c 'import platform; assert platform.python_version() == "3.14.7"'
+          python3.14 -m venv "$RUNNER_TEMP/acp-source-venv"
+          "$RUNNER_TEMP/acp-source-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt
+          "$RUNNER_TEMP/acp-source-venv/bin/python3.14" -m pip check
+      - name: Analyze both generated applications with native language semantics
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-source-venv/bin/python3.14" -B engineering/source_intelligence/qualification.py --workspace "$RUNNER_TEMP/acp-source" --provision-runner-inputs 2>&1 | tee "$RUNNER_TEMP/acp-source.log"
+      - name: Retain source graphs and exact execution identity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase7-source-intelligence
+          path: |
+            ${{ runner.temp }}/acp-source.log
+            ${{ runner.temp }}/acp-source/execution-owner.json
+            ${{ runner.temp }}/acp-source/qualification.json
+            ${{ runner.temp }}/acp-source/*/source-baseline.json
+            ${{ runner.temp }}/acp-source/*/source-baseline.sha256
+            ${{ runner.temp }}/acp-source/*/source-model.json
+          if-no-files-found: error

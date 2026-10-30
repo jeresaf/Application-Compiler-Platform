@@ -59,7 +59,7 @@ These validation commands terminate when complete. The optional demonstration be
 
 ## Evidence and phase boundaries
 
-Phase 1, Phase 2, Phase 3 and Phase 4 are CLOSED AND GREEN. Phase 5 is CLOSED AND GREEN at bounded evaluation scope. Worker/source-analysis architectures are ACCEPTED; core runtime/frontend remain DEFERRED; Xtext production use is REJECTED on provenance. [experiment commands](experiments/phase5/COMMANDS.md) and the [evaluation report](docs/phase5-completion-report.md) record the decisions, raw evidence and limitations. Phase 6 is IN_PROGRESS; Phase 7 is NOT_STARTED.
+Phase 1, Phase 2, Phase 3 and Phase 4 are CLOSED AND GREEN. Phase 5 is CLOSED AND GREEN at bounded evaluation scope. Worker/source-analysis architectures are ACCEPTED; core runtime/frontend remain DEFERRED; Xtext production use is REJECTED on provenance. [experiment commands](experiments/phase5/COMMANDS.md) and the [evaluation report](docs/phase5-completion-report.md) record the decisions, raw evidence and limitations. Phase 6 is IN_PROGRESS with formal release closure BLOCKED; Phase 7 is IN_PROGRESS under the separately authorized Source Intelligence increment.
 The [Phase 4 report](docs/phase4-completion-report.md) records the historical 92-test
 local Linux regression and green Ubuntu 24.04 CI evidence.
 Their completion reports are historical records, including Windows results that
@@ -143,3 +143,11 @@ and CVE-2026-101296 (JNDIRealm). See
 No unrelated upgrade or risk acceptance is implied. Previously unresolved build-tool
 findings remain unresolved; this demonstration does not replace authenticated
 release-scoped vulnerability assessment or operational acceptance.
+
+## Source Intelligence
+
+The first Phase 7 increment analyzes both generated references through native javac
+and TypeScript semantics. See the [verified CLI and focused qualification commands](docs/phase7-source-intelligence.md).
+It preserves human-owned extensions and reports partial completeness, exact source
+identity, impact and drift. It does not change Canonical semantics or release authority.
+Phases 8–12 remain NOT_STARTED; operational security is NOT_ESTABLISHED.

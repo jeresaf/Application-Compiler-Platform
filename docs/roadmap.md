@@ -11,7 +11,7 @@ The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 throu
 | 4 Compiler core | Independently testable compiler stages, ports, diagnostics and mappings | **COMPLETE: bounded Compiler Core 0.1.0, closed and green**; 92 regression tests and Ubuntu CI; eight-stage reference compiler; [report](phase4-completion-report.md); production runtime unselected |
 | 5 DSL/frontend evaluation | Comparative parser/editor/diagnostic/refactor/performance experiments and technology ADR | **CLOSED AND GREEN (bounded evaluation)**; Phase 5C accepts native worker and source-analysis architectures; core runtime/textual frontend independently DEFERRED; Xtext production REJECTED on provenance; [report](phase5-completion-report.md); [ADR-0004](adr/0004-technology-evaluation.md) |
 | 6 First target | Selected production stack, capability negotiation, Target IR, deterministic generation and migration/ownership tests | **IN PROGRESS, NOT CLOSED**; Java 21 / Spring Boot / Vue / PostgreSQL target prototype; [status](phase6-completion-report.md); P-08 acceptance outstanding |
-| 7 Source intelligence | Symbol/reference/type graph, completeness, ownership, impact and drift regressions | Port contracts only; P-09/P-10 open |
+| 7 Source intelligence | Symbol/reference/type graph, completeness, ownership, impact and drift regressions | **IN_PROGRESS**: native Java/TypeScript graph, ownership/provenance, impact and drift first increment; [runbook](phase7-source-intelligence.md); bounded completeness, P-10 remains open |
 | 8 Verification | Isolated build/test/migration/security/traceability/evidence gates | Typed obligations and reference evidence checks only; P-11/P-12 open |
 | 9 MCP adapter | Mature semantic operations with bounded context, approvals and provenance | Deferred |
 | 10 Reference application | Generate and evolve a serious multi-tenant/workflow/document/report/UI/job application | Two generated synthetic reference domains exercised in Phase 6; serious repeated application evolution remains outstanding |
@@ -33,7 +33,7 @@ P-01 through P-05 are resolved at bounded Phase 1 scope; they are not immediate 
 
 ## Reference evolution and later releases
 
-Payment tests monetary types and tenant-scoped command/workflow contracts. Case-management tests organization/users, related owned case records, assigned review, approval/archive workflows and task UI without financial assumptions. Neither is a generated or production-validated application.
+Payment tests monetary types and tenant-scoped command/workflow contracts. Case-management tests organization/users, related owned case records, assigned review, approval/archive workflows and task UI without financial assumptions. Both now have generated reference applications exercised at bounded Phase 6 engineering scope; neither has production release acceptance.
 
 Phase 3 executes initial state, stable-ID rename, optional relationship, required field with migration obligations, security tightening and workflow change in both domains. These are semantic history sequences, not deployed releases. Later work must execute actual backfills, API/event coexistence, UI redesign, target upgrades and recovery, measuring migration safety, custom-source preservation, stale evidence and drift. One-time generation cannot satisfy production readiness.
 
@@ -69,16 +69,14 @@ the earlier fingerprint remains historical evidence at commit `3c10461`.
 See [the Linux runbook](../DEV_LINUX.md) for execution and evidence locations.
 Engineering qualification and internal demonstration do not establish formal release
 acceptance. The sealed 0.5.0 identity and all 39 release predicates are unchanged.
-Phase 6 is IN_PROGRESS; release closure is BLOCKED; Phase 7 is NOT_STARTED.
+Phase 6 is IN_PROGRESS; release closure is BLOCKED; Phase 7 is IN_PROGRESS under separate authorization.
 
-The first separately authorized Phase 7 slice should consume these existing
-ArtifactPlans, semantic ID/revision provenance and ownership inventories through
-the native Java/TypeScript source-analysis architecture accepted in ADR-0004.
-Its bounded output is a symbol/reference/type relationship graph with exact
-source/specification mappings and explicit incomplete/unknown confidence.
-Acceptance requires generated/custom source reconciliation, reference/rename
-impact and drift regressions against both generated domains, preserving HUMAN-owned
-extensions and rejecting stale or forged source mappings. Reuse the existing
-provenance and source-analysis ports; do not introduce a replacement Canonical IR,
-parallel parser framework or MCP-centred architecture. This handoff does not start
-Phase 7 or complete Phases 8–12.
+The separately authorized [Phase 7 Source Intelligence increment](phase7-source-intelligence.md)
+consumes the existing ArtifactPlans, semantic ID/revision provenance and ownership
+inventories using native javac and TypeScript compiler APIs. It provides exact-source
+symbol/reference/type graphs, conservative semantic-ID carrier mappings, ownership,
+impact and drift checks against both generated domains. Vue SFC bodies and dynamic
+runtime relationships remain explicitly unknown; full Phase 7 completion is not claimed.
+Historical Phase 6 checkpoint statements above retain their original status at the
+recorded time. Phases 8–12 remain NOT_STARTED. Operational security remains
+NOT_ESTABLISHED and production release remains NOT_AUTHORIZED.
