@@ -10,6 +10,9 @@ BASELINE='27cbccb34a9ae771c27c7720a967984d0c2d8fdc'
 
 # Exact authorized engineering deltas, never a directory or arbitrary-byte waiver.
 AUTHORIZED_ENGINEERING = {
+    # Authorized current delivery docs; historical decisions remain unchanged.
+    'DEV_LINUX.md': 'ae2d12b13228a71752f501294c97c63dab3ca3b4',
+    'docs/roadmap.md': 'ae2d12b13228a71752f501294c97c63dab3ca3b4',
     'tooling/audit/criteria.py': '1e43974820427b8b1058cda2b00b8479b6b53de2',
     'tooling/audit/phase6.py': '1e43974820427b8b1058cda2b00b8479b6b53de2',
     'tooling/tests/test_retained_inventory.py': '6fe58c37a757fe4ff984e7221a2a6cd877164be2',
@@ -28,7 +31,7 @@ class PreservationTests(unittest.TestCase):
     def test_authorized_engineering_bindings_reject_mutation(self):
         from unittest.mock import patch
         read=Path.read_bytes
-        self.assertEqual(set(AUTHORIZED_ENGINEERING), {'tooling/audit/criteria.py','tooling/audit/phase6.py','tooling/tests/test_retained_inventory.py'})
+        self.assertEqual(set(AUTHORIZED_ENGINEERING), {'tooling/audit/criteria.py','tooling/audit/phase6.py','tooling/tests/test_retained_inventory.py','DEV_LINUX.md','docs/roadmap.md'})
         self.assertEqual(authorized_object('unregistered.py','original'),'original')
         for name in AUTHORIZED_ENGINEERING:
             path=ROOT/name
