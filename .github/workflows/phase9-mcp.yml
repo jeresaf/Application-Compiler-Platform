@@ -1,0 +1,62 @@
+name: ACP Phase 9 read-only MCP
+on:
+  push:
+    branches: ['codex/phase9-mcp-adapter']
+  pull_request:
+    paths:
+      - 'engineering/mcp_adapter/**'
+      - 'verification/mcp_adapter/**'
+      - '.github/workflows/phase9-mcp.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  readonly-mcp:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - name: Isolated hash-locked binary SDK dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -c 'import platform; assert platform.python_version() == "3.14.7"'
+          python3.14 -m venv "$RUNNER_TEMP/acp-mcp-venv"
+          "$RUNNER_TEMP/acp-mcp-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-mcp-venv/bin/python3.14" -m pip check
+          "$RUNNER_TEMP/acp-mcp-venv/bin/python3.14" -m pip freeze
+      - name: Reuse exact Phase 7 and Phase 8 hosted artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --hostname github.com repos/jeresaf/Application-Compiler-Platform/actions/artifacts/12988799586/zip > "$RUNNER_TEMP/acp-mcp-phase7.zip"
+          gh api --hostname github.com repos/jeresaf/Application-Compiler-Platform/actions/artifacts/13039542414/zip > "$RUNNER_TEMP/acp-mcp-phase8.zip"
+          echo '55ae6a899cd429628563fe3c65e035038c4f9d32d595305f16253f93325e07fe  '"$RUNNER_TEMP/acp-mcp-phase7.zip" | sha256sum --check --strict
+          echo 'd2d26338105b5e6df7b4484c24fda7213452d998f50a610bfe7745c6404d67c8  '"$RUNNER_TEMP/acp-mcp-phase8.zip" | sha256sum --check --strict
+      - name: Host prepares existing compiler plans and generated applications
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-mcp-venv/bin/python3.14" -B -m engineering.mcp_adapter.prepare --workspace "$RUNNER_TEMP/acp-mcp-host" --phase7-archive "$RUNNER_TEMP/acp-mcp-phase7.zip" --phase8-archive "$RUNNER_TEMP/acp-mcp-phase8.zip"
+      - name: Actual MCP stdio clients and adversarial boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-mcp-venv/bin/python3.14" -B -m engineering.mcp_adapter.qualification --host-config "$RUNNER_TEMP/acp-mcp-host/host.json" --output "$RUNNER_TEMP/acp-mcp-results" 2>&1 | tee "$RUNNER_TEMP/acp-mcp.log"
+      - name: Retain test counts, identities and measured response sizes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase9-readonly-mcp
+          path: |
+            ${{ runner.temp }}/acp-mcp.log
+            ${{ runner.temp }}/acp-mcp-results/*.json
+          if-no-files-found: error

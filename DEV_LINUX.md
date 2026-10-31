@@ -159,3 +159,9 @@ The [Phase 8 runbook](docs/phase8-verification.md) documents the exact accepted
 Phase 7 archive input, reproducible qualification and existing-root CLI.
 It executes existing offline artifact/provenance checks and leaves missing behavior
 results NOT_RUN and operational requirements BLOCKED. It does not grant release approval.
+
+## Local read-only MCP (Phase 9)
+
+The [MCP runbook](docs/phase9-mcp.md) exposes the existing approved specifications,
+compiler plans, native Source Models and retained verification results over stdio.
+Phase 9 is IN_PROGRESS; invocation grants no approval or release authority.
