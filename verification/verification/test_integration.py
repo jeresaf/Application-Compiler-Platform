@@ -14,6 +14,13 @@ class VerificationTests(unittest.TestCase):
    cls.sessions[domain]=Session(app,ref/'source-baseline.json',(ref/'source-baseline.sha256').read_text().strip(),ref/'source-model.json',sha((ref/'source-model.json').read_bytes()))
   cls.results={d:s.evaluate() for d,s in cls.sessions.items()}
   for d,r in cls.results.items():(cls.work/d/'verification-result.json').write_bytes(encode(r))
+  cls.hosted=None;cls.executed={}
+  if os.environ.get('ACP_EXECUTION_EVIDENCE'):
+   from engineering.verification.execution import HostedExecutions
+   cls.hosted=HostedExecutions(Path(os.environ['ACP_EXECUTION_EVIDENCE']),os.environ['ACP_EXECUTION_EVALUATED_AT'])
+   (cls.work/'github-api-observations.json').write_bytes(encode(cls.hosted.observations))
+   for d,session in cls.sessions.items():
+    cls.executed[d]=session.evaluate(execution=cls.hosted);(cls.work/d/'execution-verification-result.json').write_bytes(encode(cls.executed[d]))
  def test_both_approved_specifications_target_ir_source_and_artifacts_are_bound(self):
   for d,s in self.sessions.items():
    r=self.results[d];self.assertEqual(r['inputs']['canonicalDigest'],approved_snapshot(d)['contentDigest']);self.assertEqual(r['inputs']['artifactPlanDigest'],s.b['artifactPlanDigest']);self.assertEqual(r['inputs']['targetIRDigest'],fingerprint(s.target));self.assertEqual(r['inputs']['sourceModelDigest'],s.model['digest'])
@@ -88,3 +95,82 @@ class VerificationTests(unittest.TestCase):
   try:
    with self.assertRaisesRegex(ValueError,'PHASE7_ARCHIVE_DIGEST'):reference_inputs(p,self.work/'bad-reference')
   finally:p.unlink()
+
+ def test_hosted_build_runtime_and_migration_results_bind_both_applications(self):
+  from engineering.verification.execution import FAMILIES,PRODUCER
+  self.assertIsNotNone(self.hosted,'LIVE_HOSTED_EVIDENCE_REQUIRED')
+  for d,r in self.executed.items():
+   by={row['id']:row for row in r['results']}
+   for family in FAMILIES:
+    row=by['execution:'+family];self.assertEqual(row['observation']['execution']['sourceCommit'],PRODUCER)
+    if family!='dependency-security-assessment':self.assertEqual(row['result'],'PASS',(d,family,row['reasons']))
+   self.assertEqual(r['inputs']['executionEvidence']['authority'],'AUTHENTICATED_GITHUB_API')
+ def test_partial_source_does_not_block_independent_execution(self):
+  for r in self.executed.values():
+   by={row['id']:row for row in r['results']};self.assertEqual(by['source-model-completeness']['result'],'BLOCKED')
+   self.assertEqual(by['execution:backend-build']['result'],'PASS');self.assertEqual(by['execution:migration-failure-recovery']['result'],'PASS')
+ def test_only_existing_assertion_mapped_semantic_obligations_are_promoted(self):
+  for d,r in self.executed.items():
+   passed=[v for v in r['results'] if v['kind']=='SEMANTIC_OBLIGATION' and v['result']=='PASS']
+   self.assertEqual(len(passed),1);self.assertEqual({o['id'] for o in passed[0]['origins']},{'BOUNDARY-TASK'})
+   self.assertTrue(all(v['result']=='NOT_RUN' for v in r['results'] if v['kind']=='SEMANTIC_OBLIGATION' and v not in passed))
+ def test_scanner_findings_remain_visible_and_do_not_mean_clean_security(self):
+  for r in self.executed.values():
+   row=next(v for v in r['results'] if v['id']=='execution:dependency-security-assessment')
+   self.assertIn(row['result'],('FAIL','BLOCKED'));self.assertTrue(row['observation']['evidence']['findings'] or row['observation']['evidence']['unknown'] or row['observation']['evidence']['unresolvedEmbeddedBuildArtifacts'])
+ def altered_hosted(self,kind,change):
+  import copy
+  value=copy.copy(self.hosted);value.assets=copy.deepcopy(self.hosted.assets);value.witnesses=dict(self.hosted.witnesses);change(value.assets[kind]['report']);return value
+ def test_wrong_execution_application_and_canonical_are_rejected(self):
+  for key in ('snapshot','canonical'):
+   value=self.altered_hosted('demonstration',lambda r:r['applications']['payment'].__setitem__(key,'wrong'))
+   self.assertFalse(any(v['result']=='PASS' for v in self.sessions['payment'].evaluate(execution=value)['results'] if v['kind']=='EXECUTION_OBLIGATION' and v['observation']['execution']['job']==self.hosted.assets['demonstration']['job']['id']))
+ def test_stale_and_future_execution_timestamps_fail_closed(self):
+  import copy
+  from datetime import timedelta
+  from engineering.verification.execution import instant
+  for offset in (-2,2):
+   value=copy.copy(self.hosted);value.evaluated_at=(instant(self.hosted.evaluated_at)+timedelta(days=offset)).isoformat();value.context=copy.deepcopy(self.hosted.context);value.context['executionEvidence']['evaluatedAt']=value.evaluated_at
+   r=self.sessions['payment'].evaluate(execution=value);self.assertTrue(all(v['result']!='PASS' for v in r['results'] if v['kind']=='EXECUTION_OBLIGATION'))
+ def test_changed_dependency_locks_and_test_executor_identities_are_rejected(self):
+  from unittest.mock import patch
+  from engineering.verification import execution
+  value=self.altered_hosted('demonstration',lambda r:r['sourceHashes'].__setitem__('engineering/dependency_resolution/maven-artifacts.lock.json','0'*64))
+  r=self.sessions['payment'].evaluate(execution=value);self.assertEqual(next(v for v in r['results'] if v['id']=='execution:backend-build')['result'],'BLOCKED')
+  with patch.object(execution,'source_closure',side_effect=ValueError('CHANGED_EXECUTOR')):
+   unavailable=execution.HostedExecutions(self.hosted.directory,self.hosted.evaluated_at)
+  self.assertFalse(unavailable.assets)
+ def test_forged_pass_report_cannot_replace_authenticated_artifact_bytes(self):
+  value=self.altered_hosted('demonstration',lambda r:r.__setitem__('arbitrary','PASS'))
+  r=self.sessions['payment'].evaluate(execution=value);self.assertEqual(next(v for v in r['results'] if v['id']=='execution:browser-e2e')['result'],'BLOCKED')
+ def test_missing_required_results_and_conflicting_reports_fail_closed(self):
+  from unittest.mock import patch
+  original=self.hosted.json
+  for path in ('runtime-results.json','payment-runtime/business-browser.json'):
+   def changed(kind,name):
+    r=original(kind,name)
+    if kind=='demonstration' and name==path:
+     if name=='runtime-results.json':r['applications']={}
+     else:r['stats']['expected']=0
+    return r
+   with patch.object(self.hosted,'json',side_effect=changed):r=self.sessions['payment'].evaluate(execution=self.hosted)
+   self.assertEqual(next(v for v in r['results'] if v['id']=='execution:browser-e2e')['result'],'BLOCKED')
+ def test_changed_archive_and_missing_execution_evidence_never_pass(self):
+  import copy
+  value=copy.copy(self.hosted);value.assets=copy.deepcopy(self.hosted.assets);p=self.work/'wrong-execution.zip';p.write_bytes(b'forged')
+  try:
+   value.assets['demonstration']['path']=p;r=self.sessions['payment'].evaluate(execution=value)
+   self.assertEqual(next(v for v in r['results'] if v['id']=='execution:backend-build')['result'],'BLOCKED')
+   value.assets={};value.errors={};r=self.sessions['payment'].evaluate(execution=value);self.assertTrue(all(v['result']=='BLOCKED' for v in r['results'] if v['kind']=='EXECUTION_OBLIGATION'))
+  finally:p.unlink()
+ def test_live_authority_outage_cannot_be_replaced_by_local_checksum_claims(self):
+  from unittest.mock import patch
+  from engineering.verification import execution
+  with patch.object(execution,'source_closure',return_value=self.hosted.closure),patch.object(execution,'api',side_effect=ValueError('API_OUTAGE')):
+   value=execution.HostedExecutions(self.hosted.directory,self.hosted.evaluated_at)
+  self.assertFalse(value.assets);r=self.sessions['payment'].evaluate(execution=value);self.assertTrue(all(v['result']=='BLOCKED' for v in r['results'] if v['kind']=='EXECUTION_OBLIGATION'))
+  with patch.object(execution.subprocess,'check_output',return_value=b'{}') as transport:
+   execution.api('repos/'+execution.REPOSITORY+'/actions/runs/'+str(execution.RUN))
+   self.assertEqual(transport.call_args.args[0][:4],['gh','api','--hostname','github.com'])
+ def test_execution_results_reproduce_and_replay_under_identical_declared_inputs(self):
+  for d,s in self.sessions.items():self.assertEqual(s.verify_retained(self.executed[d],execution=self.hosted),self.executed[d])

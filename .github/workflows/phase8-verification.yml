@@ -36,13 +36,25 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gh api repos/jeresaf/Application-Compiler-Platform/actions/artifacts/12988799586/zip > "$RUNNER_TEMP/acp-phase7-source.zip"
+          gh api --hostname github.com repos/jeresaf/Application-Compiler-Platform/actions/artifacts/12988799586/zip > "$RUNNER_TEMP/acp-phase7-source.zip"
           echo '55ae6a899cd429628563fe3c65e035038c4f9d32d595305f16253f93325e07fe  '"$RUNNER_TEMP/acp-phase7-source.zip" | sha256sum --check --strict
-      - name: Generate both references and execute existing integrity verification
+      - name: Obtain existing hosted execution evidence without rebuilding
+        env:
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          "$RUNNER_TEMP/acp-verification-venv/bin/python3.14" -B engineering/verification/qualification.py --workspace "$RUNNER_TEMP/acp-verification" --phase7-archive "$RUNNER_TEMP/acp-phase7-source.zip" 2>&1 | tee "$RUNNER_TEMP/acp-verification.log"
+          mkdir "$RUNNER_TEMP/acp-execution-evidence"
+          gh api --hostname github.com repos/jeresaf/Application-Compiler-Platform/actions/artifacts/12997816106/zip > "$RUNNER_TEMP/acp-execution-evidence/demonstration.zip"
+          gh api --hostname github.com repos/jeresaf/Application-Compiler-Platform/actions/artifacts/12997421297/zip > "$RUNNER_TEMP/acp-execution-evidence/recovery.zip"
+          gh api --hostname github.com repos/jeresaf/Application-Compiler-Platform/actions/artifacts/12996254772/zip > "$RUNNER_TEMP/acp-execution-evidence/security.zip"
+      - name: Generate both references and verify existing execution evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-verification-venv/bin/python3.14" -B engineering/verification/qualification.py --workspace "$RUNNER_TEMP/acp-verification" --phase7-archive "$RUNNER_TEMP/acp-phase7-source.zip" --execution-evidence "$RUNNER_TEMP/acp-execution-evidence" --evaluated-at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" 2>&1 | tee "$RUNNER_TEMP/acp-verification.log"
       - name: Retain exact bindings and unresolved obligations
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,4 +65,6 @@ jobs:
             ${{ runner.temp }}/acp-verification/execution-owner.json
             ${{ runner.temp }}/acp-verification/qualification.json
             ${{ runner.temp }}/acp-verification/*/verification-result.json
+            ${{ runner.temp }}/acp-verification/*/execution-verification-result.json
+            ${{ runner.temp }}/acp-verification/github-api-observations.json
           if-no-files-found: error

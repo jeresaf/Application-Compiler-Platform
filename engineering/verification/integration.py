@@ -64,7 +64,7 @@ class Session:
   require(sha(self.model_path.read_bytes())==self.model_pin,'STALE_SOURCE_MODEL_FILE')
   require(sha(Path(__file__).read_bytes())==self.inputs['executorSHA256'],'STALE_EXECUTOR')
   current(self.model,self.root)
- def evaluate(self,execute=True):
+ def evaluate(self,execute=True,execution=None):
   require(type(execute) is bool,'EXECUTION_FLAG')
   rows=[]
   def add(id,kind,result,*,origins=(),artifacts=(),reason=(),obligation=None,observation=None):
@@ -92,30 +92,38 @@ class Session:
     origins=requirement.get('origins',[requirement['origin']] if 'origin' in requirement else [])
     require(origins and all(self.revisions.get(o['id'])==o['revision'] for o in origins),'DEPLOYMENT_ORIGIN_BINDING')
     add('deployment:'+digest([section,requirement]),'DEPLOYMENT_OBLIGATION','BLOCKED',origins=origins,artifacts=['acp/deployment-requirements.json'],reason=['INDEPENDENT_OPERATIONAL_OR_HUMAN_EVIDENCE_REQUIRED'],observation=requirement)
+  result_inputs=self.inputs
+  if execution is not None:
+   rows=execution.apply(self,rows);result_inputs={**self.inputs,**execution.context}
   # An input can become stale during a verifier call. No affected PASS survives.
   after,_,after_errors=outcome(self.check_fresh)
   if after!='PASS':
    for row in rows:
     if row['result']=='PASS':row['result']='BLOCKED';row['reasons']=['INPUTS_CHANGED_OR_STALE',*after_errors]
-  return validate_result(seal({'schema':SCHEMA,'scope':'QUALIFICATION_ONLY','inputs':self.inputs,'results':sorted(rows,key=lambda r:r['id']),'summary':summary(rows),'releaseDisposition':'PHASE6_RELEASE_CLOSURE_BLOCKED'}))
- def verify_retained(self,result):
+  return validate_result(seal({'schema':SCHEMA,'scope':'QUALIFICATION_ONLY','inputs':result_inputs,'results':sorted(rows,key=lambda r:r['id']),'summary':summary(rows),'releaseDisposition':'PHASE6_RELEASE_CLOSURE_BLOCKED'}))
+ def verify_retained(self,result,execution=None):
   """Compare a retained local result with independently rerun existing predicates.
 
   A checksum or caller-provided PASS label alone never establishes execution.
   This is local engineering replay, not an authenticated release attestation.
   """
-  validate_result(result);require(result['inputs']==self.inputs,'STALE_OR_MISMATCHED_EVIDENCE');self.check_fresh()
-  actual=self.evaluate();require(result==actual,'MISSING_OR_CHANGED_VERIFICATION_RESULT');return actual
+  validate_result(result);require(result['inputs']=={**self.inputs,**(execution.context if execution is not None else {})},'STALE_OR_MISMATCHED_EVIDENCE');self.check_fresh()
+  actual=self.evaluate(execution=execution);require(result==actual,'MISSING_OR_CHANGED_VERIFICATION_RESULT');return actual
 
 @dataclass(frozen=True)
 class ExistingEvidenceExecutor:
  """Existing logical EvidenceExecutor port, no arbitrary commands or release grant."""
  session: Session
  output: Path
+ execution: object = None
+ @property
+ def inputs(self):return {**self.session.inputs,**(self.execution.context if self.execution is not None else {})}
+ @property
+ def input_digests(self):return tuple('sha256:'+digest({k:self.inputs[k]}) for k in sorted(self.inputs))
  def execute(self,plan,input_digests):
-  request=plan.read();require(set(request)=={'schema','operation','inputsDigest'} and request['schema']=='acp-verification-request/1' and request['operation']=='VERIFY' and request['inputsDigest']==digest(self.session.inputs),'EXECUTION_REQUEST')
-  require(tuple(input_digests)==self.session.input_digests,'EXECUTION_INPUT_DIGESTS')
+  request=plan.read();require(set(request)=={'schema','operation','inputsDigest'} and request['schema']=='acp-verification-request/1' and request['operation']=='VERIFY' and request['inputsDigest']==digest(self.inputs),'EXECUTION_REQUEST')
+  require(tuple(input_digests)==self.input_digests,'EXECUTION_INPUT_DIGESTS')
   require(not self.output.resolve().is_relative_to(self.session.root.resolve()),'OUTPUT_INSIDE_APPLICATION')
-  result=self.session.evaluate();raw=encode(result)
+  result=self.session.evaluate(execution=self.execution);raw=encode(result)
   with self.output.open('xb') as stream:stream.write(raw)
   return Document.of({'schema':'acp-verification-descriptor/1','scope':'QUALIFICATION_ONLY','resultDigest':result['digest'],'fileSHA256':sha(raw),'summary':result['summary'],'releaseDisposition':result['releaseDisposition']})

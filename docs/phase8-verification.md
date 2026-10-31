@@ -66,9 +66,13 @@ databases, application builds or repeated Phase 7 suites are required.
 ```bash
 python3.14 engineering/verification/qualification.py \
   --workspace /tmp/acp-phase8-verification \
-  --phase7-archive /path/to/phase7-source-intelligence.zip
+  --phase7-archive /path/to/phase7-source-intelligence.zip \
+  --execution-evidence /path/to/hosted-execution-archives \
+  --evaluated-at "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
+The qualification now includes 30 tests; an authenticated `gh` session with
+repository Actions-read access is required for live execution provenance.
 The original accepted archive is artifact `12988799586` from run `41081168320`,
 SHA-256 `55ae6a899cd429628563fe3c65e035038c4f9d32d595305f16253f93325e07fe`.
 It supplies the actual native models and original bindings; its source commit,
@@ -95,3 +99,57 @@ through existing executors before exposing mature operations in Phase 9 MCP.
 Phases 9–12 are NOT_STARTED. Phase 6 retains all 21 release blockers and its 39
 unchanged predicates. Sealed 0.5.0 and unsealed 0.6.0 identities are unchanged.
 Operational security is NOT_ESTABLISHED; production release is NOT_AUTHORIZED.
+
+## Execution-evidence extension
+
+The existing integration consumes the actual demonstration, recovery and security
+artifacts from [qualified baseline run 41098093388](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/41098093388)
+at `9fd0fe07249fc1b23e9850175c478d303e1e06c8`. It does not rebuild applications or
+start PostgreSQL merely to ingest these results. GitHub's authenticated API must
+independently confirm repository, source commit, completed run/job/step and exact
+artifact digest. A local checksum or a JSON field claiming authenticated authority
+cannot replace those checks. API unavailability blocks reuse rather than upgrading
+local observations to authenticated hosted evidence.
+
+The exact producing executor and dependency-lock closure is compared with the
+pinned source commit. The demonstration also binds the original compiler audits,
+ArtifactPlan and every generated file to the current Source Model. Recovery's
+existing test compiler has different provenance labels; its own Target IR and
+ArtifactPlan are reconstructed with that existing compiler. Admission is scoped
+to exact equality of the executable target model and all backend, migration and
+UI-model bytes. The producer identities remain distinct from the consumer's
+identities; semantic similarity is insufficient. Package-readiness JUnit and
+scanner evidence retain their own producing context and immutable packaged
+library inventory.
+
+Real results cover backend build/readiness tests, frontend type checking/tests/
+build, API startup, disposable issuer/JWKS/PKCE authentication, browser journeys,
+PostgreSQL migration history, committed-state restart, idempotency/audit, the
+existing 15-case migration/crash recovery matrix and bounded dependency scanning.
+Reported vulnerabilities, unknown identities and incomplete coverage remain FAIL
+or BLOCKED; a successful scanner job does not mean a clean assessment. Existing
+recovery and replay-state assertion evaluators are reused. Missing family results,
+retries, skips, conflicting reports and substituted inputs fail closed.
+
+Only the existing Phase 6 assertion-to-object mapping for `BOUNDARY-TASK` can
+promote its exact semantic obligation, with the actual two browser permission/
+forged-call/tenant scenarios and unchanged assertion source. Builds and runtime
+health do not discharge business acceptance, policy, backup, accessibility or
+production requirements. Partial Vue/CSS analysis does not block independently
+verified backend/recovery execution; full source traceability remains BLOCKED.
+Historical Phase 6 engineering qualifications are not revoked by NOT_RUN here:
+that status means no complete result is bound by this invocation.
+
+Freshness uses the applicable reference specification's existing EvidenceRequirement
+maximum age and an explicit UTC evaluation instant, both retained in the report.
+Identical inputs, authority observations and evaluation instant produce identical
+results. A historical evaluation is not a claim of present freshness. Expired
+results require fresh execution evidence, not a relaxed threshold.
+
+For existing-root CLI calls, add `--execution-evidence` and `--evaluated-at` to
+`run` or `verify-retained`. Archive filenames are `demonstration.zip`, `recovery.zip`
+and `security.zip`; exact service artifact IDs/digests are pinned by the adapter.
+No second runner, witness registry, signing authority or release profile is created.
+The user-approved append-only custody destination is
+`/home/aiko-jerry/ACP-Evidence-Vault/phase8-execution-evidence-20261030/`.
+Preserved observations document custody, not human signatures or operational trust.
