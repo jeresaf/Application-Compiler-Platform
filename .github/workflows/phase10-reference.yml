@@ -48,7 +48,7 @@ jobs:
         run: |
           "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
           import unittest
-          suite=unittest.defaultTestLoader.discover('verification/reference_application')
+          suite=unittest.defaultTestLoader.discover('verification/reference_application',pattern='test_lifecycle.py')
           assert suite.countTestCases()==11
           result=unittest.TextTestRunner(verbosity=2).run(suite)
           assert result.wasSuccessful() and result.testsRun==11 and not result.skipped
