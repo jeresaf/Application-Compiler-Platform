@@ -25,7 +25,13 @@ PHASE8_DOC_HASHES = {'README.md': 'f509489a12080ffa69bb167ea4a1d7330f8f372c41fc6
 
 PHASE9_DOC_HASHES = {'README.md': '404ee312fbdaac2e396d6279272d07266cf21ef4571def19c79a307f288a8e71', 'DEV_LINUX.md': 'de2b0d811715eb56670239d987b4d3f1fbe139bcbe1dea97ae4c40bad190ac97', 'docs/roadmap.md': '3d1199f5b662b05ce8ccfdb3334f2b0b421a7b39b447a44c5841424e34a2439b'}
 
+PHASE10_DOC_HASHES = {'README.md': 'c2c0d72e705bf7c0d8f25f84e64bc9fecf97baf4f32eda382fd59d72076db375', 'DEV_LINUX.md': '942a286fc2a447746c13fac505521d0f59d30a1584dcdb2924d03abc8bacba79', 'docs/roadmap.md': '16e990c877188b9ac8e614091a1a2ca4ab39be5a63d0645db9aa837a259d2c68'}
+
 def authorized_object(name, original):
+    if name in PHASE10_DOC_HASHES:
+        raw=(ROOT/name).read_bytes()
+        assert not (ROOT/name).is_symlink() and hashlib.sha256(raw).hexdigest()==PHASE10_DOC_HASHES[name], name
+        return subprocess.check_output(['git','hash-object','--stdin'],input=raw,cwd=ROOT).decode().strip()
     if name in PHASE9_DOC_HASHES:
         raw=(ROOT/name).read_bytes()
         assert not (ROOT/name).is_symlink() and hashlib.sha256(raw).hexdigest()==PHASE9_DOC_HASHES[name], name

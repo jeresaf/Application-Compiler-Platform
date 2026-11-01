@@ -14,7 +14,7 @@ The charter's phase order remains authoritative. Model 0.2.0 resolves P-01 throu
 | 7 Source intelligence | Symbol/reference/type graph, completeness, ownership, impact and drift regressions | **IN_PROGRESS**: native Java/TypeScript graph, ownership/provenance, impact and drift first increment; [runbook](phase7-source-intelligence.md); bounded completeness, P-10 remains open |
 | 8 Verification | Isolated build/test/migration/security/traceability/evidence gates | **IN_PROGRESS**: exact compiler/Target IR/artifact/Source Model integration and existing offline verification; [runbook](phase8-verification.md); runtime and operational evidence remain outstanding |
 | 9 MCP adapter | Mature semantic operations with bounded context, approvals and provenance | **IN_PROGRESS**: bounded read-only stdio integration; [runbook](phase9-mcp.md); no mutation or approval authority |
-| 10 Reference application | Generate and evolve a serious multi-tenant/workflow/document/report/UI/job application | Two generated synthetic reference domains exercised in Phase 6; serious repeated application evolution remains outstanding |
+| 10 Reference application | Generate and evolve a serious multi-tenant/workflow/document/report/UI/job application | **IN_PROGRESS**: first approved Case Management R0/R1 regeneration lifecycle; [runbook](phase10-reference-application.md); R2 authenticated semantic/history/data-binding authority remains outstanding |
 | 11 Hardening | Concurrency, recovery, scale, compatibility, supply chain, isolation and fault injection | Deferred |
 | 12 Production validation | Repeated create/modify/migrate/verify/deploy/maintain/recover releases passing all profile gates | Not claimed |
 

@@ -1,0 +1,77 @@
+name: ACP Phase 10 Case Management lifecycle
+on:
+  push:
+    branches: ['codex/phase10-reference-application']
+  pull_request:
+    paths:
+      - 'engineering/reference_application/**'
+      - 'verification/reference_application/**'
+      - '.github/workflows/phase10-reference.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  case-management-lifecycle:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated locked SDK and compiler inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-reference-venv"
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -m pip check
+      - name: Existing exact Phase 7 and Phase 8 observations
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --hostname github.com repos/jeresaf/Application-Compiler-Platform/actions/artifacts/12988799586/zip > "$RUNNER_TEMP/phase7.zip"
+          gh api --hostname github.com repos/jeresaf/Application-Compiler-Platform/actions/artifacts/13039542414/zip > "$RUNNER_TEMP/phase8.zip"
+      - name: Focused lifecycle and authority regressions
+        run: |
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite=unittest.defaultTestLoader.discover('verification/reference_application')
+          assert suite.countTestCases()==11
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==11 and not result.skipped
+          PYTHON
+      - name: Exact disposable database runtime
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Generate build browse regenerate preserve data and restart
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B -m engineering.reference_application.lifecycle qualify --workspace "$RUNNER_TEMP/acp-reference" --phase7-archive "$RUNNER_TEMP/phase7.zip" --phase8-archive "$RUNNER_TEMP/phase8.zip" 2>&1 | tee "$RUNNER_TEMP/acp-reference.log"
+      - name: Retain exact lifecycle observations and approval boundary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase10-reference-lifecycle
+          path: |
+            ${{ runner.temp }}/acp-reference.log
+            ${{ runner.temp }}/acp-reference/*.json
+            ${{ runner.temp }}/acp-reference/*-inspection/*.json
+            ${{ runner.temp }}/acp-reference/*-database/
+            ${{ runner.temp }}/acp-reference/runtime/
+            ${{ runner.temp }}/acp-reference/r0-build/
+            ${{ runner.temp }}/acp-reference/r1-build/
+            ${{ runner.temp }}/acp-reference-inputs/owner.json
+          if-no-files-found: error

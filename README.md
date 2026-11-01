@@ -96,3 +96,9 @@ Current target CI requires actual full admission with builds and real browser/Po
 The [MCP runbook](docs/phase9-mcp.md) exposes the existing approved specifications,
 compiler plans, native Source Models and retained verification results over stdio.
 Phase 9 is IN_PROGRESS; invocation grants no approval or release authority.
+
+## Case Management lifecycle (Phase 10)
+
+The [reference lifecycle runbook](docs/phase10-reference-application.md) runs the
+approved Case Management workflow, regenerates it against retained disposable
+PostgreSQL data, preserves human-owned source, and records the R2 approval boundary.
