@@ -1,0 +1,92 @@
+{
+  "changeVersion": "0.3.0",
+  "id": "CHANGE-R3-INTAKE-REQUIREMENTS",
+  "author": "assistant:proposal",
+  "intent": "UNAPPROVED intake requirements; native CREATE command protocol is unsupported",
+  "branch": "BRANCH-R3-INTAKE",
+  "base": {
+    "sequence": 0,
+    "digest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+    "journalDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "operations": [
+    {
+      "op": "ADD",
+      "node": {
+        "revision": 1,
+        "lifecycle": "APPROVED",
+        "steward": "assistant:proposal",
+        "origins": [
+          {
+            "source": "proposal:phase10-r3-intake",
+            "locator": "intake",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "id": "REQ-R3-INTAKE",
+        "kind": "Requirement",
+        "name": "PROPOSED case intake",
+        "basis": [],
+        "data": {
+          "statement": "UNAPPROVED synthetic case creation: generated identity, authenticated tenant and self-assignee, explicit title and summary, optional note absent, open initial state, separate create permission, atomic audit and durable idempotency. Existing review/approve/archive unchanged. No accepted CREATE Command exists.",
+          "priority": "MUST",
+          "acceptance": [
+            {
+              "id": "AC-R3-INTAKE",
+              "revision": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "op": "ADD",
+      "node": {
+        "revision": 1,
+        "lifecycle": "APPROVED",
+        "steward": "assistant:proposal",
+        "origins": [
+          {
+            "source": "proposal:phase10-r3-intake",
+            "locator": "intake",
+            "actor": "assistant:proposal",
+            "actorType": "AI"
+          }
+        ],
+        "id": "AC-R3-INTAKE",
+        "kind": "AcceptanceCriterion",
+        "name": "PROPOSED intake acceptance",
+        "basis": [
+          {
+            "id": "REQ-R3-INTAKE",
+            "revision": 1
+          }
+        ],
+        "data": {
+          "requirement": {
+            "id": "REQ-R3-INTAKE",
+            "revision": 1
+          },
+          "scenario": "Generated UI/API create exactly one tenant-scoped case, validate closed typed inputs, reject unauthorized/expired/revoked sessions, preserve Unicode, replay the same identity and reject changed input for the same key. Persist audit and workflow state across restart. Synthetic preview only; not deployment acceptance."
+        }
+      }
+    }
+  ],
+  "reads": [],
+  "migration": {
+    "id": "MIG-R3-REQUIREMENTS",
+    "mode": "NONE",
+    "compatibility": "BACKWARD",
+    "irreversible": false,
+    "steps": [],
+    "preconditions": [],
+    "verification": [],
+    "recovery": "Requirements-only proposal changes no persisted schema; no execution or migration authorization.",
+    "observations": []
+  },
+  "sources": [],
+  "parents": [],
+  "rollbackOf": null,
+  "canonicalVersion": "0.3.0"
+}

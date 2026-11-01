@@ -1,0 +1,37 @@
+{
+  "schema": "acp-intake-synthetic/1",
+  "scope": "SYNTHETIC_PREVIEW_ONLY",
+  "requirement": "REQ-R3-INTAKE",
+  "acceptance": "AC-R3-INTAKE",
+  "entity": "CASE",
+  "operation": "PREVIEW-CREATE-CASE",
+  "path": "/api/intake-preview",
+  "role": "ROLE-REVIEWER",
+  "identity": "CASE-ID",
+  "tenant": "CASE-TENANT",
+  "assignee": "CASE-ASSIGNEE",
+  "initialState": "STATE-OPEN",
+  "inputs": {
+    "title": {
+      "field": "FLD-CASE-TITLE",
+      "member": "FLD-TITLE",
+      "maxLength": 200
+    },
+    "summary": {
+      "field": "FLD-TASK-SUMMARY",
+      "member": null,
+      "maxLength": 2000
+    }
+  },
+  "optionalAbsent": [
+    "FLD-NOTE"
+  ],
+  "idempotencySeconds": 3600,
+  "rate": {
+    "requests": 30,
+    "windowSeconds": 60,
+    "burst": 10
+  },
+  "routing": "AUTHENTICATED_SELF",
+  "authority": "NOT_APPROVED"
+}

@@ -196,6 +196,8 @@ R2_NEW_HASHES = {'engineering/reference_application/evolution.py': '911c8fe9f909
 
 R2_MODIFIED_HASHES = {'.github/workflows/phase10-reference.yml': 'a5c57a2efe40f5773e3ff0aeb67ca76142ca1dd33329a030ca30606bbce44e44'}
 
+R3_NEW_HASHES = {'.github/workflows/phase10-r3.yml': '1532ed5c12cfbb70f5a79b0006b48146f0e55bb3e57102c8e93ae10645347203', 'docs/phase10-r3-intake.md': '5ba24eac503008ac5f6df6e83d5019beea27510408aae8f2432a8885f82a542a', 'engineering/reference_application/intake.py': '4517f1325e1bf49654f14e7adcf60231c02d5ed23951ddd0991c9de54ef667eb', 'engineering/reference_application/intake_run.py': '064c2347586e0032c434483c6da44b4fd1afde7165f4d5b117d2582d6e2031e5', 'engineering/reference_application/intake_templates/IntakeController.java': '76cd92e77756328ef84f28cd62d915ee11d944f0320564971a89ec7f598e4e7a', 'engineering/reference_application/intake_templates/IntakeForm.vue': 'b9e05b5b5d82e0b17fb3251b451ef9f230b43c2014736749b21c725abc2d3956', 'verification/reference_application/test_intake.py': 'c229653e08b732555f237ebabada26f9efc92860a894b6c91a6594b9db218573', 'proposals/phase10-r3-intake/candidate.json': '9a331fca17392a5bd093d3035f22cd72ad2fb82c8e62e5f2b7f2bc1082235ab3', 'proposals/phase10-r3-intake/change.json': '4662d3f7019fd1a34df8403c0b87ca0564b202a4b7576bc0e44999c455271c85', 'proposals/phase10-r3-intake/plan.json': 'a5cf60cdcc21a5dcfd7f84e906ffdec98abcbe3ef953e04b4f792997db75b323', 'proposals/phase10-r3-intake/review.json': '8c7cf8ca9f6fe8d1a05465fb8e030bd3d6ff269855ccc9cdf33218bcc9ec24b8', 'proposals/phase10-r3-intake/synthetic-contract.json': 'b84a5c1caff6e4738eaf3e407ff90bcd40cd7e6c515d7470a9c857f243d988cc'}
+
 def preserved_bytes(path):
     # Validate the exact two authorized CI-only modifications before comparing
     # the remainder to immutable historical bytes. No path-wide exception.
@@ -281,7 +283,7 @@ def ci_legacy_tree(tree):
             if node.name == 'test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input':
                 for call in ast.walk(node):
                     if isinstance(call, ast.Call) and isinstance(call.func, ast.Attribute) and call.func.attr == 'assertEqual' and len(call.args) == 2:
-                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46, 49, 51, 56, 59, 62, 64, 68, 79, 86, 87, 95, 100, 104):
+                        if ast.unparse(call.args[0]) == 'len(self.verified_ci_additions())' and isinstance(call.args[1], ast.Constant) and call.args[1].value in (39, 41, 45, 46, 49, 51, 56, 59, 62, 64, 68, 79, 86, 87, 95, 100, 104, 116):
                             call.args[1].value = 24
             return node
         def visit_BinOp(self, node):
@@ -311,6 +313,15 @@ def ci_legacy_tree(tree):
 
 
 class PreservationTests(unittest.TestCase):
+    def test_r3_exact_intake_rejects_unreviewed_mutations(self):
+        self.assertEqual(len(R3_NEW_HASHES),12)
+        self.verified_ci_additions()
+        real=Path.read_bytes
+        for name in R3_NEW_HASHES:
+            path=ROOT/name
+            with patch.object(Path,'read_bytes',lambda item: real(item)+b'unreviewed' if item==path else real(item)):
+                with self.assertRaises(AssertionError):self.verified_ci_additions()
+
     def test_r2_exact_preview_rejects_unreviewed_mutations(self):
         self.assertEqual(len(R2_NEW_HASHES),4)
         self.assertEqual(set(R2_MODIFIED_HASHES),{'.github/workflows/phase10-reference.yml'})
@@ -384,13 +395,13 @@ class PreservationTests(unittest.TestCase):
                     else:self.verified_ci_additions()
 
     def verified_ci_additions(self):
-        for relative, expected in {**R2_NEW_HASHES, **PHASE10_NEW_HASHES, **PHASE9_NEW_HASHES, **EXECUTION_NEW_HASHES, **PHASE8_NEW_HASHES, **PHASE7_NEW_HASHES, **DELIVERY_NEW_HASHES, **V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES, **TRACEABILITY_NEW_HASHES, **PERFORMANCE_NEW_HASHES, **RECOVERY_NEW_HASHES, **SECURITY_NEW_HASHES, **{p:h for p,h in RATE_CLOCK_HASHES.items() if p not in SUCCESSOR_HASHES}}.items():
+        for relative, expected in {**R3_NEW_HASHES, **R2_NEW_HASHES, **PHASE10_NEW_HASHES, **PHASE9_NEW_HASHES, **EXECUTION_NEW_HASHES, **PHASE8_NEW_HASHES, **PHASE7_NEW_HASHES, **DELIVERY_NEW_HASHES, **V3_CI_HASHES, **SUCCESSOR_HASHES, **GENERATOR_BUILD_HASHES, **B0_NEW_HASHES, **RELEASE_NEW_HASHES, **DEPENDENCY_NEW_HASHES, **TRACEABILITY_NEW_HASHES, **PERFORMANCE_NEW_HASHES, **RECOVERY_NEW_HASHES, **SECURITY_NEW_HASHES, **{p:h for p,h in RATE_CLOCK_HASHES.items() if p not in SUCCESSOR_HASHES}}.items():
             path = ROOT / relative
             self.assertFalse(path.is_symlink(), relative)
             self.assertTrue(path.is_file(), relative)
             self.assertEqual(hashlib.sha256(preserved_bytes(path)).hexdigest(), expected, relative)
             self.assertFalse(path.stat().st_mode & 0o111, relative)
-        return set(R2_NEW_HASHES) | set(PHASE10_NEW_HASHES) | set(PHASE9_NEW_HASHES) | set(EXECUTION_NEW_HASHES) | set(PHASE8_NEW_HASHES) | set(PHASE7_NEW_HASHES) | set(DELIVERY_NEW_HASHES) | set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES)
+        return set(R3_NEW_HASHES) | set(R2_NEW_HASHES) | set(PHASE10_NEW_HASHES) | set(PHASE9_NEW_HASHES) | set(EXECUTION_NEW_HASHES) | set(PHASE8_NEW_HASHES) | set(PHASE7_NEW_HASHES) | set(DELIVERY_NEW_HASHES) | set(V3_CI_HASHES) | set(SUCCESSOR_HASHES) | set(GENERATOR_BUILD_HASHES) | set(B0_NEW_HASHES) | set(RELEASE_NEW_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES)
 
     def test_delivery_changes_are_exact_and_reject_mutated_source_or_job(self):
         self.assertEqual(len(DELIVERY_NEW_HASHES), 4)
@@ -462,11 +473,11 @@ class PreservationTests(unittest.TestCase):
     def check_b0_changes(self, changes, untracked, added, head):
         transient = {'.ci-evidence/contracts.json'}
         self.check_source_additions(set(untracked) & transient, set(added) & transient, head)
-        self.assertEqual(set(changes) - (set(untracked) & transient), set(R2_NEW_HASHES) | set(R2_MODIFIED_HASHES) | set(PHASE10_NEW_HASHES) | set(PHASE10_MODIFIED_HASHES) | set(PHASE9_NEW_HASHES) | set(PHASE9_MODIFIED_HASHES) | set(EXECUTION_NEW_HASHES) | set(EXECUTION_MODIFIED_HASHES) | set(PHASE8_NEW_HASHES) | set(PHASE8_MODIFIED_HASHES) | set(PHASE7_NEW_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
+        self.assertEqual(set(changes) - (set(untracked) & transient), set(R3_NEW_HASHES) | set(R2_NEW_HASHES) | set(R2_MODIFIED_HASHES) | set(PHASE10_NEW_HASHES) | set(PHASE10_MODIFIED_HASHES) | set(PHASE9_NEW_HASHES) | set(PHASE9_MODIFIED_HASHES) | set(EXECUTION_NEW_HASHES) | set(EXECUTION_MODIFIED_HASHES) | set(PHASE8_NEW_HASHES) | set(PHASE8_MODIFIED_HASHES) | set(PHASE7_NEW_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'})
 
     def test_b0_change_inventory_validates_transient_output_before_exclusion(self):
         head='a'*40
-        expected=set(R2_NEW_HASHES) | set(R2_MODIFIED_HASHES) | set(PHASE10_NEW_HASHES) | set(PHASE10_MODIFIED_HASHES) | set(PHASE9_NEW_HASHES) | set(PHASE9_MODIFIED_HASHES) | set(EXECUTION_NEW_HASHES) | set(EXECUTION_MODIFIED_HASHES) | set(PHASE8_NEW_HASHES) | set(PHASE8_MODIFIED_HASHES) | set(PHASE7_NEW_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
+        expected=set(R3_NEW_HASHES) | set(R2_NEW_HASHES) | set(R2_MODIFIED_HASHES) | set(PHASE10_NEW_HASHES) | set(PHASE10_MODIFIED_HASHES) | set(PHASE9_NEW_HASHES) | set(PHASE9_MODIFIED_HASHES) | set(EXECUTION_NEW_HASHES) | set(EXECUTION_MODIFIED_HASHES) | set(PHASE8_NEW_HASHES) | set(PHASE8_MODIFIED_HASHES) | set(PHASE7_NEW_HASHES) | set(PHASE7_MODIFIED_HASHES) | set(DELIVERY_NEW_HASHES) | set(DELIVERY_MODIFIED_HASHES) | set(DEPENDENCY_NEW_HASHES) | set(TRACEABILITY_NEW_HASHES) | set(PERFORMANCE_NEW_HASHES) | set(RECOVERY_NEW_HASHES) | set(SECURITY_NEW_HASHES) | set(RATE_CLOCK_HASHES) | {'.github/workflows/phase6-v3-offline.yml'} | set(RELEASE_NEW_HASHES) | set(B0_NEW_HASHES) | set(B0_MODIFIED_HASHES) | set(CI_PRESERVATION_FIX_HASHES) | {'verification/evidence_admission/test_preservation.py', '.github/workflows/acp-contracts.yml'}
         transient='.ci-evidence/contracts.json'
         with tempfile.TemporaryDirectory() as directory,patch(__name__+'.ROOT',Path(directory)),patch.dict(os.environ):
             for key in ('GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB'):os.environ.pop(key,None)
@@ -483,7 +494,7 @@ class PreservationTests(unittest.TestCase):
     def test_exact_v3_ci_allowance_rejects_modified_missing_and_symlink_input(self):
         self.assertEqual(len(V3_CI_HASHES), 10)
         self.assertEqual(len(SUCCESSOR_HASHES), 7)
-        self.assertEqual(len(self.verified_ci_additions()), 104)
+        self.assertEqual(len(self.verified_ci_additions()), 116)
         path = ROOT / 'engineering/ci/inputs/phase6-wave3-cumulative.patch'
         original_read = Path.read_bytes
         with patch.object(Path, 'read_bytes', lambda item: b'changed' if item == path else original_read(item)):

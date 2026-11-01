@@ -1,0 +1,26 @@
+{
+  "schema": "acp-r3-intake-review/1",
+  "status": "REVIEW_REQUIRED_NOT_APPROVED",
+  "baseCanonicalDigest": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+  "candidateDigest": "sha256:6bb717a03c45dae8a14f285ffdddd314eabeb0bf7f383eccaee8851d864d0e7d",
+  "planDigest": "sha256:4b150e45186fb1b2598032496b2759557165f4f92298b59b75bcf6f83b6f34a6",
+  "nativePlanScope": "REQUIREMENTS_ONLY_NOT_CREATE_COMMAND; BACKWARD describes adding requirements without schema changes, not future creation semantics",
+  "files": {
+    "synthetic-contract.json": "b84a5c1caff6e4738eaf3e407ff90bcd40cd7e6c515d7470a9c857f243d988cc",
+    "change.json": "4662d3f7019fd1a34df8403c0b87ca0564b202a4b7576bc0e44999c455271c85",
+    "plan.json": "a5cf60cdcc21a5dcfd7f84e906ffdec98abcbe3ef953e04b4f792997db75b323",
+    "candidate.json": "9a331fca17392a5bd093d3035f22cd72ad2fb82c8e62e5f2b7f2bc1082235ab3"
+  },
+  "decisionsRequired": {
+    "command": "Authorize a versioned CREATE effect with generated identity, authenticated tenant/assignee, explicit typed required fields, optional absence, initial state, concurrency, failure and event rules. Existing Command only updates existing mutable fields.",
+    "useCase": "Creation must not require a selected existing resource; subsequent UC-TASK remains unchanged.",
+    "validation": "Proposed title String 1..200 Unicode scalars, summary 1..2000; missing/null/non-String/unknown inputs reject. Review limits before semantic approval.",
+    "authorization": "New create Permission/Policy for approved role and tenant. Synthetic role check does not issue or imply new accepted grants.",
+    "ownership": "Compiler-owned generated intake artifacts; existing HUMAN seam preserved through CAS.",
+    "ui": "New creation form; current closed task-interface requires an existing selected resource and cannot encode this form as an approved UseCase.",
+    "authority": "Project semantic/UI owners must approve versioned execution contracts and exact Command/UseCase/Policy proposal before accepted adoption."
+  },
+  "execution": "Synthetic preview only; no accepted history, signatures, retained R2 migration, deployment or release approval",
+  "phase10": "IN_PROGRESS",
+  "release": "PHASE6_RELEASE_CLOSURE_BLOCKED"
+}
