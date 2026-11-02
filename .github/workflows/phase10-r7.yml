@@ -1,0 +1,95 @@
+name: ACP Phase 10 R7 native background jobs
+on:
+  push:
+    branches: ['codex/phase10-reference-application']
+  pull_request:
+    paths:
+      - 'engineering/jobs/**'
+      - 'engineering/compiler_extensions/**'
+      - 'verification/jobs/**'
+      - '.github/workflows/phase10-r7.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  case-management-r7:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated locked SDK and compiler inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-reference-venv"
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -m pip check
+      - name: Exact disposable database runtime
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Focused job and rejection tests
+        run: |
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite=unittest.defaultTestLoader.discover('verification/jobs')
+          assert suite.countTestCases()==26
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==26 and not result.skipped
+          PYTHON
+      - name: Durable scheduling independent workers fenced recovery browser verification MCP and restart
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B -m engineering.jobs.run --workspace "$RUNNER_TEMP/acp-r7" 2>&1 | tee "$RUNNER_TEMP/acp-r7.log"
+      - name: Verify exact job execution identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
+          import hashlib,json,os,subprocess
+          from pathlib import Path
+          from engineering.jobs.target import PROFILE,GENERATOR,source_digest
+          record=json.loads((Path(os.environ['RUNNER_TEMP'])/'acp-r7/result.json').read_bytes())
+          expected=json.loads(Path('proposals/phase10-r7-documents/candidate.json').read_bytes())
+          assert record['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          assert record['candidateDigest']==expected['contentDigest']
+          assert record['generator']['profile']==PROFILE
+          assert record['generator']['generator']==GENERATOR+'+sha256:'+source_digest()
+          assert 'engineering/jobs/run.py' in record['sourceSHA256']
+          assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in record['sourceSHA256'].items())
+          assert len(record['browser'])==8
+          assert all(b['expected']==1 and b['unexpected']==b['skipped']==b['flaky']==0 for b in record['browser'])
+          assert record['cleanup']=={'database':'REMOVED','processes':'REAPED'}
+          assert record['semanticApproval']=='NOT_APPROVED'
+          PYTHON
+      - name: Retain exact native compilation source and runtime observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase10-r7-documents
+          path: |
+            ${{ runner.temp }}/acp-r7.log
+            ${{ runner.temp }}/acp-r7/**/*.json
+            ${{ runner.temp }}/acp-r7/database/
+            ${{ runner.temp }}/acp-r7/**/*.log
+            ${{ runner.temp }}/acp-r7/build/
+            ${{ runner.temp }}/acp-r7/source-facts/
+            ${{ runner.temp }}/acp-r7/runtime/
+            ${{ runner.temp }}/acp-r7-inputs/owner.json
+            !${{ runner.temp }}/acp-r7/application/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r7/build-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r7/r0-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r7/r1-outputs/frontend/node_modules/**
+          if-no-files-found: error
