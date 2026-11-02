@@ -7,7 +7,7 @@ import hashlib,json
 from dataclasses import replace
 from pathlib import Path
 from engineering.native_create import semantics
-from engineering.native_create.schema import FEATURE,KINDS
+from engineering.native_create.schema import FEATURE,KINDS,CONTRACTS
 from engineering.reference_application.intake import IntakeCandidate
 from engineering.generator_candidates.spring_vue_postgres_0_6 import SuccessorCandidate
 from engineering.generator_candidates.spring_vue_postgres_0_6 import provenance
@@ -24,7 +24,7 @@ GENERATOR='acp-native-create-preview-generator/1'
 
 def source_digest():
     paths=[*sorted(Path(__file__).parent.glob('*.py')),
-           *sorted((ROOT/'contracts/native-create').glob('*.json')),
+           *sorted(CONTRACTS.glob('*.json')),
            ROOT/'engineering/reference_application/intake.py',
            *sorted((ROOT/'engineering/reference_application/intake_templates').glob('*'))]
     return sha(encode({str(p.relative_to(ROOT)):sha(p.read_bytes()) for p in paths if p.is_file()}))

@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[2];sys.path[:0]=[str(ROOT),str(ROOT/'tooli
 from jsonschema import Draft202012Validator
 from canonical_json import canonical_bytes,digest,PROFILE
 from canonical_ir import CanonicalError,AdmittedSnapshot,normalize_candidate as normalize_legacy,validate_snapshot as validate_legacy
-from engineering.native_create.schema import FEATURE,KINDS
+from engineering.native_create.schema import FEATURE,KINDS,CONTRACTS
 
 def check(ok,code):
  if not ok:raise CanonicalError('CREATE-'+code,code)
@@ -18,7 +18,7 @@ def legacy_source(source):
  # Internal compile-eligibility witnesses, NEVER persisted proofs or human grants.
  return {**source,'modelVersion':'0.4.0','nodes':nodes,'approvals':[{'subject':{'id':n['id'],'revision':n['revision']},'reviewer':'structural-only','evidence':'not-authority'} for n in nodes]}
 def validate_source(source):
- schema=json.loads((ROOT/'contracts/native-create/authoring-0.5.schema.json').read_bytes());check(Draft202012Validator(schema).is_valid(source),'SHAPE_OR_VERSION')
+ schema=json.loads((CONTRACTS/'authoring-0.5.schema.json').read_bytes());check(Draft202012Validator(schema).is_valid(source),'SHAPE_OR_VERSION')
  normalize_legacy(legacy_source(source));nodes={n['id']:n for n in source['nodes']};check(len(nodes)==len(source['nodes']),'DUPLICATE_ID')
  def get(r,kind):
   check(type(r) is dict and r.get('id') in nodes,'REFERENCE');n=nodes[r['id']];check(n['revision']==r['revision'] and n['kind']==kind,'REFERENCE_KIND_REVISION');return n
@@ -72,7 +72,7 @@ def normalize_candidate(source):
  content={**base['content'],'schemaVersion':'0.4.0','semanticModelVersion':'0.5.0','requiredFeatures':[FEATURE],'nodes':sorted(nodes,key=lambda n:n['id'])}
  return {'content':content,'contentDigest':digest(content,'canonical')}
 def validate_snapshot(snapshot):
- schema=json.loads((ROOT/'contracts/native-create/canonical-0.4.schema.json').read_bytes());check(Draft202012Validator(schema).is_valid(snapshot),'CANONICAL_SHAPE_VERSION_FEATURE')
+ schema=json.loads((CONTRACTS/'canonical-0.4.schema.json').read_bytes());check(Draft202012Validator(schema).is_valid(snapshot),'CANONICAL_SHAPE_VERSION_FEATURE')
  check(normalize_candidate(authoring(snapshot))==snapshot,'CANONICAL_NORMAL_FORM_DIGEST');return snapshot
 
 def admit(snapshot,authority=None):

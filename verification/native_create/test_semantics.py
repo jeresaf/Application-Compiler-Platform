@@ -18,7 +18,7 @@ class NativeSemantics(unittest.TestCase):
         with self.assertRaises((CanonicalError,ValueError)):s.normalize_candidate(value)
     def test_closed_schemas_are_reproducible(self):
         for name,expected in zip(('authoring-0.5.schema.json','canonical-0.4.schema.json'),schemas()):
-            self.assertEqual(json.loads((s.ROOT/'contracts/native-create'/name).read_bytes()),expected)
+            self.assertEqual(json.loads((s.CONTRACTS/name).read_bytes()),expected)
             Draft202012Validator.check_schema(expected)
     def test_exact_normalization_and_structural_validation_is_not_admission(self):
         self.assertEqual(s.validate_snapshot(self.snapshot),self.snapshot)

@@ -5,7 +5,6 @@ on:
   pull_request:
     paths:
       - 'engineering/native_create/**'
-      - 'contracts/native-create/**'
       - 'verification/native_create/**'
       - '.github/workflows/phase10-r4.yml'
 permissions:

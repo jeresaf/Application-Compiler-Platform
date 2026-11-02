@@ -2,7 +2,7 @@
 
 Authoring **0.5.0** and Canonical **0.4.0**, with mandatory
 `acp.native-create/1`, add closed `CreateOperation`, `CreatePermission` and
-`CreateForm` nodes. Earlier contracts and their default admission remain unchanged.
+`CreateForm` nodes. Schemas live under `engineering/native_create/contracts/`; the historical `contracts/` tree, earlier contracts and default admission remain unchanged.
 This is an unapproved synthetic semantic proposal, not an accepted transition.
 The `APPROVED` lifecycle flag is structural compiler eligibility only: the local
 fixture authority is explicitly test-only and cannot issue human acceptance.

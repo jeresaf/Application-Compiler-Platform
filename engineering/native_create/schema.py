@@ -2,6 +2,7 @@
 import copy,json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
+CONTRACTS=Path(__file__).resolve().parent/'contracts'
 FEATURE='acp.native-create/1'
 KINDS={'CreateOperation','CreatePermission','CreateForm'}
 def obj(properties):return {'type':'object','additionalProperties':False,'required':list(properties),'properties':properties}
@@ -21,4 +22,4 @@ def schemas():
  c['$id']='https://acp.invalid/canonical-0.4';content=c['$defs']['content']['properties'];content['schemaVersion']=const('0.4.0');content['semanticModelVersion']=const('0.5.0');content['requiredFeatures']=const([FEATURE])
  return a,c
 if __name__=='__main__':
- for name,s in zip(('authoring-0.5.schema.json','canonical-0.4.schema.json'),schemas()):(ROOT/'contracts/native-create'/name).write_text(json.dumps(s,sort_keys=True,separators=(',',':'))+'\n')
+ for name,s in zip(('authoring-0.5.schema.json','canonical-0.4.schema.json'),schemas()):(CONTRACTS/name).write_text(json.dumps(s,sort_keys=True,separators=(',',':'))+'\n')
