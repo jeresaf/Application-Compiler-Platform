@@ -44,15 +44,36 @@ jobs:
           "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
           import unittest
           suite=unittest.defaultTestLoader.discover('verification/documents')
-          assert suite.countTestCases()==23
+          assert suite.countTestCases()==25
           result=unittest.TextTestRunner(verbosity=2).run(suite)
-          assert result.wasSuccessful() and result.testsRun==23 and not result.skipped
+          assert result.wasSuccessful() and result.testsRun==25 and not result.skipped
           PYTHON
       - name: Native document upload download integrity browser verification MCP and restart
         shell: bash
         run: |
           set -euo pipefail
-          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B -m engineering.reporting.run --workspace "$RUNNER_TEMP/acp-r6" 2>&1 | tee "$RUNNER_TEMP/acp-r6.log"
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B -m engineering.documents.run --workspace "$RUNNER_TEMP/acp-r6" 2>&1 | tee "$RUNNER_TEMP/acp-r6.log"
+      - name: Verify exact document execution identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
+          import hashlib,json,os,subprocess
+          from pathlib import Path
+          from engineering.documents.target import PROFILE,GENERATOR,source_digest
+          record=json.loads((Path(os.environ['RUNNER_TEMP'])/'acp-r6/result.json').read_bytes())
+          expected=json.loads(Path('proposals/phase10-r6-documents/candidate.json').read_bytes())
+          assert record['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          assert record['candidateDigest']==expected['contentDigest']
+          assert record['generator']['profile']==PROFILE
+          assert record['generator']['generator']==GENERATOR+'+sha256:'+source_digest()
+          assert 'engineering/documents/run.py' in record['sourceSHA256']
+          assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in record['sourceSHA256'].items())
+          assert len(record['browser'])==6
+          assert all(b['expected']==1 and b['unexpected']==b['skipped']==b['flaky']==0 for b in record['browser'])
+          assert record['cleanup']=={'database':'REMOVED','processes':'REAPED'}
+          assert record['semanticApproval']=='NOT_APPROVED'
+          PYTHON
       - name: Retain exact native compilation source and runtime observations
         if: always()
         uses: actions/upload-artifact@v4
