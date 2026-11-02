@@ -1,0 +1,109 @@
+name: ACP Phase 10 R8 multi-release evolution
+on:
+  push:
+    branches: ['codex/phase10-reference-application']
+  pull_request:
+    paths:
+      - 'engineering/application_evolution/**'
+      - 'engineering/documents/**'
+      - 'engineering/jobs/**'
+      - 'engineering/compiler_extensions/**'
+      - 'verification/application_evolution/**'
+      - '.github/workflows/phase10-r8.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  case-management-r8:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated locked SDK and compiler inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-reference-venv"
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -m pip check
+      - name: Exact disposable database runtime
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Focused evolution and rejection tests
+        run: |
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite=unittest.defaultTestLoader.discover('verification/application_evolution')
+          assert suite.countTestCases()==27
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==27 and not result.skipped
+          PYTHON
+      - name: Real R6 to R7 retained-database migration ownership worker and recovery scenario
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B -m engineering.application_evolution.run --workspace "$RUNNER_TEMP/acp-r8" 2>&1 | tee "$RUNNER_TEMP/acp-r8.log"
+      - name: Verify exact multi-release execution identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
+          import hashlib,json,os,subprocess
+          from pathlib import Path
+          from engineering.documents.target import PROFILE as OLD_PROFILE,DocumentTarget
+          from engineering.jobs.target import PROFILE as NEW_PROFILE,JobTarget
+          from engineering.application_evolution.plan import validate_plan
+          from changes import fingerprint
+          root=Path(os.environ['RUNNER_TEMP'])/'acp-r8'
+          record=json.loads((root/'result.json').read_bytes())
+          old=json.loads(Path('proposals/phase10-r6-documents/candidate.json').read_bytes())
+          new=json.loads(Path('proposals/phase10-r7-jobs/candidate.json').read_bytes())
+          plan=validate_plan(json.loads((root/'evolution-plan.json').read_bytes()))
+          assert record['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in record['sourceSHA256'].items())
+          assert record['executorSHA256']==hashlib.sha256(Path('engineering/application_evolution/run.py').read_bytes()).hexdigest()
+          assert record['beforeCandidate']==old['contentDigest'] and record['afterCandidate']==new['contentDigest']
+          assert record['beforeGenerator']==DocumentTarget().descriptor() and record['afterGenerator']==JobTarget().descriptor()
+          assert record['planDigest']==plan['planDigest'] and record['changeDigest']==plan['changeDigest']==fingerprint(plan['change'],'record')
+          assert record['priorWriter']['actualPostgresConnectionVerified'] and record['priorWriter']['restart']['principal']=='r8_old_writer'
+          assert record['migration']['sourceDatabase']==record['migration']['targetDatabase']
+          assert record['continuity']['originalRowsPreserved'] and record['continuity']['documentsExact'] and record['continuity']['idempotencyBusinessStatePreserved']
+          assert record['restore']['exactRowsBeforeMigration'] and record['restore']['auditAndIdempotencyExact']
+          assert record['restore']['cleanup']=='OWN_NEW_DATABASE_REMOVED'
+          assert len(record['browser'])==9 and all(b['expected']==1 and b['unexpected']==b['skipped']==b['flaky']==0 for b in record['browser'])
+          assert record['cleanup']=={'database':'REMOVED','processes':'REAPED'}
+          assert record['scope']=='QUALIFICATION_ONLY' and record['semanticApproval']=='NOT_APPROVED'
+          PYTHON
+      - name: Retain exact native compilation source and runtime observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase10-r8-evolution
+          path: |
+            ${{ runner.temp }}/acp-r8.log
+            ${{ runner.temp }}/acp-r8/**/*.json
+            ${{ runner.temp }}/acp-r8/database/
+            ${{ runner.temp }}/acp-r8/**/*.log
+            ${{ runner.temp }}/acp-r8/build/
+            ${{ runner.temp }}/acp-r8/source-facts/
+            ${{ runner.temp }}/acp-r8/runtime/
+            ${{ runner.temp }}/acp-r8-inputs/owner.json
+            !${{ runner.temp }}/acp-r8/application/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r8/build-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r8/r0-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r8/r1-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r8/r6-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r8/r7-outputs/frontend/node_modules/**
+          if-no-files-found: error
