@@ -1,0 +1,74 @@
+name: ACP Phase 10 R5 reporting and audit
+on:
+  push:
+    branches: ['codex/phase10-reference-application']
+  pull_request:
+    paths:
+      - 'engineering/reporting/**'
+      - 'engineering/compiler_extensions/**'
+      - 'verification/reporting/**'
+      - '.github/workflows/phase10-r5.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  case-management-r5:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated locked SDK and compiler inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-reference-venv"
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -m pip check
+      - name: Exact disposable database runtime
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Focused reporting and rejection tests
+        run: |
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite=unittest.defaultTestLoader.discover('verification/reporting')
+          assert suite.countTestCases()==17
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==17 and not result.skipped
+          PYTHON
+      - name: Native CREATE compiler browser source verification MCP and restart
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B -m engineering.reporting.run --workspace "$RUNNER_TEMP/acp-r5" 2>&1 | tee "$RUNNER_TEMP/acp-r5.log"
+      - name: Retain exact native compilation source and runtime observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase10-r5-native-create
+          path: |
+            ${{ runner.temp }}/acp-r5.log
+            ${{ runner.temp }}/acp-r5/**/*.json
+            ${{ runner.temp }}/acp-r5/database/
+            ${{ runner.temp }}/acp-r5/**/*.log
+            ${{ runner.temp }}/acp-r5/build/
+            ${{ runner.temp }}/acp-r5/source-facts/
+            ${{ runner.temp }}/acp-r5/runtime/
+            ${{ runner.temp }}/acp-r5-inputs/owner.json
+            !${{ runner.temp }}/acp-r5/application/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r5/build-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r5/r0-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r5/r1-outputs/frontend/node_modules/**
+          if-no-files-found: error
