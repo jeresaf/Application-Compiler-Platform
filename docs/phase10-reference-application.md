@@ -123,3 +123,11 @@ applied to this database. No later evolution is claimed as executed.
 processes and only the owned disposable database are removed at exit. Source,
 packages, dumps and results remain for custody review; retain required evidence
 under the existing vault rules before removing temporary execution directories.
+
+## R6 document preview
+
+The separate [R6 runbook](phase10-r6-documents.md) describes the proposed versioned
+transactional document capability, real upload/download qualification, ownership-safe
+regeneration and candidate-only verification/MCP namespace. R0–R5 remain preserved;
+no R4/R5 proposal gains semantic approval. Document security and production release
+obligations remain open. Run R6 only in a newly owned disposable environment.
