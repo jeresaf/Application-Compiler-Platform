@@ -94,13 +94,21 @@ jobs:
           path: |
             ${{ runner.temp }}/acp-r8.log
             ${{ runner.temp }}/acp-r8/**/*.json
-            ${{ runner.temp }}/acp-r8/database/
+            ${{ runner.temp }}/acp-r8/r6-database/
+            ${{ runner.temp }}/acp-r8/r7-database/
+            ${{ runner.temp }}/acp-r8/restore/
+            ${{ runner.temp }}/acp-r8/application/
+            ${{ runner.temp }}/acp-r8/r6-source/
+            ${{ runner.temp }}/acp-r8/r6-build/production.tar
+            ${{ runner.temp }}/acp-r8/r7-build/production.tar
             ${{ runner.temp }}/acp-r8/**/*.log
             ${{ runner.temp }}/acp-r8/build/
             ${{ runner.temp }}/acp-r8/source-facts/
             ${{ runner.temp }}/acp-r8/runtime/
             ${{ runner.temp }}/acp-r8-inputs/owner.json
             !${{ runner.temp }}/acp-r8/application/frontend/node_modules/**
+            !${{ runner.temp }}/acp-r8/application/backend/target/**
+            !${{ runner.temp }}/acp-r8/r6-source/backend/target/**
             !${{ runner.temp }}/acp-r8/build-outputs/frontend/node_modules/**
             !${{ runner.temp }}/acp-r8/r0-outputs/frontend/node_modules/**
             !${{ runner.temp }}/acp-r8/r1-outputs/frontend/node_modules/**

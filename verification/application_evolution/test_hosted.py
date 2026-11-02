@@ -18,3 +18,5 @@ class Hosted(unittest.TestCase):
  def test_release_boundary_and_output_exclusions(self):
   self.assertIn("record['semanticApproval']=='NOT_APPROVED'",self.text);self.assertIn("record['scope']=='QUALIFICATION_ONLY'",self.text)
   self.assertIn('r6-outputs/frontend/node_modules/**',self.text);self.assertIn('r7-outputs/frontend/node_modules/**',self.text)
+  for path in ('r6-database/','r7-database/','restore/','application/','r6-source/','r6-build/production.tar','r7-build/production.tar'):self.assertIn('${{ runner.temp }}/acp-r8/'+path,self.text)
+  self.assertNotIn('${{ runner.temp }}/acp-r8/database/',self.text)
