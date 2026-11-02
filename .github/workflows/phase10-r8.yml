@@ -114,4 +114,5 @@ jobs:
             !${{ runner.temp }}/acp-r8/r1-outputs/frontend/node_modules/**
             !${{ runner.temp }}/acp-r8/r6-outputs/frontend/node_modules/**
             !${{ runner.temp }}/acp-r8/r7-outputs/frontend/node_modules/**
+          include-hidden-files: true
           if-no-files-found: error

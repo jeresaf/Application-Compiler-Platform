@@ -20,3 +20,4 @@ class Hosted(unittest.TestCase):
   self.assertIn('r6-outputs/frontend/node_modules/**',self.text);self.assertIn('r7-outputs/frontend/node_modules/**',self.text)
   for path in ('r6-database/','r7-database/','restore/','application/','r6-source/','r6-build/production.tar','r7-build/production.tar'):self.assertIn('${{ runner.temp }}/acp-r8/'+path,self.text)
   self.assertNotIn('${{ runner.temp }}/acp-r8/database/',self.text)
+  self.assertIn('include-hidden-files: true',self.text)  # retain .acp-store.json CAS ownership evidence
