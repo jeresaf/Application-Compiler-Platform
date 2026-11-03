@@ -18,13 +18,20 @@ def validated(raw,version):
 def artifacts(plan):
  return {a['path']:a for a in (wire(plan) if not isinstance(plan,dict) else plan)['artifacts']}
 
-def preview(before,after,old_plan,new_plan,old_identity,new_identity):
+def preview(before,after,old_plan,new_plan,old_identity,new_identity,*,successor=None):
  validated(encode(before),'0.6.0');validated(encode(after),'0.7.0')
  require(before['content']['applicationId']==after['content']['applicationId'],'EVOLUTION_APPLICATION')
  diff=semantic_diff(before,after);require(diff and all(d['operation']=='ADD' and d['after']['revision']==1 for d in diff),'EVOLUTION_ADDITIVE_ONLY')
  from engineering.documents.target import DocumentTarget
  from engineering.jobs.target import JobTarget
- for snapshot,plan,identity,target in ((before,old_plan,old_identity,DocumentTarget()),(after,new_plan,new_identity,JobTarget())):
+ if successor is not None:
+  from engineering.hardening.target import HardeningTarget
+  require(type(successor) is HardeningTarget,'EVOLUTION_UNREGISTERED_SUCCESSOR')
+  successor._verify()
+  registered=HardeningTarget()
+  require(successor.generator==registered.generator and successor.bundle==registered.bundle and successor.profile==registered.profile,'EVOLUTION_SUCCESSOR_BINDING')
+  successor=registered
+ for snapshot,plan,identity,target in ((before,old_plan,old_identity,DocumentTarget()),(after,new_plan,new_identity,successor if successor is not None else JobTarget())):
   require(set(identity)=={'candidate','generator','compiler','pipeline','artifactPlan'} and identity['candidate']==snapshot['contentDigest'] and identity['generator']==target.generator and identity['artifactPlan']==compiler_fingerprint(plan),'EVOLUTION_COMPILATION_IDENTITY')
   require(all(a['provenance']['compiler']==identity['compiler'] and a['provenance']['pipeline']==identity['pipeline'] for a in artifacts(plan).values()),'EVOLUTION_COMPILER_IDENTITY')
  a,b=artifacts(old_plan),artifacts(new_plan);require(set(a)<=set(b),'EVOLUTION_ARTIFACT_REMOVAL')

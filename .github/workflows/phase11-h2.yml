@@ -1,0 +1,91 @@
+name: ACP Phase 11 H2 concurrency and recovery
+on:
+  push:
+    branches: ['codex/phase11-hardening']
+  pull_request:
+    paths:
+      - 'engineering/reliability/**'
+      - 'engineering/application_evolution/**'
+      - 'verification/reliability/**'
+      - '.github/workflows/phase11-h2.yml'
+permissions:
+  contents: read
+jobs:
+  h2-reliability:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated hash-locked compiler and SDK
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-h2-venv"
+          "$RUNNER_TEMP/acp-h2-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-h2-venv/bin/python3.14" -m pip check
+      - name: Focused concurrency proof and fail-closed regressions
+        run: |
+          "$RUNNER_TEMP/acp-h2-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite=unittest.defaultTestLoader.discover('verification/reliability')
+          assert suite.countTestCases()==45
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==45 and not result.skipped
+          PYTHON
+      - name: Exact disposable PostgreSQL runtime
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Real R8 migration and H1 concurrency crash and recovery qualification
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-h2-venv/bin/python3.14" -B -m engineering.reliability.run --workspace "$RUNNER_TEMP/acp-h2" 2>&1 | tee "$RUNNER_TEMP/acp-h2.log"
+      - name: Verify exact source runner generator scenarios and cleanup
+        run: |
+          "$RUNNER_TEMP/acp-h2-venv/bin/python3.14" -B - <<'PYTHON'
+          import hashlib,json,os,platform,subprocess,sys
+          from pathlib import Path
+          sys.path.insert(0,str(Path('tooling').resolve()))
+          from engineering.reliability.verification import validate,SCENARIOS
+          from engineering.hardening.target import HardeningTarget
+          record=validate(json.loads((Path(os.environ['RUNNER_TEMP'])/'acp-h2/result.json').read_bytes()))
+          assert record['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['GITHUB_SHA']
+          assert platform.python_version()=='3.14.7' and record['environment']['python']=='3.14.7'
+          assert record['environment']['system']=='Linux' and 'VERSION_ID="24.04"' in record['environment']['osRelease']
+          assert record['generator']==HardeningTarget().descriptor()
+          assert record['canonicalDigest']==json.loads(Path('proposals/phase10-r7-jobs/candidate.json').read_bytes())['contentDigest']
+          assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in record['sourceSHA256'].items())
+          assert {r['scenario'] for r in record['scenarioResults']}==SCENARIOS
+          assert record['evolution']['sealed05']=='ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb'
+          assert record['h1PluginRealms']['status']=='PASS' and record['cleanup']=='VERIFIED'
+          assert record['scope']=='QUALIFICATION_ONLY' and record['releaseClosure']=='BLOCKED'
+          PYTHON
+      - name: Existing 26 native Source Intelligence regressions
+        run: |
+          "$RUNNER_TEMP/acp-h2-venv/bin/python3.14" -B engineering/source_intelligence/qualification.py --workspace "$RUNNER_TEMP/acp-h2-source" --maven-repo "$RUNNER_TEMP/acp-h2/evolution-inputs/m2" --node-modules "$RUNNER_TEMP/acp-h2/evolution/r7-outputs/frontend/node_modules"
+      - name: Preserve exact source database barrier and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h2-reliability
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/acp-h2.log
+            ${{ runner.temp }}/acp-h2/
+            ${{ runner.temp }}/acp-h2-source/
+            !${{ runner.temp }}/acp-h2/**/node_modules/**
+            !${{ runner.temp }}/acp-h2/**/target/**
+            !${{ runner.temp }}/acp-h2/**/m2/**
+            !${{ runner.temp }}/acp-h2/**/npm/**
+            !${{ runner.temp }}/acp-h2/**/browsers/**

@@ -61,9 +61,10 @@ def validate(model):
     require(len(symbols)==len(model['symbols']) and len(external)==len(model['externalSymbols']) and not set(symbols)&set(external),'SYMBOL_IDENTITY')
     files={x['path']:x for x in model['files']};require(len(files)==len(model['files']),'FILE_IDENTITY')
     for s in symbols.values():require(s['confidence'] in CONFIDENCE and s['location']['file'] in files and s['sourceHash']==files[s['location']['file']]['sha256'],'SYMBOL_SOURCE_BINDING')
+    known=set(symbols)|set(external)
     for r in model['references']+model['typeRelations']:
         require(r['confidence'] in CONFIDENCE and r['location']['file'] in files and (r['from'] is None or r['from'] in symbols),'REFERENCE_SOURCE')
-        require((r['confidence']=='KNOWN' and r['to'] in (set(symbols)|set(external))) or (r['confidence']!='KNOWN' and r['to'] is None),'REFERENCE_BINDING')
+        require((r['confidence']=='KNOWN' and r['to'] in known) or (r['confidence']!='KNOWN' and r['to'] is None),'REFERENCE_BINDING')
     for m in model['semanticMappings']:
         require(m['symbol'] in symbols and m['confidence']=='KNOWN' and symbols[m['symbol']]['confidence']=='KNOWN','SEMANTIC_SYMBOL')
         require(m['artifactSHA256']==symbols[m['symbol']]['sourceHash'] and m['bindingDigest']==model['bindingDigest'],'SEMANTIC_SOURCE_BINDING')
