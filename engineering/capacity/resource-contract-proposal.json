@@ -1,0 +1,14 @@
+{
+  "schema": "acp-h3-resource-contract-proposal/1",
+  "status": "REVIEW_REQUIRED",
+  "semanticApproval": "NOT_APPROVED",
+  "implemented": false,
+  "productionAuthority": "NOT_GRANTED",
+  "existingControls": {"maximumDocumentsPerTenant": 20, "executingLoopsPerJVM": 2, "executionTimeoutSeconds": 2, "maxAttempts": 3, "leaseSeconds": 4},
+  "decisions": [
+    {"id": "H3-PENDING-BOUND", "proposedField": "maximumPendingOccurrences", "proposedValue": 64, "scope": "JOB_AND_TENANT", "countedStates": ["PENDING", "RETRY", "RUNNING"], "behavior": "STOP_NEW_OCCURRENCE_ADMISSION_AT_BOUND; DO_NOT_DROP_ACCEPTED_WORK; DURABLY_REPORT_CAPACITY_REJECTION", "requires": "PROJECT_AUTHORITY_SEMANTIC_AND_MIGRATION_REVIEW"},
+    {"id": "H3-RESOURCE-RESPONSE", "proposedField": "resourceExhaustionResponse", "proposedValue": {"status": 503, "code": "RESOURCE_BUSY", "automaticRetry": "FORBIDDEN_WITHOUT_IDEMPOTENCY_AND_OUTCOME_RECONCILIATION"}, "scope": "DEPLOYMENT_ERROR_CONTRACT", "requires": "TARGET_CONTRACT_AND_SECURITY_OWNER_REVIEW"},
+    {"id": "H3-QUERY-DEADLINE", "proposedField": "databaseStatementTimeoutMs", "proposedValue": 5000, "scope": "DEPLOYMENT_RESOURCE_PROFILE", "behavior": "BOUNDED_DATABASE_EXECUTION; ROLLBACK_AND_EXACT_OUTCOME_RECONCILIATION", "requires": "APPLICATION_PROFILE_AND_MIGRATION_COMPATIBILITY_REVIEW"}
+  ],
+  "boundary": "ENGINEERING_PROPOSAL_ONLY; NO_CANONICAL_CHANGE; NO_NEW_RUNTIME_POLICY; NOT_G22_ACCEPTANCE"
+}

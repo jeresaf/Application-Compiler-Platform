@@ -1,0 +1,44 @@
+{
+  "schema": "acp-h3-workload/1",
+  "scope": "QUALIFICATION_ONLY",
+  "clients": [
+    4,
+    8,
+    16
+  ],
+  "warmupCyclesPerClient": 1,
+  "measuredCyclesPerClient": 8,
+  "operations": [
+    "create",
+    "query",
+    "report",
+    "history",
+    "upload",
+    "download",
+    "metadata"
+  ],
+  "payloadBytes": 4096,
+  "requestTimeoutSeconds": 10,
+  "levelTimeoutSeconds": 180,
+  "samplerIntervalSeconds": 0.25,
+  "heapMiB": 512,
+  "directMemoryMiB": 128,
+  "jvmActiveProcessorCount": 2,
+  "pressurePoolConnections": 2,
+  "pressureAcquisitionTimeoutMs": 750,
+  "explicitQueueOccurrences": 48,
+  "workerTimeoutSeconds": 60,
+  "latency": "CLIENT_OBSERVED; NO_HELD_BARRIERS_IN_NORMAL_WORKLOAD",
+  "uploads": "FIRST_CYCLE_CREATES; LATER_CYCLES_REPLAY_EXACT_CONTENT_AND_KEY",
+  "ratePolicy": "UNCHANGED; CREATE_AND_QUERY_429_RECORDED_SEPARATELY",
+  "productionCapacity": "NOT_APPROVED",
+  "admittedCreate": {
+    "clients": 4,
+    "rounds": 6,
+    "roundIntervalSeconds": 4.2,
+    "scope": "SAME_NATIVE_POLICY; PACING_EXCLUDED_FROM_REQUEST_LATENCY; NO_HELD_DATABASE_BARRIER"
+  },
+  "applicationPoolConnections": 34,
+  "applicationPoolAcquisitionTimeoutMs": 30000,
+  "poolRationale": "H3_16_CLIENT_PROFILE; TWO_CONNECTIONS_PER_NESTED_INVOCATION_PLUS_TWO_OBSERVER_HEADROOM; DEFAULT_10_STARVED_IN_RETAINED_BASELINE"
+}
