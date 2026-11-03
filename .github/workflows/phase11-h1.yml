@@ -40,9 +40,9 @@ jobs:
           "$RUNNER_TEMP/acp-h1-venv/bin/python3.14" -B - <<'PYTHON'
           import unittest
           suite=unittest.defaultTestLoader.discover('verification/hardening')
-          assert suite.countTestCases()==19
+          assert suite.countTestCases()==20
           result=unittest.TextTestRunner(verbosity=2).run(suite)
-          assert result.wasSuccessful() and result.testsRun==19 and not result.skipped
+          assert result.wasSuccessful() and result.testsRun==20 and not result.skipped
           PYTHON
       - name: Exact disposable PostgreSQL runtime
         run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
@@ -54,8 +54,9 @@ jobs:
       - name: Exact source and preserved release identities
         run: |
           "$RUNNER_TEMP/acp-h1-venv/bin/python3.14" -B - <<'PYTHON'
-          import hashlib,json,os,subprocess
+          import hashlib,json,os,subprocess,sys
           from pathlib import Path
+          sys.path.insert(0,str(Path('tooling').resolve()))
           from engineering.hardening.target import source_digest
           record=json.loads((Path(os.environ['RUNNER_TEMP'])/'acp-h1/h1-result.json').read_bytes())
           assert record['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()

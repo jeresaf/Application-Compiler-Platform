@@ -1,3 +1,7 @@
+import os
+import subprocess
+import sys
+import textwrap
 import unittest
 from pathlib import Path
 
@@ -27,3 +31,12 @@ class Hosted(unittest.TestCase):
         self.assertIn('include-hidden-files: true', self.text)
         self.assertIn('${{ runner.temp }}/acp-h1/', self.text)
         self.assertIn('!${{ runner.temp }}/acp-h1/r0-outputs/frontend/node_modules/**', self.text)
+
+    def test_identity_step_imports_without_inherited_pythonpath(self):
+        step = self.text.split('      - name: Exact source and preserved release identities\n', 1)[1]
+        prefix = step.split("<<'PYTHON'\n", 1)[1].split('          record=', 1)[0]
+        script = textwrap.dedent(prefix)+'\nassert len(source_digest()) == 64\n'
+        env = {k: v for k, v in os.environ.items() if k != 'PYTHONPATH'}
+        result = subprocess.run([sys.executable, '-B', '-c', script], env=env,
+                                capture_output=True, text=True, timeout=60)
+        self.assertEqual(result.returncode, 0, result.stderr)
