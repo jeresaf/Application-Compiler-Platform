@@ -1,0 +1,87 @@
+name: ACP Phase 11 H1 security hardening
+on:
+  push:
+    branches: ['codex/phase11-hardening']
+  pull_request:
+    paths:
+      - 'engineering/hardening/**'
+      - 'verification/hardening/**'
+      - '.github/workflows/phase11-h1.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  h1-security:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated hash-locked compiler and SDK
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-h1-venv"
+          "$RUNNER_TEMP/acp-h1-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-h1-venv/bin/python3.14" -m pip check
+      - name: Focused security and supply-chain rejection tests
+        run: |
+          "$RUNNER_TEMP/acp-h1-venv/bin/python3.14" -B - <<'PYTHON'
+          import unittest
+          suite=unittest.defaultTestLoader.discover('verification/hardening')
+          assert suite.countTestCases()==19
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==19 and not result.skipped
+          PYTHON
+      - name: Exact disposable PostgreSQL runtime
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Real application and plugin-realm qualification with specific fresh assessment
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-h1-venv/bin/python3.14" -B -m engineering.hardening.run --workspace "$RUNNER_TEMP/acp-h1" 2>&1 | tee "$RUNNER_TEMP/acp-h1.log"
+      - name: Exact source and preserved release identities
+        run: |
+          "$RUNNER_TEMP/acp-h1-venv/bin/python3.14" -B - <<'PYTHON'
+          import hashlib,json,os,subprocess
+          from pathlib import Path
+          from engineering.hardening.target import source_digest
+          record=json.loads((Path(os.environ['RUNNER_TEMP'])/'acp-h1/h1-result.json').read_bytes())
+          assert record['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          assert record['generatorSourceDigest']==source_digest()
+          assert all(hashlib.sha256((Path('engineering/hardening')/p).read_bytes()).hexdigest()==h for p,h in record['sourceSHA256'].items())
+          assert record['specificSecurityAssessment']['status']=='PASS'
+          assert all(v['status']=='PASS' for v in record['pluginRealms'].values())
+          app=record['application']
+          assert app['sealed05']=='ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb'
+          assert len(app['browser'])==8 and all(b['expected']==1 and b['unexpected']==b['skipped']==b['flaky']==0 for b in app['browser'])
+          assert app['cleanup']=={'database':'REMOVED','processes':'REAPED'}
+          assert record['scope']=='QUALIFICATION_ONLY' and record['releaseClosure']=='BLOCKED'
+          PYTHON
+      - name: Retain exact source, scanner responses and real execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h1-security
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/acp-h1.log
+            ${{ runner.temp }}/acp-h1/
+            !${{ runner.temp }}/acp-h1/application/frontend/node_modules/**
+            !${{ runner.temp }}/acp-h1/application/backend/target/**
+            !${{ runner.temp }}/acp-h1/r0-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-h1/r0-outputs/backend/target/**
+            !${{ runner.temp }}/acp-h1/r1-outputs/frontend/node_modules/**
+            !${{ runner.temp }}/acp-h1/r1-outputs/backend/target/**

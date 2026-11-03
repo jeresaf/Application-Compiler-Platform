@@ -1,0 +1,20 @@
+{
+  "schema": "acp-h1-plugin-inputs/1",
+  "scope": "QUALIFICATION_ONLY",
+  "parentInputLock": "engineering/dependency_resolution/maven-artifacts.lock.json",
+  "parentInputLockSHA256": "6afefcd376cf8229962d63305d6ff9b9530dd7c32013e1d4f1d14ddd34c0db9e",
+  "replacement": {
+    "coordinate": "commons-io:commons-io:jar:2.22.0",
+    "path": "commons-io/commons-io/2.22.0/commons-io-2.22.0.jar",
+    "sha256": "2b9a7b1f726fb86216dbd2c8321eabe0221dbd5b1be81c18e1cb53811b104758",
+    "size": 609182
+  },
+  "advisory": "GHSA-78wr-2p64-hpwj",
+  "aliases": ["CVE-2024-47554"],
+  "priorVersion": "2.11.0",
+  "upstreamFixedVersion": "2.14.0",
+  "origin": "org.apache.maven.shared:maven-shared-utils:3.4.2",
+  "resolutionPolicy": "EXPLICIT_PLUGIN_REALM_DEPENDENCY_OVERRIDE; HASH_LOCKED_OFFLINE_BUILD",
+  "historicalCacheFindings": "RETAINED_NOT_SUPPRESSED",
+  "productionAcceptance": "NOT_AUTHORIZED"
+}
