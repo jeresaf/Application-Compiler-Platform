@@ -1,0 +1,92 @@
+name: ACP Phase 11 H4 CREATE reliability
+on:
+  push:
+    branches: ['codex/phase11-hardening']
+  pull_request:
+    paths:
+      - 'engineering/create_reliability/**'
+      - 'verification/create_reliability/**'
+      - '.github/workflows/phase11-h4.yml'
+permissions:
+  contents: read
+jobs:
+  h4-create:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    env:
+      PYTHONPATH: tooling:.
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated hash-locked compiler and SDK
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-h4-venv"
+          "$RUNNER_TEMP/acp-h4-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-h4-venv/bin/python3.14" -m pip check
+      - name: H4 integrity and existing H1 H2 H3 regressions without skips
+        run: |
+          set -euo pipefail
+          for pair in verification/create_reliability:12 verification/capacity:46 verification/hardening:20 verification/reliability:45; do
+            "$RUNNER_TEMP/acp-h4-venv/bin/python3.14" -B - "${pair%:*}" "${pair##*:}" <<'PYTHON'
+          import sys,unittest
+          suite=unittest.defaultTestLoader.discover(sys.argv[1]);count=int(sys.argv[2])
+          assert suite.countTestCases()==count
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==count and not result.skipped
+          PYTHON
+          done
+      - name: Exact disposable PostgreSQL 18.6
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Real CREATE diagnostics and controlled pool recovery
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-h4-venv/bin/python3.14" -B -m engineering.create_reliability.run --workspace "$RUNNER_TEMP/acp-h4" 2>&1 | tee "$RUNNER_TEMP/acp-h4.log"
+      - name: Exact source identities measurements invariants and cleanup
+        run: |
+          "$RUNNER_TEMP/acp-h4-venv/bin/python3.14" -B - <<'PYTHON'
+          import hashlib,json,os,platform,subprocess
+          from pathlib import Path
+          from engineering.create_reliability.run import inventory
+          r=json.loads((Path(os.environ['RUNNER_TEMP'])/'acp-h4/result.json').read_bytes())
+          assert r['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['GITHUB_SHA']
+          assert platform.python_version()=='3.14.7' and r['sourceSHA256']==inventory()
+          assert r['scope']=='QUALIFICATION_ONLY' and r['releaseClosure']=='BLOCKED'
+          assert r['originalH3Create500']=='UNRESOLVED_NOT_CAUSALLY_ATTRIBUTED'
+          root=Path(os.environ['RUNNER_TEMP'])/'acp-h4'
+          for name,pin in r['files'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==pin
+          for pool in (2,4):
+              capture=json.loads((root/f'pool-{pool}/pool-observation.json').read_bytes())
+              assert [x['status'] for x in capture['responses']]==([200,500] if pool==2 else [200,200])
+              assert capture['after']['acp_idempotency']==capture['before']['acp_idempotency']+2
+              assert capture['originalH3Attribution']=='NOT_ESTABLISHED'
+              assert all(x['cleanup']=='OWN_CONTAINER_AND_VOLUME_REMOVED' for x in json.loads((root/f'pool-{pool}/resources.json').read_bytes()))
+          assert r['sealed05']=='ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb'
+          PYTHON
+      - name: Preserve raw measurements source database and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h4-create-reliability
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/acp-h4.log
+            ${{ runner.temp }}/acp-h4/
+            !${{ runner.temp }}/acp-h4/**/node_modules/**
+            !${{ runner.temp }}/acp-h4/**/target/**
+            !${{ runner.temp }}/acp-h4/**/m2/**
+            !${{ runner.temp }}/acp-h4/**/npm/**
+            !${{ runner.temp }}/acp-h4/**/browsers/**
