@@ -1,0 +1,92 @@
+name: ACP Phase 11 H6 operational observability
+on:
+  push:
+    branches: ['codex/phase11-hardening']
+  pull_request:
+    paths:
+      - 'engineering/operations/**'
+      - 'verification/operations/**'
+      - '.github/workflows/phase11-h6.yml'
+permissions:
+  contents: read
+jobs:
+  h6-operations:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    env:
+      PYTHONPATH: tooling:.
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated locked compiler SDK and cryptography
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-h6-venv"
+          "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -m pip check
+      - name: H1 H2 H3 H4 H5 regressions without skips
+        run: |
+          set -euo pipefail
+          for pair in verification/identity:15 verification/create_reliability:12 verification/capacity:46 verification/hardening:20 verification/reliability:45; do
+            "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B - "${pair%:*}" "${pair##*:}" <<'PYTHON'
+          import sys,unittest
+          suite=unittest.defaultTestLoader.discover(sys.argv[1]);count=int(sys.argv[2])
+          assert suite.countTestCases()==count
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==count and not result.skipped
+          PYTHON
+          done
+      - name: Pinned disposable PostgreSQL
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Generate build and exercise operational failures and recovery
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B -m engineering.operations.run --workspace "$RUNNER_TEMP/acp-h6"
+      - name: Exact source security cases artifact hashes and cleanup
+        run: |
+          "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B - <<'PYTHON'
+          import hashlib,json,os,platform,subprocess
+          from pathlib import Path
+          from engineering.operations.run import inventory
+          from engineering.operations.target import OperationalTarget
+          from engineering.operations.scenarios import REQUIRED
+          from engineering.identity.run import inventory as h5_inventory
+          root=Path(os.environ['RUNNER_TEMP'])/'acp-h6-public'
+          r=json.loads((root/'result.json').read_bytes())
+          assert r['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['GITHUB_SHA']
+          assert platform.python_version()=='3.14.7' and r['sourceSHA256']==inventory()
+          assert r['h5SourceSHA256']==h5_inventory()
+          assert r['generator']==OperationalTarget().descriptor()
+          assert r['scope']=='QUALIFICATION_ONLY' and r['engineeringObservability']=='VERIFIED'
+          assert r['productionOperations']=='NOT_APPROVED' and r['releaseClosure']=='BLOCKED'
+          assert r['operationalSecurity']=='NOT_ESTABLISHED' and r['phase12']=='NOT_STARTED'
+          assert r['historicalCreate500']=='UNRESOLVED_NOT_CLAIMED_FIXED'
+          s=r['results'];assert {x['experiment'] for x in s['experiments']}==REQUIRED
+          assert len(s['configurationRejections'])==7 and s['structuredEvents']>0
+          assert s['h5']['sessionRegressions']['tests']==3
+          assert all(s['h5']['sessionRegressions'][k]==0 for k in ('failures','errors','skipped'))
+          assert r['cleanup']=='VERIFIED' and r['resources'] and all(x['cleanup']=='OWN_CONTAINER_AND_VOLUME_REMOVED' for x in r['resources'])
+          assert r['secretScan']['credentialMatches']==0 and not r['secretScan']['signingKeysExported'] and not r['secretScan']['bearerTokensExported']
+          assert r['sealed05']=='ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb'
+          for name,pin in r['files'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==pin
+          assert hashlib.sha256((root/'verification.json').read_bytes()).hexdigest()==r['verificationSHA256']
+          PYTHON
+      - name: Preserve only successfully scanned redacted evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h6-observability
+          include-hidden-files: true
+          if-no-files-found: error
+          path: ${{ runner.temp }}/acp-h6-public/
