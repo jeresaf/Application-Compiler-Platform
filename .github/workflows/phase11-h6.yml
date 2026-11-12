@@ -73,6 +73,7 @@ jobs:
           assert r['productionOperations']=='NOT_APPROVED' and r['releaseClosure']=='BLOCKED'
           assert r['operationalSecurity']=='NOT_ESTABLISHED' and r['phase12']=='NOT_STARTED'
           assert r['historicalCreate500']=='UNRESOLVED_NOT_CLAIMED_FIXED'
+          assert r['focusedTests']=={'configurationAndTarget':20,'faultRegressions':9,'failures':0,'skipped':0}
           s=r['results'];assert {x['experiment'] for x in s['experiments']}==REQUIRED
           assert len(s['configurationRejections'])==7 and s['structuredEvents']>0
           assert s['h5']['sessionRegressions']['tests']==3
@@ -90,3 +91,14 @@ jobs:
           include-hidden-files: true
           if-no-files-found: error
           path: ${{ runner.temp }}/acp-h6-public/
+      - name: Retain closed redacted failure diagnostics
+        if: failure()
+        run: |
+          "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B -m engineering.operations.diagnostics --workspace "$RUNNER_TEMP/acp-h6" --output "$RUNNER_TEMP/acp-h6-failure-public"
+      - name: Preserve redacted failure only
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h6-failure
+          if-no-files-found: error
+          path: ${{ runner.temp }}/acp-h6-failure-public/

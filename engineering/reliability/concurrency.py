@@ -212,19 +212,31 @@ def run(lab):
     return session,resources
 
 
+def earlier_test_occurrence(minimum,now):
+    return min(now if minimum is None else minimum,now)//3600*3600-3600
+
+def next_test_occurrence(lab):
+    positions=lab.db.data("SELECT json_build_object('minimum',min(occurrence),'now',floor(extract(epoch FROM clock_timestamp()))::bigint) FROM "+PREFIX+"_queue")
+    return earlier_test_occurrence(positions['minimum'],positions['now'])
+
 def workers(lab,session,resource):
     session.close()
     first=lab.start(workers=True,port=18081);second=lab.start(workers=True,port=18082)
-    pair=[first,second]
+    pair=[first,second];observations=[]
     def state():
         code,value=api(pair[0],'/__test/job-state');require(code==200,'H2_WORKER_STATE');return value
     def admin(action,**values):
-        code,value=api(pair[0],'/__test/job-admin',{'action':action,**values});require(code==200,'H2_WORKER_ADMIN');return value
+        code,value=api(pair[0],'/__test/job-admin',{'action':action,**values})
+        observation={'action':action,'status':code,'responseSHA256':sha(encode(value)),'occurrence':values.get('occurrence')}
+        observations.append(observation);life.save(lab.logs/'worker-admin-observations.json',observations)
+        require(code==200,'H2_WORKER_ADMIN');return value
     document=lab.db.data("SELECT json_build_object('id',id::text,'sha',sha256) FROM "+lab.doc+" WHERE resource=convert_to('"+resource+"','UTF8') AND idempotency_key='h2-upload'")
-    offset=1
+    # Reserve test-only absolute positions before every retained occurrence.
+    # Relative wall-hour offsets can collide when setup crosses an hour.
+    occurrence=next_test_occurrence(lab)
     def enqueue():
-        nonlocal offset
-        q=str(uuid.uuid4());admin('ENQUEUE_FAULT',queue=q,resource=resource,document=document['id'],sha256=document['sha'],offset=offset,mode='HOLD_FIRST');offset+=1;return q
+        nonlocal occurrence
+        q=str(uuid.uuid4());admin('ENQUEUE_FAULT',queue=q,resource=resource,document=document['id'],sha256=document['sha'],occurrence=occurrence,mode='HOLD_FIRST');occurrence-=3600;return q
     def qrow(q):return next(r for r in state()['queue'] if r['id']==q)
     def entered(queues):
         return wait(state,lambda s:all(any(c['queue']==q and c['entered'] for c in s['controls']) for q in queues),'H2_WORKERS_NOT_SIMULTANEOUS',1.8)

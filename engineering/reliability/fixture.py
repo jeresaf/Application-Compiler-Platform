@@ -8,6 +8,9 @@ AFTER = 62425102
 
 def adapter_source():
     source = parent()
+    slot='long slot=java.time.Instant.now().getEpochSecond()/3600*3600-((Number)body.get("offset")).longValue()*3600;'
+    require(source.count(slot)==1,'H2_OCCURRENCE_FIXTURE_DRIFT')
+    source=source.replace(slot,'long slot=body.containsKey("occurrence")?((Number)body.get("occurrence")).longValue():java.time.Instant.now().getEpochSecond()/3600*3600-((Number)body.get("offset")).longValue()*3600;',1)
     source = source.replace('Set.of("browser-report-tenant-two",',
                             'Set.of("browser-report-tenant-two-peer","browser-report-tenant-two",', 1)
     source = source.replace('token.equals("browser-report-tenant-two")',

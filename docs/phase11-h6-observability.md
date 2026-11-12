@@ -58,3 +58,41 @@ approved custody destination. Production provider/principal enrollment, service
 authentication, transport/TLS, monitoring access policy, key custody, deployment
 acceptance and G-16–G-19 remain independent decisions. H6 success does not close
 Phase 6 release blockers or establish production readiness.
+
+## Hosted failure remediation
+
+The first H6 runs observed no real pressure waiters. The external fixture started
+34 connection acquisitions concurrently against a cold pool with a 750 ms
+acquisition timeout; discarded futures hid acquisition failures. A focused real
+PostgreSQL reproduction exposed `SQLTransientConnectionException` and partial
+occupancy. The correction acknowledges each successful acquisition before
+starting the next borrower, while retaining all borrowed connections on the
+same PostgreSQL lock. Independent `pg_locks` checks still require 34 overlapping
+waiters. Failed acquisitions propagate; completion errors are checked after
+release. This changes fixture setup, not application pool or timeout policy.
+
+The original H3 failure artifact records a unique-key violation at
+2026-11-09 07:00:20 UTC for occurrence 1794204000 and the reserved H2 document.
+The reused H2 fixture computed positions relative to the current hour, allowing
+an hour rollover to reuse an existing document occurrence. The external H2
+adapter now accepts an exact test-only occurrence; the helper selects positions
+strictly before the retained minimum and current database time. Existing
+relative-offset callers remain supported. No migration or uniqueness constraint
+changes. Native overlap, owner fencing, lease recovery and single-result
+assertions remain active.
+
+Failure exports contain closed operational events, exception classes/SQLSTATE,
+HTTP status and response digests, source/log digests, control observations and
+cleanup status. Raw logs, response bodies, SQL parameters, credentials and keys
+stay private. Failed exports are never successful qualification records.
+Neither correction establishes a cause for the historical H3 CREATE HTTP 500.
+
+The inherited generic `Errors` handler maps unmatched MVC resource exceptions to
+HTTP 500. H6 preserves that behavior and records it explicitly while testing
+fixed metric cardinality across distinct unknown paths. H6 does not claim this
+pre-existing HTTP limitation is corrected.
+
+A local H6 rerun independently encountered SQLSTATE 23505 when its own relative
+worker offsets crossed an hour. H6 now reuses the same absolute-position helper
+as H2. PostgreSQL failure logs remain private; the failure exporter retains only
+closed error classifications and timestamps, with hashes of the raw evidence.

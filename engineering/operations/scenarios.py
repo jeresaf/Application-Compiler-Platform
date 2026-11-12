@@ -9,7 +9,7 @@ from engineering.reference_application import lifecycle as life
 from engineering.jobs.scenarios import wait
 from engineering.jobs.fixture import PREFIX
 from engineering.capacity import workload,metrics as h3metrics
-from engineering.reliability.concurrency import upload
+from engineering.reliability.concurrency import upload,next_test_occurrence
 from engineering.generator_builds.runtime import docker
 
 REQUIRED={'healthyStartup','normalAuthenticatedOperations','readOnlyHealth','metricsProtected','postgresUnavailable','postgresRestored','poolExhausted','poolRecovered','identityMaterialMissing','identityMaterialSubstituted','identityRecovered','optionalWorkerDisabled','workerDraining','workerStopped','queueNotDraining','workerRecovered','liveWorkerStall','workerStallRecovered','invalidConfiguration','boundedTelemetry','secretChange','applicationRestart','cleanShutdown','h5AuthenticationPreserved'}
@@ -60,7 +60,7 @@ def exercise(root,folder,container,issuer):
     def state():return checked('/__test/job-state',token)['value']
     def enqueue(mode='NONE'):
         nonlocal counter
-        counter+=1;q=str(uuid.uuid4());admin('ENQUEUE_FAULT',queue=q,resource=resources[0],document=documents[0]['documentId'],sha256=documents[0]['sha256'],offset=600+counter,mode=mode);return q
+        counter+=1;q=str(uuid.uuid4());admin('ENQUEUE_FAULT',queue=q,resource=resources[0],document=documents[0]['documentId'],sha256=documents[0]['sha256'],occurrence=next_test_occurrence(lab),mode=mode);return q
     try:
         server=lab.start();token=issuer.obtain(claims={'sid':'h6-interactive-one','auth_time':int(time.time())});other=issuer.obtain(subject='fixture:reporter-two',tenant='tenant-two',claims={'sid':'h6-interactive-two','auth_time':int(time.time())})
         record('h5AuthenticationPreserved',requiredNegatives=len(crypto['requiredNegatives']),cases=len(crypto['outcomes']),nativeSessions=crypto['sessionRegressions']);record('healthyStartup',pid=server.process.pid,readiness=health(),liveness=health('liveness'),database=lab.identity)
@@ -89,7 +89,7 @@ def exercise(root,folder,container,issuer):
                 request=pool.submit(http,server,lab.report['path'],token,{})
                 observe('readiness',False);probe=health(status=503);live=health('liveness');rejected=request.result(timeout=5);require(rejected['status']==500,'H6_ACQUISITION_FAILURE_NOT_OBSERVED')
             require(lab.state()==stable,'H6_PRESSURE_PUBLISHED_EFFECT');record('poolExhausted',actualWaitingPostgresLocks=lab.lock_count(PRESSURE,False),readiness=probe,liveness=live,requestStatus=rejected['status'])
-        observe('readiness',True);recovered=metric();require(recovered['poolActivePeak']==34,'H6_POOL_PRESSURE_NOT_MEASURED');require(lab.state()==stable,'H6_POOL_RECOVERY_CHANGED_DATA');record('poolRecovered',readiness=health(),poolActivePeak=recovered['poolActivePeak'],poolAwaitingPeak=recovered['poolAwaitingPeak'])
+        observe('readiness',True);require(checked('/__test/h6-pressure-state',token)['value']['errors']==[],'H6_PRESSURE_WORKER_FAILURE');recovered=metric();require(recovered['poolActivePeak']==34,'H6_POOL_PRESSURE_NOT_MEASURED');require(lab.state()==stable,'H6_POOL_RECOVERY_CHANGED_DATA');record('poolRecovered',readiness=health(),poolActivePeak=recovered['poolActivePeak'],poolAwaitingPeak=recovered['poolAwaitingPeak'])
         keyfile.rename(keyfile.with_suffix('.withheld'))
         try:observe('readiness',False);record('identityMaterialMissing',readiness=health(status=503),liveness=health('liveness'),requestStatus=checked(lab.report['path'],token,{},status=401)['status'])
         finally:keyfile.with_suffix('.withheld').rename(keyfile)
@@ -117,8 +117,11 @@ def exercise(root,folder,container,issuer):
         profile={**workload.PROFILE,'measuredCyclesPerClient':1};run=types.FunctionType(workload.run_level.__code__,{**vars(workload),'PROFILE':profile,'token':lambda i:(token,other)[i%2],'Sampler':SignedSampler},'h3_signed_operational_level')
         event_before=metric()['eventEmissionNanos'];measurements=run(lab,server,4,'h6');event_after=metric()['eventEmissionNanos'];require(event_after>event_before,'H6_EVENT_TIMING_NOT_OBSERVED');life.save(folder/'mixed-workload.json',measurements)
         before=metric();keys=set(before)
-        for i in range(96):checked('/h6-test-unmatched-'+str(i),token,status=404)
-        after=metric();require(set(after)==keys and len(keys)<=256,'H6_UNBOUNDED_METRIC_LABELS');record('boundedTelemetry',metricNames=len(keys),requests=measurements['summary']['population'],maxRSSBytes=measurements['resources']['maxRSSBytes'],requestLatency=measurements['summary'],logRateLimit=after['logEventsPerSecondLimit'],droppedEvents=after['droppedOperationalEvents'],measuredEventEmissionNanos=event_after-event_before,overheadScope='SUM_OF_EVENT_EMISSION_WALL_TIMES_INCLUDING_LOG_SINK; NOT_BASELINE_SPEEDUP_OR_SLO')
+        # The inherited Errors.handle(Exception) deliberately emits generic 500,
+        # including MVC NoResourceFoundException. Measure cardinality without
+        # changing or pretending to repair that existing HTTP behavior.
+        for i in range(96):checked('/h6-test-unmatched-'+str(i),token,status=500)
+        after=metric();require(set(after)==keys and len(keys)<=256,'H6_UNBOUNDED_METRIC_LABELS');record('boundedTelemetry',metricNames=len(keys),unmatchedRouteStatus=500,requests=measurements['summary']['population'],maxRSSBytes=measurements['resources']['maxRSSBytes'],requestLatency=measurements['summary'],logRateLimit=after['logEventsPerSecondLimit'],droppedEvents=after['droppedOperationalEvents'],measuredEventEmissionNanos=event_after-event_before,overheadScope='SUM_OF_EVENT_EMISSION_WALL_TIMES_INCLUDING_LOG_SINK; NOT_BASELINE_SPEEDUP_OR_SLO')
         # Secret reference stays fixed while actual secret possession changes.
         old_key=lab.metrics_key;server.close();lab.metrics_key=secrets.token_urlsafe(32);issuer.tokens.append(lab.metrics_key);server=lab.start();checked('/internal/operations/metrics',token,status=403,headers={'X-ACP-Metrics-Key':old_key});metric();record('secretChange',oldCapabilityStatus=403,newCapabilityStatus=200,semanticIdentityChanged=False)
         # No invalid configuration may become ready.
@@ -136,6 +139,18 @@ def exercise(root,folder,container,issuer):
         all_events=events+telemetry(folder/'identity/runtime');require(required_events<={e['event'] for e in all_events},'H6_MISSING_OPERATIONAL_EVENT');life.save(folder/'structured-events.json',all_events)
         require(REQUIRED=={p['experiment'] for p in proof},'H6_MISSING_EXPERIMENT')
         return {'experiments':proof,'h5':crypto,'configurationRejections':rejections,'structuredEvents':len(all_events),'eventKinds':sorted({e['event'] for e in all_events}),'businessWorkload':measurements['summary'],'workerIdentity':'EXISTING_EXPLICIT_SERVICE_CONTEXT; NO_INTERACTIVE_JWT; CRYPTOGRAPHIC_SERVICE_ENROLLMENT_NOT_APPROVED','historicalCreate500':'UNRESOLVED_NOT_CLAIMED_FIXED','scope':'QUALIFICATION_ONLY'}
+    except Exception as error:
+        # Capture independently observed control state, never bearer/body values.
+        observation={'errorClass':type(error).__name__,'pid':server.process.pid if server is not None and server.process else None,'postgresPaused':paused}
+        if server is not None:
+            observation['healthHTTP']={group:http(server,'/actuator/health/'+group)['status'] for group in ('liveness','readiness','worker')}
+        if not paused:
+            try:observation['pressureWaiters']=lab.lock_count(PRESSURE,False)
+            except Exception:observation['pressureWaiters']=None
+        try:(folder/'postgres-failure.log').write_text(docker('logs',container))
+        except Exception as capture:observation['captureErrorClass']=type(capture).__name__
+        life.save(folder/'failure-observations.json',observation)
+        raise
     finally:
         if paused:docker('unpause',container)
         if keyfile.exists():keyfile.write_bytes(original_keys)

@@ -6,6 +6,7 @@ from engineering.reference_application import lifecycle as life
 from engineering.application_evolution.run import analyze,build
 from engineering.hardening import application
 from engineering.hardening.run import observed_offline_maven
+from engineering.identity.run import safe_maven_logs
 from engineering.hardening.assessment import verify_realms
 from engineering.jobs.inspection import Preview
 from engineering.demo import reference as demo
@@ -34,7 +35,7 @@ def qualify(workspace,*,maven_seed=None,npm_seed=None,offline=False):
     store=FilesystemArtifactStore(root);store.adopt_human(life.HUMAN);human=(root/life.HUMAN).read_bytes();plan=candidate.plan(snapshot,request,store.inventory());store.apply(plan);candidate.verify_materialized(root,plan,snapshot,request);expected=life.tree(root);preview=Preview(candidate,snapshot,request,plan,candidate.audit,root)
     life.save(w/'candidate.json',snapshot.read());life.save(w/'artifact-plan.json',wire(plan))
     active=[];inventory=[];lab=None;auth_before=os.environ.get('ACP_H2_SESSION_NAMESPACE')
-    with demo.dependencies(w,maven_seed,npm_seed,offline) as deps,observed_offline_maven():
+    with demo.dependencies(w,maven_seed,npm_seed,offline) as deps,observed_offline_maven(),safe_maven_logs():
         demo.command(['npm','ci','--ignore-scripts','--no-audit','--no-fund'],root/'frontend',w/'npm.log')
         session=analyze(preview,w/'inspection',deps/'m2',root/'frontend/node_modules')
         build(root,w/'build',fixture.adapter_source)

@@ -72,8 +72,8 @@ jobs:
           assert r['cleanup']=='VERIFIED' and r['G22']=='NOT_SATISFIED'
           assert r['productionCapacity']=='NOT_APPROVED' and r['releaseClosure']=='BLOCKED'
           PYTHON
-      - name: Preserve raw measurements source database and failure evidence
-        if: always()
+      - name: Preserve successful measurements source and database evidence
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: phase11-h3-capacity
@@ -87,3 +87,14 @@ jobs:
             !${{ runner.temp }}/acp-h3/**/m2/**
             !${{ runner.temp }}/acp-h3/**/npm/**
             !${{ runner.temp }}/acp-h3/**/browsers/**
+      - name: Retain closed redacted failure diagnostics
+        if: failure()
+        run: |
+          "$RUNNER_TEMP/acp-h3-venv/bin/python3.14" -B -m engineering.operations.diagnostics --workspace "$RUNNER_TEMP/acp-h3" --output "$RUNNER_TEMP/acp-h3-failure-public"
+      - name: Preserve redacted failure only
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h3-failure
+          if-no-files-found: error
+          path: ${{ runner.temp }}/acp-h3-failure-public/
