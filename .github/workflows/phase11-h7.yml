@@ -1,0 +1,107 @@
+name: ACP Phase 11 H7 logical backup and disaster recovery
+on:
+  push:
+    branches: ['codex/phase11-hardening']
+  pull_request:
+    paths:
+      - 'engineering/disaster_recovery/**'
+      - 'verification/disaster_recovery/**'
+      - '.github/workflows/phase11-h7.yml'
+permissions:
+  contents: read
+jobs:
+  h7-recovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    env:
+      PYTHONPATH: tooling:.
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Isolated hash-locked compiler SDK and cryptography
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-h7-venv"
+          "$RUNNER_TEMP/acp-h7-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/mcp_adapter/requirements.txt
+          "$RUNNER_TEMP/acp-h7-venv/bin/python3.14" -m pip check
+      - name: Previous security reliability capacity and CI regressions without skips
+        run: |
+          set -euo pipefail
+          for pair in verification/identity:15 verification/create_reliability:12 verification/capacity:46 verification/hardening:20 verification/reliability:45 verification/ci:26; do
+            "$RUNNER_TEMP/acp-h7-venv/bin/python3.14" -B - "${pair%:*}" "${pair##*:}" <<'PYTHON'
+          import sys,unittest
+          suite=unittest.defaultTestLoader.discover(sys.argv[1]);count=int(sys.argv[2])
+          assert suite.countTestCases()==count
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          assert result.wasSuccessful() and result.testsRun==count and not result.skipped
+          PYTHON
+          done
+      - name: Pinned disposable PostgreSQL 18.6
+        run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Real snapshot backup independent restore and authenticated application
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-h7-venv/bin/python3.14" -B -m engineering.disaster_recovery.run --workspace "$RUNNER_TEMP/acp-h7"
+      - name: Verify exact source real recovery private-data exclusion and cleanup
+        run: |
+          "$RUNNER_TEMP/acp-h7-venv/bin/python3.14" -B - <<'PYTHON'
+          import hashlib,json,os,platform,re,subprocess
+          from pathlib import Path
+          from engineering.disaster_recovery.run import inventory,PUBLIC
+          from engineering.disaster_recovery.scenarios import REQUIRED
+          from engineering.operations.target import OperationalTarget
+          root=Path(os.environ['RUNNER_TEMP'])/'acp-h7-public'
+          r=json.loads((root/'result.json').read_bytes())
+          assert r['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['GITHUB_SHA']
+          assert platform.python_version()=='3.14.7' and r['sourceSHA256']==inventory()
+          assert r['generator']==OperationalTarget().descriptor() and r['scope']=='QUALIFICATION_ONLY'
+          assert r['focusedTests']=={'tests':20,'failures':0,'skipped':0}
+          assert r['releaseClosure']=='BLOCKED' and r['operationalSecurity']=='NOT_ESTABLISHED'
+          assert r['productionRecovery']=='NOT_APPROVED' and r['G19']=='NOT_SATISFIED' and r['phase12']=='NOT_STARTED'
+          assert r['requiredExperiments']==sorted(REQUIRED)==sorted(x['experiment'] for x in r['results']['experiments'])
+          assert r['results']['PITR']['status']=='NOT_RUN' and r['results']['rawBackupRemoved']
+          assert r['results']['backup']['source']['postgresVersionNum']==180006
+          assert r['cleanup']=='VERIFIED' and r['resources'] and all(x['cleanup']=='OWN_CONTAINER_AND_VOLUME_REMOVED' for x in r['resources'])
+          assert r['secretScan']['credentialMatches']==0 and not r['secretScan']['signingKeysExported'] and not r['secretScan']['bearerTokensExported']
+          assert set(r['files'])==set(PUBLIC)
+          for name,pin in r['files'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==pin
+          assert {p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()}==set(PUBLIC)|{'result.json'}
+          for p in root.rglob('*'):
+            if p.is_file():assert p.suffix not in ('.dump','.sql') and not re.search(rb'eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}',p.read_bytes())
+          private=Path(os.environ['RUNNER_TEMP'])/'acp-h7/runtime'
+          wrong=''.join(p.read_text() for p in (private/'wrong-schema/runtime').glob('demo-backend-*.log'))
+          credentials=(private/'restored/runtime/demo-backend-1011.log').read_text()
+          assert 'FlywayValidateException' in wrong
+          assert '28P01' in credentials and 'password authentication failed' in credentials
+          assert r['sealed05']=='ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb'
+          PYTHON
+      - name: Preserve only verified redacted recovery evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h7-recovery
+          include-hidden-files: true
+          if-no-files-found: error
+          path: ${{ runner.temp }}/acp-h7-public/
+      - name: Retain closed failure diagnostics
+        if: failure()
+        run: |
+          "$RUNNER_TEMP/acp-h7-venv/bin/python3.14" -B -m engineering.operations.diagnostics --workspace "$RUNNER_TEMP/acp-h7" --output "$RUNNER_TEMP/acp-h7-failure-public"
+      - name: Preserve redacted failure metadata
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h7-failure
+          if-no-files-found: error
+          path: ${{ runner.temp }}/acp-h7-failure-public/
