@@ -80,3 +80,16 @@ class Backups(unittest.TestCase):
    seen.append(token);now[0]+=2.0 if token=='first' else 50.0;return {'total':2}
   result=authenticated_reports(None,'/fixture',['first','second'],fetch=fetch,clock=lambda:now[0])
   self.assertEqual(seen,['first','second']);self.assertEqual(result['firstRequestSeconds'],2.0);self.assertEqual(result['firstCompletedMonotonic'],102.0);self.assertEqual(now[0],152.0)
+
+ def test_worker_observation_uses_one_database_snapshot(self):
+  from engineering.disaster_recovery.scenarios import coherent_job_state
+  # A split observer can see audit-before-commit and result-after-commit.
+  before={'audits':[],'results':[]};after={'audits':[{'id':9}],'results':[{'audit_id':9}]}
+  torn={'audits':before['audits'],'results':after['results']}
+  self.assertFalse(any(a['id']==torn['results'][0]['audit_id'] for a in torn['audits']))
+  with patch('engineering.disaster_recovery.scenarios.db.sql',return_value=after) as query:
+   state=coherent_job_state('owned-only');self.assertEqual(state,after)
+   query.assert_called_once();statement=query.call_args.args[1]
+   self.assertTrue(statement.startswith('SELECT json_build_object('));self.assertNotIn(';',statement)
+   for table in ('_queue q','acp_audit a','_result r'):self.assertIn(table,statement)
+   self.assertEqual(sum(a['id']==state['results'][0]['audit_id'] for a in state['audits']),1)

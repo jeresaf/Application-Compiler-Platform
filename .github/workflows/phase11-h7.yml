@@ -67,7 +67,7 @@ jobs:
           assert r['sourceCommit']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['GITHUB_SHA']
           assert platform.python_version()=='3.14.7' and r['sourceSHA256']==inventory()
           assert r['generator']==OperationalTarget().descriptor() and r['scope']=='QUALIFICATION_ONLY'
-          assert r['focusedTests']=={'tests':21,'failures':0,'skipped':0}
+          assert r['focusedTests']=={'tests':22,'failures':0,'skipped':0}
           assert r['releaseClosure']=='BLOCKED' and r['operationalSecurity']=='NOT_ESTABLISHED'
           assert r['productionRecovery']=='NOT_APPROVED' and r['G19']=='NOT_SATISFIED' and r['phase12']=='NOT_STARTED'
           assert r['requiredExperiments']==sorted(REQUIRED)==sorted(x['experiment'] for x in r['results']['experiments'])

@@ -58,7 +58,9 @@ native PostgreSQL commit-oracle cache enrichment is performed before the backup;
 logical restore does not preserve the original cluster's transaction-clock
 history. Restored workers must preserve a still-valid fault-extended lease and
 reclaim only after explicit expiry, with a new fencing token and one terminal
-result/audit. Native retry/lease policies are not reconfigured.
+result/audit. Recovery worker observations use a single PostgreSQL statement
+so queue, result and audit share one MVCC snapshot; authenticated HTTP access
+is checked separately. Native retry/lease policies are not reconfigured.
 
 Timings distinguish backup, restore, JVM readiness and first authenticated
 operation. Snapshot age and the measured excluded population describe this

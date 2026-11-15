@@ -47,6 +47,12 @@ def authenticated_reports(server,path,auth,fetch=checked,clock=time.monotonic):
     require(fetch(server,path,auth[1],{})['total']==2,'H7_REPORT_TOTAL')
     return {'firstRequestSeconds':first_completed-started,'firstCompletedMonotonic':first_completed}
 
+def coherent_job_state(container):
+    # One PostgreSQL statement gives queue, audit and result the same MVCC snapshot.
+    # The HTTP fixture queries those tables separately and can straddle a commit.
+    schema=db.SCHEMA+'.'
+    return db.sql(container,"SELECT json_build_object('queue',(SELECT coalesce(json_agg(q),'[]') FROM "+schema+PREFIX+"_queue q),'audits',(SELECT coalesce(json_agg(a),'[]') FROM "+schema+"acp_audit a WHERE operation='JOB-INTEGRITY'),'results',(SELECT coalesce(json_agg(r),'[]') FROM "+schema+PREFIX+"_result r))")
+
 def tokens(issuer,prefix):
     return [issuer.obtain(subject=subject,tenant=tenant,claims={'sid':prefix+'-'+str(i),'auth_time':int(time.time())}) for i,(subject,tenant) in enumerate((('fixture:operator','tenant-one'),('fixture:reporter-two','tenant-two')))]
 
@@ -149,7 +155,9 @@ def exercise(root,folder,resources,issuers):
                     for case in cases:require(checked(fresh,restored.create['path'],fresh_auth[case['tenant']],case['payload'])==case['response'],'H7_IDEMPOTENCY_RESULT')
                     require(audit_counts(restored)==before,'H7_DUPLICATE_BUSINESS_EFFECT');record('idempotencyPreserved',replays=4,duplicateEffects=0,counts=before,commitClock='SOURCE_AUTHENTICATED_CACHE; NO_CROSS_CLUSTER_XID_ORACLE_CLAIM')
                     fresh.close();fresh=restored.start(workers=True)
-                    def target_jobs():return checked(fresh,'/__test/job-state',fresh_auth[0])
+                    def target_jobs():
+                        checked(fresh,'/__test/job-state',fresh_auth[0]) # Authentication remains enforced.
+                        return coherent_job_state(target.container)
                     wait(target_jobs,lambda s:any(r['queue']==pending for r in s['results']),'H7_PENDING_NOT_RESUMED',30)
                     held_row=next(q for q in target_jobs()['queue'] if q['id']==held);require(held_row['token']==old['token'] and held_row['owner']==old['owner'] and held_row['state']=='RUNNING','H7_VALID_LEASE_RECLAIMED')
                     record('validLeasePreserved',token=held_row['token'],priorOwnerUnchanged=True,pendingRecovered=1)
