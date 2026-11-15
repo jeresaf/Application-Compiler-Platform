@@ -64,7 +64,10 @@ Timings distinguish backup, restore, JVM readiness and first authenticated
 operation. Snapshot age and the measured excluded population describe this
 engineering recovery point. Failure-to-operation timing includes the deliberately
 performed fault tests; the primary restore-to-operation interval is reported
-separately. Neither is an approved production RPO, RTO or SLO.
+separately. The primary interval includes the deliberately rejected credential
+startup. First authenticated-request timing stops at the first successful
+response, before the second tenant validation; launch-to-first-response timing
+is also retained. Neither is an approved production RPO, RTO or SLO.
 
 Raw dumps and corruption copies stay in a new mode-0700 private temporary
 subdirectory and are removed on success or failure. This is logical deletion,

@@ -72,3 +72,11 @@ class Backups(unittest.TestCase):
  def test_public_symlink_rejected(self):
   self.public();p=self.root/PUBLIC[0];p.unlink();p.symlink_to(self.root/PUBLIC[1])
   with self.assertRaisesRegex(ValueError,'MISSING_OR_ESCAPE'):public_paths(self.root)
+
+ def test_first_authentication_timing_excludes_delayed_second_tenant(self):
+  from engineering.disaster_recovery.scenarios import authenticated_reports
+  now=[100.0];seen=[]
+  def fetch(server,path,token,body):
+   seen.append(token);now[0]+=2.0 if token=='first' else 50.0;return {'total':2}
+  result=authenticated_reports(None,'/fixture',['first','second'],fetch=fetch,clock=lambda:now[0])
+  self.assertEqual(seen,['first','second']);self.assertEqual(result['firstRequestSeconds'],2.0);self.assertEqual(result['firstCompletedMonotonic'],102.0);self.assertEqual(now[0],152.0)

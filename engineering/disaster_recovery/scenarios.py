@@ -41,6 +41,12 @@ def checked(server,path,token,body=None,*,status=200,multipart=False):
     else:code,value,elapsed=call(server,path,token,body,multipart=multipart)
     require(code==status,'H7_HTTP:'+str(code)+':'+path);return value
 
+def authenticated_reports(server,path,auth,fetch=checked,clock=time.monotonic):
+    started=clock();first=fetch(server,path,auth[0],{});first_completed=clock()
+    require(first['total']==2,'H7_REPORT_TOTAL')
+    require(fetch(server,path,auth[1],{})['total']==2,'H7_REPORT_TOTAL')
+    return {'firstRequestSeconds':first_completed-started,'firstCompletedMonotonic':first_completed}
+
 def tokens(issuer,prefix):
     return [issuer.obtain(subject=subject,tenant=tenant,claims={'sid':prefix+'-'+str(i),'auth_time':int(time.time())}) for i,(subject,tenant) in enumerate((('fixture:operator','tenant-one'),('fixture:reporter-two','tenant-two')))]
 
@@ -128,10 +134,10 @@ def exercise(root,folder,resources,issuers):
                     previous=os.environ['ACP_TEST_DATABASE_PASSWORD'];os.environ['ACP_TEST_DATABASE_PASSWORD']=secrets.token_urlsafe(32)
                     try:reject('invalidCredentialsRejected',lambda:restored.start(),'DEMO_BACKEND_EXIT')
                     finally:os.environ['ACP_TEST_DATABASE_PASSWORD']=previous
-                    ready_begin=time.monotonic();fresh=restored.start();ready_seconds=time.monotonic()-ready_begin;fresh_auth=tokens(new_issuer,'restored-'+uuid.uuid4().hex);first=time.monotonic()
+                    ready_begin=time.monotonic();fresh=restored.start();ready_seconds=time.monotonic()-ready_begin;fresh_auth=tokens(new_issuer,'restored-'+uuid.uuid4().hex)
                     checked(fresh,'/actuator/health/readiness',None)
-                    for who in range(2):require(checked(fresh,restored.report['path'],fresh_auth[who],{})['total']==2,'H7_REPORT_TOTAL')
-                    record('freshAuthenticatedRecovery',newIssuer=True,freshSessions=True,readinessSeconds=ready_seconds,firstAuthenticatedSeconds=time.monotonic()-first,recoverySecondsIncludingFaultExperiments=time.monotonic()-failure_begin,primaryRestoreToFirstOperationSeconds=time.monotonic()-primary_begin,excludedAfterSnapshot=2)
+                    timing=authenticated_reports(fresh,restored.report['path'],fresh_auth);first_success=timing['firstCompletedMonotonic']
+                    record('freshAuthenticatedRecovery',newIssuer=True,freshSessions=True,readinessSeconds=ready_seconds,firstAuthenticatedSeconds=timing['firstRequestSeconds'],firstAuthenticatedFromLaunchSeconds=first_success-ready_begin,recoverySecondsIncludingFaultExperiments=first_success-failure_begin,primaryRestoreToFirstOperationSeconds=first_success-primary_begin,primaryIntervalIncludesCredentialFailure=True,excludedAfterSnapshot=2)
                     for i,(case,doc) in enumerate(zip(cases,documents)):
                         who=case['tenant'];body={'resourceId':case['resource'],'documentId':doc['documentId']};require(checked(fresh,restored.documents_path+'/download',fresh_auth[who],body)==doc['raw'],'H7_DOCUMENT_BYTE_MISMATCH')
                         require(restored.ownership(case['resource'])=={'tenant':('tenant-one','tenant-two')[who],'subject':('fixture:operator','fixture:reporter-two')[who]},'H7_OWNERSHIP')
