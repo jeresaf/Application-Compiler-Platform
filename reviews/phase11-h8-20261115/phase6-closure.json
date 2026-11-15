@@ -1,0 +1,2761 @@
+{
+  "auditExecution": {
+    "exception": null,
+    "status": "PERFORMED"
+  },
+  "blockerIdentifiers": [
+    5,
+    8,
+    9,
+    10,
+    12,
+    13,
+    14,
+    15,
+    18,
+    20,
+    21,
+    22,
+    24,
+    25,
+    26,
+    27,
+    28,
+    30,
+    31,
+    32,
+    33
+  ],
+  "counts": {
+    "BLOCKED": 21,
+    "PASS": 18,
+    "criteria": 39
+  },
+  "criteria": [
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Immutable baseline",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Exact merged baseline and execution commit; clean checkout, protected history and sealed bundle checked.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "exactReviewedBaselineAndProtectedHistory"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 1,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/1"
+      },
+      "predicateRequirement": {
+        "area": "Immutable baseline",
+        "detail": "Exact merged baseline and execution commit; clean checkout, protected history and sealed bundle checked.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "exactReviewedBaselineAndProtectedHistory"
+          ]
+        },
+        "tests": [
+          "exactReviewedBaselineAndProtectedHistory"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Release immutability",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Intentional 0.5.0 successor; exact prior release entries retained and verified against the reviewed baseline.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "previousReleasedBundlesRemainImmutable"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 2,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/2"
+      },
+      "predicateRequirement": {
+        "area": "Release immutability",
+        "detail": "Intentional 0.5.0 successor; exact prior release entries retained and verified against the reviewed baseline.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "previousReleasedBundlesRemainImmutable"
+          ]
+        },
+        "tests": [
+          "previousReleasedBundlesRemainImmutable"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Full actual admission",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Original strict CLI with --full-admission --run-builds; no expected-blocker allowance.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 3,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/3"
+      },
+      "predicateRequirement": {
+        "area": "Full actual admission",
+        "detail": "Original strict CLI with --full-admission --run-builds; no expected-blocker allowance.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Integrated final entrypoint",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Audit orchestrates full strict admission, supplemental browser, fault/materializer/history, provenance and package checks; exits 2 for unmet closure criteria.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "closureEntrypointRunsEveryRequiredProducer"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 4,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/4"
+      },
+      "predicateRequirement": {
+        "area": "Integrated final entrypoint",
+        "detail": "Audit orchestrates full strict admission, supplemental browser, fault/materializer/history, provenance and package checks; exits 2 for unmet closure criteria.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "closureEntrypointRunsEveryRequiredProducer"
+          ]
+        },
+        "tests": [
+          "closureEntrypointRunsEveryRequiredProducer"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Approved exact old/new snapshots, authenticated accepted ChangeSets/journal continuity, independent measured-population bindings, exact deployed migration and regeneration chain. Preview is insufficient."
+      },
+      "originalAuditCriterion": {
+        "area": "Accepted-history deployed evolution",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "A deployed target-release evolution of unchanged approved snapshots is separate from accepted semantic evolution. Synthetic String/backfill witnesses are not new human business approvals; a complete accepted ChangeSet/data-binding deployment chain remains required.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 5,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/5"
+      },
+      "predicateRequirement": {
+        "area": "Accepted-history deployed evolution",
+        "detail": "A deployed target-release evolution of unchanged approved snapshots is separate from accepted semantic evolution. Synthetic String/backfill witnesses are not new human business approvals; a complete accepted ChangeSet/data-binding deployment chain remains required.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Approved exact old/new snapshots, authenticated accepted ChangeSets/journal continuity, independent measured-population bindings, exact deployed migration and regeneration chain. Preview is insufficient.",
+      "responsibleDecisionMaker": "Project/semantic authority, independent reviewer, data owner and deployment operator",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H2",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Historical provenance",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Policy C: target 0.1 excluded from supported production upgrade window. Historical test adapter is forensic evidence only; 0.2/0.3 ordinary reader remains production policy.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionEvolutionWindowExcludesTarget01"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 6,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/6"
+      },
+      "predicateRequirement": {
+        "area": "Historical provenance",
+        "detail": "Policy C: target 0.1 excluded from supported production upgrade window. Historical test adapter is forensic evidence only; 0.2/0.3 ordinary reader remains production policy.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionEvolutionWindowExcludesTarget01"
+          ]
+        },
+        "tests": [
+          "productionEvolutionWindowExcludesTarget01"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Scheduler observation",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Exact occurrence-scoped recovery assertions retain non-skipped count. Separate deterministic scheduler observation is fixed immediately after the original occurrence; invocation clock alone observes actual PostgreSQL commit time.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 7,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/7"
+      },
+      "predicateRequirement": {
+        "area": "Scheduler observation",
+        "detail": "Exact occurrence-scoped recovery assertions retain non-skipped count. Separate deterministic scheduler observation is fixed immediately after the original occurrence; invocation clock alone observes actual PostgreSQL commit time.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact sealed-release admitted cross-owner transition witness including authorization, revision, CAS conflicts and nonpublication on rejection; candidate ownership evidence cannot be relabelled."
+      },
+      "originalAuditCriterion": {
+        "area": "Integrated ownership",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Actual compiler replacement/human identity preservation/unapproved AI rejection plus retained approved AI/framework/CAS/unknown-file tests. Complete integrated cross-owner transition matrix remains incomplete.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "integratedCrossOwnerTransitions"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 8,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/8"
+      },
+      "predicateRequirement": {
+        "area": "Integrated ownership",
+        "detail": "Actual compiler replacement/human identity preservation/unapproved AI rejection plus retained approved AI/framework/CAS/unknown-file tests. Complete integrated cross-owner transition matrix remains incomplete.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "integratedCrossOwnerTransitions"
+          ]
+        },
+        "tests": [
+          "integratedCrossOwnerTransitions"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Exact sealed-release admitted cross-owner transition witness including authorization, revision, CAS conflicts and nonpublication on rejection; candidate ownership evidence cannot be relabelled.",
+      "responsibleDecisionMaker": "Release authority and registered engineering witness owner",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H2",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exhaustive exact-release object/revision/owner/input/artifact mapping including HUMAN artifacts and stale/forged rejection, independently admitted."
+      },
+      "originalAuditCriterion": {
+        "area": "Provenance completeness",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Exact ArtifactPlans retained separately from conservative sidecar origin sets. Host per-artifact revisions checked; exhaustive target-object bijection/input-digest reconciliation and HUMAN-owned artifact provenance remain incomplete.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "everyTargetObjectHasExactRevisionAndInputDigest"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 9,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/9"
+      },
+      "predicateRequirement": {
+        "area": "Provenance completeness",
+        "detail": "Exact ArtifactPlans retained separately from conservative sidecar origin sets. Host per-artifact revisions checked; exhaustive target-object bijection/input-digest reconciliation and HUMAN-owned artifact provenance remain incomplete.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "everyTargetObjectHasExactRevisionAndInputDigest"
+          ]
+        },
+        "tests": [
+          "everyTargetObjectHasExactRevisionAndInputDigest"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Exhaustive exact-release object/revision/owner/input/artifact mapping including HUMAN artifacts and stale/forged rejection, independently admitted.",
+      "responsibleDecisionMaker": "Release authority and compiler/provenance reviewer",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact semantic-object→artifact→assertion→retained result linkage through registered sealed-release witnesses, not just family/suite mapping."
+      },
+      "originalAuditCriterion": {
+        "area": "Traceability",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Machine-readable family→basis→ID/revision→host-artifact trace exists; suite-level runtime links do not prove a per-object assertion chain for every representative.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "representativeObjectRuntimeTraceability"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 10,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/10"
+      },
+      "predicateRequirement": {
+        "area": "Traceability",
+        "detail": "Machine-readable family→basis→ID/revision→host-artifact trace exists; suite-level runtime links do not prove a per-object assertion chain for every representative.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "representativeObjectRuntimeTraceability"
+          ]
+        },
+        "tests": [
+          "representativeObjectRuntimeTraceability"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Exact semantic-object→artifact→assertion→retained result linkage through registered sealed-release witnesses, not just family/suite mapping.",
+      "responsibleDecisionMaker": "Release authority and verification owner",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H2",
+        "H5",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Production browser review",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "24 production-browser journeys plus 16 exact HTTP outcomes against real Spring/PostgreSQL; report preserves database facts and axe incomplete results.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 11,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/11"
+      },
+      "predicateRequirement": {
+        "area": "Production browser review",
+        "detail": "24 production-browser journeys plus 16 exact HTTP outcomes against real Spring/PostgreSQL; report preserves database facts and axe incomplete results.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Required manual keyboard/focus/assistive-use review and explicit accepted disposition, exact application/profile/artifact."
+      },
+      "originalAuditCriterion": {
+        "area": "Manual accessibility",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+        "detail": "MANUAL_ACCESSIBILITY_REVIEW=OUTSTANDING; permitted before deployment, not represented as automated evidence. Human acceptance of this disposition is still required.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 12,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/12"
+      },
+      "predicateRequirement": {
+        "area": "Manual accessibility",
+        "detail": "MANUAL_ACCESSIBILITY_REVIEW=OUTSTANDING; permitted before deployment, not represented as automated evidence. Human acceptance of this disposition is still required.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Required manual keyboard/focus/assistive-use review and explicit accepted disposition, exact application/profile/artifact.",
+      "responsibleDecisionMaker": "Accessibility reviewer and project authority",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Explicit accepted browser support profile and its verification/exclusions; Chromium does not imply Firefox/WebKit."
+      },
+      "originalAuditCriterion": {
+        "area": "Browser support",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+        "detail": "SUPPORTED_BROWSER_PROFILE=CHROMIUM only; Firefox/WebKit OUTSTANDING, not supported by this audit.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 13,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/13"
+      },
+      "predicateRequirement": {
+        "area": "Browser support",
+        "detail": "SUPPORTED_BROWSER_PROFILE=CHROMIUM only; Firefox/WebKit OUTSTANDING, not supported by this audit.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Explicit accepted browser support profile and its verification/exclusions; Chromium does not imply Firefox/WebKit.",
+      "responsibleDecisionMaker": "Product/deployment owner",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H1",
+        "H2"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Accepted deployable non-test provider/principal/transport/TLS profile and startup/package evidence for exact release. H6 loopback development is not production."
+      },
+      "originalAuditCriterion": {
+        "area": "Deployable package",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Versioned startup configuration is implemented. Deployment-owned identity/principal/transport wiring, external TLS/proxy operation and production provider acceptance still require complete deployable-profile evidence.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionDistributionStartsWithDeploymentConfiguration"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 14,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/14"
+      },
+      "predicateRequirement": {
+        "area": "Deployable package",
+        "detail": "Versioned startup configuration is implemented. Deployment-owned identity/principal/transport wiring, external TLS/proxy operation and production provider acceptance still require complete deployable-profile evidence.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionDistributionStartsWithDeploymentConfiguration"
+          ]
+        },
+        "tests": [
+          "productionDistributionStartsWithDeploymentConfiguration"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Accepted deployable non-test provider/principal/transport/TLS profile and startup/package evidence for exact release. H6 loopback development is not production.",
+      "responsibleDecisionMaker": "Deployment/security/identity owners",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H5",
+        "H6"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Approved package/platform/runtime/proxy/static-hosting profile and independently checked deployment evidence; no implied OCI or architecture portability."
+      },
+      "originalAuditCriterion": {
+        "area": "Container/package profile",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+        "detail": "Chosen audit package is a reproducible JAR+static-assets tar, not OCI. Java 21/Node generation environment bound; no image digest or portable architecture/container guarantee claimed.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 15,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/15"
+      },
+      "predicateRequirement": {
+        "area": "Container/package profile",
+        "detail": "Chosen audit package is a reproducible JAR+static-assets tar, not OCI. Java 21/Node generation environment bound; no image digest or portable architecture/container guarantee claimed.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Approved package/platform/runtime/proxy/static-hosting profile and independently checked deployment evidence; no implied OCI or architecture portability.",
+      "responsibleDecisionMaker": "Deployment owner and release authority",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Startup configuration",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Versioned production startup configuration validated before background activation; require focused startup tests.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionConfigurationFailsBeforeActivation",
+            "activeDeliveryRequiresTransport"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 16,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/16"
+      },
+      "predicateRequirement": {
+        "area": "Startup configuration",
+        "detail": "Versioned production startup configuration validated before background activation; require focused startup tests.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionConfigurationFailsBeforeActivation",
+            "activeDeliveryRequiresTransport"
+          ]
+        },
+        "tests": [
+          "productionConfigurationFailsBeforeActivation",
+          "activeDeliveryRequiresTransport"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Test-only exclusion",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Packages rebuilt using restored production identity; inspect archive entries and decompressed JS/class content for BrowserServer, decoder, tokens, test endpoints and credentials.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionPackagesExcludeTestAuthority"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 17,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/17"
+      },
+      "predicateRequirement": {
+        "area": "Test-only exclusion",
+        "detail": "Packages rebuilt using restored production identity; inspect archive entries and decompressed JS/class content for BrowserServer, decoder, tokens, test endpoints and credentials.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionPackagesExcludeTestAuthority"
+          ]
+        },
+        "tests": [
+          "productionPackagesExcludeTestAuthority"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Immutable full runtime/compiler/plugin/transitive resolution evidence admitted for exact sealed release; prior 0.6 candidate #18 qualification remains candidate-only."
+      },
+      "originalAuditCriterion": {
+        "area": "Transitive dependency inventory",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Package JAR dependencies, npm lock and Python distributions inventoried. Maven plugin/build graph checksums and full transitive immutable resolution lock not complete; inventory alone is not a lock.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "transitiveResolutionLockIncludesBuildPlugins"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 18,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/18"
+      },
+      "predicateRequirement": {
+        "area": "Transitive dependency inventory",
+        "detail": "Package JAR dependencies, npm lock and Python distributions inventoried. Maven plugin/build graph checksums and full transitive immutable resolution lock not complete; inventory alone is not a lock.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "transitiveResolutionLockIncludesBuildPlugins"
+          ]
+        },
+        "tests": [
+          "transitiveResolutionLockIncludesBuildPlugins"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Immutable full runtime/compiler/plugin/transitive resolution evidence admitted for exact sealed release; prior 0.6 candidate #18 qualification remains candidate-only.",
+      "responsibleDecisionMaker": "Build/supply-chain owner and release authority",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H1"
+      ]
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "SBOM",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "CycloneDX 1.6 JSON from actual packaged backend JARs and frontend lock; generation/build-only tools distinguished in evidence.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "sbomMatchesEveryPackagedDependency"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 19,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/19"
+      },
+      "predicateRequirement": {
+        "area": "SBOM",
+        "detail": "CycloneDX 1.6 JSON from actual packaged backend JARs and frontend lock; generation/build-only tools distinguished in evidence.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "sbomMatchesEveryPackagedDependency"
+          ]
+        },
+        "tests": [
+          "sbomMatchesEveryPackagedDependency"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Resolve unknown component licenses and redistribution notices; human/legal policy acceptance bound to exact package."
+      },
+      "originalAuditCriterion": {
+        "area": "License review",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+        "detail": "License declarations inventoried; unknowns/redistribution notices and compatibility require resolution and human/legal review. No automatic legal approval.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "licensesAndRedistributionNoticesAccepted"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 20,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/20"
+      },
+      "predicateRequirement": {
+        "area": "License review",
+        "detail": "License declarations inventoried; unknowns/redistribution notices and compatibility require resolution and human/legal review. No automatic legal approval.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "licensesAndRedistributionNoticesAccepted"
+          ]
+        },
+        "tests": [
+          "licensesAndRedistributionNoticesAccepted"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Resolve unknown component licenses and redistribution notices; human/legal policy acceptance bound to exact package.",
+      "responsibleDecisionMaker": "Legal/license reviewer and release owner",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H1"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Current authenticated complete packaged backend/npm/compiler/plugin assessment, resolved unknown/unscored/high/critical findings and exact sealed-release admission."
+      },
+      "originalAuditCriterion": {
+        "area": "Current vulnerability assessment",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "npm audit and OSV timestamped runtime assessments are independent of deterministic package bytes. Missing/unscored/high/critical findings block closure; exact results in package evidence. Compiler/build-plugin vulnerability coverage is incomplete even if runtime scanners return zero findings.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 21,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/21"
+      },
+      "predicateRequirement": {
+        "area": "Current vulnerability assessment",
+        "detail": "npm audit and OSV timestamped runtime assessments are independent of deterministic package bytes. Missing/unscored/high/critical findings block closure; exact results in package evidence. Compiler/build-plugin vulnerability coverage is incomplete even if runtime scanners return zero findings.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Current authenticated complete packaged backend/npm/compiler/plugin assessment, resolved unknown/unscored/high/critical findings and exact sealed-release admission.",
+      "responsibleDecisionMaker": "Security reviewer, dependency owner and release authority",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H1"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Approved supported hostile-worker threat model/process isolation; real exhaustive applicable OS/protocol/resource/security tests and admitted release evidence. In-process successor is trusted code only."
+      },
+      "originalAuditCriterion": {
+        "area": "Worker confinement",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Retained real sandbox/protocol/resource supervision tests rerun. Exhaustive process/identity/clock syscalls plus memory/CPU exhaustion under the production sandbox are not all exercised by existing tests.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionSandboxDeniesSyscallsAndBoundsCpuMemory"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 22,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/22"
+      },
+      "predicateRequirement": {
+        "area": "Worker confinement",
+        "detail": "Retained real sandbox/protocol/resource supervision tests rerun. Exhaustive process/identity/clock syscalls plus memory/CPU exhaustion under the production sandbox are not all exercised by existing tests.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionSandboxDeniesSyscallsAndBoundsCpuMemory"
+          ]
+        },
+        "tests": [
+          "productionSandboxDeniesSyscallsAndBoundsCpuMemory"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Approved supported hostile-worker threat model/process isolation; real exhaustive applicable OS/protocol/resource/security tests and admitted release evidence. In-process successor is trusted code only.",
+      "responsibleDecisionMaker": "Security/architecture owner and sandbox operator",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Materializer",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Retained traversal/symlink/stale-CAS/concurrent-writer/crash/manual/human/AI/framework fault suites rerun. Power-loss durability and hostile same-user mutation remain Phase 11 concerns.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "materializerRejectsTraversalStaleCasAndCrash"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 23,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/23"
+      },
+      "predicateRequirement": {
+        "area": "Materializer",
+        "detail": "Retained traversal/symlink/stale-CAS/concurrent-writer/crash/manual/human/AI/framework fault suites rerun. Power-loss durability and hostile same-user mutation remain Phase 11 concerns.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "materializerRejectsTraversalStaleCasAndCrash"
+          ]
+        },
+        "tests": [
+          "materializerRejectsTraversalStaleCasAndCrash"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Complete exact-release deployment failure/recovery matrix, independent execution evidence and authorized applicable migrations, not candidate preview alone."
+      },
+      "originalAuditCriterion": {
+        "area": "Deployment migration failure/recovery",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Actual PostgreSQL String/backfill/presence/required/transactional rollback and incompatible-storage regressions supplement existing Flyway upgrade checks; the complete unavailable-DB/partial-upgrade/safe-retry deployment matrix remains required.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "failedBackfillRollsBackDdl",
+            "requiredFieldRejectsNull"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 24,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/24"
+      },
+      "predicateRequirement": {
+        "area": "Deployment migration failure/recovery",
+        "detail": "Actual PostgreSQL String/backfill/presence/required/transactional rollback and incompatible-storage regressions supplement existing Flyway upgrade checks; the complete unavailable-DB/partial-upgrade/safe-retry deployment matrix remains required.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "failedBackfillRollsBackDdl",
+            "requiredFieldRejectsNull"
+          ]
+        },
+        "tests": [
+          "failedBackfillRollsBackDdl",
+          "requiredFieldRejectsNull"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Complete exact-release deployment failure/recovery matrix, independent execution evidence and authorized applicable migrations, not candidate preview alone.",
+      "responsibleDecisionMaker": "Migration/data/deployment owners",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H2",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact-release real restart witness covering every required committed runtime family simultaneously, including audit/idempotency/lifecycle/delivery; no inference from selected R7 families."
+      },
+      "originalAuditCriterion": {
+        "area": "Real application restart matrix",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Lost-process idempotency/outbox/Job/lifecycle runtime tests exist. A complete real process restart with all specified committed state simultaneously is not proven.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "restartPreservesAllCommittedRuntimeFamilies"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 25,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/25"
+      },
+      "predicateRequirement": {
+        "area": "Real application restart matrix",
+        "detail": "Lost-process idempotency/outbox/Job/lifecycle runtime tests exist. A complete real process restart with all specified committed state simultaneously is not proven.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "restartPreservesAllCommittedRuntimeFamilies"
+          ]
+        },
+        "tests": [
+          "restartPreservesAllCommittedRuntimeFamilies"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Exact-release real restart witness covering every required committed runtime family simultaneously, including audit/idempotency/lifecycle/delivery; no inference from selected R7 families.",
+      "responsibleDecisionMaker": "Runtime verification owner and release authority",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H2",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Every outstanding generated deployment obligation satisfied or explicitly governed under exact profile; acceptance document hash registered by genuine authority."
+      },
+      "originalAuditCriterion": {
+        "area": "Deployment obligations",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+        "detail": "Every generated OUTSTANDING row retained and classified in domain evidence; none waived. Release blockers are separately enumerated.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 26,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/26"
+      },
+      "predicateRequirement": {
+        "area": "Deployment obligations",
+        "detail": "Every generated OUTSTANDING row retained and classified in domain evidence; none waived. Release blockers are separately enumerated.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Every outstanding generated deployment obligation satisfied or explicitly governed under exact profile; acceptance document hash registered by genuine authority.",
+      "responsibleDecisionMaker": "Deployment authority and applicable control owners",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H5",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Independent at-rest/backup encryption, production TLS/key-management custody/configuration/recovery evidence and accepted exact-bound review."
+      },
+      "originalAuditCriterion": {
+        "area": "Encryption/TLS",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+        "detail": "At-rest, backup encryption, TLS termination and key management remain REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT; not runtime guarantees.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 27,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/27"
+      },
+      "predicateRequirement": {
+        "area": "Encryption/TLS",
+        "detail": "At-rest, backup encryption, TLS termination and key management remain REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT; not runtime guarantees.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Independent at-rest/backup encryption, production TLS/key-management custody/configuration/recovery evidence and accepted exact-bound review.",
+      "responsibleDecisionMaker": "Security/key custodians and infrastructure operator",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H5",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Approved physical/WAL/replica/backup retention/destruction requirements and verifiable operations; logical deletion/anonymization is insufficient."
+      },
+      "originalAuditCriterion": {
+        "area": "Physical destruction",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "EXPLICIT_HUMAN_REVIEW_REQUIRED",
+        "detail": "ANONYMIZE does not establish physical erasure, WAL/replica/backup destruction; retained deployment obligations.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 28,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/28"
+      },
+      "predicateRequirement": {
+        "area": "Physical destruction",
+        "detail": "ANONYMIZE does not establish physical erasure, WAL/replica/backup destruction; retained deployment obligations.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Approved physical/WAL/replica/backup retention/destruction requirements and verifiable operations; logical deletion/anonymization is insufficient.",
+      "responsibleDecisionMaker": "Privacy/legal/data and storage owners",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Production OIDC integration",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Deployment-owned authorization-code PKCE fixture verifies RS256/JWKS identity tokens and real generated-backend expiry/tenant behavior. Production provider acceptance and assurance remain separate deployment obligations.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "oidcAcquisitionIdentityChangeExpiredAndWrongTenant"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 29,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/29"
+      },
+      "predicateRequirement": {
+        "area": "Production OIDC integration",
+        "detail": "Deployment-owned authorization-code PKCE fixture verifies RS256/JWKS identity tokens and real generated-backend expiry/tenant behavior. Production provider acceptance and assurance remain separate deployment obligations.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "oidcAcquisitionIdentityChangeExpiredAndWrongTenant"
+          ]
+        },
+        "tests": [
+          "oidcAcquisitionIdentityChangeExpiredAndWrongTenant"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact-release admitted real Query/Action/startup/browser/concurrent workload measurements and specified profile; candidate workload evidence is supporting only."
+      },
+      "originalAuditCriterion": {
+        "area": "Performance baseline",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Build durations/package sizes are measured; bounded Query/Action/startup/browser-load/concurrent-rate performance measurements are not complete. No synthetic SLO promised.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "measuredApplicationPerformanceBaseline"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 30,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/30"
+      },
+      "predicateRequirement": {
+        "area": "Performance baseline",
+        "detail": "Build durations/package sizes are measured; bounded Query/Action/startup/browser-load/concurrent-rate performance measurements are not complete. No synthetic SLO promised.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "measuredApplicationPerformanceBaseline"
+          ]
+        },
+        "tests": [
+          "measuredApplicationPerformanceBaseline"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Exact-release admitted real Query/Action/startup/browser/concurrent workload measurements and specified profile; candidate workload evidence is supporting only.",
+      "responsibleDecisionMaker": "Performance/profile owner and release authority",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H3",
+        "H4"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact-release admitted valid larger semantic fixtures, compiler memory/time, UI/provenance/package growth and deterministic limit rejection; request concurrency is not semantic graph scaling."
+      },
+      "originalAuditCriterion": {
+        "area": "Resource scaling",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Approved fixtures within limits pass; no larger valid generated UI fixture/node-limit scaling and provenance-growth curve accepted.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "validLargeFixtureScaling"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 31,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/31"
+      },
+      "predicateRequirement": {
+        "area": "Resource scaling",
+        "detail": "Approved fixtures within limits pass; no larger valid generated UI fixture/node-limit scaling and provenance-growth curve accepted.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "validLargeFixtureScaling"
+          ]
+        },
+        "tests": [
+          "validLargeFixtureScaling"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Exact-release admitted valid larger semantic fixtures, compiler memory/time, UI/provenance/package growth and deterministic limit rejection; request concurrency is not semantic graph scaling.",
+      "responsibleDecisionMaker": "Compiler/capacity owner and release authority",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H3"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Independently materialized clean exact-release package builds from same immutable inputs with matching outputs, independently retained/admitted; H1 regeneration alone insufficient."
+      },
+      "originalAuditCriterion": {
+        "area": "Generation/package determinism",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Independent compiler contexts compare ArtifactPlan digest and repeated package builds compare exact bytes. Package builds share the same checkout/build cache; two independently materialized clean package builds are still required. Runtime random keys excluded.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "independentCleanPackageBuildsMatch"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 32,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/32"
+      },
+      "predicateRequirement": {
+        "area": "Generation/package determinism",
+        "detail": "Independent compiler contexts compare ArtifactPlan digest and repeated package builds compare exact bytes. Package builds share the same checkout/build cache; two independently materialized clean package builds are still required. Runtime random keys excluded.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "independentCleanPackageBuildsMatch"
+          ]
+        },
+        "tests": [
+          "independentCleanPackageBuildsMatch"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Independently materialized clean exact-release package builds from same immutable inputs with matching outputs, independently retained/admitted; H1 regeneration alone insufficient.",
+      "responsibleDecisionMaker": "Build/reproducibility owner and release authority",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H1",
+        "H2"
+      ]
+    },
+    {
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Fresh authenticated registered criterion-specific sealed-release execution/source/artifact proof. Successful candidate workflows and performed blocked audit are not that proof."
+      },
+      "originalAuditCriterion": {
+        "area": "Fresh hosted reproduction",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Historical run 37910102322: contracts, phase5-experiments, phase5c-hard-gates and phase6-target passed; closure audit performed and deliberately exited 2 PHASE6_CLOSURE_BLOCKED. Fresh successor hosted evidence is required.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "freshHostedSuccessorAuditPerformed"
+          ]
+        },
+        "failureReason": "MISSING_EVIDENCE",
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 33,
+        "status": "BLOCKED",
+        "validationFunction": "criteria.validate/33"
+      },
+      "predicateRequirement": {
+        "area": "Fresh hosted reproduction",
+        "detail": "Historical run 37910102322: contracts, phase5-experiments, phase5c-hard-gates and phase6-target passed; closure audit performed and deliberately exited 2 PHASE6_CLOSURE_BLOCKED. Fresh successor hosted evidence is required.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "freshHostedSuccessorAuditPerformed"
+          ]
+        },
+        "tests": [
+          "freshHostedSuccessorAuditPerformed"
+        ]
+      },
+      "priority": "P0",
+      "releaseDispositionUnchanged": "BLOCKED",
+      "remainingEvidence": "Fresh authenticated registered criterion-specific sealed-release execution/source/artifact proof. Successful candidate workflows and performed blocked audit are not that proof.",
+      "responsibleDecisionMaker": "Release authority, approved executor and witness registry custodian",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Historical contracts",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Protected contract/corpus/release/ADR bytes compared against immutable merged baseline.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "historicalContractBytesUnchanged"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 34,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/34"
+      },
+      "predicateRequirement": {
+        "area": "Historical contracts",
+        "detail": "Protected contract/corpus/release/ADR bytes compared against immutable merged baseline.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "historicalContractBytesUnchanged"
+          ]
+        },
+        "tests": [
+          "historicalContractBytesUnchanged"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Human closure authority",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Audit recommendation does not mark Phase 6 COMPLETE; stop for explicit human review.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "humanClosureAuthorityRemainsRequired"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 35,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/35"
+      },
+      "predicateRequirement": {
+        "area": "Human closure authority",
+        "detail": "Audit recommendation does not mark Phase 6 COMPLETE; stop for explicit human review.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "humanClosureAuthorityRemainsRequired"
+          ]
+        },
+        "tests": [
+          "humanClosureAuthorityRemainsRequired"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Recommendation",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Only PHASE6_CLOSURE_BLOCKED or PHASE6_CLOSURE_RECOMMENDED; blocked report lists remediation criteria.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "recommendationReflectsEveryBlocker"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 36,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/36"
+      },
+      "predicateRequirement": {
+        "area": "Recommendation",
+        "detail": "Only PHASE6_CLOSURE_BLOCKED or PHASE6_CLOSURE_RECOMMENDED; blocked report lists remediation criteria.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "recommendationReflectsEveryBlocker"
+          ]
+        },
+        "tests": [
+          "recommendationReflectsEveryBlocker"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Bound machine-readable report",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Baseline, exact execution commit, Canonical/bundle/IR/UI/migration/package/SBOM/security/browser/fault/history/obligation evidence bound with digests.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "reportBindsEveryEvidenceArtifact"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 37,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/37"
+      },
+      "predicateRequirement": {
+        "area": "Bound machine-readable report",
+        "detail": "Baseline, exact execution commit, Canonical/bundle/IR/UI/migration/package/SBOM/security/browser/fault/history/obligation evidence bound with digests.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "reportBindsEveryEvidenceArtifact"
+          ]
+        },
+        "tests": [
+          "reportBindsEveryEvidenceArtifact"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Dedicated closure CI",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Separate dependent job; no continue-on-error. BLOCKED audit exits nonzero rather than faking green.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "dedicatedClosureJobDistinguishesBlockedAndException"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 38,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/38"
+      },
+      "predicateRequirement": {
+        "area": "Dedicated closure CI",
+        "detail": "Separate dependent job; no continue-on-error. BLOCKED audit exits nonzero rather than faking green.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "dedicatedClosureJobDistinguishesBlockedAndException"
+          ]
+        },
+        "tests": [
+          "dedicatedClosureJobDistinguishesBlockedAndException"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    },
+    {
+      "dependencies": [],
+      "objectiveAcceptanceCriteria": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "originalAuditCriterion": {
+        "area": "Phase disposition",
+        "blockedConditions": "Missing, malformed, stale, unrelated or failing evidence; unresolved human authority",
+        "deploymentObligationDisposition": "NOT_A_SUBSTITUTE_FOR_AUTOMATED_EVIDENCE",
+        "detail": "Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED; closure cannot be accepted automatically.",
+        "evaluationProvenance": {
+          "approvalDigest": "sha256:02ee08fdaccb441ef925af9fea4322378a65a40594fffad13ff1f6c495735c9d",
+          "bundleDigest": "sha256:ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+          "canonicalDigests": {
+            "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+            "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+          },
+          "evaluationCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+        },
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "phase6InProgressPhase7NotStarted"
+          ]
+        },
+        "failureReason": null,
+        "passConditions": "All binding, artifact and criterion-specific predicates satisfied",
+        "requirement": 39,
+        "status": "PASS",
+        "validationFunction": "criteria.validate/39"
+      },
+      "predicateRequirement": {
+        "area": "Phase disposition",
+        "detail": "Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED; closure cannot be accepted automatically.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "phase6InProgressPhase7NotStarted"
+          ]
+        },
+        "tests": [
+          "phase6InProgressPhase7NotStarted"
+        ]
+      },
+      "priority": "PRESERVE",
+      "releaseDispositionUnchanged": "PASS",
+      "remainingEvidence": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "responsibleDecisionMaker": "No new authority inferred",
+      "scope": "SEALED_0.5.0",
+      "supportingH1H7Evidence": []
+    }
+  ],
+  "note": "Historical phase7=NOT_STARTED assertions remain the sealed closure contract; later separately authorized development is not silently rewritten into that contract.",
+  "recommendation": "PHASE6_CLOSURE_BLOCKED",
+  "release": "PHASE6_RELEASE_CLOSURE_BLOCKED",
+  "reportSHA256": "6da9022df9e5af5e729a5a55860c3cc4f5ebb02c8f46ae946e27814167a44a42",
+  "reviewedSourceCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+  "workflow": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674417984"
+}

@@ -1,0 +1,1123 @@
+{
+  "approvedCanonical": {
+    "case-management": "sha256:5b3a69bb1d6e0e69ed620cd1dd32d10e8a07cec276583055b53ec03bfdcc6b90",
+    "payment": "sha256:d0f6e8d96a07e8e8358ad8f1f558f9ec3d69fd8008cceb75e82f4f695e3cf47d"
+  },
+  "branch": "codex/phase11-hardening",
+  "closure": {
+    "artifact": {
+      "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146941775/zip",
+      "created_at": "2026-11-15T04:39:04Z",
+      "digest": "sha256:7a91030ecec025401478510ea4ef08bc32ac7bb8b2bb86ede7939a96a5e57b4e",
+      "expired": false,
+      "expires_at": "2027-02-13T03:54:28Z",
+      "id": 14146941775,
+      "name": "phase6-remediation-0.5.0-closure-audit",
+      "size_in_bytes": 62549652,
+      "updated_at": "2026-11-15T04:39:04Z",
+      "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146941775",
+      "workflow_run": {
+        "head_branch": "codex/phase11-hardening",
+        "head_repository_id": 1371285836,
+        "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+        "id": 43674417984,
+        "repository_id": 1371285836
+      }
+    },
+    "jobs": [
+      {
+        "conclusion": "success",
+        "name": "contracts"
+      },
+      {
+        "conclusion": "success",
+        "name": "phase5-experiments"
+      },
+      {
+        "conclusion": "success",
+        "name": "phase5c-hard-gates"
+      },
+      {
+        "conclusion": "failure",
+        "name": "phase6-closure-audit"
+      },
+      {
+        "conclusion": "success",
+        "name": "phase6-target"
+      },
+      {
+        "conclusion": "failure",
+        "name": "final-ci-aggregate"
+      }
+    ],
+    "reportMemberSHA256": "6da9022df9e5af5e729a5a55860c3cc4f5ebb02c8f46ae946e27814167a44a42",
+    "run": 43674417984,
+    "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674417984"
+  },
+  "custody": {
+    "existingVaultRecordsUnchanged": true,
+    "gitContains": "Redacted review records and hashes only; no ZIPs/raw database/private keys/tokens.",
+    "newDestinationApproved": false,
+    "newVaultWrites": false,
+    "staging": ".audit-artifacts/phase11-h8-20261115/",
+    "stagingMayNotBeDeletedWithoutCustodyAndActiveUseReview": true
+  },
+  "generators": {
+    "H1": {
+      "generator": "acp-h1-job-preview-generator/1+sha256:f982b13e43e0efd070ea1b0773da5aedcdbf2486363c6e902f27c36ba00bcb02",
+      "parentSourceDigest": "da0582d50f7fcdafc766d0ee73e4e45253bc88b625e361bc15cd874d76381435",
+      "profile": "acp-h1-job-preview-target/1",
+      "scope": "QUALIFICATION_ONLY",
+      "semanticApproval": "NOT_APPROVED"
+    },
+    "H5": {
+      "generator": "acp-h5-identity-generator/1+sha256:c2f712a0411b1b75aec39ea47c43d28c4ea484a68496b5b4d695588c927e9615",
+      "parentSourceDigest": "f982b13e43e0efd070ea1b0773da5aedcdbf2486363c6e902f27c36ba00bcb02",
+      "profile": "acp-h5-identity-target/1",
+      "scope": "QUALIFICATION_ONLY",
+      "semanticApproval": "NOT_APPROVED"
+    },
+    "H6": {
+      "generator": "acp-h6-operational-generator/1+sha256:9bdc1adcbc50789421bd58a8f0909741031f20cd68bb66f0a6e1a205586dbfc1",
+      "operationalApproval": "NOT_APPROVED",
+      "parentSourceDigest": "c2f712a0411b1b75aec39ea47c43d28c4ea484a68496b5b4d695588c927e9615",
+      "profile": "acp-h6-operational-target/1",
+      "scope": "QUALIFICATION_ONLY",
+      "semanticApproval": "NOT_APPROVED"
+    }
+  },
+  "historical06": "600a552287cc1121be7578c31ba2a379332c9b0d55c60a79b2a5d054c92271aa",
+  "hosted": {
+    "H1": {
+      "artifact": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145636947/zip",
+        "created_at": "2026-11-15T04:05:38Z",
+        "digest": "sha256:a462bc76b6ca387882a0560ec0a8ea202844dcb86a8164cf6d9379cfa425d2be",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:29Z",
+        "id": 14145636947,
+        "name": "phase11-h1-security",
+        "size_in_bytes": 67455679,
+        "updated_at": "2026-11-15T04:05:38Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145636947",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418050,
+          "repository_id": 1371285836
+        }
+      },
+      "attempt": 1,
+      "conclusion": "success",
+      "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+      "jobSteps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Isolated hash-locked compiler and SDK",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Focused security and supply-chain rejection tests",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact disposable PostgreSQL runtime",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Real application and plugin-realm qualification with specific fresh assessment",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact source and preserved release identities",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Retain exact source, scanner responses and real execution evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ],
+      "record": "acp-h1/h1-result.json",
+      "recordSHA256": "dc288bb0e814d44779d840f73ccc90d66cf5755fdb9703a85a6c0945abc88fbd",
+      "run": 43674418050,
+      "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418050",
+      "verifiedBoundMemberCount": 0,
+      "verifiedProducerSource": {
+        "engineering/hardening/application.py": "0c0446b3cf924ff2f9d6cb51df406949176d23dd051e96f9a6b59739c4e2d8ef",
+        "engineering/hardening/assessment.py": "b371024c0a3945171bd2293db002381cd4ca3eea3ea86ca4a9a7d631db8c283e",
+        "engineering/hardening/run.py": "ca3737ace606d7bd35b007317b1a682e163d432ef1e832a49d9b19735743c99d",
+        "engineering/hardening/target.py": "bca15a27e8273ff48cff443b3c4cd312ba79587fc4e7405c9c1e376d2119a794"
+      },
+      "workflowFile": ".github/workflows/phase11-h1.yml"
+    },
+    "H2": {
+      "artifact": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145682429/zip",
+        "created_at": "2026-11-15T04:10:41Z",
+        "digest": "sha256:60ff5850b72f01052a3b78ea34d66edff494a7f9377e9944485fc4fcaf3fa2d3",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14145682429,
+        "name": "phase11-h2-reliability",
+        "size_in_bytes": 73952097,
+        "updated_at": "2026-11-15T04:10:41Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145682429",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674417986,
+          "repository_id": 1371285836
+        }
+      },
+      "attempt": 1,
+      "conclusion": "success",
+      "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+      "jobSteps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Isolated hash-locked compiler and SDK",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Focused concurrency proof and fail-closed regressions",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact disposable PostgreSQL runtime",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Real R8 migration and H1 concurrency crash and recovery qualification",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify exact source runner generator scenarios and cleanup",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Existing 26 native Source Intelligence regressions",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve exact source database barrier and failure evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ],
+      "record": "acp-h2/result.json",
+      "recordSHA256": "597de50bcfe65d03cd5a77ed91ee504e599ce61629c2c638aa38b0aa3df56f8e",
+      "run": 43674417986,
+      "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674417986",
+      "verifiedBoundMemberCount": 13,
+      "verifiedProducerSource": {
+        "engineering/application_evolution/plan.py": "d9c663419dcb43bfed52548dcc2e8d6871601fb5f13334fe9a85eb7bc34ee317",
+        "engineering/reliability/concurrency.py": "9ca4314222b7e92e7b2e09eed3f496efb5b073c06430f0eaf136722434d3d695",
+        "engineering/reliability/database.py": "fb1ca2faef15aae4da9873982cc220766f4dbaefc4474de81b68c8c9b57c58ee",
+        "engineering/reliability/fixture.py": "5a79969d4b05135f3f4fe496d1cdef9858468661b51b21822eebad87993b95bc",
+        "engineering/reliability/run.py": "50104f5db75fc99f8213addb3745b879625cd4a416d198c63ac6d88a488a993c",
+        "engineering/reliability/verification.py": "6a5dc88ebad50f6be5374b10a61fdff45304432656aa4f8ac3c6a281ab3d37cc",
+        "engineering/source_intelligence/model.py": "8bed64c188247a7d0f67a17ed6f1c6d706d3f1f8ddbadba18cbaa0f4e763b8ba"
+      },
+      "workflowFile": ".github/workflows/phase11-h2.yml"
+    },
+    "H3": {
+      "artifact": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145602967/zip",
+        "created_at": "2026-11-15T04:03:10Z",
+        "digest": "sha256:568d2f20add9e0ce9856bbb395d9c6169e57f9e1ae42d4869d991b57ed9e86f1",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14145602967,
+        "name": "phase11-h3-capacity",
+        "size_in_bytes": 33694336,
+        "updated_at": "2026-11-15T04:03:10Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145602967",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418022,
+          "repository_id": 1371285836
+        }
+      },
+      "attempt": 1,
+      "conclusion": "success",
+      "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+      "jobSteps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Isolated hash-locked compiler and SDK",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact H3 and existing H1 H2 regressions without skips",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact disposable PostgreSQL 18.6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Actual generated application capacity and resource qualification",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact source identities measurements invariants and cleanup",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve successful measurements source and database evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Retain closed redacted failure diagnostics",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Preserve redacted failure only",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ],
+      "record": "acp-h3/result.json",
+      "recordSHA256": "85b72f9e1cb392138642429eeb6dcda34c15af161ded9e3a296f1fb1c79ffd7c",
+      "run": 43674418022,
+      "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418022",
+      "verifiedBoundMemberCount": 20,
+      "verifiedProducerSource": {
+        "engineering/capacity/fixture.py": "c03790e68b7968943345d8d2b19da1b0b88f3766bf9b7d1fd4b84f8b907afcd7",
+        "engineering/capacity/metrics.py": "b7bbc717bad30b9af4ecc2a2317662eb3e0e218202897f919ac82c43b0b988d8",
+        "engineering/capacity/profile.json": "b5312b841118d834748241bb6f0e2534e7baa88d078cd55854cb4bf19b8b02bc",
+        "engineering/capacity/resource-contract-proposal.json": "d08f25cb68dbe61d9b1de3debda1801b3a55e91e35d71b82f763f6ca36d3a4ea",
+        "engineering/capacity/run.py": "8665db32bf5e51b4471e65dc4f104b896d1d3b3d3b6cd617b3cc3285103df778",
+        "engineering/capacity/scenarios.py": "24ff7d4fb3fa926b5d02a2c75eb9ed45aca673c321088ff8aff577614efe8caa",
+        "engineering/capacity/verification.py": "c35d0a09fe0dd08873e747417417982285be5760ab2289182029057413e0da76",
+        "engineering/capacity/workload.py": "3a259feb5df8f104004cf4e594eaa88b1d31ff50932acb1b5dadf397451cd8f9"
+      },
+      "workflowFile": ".github/workflows/phase11-h3.yml"
+    },
+    "H4": {
+      "artifact": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146031173/zip",
+        "created_at": "2026-11-15T04:05:04Z",
+        "digest": "sha256:04e17fd2b7a265cc78ed04581342eef99c5f7ca34cf4167ea2773c5d1953e587",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14146031173,
+        "name": "phase11-h4-create-reliability",
+        "size_in_bytes": 34170838,
+        "updated_at": "2026-11-15T04:05:04Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146031173",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418025,
+          "repository_id": 1371285836
+        }
+      },
+      "attempt": 1,
+      "conclusion": "success",
+      "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+      "jobSteps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Isolated hash-locked compiler and SDK",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "H4 integrity and existing H1 H2 H3 regressions without skips",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact disposable PostgreSQL 18.6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Real CREATE diagnostics and controlled pool recovery",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact source identities measurements invariants and cleanup",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve raw measurements source database and failure evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ],
+      "record": "acp-h4/result.json",
+      "recordSHA256": "036429f5599c727723e6fd33430b9509d4953f3820c08b82ca600bcbb84d5c88",
+      "run": 43674418025,
+      "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418025",
+      "verifiedBoundMemberCount": 10,
+      "verifiedProducerSource": {
+        "engineering/create_reliability/diagnostic.py": "193d5e53d0f3271ea8355e68d82717d0343f8eb36a54cba2a83107ab5167b27e",
+        "engineering/create_reliability/fixture.py": "8b378ed43d47810e4609c76798c894e2cf318b101e54b9eaf7c88018c7473a52",
+        "engineering/create_reliability/probes.py": "279bbf329aafae4b0c81146799f3012c0fb1e5ae1076f7cced95da9bcd2a12cd",
+        "engineering/create_reliability/run.py": "334f4240ae595e2a35436b749ed397bfe8826517b5d44f276a131cb4072d5a74"
+      },
+      "workflowFile": ".github/workflows/phase11-h4.yml"
+    },
+    "H5": {
+      "artifact": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145786729/zip",
+        "created_at": "2026-11-15T04:06:37Z",
+        "digest": "sha256:8a070ca81eedc74298c4e7a57ffe3f7ac805708f6a7f7472a6a104064a6c4b55",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14145786729,
+        "name": "phase11-h5-identity",
+        "size_in_bytes": 33183284,
+        "updated_at": "2026-11-15T04:06:37Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145786729",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418019,
+          "repository_id": 1371285836
+        }
+      },
+      "attempt": 1,
+      "conclusion": "success",
+      "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+      "jobSteps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Isolated locked compiler SDK and cryptography",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "H5 security and H1 H2 H3 H4 regressions without skips",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Pinned disposable PostgreSQL",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Generate build and exercise real signed tokens",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact source security cases artifact hashes and cleanup",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve only successfully scanned redacted evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ],
+      "record": "result.json",
+      "recordSHA256": "0839690860482c31a862dfaebf320c3e95c311d02a7107e5ae7612c8f2fb421c",
+      "run": 43674418019,
+      "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418019",
+      "verifiedBoundMemberCount": 33,
+      "verifiedProducerSource": {
+        "engineering/identity/application.py": "e0c59d0147ec4f77e71689eb9ae37e2de59276ee58d7104d6a2b7168400812bc",
+        "engineering/identity/fixture.py": "5a41dcfd0fd6507f0a3908892a712342d6a5e8ad8c26945162514118ed165bf0",
+        "engineering/identity/issuer.py": "cf68ffd39a491cebb0f12af5cbd39942be125d1319043f2f5e926c85bed73825",
+        "engineering/identity/run.py": "2dbbf0c19698bf4119a2dadcd598388e9b96d27627022c93be3ae7c1acc8e25b",
+        "engineering/identity/scenarios.py": "d27ba347f4863d302e6bcd0f9ce389adc9b3878fb1577781176734e4cd602839",
+        "engineering/identity/target.py": "3d8f2eaa8f6958d8532c939d2727f48f5bfec2ca72f095676ef212d325685d28",
+        "engineering/identity/templates/SecurityConfiguration.java": "60f53599c98c122298f837fddca7f1500f247b9a91d2770fcd0b9b857d19eaf6"
+      },
+      "workflowFile": ".github/workflows/phase11-h5.yml"
+    },
+    "H6": {
+      "artifact": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146052181/zip",
+        "created_at": "2026-11-15T04:06:48Z",
+        "digest": "sha256:10f0de8e17c2dfbad5971bb2a506c518111f62e6a865e88aaa595ba91646d2dc",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14146052181,
+        "name": "phase11-h6-observability",
+        "size_in_bytes": 2997275,
+        "updated_at": "2026-11-15T04:06:48Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146052181",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674417982,
+          "repository_id": 1371285836
+        }
+      },
+      "attempt": 1,
+      "conclusion": "success",
+      "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+      "jobSteps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Isolated locked compiler SDK and cryptography",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "H1 H2 H3 H4 H5 regressions without skips",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Pinned disposable PostgreSQL",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Generate build and exercise operational failures and recovery",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exact source security cases artifact hashes and cleanup",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve only successfully scanned redacted evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Retain closed redacted failure diagnostics",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Preserve redacted failure only",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ],
+      "record": "result.json",
+      "recordSHA256": "3f2b6dd2422308fa796ee77b100dcde8b39b381405c56d8cef8d1b535f427060",
+      "run": 43674417982,
+      "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674417982",
+      "verifiedBoundMemberCount": 14,
+      "verifiedProducerSource": {
+        "engineering/operations/application.py": "324825786f34a165f75c3300a1e92e01bb16c67869159a0be37d536a97fd8478",
+        "engineering/operations/configuration.py": "dca232f165ea544f3b50f788c948295f8ec370caec937c3f8d1337d3fe9a904b",
+        "engineering/operations/diagnostics.py": "d4e34701d9a6787d41b1d477c18be6d8c94c9dbafa80685849ff0998e5672d84",
+        "engineering/operations/fixture.py": "ad8eba44cf3f3674a23532f9508ec914ce8a312c40103653f921ac9c6db1c4de",
+        "engineering/operations/lab.py": "570a148efd92ff4487925c0d87cd44a5e8c61f305f0b8c10d8ab769818e2b4d8",
+        "engineering/operations/run.py": "10b1f0f63be69ff6f4f017a4bc9010b48e2593fafe011910624eb3877032f464",
+        "engineering/operations/scenarios.py": "9c0122ae3d4478e064c0d9a4f3f5ff7ada3fa3be84ef2f006b0d11f094baa9fe",
+        "engineering/operations/target.py": "7eff98da21a35dfc8278fd9f45b368a3f6849d78afb0a4b4ae5a0d521490f6e7",
+        "engineering/operations/templates/OperationalConfiguration.java": "5aa226994602e209d94994bdc58466898025552863387d3243b442faa652e44e",
+        "engineering/operations/templates/OperationalRuntime.java": "4ab8677c97c79103254763850f6cdcbccd45c35348a2cc18c7b28bdbe8c665fd"
+      },
+      "workflowFile": ".github/workflows/phase11-h6.yml"
+    },
+    "H7": {
+      "artifact": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145597178/zip",
+        "created_at": "2026-11-15T04:05:30Z",
+        "digest": "sha256:afbbcfd48595d1252094d242a033bb526253539b9dce7e5b57ca5d948524d057",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:29Z",
+        "id": 14145597178,
+        "name": "phase11-h7-recovery",
+        "size_in_bytes": 2978335,
+        "updated_at": "2026-11-15T04:05:30Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145597178",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418010,
+          "repository_id": 1371285836
+        }
+      },
+      "attempt": 1,
+      "conclusion": "success",
+      "executionCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+      "jobSteps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Isolated hash-locked compiler SDK and cryptography",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Previous security reliability capacity and CI regressions without skips",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Pinned disposable PostgreSQL 18.6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Real snapshot backup independent restore and authenticated application",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify exact source real recovery private-data exclusion and cleanup",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve only verified redacted recovery evidence",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Retain closed failure diagnostics",
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Preserve redacted failure metadata",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v7",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v7.0.0",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "status": "completed"
+        }
+      ],
+      "record": "result.json",
+      "recordSHA256": "629f6655a44b7b4b12345050b8688bc3428c9e1dd0284f42b20f36ecd47550d1",
+      "run": 43674418010,
+      "url": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418010",
+      "verifiedBoundMemberCount": 12,
+      "verifiedProducerSource": {
+        "engineering/disaster_recovery/backup.py": "f8fcc9ac71048524e61d75b0739d4a989e06a74be233cfbf4b75cc82f0ad0731",
+        "engineering/disaster_recovery/run.py": "c9f04da08c38c949fa0e0f2293715c33223ab93875a97099b95d0bd035ca0b0a",
+        "engineering/disaster_recovery/scenarios.py": "2c14c2941978dad2d0bb0b5e46e1c0bae89d4de3d5d46d2ad219fefa95c556a4"
+      },
+      "workflowFile": ".github/workflows/phase11-h7.yml"
+    }
+  },
+  "preservation": {
+    "allProtectedDirectoriesMatchReviewedCommit": true,
+    "historical06Recomputed": true,
+    "historicalReportsUnchanged": true,
+    "predicateBytesUnchanged": true,
+    "priorApplicationSourceChangesByH8": [],
+    "sealed05Recomputed": true
+  },
+  "r7Candidate": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+  "retainedReliabilityFailure": {
+    "path": ".audit-artifacts/phase11-h3-20261103/runtime-5/failure.json",
+    "sha256": "db58258e3feb61734d95d29950cdc4756ce33a00cbac4f445424d4092a1e453b",
+    "status": "UNRESOLVED; HISTORICAL_EXECUTION_NOT_REBOUND"
+  },
+  "reviewedSourceCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+  "reviewer": "ASSISTANT_TECHNICAL_REVIEW; NOT_AN_AUTHENTICATED_HUMAN_APPROVAL",
+  "sealed05": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb",
+  "sources": {
+    ".github/workflows/phase11-h1.yml": "9e4bf0b3a7020ae1fbc14290aed4a562b479a44bf09b0d13ef3de72e369f3e81",
+    ".github/workflows/phase11-h2.yml": "8e3e71d518a953595b5623bb8170c6402385c4d8ecc11ef8f8ff01f3cfd7288c",
+    ".github/workflows/phase11-h3.yml": "0fc5567b79582a5484e81790dcc7810e9cdeb793bc0918cea928a798b60df64a",
+    ".github/workflows/phase11-h4.yml": "f086206e9d5aae435ce25c7dc917ab8359b8fc4f74e66e4d8ba6866e267b7145",
+    ".github/workflows/phase11-h5.yml": "21abff03bb501cb74fc6b90896dec847c68e0124847dcc780edea46c6aa49528",
+    ".github/workflows/phase11-h6.yml": "5017b5f02c572adec5d636af6717e3b940a7116766dd098c4bf54de1ed3e0c7d",
+    ".github/workflows/phase11-h7.yml": "84395f1e13ef35bb36f68a838bd786d28e7967c5dd93cc4c583b0a437eeb144d",
+    "ACP_CODEX_MASTER_HANDOFF.md": "947796c22d9030b33739a5caa0aae53ff42be83b6957ff48bcfef157ee1a2cac",
+    "docs/constitution.md": "1ade79ba4c6ff8c9de8b1d66c3e099ec80fc223df809ddf759a01dd3e40d3912",
+    "docs/phase10-r8-evolution.md": "c66d8e6b269f6900dedde3a018c14038c3d49d99e69328764020ee19be6ec56d",
+    "docs/phase11-h1-hardening.md": "f3cf0b80e39fcd8e0034668cdd8f48c6e797408ddd79be29a7348c9573cdcdfa",
+    "docs/phase11-h2-recovery.md": "bb3830a4b9c7ce53a57c8d586723ab351f8d374a05c08cd00a29b94eddaca2b7",
+    "docs/phase11-h3-capacity.md": "6f74056753bcf64716507c8f2e40cbcebf2e42e63e8412cf1b9c74096bc707c3",
+    "docs/phase11-h4-create-reliability.md": "5497e0bdaccd602dd197bce22774f5cc704cb097149554dfa9e9c660a993b5d1",
+    "docs/phase11-h5-identity.md": "ffde6d0ba355201873fe24a93517c125cf23e2f749bea104ca21a8a94a6f174e",
+    "docs/phase11-h6-observability.md": "402a5205fd5be8f5bd01f07a4a7c69521d7e99592cfca72453eeadcb7cc1b564",
+    "docs/phase11-h7-recovery.md": "9e3105d6677a00b89078943a1bd49da75408a18ba13d6e94ed52b771a0b07d09",
+    "docs/phase6-final-closure-audit.md": "28d62d474b7f466b768c9f20bfd1c5b860d03c673a0c24ff9c400e576dd4f00b",
+    "docs/production-gates.md": "c275433320fb2de1558b964cccef475e88e25c8227360beb38caee8b604368d0",
+    "docs/roadmap.md": "16e990c877188b9ac8e614091a1a2ca4ab39be5a63d0645db9aa837a259d2c68",
+    "engineering/capacity/fixture.py": "c03790e68b7968943345d8d2b19da1b0b88f3766bf9b7d1fd4b84f8b907afcd7",
+    "engineering/capacity/metrics.py": "b7bbc717bad30b9af4ecc2a2317662eb3e0e218202897f919ac82c43b0b988d8",
+    "engineering/capacity/profile.json": "b5312b841118d834748241bb6f0e2534e7baa88d078cd55854cb4bf19b8b02bc",
+    "engineering/capacity/resource-contract-proposal.json": "d08f25cb68dbe61d9b1de3debda1801b3a55e91e35d71b82f763f6ca36d3a4ea",
+    "engineering/capacity/run.py": "8665db32bf5e51b4471e65dc4f104b896d1d3b3d3b6cd617b3cc3285103df778",
+    "engineering/capacity/scenarios.py": "24ff7d4fb3fa926b5d02a2c75eb9ed45aca673c321088ff8aff577614efe8caa",
+    "engineering/capacity/verification.py": "c35d0a09fe0dd08873e747417417982285be5760ab2289182029057413e0da76",
+    "engineering/capacity/workload.py": "3a259feb5df8f104004cf4e594eaa88b1d31ff50932acb1b5dadf397451cd8f9",
+    "engineering/create_reliability/diagnostic.py": "193d5e53d0f3271ea8355e68d82717d0343f8eb36a54cba2a83107ab5167b27e",
+    "engineering/create_reliability/fixture.py": "8b378ed43d47810e4609c76798c894e2cf318b101e54b9eaf7c88018c7473a52",
+    "engineering/create_reliability/probes.py": "279bbf329aafae4b0c81146799f3012c0fb1e5ae1076f7cced95da9bcd2a12cd",
+    "engineering/create_reliability/run.py": "334f4240ae595e2a35436b749ed397bfe8826517b5d44f276a131cb4072d5a74",
+    "engineering/disaster_recovery/backup.py": "f8fcc9ac71048524e61d75b0739d4a989e06a74be233cfbf4b75cc82f0ad0731",
+    "engineering/disaster_recovery/run.py": "c9f04da08c38c949fa0e0f2293715c33223ab93875a97099b95d0bd035ca0b0a",
+    "engineering/disaster_recovery/scenarios.py": "2c14c2941978dad2d0bb0b5e46e1c0bae89d4de3d5d46d2ad219fefa95c556a4",
+    "engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py": "8751d0fdf4393266154f8ba9f7ff5fcc2ed1d71514f4bfe21af86935054d784a",
+    "engineering/hardening/application.py": "0c0446b3cf924ff2f9d6cb51df406949176d23dd051e96f9a6b59739c4e2d8ef",
+    "engineering/hardening/assessment.py": "b371024c0a3945171bd2293db002381cd4ca3eea3ea86ca4a9a7d631db8c283e",
+    "engineering/hardening/plugin-inputs.lock.json": "767c441f114bf2066f6f41f29f234177eb32a6705f3a773c42bea25ef9b74fec",
+    "engineering/hardening/run.py": "ca3737ace606d7bd35b007317b1a682e163d432ef1e832a49d9b19735743c99d",
+    "engineering/hardening/target.py": "bca15a27e8273ff48cff443b3c4cd312ba79587fc4e7405c9c1e376d2119a794",
+    "engineering/identity/application.py": "e0c59d0147ec4f77e71689eb9ae37e2de59276ee58d7104d6a2b7168400812bc",
+    "engineering/identity/fixture.py": "5a41dcfd0fd6507f0a3908892a712342d6a5e8ad8c26945162514118ed165bf0",
+    "engineering/identity/issuer.py": "cf68ffd39a491cebb0f12af5cbd39942be125d1319043f2f5e926c85bed73825",
+    "engineering/identity/run.py": "2dbbf0c19698bf4119a2dadcd598388e9b96d27627022c93be3ae7c1acc8e25b",
+    "engineering/identity/scenarios.py": "d27ba347f4863d302e6bcd0f9ce389adc9b3878fb1577781176734e4cd602839",
+    "engineering/identity/target.py": "3d8f2eaa8f6958d8532c939d2727f48f5bfec2ca72f095676ef212d325685d28",
+    "engineering/identity/templates/SecurityConfiguration.java": "60f53599c98c122298f837fddca7f1500f247b9a91d2770fcd0b9b857d19eaf6",
+    "engineering/jobs/templates/IntegrityWorker.java": "e3c7faf7d9ae0962591f7079377c7d4b94c63752aae9166208e5d65f8426dec2",
+    "engineering/operations/application.py": "324825786f34a165f75c3300a1e92e01bb16c67869159a0be37d536a97fd8478",
+    "engineering/operations/configuration.py": "dca232f165ea544f3b50f788c948295f8ec370caec937c3f8d1337d3fe9a904b",
+    "engineering/operations/diagnostics.py": "d4e34701d9a6787d41b1d477c18be6d8c94c9dbafa80685849ff0998e5672d84",
+    "engineering/operations/fixture.py": "ad8eba44cf3f3674a23532f9508ec914ce8a312c40103653f921ac9c6db1c4de",
+    "engineering/operations/lab.py": "570a148efd92ff4487925c0d87cd44a5e8c61f305f0b8c10d8ab769818e2b4d8",
+    "engineering/operations/run.py": "10b1f0f63be69ff6f4f017a4bc9010b48e2593fafe011910624eb3877032f464",
+    "engineering/operations/scenarios.py": "9c0122ae3d4478e064c0d9a4f3f5ff7ada3fa3be84ef2f006b0d11f094baa9fe",
+    "engineering/operations/target.py": "7eff98da21a35dfc8278fd9f45b368a3f6849d78afb0a4b4ae5a0d521490f6e7",
+    "engineering/operations/templates/OperationalConfiguration.java": "5aa226994602e209d94994bdc58466898025552863387d3243b442faa652e44e",
+    "engineering/operations/templates/OperationalRuntime.java": "4ab8677c97c79103254763850f6cdcbccd45c35348a2cc18c7b28bdbe8c665fd",
+    "engineering/reliability/concurrency.py": "9ca4314222b7e92e7b2e09eed3f496efb5b073c06430f0eaf136722434d3d695",
+    "engineering/reliability/database.py": "fb1ca2faef15aae4da9873982cc220766f4dbaefc4474de81b68c8c9b57c58ee",
+    "engineering/reliability/fixture.py": "5a79969d4b05135f3f4fe496d1cdef9858468661b51b21822eebad87993b95bc",
+    "engineering/reliability/run.py": "50104f5db75fc99f8213addb3745b879625cd4a416d198c63ac6d88a488a993c",
+    "engineering/reliability/verification.py": "6a5dc88ebad50f6be5374b10a61fdff45304432656aa4f8ac3c6a281ab3d37cc",
+    "engineering/security/qualification.py": "0826239eac86e1e0fdfb18806c408869e4ce90419a2b24fa4d4ef2216bb4082f",
+    "proposals/phase6-route-a-implementation-review/security-remediation/t09-decisions/accept-deliverables-with-reservations.json": "f5b777d43482d7b59b3f40962d8bf56d9f94acf19e315e248a271c3c9f4837ae",
+    "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/Errors.java": "59f6efb8f9e03b7b298d1a7bf8b022087674670d6a5e75f402f0cd6a5804dc65",
+    "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/FailureMapping.java": "c0056d6574bbfdbf9452e4475d25a9beae5227b67cb2549b1ac3da7341aa4c44",
+    "targets/spring-vue-postgres/worker/main.py": "4e1b35521c94e18708c109b61425ffdb5e7cc5c992958e0ceac2ed9036539897",
+    "tooling/audit/criteria.py": "48b175977f9bcde3e9b5142bd185a43be5b4dd22e35aebe360d25d858e737adb",
+    "tooling/audit/phase6.py": "8bab77ed470ed440316b23321a89c4997d3004ec7848d438f42d6da94b4064fd",
+    "tooling/filesystem_artifacts.py": "bfd8346b702772d3e5550a09f7e3c30088a926dfaf4504df872cc80303fe0ab3",
+    "tooling/target_worker.py": "aad55a36be601479797adccc0f6bebc7ca93f53c138bb484adb69e05bef5e41d",
+    "verification/capacity/test_evidence.py": "e02ccbfedf32d2138a6cffe12633300f075c7c89397383510e43d2812ebdfe64",
+    "verification/capacity/test_hosted.py": "866f382723547e9b9ee451db911aa33b5604bd898ea960882ac3eecebac5cec8",
+    "verification/capacity/test_measurements.py": "77cac84d6d73eec3595c9db09103717f55779a585b4f8636f691cf414db497ab",
+    "verification/create_reliability/test_retained.py": "ab4bfd11e86781faf4e3b47a0bc6f5739e88317d20d4ad22faa76fbb53318f08",
+    "verification/disaster_recovery/test_backup.py": "5716e7d6f406962302453a999219c85d3f1876a565e66b3346e83add9f3777cb",
+    "verification/hardening/test_assessment.py": "09068a1136a42327106b1ed3a5beecfb2a29337b397aef943a78abcc3da65504",
+    "verification/hardening/test_hosted.py": "191eba3e4984ce2108d51fb9a009adece923658f14cb09c0d50cf83989a4d307",
+    "verification/hardening/test_target.py": "923a43efe1458f53403a2c8db80ce79bcf504df22486b5f9a95abfda4319d2c7",
+    "verification/identity/test_identity.py": "6916172cc53742c61cdf004365d8dcf352d8991c9690deda284ccdd312ad0bb3",
+    "verification/operations/test_configuration.py": "75960bae7a9208fa007be3b98f6fc1614c00f570e1e806f5daab32825ddf4f52",
+    "verification/operations/test_target.py": "1bb258ae170bad38450b43b58acbcf83ccd96999c353bfbd91f6f3b974948ce2",
+    "verification/reliability/test_contract.py": "7b6aec798a11550c2ec275c50c2b77791f92e2e5b1e9b2bae62a7aea113166ad",
+    "verification/reliability/test_hosted.py": "c13484d0701cb5c5bedba2450eeb140d6c9ddeba0975b32d0f7a8b1accea4252",
+    "verification/reliability/test_receipt.py": "5019b6f8daa2630c9edd70bfff3cce5bfb4bbb356cc2945c341500b515d25bff"
+  },
+  "tree": "9964f6b89ecb99e965537edcbf427409ca76a9ef",
+  "validation": {
+    "H2AndH3RecordValidators": "PASS_REUSED_EXISTING_RESULTS",
+    "archiveHashesAndCRCAndPaths": 8,
+    "currentClosure": {
+      "BLOCKED": 21,
+      "PASS": 18
+    },
+    "exactSourceRuns": "ALL_H1_H7_PASS_ATTEMPT_1",
+    "existingPreservationSuite": {
+      "command": "PYTHONPATH=tooling:. <existing SDK Python> -B -m unittest discover -s verification/evidence_admission -v",
+      "failures": 0,
+      "logSHA256": "df2be74c1d8be64f00adedcefebadfe303e13d34d12957745a077f7e96fb1e17",
+      "python": "3.14.4 local existing SDK",
+      "skipped": 0,
+      "tests": 73
+    },
+    "finalInventoryChecks": {
+      "failures": 0,
+      "logSHA256": "5062038cf2010460318055ee390a46088a553de8accb812be4bf4b6a8d6ac318",
+      "scope": "Final exact review hash/inventory, no added broad path exception.",
+      "skipped": 0,
+      "tests": 3
+    },
+    "independentArtifactDetails": {
+      "H1ActualPluginLogRealms": "PARSED_AND_MATCHED_BOTH_BUILDS",
+      "H4ActualPoolResponses": "MATCH_200_500_AND_200_200",
+      "H6H7ExperimentInventories": "EXACT_REQUIRED_SETS"
+    },
+    "qualificationRerunByH8": false,
+    "repositoryChecks": {
+      "command": "PYTHONPATH=tooling:. <existing SDK Python> -B tooling/check_repository.py",
+      "logSHA256": "c4137e2af6826157e9ca3a60cabad1b1821ead489252e1daa8aa649ad19783b4",
+      "result": "PASS"
+    },
+    "reviewIntegrity": {
+      "checks": 9,
+      "logSHA256": "a83ceda1151a77b674ebd70658650c939d8a68cfc384bbd7bc99c4a11cd08676",
+      "negativeCases": [
+        "missing increment",
+        "stale execution commit",
+        "altered artifact digest",
+        "wrong generator"
+      ],
+      "result": "PASS"
+    },
+    "scope": "STATIC_AND_RETAINED_EVIDENCE_REVIEW_ONLY",
+    "sourceInventories": 7
+  }
+}

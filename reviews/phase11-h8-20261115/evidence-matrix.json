@@ -1,0 +1,2034 @@
+{
+  "dimensions": [
+    {
+      "dimension": "Concurrency",
+      "disposition": "VERIFIED",
+      "remaining": "Bounded Case Management; no arbitrary-load or distributed exactly-once guarantee.",
+      "support": [
+        "H2",
+        "H3",
+        "H4",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dimension": "Recovery",
+      "disposition": "VERIFIED",
+      "remaining": "Disposable process/transaction/logical recovery, not full operational disaster recovery.",
+      "support": [
+        "H2",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dimension": "Scale",
+      "disposition": "PARTIALLY_VERIFIED",
+      "remaining": "Bounded workload and scope limits; approved production capacity/pending bound absent.",
+      "support": [
+        "H3"
+      ]
+    },
+    {
+      "dimension": "Compatibility",
+      "disposition": "PARTIALLY_VERIFIED",
+      "remaining": "R6→R7 stopped/fenced preview only; live mixed-version/client/browser matrix incomplete.",
+      "support": [
+        "H2"
+      ]
+    },
+    {
+      "dimension": "Supply-chain security",
+      "disposition": "PARTIALLY_VERIFIED",
+      "remaining": "One current selected fix; whole policy/coverage/license acceptance incomplete.",
+      "support": [
+        "H1"
+      ]
+    },
+    {
+      "dimension": "Tenant isolation",
+      "disposition": "VERIFIED",
+      "remaining": "Two-tenant synthetic scenarios, not exhaustive all applications.",
+      "support": [
+        "H2",
+        "H5",
+        "H7"
+      ]
+    },
+    {
+      "dimension": "Authentication",
+      "disposition": "PARTIALLY_VERIFIED",
+      "remaining": "Cryptographic interactive boundary verified; production service enrollment/revocation/custody missing.",
+      "support": [
+        "H5",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dimension": "Fault injection",
+      "disposition": "VERIFIED",
+      "remaining": "Declared faults only; physical backup/power-loss/host compromise NOT_RUN.",
+      "support": [
+        "H2",
+        "H3",
+        "H4",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "dimension": "Operational configuration",
+      "disposition": "PARTIALLY_VERIFIED",
+      "remaining": "Closed laboratory profile, production profile requires authority.",
+      "support": [
+        "H6"
+      ]
+    },
+    {
+      "dimension": "Observability",
+      "disposition": "PARTIALLY_VERIFIED",
+      "remaining": "Actual probes/events/metrics verified; external monitoring/alerts/production evidence missing.",
+      "support": [
+        "H6"
+      ]
+    },
+    {
+      "dimension": "Backup and disaster recovery",
+      "disposition": "PARTIALLY_VERIFIED",
+      "remaining": "Logical restore verified; encryption, retained-copy authorization, PITR applicability and objectives unresolved.",
+      "support": [
+        "H7"
+      ]
+    },
+    {
+      "dimension": "Sandboxing",
+      "disposition": "UNRESOLVED",
+      "remaining": "Trusted in-process successor has no hostile-plugin OS boundary.",
+      "support": []
+    },
+    {
+      "dimension": "Provenance",
+      "disposition": "VERIFIED",
+      "remaining": "Bound source/ArtifactPlan/Source Models; no accepted deployment-chain authority.",
+      "support": [
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ]
+    }
+  ],
+  "increments": [
+    {
+      "actualObservedResult": {
+        "browserJourneys": [
+          {
+            "duration": 4190.558999999999,
+            "expected": 1,
+            "flaky": 0,
+            "skipped": 0,
+            "startTime": "2026-11-15T04:00:49.409Z",
+            "unexpected": 0
+          },
+          {
+            "duration": 740.536,
+            "expected": 1,
+            "flaky": 0,
+            "skipped": 0,
+            "startTime": "2026-11-15T04:00:57.353Z",
+            "unexpected": 0
+          },
+          {
+            "duration": 1489.748,
+            "expected": 1,
+            "flaky": 0,
+            "skipped": 0,
+            "startTime": "2026-11-15T04:00:58.675Z",
+            "unexpected": 0
+          },
+          {
+            "duration": 679.232,
+            "expected": 1,
+            "flaky": 0,
+            "skipped": 0,
+            "startTime": "2026-11-15T04:01:00.743Z",
+            "unexpected": 0
+          },
+          {
+            "duration": 1603.492,
+            "expected": 1,
+            "flaky": 0,
+            "skipped": 0,
+            "startTime": "2026-11-15T04:01:02.010Z",
+            "unexpected": 0
+          },
+          {
+            "duration": 1008.7629999999999,
+            "expected": 1,
+            "flaky": 0,
+            "skipped": 0,
+            "startTime": "2026-11-15T04:01:43.963Z",
+            "unexpected": 0
+          },
+          {
+            "duration": 931.847,
+            "expected": 1,
+            "flaky": 0,
+            "skipped": 0,
+            "startTime": "2026-11-15T04:04:49.423Z",
+            "unexpected": 0
+          },
+          {
+            "duration": 886.6940000000001,
+            "expected": 1,
+            "flaky": 0,
+            "skipped": 0,
+            "startTime": "2026-11-15T04:04:50.950Z",
+            "unexpected": 0
+          }
+        ],
+        "oldVersionFindingsRetained": 1,
+        "pluginRealms": {
+          "r0-build": {
+            "artifact": "commons-io/commons-io/2.22.0/commons-io-2.22.0.jar",
+            "realms": {
+              "plugin>org.apache.maven.plugins:maven-compiler-plugin:3.15.0": [
+                "commons-io:commons-io:jar:2.22.0"
+              ],
+              "plugin>org.apache.maven.plugins:maven-jar-plugin:3.5.1": [
+                "commons-io:commons-io:jar:2.22.0"
+              ],
+              "plugin>org.apache.maven.plugins:maven-resources-plugin:3.5.0": [
+                "commons-io:commons-io:jar:2.22.0"
+              ],
+              "plugin>org.springframework.boot:spring-boot-maven-plugin:4.1.1": [
+                "commons-io:commons-io:jar:2.22.0"
+              ]
+            },
+            "scope": "QUALIFICATION_ONLY",
+            "sha256": "2b9a7b1f726fb86216dbd2c8321eabe0221dbd5b1be81c18e1cb53811b104758",
+            "status": "PASS"
+          },
+          "r1-build": {
+            "artifact": "commons-io/commons-io/2.22.0/commons-io-2.22.0.jar",
+            "realms": {
+              "plugin>org.apache.maven.plugins:maven-compiler-plugin:3.15.0": [
+                "commons-io:commons-io:jar:2.22.0"
+              ],
+              "plugin>org.apache.maven.plugins:maven-jar-plugin:3.5.1": [
+                "commons-io:commons-io:jar:2.22.0"
+              ],
+              "plugin>org.apache.maven.plugins:maven-resources-plugin:3.5.0": [
+                "commons-io:commons-io:jar:2.22.0"
+              ],
+              "plugin>org.springframework.boot:spring-boot-maven-plugin:4.1.1": [
+                "commons-io:commons-io:jar:2.22.0"
+              ]
+            },
+            "scope": "QUALIFICATION_ONLY",
+            "sha256": "2b9a7b1f726fb86216dbd2c8321eabe0221dbd5b1be81c18e1cb53811b104758",
+            "status": "PASS"
+          }
+        },
+        "securityClaim": "Selected Commons IO identity only; other retained findings remain open.",
+        "securityStatus": "PASS"
+      },
+      "approvalRequirement": "Formal engineering acceptance remains human; operational/provider/semantic/release approval not granted by qualification.",
+      "artifactIdentity": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145636947/zip",
+        "created_at": "2026-11-15T04:05:38Z",
+        "digest": "sha256:a462bc76b6ca387882a0560ec0a8ea202844dcb86a8164cf6d9379cfa425d2be",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:29Z",
+        "id": 14145636947,
+        "name": "phase11-h1-security",
+        "size_in_bytes": 67455679,
+        "updated_at": "2026-11-15T04:05:38Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145636947",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418050,
+          "repository_id": 1371285836
+        }
+      },
+      "boundedQualificationResult": "PASS",
+      "canonicalCandidate": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+      "engineeringDisposition": "VERIFIED",
+      "engineeringScope": "Supply-chain plugin correction",
+      "evidenceDigest": "sha256:a462bc76b6ca387882a0560ec0a8ea202844dcb86a8164cf6d9379cfa425d2be",
+      "exactSourceIdentity": {
+        "commit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+        "producerFiles": {
+          "engineering/hardening/application.py": "0c0446b3cf924ff2f9d6cb51df406949176d23dd051e96f9a6b59739c4e2d8ef",
+          "engineering/hardening/assessment.py": "b371024c0a3945171bd2293db002381cd4ca3eea3ea86ca4a9a7d631db8c283e",
+          "engineering/hardening/run.py": "ca3737ace606d7bd35b007317b1a682e163d432ef1e832a49d9b19735743c99d",
+          "engineering/hardening/target.py": "bca15a27e8273ff48cff443b3c4cd312ba79587fc4e7405c9c1e376d2119a794"
+        }
+      },
+      "focusedRegressionEvidence": {
+        "basis": "Pinned workflow count assertions plus successful exact-source steps; runtime records when available; not an independent full test count for every inherited suite.",
+        "counts": {
+          "verification/hardening": 20
+        }
+      },
+      "generatorIdentity": {
+        "generator": "acp-h1-job-preview-generator/1+sha256:f982b13e43e0efd070ea1b0773da5aedcdbf2486363c6e902f27c36ba00bcb02",
+        "parentSourceDigest": "da0582d50f7fcdafc766d0ee73e4e45253bc88b625e361bc15cd874d76381435",
+        "profile": "acp-h1-job-preview-target/1",
+        "scope": "QUALIFICATION_ONLY",
+        "semanticApproval": "NOT_APPROVED"
+      },
+      "hostedWorkflowReference": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418050",
+      "implementingCommit": "7e21698128d7f05d28070909c4b868cb2dd16ab2",
+      "remainingLimitation": "Selected Commons IO comparison only; unrelated findings, full compiler/plugin/package security and license acceptance remain open. Trusted-JWT application fixture.",
+      "requirementIdentifier": "H1",
+      "subsequentRelevantCommits": [],
+      "verificationIdentifier": {
+        "artifactPlanDigest": null,
+        "record": "acp-h1/h1-result.json",
+        "recordSHA256": "dc288bb0e814d44779d840f73ccc90d66cf5755fdb9703a85a6c0945abc88fbd",
+        "sourceModelDigest": null
+      }
+    },
+    {
+      "actualObservedResult": {
+        "cleanup": "VERIFIED",
+        "migrationPreflightRejections": [
+          {
+            "case": "source",
+            "error": "EVOLUTION_STALE_DATABASE_OR_SOURCE",
+            "result": "PASS"
+          },
+          {
+            "case": "populationDigest",
+            "error": "EVOLUTION_STALE_DATABASE_OR_SOURCE",
+            "result": "PASS"
+          },
+          {
+            "case": "schema",
+            "error": "EVOLUTION_STALE_DATABASE_OR_SOURCE",
+            "result": "PASS"
+          },
+          {
+            "case": "source",
+            "error": "EVOLUTION_STALE_DATABASE_OR_SOURCE",
+            "result": "PASS"
+          },
+          {
+            "case": "populationDigest",
+            "error": "EVOLUTION_STALE_DATABASE_OR_SOURCE",
+            "result": "PASS"
+          },
+          {
+            "case": "schema",
+            "error": "EVOLUTION_STALE_DATABASE_OR_SOURCE",
+            "result": "PASS"
+          }
+        ],
+        "scenarios": [
+          {
+            "result": "PASS",
+            "scenario": "parallelCaseCreation"
+          },
+          {
+            "result": "PASS",
+            "scenario": "simultaneousDocumentUploads"
+          },
+          {
+            "result": "PASS",
+            "scenario": "databaseConnectionLossBeforeDocumentCommit"
+          },
+          {
+            "result": "PASS",
+            "scenario": "processDeathBeforeCommit"
+          },
+          {
+            "result": "PASS",
+            "scenario": "caseDeathAfterCommitBeforeAcknowledgement"
+          },
+          {
+            "result": "PASS",
+            "scenario": "documentDeathAfterCommitBeforeAcknowledgement"
+          },
+          {
+            "result": "PASS",
+            "scenario": "databaseAndApplicationRestart"
+          },
+          {
+            "result": "PASS",
+            "scenario": "interruptedApplicationRestart"
+          },
+          {
+            "result": "PASS",
+            "scenario": "concurrentQueueClaims"
+          },
+          {
+            "result": "PASS",
+            "scenario": "leaseExpiryAndStaleCompletion"
+          },
+          {
+            "result": "PASS",
+            "scenario": "workerDeathAfterClaim"
+          }
+        ]
+      },
+      "approvalRequirement": "Formal engineering acceptance remains human; operational/provider/semantic/release approval not granted by qualification.",
+      "artifactIdentity": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145682429/zip",
+        "created_at": "2026-11-15T04:10:41Z",
+        "digest": "sha256:60ff5850b72f01052a3b78ea34d66edff494a7f9377e9944485fc4fcaf3fa2d3",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14145682429,
+        "name": "phase11-h2-reliability",
+        "size_in_bytes": 73952097,
+        "updated_at": "2026-11-15T04:10:41Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145682429",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674417986,
+          "repository_id": 1371285836
+        }
+      },
+      "boundedQualificationResult": "PASS",
+      "canonicalCandidate": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+      "engineeringDisposition": "VERIFIED",
+      "engineeringScope": "Concurrency, migration and recovery",
+      "evidenceDigest": "sha256:60ff5850b72f01052a3b78ea34d66edff494a7f9377e9944485fc4fcaf3fa2d3",
+      "exactSourceIdentity": {
+        "commit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+        "producerFiles": {
+          "engineering/application_evolution/plan.py": "d9c663419dcb43bfed52548dcc2e8d6871601fb5f13334fe9a85eb7bc34ee317",
+          "engineering/reliability/concurrency.py": "9ca4314222b7e92e7b2e09eed3f496efb5b073c06430f0eaf136722434d3d695",
+          "engineering/reliability/database.py": "fb1ca2faef15aae4da9873982cc220766f4dbaefc4474de81b68c8c9b57c58ee",
+          "engineering/reliability/fixture.py": "5a79969d4b05135f3f4fe496d1cdef9858468661b51b21822eebad87993b95bc",
+          "engineering/reliability/run.py": "50104f5db75fc99f8213addb3745b879625cd4a416d198c63ac6d88a488a993c",
+          "engineering/reliability/verification.py": "6a5dc88ebad50f6be5374b10a61fdff45304432656aa4f8ac3c6a281ab3d37cc",
+          "engineering/source_intelligence/model.py": "8bed64c188247a7d0f67a17ed6f1c6d706d3f1f8ddbadba18cbaa0f4e763b8ba"
+        }
+      },
+      "focusedRegressionEvidence": {
+        "basis": "Pinned workflow count assertions plus successful exact-source steps; runtime records when available; not an independent full test count for every inherited suite.",
+        "counts": {
+          "nativeSourceIntelligence": 26,
+          "verification/reliability": 45
+        }
+      },
+      "generatorIdentity": {
+        "generator": "acp-h1-job-preview-generator/1+sha256:f982b13e43e0efd070ea1b0773da5aedcdbf2486363c6e902f27c36ba00bcb02",
+        "parentSourceDigest": "da0582d50f7fcdafc766d0ee73e4e45253bc88b625e361bc15cd874d76381435",
+        "profile": "acp-h1-job-preview-target/1",
+        "scope": "QUALIFICATION_ONLY",
+        "semanticApproval": "NOT_APPROVED"
+      },
+      "hostedWorkflowReference": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674417986",
+      "implementingCommit": "5e171cdf4945246b23e91e792dda774461fe14f6",
+      "remainingLimitation": "Case Management preview only; trusted-JWT component adapter, no accepted history, production service identity or zero-downtime compatibility.",
+      "requirementIdentifier": "H2",
+      "subsequentRelevantCommits": [
+        "0d1526b9aec78a6acaad9c8137645550acf4a28a"
+      ],
+      "verificationIdentifier": {
+        "artifactPlanDigest": "sha256:e4923881d567ccc67eed1817434e8a8cc82fc5e5c435a80bf6164175c40acca4",
+        "record": "acp-h2/result.json",
+        "recordSHA256": "597de50bcfe65d03cd5a77ed91ee504e599ce61629c2c638aa38b0aa3df56f8e",
+        "sourceModelDigest": "73fd6de139cf49986235b3b74148417343f11030dcecc5a18ec8abccd740038d"
+      }
+    },
+    {
+      "actualObservedResult": {
+        "cleanup": "VERIFIED",
+        "clientLevels": [
+          4,
+          8,
+          16
+        ],
+        "limits": [
+          "20_ELIGIBLE_DOCUMENTS_PER_TENANT_FOR_SCHEDULING",
+          "2_EXECUTING_LOOPS_PER_JVM",
+          "NO_APPROVED_PENDING_OCCURRENCE_BOUND",
+          "GENERIC_500_ON_POOL_EXHAUSTION",
+          "CLIENT_TIMEOUT_DOES_NOT_CANCEL_COMMITTED_EFFECTS",
+          "NO_PRODUCTION_SLO_OR_CAPACITY_APPROVAL"
+        ],
+        "scenarios": [
+          {
+            "id": "workerCapacity",
+            "result": "PASS"
+          },
+          {
+            "id": "policyAdmittedCreate",
+            "result": "PASS"
+          },
+          {
+            "id": "invalidAndBoundedInputs",
+            "result": "PASS"
+          },
+          {
+            "id": "poolPressure",
+            "result": "PASS"
+          },
+          {
+            "id": "clientTimeout",
+            "result": "PASS"
+          },
+          {
+            "id": "shutdownUnderLoad",
+            "result": "PASS"
+          },
+          {
+            "id": "processKillUnderLoad",
+            "result": "PASS"
+          },
+          {
+            "id": "workerScopeLimit",
+            "result": "PASS"
+          }
+        ]
+      },
+      "approvalRequirement": "Formal engineering acceptance remains human; operational/provider/semantic/release approval not granted by qualification.",
+      "artifactIdentity": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145602967/zip",
+        "created_at": "2026-11-15T04:03:10Z",
+        "digest": "sha256:568d2f20add9e0ce9856bbb395d9c6169e57f9e1ae42d4869d991b57ed9e86f1",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14145602967,
+        "name": "phase11-h3-capacity",
+        "size_in_bytes": 33694336,
+        "updated_at": "2026-11-15T04:03:10Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145602967",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418022,
+          "repository_id": 1371285836
+        }
+      },
+      "boundedQualificationResult": "PASS",
+      "canonicalCandidate": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+      "engineeringDisposition": "VERIFIED",
+      "engineeringScope": "Bounded performance/resource capacity",
+      "evidenceDigest": "sha256:568d2f20add9e0ce9856bbb395d9c6169e57f9e1ae42d4869d991b57ed9e86f1",
+      "exactSourceIdentity": {
+        "commit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+        "producerFiles": {
+          "engineering/capacity/fixture.py": "c03790e68b7968943345d8d2b19da1b0b88f3766bf9b7d1fd4b84f8b907afcd7",
+          "engineering/capacity/metrics.py": "b7bbc717bad30b9af4ecc2a2317662eb3e0e218202897f919ac82c43b0b988d8",
+          "engineering/capacity/profile.json": "b5312b841118d834748241bb6f0e2534e7baa88d078cd55854cb4bf19b8b02bc",
+          "engineering/capacity/resource-contract-proposal.json": "d08f25cb68dbe61d9b1de3debda1801b3a55e91e35d71b82f763f6ca36d3a4ea",
+          "engineering/capacity/run.py": "8665db32bf5e51b4471e65dc4f104b896d1d3b3d3b6cd617b3cc3285103df778",
+          "engineering/capacity/scenarios.py": "24ff7d4fb3fa926b5d02a2c75eb9ed45aca673c321088ff8aff577614efe8caa",
+          "engineering/capacity/verification.py": "c35d0a09fe0dd08873e747417417982285be5760ab2289182029057413e0da76",
+          "engineering/capacity/workload.py": "3a259feb5df8f104004cf4e594eaa88b1d31ff50932acb1b5dadf397451cd8f9"
+        }
+      },
+      "focusedRegressionEvidence": {
+        "basis": "Pinned workflow count assertions plus successful exact-source steps; runtime records when available; not an independent full test count for every inherited suite.",
+        "counts": {
+          "verification/capacity": 46,
+          "verification/hardening": 20,
+          "verification/reliability": 45
+        }
+      },
+      "generatorIdentity": {
+        "generator": "acp-h1-job-preview-generator/1+sha256:f982b13e43e0efd070ea1b0773da5aedcdbf2486363c6e902f27c36ba00bcb02",
+        "parentSourceDigest": "da0582d50f7fcdafc766d0ee73e4e45253bc88b625e361bc15cd874d76381435",
+        "profile": "acp-h1-job-preview-target/1",
+        "scope": "QUALIFICATION_ONLY",
+        "semanticApproval": "NOT_APPROVED"
+      },
+      "hostedWorkflowReference": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418022",
+      "implementingCommit": "030cf1d52abe51575161565c4e0cea3f18ab8d80",
+      "remainingLimitation": "Closed-loop 4/8/16 clients and fixed synthetic population, finite samples, no production SLO or approved pending capacity.",
+      "requirementIdentifier": "H3",
+      "subsequentRelevantCommits": [],
+      "verificationIdentifier": {
+        "artifactPlanDigest": "sha256:23ef009bfd9b2ba54d217a671ac5e0fd5ee074eca01493559145dae6a747c81b",
+        "record": "acp-h3/result.json",
+        "recordSHA256": "85b72f9e1cb392138642429eeb6dcda34c15af161ded9e3a296f1fb1c79ffd7c",
+        "sourceModelDigest": "0bfe1fc57a28fa1015c15adbc604db3837c6af296fab2955eb4bfb7e7852f3ae"
+      }
+    },
+    {
+      "actualObservedResult": {
+        "fourConnections": [
+          200,
+          200
+        ],
+        "original500": "UNRESOLVED_NOT_CAUSALLY_ATTRIBUTED",
+        "poolExhaustion": "REPRODUCED_WITH_NATIVE_ERROR_MAPPING",
+        "twoConnections": [
+          200,
+          500
+        ]
+      },
+      "approvalRequirement": "Formal engineering acceptance remains human; operational/provider/semantic/release approval not granted by qualification.",
+      "artifactIdentity": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146031173/zip",
+        "created_at": "2026-11-15T04:05:04Z",
+        "digest": "sha256:04e17fd2b7a265cc78ed04581342eef99c5f7ca34cf4167ea2773c5d1953e587",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14146031173,
+        "name": "phase11-h4-create-reliability",
+        "size_in_bytes": 34170838,
+        "updated_at": "2026-11-15T04:05:04Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146031173",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418025,
+          "repository_id": 1371285836
+        }
+      },
+      "boundedQualificationResult": "PASS",
+      "canonicalCandidate": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+      "engineeringDisposition": "VERIFIED",
+      "engineeringScope": "CREATE diagnostics and controlled starvation",
+      "evidenceDigest": "sha256:04e17fd2b7a265cc78ed04581342eef99c5f7ca34cf4167ea2773c5d1953e587",
+      "exactSourceIdentity": {
+        "commit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+        "producerFiles": {
+          "engineering/create_reliability/diagnostic.py": "193d5e53d0f3271ea8355e68d82717d0343f8eb36a54cba2a83107ab5167b27e",
+          "engineering/create_reliability/fixture.py": "8b378ed43d47810e4609c76798c894e2cf318b101e54b9eaf7c88018c7473a52",
+          "engineering/create_reliability/probes.py": "279bbf329aafae4b0c81146799f3012c0fb1e5ae1076f7cced95da9bcd2a12cd",
+          "engineering/create_reliability/run.py": "334f4240ae595e2a35436b749ed397bfe8826517b5d44f276a131cb4072d5a74"
+        }
+      },
+      "focusedRegressionEvidence": {
+        "basis": "Pinned workflow count assertions plus successful exact-source steps; runtime records when available; not an independent full test count for every inherited suite.",
+        "counts": {
+          "verification/capacity": 46,
+          "verification/create_reliability": 12,
+          "verification/hardening": 20,
+          "verification/reliability": 45
+        }
+      },
+      "generatorIdentity": {
+        "generator": "acp-h1-job-preview-generator/1+sha256:f982b13e43e0efd070ea1b0773da5aedcdbf2486363c6e902f27c36ba00bcb02",
+        "parentSourceDigest": "da0582d50f7fcdafc766d0ee73e4e45253bc88b625e361bc15cd874d76381435",
+        "profile": "acp-h1-job-preview-target/1",
+        "scope": "QUALIFICATION_ONLY",
+        "semanticApproval": "NOT_APPROVED"
+      },
+      "hostedWorkflowReference": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418025",
+      "implementingCommit": "93ebb038abd5994953568912498809865ef901bd",
+      "remainingLimitation": "Controlled pool starvation does not explain original intermittent CREATE 500. Error policy unchanged.",
+      "requirementIdentifier": "H4",
+      "subsequentRelevantCommits": [],
+      "verificationIdentifier": {
+        "artifactPlanDigest": null,
+        "record": "acp-h4/result.json",
+        "recordSHA256": "036429f5599c727723e6fd33430b9509d4953f3820c08b82ca600bcbb84d5c88",
+        "sourceModelDigest": null
+      }
+    },
+    {
+      "actualObservedResult": {
+        "outcomes": [
+          {
+            "case": "signedBootstrap",
+            "expected": 200,
+            "milliseconds": 381.37244400002146,
+            "status": 200
+          },
+          {
+            "case": "secondTenantPrerequisites",
+            "expected": 200,
+            "milliseconds": 20.691145000000688,
+            "status": 200
+          },
+          {
+            "case": "tenant0Create",
+            "expected": 200,
+            "milliseconds": 68.38873200001672,
+            "status": 200
+          },
+          {
+            "case": "tenant0CreateReplay",
+            "expected": 200,
+            "milliseconds": 30.39003000003504,
+            "status": 200
+          },
+          {
+            "case": "tenant0ReviewApproveArchive",
+            "expected": 200,
+            "milliseconds": 110.81380300004184,
+            "status": 200
+          },
+          {
+            "case": "tenant0Upload",
+            "expected": 200,
+            "milliseconds": 36.28555900002084,
+            "status": 200
+          },
+          {
+            "case": "tenant0Download",
+            "expected": 200,
+            "milliseconds": 16.316721999942274,
+            "status": 200
+          },
+          {
+            "case": "tenant0History",
+            "expected": 200,
+            "milliseconds": 18.006091000074775,
+            "status": 200
+          },
+          {
+            "case": "tenant0Report",
+            "expected": 200,
+            "milliseconds": 14.467534999994314,
+            "status": 200
+          },
+          {
+            "case": "tenant0JobStatus",
+            "expected": 200,
+            "milliseconds": 13.196460000017396,
+            "status": 200
+          },
+          {
+            "case": "tenant1Create",
+            "expected": 200,
+            "milliseconds": 21.60236999998233,
+            "status": 200
+          },
+          {
+            "case": "tenant1CreateReplay",
+            "expected": 200,
+            "milliseconds": 17.75410599998395,
+            "status": 200
+          },
+          {
+            "case": "tenant1ReviewApproveArchive",
+            "expected": 200,
+            "milliseconds": 58.21153099998355,
+            "status": 200
+          },
+          {
+            "case": "tenant1Upload",
+            "expected": 200,
+            "milliseconds": 14.005364000013287,
+            "status": 200
+          },
+          {
+            "case": "tenant1Download",
+            "expected": 200,
+            "milliseconds": 10.144102000026578,
+            "status": 200
+          },
+          {
+            "case": "tenant1History",
+            "expected": 200,
+            "milliseconds": 8.826348999946276,
+            "status": 200
+          },
+          {
+            "case": "tenant1Report",
+            "expected": 200,
+            "milliseconds": 10.210825999934059,
+            "status": 200
+          },
+          {
+            "case": "tenant1JobStatus",
+            "expected": 200,
+            "milliseconds": 8.340234000002056,
+            "status": 200
+          },
+          {
+            "case": "unsigned",
+            "expected": 401,
+            "milliseconds": 12.568787999953202,
+            "status": 401
+          },
+          {
+            "case": "signatureSubstitution",
+            "expected": 401,
+            "milliseconds": 4.458443999965311,
+            "status": 401
+          },
+          {
+            "case": "algorithmConfusion",
+            "expected": 401,
+            "milliseconds": 2.561039999932291,
+            "status": 401
+          },
+          {
+            "case": "unknownKid",
+            "expected": 401,
+            "milliseconds": 2.821934999928999,
+            "status": 401
+          },
+          {
+            "case": "wrongIssuer",
+            "expected": 401,
+            "milliseconds": 4.136814000048616,
+            "status": 401
+          },
+          {
+            "case": "wrongAudience",
+            "expected": 401,
+            "milliseconds": 2.8613289999839253,
+            "status": 401
+          },
+          {
+            "case": "expired",
+            "expected": 401,
+            "milliseconds": 2.7841249999482898,
+            "status": 401
+          },
+          {
+            "case": "notYetValid",
+            "expected": 401,
+            "milliseconds": 2.783844999953544,
+            "status": 401
+          },
+          {
+            "case": "missingTenant",
+            "expected": 401,
+            "milliseconds": 2.255991999959406,
+            "status": 401
+          },
+          {
+            "case": "malformedTenant",
+            "expected": 401,
+            "milliseconds": 2.2104060000174286,
+            "status": 401
+          },
+          {
+            "case": "malformedSubject",
+            "expected": 401,
+            "milliseconds": 2.4565549999806535,
+            "status": 401
+          },
+          {
+            "case": "missingExpiry",
+            "expected": 401,
+            "milliseconds": 2.8176370000210227,
+            "status": 401
+          },
+          {
+            "case": "missingNotBefore",
+            "expected": 401,
+            "milliseconds": 2.673589999972137,
+            "status": 401
+          },
+          {
+            "case": "malformedAuthTime",
+            "expected": 401,
+            "milliseconds": 2.5163970000221525,
+            "status": 401
+          },
+          {
+            "case": "malformedAudience",
+            "expected": 401,
+            "milliseconds": 2.5910860000522007,
+            "status": 401
+          },
+          {
+            "case": "wrongTokenType",
+            "expected": 401,
+            "milliseconds": 2.3156429999744432,
+            "status": 401
+          },
+          {
+            "case": "idToken",
+            "expected": 401,
+            "milliseconds": 3.5936430000447217,
+            "status": 401
+          },
+          {
+            "case": "tokenProvidedURL",
+            "expected": 401,
+            "milliseconds": 2.0641150000528796,
+            "status": 401
+          },
+          {
+            "case": "trustedShortcut",
+            "expected": 401,
+            "milliseconds": 1.9007299999884708,
+            "status": 401
+          },
+          {
+            "case": "payloadSubstitution",
+            "expected": 401,
+            "milliseconds": 3.2156089999944015,
+            "status": 401
+          },
+          {
+            "case": "staleAuthentication",
+            "expected": 403,
+            "milliseconds": 12.471557000026223,
+            "status": 403
+          },
+          {
+            "case": "insufficientMFA",
+            "expected": 403,
+            "milliseconds": 6.010683999988942,
+            "status": 403
+          },
+          {
+            "case": "wrongTenantSubject",
+            "expected": 403,
+            "milliseconds": 7.514414999945984,
+            "status": 403
+          },
+          {
+            "case": "subjectUnknown",
+            "expected": 403,
+            "milliseconds": 5.367967999973189,
+            "status": 403
+          },
+          {
+            "case": "roleEscalation",
+            "expected": 403,
+            "milliseconds": 7.2644720000880625,
+            "status": 403
+          },
+          {
+            "case": "crossTenantHistory",
+            "expected": 404,
+            "milliseconds": 10.526104000064151,
+            "status": 404
+          },
+          {
+            "case": "crossTenantDocument",
+            "expected": 404,
+            "milliseconds": 7.205649999946218,
+            "status": 404
+          },
+          {
+            "case": "crossTenantJob",
+            "expected": 404,
+            "milliseconds": 8.027046999927734,
+            "status": 404
+          },
+          {
+            "case": "forgedTenantHeader",
+            "expected": 404,
+            "milliseconds": 8.0847699999822,
+            "status": 404
+          },
+          {
+            "case": "ownershipOverride",
+            "expected": 400,
+            "milliseconds": 7.494698999948923,
+            "status": 400
+          },
+          {
+            "case": "tenantOverride",
+            "expected": 400,
+            "milliseconds": 5.774341000005734,
+            "status": 400
+          },
+          {
+            "case": "keySourceOutage",
+            "expected": 401,
+            "milliseconds": 3.1670479999093004,
+            "status": 401
+          },
+          {
+            "case": "keySourceSubstitution",
+            "expected": 401,
+            "milliseconds": 2.3102160000689764,
+            "status": 401
+          },
+          {
+            "case": "offlinePinnedKeyStillVerified",
+            "expected": 200,
+            "milliseconds": 10.294631999954618,
+            "status": 200
+          },
+          {
+            "case": "unknownKeyDuringIssuerOutage",
+            "expected": 401,
+            "milliseconds": 2.6217890000452826,
+            "status": 401
+          },
+          {
+            "case": "prepublishedKeyRotation",
+            "expected": 200,
+            "milliseconds": 10.182523000025867,
+            "status": 200
+          },
+          {
+            "case": "overlapOldKeyStillValid",
+            "expected": 200,
+            "milliseconds": 10.73962800001027,
+            "status": 200
+          },
+          {
+            "case": "retiredKey",
+            "expected": 401,
+            "milliseconds": 21.747952000055193,
+            "status": 401
+          },
+          {
+            "case": "restartSignedOperation",
+            "expected": 200,
+            "milliseconds": 48.21319300003779,
+            "status": 200
+          },
+          {
+            "case": "restartTenant0Document",
+            "expected": 200,
+            "milliseconds": 24.822578999987854,
+            "status": 200
+          },
+          {
+            "case": "restartTenant1Document",
+            "expected": 200,
+            "milliseconds": 15.966214999934891,
+            "status": 200
+          },
+          {
+            "case": "unsupportedAlgorithm",
+            "result": "STARTUP_REJECTED"
+          },
+          {
+            "case": "unsupportedAlgorithmRecovered",
+            "expected": 200,
+            "milliseconds": 57.93302999995831,
+            "status": 200
+          },
+          {
+            "case": "configurationHashMismatch",
+            "result": "STARTUP_REJECTED"
+          },
+          {
+            "case": "configurationHashMismatchRecovered",
+            "expected": 200,
+            "milliseconds": 60.371164000002864,
+            "status": 200
+          },
+          {
+            "case": "overflowClockSkew",
+            "result": "STARTUP_REJECTED"
+          },
+          {
+            "case": "overflowClockSkewRecovered",
+            "expected": 200,
+            "milliseconds": 59.281783999949766,
+            "status": 200
+          },
+          {
+            "case": "nonStringAudience",
+            "result": "STARTUP_REJECTED"
+          },
+          {
+            "case": "nonStringAudienceRecovered",
+            "expected": 200,
+            "milliseconds": 59.14369499998884,
+            "status": 200
+          },
+          {
+            "case": "revokedSession",
+            "expected": 403,
+            "milliseconds": 20.59885200003464,
+            "status": 403
+          }
+        ],
+        "requiredNegatives": [
+          "algorithmConfusion",
+          "crossTenantDocument",
+          "crossTenantHistory",
+          "crossTenantJob",
+          "expired",
+          "forgedTenantHeader",
+          "idToken",
+          "insufficientMFA",
+          "keySourceOutage",
+          "keySourceSubstitution",
+          "malformedAudience",
+          "malformedAuthTime",
+          "malformedSubject",
+          "malformedTenant",
+          "missingExpiry",
+          "missingNotBefore",
+          "missingTenant",
+          "notYetValid",
+          "ownershipOverride",
+          "payloadSubstitution",
+          "retiredKey",
+          "revokedSession",
+          "roleEscalation",
+          "signatureSubstitution",
+          "staleAuthentication",
+          "subjectUnknown",
+          "tenantOverride",
+          "tokenProvidedURL",
+          "trustedShortcut",
+          "unknownKid",
+          "unsigned",
+          "wrongAudience",
+          "wrongIssuer",
+          "wrongTenantSubject",
+          "wrongTokenType"
+        ],
+        "sessionRegressions": {
+          "errors": 0,
+          "failures": 0,
+          "profile": "TRUSTED_JWT_COMPONENT_TEST",
+          "skipped": 0,
+          "tests": 3
+        },
+        "workerIdentity": "EXISTING_EXPLICIT_HOST_SERVICE_CONTEXT; CRYPTOGRAPHIC_SERVICE_ENROLLMENT_UNSUPPORTED; NO_INTERACTIVE_JWT"
+      },
+      "approvalRequirement": "Formal engineering acceptance remains human; operational/provider/semantic/release approval not granted by qualification.",
+      "artifactIdentity": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145786729/zip",
+        "created_at": "2026-11-15T04:06:37Z",
+        "digest": "sha256:8a070ca81eedc74298c4e7a57ffe3f7ac805708f6a7f7472a6a104064a6c4b55",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14145786729,
+        "name": "phase11-h5-identity",
+        "size_in_bytes": 33183284,
+        "updated_at": "2026-11-15T04:06:37Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145786729",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418019,
+          "repository_id": 1371285836
+        }
+      },
+      "boundedQualificationResult": "PASS",
+      "canonicalCandidate": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+      "engineeringDisposition": "VERIFIED",
+      "engineeringScope": "Cryptographic identity and tenant isolation",
+      "evidenceDigest": "sha256:8a070ca81eedc74298c4e7a57ffe3f7ac805708f6a7f7472a6a104064a6c4b55",
+      "exactSourceIdentity": {
+        "commit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+        "producerFiles": {
+          "engineering/identity/application.py": "e0c59d0147ec4f77e71689eb9ae37e2de59276ee58d7104d6a2b7168400812bc",
+          "engineering/identity/fixture.py": "5a41dcfd0fd6507f0a3908892a712342d6a5e8ad8c26945162514118ed165bf0",
+          "engineering/identity/issuer.py": "cf68ffd39a491cebb0f12af5cbd39942be125d1319043f2f5e926c85bed73825",
+          "engineering/identity/run.py": "2dbbf0c19698bf4119a2dadcd598388e9b96d27627022c93be3ae7c1acc8e25b",
+          "engineering/identity/scenarios.py": "d27ba347f4863d302e6bcd0f9ce389adc9b3878fb1577781176734e4cd602839",
+          "engineering/identity/target.py": "3d8f2eaa8f6958d8532c939d2727f48f5bfec2ca72f095676ef212d325685d28",
+          "engineering/identity/templates/SecurityConfiguration.java": "60f53599c98c122298f837fddca7f1500f247b9a91d2770fcd0b9b857d19eaf6"
+        }
+      },
+      "focusedRegressionEvidence": {
+        "basis": "Pinned workflow count assertions plus successful exact-source steps; runtime records when available; not an independent full test count for every inherited suite.",
+        "counts": {
+          "trustedJWTSessionRegressions": 3,
+          "verification/identity": 15
+        }
+      },
+      "generatorIdentity": {
+        "generator": "acp-h5-identity-generator/1+sha256:c2f712a0411b1b75aec39ea47c43d28c4ea484a68496b5b4d695588c927e9615",
+        "parentSourceDigest": "f982b13e43e0efd070ea1b0773da5aedcdbf2486363c6e902f27c36ba00bcb02",
+        "profile": "acp-h5-identity-target/1",
+        "scope": "QUALIFICATION_ONLY",
+        "semanticApproval": "NOT_APPROVED"
+      },
+      "hostedWorkflowReference": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418019",
+      "implementingCommit": "091d4d28fb77724481932e3bffbf775cfcc3dda3",
+      "remainingLimitation": "Ephemeral issuer and pinned key-set lifecycle; no production provider enrollment, remote revocation or service-account custody.",
+      "requirementIdentifier": "H5",
+      "subsequentRelevantCommits": [],
+      "verificationIdentifier": {
+        "artifactPlanDigest": "sha256:6c760638417cfd08e8f666772ead5fb76254cc02ffe406260621eb221d4e2ff4",
+        "record": "result.json",
+        "recordSHA256": "0839690860482c31a862dfaebf320c3e95c311d02a7107e5ae7612c8f2fb421c",
+        "sourceModelDigest": "d67e5b04e6a8e83c978c1b5cc3032b9bb727d08d175070ff3e2571e992d8adb9"
+      }
+    },
+    {
+      "actualObservedResult": {
+        "cleanup": "VERIFIED",
+        "experiments": [
+          {
+            "actual": {
+              "cases": 68,
+              "nativeSessions": {
+                "errors": 0,
+                "failures": 0,
+                "profile": "TRUSTED_JWT_COMPONENT_TEST",
+                "skipped": 0,
+                "tests": 3
+              },
+              "requiredNegatives": 35
+            },
+            "experiment": "h5AuthenticationPreserved"
+          },
+          {
+            "actual": {
+              "database": {
+                "database": "acp_runtime",
+                "postgres": "18.6 (Debian 18.6-1.pgdg13+2)",
+                "started": "2026-11-15T04:04:02.176257+00:00",
+                "systemIdentifier": "7708244126250618929"
+              },
+              "liveness": {
+                "correlation": "df3df393-cbd0-495b-bfe4-90d1d841ab6a",
+                "health": "UP",
+                "milliseconds": 4.634301000010055,
+                "status": 200
+              },
+              "pid": 8092,
+              "readiness": {
+                "correlation": "ef33e6cb-037e-4c68-b76d-b1fd00bebaad",
+                "health": "UP",
+                "milliseconds": 10.94447500008755,
+                "status": 200
+              }
+            },
+            "experiment": "healthyStartup"
+          },
+          {
+            "actual": {
+              "metricsWorkersEnabled": false,
+              "worker": {
+                "correlation": "6a10b4bb-6b8e-4aa4-a047-67bde205bde9",
+                "health": "UP",
+                "milliseconds": 5.253062999940994,
+                "status": 200
+              }
+            },
+            "experiment": "optionalWorkerDisabled"
+          },
+          {
+            "actual": {
+              "afterSHA256": "2373f78ae3c831f24b1b0cf44f57aa6936653e23916d94926fdf899b89831bf9",
+              "beforeSHA256": "2373f78ae3c831f24b1b0cf44f57aa6936653e23916d94926fdf899b89831bf9",
+              "probes": 64
+            },
+            "experiment": "readOnlyHealth"
+          },
+          {
+            "actual": {
+              "authenticated": 200,
+              "denials": [
+                401,
+                403,
+                403
+              ]
+            },
+            "experiment": "metricsProtected"
+          },
+          {
+            "actual": {
+              "documents": 4,
+              "newCases": 4,
+              "source": "NATIVE_CRYPTOGRAPHIC_HTTP",
+              "tenants": 2
+            },
+            "experiment": "normalAuthenticatedOperations"
+          },
+          {
+            "actual": {
+              "containerPaused": true,
+              "liveness": {
+                "correlation": "43ff3e4f-b102-4416-b89b-5ec1d1800ebe",
+                "health": "UP",
+                "milliseconds": 3.9196530000253915,
+                "status": 200
+              },
+              "readiness": {
+                "correlation": "dea2822f-29bf-4c0b-8096-adef00305b43",
+                "health": "DOWN",
+                "milliseconds": 756.0660479999797,
+                "status": 503
+              }
+            },
+            "experiment": "postgresUnavailable"
+          },
+          {
+            "actual": {
+              "readiness": {
+                "correlation": "ea3ca24c-2bfb-4474-809a-a63e3b9e0f7d",
+                "health": "UP",
+                "milliseconds": 5.374572999926386,
+                "status": 200
+              },
+              "reportStatus": 200
+            },
+            "experiment": "postgresRestored"
+          },
+          {
+            "actual": {
+              "actualWaitingPostgresLocks": 34,
+              "liveness": {
+                "correlation": "aec3cadd-73fb-48cb-b2cb-55a4a0dba1b8",
+                "health": "UP",
+                "milliseconds": 2.6150979999783885,
+                "status": 200
+              },
+              "readiness": {
+                "correlation": "ff9dc3a9-d8d9-4047-ad67-487ac59ed6c8",
+                "health": "DOWN",
+                "milliseconds": 3.2888990000401463,
+                "status": 503
+              },
+              "requestStatus": 500
+            },
+            "experiment": "poolExhausted"
+          },
+          {
+            "actual": {
+              "poolActivePeak": 34,
+              "poolAwaitingPeak": 1,
+              "readiness": {
+                "correlation": "9643b686-213f-4fac-88ab-a9db2ef2df28",
+                "health": "UP",
+                "milliseconds": 6.007635000059963,
+                "status": 200
+              }
+            },
+            "experiment": "poolRecovered"
+          },
+          {
+            "actual": {
+              "liveness": {
+                "correlation": "c07b1b88-296a-42cc-96ff-33185c864b07",
+                "health": "UP",
+                "milliseconds": 2.76667700006783,
+                "status": 200
+              },
+              "readiness": {
+                "correlation": "a52e4dc1-0b3c-4a0b-a7db-96d8d7f0d2f0",
+                "health": "DOWN",
+                "milliseconds": 3.1002110000599714,
+                "status": 503
+              },
+              "requestStatus": 401
+            },
+            "experiment": "identityMaterialMissing"
+          },
+          {
+            "actual": {
+              "readiness": {
+                "correlation": "86b86b76-0b5d-497f-9239-417a9eb2f5ef",
+                "health": "DOWN",
+                "milliseconds": 2.741864999961763,
+                "status": 503
+              },
+              "requestStatus": 401
+            },
+            "experiment": "identityMaterialSubstituted"
+          },
+          {
+            "actual": {
+              "readiness": {
+                "correlation": "91577fb1-bea0-4b64-b433-c8dbf6ad9285",
+                "health": "UP",
+                "milliseconds": 3.2471240000404578,
+                "status": 200
+              },
+              "report": 200
+            },
+            "experiment": "identityRecovered"
+          },
+          {
+            "actual": {
+              "completed": 6,
+              "uniqueAudits": 6,
+              "worker": {
+                "correlation": "801c6622-57db-4842-8978-b2e36ed92f3b",
+                "health": "UP",
+                "milliseconds": 6.244597000090835,
+                "status": 200
+              }
+            },
+            "experiment": "workerDraining"
+          },
+          {
+            "actual": {
+              "readiness": {
+                "correlation": "87a617c4-3658-48f7-a022-c43df36d6e86",
+                "health": "DOWN",
+                "milliseconds": 6.804718000012144,
+                "status": 503
+              },
+              "running": false,
+              "worker": {
+                "correlation": "530f248d-7c1c-43ad-8ebb-962f38359300",
+                "health": "DOWN",
+                "milliseconds": 5.1156050000145115,
+                "status": 503
+              }
+            },
+            "experiment": "workerStopped"
+          },
+          {
+            "actual": {
+              "oldestSeconds": 3,
+              "pendingAttempts": 0,
+              "readiness": {
+                "correlation": "de8f5e22-37be-49d7-957e-558baec82da3",
+                "health": "DOWN",
+                "milliseconds": 12.359560000049896,
+                "status": 503
+              }
+            },
+            "experiment": "queueNotDraining"
+          },
+          {
+            "actual": {
+              "readiness": {
+                "correlation": "01769b1e-6e80-43f7-b1f4-13c1e7f86c73",
+                "health": "UP",
+                "milliseconds": 5.448997000030431,
+                "status": 200
+              },
+              "workerRunning": true
+            },
+            "experiment": "workerRecovered"
+          },
+          {
+            "actual": {
+              "oldestSeconds": 1,
+              "worker": {
+                "correlation": "d511f010-787c-4e71-87c5-1b3d49a1126b",
+                "health": "DOWN",
+                "milliseconds": 6.010943999967822,
+                "status": 503
+              },
+              "workerRunning": true
+            },
+            "experiment": "liveWorkerStall"
+          },
+          {
+            "actual": {
+              "readiness": {
+                "correlation": "3dd060ee-7d6e-48c1-a307-2b00428ab8d4",
+                "health": "UP",
+                "milliseconds": 5.237823000015851,
+                "status": 200
+              }
+            },
+            "experiment": "workerStallRecovered"
+          },
+          {
+            "actual": {
+              "droppedEvents": 215,
+              "logRateLimit": 64,
+              "maxRSSBytes": 269746176,
+              "measuredEventEmissionNanos": 161752800,
+              "metricNames": 214,
+              "overheadScope": "SUM_OF_EVENT_EMISSION_WALL_TIMES_INCLUDING_LOG_SINK; NOT_BASELINE_SPEEDUP_OR_SLO",
+              "requestLatency": {
+                "allRequests": {
+                  "count": 28,
+                  "failures": 0,
+                  "maximumMs": 242.522345999987,
+                  "meanMs": 75.07038371428264,
+                  "minimumMs": 27.2726910000074,
+                  "p50Ms": 46.680111999990004,
+                  "p95Ms": 233.4392420000313,
+                  "p99Ms": null,
+                  "percentileMethod": "nearest rank; at least 100 observations per tail observation",
+                  "sampleStddevMs": 67.98061953986088,
+                  "samples": [
+                    218.94613200004187,
+                    232.40230800001882,
+                    233.4392420000313,
+                    242.522345999987,
+                    87.94683999997233,
+                    87.71222499990472,
+                    80.21417899999506,
+                    104.58249499993144,
+                    33.387186000027214,
+                    34.53414500006602,
+                    38.38927200001763,
+                    41.68437299995276,
+                    32.36043000003974,
+                    39.52757699994436,
+                    32.61399500001971,
+                    49.580585999933646,
+                    50.170099999945705,
+                    53.74922900000456,
+                    44.14184200004456,
+                    55.7556520000162,
+                    42.897791999962465,
+                    47.15916800000741,
+                    48.29816000005849,
+                    46.201055999972596,
+                    27.2726910000074,
+                    29.395414000077835,
+                    31.25447599995823,
+                    35.83183299997472
+                  ]
+                },
+                "elapsedSeconds": 0.6507817670000122,
+                "expectedRejections": 0,
+                "expectedRejectionsOnly": null,
+                "interpretation": "EMPIRICAL_BOUNDED_CLIENT_LATENCY; NOT_A_PRODUCTION_SLO",
+                "population": 28,
+                "requestsPerSecond": 43.025175903552125,
+                "statuses": {
+                  "200": 28
+                },
+                "successful": 28,
+                "successfulRequests": {
+                  "count": 28,
+                  "failures": 0,
+                  "maximumMs": 242.522345999987,
+                  "meanMs": 75.07038371428264,
+                  "minimumMs": 27.2726910000074,
+                  "p50Ms": 46.680111999990004,
+                  "p95Ms": 233.4392420000313,
+                  "p99Ms": null,
+                  "percentileMethod": "nearest rank; at least 100 observations per tail observation",
+                  "sampleStddevMs": 67.98061953986088,
+                  "samples": [
+                    218.94613200004187,
+                    232.40230800001882,
+                    233.4392420000313,
+                    242.522345999987,
+                    87.94683999997233,
+                    87.71222499990472,
+                    80.21417899999506,
+                    104.58249499993144,
+                    33.387186000027214,
+                    34.53414500006602,
+                    38.38927200001763,
+                    41.68437299995276,
+                    32.36043000003974,
+                    39.52757699994436,
+                    32.61399500001971,
+                    49.580585999933646,
+                    50.170099999945705,
+                    53.74922900000456,
+                    44.14184200004456,
+                    55.7556520000162,
+                    42.897791999962465,
+                    47.15916800000741,
+                    48.29816000005849,
+                    46.201055999972596,
+                    27.2726910000074,
+                    29.395414000077835,
+                    31.25447599995823,
+                    35.83183299997472
+                  ]
+                },
+                "unexpectedErrors": 0
+              },
+              "requests": 28,
+              "unmatchedRouteStatus": 500
+            },
+            "experiment": "boundedTelemetry"
+          },
+          {
+            "actual": {
+              "newCapabilityStatus": 200,
+              "oldCapabilityStatus": 403,
+              "semanticIdentityChanged": false
+            },
+            "experiment": "secretChange"
+          },
+          {
+            "actual": {
+              "rejected": [
+                "production",
+                "poolZero",
+                "workerConcurrency",
+                "sessionOverride",
+                "profileHash",
+                "traceLogging",
+                "productionEnvironment"
+              ]
+            },
+            "experiment": "invalidConfiguration"
+          },
+          {
+            "actual": {
+              "committedStatePreserved": true,
+              "newPid": 18078,
+              "oldPid": 16995,
+              "readiness": {
+                "correlation": "e77ed3d8-db95-4bdf-84ef-85f367b665d0",
+                "health": "UP",
+                "milliseconds": 8.399732000043514,
+                "status": 200
+              }
+            },
+            "experiment": "applicationRestart"
+          },
+          {
+            "actual": {
+              "portNoLongerServing": true,
+              "processExit": 143,
+              "shutdownEvents": 6
+            },
+            "experiment": "cleanShutdown"
+          }
+        ],
+        "focusedTests": {
+          "configurationAndTarget": 20,
+          "failures": 0,
+          "faultRegressions": 9,
+          "skipped": 0
+        }
+      },
+      "approvalRequirement": "Formal engineering acceptance remains human; operational/provider/semantic/release approval not granted by qualification.",
+      "artifactIdentity": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146052181/zip",
+        "created_at": "2026-11-15T04:06:48Z",
+        "digest": "sha256:10f0de8e17c2dfbad5971bb2a506c518111f62e6a865e88aaa595ba91646d2dc",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:28Z",
+        "id": 14146052181,
+        "name": "phase11-h6-observability",
+        "size_in_bytes": 2997275,
+        "updated_at": "2026-11-15T04:06:48Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14146052181",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674417982,
+          "repository_id": 1371285836
+        }
+      },
+      "boundedQualificationResult": "PASS",
+      "canonicalCandidate": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+      "engineeringDisposition": "VERIFIED",
+      "engineeringScope": "Operational configuration, health and observability",
+      "evidenceDigest": "sha256:10f0de8e17c2dfbad5971bb2a506c518111f62e6a865e88aaa595ba91646d2dc",
+      "exactSourceIdentity": {
+        "commit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+        "producerFiles": {
+          "engineering/operations/application.py": "324825786f34a165f75c3300a1e92e01bb16c67869159a0be37d536a97fd8478",
+          "engineering/operations/configuration.py": "dca232f165ea544f3b50f788c948295f8ec370caec937c3f8d1337d3fe9a904b",
+          "engineering/operations/diagnostics.py": "d4e34701d9a6787d41b1d477c18be6d8c94c9dbafa80685849ff0998e5672d84",
+          "engineering/operations/fixture.py": "ad8eba44cf3f3674a23532f9508ec914ce8a312c40103653f921ac9c6db1c4de",
+          "engineering/operations/lab.py": "570a148efd92ff4487925c0d87cd44a5e8c61f305f0b8c10d8ab769818e2b4d8",
+          "engineering/operations/run.py": "10b1f0f63be69ff6f4f017a4bc9010b48e2593fafe011910624eb3877032f464",
+          "engineering/operations/scenarios.py": "9c0122ae3d4478e064c0d9a4f3f5ff7ada3fa3be84ef2f006b0d11f094baa9fe",
+          "engineering/operations/target.py": "7eff98da21a35dfc8278fd9f45b368a3f6849d78afb0a4b4ae5a0d521490f6e7",
+          "engineering/operations/templates/OperationalConfiguration.java": "5aa226994602e209d94994bdc58466898025552863387d3243b442faa652e44e",
+          "engineering/operations/templates/OperationalRuntime.java": "4ab8677c97c79103254763850f6cdcbccd45c35348a2cc18c7b28bdbe8c665fd"
+        }
+      },
+      "focusedRegressionEvidence": {
+        "basis": "Pinned workflow count assertions plus successful exact-source steps; runtime records when available; not an independent full test count for every inherited suite.",
+        "counts": {
+          "configurationAndTarget": 20,
+          "failures": 0,
+          "faultRegressions": 9,
+          "skipped": 0
+        }
+      },
+      "generatorIdentity": {
+        "generator": "acp-h6-operational-generator/1+sha256:9bdc1adcbc50789421bd58a8f0909741031f20cd68bb66f0a6e1a205586dbfc1",
+        "operationalApproval": "NOT_APPROVED",
+        "parentSourceDigest": "c2f712a0411b1b75aec39ea47c43d28c4ea484a68496b5b4d695588c927e9615",
+        "profile": "acp-h6-operational-target/1",
+        "scope": "QUALIFICATION_ONLY",
+        "semanticApproval": "NOT_APPROVED"
+      },
+      "hostedWorkflowReference": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674417982",
+      "implementingCommit": "13bc26ca59ff125d7c1f2af97feddd0bb7db290b",
+      "remainingLimitation": "Development/loopback operational profile only; no monitoring service, alert acceptance or production operations.",
+      "requirementIdentifier": "H6",
+      "subsequentRelevantCommits": [
+        "0d1526b9aec78a6acaad9c8137645550acf4a28a"
+      ],
+      "verificationIdentifier": {
+        "artifactPlanDigest": "sha256:25611adbabda37fda74afceac05c7990ce0d710e48218b1a0a2bffe06ee11651",
+        "record": "result.json",
+        "recordSHA256": "3f2b6dd2422308fa796ee77b100dcde8b39b381405c56d8cef8d1b535f427060",
+        "sourceModelDigest": "3df88785a77965c2e7132e878719ab3d93408ec8048916049381050835475cf0"
+      }
+    },
+    {
+      "actualObservedResult": {
+        "cleanup": "VERIFIED",
+        "experiments": [
+          {
+            "actual": {
+              "heldToken": 1,
+              "leaseFault": "EXTENDED_IN_DISPOSABLE_FIXTURE_ONLY; NATIVE_POLICY_UNCHANGED",
+              "pending": 1,
+              "processKilled": {
+                "exit": -9,
+                "pid": 4317
+              }
+            },
+            "experiment": "workerInterruptedBeforeBackup"
+          },
+          {
+            "actual": {
+              "authorizedCases": 4,
+              "completedJobs": 4,
+              "counts": {
+                "cases": 5,
+                "creates": 4,
+                "documents": 4,
+                "keys": 10,
+                "uploads": 4
+              },
+              "documents": 4,
+              "tenants": 2
+            },
+            "experiment": "committedPopulation"
+          },
+          {
+            "actual": {
+              "dumpSHA256": "28fc13dd8cc6e51a6ee78767a895d4a8797272a7f91f7ffe2c462cfc5c0debda",
+              "expectedStateSHA256": "41895929fe025dbc9aca39847ce4f5d28cb328e0930b9fc263ae85aef90063ee",
+              "overlappingWrites": 2,
+              "seconds": 0.7824035590000449,
+              "size": 118841,
+              "snapshot": "00000023-00000002-1"
+            },
+            "experiment": "snapshotBackupDuringWrites"
+          },
+          {
+            "actual": {
+              "code": "H7_BACKUP_SUBSTITUTION",
+              "rejected": true
+            },
+            "experiment": "corruptionRejected"
+          },
+          {
+            "actual": {
+              "code": "H7_BACKUP_SUBSTITUTION",
+              "rejected": true
+            },
+            "experiment": "substitutionRejected"
+          },
+          {
+            "actual": {
+              "code": "H7_BACKUP_COMPONENT_MISSING_OR_ESCAPE",
+              "rejected": true
+            },
+            "experiment": "missingComponentRejected"
+          },
+          {
+            "actual": {
+              "code": "H7_RESTORE_TARGET",
+              "rejected": true
+            },
+            "experiment": "wrongTargetRejected"
+          },
+          {
+            "actual": {
+              "running": false,
+              "snapshotAgeSeconds": 0.904454093,
+              "sourceSystem": "7708244076938199090"
+            },
+            "experiment": "sourceDatabaseTerminated"
+          },
+          {
+            "actual": {
+              "code": "H7_RESTORE_NOT_VERIFIED",
+              "rejected": true
+            },
+            "experiment": "startupBeforeRestoreRejected"
+          },
+          {
+            "actual": {
+              "code": "H7_RESTORE_PROCESS_FAILED",
+              "rejected": true
+            },
+            "experiment": "interruptedRestoreRolledBack"
+          },
+          {
+            "actual": {
+              "code": "H7_RESTORE_CHANGED_BEFORE_ACTIVATION",
+              "rejected": true
+            },
+            "experiment": "incompleteRestoreRejected"
+          },
+          {
+            "actual": {
+              "code": "DEMO_BACKEND_EXIT",
+              "rejected": true
+            },
+            "experiment": "wrongSchemaRejected"
+          },
+          {
+            "actual": {
+              "exit": 0,
+              "rowCounts": {
+                "acp_audit": 18,
+                "acp_classification_audit": 36,
+                "acp_delivery_attempt": 0,
+                "acp_delivery_barrier": 0,
+                "acp_idempotency": 10,
+                "acp_job_charge": 0,
+                "acp_job_invocation_attempt": 0,
+                "acp_job_occurrence": 0,
+                "acp_job_skip_range": 0,
+                "acp_lifecycle_anchor": 2,
+                "acp_lifecycle_attempt": 0,
+                "acp_lifecycle_release_audit": 0,
+                "acp_outbox": 6,
+                "acp_rate": 8,
+                "acp_scheduler": 0,
+                "acp_sessions": 2,
+                "d_519135c86ff03bd1d39b49a7": 4,
+                "d_519135c86ff03bd1d39b49a7_audit": 4,
+                "e_0e6739cd5c48f9356c70c968": 2,
+                "e_182e499256bea391f0891e85": 0,
+                "e_30b82cbe46f23754678604ec": 0,
+                "e_71772a68c6d1eeb195691104": 0,
+                "e_92b7b421992ef490f3b75898": 3,
+                "e_ab04ccc137d58ef30f41dbd2": 0,
+                "e_d35114736c127b0a4f015cde": 5,
+                "e_e52e1d57122da276f479fa74": 0,
+                "flyway_schema_history": 6,
+                "j_8e82d00013089ccb710e01fb_attempt": 5,
+                "j_8e82d00013089ccb710e01fb_control": 2,
+                "j_8e82d00013089ccb710e01fb_queue": 6,
+                "j_8e82d00013089ccb710e01fb_result": 4,
+                "j_8e82d00013089ccb710e01fb_schedule": 2,
+                "r_10dd8e27e3bdce7d988bf17d": 0,
+                "r_6f1a11c53b21721637917874": 0,
+                "r_79096d2ab341527440286399": 0,
+                "r_99006847f90aa620e8875b47": 0,
+                "r_a394bbeb3ff7075b70038c79": 0,
+                "r_b1b3805f1252b860af2c79d1": 0
+              },
+              "schemaSHA256": "64a638118a35f782d65fafca4029bfc236cbf75511c9b5678d702a38133f2bde",
+              "seconds": 2.840439339999989,
+              "stateSHA256": "41895929fe025dbc9aca39847ce4f5d28cb328e0930b9fc263ae85aef90063ee",
+              "target": {
+                "database": "acp_runtime",
+                "postgres": "18.6 (Debian 18.6-1.pgdg13+2)",
+                "postgresVersionNum": 180006,
+                "started": "2026-11-15T04:04:24.506549+00:00",
+                "systemIdentifier": "7708244222403432497"
+              }
+            },
+            "experiment": "independentRestore"
+          },
+          {
+            "actual": {
+              "code": "DEMO_BACKEND_EXIT",
+              "rejected": true
+            },
+            "experiment": "invalidCredentialsRejected"
+          },
+          {
+            "actual": {
+              "excludedAfterSnapshot": 2,
+              "firstAuthenticatedFromLaunchSeconds": 3.605298738999977,
+              "firstAuthenticatedSeconds": 0.048611118999929204,
+              "freshSessions": true,
+              "newIssuer": true,
+              "primaryIntervalIncludesCredentialFailure": true,
+              "primaryRestoreToFirstOperationSeconds": 11.919959958999925,
+              "readinessSeconds": 3.5405989409999847,
+              "recoverySecondsIncludingFaultExperiments": 32.25121865599999
+            },
+            "experiment": "freshAuthenticatedRecovery"
+          },
+          {
+            "actual": {
+              "documents": 4,
+              "hashes": [
+                "0e9d37ed32d1cba2e6e05d708d4b2fa1dcd40af9084b93469cf3b85091b6f5c4",
+                "d4847b31e88018537223e86696496b83b1e8376663c9c7b3abb41c5347b00cad",
+                "d1a0038c9a8553ce4902e68dcd7cd986a5fb423ccc6c9590c40a33673f141a90",
+                "49b0e6287236fc05aa9a59bb83e7587d4622fa03ab38ddf468475d84dbc8c47d"
+              ]
+            },
+            "experiment": "documentsExact"
+          },
+          {
+            "actual": {
+              "cases": 4,
+              "tenants": 2,
+              "workflowHistories": 2
+            },
+            "experiment": "auditAndOwnershipExact"
+          },
+          {
+            "actual": {
+              "negativeRequests": 8
+            },
+            "experiment": "crossTenantDenied"
+          },
+          {
+            "actual": {
+              "commitClock": "SOURCE_AUTHENTICATED_CACHE; NO_CROSS_CLUSTER_XID_ORACLE_CLAIM",
+              "counts": {
+                "cases": 5,
+                "creates": 4,
+                "documents": 4,
+                "keys": 10,
+                "uploads": 4
+              },
+              "duplicateEffects": 0,
+              "replays": 4
+            },
+            "experiment": "idempotencyPreserved"
+          },
+          {
+            "actual": {
+              "pendingRecovered": 1,
+              "priorOwnerUnchanged": true,
+              "token": 1
+            },
+            "experiment": "validLeasePreserved"
+          },
+          {
+            "actual": {
+              "uniqueAudit": 1,
+              "uniqueResult": 1,
+              "winningToken": 2
+            },
+            "experiment": "expiredLeaseRecovered"
+          },
+          {
+            "actual": {
+              "code": "H7_RESTORE_TARGET_NOT_EMPTY",
+              "rejected": true
+            },
+            "experiment": "repeatedTargetRejected"
+          },
+          {
+            "actual": {
+              "exit": 0,
+              "rowCounts": {
+                "acp_audit": 18,
+                "acp_classification_audit": 36,
+                "acp_delivery_attempt": 0,
+                "acp_delivery_barrier": 0,
+                "acp_idempotency": 10,
+                "acp_job_charge": 0,
+                "acp_job_invocation_attempt": 0,
+                "acp_job_occurrence": 0,
+                "acp_job_skip_range": 0,
+                "acp_lifecycle_anchor": 2,
+                "acp_lifecycle_attempt": 0,
+                "acp_lifecycle_release_audit": 0,
+                "acp_outbox": 6,
+                "acp_rate": 8,
+                "acp_scheduler": 0,
+                "acp_sessions": 2,
+                "d_519135c86ff03bd1d39b49a7": 4,
+                "d_519135c86ff03bd1d39b49a7_audit": 4,
+                "e_0e6739cd5c48f9356c70c968": 2,
+                "e_182e499256bea391f0891e85": 0,
+                "e_30b82cbe46f23754678604ec": 0,
+                "e_71772a68c6d1eeb195691104": 0,
+                "e_92b7b421992ef490f3b75898": 3,
+                "e_ab04ccc137d58ef30f41dbd2": 0,
+                "e_d35114736c127b0a4f015cde": 5,
+                "e_e52e1d57122da276f479fa74": 0,
+                "flyway_schema_history": 6,
+                "j_8e82d00013089ccb710e01fb_attempt": 5,
+                "j_8e82d00013089ccb710e01fb_control": 2,
+                "j_8e82d00013089ccb710e01fb_queue": 6,
+                "j_8e82d00013089ccb710e01fb_result": 4,
+                "j_8e82d00013089ccb710e01fb_schedule": 2,
+                "r_10dd8e27e3bdce7d988bf17d": 0,
+                "r_6f1a11c53b21721637917874": 0,
+                "r_79096d2ab341527440286399": 0,
+                "r_99006847f90aa620e8875b47": 0,
+                "r_a394bbeb3ff7075b70038c79": 0,
+                "r_b1b3805f1252b860af2c79d1": 0
+              },
+              "schemaSHA256": "64a638118a35f782d65fafca4029bfc236cbf75511c9b5678d702a38133f2bde",
+              "seconds": 2.8296019209999486,
+              "stateSHA256": "41895929fe025dbc9aca39847ce4f5d28cb328e0930b9fc263ae85aef90063ee",
+              "target": {
+                "database": "acp_runtime",
+                "postgres": "18.6 (Debian 18.6-1.pgdg13+2)",
+                "postgresVersionNum": 180006,
+                "started": "2026-11-15T04:04:48.756159+00:00",
+                "systemIdentifier": "7708244326714134577"
+              }
+            },
+            "experiment": "independentRepeatedRecovery"
+          },
+          {
+            "actual": {
+              "encryption": "NOT_ENCRYPTED; NO_SECURE_ERASURE_CLAIM",
+              "removed": true
+            },
+            "experiment": "privateBackupRemoved"
+          }
+        ],
+        "focusedTests": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 22
+        }
+      },
+      "approvalRequirement": "Formal engineering acceptance remains human; operational/provider/semantic/release approval not granted by qualification.",
+      "artifactIdentity": {
+        "archive_download_url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145597178/zip",
+        "created_at": "2026-11-15T04:05:30Z",
+        "digest": "sha256:afbbcfd48595d1252094d242a033bb526253539b9dce7e5b57ca5d948524d057",
+        "expired": false,
+        "expires_at": "2027-02-13T03:54:29Z",
+        "id": 14145597178,
+        "name": "phase11-h7-recovery",
+        "size_in_bytes": 2978335,
+        "updated_at": "2026-11-15T04:05:30Z",
+        "url": "https://api.github.com/repos/jeresaf/Application-Compiler-Platform/actions/artifacts/14145597178",
+        "workflow_run": {
+          "head_branch": "codex/phase11-hardening",
+          "head_repository_id": 1371285836,
+          "head_sha": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+          "id": 43674418010,
+          "repository_id": 1371285836
+        }
+      },
+      "boundedQualificationResult": "PASS",
+      "canonicalCandidate": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+      "engineeringDisposition": "VERIFIED",
+      "engineeringScope": "Backup, independent restore and application recovery",
+      "evidenceDigest": "sha256:afbbcfd48595d1252094d242a033bb526253539b9dce7e5b57ca5d948524d057",
+      "exactSourceIdentity": {
+        "commit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+        "producerFiles": {
+          "engineering/disaster_recovery/backup.py": "f8fcc9ac71048524e61d75b0739d4a989e06a74be233cfbf4b75cc82f0ad0731",
+          "engineering/disaster_recovery/run.py": "c9f04da08c38c949fa0e0f2293715c33223ab93875a97099b95d0bd035ca0b0a",
+          "engineering/disaster_recovery/scenarios.py": "2c14c2941978dad2d0bb0b5e46e1c0bae89d4de3d5d46d2ad219fefa95c556a4"
+        }
+      },
+      "focusedRegressionEvidence": {
+        "basis": "Pinned workflow count assertions plus successful exact-source steps; runtime records when available; not an independent full test count for every inherited suite.",
+        "counts": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 22
+        }
+      },
+      "generatorIdentity": {
+        "generator": "acp-h6-operational-generator/1+sha256:9bdc1adcbc50789421bd58a8f0909741031f20cd68bb66f0a6e1a205586dbfc1",
+        "operationalApproval": "NOT_APPROVED",
+        "parentSourceDigest": "c2f712a0411b1b75aec39ea47c43d28c4ea484a68496b5b4d695588c927e9615",
+        "profile": "acp-h6-operational-target/1",
+        "scope": "QUALIFICATION_ONLY",
+        "semanticApproval": "NOT_APPROVED"
+      },
+      "hostedWorkflowReference": "https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/43674418010",
+      "implementingCommit": "967c4db35ecf55d4c7d233f1cae28f8ce63c0181",
+      "remainingLimitation": "Logical snapshot only; two post-boundary writes excluded; no encryption, WAL/PITR, secure erasure or approved production RPO/RTO.",
+      "requirementIdentifier": "H7",
+      "subsequentRelevantCommits": [
+        "0c61cf47ff6343cfd5d1350641232b09185a1b7a",
+        "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+      ],
+      "verificationIdentifier": {
+        "artifactPlanDigest": "sha256:25611adbabda37fda74afceac05c7990ce0d710e48218b1a0a2bffe06ee11651",
+        "record": "result.json",
+        "recordSHA256": "629f6655a44b7b4b12345050b8688bc3428c9e1dd0284f42b20f36ecd47550d1",
+        "sourceModelDigest": "3df88785a77965c2e7132e878719ab3d93408ec8048916049381050835475cf0"
+      }
+    }
+  ],
+  "reviewedSourceCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+  "scope": "AUDIT_ONLY"
+}

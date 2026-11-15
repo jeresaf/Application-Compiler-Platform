@@ -1,0 +1,673 @@
+{
+  "additionalTestsNow": "None: reuse exact-source hosted qualification. Focused preservation and review consistency checks only.",
+  "dependencyOrder": [
+    "AUTH-01",
+    "SEC-01",
+    "SEC-02",
+    "EVOL-01",
+    "OPS-01",
+    "REL-01",
+    "REL-02",
+    "REL-03",
+    "REL-04",
+    "SEC-03",
+    "SEC-04",
+    "OPS-02",
+    "OPS-03",
+    "ENG-01",
+    "ENG-02",
+    "GOV-01",
+    "OPT-01"
+  ],
+  "implementationAuthorizedByThisReview": false,
+  "items": [
+    {
+      "affectedComponent": "Successor generator host boundary",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "ENGINEERING_AND_SECURITY_OWNER",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [],
+      "engineeringExitCriteria": "Actual allowed/denied filesystem/network/exec/identity/clock/entropy/IPC/CPU/memory/timeouts/descendant cleanup under selected threat model.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "SEC-01",
+      "missingVerification": "Actual allowed/denied filesystem/network/exec/identity/clock/entropy/IPC/CPU/memory/timeouts/descendant cleanup under selected threat model.",
+      "priority": "P0",
+      "problem": "Trusted in-process successor cannot confine hostile plugin code; vDSO and host boundary not proven.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Choose approved trusted-only scope or independently supervised OS process boundary; preserve sealed worker.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Actual allowed/denied filesystem/network/exec/identity/clock/entropy/IPC/CPU/memory/timeouts/descendant cleanup under selected threat model.",
+      "responsibleDecisionMaker": "Security/architecture owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "engineering/security/qualification.py:confinement",
+        "tooling/target_worker.py",
+        "engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py"
+      ]
+    },
+    {
+      "affectedComponent": "Packaged/runtime/compiler/build/plugin dependencies",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "SUPPLY_CHAIN_AND_HUMAN_POLICY",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [],
+      "engineeringExitCriteria": "Current authenticated complete queries, negative substituted/mutable inputs, SBOM/content identity, license notices and reviewed policy dispositions.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "SEC-02",
+      "missingVerification": "Current authenticated complete queries, negative substituted/mutable inputs, SBOM/content identity, license notices and reviewed policy dispositions.",
+      "priority": "P0",
+      "problem": "Selected Commons IO fix and zero sealed runtime OSV findings do not establish complete current policy/coverage.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Reconcile exact package plus immutable inputs, all scanner coverage/unknowns and applicable licenses; proposed dependency changes separately approved.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Current authenticated complete queries, negative substituted/mutable inputs, SBOM/content identity, license notices and reviewed policy dispositions.",
+      "responsibleDecisionMaker": "Dependency/security/legal owners",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H1",
+        "criterion 18",
+        "criterion 20",
+        "criterion 21"
+      ]
+    },
+    {
+      "affectedComponent": "Deployment/release trust",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "HUMAN_AUTHORITY",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [],
+      "engineeringExitCriteria": "Independent source/execution/artifact/registration/revocation checks and stale/forged/wrong-release negatives under approved profile.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "AUTH-01",
+      "missingVerification": "Independent source/execution/artifact/registration/revocation checks and stale/forged/wrong-release negatives under approved profile.",
+      "priority": "P0",
+      "problem": "Production trust/profile/release registration and external providers are not approved.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Obtain genuine exact-scope authority/custody/executor/registry/revocation choices; no synthetic activation.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Independent source/execution/artifact/registration/revocation checks and stale/forged/wrong-release negatives under approved profile.",
+      "responsibleDecisionMaker": "Project/release/security authorities",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "G-03",
+        "G-14",
+        "G-17",
+        "criterion 33",
+        "T09 reservations"
+      ]
+    },
+    {
+      "affectedComponent": "History/ChangeSet/migration/deployed successor",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "AUTHORITY_AND_COMPATIBILITY",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "engineeringExitCriteria": "Authenticated continuous history; exact snapshots/plan; real authorized upgrade, regeneration, ownership/provenance and rollback/recovery.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "EVOL-01",
+      "missingVerification": "Authenticated continuous history; exact snapshots/plan; real authorized upgrade, regeneration, ownership/provenance and rollback/recovery.",
+      "priority": "P0",
+      "problem": "R8/H2 migration preview is not an accepted-history deployed evolution.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Approve supported Canonical history route plus exact semantics, independent bindings, migration and deployment scope.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Authenticated continuous history; exact snapshots/plan; real authorized upgrade, regeneration, ownership/provenance and rollback/recovery.",
+      "responsibleDecisionMaker": "Semantic/data/release authorities",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H2",
+        "docs/phase10-r8-evolution.md",
+        "criterion 5"
+      ]
+    },
+    {
+      "affectedComponent": "Production backup/restore",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "PRODUCTION_RECOVERY",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "engineeringExitCriteria": "Encrypted independently controlled copies, authorized restore, retention/access/custody, measured complete realistic RPO/RTO and boundary-loss reconciliation.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "OPS-01",
+      "missingVerification": "Encrypted independently controlled copies, authorized restore, retention/access/custody, measured complete realistic RPO/RTO and boundary-loss reconciliation.",
+      "priority": "P0",
+      "problem": "Logical synthetic backup is unencrypted and has no approved objectives, custody, retention or operational restore authority.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Select minimum production recovery profile; decide whether logical recovery meets objectives or physical/WAL/PITR required.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Encrypted independently controlled copies, authorized restore, retention/access/custody, measured complete realistic RPO/RTO and boundary-loss reconciliation.",
+      "responsibleDecisionMaker": "Business/data/privacy/security/operations owners",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H7",
+        "G-19",
+        "criteria 26–28"
+      ]
+    },
+    {
+      "affectedComponent": "CREATE/idempotency/authentication/DB interaction",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "RELIABILITY_DEFECT",
+      "demonstratedCause": "UNKNOWN; pool exhaustion not proven as original cause",
+      "dependencies": [],
+      "engineeringExitCriteria": "Cause/fix proven or explicit qualified unresolved disposition reviewed; no fabricated root cause.",
+      "existingMitigation": "H4 closed exception/SQLSTATE observer; immutable original FAIL retained",
+      "id": "REL-01",
+      "missingVerification": "Correlated response/exception/SQLSTATE/pool/session/idempotency and DB commit observations; deterministic causal regression if cause found.",
+      "originalEvidence": {
+        "observation": "Normal measured CREATE: clients=4, client=0, cycle=0, HTTP500 INTERNAL_ERROR, 1107.3533609742299 ms; source-commit identity not in this failure record, so it is not relabelled as current execution.",
+        "path": ".audit-artifacts/phase11-h3-20261103/runtime-5/failure.json",
+        "sha256": "db58258e3feb61734d95d29950cdc4756ce33a00cbac4f445424d4092a1e453b"
+      },
+      "priority": "P1",
+      "problem": "Historical normal CREATE HTTP 500 has no demonstrated cause.",
+      "proposedCodexIncrement": "Next bounded Phase 11 defect correction",
+      "proposedCorrection": "Reuse closed H4 diagnostics for bounded causal capture; implement only demonstrated cause; keep nonreproduction unresolved.",
+      "reproductionStatus": "NOT_REPRODUCED_WITH_CAUSAL_ATTRIBUTION",
+      "requiredTests": "Correlated response/exception/SQLSTATE/pool/session/idempotency and DB commit observations; deterministic causal regression if cause found.",
+      "responsibleDecisionMaker": "Runtime/verification owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Unexpected normal CREATE failure; business outcome needs independent reconciliation.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "docs/phase11-h3-capacity.md",
+        "docs/phase11-h4-create-reliability.md",
+        "H4.originalH3Create500",
+        {
+          "observation": "Normal measured CREATE: clients=4, client=0, cycle=0, HTTP500 INTERNAL_ERROR, 1107.3533609742299 ms; source-commit identity not in this failure record, so it is not relabelled as current execution.",
+          "path": ".audit-artifacts/phase11-h3-20261103/runtime-5/failure.json",
+          "sha256": "db58258e3feb61734d95d29950cdc4756ce33a00cbac4f445424d4092a1e453b"
+        }
+      ]
+    },
+    {
+      "affectedComponent": "Successor HTTP error mapping",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "DEMONSTRATED_HTTP_DEFECT",
+      "demonstratedCause": "Generic Errors/FailureMapping handling of unrecognized MVC resource exception",
+      "dependencies": [],
+      "engineeringExitCriteria": "Unknown route variants return approved status; authenticated/unauthenticated behavior, bounded metrics, no resource/exception leak, business/security mappings unchanged.",
+      "existingMitigation": "Redacted fixed-cardinality errors and H6 explicit limitation",
+      "id": "REL-02",
+      "missingVerification": "Unknown route variants return approved status; authenticated/unauthenticated behavior, bounded metrics, no resource/exception leak, business/security mappings unchanged.",
+      "priority": "P1",
+      "problem": "Unknown MVC resource paths map to generic 500.",
+      "proposedCodexIncrement": "Next bounded Phase 11 defect correction",
+      "proposedCorrection": "Add minimal successor-only reviewed not-found classification, preserving sealed bytes and semantic/security envelopes.",
+      "reproductionStatus": "REPRODUCED",
+      "requiredTests": "Unknown route variants return approved status; authenticated/unauthenticated behavior, bounded metrics, no resource/exception leak, business/security mappings unchanged.",
+      "responsibleDecisionMaker": "Target-contract/security owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Incorrect error classification and false server-failure telemetry; no demonstrated authorization bypass.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H6",
+        "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/Errors.java",
+        "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/FailureMapping.java"
+      ]
+    },
+    {
+      "affectedComponent": "Ingress/transaction pool",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "RESOURCE_CONTRACT",
+      "demonstratedCause": "Nested authorized transactions exhaust two-connection pool under held SQL work",
+      "dependencies": [
+        "REL-01"
+      ],
+      "engineeringExitCriteria": "Sustained declared bound, deterministic pressure, authorization/idempotency, rollback/committed differentiation, no concealed retries.",
+      "existingMitigation": "34-connection bounded laboratory configuration; acquisition timeout; explicit DB-observed recovery/replay",
+      "id": "REL-03",
+      "missingVerification": "Sustained declared bound, deterministic pressure, authorization/idempotency, rollback/committed differentiation, no concealed retries.",
+      "priority": "P1",
+      "problem": "Pool starvation returns 500; finite pool alone is not safe arbitrary-concurrency admission.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Approve bounded resource profile and compatible overload/deadline policy, then implement safe admission/outcome reconciliation.",
+      "reproductionStatus": "REPRODUCED",
+      "requiredTests": "Sustained declared bound, deterministic pressure, authorization/idempotency, rollback/committed differentiation, no concealed retries.",
+      "responsibleDecisionMaker": "Target-contract/operations/security owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Availability/latency and ambiguous client outcome under overload; no arbitrary-concurrency guarantee.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H3",
+        "H4",
+        "engineering/capacity/resource-contract-proposal.json"
+      ]
+    },
+    {
+      "affectedComponent": "Background job admission",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "SEMANTIC_CAPACITY_DECISION",
+      "demonstratedCause": "No configured accepted pending-occurrence admission cap",
+      "dependencies": [],
+      "engineeringExitCriteria": "Queue-bound enforcement at concurrency/restart/tenant boundaries, rejection audit, preserved accepted work and fence/recovery invariants.",
+      "existingMitigation": "Two execution loops/JVM, 20 eligible documents/tenant, existing retry/lease/timeouts",
+      "id": "REL-04",
+      "missingVerification": "Queue-bound enforcement at concurrency/restart/tenant boundaries, rejection audit, preserved accepted work and fence/recovery invariants.",
+      "priority": "P1",
+      "problem": "Pending job occurrences lack an accepted finite growth bound.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Decide exact semantic/migration-compatible bound and behavior without dropping accepted work.",
+      "reproductionStatus": "NO_ACCEPTED_FINITE_BOUND",
+      "requiredTests": "Queue-bound enforcement at concurrency/restart/tenant boundaries, rejection audit, preserved accepted work and fence/recovery invariants.",
+      "responsibleDecisionMaker": "Project semantic authority and data/worker owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Potential queue growth under a workload outside the measured bound; no production capacity claim.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H3",
+        "engineering/capacity/resource-contract-proposal.json"
+      ]
+    },
+    {
+      "affectedComponent": "Worker identity/grants",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "OPERATIONAL_IDENTITY",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "engineeringExitCriteria": "Wrong/missing/revoked principal/tenant denied; rotation/outage/freshness and audit/fencing preserved.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "SEC-03",
+      "missingVerification": "Wrong/missing/revoked principal/tenant denied; rotation/outage/freshness and audit/fencing preserved.",
+      "priority": "P1",
+      "problem": "Host-declared worker service context is not cryptographic production service authentication.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Approve real service-principal enrollment, scoped tenant grants, custody/revocation and rotation; do not invent interactive tokens.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Wrong/missing/revoked principal/tenant denied; rotation/outage/freshness and audit/fencing preserved.",
+      "responsibleDecisionMaker": "Security/identity/service operator",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H5.results.workerIdentity",
+        "engineering/jobs/templates/IntegrityWorker.java"
+      ]
+    },
+    {
+      "affectedComponent": "Interactive identity",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "OPERATIONAL_IDENTITY",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "engineeringExitCriteria": "Real provider acquisition/identity change, expiry/revocation, compromise/outage, tenant binding and key retirement.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "SEC-04",
+      "missingVerification": "Real provider acquisition/identity change, expiry/revocation, compromise/outage, tenant binding and key retirement.",
+      "priority": "P1",
+      "problem": "Pinned key overlap and repinning/restart do not prove production provider lifecycle or remote compromise response.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Supply approved provider, authoritative tenant lifecycle, key custody, incident/revocation and TLS/ingress profile.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Real provider acquisition/identity change, expiry/revocation, compromise/outage, tenant binding and key retirement.",
+      "responsibleDecisionMaker": "Identity/security owners",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H5",
+        "H6"
+      ]
+    },
+    {
+      "affectedComponent": "Deployable configuration",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "DEPLOYMENT_PROFILE",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "AUTH-01",
+        "SEC-03",
+        "SEC-04"
+      ],
+      "engineeringExitCriteria": "Missing/invalid settings fail before activation; exact package/content, no test authority, least privileges and real external integration.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "OPS-02",
+      "missingVerification": "Missing/invalid settings fail before activation; exact package/content, no test authority, least privileges and real external integration.",
+      "priority": "P1",
+      "problem": "H6 deliberately accepts development/loopback only; real transport/TLS/secret binding not qualified.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Select versioned production provider/principal/delivery transport/database/TLS/secrets profile before compatible successor implementation.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Missing/invalid settings fail before activation; exact package/content, no test authority, least privileges and real external integration.",
+      "responsibleDecisionMaker": "Deployment/security owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H6",
+        "G-17",
+        "criterion 14"
+      ]
+    },
+    {
+      "affectedComponent": "Monitoring/logging/metrics",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "OBSERVABILITY_OPERATIONS",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "OPS-02"
+      ],
+      "engineeringExitCriteria": "Actual authorized collection and failure alerts, bounded labels, credential leak negatives and recovery acknowledgement.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "OPS-03",
+      "missingVerification": "Actual authorized collection and failure alerts, bounded labels, credential leak negatives and recovery acknowledgement.",
+      "priority": "P1",
+      "problem": "Local probes/events/metrics do not prove monitoring access, alerts or operational incident response.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Approve collector principal/capability custody, redaction/retention and alert/on-call policy.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Actual authorized collection and failure alerts, bounded labels, credential leak negatives and recovery acknowledgement.",
+      "responsibleDecisionMaker": "Operations/security owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H6",
+        "G-18"
+      ]
+    },
+    {
+      "affectedComponent": "Deployment/API/UI compatibility",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "COMPATIBILITY",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [],
+      "engineeringExitCriteria": "Exact old/new clients/schema/provider/package combinations; unsupported combinations reject; no zero-downtime claim.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "ENG-01",
+      "missingVerification": "Exact old/new clients/schema/provider/package combinations; unsupported combinations reject; no zero-downtime claim.",
+      "priority": "P1",
+      "problem": "Stopped/fenced R6→R7 preview is not a general live mixed-version/API/browser support matrix.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Declare supported stop/fence/client/browser scope and verify applicable upgrade/downgrade incompatibility.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Exact old/new clients/schema/provider/package combinations; unsupported combinations reject; no zero-downtime claim.",
+      "responsibleDecisionMaker": "Architecture/product/deployment owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H2",
+        "docs/phase10-r8-evolution.md",
+        "criterion 13"
+      ]
+    },
+    {
+      "affectedComponent": "Filesystem publisher/host custody",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "MATERIALIZER_SECURITY",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "SEC-01"
+      ],
+      "engineeringExitCriteria": "Exact no-unintended-publication, durable recoverability, directory replacement/rename/symlink/power-loss and host privilege limits.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "ENG-02",
+      "missingVerification": "Exact no-unintended-publication, durable recoverability, directory replacement/rename/symlink/power-loss and host privilege limits.",
+      "priority": "P1",
+      "problem": "Power-loss durability and hostile same-user/root mutation are not established by retained publisher/CAS tests.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Select enforceable host threat/durability model; independently test authorized disposable crash/fault cases or retain explicit unsupported scope.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Exact no-unintended-publication, durable recoverability, directory replacement/rename/symlink/power-loss and host privilege limits.",
+      "responsibleDecisionMaker": "Security/storage/source owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "criterion 23",
+        "docs/phase6-final-closure-audit.md"
+      ]
+    },
+    {
+      "affectedComponent": "Production acceptance",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "RELEASE_GOVERNANCE",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "engineeringExitCriteria": "Required manual keyboard/focus/assistive use, licenses/notices, retained exact accepted decisions under independently verified authority.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "GOV-01",
+      "missingVerification": "Required manual keyboard/focus/assistive use, licenses/notices, retained exact accepted decisions under independently verified authority.",
+      "priority": "P1",
+      "problem": "Manual accessibility, legal notices, package/browser policy and deployment review acceptance are absent.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Obtain exact artifact/profile-bound reviews and genuine authority registration; do not synthesize signatures.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Required manual keyboard/focus/assistive use, licenses/notices, retained exact accepted decisions under independently verified authority.",
+      "responsibleDecisionMaker": "Accessibility/legal/project/deployment owners",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "criteria 12,13,15,20,26–28",
+        "G-21"
+      ]
+    },
+    {
+      "affectedComponent": "Expanded recovery support",
+      "approvalRequirements": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "category": "OPTIONAL_PROFILE",
+      "demonstratedCause": "See exact problem and original source; no additional incident cause claimed.",
+      "dependencies": [
+        "OPS-01"
+      ],
+      "engineeringExitCriteria": "Separate authorized physical/WAL/PITR and environment restoration tests if selected.",
+      "existingMitigation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "id": "OPT-01",
+      "missingVerification": "Separate authorized physical/WAL/PITR and environment restoration tests if selected.",
+      "priority": "P2",
+      "problem": "Physical backup/WAL/PITR and additional environments are not exercised.",
+      "proposedCodexIncrement": "Existing Phase 11 requirement, separately authorized if needed; no new phase",
+      "proposedCorrection": "Implement only if approved objectives require them; otherwise retain explicit exclusion.",
+      "reproductionStatus": "PROFILE_OR_AUTHORITY_GAP",
+      "requiredTests": "Separate authorized physical/WAL/PITR and environment restoration tests if selected.",
+      "responsibleDecisionMaker": "Data/recovery owner",
+      "scopeAffected": [
+        "candidate",
+        "production-profile"
+      ],
+      "severityAndImpact": "Blocks the stated supported production/security claim; no demonstrated exploit inferred.",
+      "status": "UNRESOLVED",
+      "supportingEvidence": [
+        "H7"
+      ]
+    }
+  ],
+  "nextIncrement": [
+    "REL-02",
+    "REL-01"
+  ],
+  "noRepeatedFullCIWithoutNeed": true,
+  "priorityMeaning": {
+    "P0": "Material safety/correctness or release-blocking prerequisites; not proof of exploitation.",
+    "P1": "Important demonstrated defect or engineering/profile gap.",
+    "P2": "Optional beyond presently selected bounded scope; may become required under a chosen profile."
+  },
+  "reliabilityFindingCoverage": [
+    {
+      "demonstratedCause": "UNKNOWN",
+      "engineeringDisposition": "UNRESOLVED",
+      "existingMitigation": "H4 diagnostics",
+      "missingVerification": "Causal trace",
+      "originalAndCurrentEvidence": [
+        "REL-01"
+      ],
+      "recommendedCorrection": "REL-01",
+      "reproductionStatus": "Original retained failure; causal nonreproduction",
+      "severityAndImpact": "P1 reliability",
+      "topic": "A Historical CREATE500"
+    },
+    {
+      "demonstratedCause": "Generic unexpected exception mapping",
+      "engineeringDisposition": "UNRESOLVED",
+      "existingMitigation": "Redaction/cardinality bounds",
+      "missingVerification": "Compatible successor correction",
+      "originalAndCurrentEvidence": [
+        "REL-02",
+        "H6"
+      ],
+      "recommendedCorrection": "REL-02",
+      "reproductionStatus": "Observed in actual H6",
+      "severityAndImpact": "P1 HTTP correctness",
+      "topic": "B Unmatched-resource500"
+    },
+    {
+      "demonstratedCause": "Finite pool versus nested borrowers; pending bound unapproved",
+      "engineeringDisposition": "PARTIALLY_VERIFIED",
+      "existingMitigation": "Timeouts/leases/fences and bounded pool profile",
+      "missingVerification": "Approved admission/overload scope",
+      "originalAndCurrentEvidence": [
+        "REL-03",
+        "REL-04",
+        "H3",
+        "H4"
+      ],
+      "recommendedCorrection": "REL-03 and REL-04",
+      "reproductionStatus": "Actual pool starvation and recovery",
+      "severityAndImpact": "P1 availability/capacity",
+      "topic": "C Resource exhaustion"
+    },
+    {
+      "demonstratedCause": "Production enrollment absent by explicit boundary",
+      "engineeringDisposition": "REQUIRES HUMAN AUTHORITY",
+      "existingMitigation": "Tenant subset enforcement; no interactive token fabrication",
+      "missingVerification": "Real service lifecycle/custody evidence",
+      "originalAndCurrentEvidence": [
+        "SEC-03",
+        "H5"
+      ],
+      "recommendedCorrection": "SEC-03",
+      "reproductionStatus": "Host service scope exercised",
+      "severityAndImpact": "Production security blocker",
+      "topic": "D Worker-service authentication"
+    },
+    {
+      "demonstratedCause": "Controlled injected fault; not original CREATE cause",
+      "engineeringDisposition": "VERIFIED",
+      "existingMitigation": "Transactions/readiness/replay",
+      "missingVerification": "Selected production partition/failover scope",
+      "originalAndCurrentEvidence": [
+        "H2",
+        "H6",
+        "H7"
+      ],
+      "recommendedCorrection": "OPS-02 only if selected scope needs additional work",
+      "reproductionStatus": "Real termination/pause/recovery and invalid credentials",
+      "severityAndImpact": "P1 external profile; no new defect shown",
+      "topic": "E Failed/recovered DB connections"
+    },
+    {
+      "demonstratedCause": "Controlled DDL/process interruption",
+      "engineeringDisposition": "VERIFIED",
+      "existingMitigation": "Transactional rollback, exact population/history, explicit replay",
+      "missingVerification": "Accepted-history production upgrade and full runtime-family release witness",
+      "originalAndCurrentEvidence": [
+        "H2",
+        "H7",
+        "EVOL-01"
+      ],
+      "recommendedCorrection": "EVOL-01",
+      "reproductionStatus": "Real disposable stopped/fenced upgrades and restart",
+      "severityAndImpact": "P0 release boundary; laboratory behavior passed",
+      "topic": "F Migration/restart"
+    },
+    {
+      "demonstratedCause": "Controlled injected faults",
+      "engineeringDisposition": "PARTIALLY_VERIFIED",
+      "existingMitigation": "Health/readiness/events/metrics and redaction",
+      "missingVerification": "Production alert collection/on-call evidence",
+      "originalAndCurrentEvidence": [
+        "H6",
+        "OPS-03"
+      ],
+      "recommendedCorrection": "OPS-03",
+      "reproductionStatus": "Actual dependency/worker failure detection",
+      "severityAndImpact": "P1 operational readiness",
+      "topic": "G Operational detection"
+    },
+    {
+      "demonstratedCause": "Controlled source destruction after logical boundary",
+      "engineeringDisposition": "PARTIALLY_VERIFIED",
+      "existingMitigation": "Private transient capture, exact hashes/state, fresh authentication",
+      "missingVerification": "Approved encrypted custody/retention/RPO/RTO; physical/WAL/PITR only if selected",
+      "originalAndCurrentEvidence": [
+        "H7",
+        "OPS-01"
+      ],
+      "recommendedCorrection": "OPS-01; OPT-01 conditionally",
+      "reproductionStatus": "Actual independent cluster restore",
+      "severityAndImpact": "P0 production recovery; no lab restore failure claimed",
+      "topic": "H Backup/restore"
+    }
+  ],
+  "reviewedSourceCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a"
+}

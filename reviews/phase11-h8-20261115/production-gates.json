@@ -1,0 +1,439 @@
+{
+  "gates": [
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Complete supported meta-model validation and approved dependency closure",
+      "gateId": "G-01",
+      "humanDecision": "Semantic authority must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Approved dependency-closed exact deployment semantic snapshot; R7 remains synthetic.",
+      "name": "Specification valid",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1"
+      ],
+      "technicalRemediation": "Approved dependency-closed exact deployment semantic snapshot; R7 remains synthetic."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "NOT_RUN",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Issue resolution and formal semantic checks for supported rules; explicit reviewed handling of remaining uncertainty",
+      "gateId": "G-02",
+      "humanDecision": "Specification/architecture owner must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Resolve blocking ambiguities/constraints and review unsupported analysis completeness.",
+      "name": "No blocking ambiguity/conflicts",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [],
+      "technicalRemediation": "Resolve blocking ambiguities/constraints and review unsupported analysis completeness."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "NOT_RUN",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Required/locked decisions current and authority verified",
+      "gateId": "G-03",
+      "humanDecision": "Project authority/independent reviewers must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Authenticated accepted decisions, ChangeSets and authority scope.",
+      "name": "Decisions accepted",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [],
+      "technicalRemediation": "Authenticated accepted decisions, ChangeSets and authority scope."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Requirement/decision → realization → source → verification → deployment/runtime-control mappings for applicable obligations",
+      "gateId": "G-04",
+      "humanDecision": "Traceability and deployment owners must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Complete deployment/runtime control and assertion mappings for every applicable obligation.",
+      "name": "Traceability complete",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "technicalRemediation": "Complete deployment/runtime control and assertion mappings for every applicable obligation."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Target capability negotiation and complete lowering/enforcement plan",
+      "gateId": "G-05",
+      "humanDecision": "Architecture/security owner must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Production profile capability/lowering and isolation scope acceptance.",
+      "name": "Architecture/capabilities valid",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H5",
+        "H6"
+      ],
+      "technicalRemediation": "Production profile capability/lowering and isolation scope acceptance."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Backend/query/UI/export/audit control mappings; no unimplemented required policy",
+      "gateId": "G-06",
+      "humanDecision": "Security policy owner must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Production/export/audit policy completeness and profile-specific enforcement.",
+      "name": "Security policies compiled",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H5"
+      ],
+      "technicalRemediation": "Production/export/audit policy completeness and profile-specific enforcement."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Positive and negative authorization/tenant tests pass",
+      "gateId": "G-07",
+      "humanDecision": "Security/identity owner must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Accepted provider/service/tenant profile and exact production-context tests; two-tenant laboratory cases are support.",
+      "name": "Authorization tested",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H2",
+        "H5",
+        "H7"
+      ],
+      "technicalRemediation": "Accepted provider/service/tenant profile and exact production-context tests; two-tenant laboratory cases are support."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Data impact, compatibility windows, phase preconditions, recovery and migration tests",
+      "gateId": "G-08",
+      "humanDecision": "Data/migration/release authority must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Approved accepted-history migration, measured population bindings, compatibility windows and recovery execution.",
+      "name": "Migration validated",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H2",
+        "H7"
+      ],
+      "technicalRemediation": "Approved accepted-history migration, measured population bindings, compatibility windows and recovery execution."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Isolated locked-toolchain successful build for exact artifact",
+      "gateId": "G-09",
+      "humanDecision": "Build/release owner must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Accepted production target/profile exact artifact build and input/toolchain evidence.",
+      "name": "Build succeeds",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "technicalRemediation": "Accepted production target/profile exact artifact build and input/toolchain evidence."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "All required unit evidence",
+      "gateId": "G-10",
+      "humanDecision": "Verification/release owner must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Complete applicable exact-artifact required unit suite, registered fresh evidence.",
+      "name": "Unit tests pass",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "technicalRemediation": "Complete applicable exact-artifact required unit suite, registered fresh evidence."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "All required integration evidence",
+      "gateId": "G-11",
+      "humanDecision": "Verification and external-service owners must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "All applicable production integration/provider/transport/service tests.",
+      "name": "Integration tests pass",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H2",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "technicalRemediation": "All applicable production integration/provider/transport/service tests."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Required user journeys across responsive/error/permission states",
+      "gateId": "G-12",
+      "humanDecision": "Product/verification owner must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Required supported browsers, responsive/error/permission journeys and exact deployment.",
+      "name": "E2E tests pass",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H2"
+      ],
+      "technicalRemediation": "Required supported browsers, responsive/error/permission journeys and exact deployment."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Fresh evidence for each applicable criterion, including critical requirements",
+      "gateId": "G-13",
+      "humanDecision": "Product/project authority must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Every critical acceptance obligation, unresolved CREATE finding and approvals satisfied.",
+      "name": "Acceptance satisfied",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "technicalRemediation": "Every critical acceptance obligation, unresolved CREATE finding and approvals satisfied."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Locks, vulnerability policy, SBOM; applicable license policy",
+      "gateId": "G-14",
+      "humanDecision": "Supply-chain/security/legal owners must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Full immutable dependency coverage, current vulnerability policy, SBOM and legal/license acceptance.",
+      "name": "Dependencies compliant",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1"
+      ],
+      "technicalRemediation": "Full immutable dependency coverage, current vulnerability policy, SBOM and legal/license acceptance."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Configured static/security analysis and reviewed findings",
+      "gateId": "G-15",
+      "humanDecision": "Security reviewer must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Current full configured static/security scanning, triage and reviewed unresolved findings.",
+      "name": "Security scans pass",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1"
+      ],
+      "technicalRemediation": "Current full configured static/security scanning, triage and reviewed unresolved findings."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Source/artifact/config/log secret scanning",
+      "gateId": "G-16",
+      "humanDecision": "Security/operations owner must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Exact production source/artifact/config/log scanning and redacted failure-path coverage.",
+      "name": "Secrets scan passes",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "technicalRemediation": "Exact production source/artifact/config/log scanning and redacted failure-path coverage."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Versioned config schema, environment bindings, secret handles resolved under scoped authority",
+      "gateId": "G-17",
+      "humanDecision": "Deployment/identity/secret custodians must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Production schema/bindings, scoped secret handles, actual provider/principal/transport and startup validation.",
+      "name": "Configuration valid",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H5",
+        "H6"
+      ],
+      "technicalRemediation": "Production schema/bindings, scoped secret handles, actual provider/principal/transport and startup validation."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Health/readiness probes, required structured logs/traces/metrics/audit/alerts, redaction evidence",
+      "gateId": "G-18",
+      "humanDecision": "Operations/monitoring/security owners must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Production log/trace/metric/alert collection, access policy, retention and exercised failure detection.",
+      "name": "Health/observability present",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H6"
+      ],
+      "technicalRemediation": "Production log/trace/metric/alert collection, access policy, retention and exercised failure detection."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Backup and measured restore/recovery evidence for RPO/RTO requirements",
+      "gateId": "G-19",
+      "humanDecision": "Business/data/recovery/security owners must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Approved RPO/RTO, encryption/custody/retention/restore permissions and realistic independent recovery; decide PITR applicability.",
+      "name": "Backup/recovery satisfied",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H7"
+      ],
+      "technicalRemediation": "Approved RPO/RTO, encryption/custody/retention/restore permissions and realistic independent recovery; decide PITR applicability."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Artifact hashes, compiler/generator provenance, reproducibility verification, applicable signatures",
+      "gateId": "G-20",
+      "humanDecision": "Build/release/signing custodians must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Independent clean production artifacts, full provenance and required signatures/custody.",
+      "name": "Package reproducible",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H2"
+      ],
+      "technicalRemediation": "Independent clean production artifacts, full provenance and required signatures/custody."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Automated checks plus required manual keyboard/focus/assistive-use evidence",
+      "gateId": "G-21",
+      "humanDecision": "Accessibility reviewer must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Manual keyboard/focus/assistive-use evidence plus automated checks, accepted exact profile.",
+      "name": "Accessibility satisfied",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H2"
+      ],
+      "technicalRemediation": "Manual keyboard/focus/assistive-use evidence plus automated checks, accepted exact profile."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Measured workload/latency/scale, timeout/retry/idempotency/failure tests for specified thresholds",
+      "gateId": "G-22",
+      "humanDecision": "Performance/product/security/target-contract owners must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Approved bounded workload/SLO/resource/backpressure and failure semantics; resolve actual defects and verify profile.",
+      "name": "Performance/reliability satisfied",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H2",
+        "H3",
+        "H4",
+        "H6",
+        "H7"
+      ],
+      "technicalRemediation": "Approved bounded workload/SLO/resource/backpressure and failure semantics; resolve actual defects and verify profile."
+    },
+    {
+      "applicableTargetProfile": "A separately approved full baseline production profile; current acp-operational-lab/1 and H1/H5/H6 are qualification-only.",
+      "canCurrentlyBeSatisfied": false,
+      "engineeringSupport": "PARTIALLY_VERIFIED",
+      "evidenceMatrix": "evidence-matrix.json",
+      "exactRequiredEvidence": "Human extension preservation; source/infrastructure/runtime differences explicitly assessed",
+      "gateId": "G-23",
+      "humanDecision": "Source/deployment/security owners must approve exact applicability, policy and acceptance where required.",
+      "missingEvidence": "Complete ownership/drift over source/infrastructure/runtime; selected hostile-host/power-loss scope.",
+      "name": "Ownership/drift acceptable",
+      "noFormalAcceptanceInferred": true,
+      "result": "BLOCKED",
+      "supportingEvidence": [
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "technicalRemediation": "Complete ownership/drift over source/infrastructure/runtime; selected hostile-host/power-loss scope."
+    }
+  ],
+  "reviewedSourceCommit": "73d48b1e82d4898fe1abb46c25b115185ce6723a",
+  "scope": "PRODUCTION_ACCEPTANCE_AUDIT",
+  "source": "docs/production-gates.md"
+}
