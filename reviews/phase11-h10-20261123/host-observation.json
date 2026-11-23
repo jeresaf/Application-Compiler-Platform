@@ -1,0 +1,139 @@
+{
+  "architecture": "x86_64",
+  "candidateExecuted": false,
+  "candidateIdentity": "NONE_EXECUTED",
+  "capturedAt": "2026-11-23T17:38:36.543138+00:00",
+  "cleanup": "NO_DISPOSABLE_EXECUTION_RESOURCES_CREATED",
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/bwrap",
+        "--version"
+      ],
+      "elapsedSeconds": 0.004940834944136441,
+      "exit": 0,
+      "stderr": "",
+      "stdout": "bubblewrap 0.11.1\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/dpkg-query",
+        "-W",
+        "-f=${Package} ${Version} ${Architecture}\n",
+        "bubblewrap",
+        "libseccomp2"
+      ],
+      "elapsedSeconds": 0.07478867005556822,
+      "exit": 0,
+      "stderr": "",
+      "stdout": "bubblewrap 0.11.1-1ubuntu0.3 amd64\nlibseccomp2 2.6.0-2ubuntu5 amd64\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/systemctl",
+        "--user",
+        "show",
+        "-p",
+        "ControlGroup"
+      ],
+      "elapsedSeconds": 0.004369593982119113,
+      "exit": 1,
+      "stderr": "Failed to connect to user scope bus via local transport: $DBUS_SESSION_BUS_ADDRESS and $XDG_RUNTIME_DIR not defined (consider using --machine=<user>@.host --user to connect to bus of other user)\n",
+      "stdout": ""
+    }
+  ],
+  "executionMechanism": "FIXED_READ_ONLY_COMMANDS_NO_SANDBOX",
+  "hostilePayloadExecuted": false,
+  "installedToolObservations": {
+    "/usr/bin/bwrap": {
+      "mode": "0o755",
+      "resolved": "/usr/bin/bwrap",
+      "sha256": "523da3e7399044be5163aee6f57a77a6bef7454376e28f0a0627920bae1b76b6",
+      "uid": 0
+    },
+    "/usr/bin/dpkg-query": {
+      "mode": "0o755",
+      "resolved": "/usr/bin/dpkg-query",
+      "sha256": "82a19acac53907f83faca7d6494289fe2d074514cf1b09933114635415c2e876",
+      "uid": 0
+    },
+    "/usr/bin/systemctl": {
+      "mode": "0o755",
+      "resolved": "/usr/bin/systemctl",
+      "sha256": "6394f5e8df92878184de9d4dfb7ac242471cb09daf89d23be4e81ae17e9c03b2",
+      "uid": 0
+    },
+    "/usr/lib/x86_64-linux-gnu/libseccomp.so.2": {
+      "mode": "0o644",
+      "resolved": "/usr/lib/x86_64-linux-gnu/libseccomp.so.2.6.0",
+      "sha256": "df995d80c824876afc38528b5e71d258e1844eb524cd9d34f9a7898562fd99e7",
+      "uid": 0
+    }
+  },
+  "isolationProfileIdentity": "NONE_ACTIVATED",
+  "kernel": "7.0.0-43-generic",
+  "limitations": [
+    "Read-only visibility does not establish namespace creation, delegation, policy attachment or confinement.",
+    "No vDSO or hostile probe executed.",
+    "Installed Bubblewrap version is an observation, not distribution trust or security acceptance."
+  ],
+  "observerSHA256": "e611346f686b795a02e45f710533017463fcbe39fab4f84ecd6a02342910e846",
+  "reads": {
+    "/etc/os-release": {
+      "sha256": "cf72627ff81aef345d0a9f3807eb80f1035e0f80fe2932d12d94efc02fd68104",
+      "status": "OBSERVED",
+      "text": "PRETTY_NAME=\"Ubuntu 26.04.1 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"26.04\"\nVERSION=\"26.04.1 LTS (Resolute Raccoon)\"\nVERSION_CODENAME=resolute\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=resolute\nLOGO=ubuntu-logo"
+    },
+    "/proc/self/attr/current": {
+      "sha256": "d85cf5399d223fa0c5561de9d4e320dab79fc1eccc741c1f8c8661c38a1f25d3",
+      "status": "OBSERVED",
+      "text": "snap.code.code (complain)"
+    },
+    "/proc/self/cgroup": {
+      "sha256": "4d0e36d909beaf33a7a63954124e712d61eb4bc7271f2216268e621b217a4fbc",
+      "status": "OBSERVED",
+      "text": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/snap.code.code-0c964bb8-202a-49e3-b331-fc126f67c799.scope"
+    },
+    "/proc/sys/kernel/apparmor_restrict_unprivileged_unconfined": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "status": "OBSERVED",
+      "text": "1"
+    },
+    "/proc/sys/kernel/apparmor_restrict_unprivileged_userns": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "status": "OBSERVED",
+      "text": "1"
+    },
+    "/proc/sys/kernel/unprivileged_userns_clone": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "status": "OBSERVED",
+      "text": "1"
+    },
+    "/proc/sys/user/max_user_namespaces": {
+      "sha256": "31e3dee23f6144aef4f7f665cb23d4089e0c3640bff26169857bb18ec1d6fd06",
+      "status": "OBSERVED",
+      "text": "60293"
+    },
+    "/sys/fs/cgroup/cgroup.controllers": {
+      "sha256": "a1d3f9a7963cbedee1c50c26c826b35dfb1af3608d9c611731f8a21e56ea9bde",
+      "status": "OBSERVED",
+      "text": "cpuset cpu io memory hugetlb pids rdma misc dmem"
+    },
+    "/sys/fs/cgroup/cgroup.subtree_control": {
+      "sha256": "a1d3f9a7963cbedee1c50c26c826b35dfb1af3608d9c611731f8a21e56ea9bde",
+      "status": "OBSERVED",
+      "text": "cpuset cpu io memory hugetlb pids rdma misc dmem"
+    },
+    "/sys/module/apparmor/parameters/enabled": {
+      "sha256": "d08c5f95ebb8581ee4e5c0a2ee534d5a10d3c8e7f3a18d961adf902602bbd8a3",
+      "status": "OBSERVED",
+      "text": "Y"
+    }
+  },
+  "resourcesCreated": [],
+  "schema": "acp-h10-readonly-feasibility/1",
+  "securityPolicyDigest": null,
+  "sourceCommit": "396b263683f0e57aa9ed0be431d863304279aafb",
+  "status": "OBSERVED_NOT_QUALIFIED",
+  "system": "Linux"
+}

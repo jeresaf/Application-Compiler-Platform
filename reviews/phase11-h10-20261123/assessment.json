@@ -1,0 +1,267 @@
+{
+  "SEC-01": {
+    "disposition": "BLOCKED",
+    "historicalStatus": "UNRESOLVED",
+    "reason": "No approved implemented independently qualified hostile-plugin boundary"
+  },
+  "acceptance": [
+    "No plugin code executes in the trusted parent or before all payload restrictions are established",
+    "All applicable adversarial rows retain independent actual observations and fail closed on absent controls",
+    "Same original Canonical/Target IR/ArtifactPlan semantic and ownership checks are retained",
+    "Candidate cannot supply publication, admission, signing or collector authority",
+    "All owned descendants and disposable resources are removed or the environment is quarantined",
+    "Required security-owner approvals exist; no skipped or unsupported row establishes PASS"
+  ],
+  "activeUntrustedExecutionProfile": null,
+  "baseline": "396b263683f0e57aa9ed0be431d863304279aafb",
+  "boundaries": [
+    {
+      "claim": "Bounded trusted-worker protocol, denylist and RLIMIT component only",
+      "id": "sealed-worker",
+      "source": "tooling/target_worker.py",
+      "symbols": [
+        "TargetWorker._exchange",
+        "TargetWorker.call",
+        "ProductionTarget._call",
+        "ProductionTarget.plan"
+      ]
+    },
+    {
+      "claim": "Trusted imports/templates precede sandbox; request read follows sandbox",
+      "id": "preload",
+      "source": "targets/spring-vue-postgres/worker/main.py",
+      "symbols": [
+        "sandbox",
+        "main",
+        "handle"
+      ]
+    },
+    {
+      "claim": "Top-level relative imports and host methods are executable before any independent confinement",
+      "id": "candidate",
+      "source": "engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py",
+      "symbols": [
+        "SuccessorCandidate.__init__",
+        "SuccessorCandidate._call",
+        "SuccessorCandidate._verify"
+      ]
+    },
+    {
+      "claim": "Existing trusted target port; no remote hostile loader found in bounded service inspection",
+      "id": "compiler-adapter",
+      "source": "engineering/demo/pipeline.py",
+      "symbols": [
+        "CandidatePort._call",
+        "PipelineCandidate.plan"
+      ]
+    },
+    {
+      "claim": "Native tool limits, partial environment filtering; no hostile-source containment proof",
+      "id": "source-analysis",
+      "source": "engineering/source_intelligence/native.py",
+      "symbols": [
+        "run",
+        "java",
+        "typescript"
+      ]
+    },
+    {
+      "claim": "Host verification and result binding do not sandbox generator code",
+      "id": "verification",
+      "source": "engineering/verification/integration.py",
+      "symbols": [
+        "Session",
+        "validate_result"
+      ]
+    },
+    {
+      "claim": "CAS/ownership/no-follow cooperating-host boundary; not protection from malicious parent process",
+      "id": "publication",
+      "source": "tooling/filesystem_artifacts.py",
+      "symbols": [
+        "FilesystemArtifactStore.apply",
+        "FilesystemArtifactStore._publish"
+      ]
+    }
+  ],
+  "currentTrustFinding": "Sealed worker preload is trusted; successor and H1-H9 adapters execute in the compiler process. Hash checks are not confinement.",
+  "decisions": [
+    {
+      "id": "H10-D1",
+      "owner": "Security owner and compiler architecture owner",
+      "request": "Choose A trusted-only exclusion or B isolated-hostile capability. Approve attacker scope and explicitly excluded host-root/hypervisor/side-channel threats.",
+      "status": "NOT_APPROVED"
+    },
+    {
+      "id": "H10-D2",
+      "owner": "Security owner",
+      "request": "For B choose shared-kernel risk acceptance or dedicated VM/microVM protection; exact runtime/source/dependency/guest-image policy and supported OS/ABI must be independently approved. No runtime version is selected here.",
+      "status": "NOT_APPROVED"
+    },
+    {
+      "id": "H10-D3",
+      "owner": "Security owner and compiler architecture owner",
+      "request": "Approve clock/entropy claims and deterministic-stage eligibility. Absolute denial cannot be promised for native-capable process execution; do not silently weaken determinism. Select supported plugin language/entrypoint scope.",
+      "status": "NOT_APPROVED"
+    },
+    {
+      "id": "H10-D4",
+      "owner": "Infrastructure and security owners",
+      "request": "Authorize one exact disposable guest, synthetic canaries, quotas, cgroup delegation, LSM attachment and fixed launch/test procedures. No host global settings or existing VM resources may be changed by this request.",
+      "status": "NOT_APPROVED"
+    },
+    {
+      "id": "H10-D5",
+      "owner": "Project authority and independent security reviewer",
+      "request": "Approve pre-import registration/custody and independent qualification/acceptance criteria. No key, reviewer, issuer, host or operational approval is created by H10.",
+      "status": "NOT_APPROVED"
+    },
+    {
+      "id": "H10-D6",
+      "owner": "Compiler architecture and source ownership owners",
+      "request": "Authorize data-only adapter implementation through existing ports, exact bounded protocol and independent plan validation; no semantic change or sealed generator modification.",
+      "status": "NOT_APPROVED"
+    }
+  ],
+  "implementationAuthorized": false,
+  "implementationOrder": [
+    "Obtain explicit security/architecture and exact lab authorization",
+    "Implement pre-import identity resolver, fixed bootstrap and independent supervisor",
+    "Implement bounded data adapter and host-owned validations without candidate callbacks",
+    "Run all applicable adversarial/recovery rows in authorized disposable guest",
+    "Compare both reference compilations, source ownership, provenance and Phase 8 results",
+    "Measure isolation overhead/determinism and obtain independent security disposition"
+  ],
+  "operationalSecurity": "NOT_ESTABLISHED",
+  "phase11": "IN_PROGRESS",
+  "phase12": "NOT_STARTED",
+  "phase6ReleaseClosure": "BLOCKED",
+  "policyDigest": null,
+  "preferredAlternative": "B_RECOMMENDED_NOT_SELECTED",
+  "probeDisposition": {
+    "cleanup": "NO_EXECUTION_RESOURCES_CREATED",
+    "hostileTests": "NOT_RUN_PENDING_AUTHORIZATION",
+    "readOnlyHostObservation": "OBSERVED_NOT_QUALIFIED",
+    "resourcesCreated": []
+  },
+  "productionProfileSelected": false,
+  "proposedOS": "Ubuntu 24.04 x86_64 disposable VM; other hosts separately qualified",
+  "proposedProtocol": {
+    "artifactFields": [
+      "path",
+      "role",
+      "encoding",
+      "content",
+      "contentDigest",
+      "origins",
+      "verificationObligationIds"
+    ],
+    "framing": "One length-prefixed UTF-8 JSON request and response; EOF required; reject duplicate keys, nonfinite values, trailing bytes and unknown fields",
+    "hostDerives": "Owner, CAS intent/expected digest, semantic origin validity, input digests, provenance, mappings and verification applicability come from trusted compiler/inventory; plugin cannot grant these.",
+    "identityChecks": "Host-owned execution/stream binds exact immutable request, profile and launched process. Responses cannot select authority. Recompute all digests.",
+    "limits": {
+      "cgroupTasks": 8,
+      "cpuSeconds": 20,
+      "diagnosticBytes": 8192,
+      "jsonDepth": 128,
+      "jsonNodes": 200000,
+      "memoryBytes": 536870912,
+      "requestBytes": 4000000,
+      "resultBytes": 16000000,
+      "wallSeconds": 30
+    },
+    "limitsStatus": "PROPOSED_NOT_ACTIVATED",
+    "operations": [
+      "lower",
+      "plan"
+    ],
+    "originFields": [
+      "application",
+      "id",
+      "revision"
+    ],
+    "outcomes": [
+      "SUCCESS",
+      "ERROR"
+    ],
+    "requestFields": [
+      "protocol",
+      "operation",
+      "executionId",
+      "nonce",
+      "canonicalSnapshot",
+      "canonicalDigest",
+      "compilerIdentity",
+      "pipelineIdentity",
+      "candidateSourceDigest",
+      "candidateDependencyDigest",
+      "rootfsDigest",
+      "isolationPolicyDigest",
+      "targetProfile",
+      "targetIR",
+      "inventory",
+      "limits"
+    ],
+    "responseFields": [
+      "protocol",
+      "executionId",
+      "nonce",
+      "canonicalDigest",
+      "candidateSourceDigest",
+      "outcome",
+      "targetIR",
+      "artifacts",
+      "errorCode"
+    ],
+    "status": "PROPOSAL_ONLY_NOT_REGISTERED",
+    "unknownOrUnsupported": "BLOCKED before launch for unknown capabilities/profile; invalid result FAIL without publication"
+  },
+  "protectedAssets": [
+    "Canonical specifications",
+    "approved generator source",
+    "signing credentials",
+    "identity credentials",
+    "release evidence",
+    "repository state",
+    "ArtifactPlan identities",
+    "generated source",
+    "human extensions",
+    "database credentials",
+    "other applications",
+    "host integrity"
+  ],
+  "requiredControls": [
+    "supervisor",
+    "preload-boundary",
+    "namespaces",
+    "filesystem",
+    "network",
+    "syscall-policy",
+    "dedicated-identity",
+    "capability-removal",
+    "descriptor-closure",
+    "environment",
+    "cgroup-memory",
+    "cgroup-cpu",
+    "cgroup-pids",
+    "deadline",
+    "descendant-cleanup",
+    "bounded-protocol",
+    "independent-output-validation",
+    "ownership-publication",
+    "clock-entropy-policy",
+    "source-admission"
+  ],
+  "residualRisks": [
+    "Host-root or compromised supervisor/kernel/hypervisor outside honest-isolation proof",
+    "Same-UID host mutation is not prevented by in-process candidate checks",
+    "vDSO and CPU timing/randomness remain accessible without a separately qualified restricted runtime policy",
+    "Parsers, build tools and generated applications have independent execution boundaries",
+    "Read-only capability visibility and synthetic declarations are not operational security evidence",
+    "Existing runtime security gate decisions and all 21 release blockers remain"
+  ],
+  "reviewRole": "ASSISTANT_TECHNICAL_ASSESSMENT_NOT_HUMAN_APPROVAL",
+  "schema": "acp-h10-architecture-assessment/1",
+  "scope": "DESIGN_AND_READONLY_FEASIBILITY_ONLY",
+  "trustedOnlyAlternative": "A requires authenticated source and review admission before any import; no hostile code support claim"
+}

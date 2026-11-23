@@ -1,0 +1,86 @@
+name: ACP Phase 11 H10 plugin isolation architecture review
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h10-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: tooling:.
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.21.0'
+      - name: Provision existing locked review dependencies in disposable runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/acp-h10-venv"
+          "$RUNNER_TEMP/acp-h10-venv/bin/python3.14" -m pip install --require-hashes --only-binary=:all: -r engineering/evidence_admission/requirements.txt
+          "$RUNNER_TEMP/acp-h10-venv/bin/python3.14" -m pip check
+      - name: Review contracts and existing fail-closed security regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-h10-venv/bin/python3.14" -B - <<'PY' 2>&1 | tee "$RUNNER_TEMP/acp-h10-tests.log"
+          import platform, unittest
+          assert platform.python_version() == '3.14.7'
+          folders = [('verification/plugin_isolation',13),('verification/security',12),('verification/evidence_admission/stage2b2',26),('verification/evidence_admission',39)]
+          for folder, count in folders:
+              suite = unittest.defaultTestLoader.discover(folder, pattern='test_preservation.py' if folder == 'verification/evidence_admission' else 'test*.py')
+              assert suite.countTestCases() == count, (folder, suite.countTestCases())
+              result = unittest.TextTestRunner(verbosity=2).run(suite)
+              assert result.wasSuccessful() and result.testsRun == count and not result.skipped
+          PY
+      - name: Canonical vectors and repository contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tooling/check_canonical_vectors.mjs
+          node tooling/check_canonical_vectors.mjs test-corpus/execution-v03
+          node tooling/check_canonical_vectors.mjs test-corpus/deterministic-v04
+          "$RUNNER_TEMP/acp-h10-venv/bin/python3.14" -B tooling/check_repository.py
+          git diff --check
+      - name: Observe runner read-only without launching a sandbox
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-h10-venv/bin/python3.14" -B verification/plugin_isolation/observe_host.py --output "$RUNNER_TEMP/acp-h10-host.json"
+          "$RUNNER_TEMP/acp-h10-venv/bin/python3.14" -B - <<'PY'
+          import hashlib,json,os,subprocess
+          from pathlib import Path
+          root=Path(os.environ['RUNNER_TEMP'])
+          observation=json.loads((root/'acp-h10-host.json').read_bytes())
+          assert observation['sourceCommit']==os.environ['GITHUB_SHA']==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          assert observation['observerSHA256']==hashlib.sha256(Path('verification/plugin_isolation/observe_host.py').read_bytes()).hexdigest()
+          assert observation['status']=='OBSERVED_NOT_QUALIFIED'
+          assert observation['candidateExecuted'] is False and observation['hostilePayloadExecuted'] is False
+          assert observation['resourcesCreated']==[] and observation['cleanup']=='NO_DISPOSABLE_EXECUTION_RESOURCES_CREATED'
+          assert observation['isolationProfileIdentity']=='NONE_ACTIVATED' and observation['securityPolicyDigest'] is None
+          result={'sourceCommit':observation['sourceCommit'],'run':os.environ['GITHUB_RUN_ID'],'scope':'ARCHITECTURE_REVIEW_ONLY','SEC-01':'BLOCKED','phase11':'IN_PROGRESS','phase12':'NOT_STARTED','releaseClosure':'BLOCKED','files':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [root/'acp-h10-host.json',root/'acp-h10-tests.log']}}
+          (root/'acp-h10-result.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\n')
+          PY
+      - name: Retain bounded review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase11-h10-review
+          path: |
+            ${{ runner.temp }}/acp-h10-host.json
+            ${{ runner.temp }}/acp-h10-tests.log
+            ${{ runner.temp }}/acp-h10-result.json
+          if-no-files-found: error

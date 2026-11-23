@@ -1,0 +1,71 @@
+{
+  "baseline": "396b263683f0e57aa9ed0be431d863304279aafb",
+  "evidenceReferences": {
+    "H9": {
+      "commit": "20757de264c647f0f925554d5ce6c0866ed5d9d2",
+      "run": 45140959408,
+      "status": "SUCCESS_BOUNDED_ENGINEERING"
+    },
+    "H91": {
+      "artifactSHA256": "b7592d67f339852acd40f4736f6a174bd18a78aa70161a286a5eb0dd46eab092",
+      "commit": "396b263683f0e57aa9ed0be431d863304279aafb",
+      "job": 137629027358,
+      "run": 45156024739,
+      "status": "SUCCESS_BOUNDED_ENGINEERING"
+    },
+    "closure": {
+      "blocked": 21,
+      "criteria": 39,
+      "pass": 18,
+      "reportSHA256": "18cc9c8968dc1a7f69a996abe2ae6dfefed5ae44f524d17b70aaed8632f8e5a9",
+      "run": 45156024805,
+      "status": "PHASE6_CLOSURE_BLOCKED"
+    }
+  },
+  "files": {
+    "ACP_CODEX_MASTER_HANDOFF.md": "947796c22d9030b33739a5caa0aae53ff42be83b6957ff48bcfef157ee1a2cac",
+    "docs/adr/0005-open-architecture.md": "9c6d5d774e5ec7eefcc966abbe493c01492131744489e2cbe66e3822ea59ea98",
+    "docs/constitution.md": "1ade79ba4c6ff8c9de8b1d66c3e099ec80fc223df809ddf759a01dd3e40d3912",
+    "docs/phase6-route-a-security-remediation.md": "c4323a41ef6d188f8c74b7fe84a773b61a36544ecae7478205f220bbc4931c3c",
+    "docs/phase6-route-a-security-threat-model.md": "534696cd3d2f24e86b1d56e65f0af2dca8581e272afb2dc22dde8f0cb7c2f1a9",
+    "docs/production-gates.md": "c275433320fb2de1558b964cccef475e88e25c8227360beb38caee8b604368d0",
+    "docs/roadmap.md": "16e990c877188b9ac8e614091a1a2ca4ab39be5a63d0645db9aa837a259d2c68",
+    "engineering/demo/pipeline.py": "f140771d1ed7d4b95a5be2c0b53cb4a05611fcc46d7a6cc3014d9e15025c3a80",
+    "engineering/dependency_resolution/maven-distribution.json": "9eb9b4e7ed72c08d431d034f30bd611c04e671addd780824c352fc84865d2631",
+    "engineering/dependency_resolution/maven_toolchain.py": "9adf359c0855cad157da44ff52c15ed84bc775370ede5f7f90a6d91afd785576",
+    "engineering/evidence_admission/host_capabilities.py": "05f0b4fdf594d65abb034fa46c8bb48cd76e3d22de6aa3f4d3f80268493935dd",
+    "engineering/evidence_admission/isolation.py": "6e7ed73deec77543b19994873383adbcd4bd2a320d9c397438ce82c10024edbe",
+    "engineering/generator_builds/runtime.py": "692d72831adeece05aa6e5e3059843d9642cf7e87dbfb6307397f0be5a274185",
+    "engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py": "8751d0fdf4393266154f8ba9f7ff5fcc2ed1d71514f4bfe21af86935054d784a",
+    "engineering/hardening/target.py": "bca15a27e8273ff48cff443b3c4cd312ba79587fc4e7405c9c1e376d2119a794",
+    "engineering/http_reliability/compatibility.json": "6635952fc2de85413f3b17fac0412e892067bec070dca29da74b67266e422a0c",
+    "engineering/http_reliability/target.py": "1c8a61697cf8b33457cb5d7542cb9dca81c82285c5b4b305885f6733f0f86c1c",
+    "engineering/identity/target.py": "3d8f2eaa8f6958d8532c939d2727f48f5bfec2ca72f095676ef212d325685d28",
+    "engineering/mcp_adapter/service.py": "635a57769c016ab4d23631be32bdfd0515ee49a65c8f3e59e6163ca6faafb41b",
+    "engineering/operations/target.py": "7eff98da21a35dfc8278fd9f45b368a3f6849d78afb0a4b4ae5a0d521490f6e7",
+    "engineering/security/qualification.py": "0826239eac86e1e0fdfb18806c408869e4ce90419a2b24fa4d4ef2216bb4082f",
+    "engineering/source_intelligence/analysis.py": "52ef63d3c1d22fac953ecc1ce0d62dd0aa5c39eff140f6ea80f33eea7f477ee3",
+    "engineering/source_intelligence/native.py": "d7831d4ed9a568526b62b71403fb005aaf948ed2bdb20c8af3bb0cfd75ccb2c4",
+    "engineering/verification/integration.py": "1a7d5b4ffdd7e7a42c25c3516571d5b5aaa247aec96c8909f311d7bf735fe5cd",
+    "reviews/phase11-h8-20261115/README.md": "c05405138ae467eca633de15911939888c5c53f0b6f90012567d292ef388b845",
+    "reviews/phase11-h8-20261115/phase6-closure.json": "bf5faa1a0f1b7e39087126ed4aeb73c12d4260ab77412ad8bfd9d85feba1bc3c",
+    "reviews/phase11-h8-20261115/remediation-register.json": "9792b9bd4048287dc17a6bce7f260e666f3ec9c666a35e670bdead35b9e8b5f1",
+    "targets/spring-vue-postgres/release-contract.json": "2f2a10ea29c4f6083352c8b49e5d2d715b0797bdd36b6cad3db762a03d7e4605",
+    "targets/spring-vue-postgres/worker/main.py": "4e1b35521c94e18708c109b61425ffdb5e7cc5c992958e0ceac2ed9036539897",
+    "tooling/audit/criteria.py": "48b175977f9bcde3e9b5142bd185a43be5b4dd22e35aebe360d25d858e737adb",
+    "tooling/audit/phase6.py": "8bab77ed470ed440316b23321a89c4997d3004ec7848d438f42d6da94b4064fd",
+    "tooling/compiler_core.py": "dbdae559589d6607370f7771d99056240bd2c94be79ae07a8fd312bf3594e8a7",
+    "tooling/filesystem_artifacts.py": "bfd8346b702772d3e5550a09f7e3c30088a926dfaf4504df872cc80303fe0ab3",
+    "tooling/target_worker.py": "aad55a36be601479797adccc0f6bebc7ca93f53c138bb484adb69e05bef5e41d"
+  },
+  "generatorIdentities": {
+    "H1": "f982b13e43e0efd070ea1b0773da5aedcdbf2486363c6e902f27c36ba00bcb02",
+    "H5": "c2f712a0411b1b75aec39ea47c43d28c4ea484a68496b5b4d695588c927e9615",
+    "H6": "9bdc1adcbc50789421bd58a8f0909741031f20cd68bb66f0a6e1a205586dbfc1",
+    "H9": "9644a86dd94e3166dfe049dd04377b83c70177ef954570fc2cfd3996a996aa5e",
+    "historical06": "600a552287cc1121be7578c31ba2a379332c9b0d55c60a79b2a5d054c92271aa",
+    "sealed05": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb"
+  },
+  "schema": "acp-h10-inspected-source/1",
+  "scope": "STATIC_ENGINEERING_REVIEW_NOT_AUTHORITY"
+}
