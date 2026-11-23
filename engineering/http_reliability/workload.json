@@ -1,0 +1,98 @@
+{
+  "schema": "acp-h9-create-diagnostic/1",
+  "scope": "SYNTHETIC_DISPOSABLE_ONLY",
+  "maximumAttempts": 64,
+  "maximumSeconds": 240,
+  "maximumClients": 8,
+  "maximumNewCases": 64,
+  "maximumPoolConnections": 34,
+  "automaticRetries": false,
+  "variants": [
+    {
+      "id": "serial",
+      "clients": 1,
+      "requests": 4,
+      "pool": 34,
+      "identity": "DISTINCT_SESSIONS",
+      "keys": "UNIQUE",
+      "restart": false
+    },
+    {
+      "id": "two-clients",
+      "clients": 2,
+      "requests": 4,
+      "pool": 34,
+      "identity": "DISTINCT_SESSIONS",
+      "keys": "UNIQUE",
+      "restart": false
+    },
+    {
+      "id": "four-clients",
+      "clients": 4,
+      "requests": 8,
+      "pool": 34,
+      "identity": "DISTINCT_SESSIONS",
+      "keys": "UNIQUE",
+      "restart": false
+    },
+    {
+      "id": "eight-clients",
+      "clients": 8,
+      "requests": 8,
+      "pool": 34,
+      "identity": "DISTINCT_SESSIONS",
+      "keys": "UNIQUE",
+      "restart": false
+    },
+    {
+      "id": "one-tenant-distinct-sessions",
+      "clients": 4,
+      "requests": 4,
+      "pool": 34,
+      "identity": "DISTINCT_SESSIONS",
+      "keys": "UNIQUE",
+      "restart": false,
+      "singleTenant": true
+    },
+    {
+      "id": "shared-session",
+      "clients": 4,
+      "requests": 4,
+      "pool": 34,
+      "identity": "SHARED_AUTH_EVENT",
+      "keys": "UNIQUE",
+      "restart": false
+    },
+    {
+      "id": "idempotency-reuse",
+      "clients": 4,
+      "requests": 4,
+      "pool": 34,
+      "identity": "DISTINCT_SESSIONS",
+      "keys": "REUSE_PER_TENANT",
+      "restart": false
+    },
+    {
+      "id": "smaller-pool",
+      "clients": 4,
+      "requests": 4,
+      "pool": 4,
+      "identity": "DISTINCT_SESSIONS",
+      "keys": "UNIQUE",
+      "restart": true
+    },
+    {
+      "id": "fresh-process",
+      "clients": 4,
+      "requests": 4,
+      "pool": 34,
+      "identity": "DISTINCT_SESSIONS",
+      "keys": "UNIQUE",
+      "restart": true
+    }
+  ],
+  "ratePolicy": "UNCHANGED; ACTUAL_429_RETAINED; NO_BUCKET_RESET",
+  "connectionAcquisitionEvidence": "HIKARI_OCCUPANCY_AWAITING_SAMPLES_AND_EXCEPTION_SQLSTATE_ONLY; NOT_PER_CONNECTION_TIMESTAMPS",
+  "historicalFailure": "UNRESOLVED_NOT_CAUSALLY_ATTRIBUTED",
+  "boundaries": "No benchmark SLO; changing one selected factor does not eliminate all clock/database/session confounders. No forced indefinite repetition."
+}

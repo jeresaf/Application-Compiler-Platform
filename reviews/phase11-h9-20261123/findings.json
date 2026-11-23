@@ -1,0 +1,212 @@
+{
+  "REL01": {
+    "HTTPStatuses": {
+      "200": 32,
+      "202": 1,
+      "429": 7,
+      "500": 4
+    },
+    "attempts": 44,
+    "causeScope": "Connection acquisition/transaction creation failures occur in the controlled four-connection variant. Not attributed as the original H3 cause.",
+    "correlatedResourceErrors": [
+      "java.sql.SQLTransientConnectionException",
+      "org.springframework.transaction.CannotCreateTransactionException"
+    ],
+    "disposition": "UNRESOLVED_NOT_CAUSALLY_ATTRIBUTED",
+    "historicalEvidence": {
+      ".audit-artifacts/phase11-h3-20261103/runtime-5/failure.json": {
+        "bytes": 447,
+        "sha256": "db58258e3feb61734d95d29950cdc4756ce33a00cbac4f445424d4092a1e453b"
+      },
+      ".audit-artifacts/phase11-h3-20261103/runtime-5/runtime/demo-backend-1011.log": {
+        "bytes": 113011,
+        "sha256": "f7410755efacbaf3b65aaae09c4c7095f7e88238db358fbd75ae145c144db0ce"
+      },
+      ".audit-artifacts/phase11-h3-20261103/runtime-5/runtime/raw-measured-4.json": {
+        "bytes": 1676,
+        "sha256": "d45bbbe89b42679643850f1b41a854c62b576c9b9e32deca97c26db9ea86fb5c"
+      },
+      "availableExceptionClasses": [],
+      "hasH4Observer": false,
+      "hasH6Correlation": false
+    },
+    "limits": [
+      "Connection acquisition is observed through aggregate Hikari timing/counts and exceptions; not an exact per-connection trace.",
+      "H6 transaction/idempotency events plus independent PostgreSQL committed rows; clock/session/DB confounders not eliminated.",
+      "No attribution of original H3 execution from later success or analogous failure.",
+      "Worker fencing remains independently qualified H2/H7; this study does not alter worker policy."
+    ],
+    "nextNecessaryObservation": "If normal CREATE 500 recurs, retain matching server UUID, exceptions/SQLSTATE, acquisition metrics, PG transaction/lock samples, exact key ledger and business/audit outcome. No indefinite workload repetition.",
+    "normalProfile500s": 0,
+    "perKeyOutcomes": {
+      "COMMITTED": 34,
+      "NO_COMMITTED_EFFECT_OBSERVED": 10
+    },
+    "postgresSamples": 18,
+    "relatedPolicyDependency": "REL-03/REL-04 resource policy proposal remains unapproved and unimplemented; no new 503, retries or pending-queue cap.",
+    "resourceVariant500s": 4,
+    "studyOutcome": "INJECTED_ANALOGOUS_FAILURE",
+    "uniqueNewCases": 32,
+    "variants": 9
+  },
+  "REL02": {
+    "after": {
+      "anonymous": 401,
+      "authenticatedUnknownAPI": 404,
+      "authenticatedUnknownStatic": 404,
+      "envelope": {
+        "category": "HTTP",
+        "code": "RESOURCE_NOT_FOUND",
+        "retryable": false
+      },
+      "unexpectedInternalException": 500,
+      "wrappedOrSubclassMissingException": 500
+    },
+    "before": {
+      "anonymous": 401,
+      "authenticatedUnknownAPI": 500,
+      "authenticatedUnknownStatic": 500,
+      "businessWrites": 0
+    },
+    "compatibility": "Explicit user authorization of this H9-only exact-class extension; no business/CAS/security/SQLSTATE/overload/retry mapping changes.",
+    "disposition": "CORRECTED_IN_H9_ONLY; FINAL_HOSTED_QUALIFICATION_REQUIRED",
+    "nativeArtifactDelta": [
+      "acp/profile.json",
+      "acp/provenance.json",
+      "acp/target-upgrade.json",
+      "backend/src/main/java/acp/api/Errors.java",
+      "backend/src/main/resources/acp-model.json",
+      "contracts/target-ir.json"
+    ],
+    "onlyChangedRuntimeJava": "backend/src/main/java/acp/api/Errors.java",
+    "rootCause": "Exact NoResourceFoundException absent from native 1.1.0 fault map; generic Errors falls through to unknown INTERNAL_ERROR 500.",
+    "unchangedArtifactMembership": true
+  },
+  "artifactPlanDigest": "sha256:0ac7dce722e2eb29c4399c2521583b4d75fd9b3d2690665e54ac348bb4df599b",
+  "baseCommit": "16f164d589ba4449aae4e9fba2197779d0ab8323",
+  "canonicalDigest": "sha256:43966f9571b6e908098ee02d32d3350c38f3c29fb9d35eafee381a4d1f840f66",
+  "custody": {
+    "approvedDestination": "/home/aiko-jerry/ACP-Evidence-Vault/phase11-h9-http-reliability-20261115/",
+    "finalHostedArtifact": "PENDING_AT_IMPLEMENTATION_CHECKPOINT; must verify exact-source artifact and preserve append-only before final acceptance.",
+    "rawDatabaseOrCredentialsOrPrivateKeys": "EXCLUDED"
+  },
+  "finalRuntimeReceiptSHA256": "a5a80b55dee2803ea6130b3bb98f740ffb69413cafedcf71a4065d39e6afb463",
+  "generator": {
+    "generator": "acp-h9-http-generator/1+sha256:9644a86dd94e3166dfe049dd04377b83c70177ef954570fc2cfd3996a996aa5e",
+    "operationalApproval": "NOT_APPROVED",
+    "parentSourceDigest": "9bdc1adcbc50789421bd58a8f0909741031f20cd68bb66f0a6e1a205586dbfc1",
+    "profile": "acp-h9-http-target/1",
+    "scope": "QUALIFICATION_ONLY",
+    "semanticApproval": "NOT_APPROVED"
+  },
+  "hostedQualification": "Must execute final clean commit in phase11-h9.yml; local native and runtime receipts are not misattributed to a future commit.",
+  "localSourceIdentity": "WORKING_TREE_WITH_HASHED_PRODUCERS; not represented as an already committed execution",
+  "nativeBuildReceiptSHA256": "d48eaf1cdfc68ed0437cead2b344934408ea120381c2ea9b3f34d51236578a53",
+  "nativeIdentityInteropReference": {
+    "expectedSHA256": "bce03969a559d200aac4e2a25a9d5715c3999deef8daf79f14add7e2c6d44b1b",
+    "source": "Actual compiled InvocationCore.typed and canonical methods, invoked in a disposable Java component probe"
+  },
+  "parentGenerator": {
+    "generator": "acp-h6-operational-generator/1+sha256:9bdc1adcbc50789421bd58a8f0909741031f20cd68bb66f0a6e1a205586dbfc1",
+    "operationalApproval": "NOT_APPROVED",
+    "parentSourceDigest": "c2f712a0411b1b75aec39ea47c43d28c4ea484a68496b5b4d695588c927e9615",
+    "profile": "acp-h6-operational-target/1",
+    "scope": "QUALIFICATION_ONLY",
+    "semanticApproval": "NOT_APPROVED"
+  },
+  "preservation": {
+    "H1H5H6Identities": "UNCHANGED",
+    "H8Review": "UNCHANGED",
+    "canonicalContractsAndMigrationBytes": "UNCHANGED",
+    "criteria39": "UNCHANGED",
+    "historical06": "600a552287cc1121be7578c31ba2a379332c9b0d55c60a79b2a5d054c92271aa",
+    "protectedVaultRecords": "UNCHANGED",
+    "releaseBlockers21": "PRESERVED",
+    "sealed05": "ea19da2aed4182b0f8bc781a2011f949de52a2d4375e67bb7b59346dc75296bb"
+  },
+  "remaining": {
+    "REL01": "Unresolved historical cause",
+    "operationalSecurity": "NOT_ESTABLISHED",
+    "otherHTTPMappings": "Unsupported methods/media/missing servlet parameters remain their existing 500 behavior; new changes require their own scope.",
+    "phase11": "IN_PROGRESS",
+    "phase12": "NOT_STARTED",
+    "releaseClosure": "BLOCKED",
+    "resourcePolicy": "No approved production admission/pending capacity/overload policy"
+  },
+  "reviewDate": "2026-11-23",
+  "schema": "acp-h9-reliability-findings/1",
+  "scope": "QUALIFICATION_ONLY",
+  "sourceModelDigest": "34406556fe6eba36537943708d19bc9a0562fa2d50126f6ea1ced2ae20d7a009",
+  "sourceSHA256": {
+    "engineering/http_reliability/application.py": "4f863e2692d932af50688df92bf21b072ae2e1d4554dc43e691a1b82ef6bf162",
+    "engineering/http_reliability/compatibility.json": "6635952fc2de85413f3b17fac0412e892067bec070dca29da74b67266e422a0c",
+    "engineering/http_reliability/diagnostics.py": "0a42aa9495ef4eb33cf9bdde0fd053d8e3ac3e6855a05f818d8d1134d9d4285c",
+    "engineering/http_reliability/failure.py": "2b445bc2c83619646c6702ad92418727cdf64f79772637855915638eb6a63fcb",
+    "engineering/http_reliability/fixture.py": "6066dbb31cb718ac5c339d2b8df2d8c5149412fae93783552e06d57a8921a68b",
+    "engineering/http_reliability/run.py": "0c89fca3ed94b4ff619ec21f5de2796ba2022cf29c44008afea650b31e9d3d5a",
+    "engineering/http_reliability/scenarios.py": "267184c7bea33889b0e01b0ecba3af443bfad1cfbf01e61658bcef1bc42553bc",
+    "engineering/http_reliability/target.py": "1c8a61697cf8b33457cb5d7542cb9dca81c82285c5b4b305885f6733f0f86c1c",
+    "engineering/http_reliability/workload.json": "75bcbad818d3ab2853e406f1206ac46669fd165f8ad75771789bdfc3ef073045"
+  },
+  "validation": {
+    "CIRegressions": {
+      "failures": 0,
+      "skipped": 0,
+      "tests": 26
+    },
+    "H4UnitRegressions": {
+      "failures": 0,
+      "skipped": 0,
+      "tests": 12
+    },
+    "HTTPMatrix": {
+      "cases": 22,
+      "failures": 0
+    },
+    "diagnosticHarnessCorrections": [
+      {
+        "correction": "Explicit @RequestParam(\"required\") and aligned -parameters compilation. Expected native 500 retained.",
+        "finding": "Direct javac omitted implicit parameter-name metadata, yielding 422 at test-only missing-parameter endpoint."
+      },
+      {
+        "correction": "Use existing canonical_bytes; actual native Java interoperability reference added; strict commit assertion retained.",
+        "finding": "Diagnostic key derivation used newline-terminated text encoding."
+      }
+    ],
+    "failureExport": "Closed H9-only schema, 17 exceptions and 30 request observations, zero parse errors; no bearer/private-key/sentinel patterns.",
+    "focusedTests": {
+      "failures": 0,
+      "skipped": 0,
+      "tests": 16
+    },
+    "fullH5RuntimeOnNativeH9": {
+      "failures": 0,
+      "mismatches": 0,
+      "signedHTTPOutcomes": 68,
+      "skipped": 0,
+      "trustedJWTSessionComponentTests": 3
+    },
+    "identityUnitRegressions": {
+      "failures": 0,
+      "sandboxBlockedAttemptRetained": true,
+      "skipped": 0,
+      "tests": 15
+    },
+    "localVersions": {
+      "java": "openjdk version \"21\" 2023-09-19 LTS\nOpenJDK Runtime Environment Temurin-21+35 (build 21+35-LTS)\nOpenJDK 64-Bit Server VM Temurin-21+35 (build 21+35-LTS, mixed mode, sharing)",
+      "node": "v24.21.0",
+      "osRelease": "PRETTY_NAME=\"Ubuntu 26.04.1 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"26.04\"\nVERSION=\"26.04.1 LTS (Resolute Raccoon)\"\nVERSION_CODENAME=resolute\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=resolute\nLOGO=ubuntu-logo\n",
+      "python": "3.14.4",
+      "run": null
+    },
+    "nativeGenerationAndBuild": "Actual H6 and H9 generated source built; frozen source/main-class inventories reverified before focused final diagnostic reuse.",
+    "publicNativeEvidenceSecretScan": {
+      "bearerTokensExported": false,
+      "credentialMatches": 0,
+      "filesScanned": 15,
+      "signingKeysExported": false
+    },
+    "sourceIntelligenceAndProvenance": "Native Preview/analyze/evaluate and ownership-safe publisher, unchanged HUMAN extension and ArtifactPlan mappings. Missing semantic obligations not converted to PASS.",
+    "workloadExecution": "Finite 44 one-submit attempts, no success retries, all outcomes retained."
+  }
+}

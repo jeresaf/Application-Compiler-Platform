@@ -1,0 +1,11 @@
+{
+  "schema": "acp-h9-http-compatibility/1",
+  "scope": "QUALIFICATION_ONLY",
+  "parentMapping": "1.1.0",
+  "authority": "EXPLICIT_USER_AUTHORIZATION_OF_H9_ONLY_MAPPING; NOT_SEMANTIC_OR_RELEASE_APPROVAL",
+  "exactException": "org.springframework.web.servlet.resource.NoResourceFoundException",
+  "response": {"status": 404, "code": "RESOURCE_NOT_FOUND", "category": "HTTP", "retryable": false},
+  "recognition": "EXACT_CLASS_ONLY; NO_CAUSE_UNWRAPPING; NO_MESSAGE_MATCHING",
+  "unchanged": ["business-resource and tenant denials", "authentication", "authorization", "semantic failure envelopes", "validation", "method and media failures", "SQLSTATE mapping", "unexpected internal errors", "pool exhaustion", "retry and rate policies"],
+  "unapproved": ["new HTTP 503 overload policy", "queue admission limits", "automatic retries", "production acceptance"]
+}
