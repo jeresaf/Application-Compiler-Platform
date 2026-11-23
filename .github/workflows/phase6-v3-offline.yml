@@ -193,6 +193,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Provision authorized exact Maven distribution in disposable runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -B -c 'import unittest; s=unittest.defaultTestLoader.discover("verification/maven_toolchain"); assert s.countTestCases()==18; r=unittest.TextTestRunner(verbosity=2).run(s); assert r.wasSuccessful() and r.testsRun==18 and not r.skipped'
+          python3.14 engineering/dependency_resolution/maven_toolchain.py provision --root "$RUNNER_TEMP/acp-maven-3.10.0" --receipt "$RUNNER_TEMP/acp-maven-receipt.json"
       - name: Provision existing hash-pinned compiler wheels in disposable runner
         shell: bash
         run: |
@@ -219,20 +225,24 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python3.14 engineering/dependency_resolution/maven_toolchain.py verify --root "$RUNNER_TEMP/acp-maven-3.10.0" --receipt "$RUNNER_TEMP/acp-maven-receipt.json"
           mkdir "$RUNNER_TEMP/acp-empty-m2" "$RUNNER_TEMP/acp-empty-npm"
           "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B engineering/dependency_resolution/qualify.py prepare --workspace "$RUNNER_TEMP/acp-dependency-qualification" --maven-seed "$RUNNER_TEMP/acp-empty-m2" --npm-seed "$RUNNER_TEMP/acp-empty-npm" --wheels "$RUNNER_TEMP/acp-compiler-wheels" --online-acquire 2>&1 | tee "$RUNNER_TEMP/acp-dependency-prepare.log"
       - name: Build both applications twice offline from independently clean exports
         shell: bash
         run: |
           set -euo pipefail
+          python3.14 engineering/dependency_resolution/maven_toolchain.py verify --root "$RUNNER_TEMP/acp-maven-3.10.0" --receipt "$RUNNER_TEMP/acp-maven-receipt.json"
           read -r lock_digest < "$RUNNER_TEMP/acp-dependency-qualification/dependency-lock.sha256"
           "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B engineering/dependency_resolution/qualify.py qualify --workspace "$RUNNER_TEMP/acp-dependency-qualification" --expected "$lock_digest" 2>&1 | tee "$RUNNER_TEMP/acp-dependency-qualify.log"
+          python3.14 engineering/dependency_resolution/maven_toolchain.py verify --root "$RUNNER_TEMP/acp-maven-3.10.0" --receipt "$RUNNER_TEMP/acp-maven-receipt.json"
       - name: Preserve exact inputs and independent clean-build outcomes
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: successor-dependency-determinism
           path: |
+            ${{ runner.temp }}/acp-maven-receipt.json
             ${{ runner.temp }}/acp-dependency-prepare.log
             ${{ runner.temp }}/acp-dependency-qualify.log
             ${{ runner.temp }}/acp-dependency-qualification/*.json
