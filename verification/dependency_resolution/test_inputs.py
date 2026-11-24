@@ -192,3 +192,28 @@ class InputTests(unittest.TestCase):
 
 
 if __name__=='__main__':unittest.main()
+
+
+class CentralRetryTests(unittest.TestCase):
+    def test_retry_after_then_success(self):
+        from unittest.mock import MagicMock, patch
+        from urllib.error import HTTPError
+        url = 'https://repo.maven.apache.org/maven2/example.jar'
+        response = MagicMock()
+        response.__enter__.return_value.geturl.return_value = url
+        response.__enter__.return_value.read.return_value = b'bytes'
+        error = HTTPError(url, 429, 'limited', {'Retry-After': '9'}, None)
+        with patch('urllib.request.urlopen', side_effect=[error, response]), patch('time.sleep') as sleep:
+            self.assertEqual(acquire_maven(url, 5), b'bytes')
+        sleep.assert_called_once_with(9)
+
+    def test_finite_retries_and_unacceptable_wait(self):
+        from unittest.mock import patch
+        from urllib.error import HTTPError
+        url = 'https://repo.maven.apache.org/maven2/example.jar'
+        for status, delay, calls in [(429, '1', 4), (429, '31', 1), (404, '1', 1)]:
+            error = HTTPError(url, status, 'failure', {'Retry-After': delay}, None)
+            with self.subTest(status=status, delay=delay), patch('urllib.request.urlopen', side_effect=error) as request, patch('time.sleep'):
+                with self.assertRaises(HTTPError):
+                    acquire_maven(url, 5)
+                self.assertEqual(request.call_count, calls)

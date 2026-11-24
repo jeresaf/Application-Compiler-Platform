@@ -196,6 +196,7 @@ R2_NEW_HASHES = {'engineering/reference_application/evolution.py': '911c8fe9f909
 
 R2_MODIFIED_HASHES = {'.github/workflows/phase10-reference.yml': 'a5c57a2efe40f5773e3ff0aeb67ca76142ca1dd33329a030ca30606bbce44e44'}
 
+H101_MODIFIED_HASHES = {'.github/workflows/acp-contracts.yml': 'e4deb80e4f4cf851d55a1f082002e94831ef0f473c3e8bee42a3bdff59759d28', '.github/workflows/phase6-v3-offline.yml': '01b8b5a3668dba6d30de653fd9dc2f17a88af6eeb9654cd2e9763574d4422e27', 'engineering/dependency_resolution/inputs.py': 'dc68aa55c04ffd9151b5fd66253cf8280c2b5dfe385c9a5ee51a5ffa8d993b74', 'verification/dependency_resolution/test_inputs.py': '4c5c4fa9851d296dbcf3ca6c50ab8129dd7cd4c7a0f3f63f61ada684c5f5e76a', 'verification/maven_toolchain/test_maven.py': '52eabff06836dda2cfda5b35fff5c5629b60fb5ae25e5c0705fb443361845e39'}
 H10_NEW_HASHES = {'.github/workflows/phase11-h10.yml': 'b0b7d4b2b8f4f542e6d478b5b3e72f8fbd0048f37d5d6262cd2fdd445166f31e', 'docs/phase11-h10-plugin-isolation.md': '077648e97e3840278ffc525758e13dc04cdb97553962d6b9437109234f0f5350', 'reviews/phase11-h10-20261123/assessment.json': '3af5e68ff3a87c1c80344c67fa6242831e5d9dcb5c1a700588228cc1195f8a64', 'reviews/phase11-h10-20261123/adversarial-tests.json': 'a5a1b1407899067bd6daeb252c897f9b869cb3602d41a0a2b4aeed313fb9e7df', 'reviews/phase11-h10-20261123/source-index.json': '193ee0410151943ac70ac5d33e6896f2337a94b04d99e8789f78db79cdc2a3d7', 'reviews/phase11-h10-20261123/host-observation.json': '35dcdeff1d6eba8556d8024d6f224f3f25327d93f35920e88119f1b332a9b03e', 'verification/plugin_isolation/observe_host.py': 'e611346f686b795a02e45f710533017463fcbe39fab4f84ecd6a02342910e846', 'verification/plugin_isolation/test_review.py': '5ae27516806878e3d359469c38ad34462b6fc1e02a8a8b5b7f9aaca2f038337c'}
 H91_NEW_HASHES = {'engineering/dependency_resolution/maven-distribution.json': '9eb9b4e7ed72c08d431d034f30bd611c04e671addd780824c352fc84865d2631', 'engineering/dependency_resolution/maven_toolchain.py': '9adf359c0855cad157da44ff52c15ed84bc775370ede5f7f90a6d91afd785576', 'verification/maven_toolchain/test_maven.py': 'dcd9e2fc04b3716533507a26f8dab641ec40c66869b599f916934564a546586d'}
 H91_WORKFLOW_SHA256 = '65e3c4cd490fe2b2e61cc88ad7e5012d7f635d7acba6484faa785a856e5e1a47'
@@ -239,6 +240,9 @@ def preserved_bytes(path):
         relative = path.relative_to(ROOT).as_posix()
     except ValueError:
         return actual
+    if relative in H101_MODIFIED_HASHES:
+        assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == H101_MODIFIED_HASHES[relative], relative
+        actual = subprocess.check_output(['git', 'show', 'ed36cb147600f8e27109c06e7851f4f76646730a:' + relative], cwd=ROOT)
     if relative == '.github/workflows/phase6-v3-offline.yml':
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest()==H91_WORKFLOW_SHA256, relative
         actual=subprocess.check_output(['git','show','20757de264c647f0f925554d5ce6c0866ed5d9d2:'+relative],cwd=ROOT)

@@ -222,7 +222,7 @@ jobs:
         run: |
           python3.14 -m pip install -r tooling/requirements.txt
           npm --prefix experiments/phase5/langium ci --ignore-scripts --no-audit --no-fund
-          mvn -B -ntp -f experiments/phase5/xtext/pom.xml -Dmaven.repo.local="$GITHUB_WORKSPACE/experiments/phase5/.cache/m2" dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
+          mvn -B -ntp -f experiments/phase5/xtext/pom.xml -Dmaven.repo.local="$GITHUB_WORKSPACE/experiments/phase5/.cache/m2" org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath -Dmdep.outputFile=target/classpath.txt
           python3.14 experiments/phase5/setup.py
       - name: Build all three actual ACP grammars
         run: |
@@ -258,7 +258,7 @@ jobs:
         run: |
           python3.14 experiments/phase5/evolution.py prepare
           npm --prefix experiments/phase5/.cache/evolution/langium ci --ignore-scripts --no-audit --no-fund
-          mvn -B -ntp -f experiments/phase5/.cache/evolution/xtext/pom.xml -Dmaven.repo.local="$GITHUB_WORKSPACE/experiments/phase5/.cache/m2" dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
+          mvn -B -ntp -f experiments/phase5/.cache/evolution/xtext/pom.xml -Dmaven.repo.local="$GITHUB_WORKSPACE/experiments/phase5/.cache/m2" org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath -Dmdep.outputFile=target/classpath.txt
           python3.14 experiments/phase5/evolution.py
       - name: Verify Phase 5C native persistence, fault parity and toolchain evidence
         run: |

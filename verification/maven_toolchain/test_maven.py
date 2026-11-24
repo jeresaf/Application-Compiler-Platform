@@ -113,7 +113,7 @@ class MavenTests(unittest.TestCase):
         job = workflow.split('  successor-dependency-determinism:', 1)[1].split('  successor-performance-scaling:', 1)[0]
         self.assertIn('maven_toolchain.py provision', job)
         self.assertEqual(job.count('maven_toolchain.py verify'), 3)
-        self.assertIn('suite.countTestCases() == 24', job)
+        self.assertIn('suite.countTestCases() == 26', job)
         self.assertIn('qualify.py qualify', job)
         self.assertNotIn('continue-on-error', job)
 

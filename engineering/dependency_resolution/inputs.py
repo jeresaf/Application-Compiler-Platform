@@ -165,6 +165,38 @@ def installed_npm(front,locked):
     require(result,'EMPTY_NPM_INSTALL');return result
 
 
+def acquire_maven(url, size):
+    """Retry transient Central responses within a fixed attempt and delay budget."""
+    from datetime import datetime, timezone
+    from email.utils import parsedate_to_datetime
+    from time import sleep
+    from urllib.error import HTTPError
+    from urllib.request import urlopen
+
+    for attempt in range(4):
+        try:
+            with urlopen(url, timeout=30) as response:
+                require(response.geturl() == url, 'MAVEN_REDIRECT')
+                return response.read(size + 1)
+        except HTTPError as error:
+            error.close()
+            if error.code not in (429, 502, 503, 504) or attempt == 3:
+                raise
+            delay = 2 ** attempt
+            retry_after = error.headers.get('Retry-After') if error.headers else None
+            if retry_after:
+                try:
+                    requested = int(retry_after) if retry_after.isdecimal() else (
+                        parsedate_to_datetime(retry_after) - datetime.now(timezone.utc)
+                    ).total_seconds()
+                    delay = max(delay, requested)
+                except (TypeError, ValueError, OverflowError):
+                    pass
+            if delay > 30:
+                raise
+            sleep(delay)
+
+
 def seed_maven(seed,target,reference,online=False):
     """Hash BEFORE copying or executing; never bless fresh resolver output.
 
@@ -173,7 +205,6 @@ def seed_maven(seed,target,reference,online=False):
     """
     from concurrent.futures import ThreadPoolExecutor
     import shutil
-    import urllib.request
     require(reference['schema']=='acp-maven-inputs/1' and reference['scope']=='UNSEALED_CANDIDATE_QUALIFICATION_ONLY','MAVEN_REFERENCE_SCOPE')
     target=Path(target);target.mkdir(exist_ok=False)
     def acquire(item):
@@ -185,13 +216,11 @@ def seed_maven(seed,target,reference,online=False):
         else:
             require(online,'MISSING_PINNED_MAVEN_ARTIFACT:'+relative)
             url='https://repo.maven.apache.org/maven2/'+relative
-            with urllib.request.urlopen(url,timeout=60) as response:
-                require(response.geturl()==url,'MAVEN_REDIRECT')
-                data=response.read(row['size']+1)
+            data=acquire_maven(url,row['size'])
             require(len(data)==row['size'] and digest(data)==row['sha256'],'DOWNLOADED_MAVEN_SUBSTITUTION')
             destination.write_bytes(data)
         require(file_hash(destination)==row['sha256'],'MAVEN_COPY_SUBSTITUTION')
-    with ThreadPoolExecutor(max_workers=8) as pool:list(pool.map(acquire,reference['artifacts'].items()))
+    with ThreadPoolExecutor(max_workers=2) as pool:list(pool.map(acquire,reference['artifacts'].items()))
     verify_tree(target,reference['artifacts'])
 
 
