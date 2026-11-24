@@ -80,6 +80,7 @@ jobs:
           if-no-files-found: error
 
   successor-application-builds:
+    needs: successor-dependency-determinism
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
@@ -104,11 +105,15 @@ jobs:
           "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -m pip check
       - name: Verify build runner contracts
         run: '"$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B -m unittest discover -s verification/generator_builds -v'
+      - uses: actions/download-artifact@v4
+        with:
+          name: successor-verified-maven-inputs
+          path: ${{ runner.temp }}/acp-transferred-m2
       - name: Compile both generated successor applications
         shell: bash
         run: |
           set -euo pipefail
-          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B engineering/generator_builds/qualify.py --workspace "$RUNNER_TEMP/acp-successor-builds" 2>&1 | tee "$RUNNER_TEMP/acp-successor-build.log"
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B engineering/generator_builds/qualify.py --workspace "$RUNNER_TEMP/acp-successor-builds" --maven-seed "$RUNNER_TEMP/acp-transferred-m2" 2>&1 | tee "$RUNNER_TEMP/acp-successor-build.log"
       - name: Retain build identity and actual compiler output
         if: always()
         uses: actions/upload-artifact@v4
@@ -236,6 +241,24 @@ jobs:
           read -r lock_digest < "$RUNNER_TEMP/acp-dependency-qualification/dependency-lock.sha256"
           "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B engineering/dependency_resolution/qualify.py qualify --workspace "$RUNNER_TEMP/acp-dependency-qualification" --expected "$lock_digest" 2>&1 | tee "$RUNNER_TEMP/acp-dependency-qualify.log"
           python3.14 engineering/dependency_resolution/maven_toolchain.py verify --root "$RUNNER_TEMP/acp-maven-3.10.0" --receipt "$RUNNER_TEMP/acp-maven-receipt.json"
+      - name: Transfer Maven artifacts verified against the committed lock
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -B - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          from engineering.dependency_resolution.inputs import seed_maven
+          temp = Path(os.environ['RUNNER_TEMP'])
+          lock = json.loads(Path('engineering/dependency_resolution/maven-artifacts.lock.json').read_bytes())
+          seed_maven(temp / 'acp-dependency-qualification/frozen/m2',
+                     temp / 'acp-verified-maven-transfer', lock, online=False)
+          PYTHON
+      - uses: actions/upload-artifact@v4
+        with:
+          name: successor-verified-maven-inputs
+          path: ${{ runner.temp }}/acp-verified-maven-transfer/
+          if-no-files-found: error
       - name: Preserve exact inputs and independent clean-build outcomes
         if: always()
         uses: actions/upload-artifact@v4

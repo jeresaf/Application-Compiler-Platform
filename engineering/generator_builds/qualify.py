@@ -38,12 +38,26 @@ def reject_substituted_source(path, command, cwd):
         path.write_bytes(original)
 
 
-def qualify(workspace):
+def qualify(workspace, *, maven_seed=None):
     workspace = Path(workspace).resolve()
     workspace.mkdir(mode=0o700, exist_ok=False)
+    maven = ['mvn', '-B', '-ntp']
+    maven_inputs = None
+    if maven_seed is not None:
+        from engineering.dependency_resolution.inputs import seed_maven, verify_tree
+        from engineering.dependency_resolution.qualify import SETTINGS
+        lock = ROOT / 'engineering/dependency_resolution/maven-artifacts.lock.json'
+        reference = json.loads(lock.read_bytes())
+        verify_tree(maven_seed, reference['artifacts'])
+        maven_inputs = {'lockSHA256': sha(lock), 'artifactCount': len(reference['artifacts']), 'offline': True}
+        repo = workspace / 'verified-m2'
+        seed_maven(maven_seed, repo, reference, online=False)
+        settings = workspace / 'settings.xml'
+        settings.write_bytes(SETTINGS)
+        maven += ['-o', '-s', str(settings), '-gs', str(settings), '-Dmaven.repo.local=' + str(repo)]
     run(['node', '-e', 'if(process.versions.node!=="24.21.0")process.exit(1)'], workspace)
     candidate = SuccessorCandidate()
-    results = {'candidate': candidate.descriptor(), 'applications': {},
+    results = {'mavenInputs': maven_inputs, 'candidate': candidate.descriptor(), 'applications': {},
                'toolchains': {name: subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
                               for name, command in {'java': ['java', '-version'], 'maven': ['mvn', '-version'],
                                                     'node': ['node', '--version'], 'npm': ['npm', '--version']}.items()}}
@@ -60,10 +74,10 @@ def qualify(workspace):
         FilesystemArtifactStore(root).apply(plan)
         candidate.verify_materialized(root, plan, snapshot, request)
         sources = {p.relative_to(root).as_posix(): sha(p) for p in root.rglob('*') if p.is_file()}
-        run(['mvn', '-B', '-ntp', 'clean', 'test-compile'], root / 'backend')
+        run(maven + ['clean', 'test-compile'], root / 'backend')
         reject_substituted_source(root / 'backend/src/main/java/acp/Application.java',
-                                  ['mvn', '-B', '-ntp', 'clean', 'test-compile'], root / 'backend')
-        run(['mvn', '-B', '-ntp', 'clean', 'test-compile'], root / 'backend')
+                                  maven + ['clean', 'test-compile'], root / 'backend')
+        run(maven + ['clean', 'test-compile'], root / 'backend')
         classes = list((root / 'backend/target/classes').rglob('*.class'))
         if not classes:
             raise ValueError('NO_COMPILED_GENERATED_CLASSES')
@@ -96,4 +110,6 @@ def qualify(workspace):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--workspace', required=True)
-    qualify(parser.parse_args().workspace)
+    parser.add_argument('--maven-seed', type=Path)
+    args = parser.parse_args()
+    qualify(args.workspace, maven_seed=args.maven_seed)

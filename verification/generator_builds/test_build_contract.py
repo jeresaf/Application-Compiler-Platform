@@ -31,7 +31,11 @@ class BuildContractTests(unittest.TestCase):
         calls = [node for node in ast.walk(tree) if isinstance(node, ast.Call)]
         commands = [ast.literal_eval(node.args[0]) for node in calls
                     if isinstance(node.func, ast.Name) and node.func.id == 'run' and isinstance(node.args[0], ast.List)]
-        self.assertIn(['mvn', '-B', '-ntp', 'clean', 'test-compile'], commands)
+        self.assertTrue(any(
+            isinstance(node.func, ast.Name) and node.func.id == 'run'
+            and ast.unparse(node.args[0]) == "maven + ['clean', 'test-compile']"
+            for node in calls
+        ))
         self.assertIn(['npm', 'run', 'build'], commands)
         self.assertIn(['npm', 'run', 'typecheck'], commands)
         self.assertNotIn('spring-boot:run', source)
