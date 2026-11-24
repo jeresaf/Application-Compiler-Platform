@@ -22,6 +22,10 @@ def verify():
         assert 'run: python3.14 engineering/ci/aggregate.py capture' in actual, 'SOURCE_CAPTURE:'+name
         assert 'name: ci-source-'+name in actual, 'SOURCE_ARTIFACT:'+name
         actual = actual.split('      - name: Bind fresh job evidence to exact source and attempt')[0].rstrip()
+        plugin = ' org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath '
+        if name in ('phase5-experiments', 'phase5c-hard-gates') and ' dependency:build-classpath ' in body:
+            assert actual.count(plugin) == body.count(' dependency:build-classpath '), 'EXACT_PHASE5_PLUGIN_REQUIRED'
+            actual = actual.replace(plugin, ' dependency:build-classpath ')
         if name == 'phase6-target':
             revised = 'python3.14 engineering/ci/privacy_gate.py --output /tmp/acp-privacy-lifecycle-components --run-builds'
             frozen = 'python3.14 tooling/tests/phase6_gates.py privacy --output /tmp/acp-privacy-lifecycle-components --run-builds'
