@@ -582,7 +582,7 @@ class PreservationTests(unittest.TestCase):
         workflow = ROOT / '.github/workflows/acp-contracts.yml'
         raw = workflow.read_bytes()
         accepted = subprocess.check_output(['git', 'show', '1e43974:.github/workflows/acp-contracts.yml'], cwd=ROOT)
-        self.assertEqual(raw.replace(RELEASE_CI_STEPS,b'',1), accepted.replace(b'\n  phase5-experiments:', CI_B0_STEPS+b'\n  phase5-experiments:', 1))
+        self.assertEqual(raw.replace(b' org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath ', b' dependency:build-classpath ').replace(RELEASE_CI_STEPS,b'',1), accepted.replace(b'\n  phase5-experiments:', CI_B0_STEPS+b'\n  phase5-experiments:', 1))
         preserved_bytes(workflow)
         real_read = Path.read_bytes
         for changed in (raw.replace(b'== 60', b'>= 0'), raw.replace(b'set -euo pipefail', b'set -eu'), raw.replace(b'B0_FAILURE_OR_SKIP', b'UNREVIEWED'), raw.replace(CI_B0_STEPS,b'')):
