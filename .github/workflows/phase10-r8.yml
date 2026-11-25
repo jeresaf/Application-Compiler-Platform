@@ -1,7 +1,7 @@
 name: ACP Phase 10 R8 multi-release evolution
 on:
   push:
-    branches: ['codex/phase10-reference-application']
+    branches: ['codex/phase10-reference-application', 'codex/phase11-hardening']
   pull_request:
     paths:
       - 'engineering/application_evolution/**'
@@ -86,6 +86,12 @@ jobs:
           assert record['cleanup']=={'database':'REMOVED','processes':'REAPED'}
           assert record['scope']=='QUALIFICATION_ONLY' and record['semanticApproval']=='NOT_APPROVED'
           PYTHON
+      - name: Verify Batch 02 migration and recovery evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B -m unittest discover -s verification/batch02 -p test_evolution_evidence.py -v
+          "$RUNNER_TEMP/acp-reference-venv/bin/python3.14" -B -m verification.batch02.verify_evolution --workspace "$RUNNER_TEMP/acp-r8" --source "$GITHUB_SHA" --output "$RUNNER_TEMP/acp-r8/batch02-reconciliation.json"
       - name: Retain exact native compilation source and runtime observations
         if: always()
         uses: actions/upload-artifact@v4

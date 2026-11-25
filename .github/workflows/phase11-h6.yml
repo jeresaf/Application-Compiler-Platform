@@ -9,6 +9,7 @@ on:
       - '.github/workflows/phase11-h6.yml'
 permissions:
   contents: read
+  actions: read
 jobs:
   h6-operations:
     runs-on: ubuntu-24.04
@@ -50,10 +51,20 @@ jobs:
           done
       - name: Pinned disposable PostgreSQL
         run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - name: Restore verified Batch 01 Maven inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B -m unittest discover -s verification/batch02 -p test_maven_transfer.py -v
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/15031660633/zip" > "$RUNNER_TEMP/acp-batch02-maven.zip"
+          python3.14 -B -m engineering.ci.batch02_maven "$RUNNER_TEMP/acp-batch02-maven.zip" "$RUNNER_TEMP/acp-batch02-m2"
       - name: Generate build and exercise operational failures and recovery
         run: |
           set -euo pipefail
-          "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B -m engineering.operations.run --workspace "$RUNNER_TEMP/acp-h6"
+          "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B -m engineering.operations.run --workspace "$RUNNER_TEMP/acp-h6" --maven-seed "$RUNNER_TEMP/acp-batch02-m2"
       - name: Exact source security cases artifact hashes and cleanup
         run: |
           "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B - <<'PYTHON'

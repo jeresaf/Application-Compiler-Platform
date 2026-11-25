@@ -57,7 +57,12 @@
       "decisionOwner": "Dependency/security/legal owners",
       "requiredAction": "Reconcile exact package plus immutable inputs, all scanner coverage/unknowns and applicable licenses; proposed dependency changes separately approved.",
       "exitCondition": "Current authenticated complete queries, negative substituted/mutable inputs, SBOM/content identity, license notices and reviewed policy dispositions.",
-      "historicalDisposition": "UNRESOLVED"
+      "historicalDisposition": "UNRESOLVED",
+      "batch02": {
+        "implementation": "Batch 02 transfer checks strengthen input integrity",
+        "remainingGap": "Frontend, shading, native and legal gaps remain open",
+        "evidence": "reviews/batch02/README.md"
+      }
     },
     {
       "id": "AUTH-01",
@@ -124,7 +129,12 @@
       "decisionOwner": "Business/data/privacy/security/operations owners",
       "requiredAction": "Select minimum production recovery profile; decide whether logical recovery meets objectives or physical/WAL/PITR required.",
       "exitCondition": "Encrypted independently controlled copies, authorized restore, retention/access/custody, measured complete realistic RPO/RTO and boundary-loss reconciliation.",
-      "historicalDisposition": "UNRESOLVED"
+      "historicalDisposition": "UNRESOLVED",
+      "batch02": {
+        "implementation": "Batch 02 staging profile proposal unifies recovery and custody decisions",
+        "remainingGap": "Exact provider, encryption, custody and RPO/RTO require approval",
+        "evidence": "reviews/batch02/README.md"
+      }
     },
     {
       "id": "REL-01",
@@ -150,7 +160,12 @@
       "decisionOwner": "Runtime/verification owner",
       "requiredAction": "Reuse closed H4 diagnostics for bounded causal capture; implement only demonstrated cause; keep nonreproduction unresolved.",
       "exitCondition": "Cause/fix proven or explicit qualified unresolved disposition reviewed; no fabricated root cause.",
-      "historicalDisposition": "UNRESOLVED"
+      "historicalDisposition": "UNRESOLVED",
+      "batch02": {
+        "implementation": "Historical CREATE 500 remains unattributed",
+        "remainingGap": "Only H9 controlled reduced-pool observations support analogy",
+        "evidence": "reviews/batch02/README.md"
+      }
     },
     {
       "id": "REL-02",
@@ -319,7 +334,12 @@
       "decisionOwner": "Architecture/product/deployment owner",
       "requiredAction": "Declare supported stop/fence/client/browser scope and verify applicable upgrade/downgrade incompatibility.",
       "exitCondition": "Exact old/new clients/schema/provider/package combinations; unsupported combinations reject; no zero-downtime claim.",
-      "historicalDisposition": "UNRESOLVED"
+      "historicalDisposition": "UNRESOLVED",
+      "batch02": {
+        "implementation": "Existing R8 stopped/fenced pipeline enabled on integration branch and independently reconciled",
+        "remainingGap": "Live mixed writer authority and compatibility tests remain pending",
+        "evidence": "reviews/batch02/README.md"
+      }
     },
     {
       "id": "ENG-02",
@@ -3910,7 +3930,12 @@
       "workstream": "WS-A",
       "decisionOwner": "CI and dependency owners",
       "requiredAction": "Capture acquisition command, endpoint and exact failure; reuse already verified immutable artifacts only where applicable.",
-      "exitCondition": "No substitution or hidden retry, and each affected execution has actual exact-source results or separately recorded external failure."
+      "exitCondition": "No substitution or hidden retry, and each affected execution has actual exact-source results or separately recorded external failure.",
+      "batch02": {
+        "implementation": "H5/H6 use pinned V3 Maven archive with exact member verification",
+        "remainingGap": "Hosted H5/H6 qualification on Batch 02; archive expiry remains external",
+        "evidence": "reviews/batch02/README.md"
+      }
     },
     {
       "id": "CI-PERF-01",
@@ -3946,7 +3971,12 @@
       "workstream": "WS-A",
       "decisionOwner": "CI and provenance owners",
       "requiredAction": "Verify complete member inventory and source identity at transfer boundaries.",
-      "exitCondition": "Wrong-run, missing and substituted inputs fail before builds."
+      "exitCondition": "Wrong-run, missing and substituted inputs fail before builds.",
+      "batch02": {
+        "implementation": "Batch 02 enforces exact archive, lock inventory, member size and digest",
+        "remainingGap": "Controlled missing, extra and modified member tests; exact hosted restore required",
+        "evidence": "reviews/batch02/README.md"
+      }
     },
     {
       "id": "PROD-12",
