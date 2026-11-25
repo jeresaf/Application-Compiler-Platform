@@ -181,6 +181,9 @@ jobs:
           if-no-files-found: error
 
   successor-dependency-determinism:
+    permissions:
+      contents: read
+      actions: read
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -273,6 +276,20 @@ jobs:
             ${{ runner.temp }}/acp-dependency-qualification/*.log
             ${{ runner.temp }}/acp-dependency-qualification/clean-*/*.log
             ${{ runner.temp }}/acp-dependency-qualification/clean-*/results.json
+          if-no-files-found: error
+      - name: Reconcile actual packages and triage pinned H11 findings
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3.14 -B -m unittest discover -s verification/supply_chain -v
+          gh run download 45575665924 --repo "$GITHUB_REPOSITORY" -n h11-supply-chain-observations -D "$RUNNER_TEMP/acp-h11-historical"
+          python3.14 -B -m engineering.supply_chain.reconcile --workspace "$RUNNER_TEMP/acp-dependency-qualification" --scan "$RUNNER_TEMP/acp-h11-historical" --output "$RUNNER_TEMP/acp-h11-reconciliation" --build-source "$GITHUB_SHA"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h11-1-package-reconciliation
+          path: ${{ runner.temp }}/acp-h11-reconciliation/
           if-no-files-found: error
 
   successor-performance-scaling:

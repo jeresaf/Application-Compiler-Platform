@@ -1,0 +1,7 @@
+# H11.1 package reconciliation
+
+Baseline `00b1227471679dd0fabd647df269c1e885042f90`. The reconciliation reads package archives produced by the existing V3 qualifier and compares every member digest and nested JAR origin with its clean-build evidence and the committed lock. Locally retained archives matched the independently qualified H10.1 Payment and Case Management package digests. Hosted reconciliation uses actual archives from its own run. The retained H11 advisory artifact is verified against its exact historical manifest and every member hash.
+
+CycloneDX views remain explicitly incomplete. Frontend bytes are verified and the generated npm lock is recorded, but emitted bundle attribution is unresolved. The build lock and toolchain inventories describe recorded executables and inputs. Full native provenance and shaded-code attribution still need independent review. License and notice members are content-hashed observations; legal obligations and unidentified licenses remain for legal review.
+
+Triage preserves each original finding, exact affected-version evidence and separate packaged-JAR matching. Unsupported comparators retain uncertainty. The absence of a nested JAR match does not exclude embedded, shaded or frontend exposure. Security owners must review execution scope and compatibility before approving remediation. Dependency locks, prior seals and owner decisions retain their existing authority. SEC-01, SEC-02 and release closure remain BLOCKED. Phase 12 remains NOT_STARTED.
