@@ -283,9 +283,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          python3.14 -B -m unittest discover -s verification/supply_chain -v
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B -m unittest discover -s verification/supply_chain -v
           gh run download 45575665924 --repo "$GITHUB_REPOSITORY" -n h11-supply-chain-observations -D "$RUNNER_TEMP/acp-h11-historical"
-          python3.14 -B -m engineering.supply_chain.reconcile --workspace "$RUNNER_TEMP/acp-dependency-qualification" --scan "$RUNNER_TEMP/acp-h11-historical" --output "$RUNNER_TEMP/acp-h11-reconciliation" --build-source "$GITHUB_SHA"
+          "$RUNNER_TEMP/acp-dependency-venv/bin/python3.14" -B -m engineering.supply_chain.reconcile --workspace "$RUNNER_TEMP/acp-dependency-qualification" --scan "$RUNNER_TEMP/acp-h11-historical" --output "$RUNNER_TEMP/acp-h11-reconciliation" --build-source "$GITHUB_SHA"
       - uses: actions/upload-artifact@v4
         with:
           name: h11-1-package-reconciliation

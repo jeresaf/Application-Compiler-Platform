@@ -1,0 +1,3976 @@
+{
+  "schema": "acp-batch-delivery-register/1",
+  "date": "2026-11-25",
+  "timeZone": "Africa/Kampala",
+  "baseline": "bf34ca5d7eda7a483c0e77585663f73698c53dca",
+  "inputsSHA256": {
+    "reviews/phase11-h8-20261115/remediation-register.json": "9792b9bd4048287dc17a6bce7f260e666f3ec9c666a35e670bdead35b9e8b5f1",
+    "reviews/phase11-h8-20261115/phase6-closure.json": "bf5faa1a0f1b7e39087126ed4aeb73c12d4260ab77412ad8bfd9d85feba1bc3c",
+    "reviews/phase11-h8-20261115/production-gates.json": "9a5815420fd09c53643dcfdb76b24cabdbffd4ef4740d800141bc0c39d37868d",
+    "reviews/phase11-h10-20261123/assessment.json": "3af5e68ff3a87c1c80344c67fa6242831e5d9dcb5c1a700588228cc1195f8a64",
+    ".audit-artifacts/phase11-h11-2/45607695458/triage.json": "bd6c4f97372bbe95a6bbdce6fa1cab6b35104534d287e2b9574a72d9a6582858"
+  },
+  "historicalAuditCounts": {
+    "total": 39,
+    "pass": 18,
+    "blocked": 21
+  },
+  "items": [
+    {
+      "id": "SEC-01",
+      "requirement": "Trusted in-process successor cannot confine hostile plugin code; vDSO and host boundary not proven.",
+      "implementation": "H10.2 implements detached identity and data validation. No executor exists.",
+      "engineeringVerification": "Hosted contract checks; 22 OS cases NOT_RUN.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "engineering/security/qualification.py:confinement",
+        "tooling/target_worker.py",
+        "engineering/generator_candidates/spring_vue_postgres_0_6/candidate.py",
+        "reviews/phase11-h10-3/authorization-request.md"
+      ],
+      "dependencies": [],
+      "workstream": "WS-D",
+      "decisionOwner": "Security/architecture owner",
+      "requiredAction": "Choose approved trusted-only scope or independently supervised OS process boundary; preserve sealed worker.",
+      "exitCondition": "Actual allowed/denied filesystem/network/exec/identity/clock/entropy/IPC/CPU/memory/timeouts/descendant cleanup under selected threat model.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "SEC-02",
+      "requirement": "Selected Commons IO fix and zero sealed runtime OSV findings do not establish complete current policy/coverage.",
+      "implementation": "H11.2 reconciles package evidence and validates three incomplete CycloneDX documents.",
+      "engineeringVerification": "45607695458 passed; 38 rows retained, with 33 shading/build and five frontend dispositions open.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H1",
+        "criterion 18",
+        "criterion 20",
+        "criterion 21",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [],
+      "workstream": "WS-D",
+      "decisionOwner": "Dependency/security/legal owners",
+      "requiredAction": "Reconcile exact package plus immutable inputs, all scanner coverage/unknowns and applicable licenses; proposed dependency changes separately approved.",
+      "exitCondition": "Current authenticated complete queries, negative substituted/mutable inputs, SBOM/content identity, license notices and reviewed policy dispositions.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "AUTH-01",
+      "requirement": "Production trust/profile/release registration and external providers are not approved.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Independent source/execution/artifact/registration/revocation checks and stale/forged/wrong-release negatives under approved profile.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "G-03",
+        "G-14",
+        "G-17",
+        "criterion 33",
+        "T09 reservations"
+      ],
+      "dependencies": [],
+      "workstream": "WS-E",
+      "decisionOwner": "Project/release/security authorities",
+      "requiredAction": "Obtain genuine exact-scope authority/custody/executor/registry/revocation choices; no synthetic activation.",
+      "exitCondition": "Independent source/execution/artifact/registration/revocation checks and stale/forged/wrong-release negatives under approved profile.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "EVOL-01",
+      "requirement": "R8/H2 migration preview is not an accepted-history deployed evolution.",
+      "implementation": "Real disposable R6→R7 stop/fence/migrate/restart preview exists.",
+      "engineeringVerification": "R8 demonstrates synthetic migration/recovery only. Authenticated accepted-history evolution remains outstanding.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H2",
+        "docs/phase10-r8-evolution.md",
+        "criterion 5",
+        "docs/phase10-r8-evolution.md"
+      ],
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Semantic/data/release authorities",
+      "requiredAction": "Approve supported Canonical history route plus exact semantics, independent bindings, migration and deployment scope.",
+      "exitCondition": "Authenticated continuous history; exact snapshots/plan; real authorized upgrade, regeneration, ownership/provenance and rollback/recovery.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "OPS-01",
+      "requirement": "Logical synthetic backup is unencrypted and has no approved objectives, custody, retention or operational restore authority.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Encrypted independently controlled copies, authorized restore, retention/access/custody, measured complete realistic RPO/RTO and boundary-loss reconciliation.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H7",
+        "G-19",
+        "criteria 26–28"
+      ],
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Business/data/privacy/security/operations owners",
+      "requiredAction": "Select minimum production recovery profile; decide whether logical recovery meets objectives or physical/WAL/PITR required.",
+      "exitCondition": "Encrypted independently controlled copies, authorized restore, retention/access/custody, measured complete realistic RPO/RTO and boundary-loss reconciliation.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "REL-01",
+      "requirement": "Historical normal CREATE HTTP 500 has no demonstrated cause.",
+      "implementation": "H9 added bounded causal instrumentation, but did not identify the historical failure.",
+      "engineeringVerification": "Three hosted HTTP 500 responses were from the deliberately reduced pool. The historical normal-profile cause remains unresolved.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "docs/phase11-h3-capacity.md",
+        "docs/phase11-h4-create-reliability.md",
+        "H4.originalH3Create500",
+        {
+          "observation": "Normal measured CREATE: clients=4, client=0, cycle=0, HTTP500 INTERNAL_ERROR, 1107.3533609742299 ms; source-commit identity not in this failure record, so it is not relabelled as current execution.",
+          "path": ".audit-artifacts/phase11-h3-20261103/runtime-5/failure.json",
+          "sha256": "db58258e3feb61734d95d29950cdc4756ce33a00cbac4f445424d4092a1e453b"
+        },
+        "docs/phase11-h9-http-reliability.md"
+      ],
+      "dependencies": [],
+      "workstream": "WS-C",
+      "decisionOwner": "Runtime/verification owner",
+      "requiredAction": "Reuse closed H4 diagnostics for bounded causal capture; implement only demonstrated cause; keep nonreproduction unresolved.",
+      "exitCondition": "Cause/fix proven or explicit qualified unresolved disposition reviewed; no fabricated root cause.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "REL-02",
+      "requirement": "Unknown MVC resource paths map to generic 500.",
+      "implementation": "H9 classifies the exact Spring missing-resource exception as redacted HTTP 404 in the H9 successor.",
+      "engineeringVerification": "45140959408 passed on 20757de; unrelated HTTP failure classes retain their prior behavior.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H6",
+        "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/Errors.java",
+        "targets/spring-vue-postgres/templates/backend/src/main/java/acp/api/FailureMapping.java",
+        "docs/phase11-h9-http-reliability.md"
+      ],
+      "dependencies": [],
+      "workstream": "WS-C",
+      "decisionOwner": "Target-contract/security owner",
+      "requiredAction": "Add minimal successor-only reviewed not-found classification, preserving sealed bytes and semantic/security envelopes.",
+      "exitCondition": "Unknown route variants return approved status; authenticated/unauthenticated behavior, bounded metrics, no resource/exception leak, business/security mappings unchanged.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "REL-03",
+      "requirement": "Pool starvation returns 500; finite pool alone is not safe arbitrary-concurrency admission.",
+      "implementation": "34-connection bounded laboratory configuration; acquisition timeout; explicit DB-observed recovery/replay",
+      "engineeringVerification": "Bounded H8 evidence. Sustained declared bound, deterministic pressure, authorization/idempotency, rollback/committed differentiation, no concealed retries.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H3",
+        "H4",
+        "engineering/capacity/resource-contract-proposal.json"
+      ],
+      "dependencies": [
+        "REL-01"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "Target-contract/operations/security owner",
+      "requiredAction": "Approve bounded resource profile and compatible overload/deadline policy, then implement safe admission/outcome reconciliation.",
+      "exitCondition": "Sustained declared bound, deterministic pressure, authorization/idempotency, rollback/committed differentiation, no concealed retries.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "REL-04",
+      "requirement": "Pending job occurrences lack an accepted finite growth bound.",
+      "implementation": "Two execution loops/JVM, 20 eligible documents/tenant, existing retry/lease/timeouts",
+      "engineeringVerification": "Bounded H8 evidence. Queue-bound enforcement at concurrency/restart/tenant boundaries, rejection audit, preserved accepted work and fence/recovery invariants.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H3",
+        "engineering/capacity/resource-contract-proposal.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-C",
+      "decisionOwner": "Project semantic authority and data/worker owner",
+      "requiredAction": "Decide exact semantic/migration-compatible bound and behavior without dropping accepted work.",
+      "exitCondition": "Queue-bound enforcement at concurrency/restart/tenant boundaries, rejection audit, preserved accepted work and fence/recovery invariants.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "SEC-03",
+      "requirement": "Host-declared worker service context is not cryptographic production service authentication.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Wrong/missing/revoked principal/tenant denied; rotation/outage/freshness and audit/fencing preserved.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H5.results.workerIdentity",
+        "engineering/jobs/templates/IntegrityWorker.java"
+      ],
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security/identity/service operator",
+      "requiredAction": "Approve real service-principal enrollment, scoped tenant grants, custody/revocation and rotation; do not invent interactive tokens.",
+      "exitCondition": "Wrong/missing/revoked principal/tenant denied; rotation/outage/freshness and audit/fencing preserved.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "SEC-04",
+      "requirement": "Pinned key overlap and repinning/restart do not prove production provider lifecycle or remote compromise response.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Real provider acquisition/identity change, expiry/revocation, compromise/outage, tenant binding and key retirement.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H5",
+        "H6"
+      ],
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Identity/security owners",
+      "requiredAction": "Supply approved provider, authoritative tenant lifecycle, key custody, incident/revocation and TLS/ingress profile.",
+      "exitCondition": "Real provider acquisition/identity change, expiry/revocation, compromise/outage, tenant binding and key retirement.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "OPS-02",
+      "requirement": "H6 deliberately accepts development/loopback only; real transport/TLS/secret binding not qualified.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Missing/invalid settings fail before activation; exact package/content, no test authority, least privileges and real external integration.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H6",
+        "G-17",
+        "criterion 14"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "SEC-03",
+        "SEC-04"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Deployment/security owner",
+      "requiredAction": "Select versioned production provider/principal/delivery transport/database/TLS/secrets profile before compatible successor implementation.",
+      "exitCondition": "Missing/invalid settings fail before activation; exact package/content, no test authority, least privileges and real external integration.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "OPS-03",
+      "requirement": "Local probes/events/metrics do not prove monitoring access, alerts or operational incident response.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Actual authorized collection and failure alerts, bounded labels, credential leak negatives and recovery acknowledgement.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H6",
+        "G-18"
+      ],
+      "dependencies": [
+        "OPS-02"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Operations/security owner",
+      "requiredAction": "Approve collector principal/capability custody, redaction/retention and alert/on-call policy.",
+      "exitCondition": "Actual authorized collection and failure alerts, bounded labels, credential leak negatives and recovery acknowledgement.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "ENG-01",
+      "requirement": "Stopped/fenced R6→R7 preview is not a general live mixed-version/API/browser support matrix.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Exact old/new clients/schema/provider/package combinations; unsupported combinations reject; no zero-downtime claim.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H2",
+        "docs/phase10-r8-evolution.md",
+        "criterion 13"
+      ],
+      "dependencies": [],
+      "workstream": "WS-C",
+      "decisionOwner": "Architecture/product/deployment owner",
+      "requiredAction": "Declare supported stop/fence/client/browser scope and verify applicable upgrade/downgrade incompatibility.",
+      "exitCondition": "Exact old/new clients/schema/provider/package combinations; unsupported combinations reject; no zero-downtime claim.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "ENG-02",
+      "requirement": "Power-loss durability and hostile same-user/root mutation are not established by retained publisher/CAS tests.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Exact no-unintended-publication, durable recoverability, directory replacement/rename/symlink/power-loss and host privilege limits.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "criterion 23",
+        "docs/phase6-final-closure-audit.md"
+      ],
+      "dependencies": [
+        "SEC-01"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "Security/storage/source owner",
+      "requiredAction": "Select enforceable host threat/durability model; independently test authorized disposable crash/fault cases or retain explicit unsupported scope.",
+      "exitCondition": "Exact no-unintended-publication, durable recoverability, directory replacement/rename/symlink/power-loss and host privilege limits.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "GOV-01",
+      "requirement": "Manual accessibility, legal notices, package/browser policy and deployment review acceptance are absent.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Required manual keyboard/focus/assistive use, licenses/notices, retained exact accepted decisions under independently verified authority.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "criteria 12,13,15,20,26–28",
+        "G-21"
+      ],
+      "dependencies": [
+        "AUTH-01"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Accessibility/legal/project/deployment owners",
+      "requiredAction": "Obtain exact artifact/profile-bound reviews and genuine authority registration; do not synthesize signatures.",
+      "exitCondition": "Required manual keyboard/focus/assistive use, licenses/notices, retained exact accepted decisions under independently verified authority.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "OPT-01",
+      "requirement": "Physical backup/WAL/PITR and additional environments are not exercised.",
+      "implementation": "Existing bounded qualification and fail-closed production boundary retained.",
+      "engineeringVerification": "Bounded H8 evidence. Separate authorized physical/WAL/PITR and environment restoration tests if selected.",
+      "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json",
+        "H7"
+      ],
+      "dependencies": [
+        "OPS-01"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Data/recovery owner",
+      "requiredAction": "Implement only if approved objectives require them; otherwise retain explicit exclusion.",
+      "exitCondition": "Separate authorized physical/WAL/PITR and environment restoration tests if selected.",
+      "historicalDisposition": "UNRESOLVED"
+    },
+    {
+      "id": "P6-01",
+      "requirement": {
+        "area": "Immutable baseline",
+        "detail": "Exact merged baseline and execution commit; clean checkout, protected history and sealed bundle checked.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "exactReviewedBaselineAndProtectedHistory"
+          ]
+        },
+        "tests": [
+          "exactReviewedBaselineAndProtectedHistory"
+        ]
+      },
+      "implementation": "Exact merged baseline and execution commit; clean checkout, protected history and sealed bundle checked.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-F",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-02",
+      "requirement": {
+        "area": "Release immutability",
+        "detail": "Intentional 0.5.0 successor; exact prior release entries retained and verified against the reviewed baseline.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "previousReleasedBundlesRemainImmutable"
+          ]
+        },
+        "tests": [
+          "previousReleasedBundlesRemainImmutable"
+        ]
+      },
+      "implementation": "Intentional 0.5.0 successor; exact prior release entries retained and verified against the reviewed baseline.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-F",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-03",
+      "requirement": {
+        "area": "Full actual admission",
+        "detail": "Original strict CLI with --full-admission --run-builds; no expected-blocker allowance.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "Original strict CLI with --full-admission --run-builds; no expected-blocker allowance.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-F",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-04",
+      "requirement": {
+        "area": "Integrated final entrypoint",
+        "detail": "Audit orchestrates full strict admission, supplemental browser, fault/materializer/history, provenance and package checks; exits 2 for unmet closure criteria.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "closureEntrypointRunsEveryRequiredProducer"
+          ]
+        },
+        "tests": [
+          "closureEntrypointRunsEveryRequiredProducer"
+        ]
+      },
+      "implementation": "Audit orchestrates full strict admission, supplemental browser, fault/materializer/history, provenance and package checks; exits 2 for unmet closure criteria.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-F",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-05",
+      "requirement": {
+        "area": "Accepted-history deployed evolution",
+        "detail": "A deployed target-release evolution of unchanged approved snapshots is separate from accepted semantic evolution. Synthetic String/backfill witnesses are not new human business approvals; a complete accepted ChangeSet/data-binding deployment chain remains required.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "A deployed target-release evolution of unchanged approved snapshots is separate from accepted semantic evolution. Synthetic String/backfill witnesses are not new human business approvals; a complete accepted ChangeSet/data-binding deployment chain remains required.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H2",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Project/semantic authority, independent reviewer, data owner and deployment operator",
+      "requiredAction": "Approved exact old/new snapshots, authenticated accepted ChangeSets/journal continuity, independent measured-population bindings, exact deployed migration and regeneration chain. Preview is insufficient.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Approved exact old/new snapshots, authenticated accepted ChangeSets/journal continuity, independent measured-population bindings, exact deployed migration and regeneration chain. Preview is insufficient."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-06",
+      "requirement": {
+        "area": "Historical provenance",
+        "detail": "Policy C: target 0.1 excluded from supported production upgrade window. Historical test adapter is forensic evidence only; 0.2/0.3 ordinary reader remains production policy.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionEvolutionWindowExcludesTarget01"
+          ]
+        },
+        "tests": [
+          "productionEvolutionWindowExcludesTarget01"
+        ]
+      },
+      "implementation": "Policy C: target 0.1 excluded from supported production upgrade window. Historical test adapter is forensic evidence only; 0.2/0.3 ordinary reader remains production policy.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-07",
+      "requirement": {
+        "area": "Scheduler observation",
+        "detail": "Exact occurrence-scoped recovery assertions retain non-skipped count. Separate deterministic scheduler observation is fixed immediately after the original occurrence; invocation clock alone observes actual PostgreSQL commit time.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "Exact occurrence-scoped recovery assertions retain non-skipped count. Separate deterministic scheduler observation is fixed immediately after the original occurrence; invocation clock alone observes actual PostgreSQL commit time.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-08",
+      "requirement": {
+        "area": "Integrated ownership",
+        "detail": "Actual compiler replacement/human identity preservation/unapproved AI rejection plus retained approved AI/framework/CAS/unknown-file tests. Complete integrated cross-owner transition matrix remains incomplete.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "integratedCrossOwnerTransitions"
+          ]
+        },
+        "tests": [
+          "integratedCrossOwnerTransitions"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Ownership transitions",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H2",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Release authority and registered engineering witness owner",
+      "requiredAction": "Exact sealed-release admitted cross-owner transition witness including authorization, revision, CAS conflicts and nonpublication on rejection; candidate ownership evidence cannot be relabelled.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact sealed-release admitted cross-owner transition witness including authorization, revision, CAS conflicts and nonpublication on rejection; candidate ownership evidence cannot be relabelled."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-09",
+      "requirement": {
+        "area": "Provenance completeness",
+        "detail": "Exact ArtifactPlans retained separately from conservative sidecar origin sets. Host per-artifact revisions checked; exhaustive target-object bijection/input-digest reconciliation and HUMAN-owned artifact provenance remain incomplete.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "everyTargetObjectHasExactRevisionAndInputDigest"
+          ]
+        },
+        "tests": [
+          "everyTargetObjectHasExactRevisionAndInputDigest"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Exact provenance",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Release authority and compiler/provenance reviewer",
+      "requiredAction": "Exhaustive exact-release object/revision/owner/input/artifact mapping including HUMAN artifacts and stale/forged rejection, independently admitted.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exhaustive exact-release object/revision/owner/input/artifact mapping including HUMAN artifacts and stale/forged rejection, independently admitted."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-10",
+      "requirement": {
+        "area": "Traceability",
+        "detail": "Machine-readable family→basis→ID/revision→host-artifact trace exists; suite-level runtime links do not prove a per-object assertion chain for every representative.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "representativeObjectRuntimeTraceability"
+          ]
+        },
+        "tests": [
+          "representativeObjectRuntimeTraceability"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Runtime assertion traceability",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H2",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Release authority and verification owner",
+      "requiredAction": "Exact semantic-object→artifact→assertion→retained result linkage through registered sealed-release witnesses, not just family/suite mapping.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact semantic-object→artifact→assertion→retained result linkage through registered sealed-release witnesses, not just family/suite mapping."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-11",
+      "requirement": {
+        "area": "Production browser review",
+        "detail": "24 production-browser journeys plus 16 exact HTTP outcomes against real Spring/PostgreSQL; report preserves database facts and axe incomplete results.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "24 production-browser journeys plus 16 exact HTTP outcomes against real Spring/PostgreSQL; report preserves database facts and axe incomplete results.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-12",
+      "requirement": {
+        "area": "Manual accessibility",
+        "detail": "MANUAL_ACCESSIBILITY_REVIEW=OUTSTANDING; permitted before deployment, not represented as automated evidence. Human acceptance of this disposition is still required.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "MANUAL_ACCESSIBILITY_REVIEW=OUTSTANDING; permitted before deployment, not represented as automated evidence. Human acceptance of this disposition is still required.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Accessibility reviewer and project authority",
+      "requiredAction": "Required manual keyboard/focus/assistive-use review and explicit accepted disposition, exact application/profile/artifact.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Required manual keyboard/focus/assistive-use review and explicit accepted disposition, exact application/profile/artifact."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-13",
+      "requirement": {
+        "area": "Browser support",
+        "detail": "SUPPORTED_BROWSER_PROFILE=CHROMIUM only; Firefox/WebKit OUTSTANDING, not supported by this audit.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "SUPPORTED_BROWSER_PROFILE=CHROMIUM only; Firefox/WebKit OUTSTANDING, not supported by this audit.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H1",
+        "H2"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Product/deployment owner",
+      "requiredAction": "Explicit accepted browser support profile and its verification/exclusions; Chromium does not imply Firefox/WebKit.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Explicit accepted browser support profile and its verification/exclusions; Chromium does not imply Firefox/WebKit."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-14",
+      "requirement": {
+        "area": "Deployable package",
+        "detail": "Versioned startup configuration is implemented. Deployment-owned identity/principal/transport wiring, external TLS/proxy operation and production provider acceptance still require complete deployable-profile evidence.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionDistributionStartsWithDeploymentConfiguration"
+          ]
+        },
+        "tests": [
+          "productionDistributionStartsWithDeploymentConfiguration"
+        ]
+      },
+      "implementation": "Versioned startup configuration is implemented. Deployment-owned identity/principal/transport wiring, external TLS/proxy operation and production provider acceptance still require complete deployable-profile evidence.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H5",
+        "H6"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Deployment/security/identity owners",
+      "requiredAction": "Accepted deployable non-test provider/principal/transport/TLS profile and startup/package evidence for exact release. H6 loopback development is not production.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Accepted deployable non-test provider/principal/transport/TLS profile and startup/package evidence for exact release. H6 loopback development is not production."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-15",
+      "requirement": {
+        "area": "Container/package profile",
+        "detail": "Chosen audit package is a reproducible JAR+static-assets tar, not OCI. Java 21/Node generation environment bound; no image digest or portable architecture/container guarantee claimed.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "Chosen audit package is a reproducible JAR+static-assets tar, not OCI. Java 21/Node generation environment bound; no image digest or portable architecture/container guarantee claimed.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Deployment owner and release authority",
+      "requiredAction": "Approved package/platform/runtime/proxy/static-hosting profile and independently checked deployment evidence; no implied OCI or architecture portability.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Approved package/platform/runtime/proxy/static-hosting profile and independently checked deployment evidence; no implied OCI or architecture portability."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-16",
+      "requirement": {
+        "area": "Startup configuration",
+        "detail": "Versioned production startup configuration validated before background activation; require focused startup tests.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionConfigurationFailsBeforeActivation",
+            "activeDeliveryRequiresTransport"
+          ]
+        },
+        "tests": [
+          "productionConfigurationFailsBeforeActivation",
+          "activeDeliveryRequiresTransport"
+        ]
+      },
+      "implementation": "Versioned production startup configuration validated before background activation; require focused startup tests.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-17",
+      "requirement": {
+        "area": "Test-only exclusion",
+        "detail": "Packages rebuilt using restored production identity; inspect archive entries and decompressed JS/class content for BrowserServer, decoder, tokens, test endpoints and credentials.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionPackagesExcludeTestAuthority"
+          ]
+        },
+        "tests": [
+          "productionPackagesExcludeTestAuthority"
+        ]
+      },
+      "implementation": "Packages rebuilt using restored production identity; inspect archive entries and decompressed JS/class content for BrowserServer, decoder, tokens, test endpoints and credentials.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-18",
+      "requirement": {
+        "area": "Transitive dependency inventory",
+        "detail": "Package JAR dependencies, npm lock and Python distributions inventoried. Maven plugin/build graph checksums and full transitive immutable resolution lock not complete; inventory alone is not a lock.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "transitiveResolutionLockIncludesBuildPlugins"
+          ]
+        },
+        "tests": [
+          "transitiveResolutionLockIncludesBuildPlugins"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Transitive dependency inventory",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H1"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Build/supply-chain owner and release authority",
+      "requiredAction": "Immutable full runtime/compiler/plugin/transitive resolution evidence admitted for exact sealed release; prior 0.6 candidate #18 qualification remains candidate-only.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Immutable full runtime/compiler/plugin/transitive resolution evidence admitted for exact sealed release; prior 0.6 candidate #18 qualification remains candidate-only."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-19",
+      "requirement": {
+        "area": "SBOM",
+        "detail": "CycloneDX 1.6 JSON from actual packaged backend JARs and frontend lock; generation/build-only tools distinguished in evidence.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "sbomMatchesEveryPackagedDependency"
+          ]
+        },
+        "tests": [
+          "sbomMatchesEveryPackagedDependency"
+        ]
+      },
+      "implementation": "CycloneDX 1.6 JSON from actual packaged backend JARs and frontend lock; generation/build-only tools distinguished in evidence.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-D",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-20",
+      "requirement": {
+        "area": "License review",
+        "detail": "License declarations inventoried; unknowns/redistribution notices and compatibility require resolution and human/legal review. No automatic legal approval.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "licensesAndRedistributionNoticesAccepted"
+          ]
+        },
+        "tests": [
+          "licensesAndRedistributionNoticesAccepted"
+        ]
+      },
+      "implementation": "License declarations inventoried; unknowns/redistribution notices and compatibility require resolution and human/legal review. No automatic legal approval.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H1"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Legal/license reviewer and release owner",
+      "requiredAction": "Resolve unknown component licenses and redistribution notices; human/legal policy acceptance bound to exact package.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Resolve unknown component licenses and redistribution notices; human/legal policy acceptance bound to exact package."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-21",
+      "requirement": {
+        "area": "Current vulnerability assessment",
+        "detail": "npm audit and OSV timestamped runtime assessments are independent of deterministic package bytes. Missing/unscored/high/critical findings block closure; exact results in package evidence. Compiler/build-plugin vulnerability coverage is incomplete even if runtime scanners return zero findings.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "npm audit and OSV timestamped runtime assessments are independent of deterministic package bytes. Missing/unscored/high/critical findings block closure; exact results in package evidence. Compiler/build-plugin vulnerability coverage is incomplete even if runtime scanners return zero findings.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H1"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security reviewer, dependency owner and release authority",
+      "requiredAction": "Current authenticated complete packaged backend/npm/compiler/plugin assessment, resolved unknown/unscored/high/critical findings and exact sealed-release admission.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Current authenticated complete packaged backend/npm/compiler/plugin assessment, resolved unknown/unscored/high/critical findings and exact sealed-release admission."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-22",
+      "requirement": {
+        "area": "Worker confinement",
+        "detail": "Retained real sandbox/protocol/resource supervision tests rerun. Exhaustive process/identity/clock syscalls plus memory/CPU exhaustion under the production sandbox are not all exercised by existing tests.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "productionSandboxDeniesSyscallsAndBoundsCpuMemory"
+          ]
+        },
+        "tests": [
+          "productionSandboxDeniesSyscallsAndBoundsCpuMemory"
+        ]
+      },
+      "implementation": "Retained real sandbox/protocol/resource supervision tests rerun. Exhaustive process/identity/clock syscalls plus memory/CPU exhaustion under the production sandbox are not all exercised by existing tests.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security/architecture owner and sandbox operator",
+      "requiredAction": "Approved supported hostile-worker threat model/process isolation; real exhaustive applicable OS/protocol/resource/security tests and admitted release evidence. In-process successor is trusted code only.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Approved supported hostile-worker threat model/process isolation; real exhaustive applicable OS/protocol/resource/security tests and admitted release evidence. In-process successor is trusted code only."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-23",
+      "requirement": {
+        "area": "Materializer",
+        "detail": "Retained traversal/symlink/stale-CAS/concurrent-writer/crash/manual/human/AI/framework fault suites rerun. Power-loss durability and hostile same-user mutation remain Phase 11 concerns.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "materializerRejectsTraversalStaleCasAndCrash"
+          ]
+        },
+        "tests": [
+          "materializerRejectsTraversalStaleCasAndCrash"
+        ]
+      },
+      "implementation": "Retained traversal/symlink/stale-CAS/concurrent-writer/crash/manual/human/AI/framework fault suites rerun. Power-loss durability and hostile same-user mutation remain Phase 11 concerns.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-24",
+      "requirement": {
+        "area": "Deployment migration failure/recovery",
+        "detail": "Actual PostgreSQL String/backfill/presence/required/transactional rollback and incompatible-storage regressions supplement existing Flyway upgrade checks; the complete unavailable-DB/partial-upgrade/safe-retry deployment matrix remains required.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "failedBackfillRollsBackDdl",
+            "requiredFieldRejectsNull"
+          ]
+        },
+        "tests": [
+          "failedBackfillRollsBackDdl",
+          "requiredFieldRejectsNull"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Migration failure recovery",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H2",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "Migration/data/deployment owners",
+      "requiredAction": "Complete exact-release deployment failure/recovery matrix, independent execution evidence and authorized applicable migrations, not candidate preview alone.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Complete exact-release deployment failure/recovery matrix, independent execution evidence and authorized applicable migrations, not candidate preview alone."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-25",
+      "requirement": {
+        "area": "Real application restart matrix",
+        "detail": "Lost-process idempotency/outbox/Job/lifecycle runtime tests exist. A complete real process restart with all specified committed state simultaneously is not proven.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "restartPreservesAllCommittedRuntimeFamilies"
+          ]
+        },
+        "tests": [
+          "restartPreservesAllCommittedRuntimeFamilies"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Restart and committed-state recovery",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H2",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "Runtime verification owner and release authority",
+      "requiredAction": "Exact-release real restart witness covering every required committed runtime family simultaneously, including audit/idempotency/lifecycle/delivery; no inference from selected R7 families.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact-release real restart witness covering every required committed runtime family simultaneously, including audit/idempotency/lifecycle/delivery; no inference from selected R7 families."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-26",
+      "requirement": {
+        "area": "Deployment obligations",
+        "detail": "Every generated OUTSTANDING row retained and classified in domain evidence; none waived. Release blockers are separately enumerated.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "Every generated OUTSTANDING row retained and classified in domain evidence; none waived. Release blockers are separately enumerated.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Deployment authority and applicable control owners",
+      "requiredAction": "Every outstanding generated deployment obligation satisfied or explicitly governed under exact profile; acceptance document hash registered by genuine authority.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Every outstanding generated deployment obligation satisfied or explicitly governed under exact profile; acceptance document hash registered by genuine authority."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-27",
+      "requirement": {
+        "area": "Encryption/TLS",
+        "detail": "At-rest, backup encryption, TLS termination and key management remain REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT; not runtime guarantees.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "At-rest, backup encryption, TLS termination and key management remain REQUIRED_BEFORE_PRODUCTION_DEPLOYMENT; not runtime guarantees.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H5",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Security/key custodians and infrastructure operator",
+      "requiredAction": "Independent at-rest/backup encryption, production TLS/key-management custody/configuration/recovery evidence and accepted exact-bound review.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Independent at-rest/backup encryption, production TLS/key-management custody/configuration/recovery evidence and accepted exact-bound review."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-28",
+      "requirement": {
+        "area": "Physical destruction",
+        "detail": "ANONYMIZE does not establish physical erasure, WAL/replica/backup destruction; retained deployment obligations.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": []
+        },
+        "tests": []
+      },
+      "implementation": "ANONYMIZE does not establish physical erasure, WAL/replica/backup destruction; retained deployment obligations.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Privacy/legal/data and storage owners",
+      "requiredAction": "Approved physical/WAL/replica/backup retention/destruction requirements and verifiable operations; logical deletion/anonymization is insufficient.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Approved physical/WAL/replica/backup retention/destruction requirements and verifiable operations; logical deletion/anonymization is insufficient."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-29",
+      "requirement": {
+        "area": "Production OIDC integration",
+        "detail": "Deployment-owned authorization-code PKCE fixture verifies RS256/JWKS identity tokens and real generated-backend expiry/tenant behavior. Production provider acceptance and assurance remain separate deployment obligations.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "oidcAcquisitionIdentityChangeExpiredAndWrongTenant"
+          ]
+        },
+        "tests": [
+          "oidcAcquisitionIdentityChangeExpiredAndWrongTenant"
+        ]
+      },
+      "implementation": "Deployment-owned authorization-code PKCE fixture verifies RS256/JWKS identity tokens and real generated-backend expiry/tenant behavior. Production provider acceptance and assurance remain separate deployment obligations.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-E",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-30",
+      "requirement": {
+        "area": "Performance baseline",
+        "detail": "Build durations/package sizes are measured; bounded Query/Action/startup/browser-load/concurrent-rate performance measurements are not complete. No synthetic SLO promised.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "measuredApplicationPerformanceBaseline"
+          ]
+        },
+        "tests": [
+          "measuredApplicationPerformanceBaseline"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Bounded performance",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H3",
+        "H4"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "Performance/profile owner and release authority",
+      "requiredAction": "Exact-release admitted real Query/Action/startup/browser/concurrent workload measurements and specified profile; candidate workload evidence is supporting only.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact-release admitted real Query/Action/startup/browser/concurrent workload measurements and specified profile; candidate workload evidence is supporting only."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-31",
+      "requirement": {
+        "area": "Resource scaling",
+        "detail": "Approved fixtures within limits pass; no larger valid generated UI fixture/node-limit scaling and provenance-growth curve accepted.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "validLargeFixtureScaling"
+          ]
+        },
+        "tests": [
+          "validLargeFixtureScaling"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Bounded scaling",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H3"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "Compiler/capacity owner and release authority",
+      "requiredAction": "Exact-release admitted valid larger semantic fixtures, compiler memory/time, UI/provenance/package growth and deterministic limit rejection; request concurrency is not semantic graph scaling.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Exact-release admitted valid larger semantic fixtures, compiler memory/time, UI/provenance/package growth and deterministic limit rejection; request concurrency is not semantic graph scaling."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-32",
+      "requirement": {
+        "area": "Generation/package determinism",
+        "detail": "Independent compiler contexts compare ArtifactPlan digest and repeated package builds compare exact bytes. Package builds share the same checkout/build cache; two independently materialized clean package builds are still required. Runtime random keys excluded.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "independentCleanPackageBuildsMatch"
+          ]
+        },
+        "tests": [
+          "independentCleanPackageBuildsMatch"
+        ]
+      },
+      "implementation": "Candidate engineering demonstrated: Independent clean-build equality",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H1",
+        "H2"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Build/reproducibility owner and release authority",
+      "requiredAction": "Independently materialized clean exact-release package builds from same immutable inputs with matching outputs, independently retained/admitted; H1 regeneration alone insufficient.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Independently materialized clean exact-release package builds from same immutable inputs with matching outputs, independently retained/admitted; H1 regeneration alone insufficient."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-33",
+      "requirement": {
+        "area": "Fresh hosted reproduction",
+        "detail": "Historical run 37910102322: contracts, phase5-experiments, phase5c-hard-gates and phase6-target passed; closure audit performed and deliberately exited 2 PHASE6_CLOSURE_BLOCKED. Fresh successor hosted evidence is required.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "freshHostedSuccessorAuditPerformed"
+          ]
+        },
+        "tests": [
+          "freshHostedSuccessorAuditPerformed"
+        ]
+      },
+      "implementation": "Historical run 37910102322: contracts, phase5-experiments, phase5c-hard-gates and phase6-target passed; closure audit performed and deliberately exited 2 PHASE6_CLOSURE_BLOCKED. Fresh successor hosted evidence is required.",
+      "engineeringVerification": "Historical audit BLOCKED. Candidate evidence cannot satisfy sealed-release admission.",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "Approved release-context source/execution/artifact/registration/revocation verification",
+        "Genuine independent approval where required"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Release authority, approved executor and witness registry custodian",
+      "requiredAction": "Fresh authenticated registered criterion-specific sealed-release execution/source/artifact proof. Successful candidate workflows and performed blocked audit are not that proof.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Fresh authenticated registered criterion-specific sealed-release execution/source/artifact proof. Successful candidate workflows and performed blocked audit are not that proof."
+      },
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "P6-34",
+      "requirement": {
+        "area": "Historical contracts",
+        "detail": "Protected contract/corpus/release/ADR bytes compared against immutable merged baseline.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "historicalContractBytesUnchanged"
+          ]
+        },
+        "tests": [
+          "historicalContractBytesUnchanged"
+        ]
+      },
+      "implementation": "Protected contract/corpus/release/ADR bytes compared against immutable merged baseline.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-35",
+      "requirement": {
+        "area": "Human closure authority",
+        "detail": "Audit recommendation does not mark Phase 6 COMPLETE; stop for explicit human review.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "humanClosureAuthorityRemainsRequired"
+          ]
+        },
+        "tests": [
+          "humanClosureAuthorityRemainsRequired"
+        ]
+      },
+      "implementation": "Audit recommendation does not mark Phase 6 COMPLETE; stop for explicit human review.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-36",
+      "requirement": {
+        "area": "Recommendation",
+        "detail": "Only PHASE6_CLOSURE_BLOCKED or PHASE6_CLOSURE_RECOMMENDED; blocked report lists remediation criteria.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "recommendationReflectsEveryBlocker"
+          ]
+        },
+        "tests": [
+          "recommendationReflectsEveryBlocker"
+        ]
+      },
+      "implementation": "Only PHASE6_CLOSURE_BLOCKED or PHASE6_CLOSURE_RECOMMENDED; blocked report lists remediation criteria.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-37",
+      "requirement": {
+        "area": "Bound machine-readable report",
+        "detail": "Baseline, exact execution commit, Canonical/bundle/IR/UI/migration/package/SBOM/security/browser/fault/history/obligation evidence bound with digests.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "reportBindsEveryEvidenceArtifact"
+          ]
+        },
+        "tests": [
+          "reportBindsEveryEvidenceArtifact"
+        ]
+      },
+      "implementation": "Baseline, exact execution commit, Canonical/bundle/IR/UI/migration/package/SBOM/security/browser/fault/history/obligation evidence bound with digests.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-38",
+      "requirement": {
+        "area": "Dedicated closure CI",
+        "detail": "Separate dependent job; no continue-on-error. BLOCKED audit exits nonzero rather than faking green.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "dedicatedClosureJobDistinguishesBlockedAndException"
+          ]
+        },
+        "tests": [
+          "dedicatedClosureJobDistinguishesBlockedAndException"
+        ]
+      },
+      "implementation": "Separate dependent job; no continue-on-error. BLOCKED audit exits nonzero rather than faking green.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "P6-39",
+      "requirement": {
+        "area": "Phase disposition",
+        "detail": "Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED; closure cannot be accepted automatically.",
+        "evidenceRequired": {
+          "artifacts": "Existing files with verified SHA-256; no self-reported status accepted",
+          "binding": [
+            "bundleDigest",
+            "canonicalDigests",
+            "approvalDigest",
+            "executionCommit",
+            "evaluatedAt"
+          ],
+          "criterionTests": [
+            "phase6InProgressPhase7NotStarted"
+          ]
+        },
+        "tests": [
+          "phase6InProgressPhase7NotStarted"
+        ]
+      },
+      "implementation": "Phase 6 IN_PROGRESS; Phase 7 NOT_STARTED; closure cannot be accepted automatically.",
+      "engineeringVerification": "Historical audit PASS",
+      "ownerApproval": "Only authenticated, applicable approvals can satisfy the unchanged predicate.",
+      "productionAcceptance": "PASS",
+      "evidence": [
+        "reviews/phase11-h8-20261115/phase6-closure.json"
+      ],
+      "dependencies": [],
+      "workstream": "WS-B",
+      "decisionOwner": "No new authority inferred",
+      "requiredAction": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision.",
+      "exitCondition": {
+        "noCandidatePromotion": true,
+        "requirement": "Unchanged criteria.validate/1 and binding/artifact requirements must succeed for this exact criterion.",
+        "specific": "Existing recorded PASS retained only at exact sealed audit execution; no new closure decision."
+      },
+      "historicalDisposition": "PASS"
+    },
+    {
+      "id": "G-01",
+      "requirement": {
+        "name": "Specification valid",
+        "evidence": "Complete supported meta-model validation and approved dependency closure"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Semantic authority must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Semantic authority must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Approved dependency-closed exact deployment semantic snapshot; R7 remains synthetic.",
+      "exitCondition": "Complete supported meta-model validation and approved dependency closure",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-02",
+      "requirement": {
+        "name": "No blocking ambiguity/conflicts",
+        "evidence": "Issue resolution and formal semantic checks for supported rules; explicit reviewed handling of remaining uncertainty"
+      },
+      "implementation": "NOT_RUN",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Specification/architecture owner must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Specification/architecture owner must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Resolve blocking ambiguities/constraints and review unsupported analysis completeness.",
+      "exitCondition": "Issue resolution and formal semantic checks for supported rules; explicit reviewed handling of remaining uncertainty",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-03",
+      "requirement": {
+        "name": "Decisions accepted",
+        "evidence": "Required/locked decisions current and authority verified"
+      },
+      "implementation": "NOT_RUN",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Project authority/independent reviewers must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Project authority/independent reviewers must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Authenticated accepted decisions, ChangeSets and authority scope.",
+      "exitCondition": "Required/locked decisions current and authority verified",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-04",
+      "requirement": {
+        "name": "Traceability complete",
+        "evidence": "Requirement/decision → realization → source → verification → deployment/runtime-control mappings for applicable obligations"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Traceability and deployment owners must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Traceability and deployment owners must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Complete deployment/runtime control and assertion mappings for every applicable obligation.",
+      "exitCondition": "Requirement/decision → realization → source → verification → deployment/runtime-control mappings for applicable obligations",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-05",
+      "requirement": {
+        "name": "Architecture/capabilities valid",
+        "evidence": "Target capability negotiation and complete lowering/enforcement plan"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Architecture/security owner must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H5",
+        "H6"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Architecture/security owner must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Production profile capability/lowering and isolation scope acceptance.",
+      "exitCondition": "Target capability negotiation and complete lowering/enforcement plan",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-06",
+      "requirement": {
+        "name": "Security policies compiled",
+        "evidence": "Backend/query/UI/export/audit control mappings; no unimplemented required policy"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Security policy owner must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H5"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Security policy owner must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Production/export/audit policy completeness and profile-specific enforcement.",
+      "exitCondition": "Backend/query/UI/export/audit control mappings; no unimplemented required policy",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-07",
+      "requirement": {
+        "name": "Authorization tested",
+        "evidence": "Positive and negative authorization/tenant tests pass"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Security/identity owner must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H2",
+        "H5",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Security/identity owner must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Accepted provider/service/tenant profile and exact production-context tests; two-tenant laboratory cases are support.",
+      "exitCondition": "Positive and negative authorization/tenant tests pass",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-08",
+      "requirement": {
+        "name": "Migration validated",
+        "evidence": "Data impact, compatibility windows, phase preconditions, recovery and migration tests"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Data/migration/release authority must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H2",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Data/migration/release authority must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Approved accepted-history migration, measured population bindings, compatibility windows and recovery execution.",
+      "exitCondition": "Data impact, compatibility windows, phase preconditions, recovery and migration tests",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-09",
+      "requirement": {
+        "name": "Build succeeds",
+        "evidence": "Isolated locked-toolchain successful build for exact artifact"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Build/release owner must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Build/release owner must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Accepted production target/profile exact artifact build and input/toolchain evidence.",
+      "exitCondition": "Isolated locked-toolchain successful build for exact artifact",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-10",
+      "requirement": {
+        "name": "Unit tests pass",
+        "evidence": "All required unit evidence"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Verification/release owner must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Verification/release owner must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Complete applicable exact-artifact required unit suite, registered fresh evidence.",
+      "exitCondition": "All required unit evidence",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-11",
+      "requirement": {
+        "name": "Integration tests pass",
+        "evidence": "All required integration evidence"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Verification and external-service owners must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H2",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Verification and external-service owners must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "All applicable production integration/provider/transport/service tests.",
+      "exitCondition": "All required integration evidence",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-12",
+      "requirement": {
+        "name": "E2E tests pass",
+        "evidence": "Required user journeys across responsive/error/permission states"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Product/verification owner must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H2"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Product/verification owner must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Required supported browsers, responsive/error/permission journeys and exact deployment.",
+      "exitCondition": "Required user journeys across responsive/error/permission states",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-13",
+      "requirement": {
+        "name": "Acceptance satisfied",
+        "evidence": "Fresh evidence for each applicable criterion, including critical requirements"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Product/project authority must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Product/project authority must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Every critical acceptance obligation, unresolved CREATE finding and approvals satisfied.",
+      "exitCondition": "Fresh evidence for each applicable criterion, including critical requirements",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-14",
+      "requirement": {
+        "name": "Dependencies compliant",
+        "evidence": "Locks, vulnerability policy, SBOM; applicable license policy"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Supply-chain/security/legal owners must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Supply-chain/security/legal owners must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Full immutable dependency coverage, current vulnerability policy, SBOM and legal/license acceptance.",
+      "exitCondition": "Locks, vulnerability policy, SBOM; applicable license policy",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-15",
+      "requirement": {
+        "name": "Security scans pass",
+        "evidence": "Configured static/security analysis and reviewed findings"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Security reviewer must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security reviewer must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Current full configured static/security scanning, triage and reviewed unresolved findings.",
+      "exitCondition": "Configured static/security analysis and reviewed findings",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-16",
+      "requirement": {
+        "name": "Secrets scan passes",
+        "evidence": "Source/artifact/config/log secret scanning"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Security/operations owner must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security/operations owner must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Exact production source/artifact/config/log scanning and redacted failure-path coverage.",
+      "exitCondition": "Source/artifact/config/log secret scanning",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-17",
+      "requirement": {
+        "name": "Configuration valid",
+        "evidence": "Versioned config schema, environment bindings, secret handles resolved under scoped authority"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Deployment/identity/secret custodians must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H5",
+        "H6"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Deployment/identity/secret custodians must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Production schema/bindings, scoped secret handles, actual provider/principal/transport and startup validation.",
+      "exitCondition": "Versioned config schema, environment bindings, secret handles resolved under scoped authority",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-18",
+      "requirement": {
+        "name": "Health/observability present",
+        "evidence": "Health/readiness probes, required structured logs/traces/metrics/audit/alerts, redaction evidence"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Operations/monitoring/security owners must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H6"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Operations/monitoring/security owners must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Production log/trace/metric/alert collection, access policy, retention and exercised failure detection.",
+      "exitCondition": "Health/readiness probes, required structured logs/traces/metrics/audit/alerts, redaction evidence",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-19",
+      "requirement": {
+        "name": "Backup/recovery satisfied",
+        "evidence": "Backup and measured restore/recovery evidence for RPO/RTO requirements"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Business/data/recovery/security owners must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-E",
+      "decisionOwner": "Business/data/recovery/security owners must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Approved RPO/RTO, encryption/custody/retention/restore permissions and realistic independent recovery; decide PITR applicability.",
+      "exitCondition": "Backup and measured restore/recovery evidence for RPO/RTO requirements",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-20",
+      "requirement": {
+        "name": "Package reproducible",
+        "evidence": "Artifact hashes, compiler/generator provenance, reproducibility verification, applicable signatures"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Build/release/signing custodians must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H2"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Build/release/signing custodians must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Independent clean production artifacts, full provenance and required signatures/custody.",
+      "exitCondition": "Artifact hashes, compiler/generator provenance, reproducibility verification, applicable signatures",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-21",
+      "requirement": {
+        "name": "Accessibility satisfied",
+        "evidence": "Automated checks plus required manual keyboard/focus/assistive-use evidence"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Accessibility reviewer must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H2"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Accessibility reviewer must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Manual keyboard/focus/assistive-use evidence plus automated checks, accepted exact profile.",
+      "exitCondition": "Automated checks plus required manual keyboard/focus/assistive-use evidence",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-22",
+      "requirement": {
+        "name": "Performance/reliability satisfied",
+        "evidence": "Measured workload/latency/scale, timeout/retry/idempotency/failure tests for specified thresholds"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Performance/product/security/target-contract owners must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H2",
+        "H3",
+        "H4",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "Performance/product/security/target-contract owners must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Approved bounded workload/SLO/resource/backpressure and failure semantics; resolve actual defects and verify profile.",
+      "exitCondition": "Measured workload/latency/scale, timeout/retry/idempotency/failure tests for specified thresholds",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "G-23",
+      "requirement": {
+        "name": "Ownership/drift acceptable",
+        "evidence": "Human extension preservation; source/infrastructure/runtime differences explicitly assessed"
+      },
+      "implementation": "PARTIALLY_VERIFIED",
+      "engineeringVerification": "Candidate and laboratory evidence; production profile evidence outstanding.",
+      "ownerApproval": "Source/deployment/security owners must approve exact applicability, policy and acceptance where required.",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/production-gates.json",
+        "H1",
+        "H2",
+        "H3",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "Approved production profile",
+        "Exact applicable deployment evidence"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Source/deployment/security owners must approve exact applicability, policy and acceptance where required.",
+      "requiredAction": "Complete ownership/drift over source/infrastructure/runtime; selected hostile-host/power-loss scope.",
+      "exitCondition": "Human extension preservation; source/infrastructure/runtime differences explicitly assessed",
+      "historicalDisposition": "BLOCKED"
+    },
+    {
+      "id": "H10-D1",
+      "requirement": "Choose A trusted-only exclusion or B isolated-hostile capability. Approve attacker scope and explicitly excluded host-root/hypervisor/side-channel threats.",
+      "implementation": "Proposed decision",
+      "engineeringVerification": "No approved enforcement execution",
+      "ownerApproval": "NOT_APPROVED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h10-3/authorization-request.md"
+      ],
+      "dependencies": [
+        "SEC-01"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security owner and compiler architecture owner",
+      "requiredAction": "Choose A trusted-only exclusion or B isolated-hostile capability. Approve attacker scope and explicitly excluded host-root/hypervisor/side-channel threats.",
+      "exitCondition": "Exact attributable owner decision, inputs and scope retained."
+    },
+    {
+      "id": "H10-D2",
+      "requirement": "For B choose shared-kernel risk acceptance or dedicated VM/microVM protection; exact runtime/source/dependency/guest-image policy and supported OS/ABI must be independently approved. No runtime version is selected here.",
+      "implementation": "Proposed decision",
+      "engineeringVerification": "No approved enforcement execution",
+      "ownerApproval": "NOT_APPROVED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h10-3/authorization-request.md"
+      ],
+      "dependencies": [
+        "SEC-01"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security owner",
+      "requiredAction": "For B choose shared-kernel risk acceptance or dedicated VM/microVM protection; exact runtime/source/dependency/guest-image policy and supported OS/ABI must be independently approved. No runtime version is selected here.",
+      "exitCondition": "Exact attributable owner decision, inputs and scope retained."
+    },
+    {
+      "id": "H10-D3",
+      "requirement": "Approve clock/entropy claims and deterministic-stage eligibility. Absolute denial cannot be promised for native-capable process execution; do not silently weaken determinism. Select supported plugin language/entrypoint scope.",
+      "implementation": "Proposed decision",
+      "engineeringVerification": "No approved enforcement execution",
+      "ownerApproval": "NOT_APPROVED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h10-3/authorization-request.md"
+      ],
+      "dependencies": [
+        "SEC-01"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security owner and compiler architecture owner",
+      "requiredAction": "Approve clock/entropy claims and deterministic-stage eligibility. Absolute denial cannot be promised for native-capable process execution; do not silently weaken determinism. Select supported plugin language/entrypoint scope.",
+      "exitCondition": "Exact attributable owner decision, inputs and scope retained."
+    },
+    {
+      "id": "H10-D4",
+      "requirement": "Authorize one exact disposable guest, synthetic canaries, quotas, cgroup delegation, LSM attachment and fixed launch/test procedures. No host global settings or existing VM resources may be changed by this request.",
+      "implementation": "Proposed decision",
+      "engineeringVerification": "No approved enforcement execution",
+      "ownerApproval": "NOT_APPROVED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h10-3/authorization-request.md"
+      ],
+      "dependencies": [
+        "SEC-01"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Infrastructure and security owners",
+      "requiredAction": "Authorize one exact disposable guest, synthetic canaries, quotas, cgroup delegation, LSM attachment and fixed launch/test procedures. No host global settings or existing VM resources may be changed by this request.",
+      "exitCondition": "Exact attributable owner decision, inputs and scope retained."
+    },
+    {
+      "id": "H10-D5",
+      "requirement": "Approve pre-import registration/custody and independent qualification/acceptance criteria. No key, reviewer, issuer, host or operational approval is created by H10.",
+      "implementation": "Proposed decision",
+      "engineeringVerification": "No approved enforcement execution",
+      "ownerApproval": "NOT_APPROVED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h10-3/authorization-request.md"
+      ],
+      "dependencies": [
+        "SEC-01"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Project authority and independent security reviewer",
+      "requiredAction": "Approve pre-import registration/custody and independent qualification/acceptance criteria. No key, reviewer, issuer, host or operational approval is created by H10.",
+      "exitCondition": "Exact attributable owner decision, inputs and scope retained."
+    },
+    {
+      "id": "H10-D6",
+      "requirement": "Authorize data-only adapter implementation through existing ports, exact bounded protocol and independent plan validation; no semantic change or sealed generator modification.",
+      "implementation": "Proposed decision",
+      "engineeringVerification": "No approved enforcement execution",
+      "ownerApproval": "NOT_APPROVED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "reviews/phase11-h10-3/authorization-request.md"
+      ],
+      "dependencies": [
+        "SEC-01"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Compiler architecture and source ownership owners",
+      "requiredAction": "Authorize data-only adapter implementation through existing ports, exact bounded protocol and independent plan validation; no semantic change or sealed generator modification.",
+      "exitCondition": "Exact attributable owner decision, inputs and scope retained."
+    },
+    {
+      "id": "H11-F01",
+      "requirement": {
+        "advisory": "GHSA-7hhh-6rmp-j9qf",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "com.fasterxml.jackson.core:jackson-core",
+          "version": "2.21.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F02",
+      "requirement": {
+        "advisory": "GHSA-p6pp-m3f8-5c89",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "com.fasterxml.jackson.core:jackson-core",
+          "version": "2.21.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F03",
+      "requirement": {
+        "advisory": "GHSA-cxp5-3px4-pw24",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind",
+          "version": "2.21.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F04",
+      "requirement": {
+        "advisory": "GHSA-gx83-3vf8-gh7j",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind",
+          "version": "2.21.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F05",
+      "requirement": {
+        "advisory": "GHSA-q4xh-88c3-wmh7",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind",
+          "version": "2.21.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F06",
+      "requirement": {
+        "advisory": "GHSA-wjgm-6hv5-3cvf",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind",
+          "version": "2.21.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F07",
+      "requirement": {
+        "advisory": "GHSA-wv8q-qhhj-9h54",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind",
+          "version": "2.21.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F08",
+      "requirement": {
+        "advisory": "GHSA-6phf-73q6-gh87",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "commons-beanutils:commons-beanutils",
+          "version": "1.8.3"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F09",
+      "requirement": {
+        "advisory": "GHSA-p66x-2cv9-qq3v",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "commons-beanutils:commons-beanutils",
+          "version": "1.8.3"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F10",
+      "requirement": {
+        "advisory": "GHSA-wxr5-93ph-8wr9",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "commons-beanutils:commons-beanutils",
+          "version": "1.8.3"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F11",
+      "requirement": {
+        "advisory": "GHSA-wxr5-93ph-8wr9",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "commons-beanutils:commons-beanutils",
+          "version": "1.9.4"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F12",
+      "requirement": {
+        "advisory": "GHSA-78wr-2p64-hpwj",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "commons-io:commons-io",
+          "version": "2.11.0"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F13",
+      "requirement": {
+        "advisory": "GHSA-j288-q9x7-2f5v",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.apache.commons:commons-lang3",
+          "version": "3.10"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F14",
+      "requirement": {
+        "advisory": "GHSA-j288-q9x7-2f5v",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.apache.commons:commons-lang3",
+          "version": "3.14.0"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F15",
+      "requirement": {
+        "advisory": "GHSA-j288-q9x7-2f5v",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.apache.commons:commons-lang3",
+          "version": "3.16.0"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F16",
+      "requirement": {
+        "advisory": "GHSA-j288-q9x7-2f5v",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.apache.commons:commons-lang3",
+          "version": "3.17.0"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F17",
+      "requirement": {
+        "advisory": "GHSA-6fmv-xxpf-w3cw",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.codehaus.plexus:plexus-utils",
+          "version": "3.5.1"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F18",
+      "requirement": {
+        "advisory": "GHSA-6fmv-xxpf-w3cw",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.codehaus.plexus:plexus-utils",
+          "version": "3.6.0"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F19",
+      "requirement": {
+        "advisory": "GHSA-6fmv-xxpf-w3cw",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.codehaus.plexus:plexus-utils",
+          "version": "4.0.1"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F20",
+      "requirement": {
+        "advisory": "GHSA-6fmv-xxpf-w3cw",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.codehaus.plexus:plexus-utils",
+          "version": "4.0.2"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F21",
+      "requirement": {
+        "advisory": "GHSA-355h-qmc2-wpwf",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.eclipse.jetty:jetty-http",
+          "version": "9.4.58.v20250814"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F22",
+      "requirement": {
+        "advisory": "GHSA-qh8g-58pp-2wxh",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.eclipse.jetty:jetty-http",
+          "version": "9.4.58.v20250814"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F23",
+      "requirement": {
+        "advisory": "GHSA-2fvj-hgj9-j2gr",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.eclipse.jetty:jetty-security",
+          "version": "9.4.58.v20250814"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F24",
+      "requirement": {
+        "advisory": "GHSA-7p3p-8qv8-m2vh",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.eclipse.jetty:jetty-server",
+          "version": "9.4.58.v20250814"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F25",
+      "requirement": {
+        "advisory": "GHSA-65r4-943x-97jj",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.jsoup:jsoup",
+          "version": "1.22.1"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F26",
+      "requirement": {
+        "advisory": "GHSA-pmhh-3w7g-xqp8",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "org.jsoup:jsoup",
+          "version": "1.22.1"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F27",
+      "requirement": {
+        "advisory": "GHSA-7hhh-6rmp-j9qf",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "tools.jackson.core:jackson-core",
+          "version": "3.1.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F28",
+      "requirement": {
+        "advisory": "GHSA-p6pp-m3f8-5c89",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "tools.jackson.core:jackson-core",
+          "version": "3.1.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F29",
+      "requirement": {
+        "advisory": "GHSA-cxp5-3px4-pw24",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "tools.jackson.core:jackson-databind",
+          "version": "3.1.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F30",
+      "requirement": {
+        "advisory": "GHSA-gx83-3vf8-gh7j",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "tools.jackson.core:jackson-databind",
+          "version": "3.1.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F31",
+      "requirement": {
+        "advisory": "GHSA-q4xh-88c3-wmh7",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "tools.jackson.core:jackson-databind",
+          "version": "3.1.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F32",
+      "requirement": {
+        "advisory": "GHSA-wjgm-6hv5-3cvf",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "tools.jackson.core:jackson-databind",
+          "version": "3.1.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F33",
+      "requirement": {
+        "advisory": "GHSA-wv8q-qhhj-9h54",
+        "component": {
+          "ecosystem": "Maven",
+          "name": "tools.jackson.core:jackson-databind",
+          "version": "3.1.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "SHADING_AND_BUILD_EXPOSURE_REVIEW_REQUIRED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F34",
+      "requirement": {
+        "advisory": "GHSA-3g3m-2fjr-6pw4",
+        "component": {
+          "ecosystem": "npm",
+          "name": "glob",
+          "version": "13.0.6"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "FRONTEND_ATTRIBUTION_UNRESOLVED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F35",
+      "requirement": {
+        "advisory": "GHSA-5fpq-26gf-qwcr",
+        "component": {
+          "ecosystem": "npm",
+          "name": "happy-dom",
+          "version": "20.14.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "FRONTEND_ATTRIBUTION_UNRESOLVED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F36",
+      "requirement": {
+        "advisory": "GHSA-834v-8h66-3h79",
+        "component": {
+          "ecosystem": "npm",
+          "name": "happy-dom",
+          "version": "20.14.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "FRONTEND_ATTRIBUTION_UNRESOLVED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F37",
+      "requirement": {
+        "advisory": "GHSA-c8p4-j97h-3vg8",
+        "component": {
+          "ecosystem": "npm",
+          "name": "happy-dom",
+          "version": "20.14.5"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "FRONTEND_ATTRIBUTION_UNRESOLVED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "H11-F38",
+      "requirement": {
+        "advisory": "GHSA-g3hv-75wg-m249",
+        "component": {
+          "ecosystem": "npm",
+          "name": "minimatch",
+          "version": "10.2.6"
+        },
+        "scopeRequired": "Exact version and exposure disposition"
+      },
+      "implementation": "FRONTEND_ATTRIBUTION_UNRESOLVED",
+      "engineeringVerification": "CONFIRMED_AFFECTED_VERSION",
+      "ownerApproval": "OWNER_DECISION_REQUIRED",
+      "productionAcceptance": "BLOCKED",
+      "evidence": [
+        "Hosted H11.2 run 45607695458, triage.json",
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [
+        "SEC-02"
+      ],
+      "workstream": "WS-D",
+      "decisionOwner": "Security and dependency owners; legal for distribution obligations",
+      "requiredAction": "Bind exact consumed artifact and independently review scope, compatibility and applicable fixed version.",
+      "exitCondition": "Supported evidence establishes inclusion or justified exclusion, with attributable remediation/risk disposition."
+    },
+    {
+      "id": "LIFECYCLE-06",
+      "requirement": "Qualified accepted-history generation and target evolution",
+      "implementation": "Approved reference target and candidate lanes implemented; deployed semantic transition incomplete",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "docs/phase6-completion-report.md"
+      ],
+      "dependencies": [
+        "EVOL-01",
+        "AUTH-01"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Project authority",
+      "requiredAction": "Use existing compiler/ArtifactPlan/verification ports and bind accepted history when approved.",
+      "exitCondition": "Both reference domains reproduce approved evolution and recovery with original ownership and evidence links."
+    },
+    {
+      "id": "SOURCE-07",
+      "requirement": "Resolve all applicable source relationships or carry uncertainty",
+      "implementation": "Native Java and TypeScript analysis is qualified within bounded syntax and resolution support. Vue templates, dynamic runtime relationships, and unsupported project resolution remain incomplete.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "docs/phase7-source-intelligence.md"
+      ],
+      "dependencies": [
+        "LIFECYCLE-06"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Compiler architecture owner",
+      "requiredAction": "Trace generation, changed files and ownership through the supported source model; reject incomplete claims.",
+      "exitCondition": "Expected sources and obligations reconcile for both domains, and unsupported relations remain explicitly unknown."
+    },
+    {
+      "id": "VERIFY-08",
+      "requirement": "Exact-input and assertion-bound verification",
+      "implementation": "Compile/Source Model integration and bounded execution ingestion are available. Missing and unsupported evidence remains unresolved.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "docs/phase8-verification.md"
+      ],
+      "dependencies": [
+        "SOURCE-07",
+        "AUTH-01"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Verification and release owners",
+      "requiredAction": "Bind positive effects, required failures and source/artifact changes to applicable verification obligations.",
+      "exitCondition": "Stale, missing, foreign or mismatched results remain non-PASS."
+    },
+    {
+      "id": "MCP-09",
+      "requirement": "Expose authorized compiler lifecycle operations",
+      "implementation": "Read-only stdio adapter and bounded context. Mutation, approval, deployment and production trust remain unapproved.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "docs/phase9-mcp.md"
+      ],
+      "dependencies": [
+        "VERIFY-08",
+        "AUTH-01"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Compiler and project authority",
+      "requiredAction": "Use pure validation or proposal preview where existing contracts permit. Keep authenticated authority outside MCP.",
+      "exitCondition": "Read-only and rejection contracts pass; any future mutation capability is explicitly authorized and independently tested."
+    },
+    {
+      "id": "APP-10",
+      "requirement": "Exercise serious reference life cycles",
+      "implementation": "Case Management R0/R1 plus isolated R2–R8 previews. R6→R7 stopped transition is bounded; no accepted deployed evolution or live mixed-version claim.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "docs/phase10-r8-evolution.md"
+      ],
+      "dependencies": [
+        "EVOL-01",
+        "ENG-01"
+      ],
+      "workstream": "WS-B",
+      "decisionOwner": "Semantic and migration authorities",
+      "requiredAction": "Integrate both reference lanes around already-approved snapshots and data; separate previews.",
+      "exitCondition": "Demonstrate exact regeneration and retention across approved old/new application versions in isolated deployment."
+    },
+    {
+      "id": "HARDEN-11",
+      "requirement": "Bound reliability, capacity, security and recovery under measurable support limits",
+      "implementation": "H1–H9 qualify selected candidate mechanisms; H10 and H11 establish design/evidence with SEC-01/02 open.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/README.md"
+      ],
+      "dependencies": [
+        "SEC-01",
+        "SEC-02",
+        "REL-01",
+        "REL-03",
+        "REL-04"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "Security, reliability and architecture owners",
+      "requiredAction": "Run representative integrated operating envelopes and close or explicitly scope independent limitations.",
+      "exitCondition": "Observed recovery/fencing, rejection, capacity and security evidence reconcile with the approved support policy."
+    },
+    {
+      "id": "CI-ENV-01",
+      "requirement": "Run V3 supply-chain tests under the pinned compiler interpreter",
+      "implementation": "System interpreter selection is the demonstrated defect under investigation.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "engineering/supply_chain/completeness.py"
+      ],
+      "dependencies": [],
+      "workstream": "WS-A",
+      "decisionOwner": "CI engineering owner",
+      "requiredAction": "Use the job’s existing compiler venv and assert exact execution identity.",
+      "exitCondition": "Exact-commit V3 executes the affected test inventory without missing jsonschema or skipped checks."
+    },
+    {
+      "id": "CI-CENTRAL-01",
+      "requirement": "Preserve immutable dependency acquisition under bounded network failures",
+      "implementation": "H10.1 verified same-run Maven transfer covers V3 compilation. H4, H9 and reference/other paths require separately classified evidence.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h11-2/README.md"
+      ],
+      "dependencies": [],
+      "workstream": "WS-A",
+      "decisionOwner": "CI and dependency owners",
+      "requiredAction": "Capture acquisition command, endpoint and exact failure; reuse already verified immutable artifacts only where applicable.",
+      "exitCondition": "No substitution or hidden retry, and each affected execution has actual exact-source results or separately recorded external failure."
+    },
+    {
+      "id": "CI-PERF-01",
+      "requirement": "Retain performance and capacity qualification under exact inputs",
+      "implementation": "Historical bounded workload and scaling evidence exists. Current failed or pending executions require separate reconciliation.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "reviews/phase11-h8-20261115/remediation-register.json"
+      ],
+      "dependencies": [
+        "CI-CENTRAL-01"
+      ],
+      "workstream": "WS-C",
+      "decisionOwner": "CI and performance owners",
+      "requiredAction": "Classify acquisition, environment and workload failures from actual hosted logs; preserve qualification thresholds.",
+      "exitCondition": "Required measurements finish under pinned settings; resource or dependency failures remain independently classified."
+    },
+    {
+      "id": "CI-TRANSFER-01",
+      "requirement": "Bind transferred inputs to the producing execution and verify hashes in consumer",
+      "implementation": "V3 same-run transfer verifies exact Maven lock inventory. Cross-workflow transfer requires independent source and run provenance.",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "engineering/dependency_resolution/inputs.py"
+      ],
+      "dependencies": [
+        "CI-CENTRAL-01"
+      ],
+      "workstream": "WS-A",
+      "decisionOwner": "CI and provenance owners",
+      "requiredAction": "Verify complete member inventory and source identity at transfer boundaries.",
+      "exitCondition": "Wrong-run, missing and substituted inputs fail before builds."
+    },
+    {
+      "id": "PROD-12",
+      "requirement": "Repeated approved production life cycles",
+      "implementation": "NOT_STARTED",
+      "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "ownerApproval": "Pending where applicable",
+      "productionAcceptance": "NOT_ACCEPTED",
+      "evidence": [
+        "docs/production-gates.md"
+      ],
+      "dependencies": [
+        "AUTH-01",
+        "OPS-01",
+        "OPS-02",
+        "OPS-03",
+        "GOV-01",
+        "SEC-01",
+        "SEC-02"
+      ],
+      "workstream": "WS-F",
+      "decisionOwner": "Release authority",
+      "requiredAction": "Present exact production profile for approval before operational implementation.",
+      "exitCondition": "Repeat approved deployment, evolution, verification and restore with admissible G-01–G-23 evidence."
+    }
+  ]
+}

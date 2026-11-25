@@ -35,3 +35,30 @@ class CompletenessTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'BOM_COMPLETENESS'):
             validate_bom(bom | {'compositions': [{'aggregate': 'complete', 'assemblies': ['one']}]},
                          expected, schema)
+
+    def test_edges_require_exact_packaged_endpoints(self):
+        from engineering.supply_chain.completeness import packaged_maven_edges, verify_projected_edges
+
+        def node(name, children=(), *, classifier=''):
+            return {'groupId': 'org.example', 'artifactId': name, 'version': '1',
+                    'type': 'jar', 'children': list(children), 'classifier': classifier}
+
+        a, b = 'a' * 64, 'b' * 64
+        packaged = [
+            {'identity': {'name': 'org.example:' + name, 'version': '1', 'sha256': pin},
+             'sha256': pin, 'origins': [f'maven:org/example/{name}/1/{name}-1.jar']}
+            for name, pin in (('a', a), ('b', b))
+        ]
+        bom = {'components': [
+            {'bom-ref': name, 'name': 'org.example:' + name, 'version': '1',
+             'hashes': [{'content': pin}]}
+            for name, pin in (('a', a), ('b', b))
+        ]}
+        graph = node('application', [node('a', [node('b'), node('b', classifier='tests')])])
+        edges, unmapped = packaged_maven_edges(graph, packaged, bom)
+        self.assertEqual(edges, [{'ref': 'a', 'dependsOn': ['b']}])
+        self.assertEqual(unmapped, 2)
+        with self.assertRaisesRegex(ValueError, 'PACKAGED_EDGE_RECONCILIATION'):
+            verify_projected_edges(bom | {'dependencies': []}, edges, Draft7Validator({}))
+        with self.assertRaisesRegex(ValueError, 'PACKAGED_ENDPOINT_DIGEST'):
+            packaged_maven_edges(graph, [packaged[0] | {'sha256': b}, packaged[1]], bom)

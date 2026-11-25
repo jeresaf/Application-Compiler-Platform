@@ -66,6 +66,56 @@ def validate_bom(bom, expected, validator):
     require(sorted(actual) == sorted(expected), 'BOM_COMPONENT_RECONCILIATION')
 
 
+def packaged_maven_edges(graph, packaged, bom):
+    """Project only Maven graph edges with exact, unambiguous packaged endpoints."""
+    refs = {}
+    by_component = {}
+    for component in bom['components']:
+        key = (component['name'], component['version'], component['hashes'][0]['content'])
+        by_component.setdefault(key, []).append(component['bom-ref'])
+    for row in packaged:
+        identity = row.get('identity')
+        if identity is None:
+            continue
+        require(row['sha256'] == identity['sha256'], 'PACKAGED_ENDPOINT_DIGEST')
+        matches = by_component.get(component_key(identity), [])
+        if len(matches) != 1:
+            continue
+        for origin in row['origins']:
+            if origin.startswith('maven:'):
+                refs.setdefault(origin.removeprefix('maven:'), set()).add(matches[0])
+
+    def endpoint(node):
+        if node.get('type') != 'jar':
+            return None
+        group, name, version = (node[field] for field in ('groupId', 'artifactId', 'version'))
+        classifier = node.get('classifier', '')
+        suffix = '-' + classifier if classifier else ''
+        path = f"{group.replace('.', '/')}/{name}/{version}/{name}-{version}{suffix}.jar"
+        candidates = refs.get(path, set())
+        return next(iter(candidates)) if len(candidates) == 1 else None
+
+    edges = {}
+    unmapped = 0
+    pending = [graph]
+    while pending:
+        parent = pending.pop()
+        start = endpoint(parent)
+        for child in parent.get('children', []):
+            end = endpoint(child)
+            if start is not None and end is not None and start != end:
+                edges.setdefault(start, set()).add(end)
+            else:
+                unmapped += 1
+            pending.append(child)
+    return [{'ref': source, 'dependsOn': sorted(targets)} for source, targets in sorted(edges.items())], unmapped
+
+
+def verify_projected_edges(bom, expected, validator):
+    validator.validate(bom)
+    require(bom.get('dependencies') == expected, 'PACKAGED_EDGE_RECONCILIATION')
+
+
 def native_tools(toolchains):
     result = {}
     roots = toolchains['inventories']
@@ -105,6 +155,7 @@ def qualify(archive, schemas, output):
                         'native analyzer execution outside this build']})
     licenses = []
     frontend = {}
+    graph_coverage = {}
     require(set(reconciliation['applications']) == {'payment', 'case-management'}, 'APPLICATIONS')
     for domain, app in sorted(reconciliation['applications'].items()):
         expected = [component_key(row['identity']) for row in app['components'] if row['identity']]
@@ -120,6 +171,11 @@ def qualify(archive, schemas, output):
                         'members': row['licenseMembers'], 'ownerReview': 'LEGAL_REVIEW_REQUIRED',
                         'status': 'NOTICE_OR_LICENSE_MEMBER_HASHED' if row['licenseMembers']
                         else 'LICENSE_IDENTITY_UNCERTAIN'} for row in app['components'])
+        edges, unmapped = packaged_maven_edges(maven['graphs'][domain], app['components'], bom)
+        bom['dependencies'] = edges
+        verify_projected_edges(bom, edges, validator)
+        graph_coverage[domain] = {'projectedEdges': sum(len(row['dependsOn']) for row in edges),
+                                  'unmappedGraphOccurrences': unmapped}
         save(output / f'{domain}.cdx.json', bom)
     build = [component_key(maven_component(path, pin)) for path, pin in maven['artifacts'].items()]
     build.extend((name, row['version'], row['sha256']) for name, row in reconciliation['compilerInputs'].items())
@@ -144,7 +200,8 @@ def qualify(archive, schemas, output):
     save(output / 'licenses.json', licenses)
     save(output / 'assessment.json', {'sourceCommit': commit, 'buildSource': PRODUCER,
         'sourceArchiveSHA256': ARCHIVE, 'schemaSHA256': SCHEMAS, 'schemaValidation': 'PASS',
-        'relationshipCoverage': 'INCOMPLETE', 'shadedCoverage': 'UNRESOLVED',
+        'relationshipCoverage': 'INCOMPLETE', 'packagedMavenGraphProjection': graph_coverage,
+        'shadedCoverage': 'UNRESOLVED',
         'trustAndLegalAcceptance': 'PENDING', 'SEC-02': 'BLOCKED', 'SEC-01': 'BLOCKED'})
     save(output / 'manifest.json', {'sourceCommit': commit, 'buildSource': PRODUCER,
                                   'files': {p.name: sha(p.read_bytes()) for p in sorted(output.iterdir())}})
