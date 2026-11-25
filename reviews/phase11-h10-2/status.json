@@ -1,0 +1,37 @@
+{
+  "baseline": "a5393724f352d117899afa6f75381dff02d7f5f3",
+  "decisions": {
+    "H10-D1": "NOT_APPROVED",
+    "H10-D2": "NOT_APPROVED",
+    "H10-D3": "NOT_APPROVED",
+    "H10-D4": "NOT_APPROVED",
+    "H10-D5": "NOT_APPROVED",
+    "H10-D6": "NOT_APPROVED"
+  },
+  "labCases": {
+    "H10-T01": "NOT_RUN",
+    "H10-T02": "NOT_RUN",
+    "H10-T03": "NOT_RUN",
+    "H10-T04": "NOT_RUN",
+    "H10-T05": "NOT_RUN",
+    "H10-T06": "NOT_RUN",
+    "H10-T07": "NOT_RUN",
+    "H10-T08": "NOT_RUN",
+    "H10-T09": "NOT_RUN",
+    "H10-T10": "NOT_RUN",
+    "H10-T11": "NOT_RUN",
+    "H10-T12": "NOT_RUN",
+    "H10-T13": "NOT_RUN",
+    "H10-T14": "NOT_RUN",
+    "H10-T15": "NOT_RUN",
+    "H10-T16": "NOT_RUN",
+    "H10-T17": "NOT_RUN",
+    "H10-T18": "NOT_RUN",
+    "H10-T19": "NOT_RUN",
+    "H10-T20": "NOT_RUN",
+    "H10-T21": "NOT_RUN",
+    "H10-T22": "NOT_RUN"
+  },
+  "SEC-01": "BLOCKED",
+  "phase12": "NOT_STARTED"
+}

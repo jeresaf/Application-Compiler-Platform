@@ -1,0 +1,37 @@
+name: ACP Phase 11 H10.2 plugin contract foundation
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  plugin-contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - name: Verify exact source and disabled execution foundation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          git diff --exit-code HEAD
+          python3.14 -B - <<'PYTHON' | tee "$RUNNER_TEMP/h10-2-tests.log"
+          import os
+          import unittest
+          print('Source', os.environ['GITHUB_SHA'], flush=True)
+          suite = unittest.defaultTestLoader.discover('verification/plugin_contract')
+          assert suite.countTestCases() == 6
+          result = unittest.TextTestRunner(verbosity=2, stream=__import__('sys').stdout).run(suite)
+          assert result.testsRun == 6 and not result.skipped and result.wasSuccessful()
+          PYTHON
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h10-2-plugin-contract
+          path: ${{ runner.temp }}/h10-2-tests.log
+          if-no-files-found: error
