@@ -1,0 +1,54 @@
+name: ACP Phase 11 H11.2 supply-chain evidence verification
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - name: Provision approved validator and run security regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -m venv "$RUNNER_TEMP/h112-venv"
+          py="$RUNNER_TEMP/h112-venv/bin/python"
+          "$py" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt
+          "$py" -m pip check
+          "$py" -B - <<'PY'
+          import unittest
+          for folder, count in [('supply_chain', 11), ('dependency_resolution', 26), ('security', 12)]:
+              suite = unittest.defaultTestLoader.discover('verification/' + folder)
+              assert suite.countTestCases() == count
+              result = unittest.TextTestRunner(verbosity=2).run(suite)
+              assert result.wasSuccessful() and result.testsRun == count and not result.skipped
+          PY
+      - name: Obtain exact historical evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/15009245824/zip" > "$RUNNER_TEMP/h112.zip"
+      - name: Validate CycloneDX and reconcile source-bound component evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -f "$tmp"/{bom-1.6,spdx,jsf-0.82}.schema.json; rmdir "$tmp"' EXIT
+          for name in bom-1.6 spdx jsf-0.82; do
+            curl -fsS --max-time 20 "https://cyclonedx.org/schema/$name.schema.json" -o "$tmp/$name.schema.json"
+          done
+          "$RUNNER_TEMP/h112-venv/bin/python" -B -m engineering.supply_chain.completeness --archive "$RUNNER_TEMP/h112.zip" --schemas "$tmp" --output "$RUNNER_TEMP/h112-results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h11-2-supply-chain-evidence
+          path: ${{ runner.temp }}/h112-results/
+          if-no-files-found: error
