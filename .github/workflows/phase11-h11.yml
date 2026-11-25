@@ -1,0 +1,37 @@
+name: ACP Phase 11 H11 supply-chain inventory
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  supply-chain:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.14.7'
+      - run: |
+          python3.14 -m venv "$RUNNER_TEMP/h11-venv"
+          "$RUNNER_TEMP/h11-venv/bin/python" -m pip install --require-hashes --only-binary=:all: -r engineering/dependency_resolution/compiler-requirements.txt
+          "$RUNNER_TEMP/h11-venv/bin/python" -m pip check
+      - name: Verify inventory and existing supply-chain guards
+        run: |
+          "$RUNNER_TEMP/h11-venv/bin/python" -B -m unittest discover -s verification/supply_chain -v
+          "$RUNNER_TEMP/h11-venv/bin/python" -B -m unittest discover -s verification/dependency_resolution -v
+          "$RUNNER_TEMP/h11-venv/bin/python" -B -m unittest discover -s verification/maven_toolchain -v
+          "$RUNNER_TEMP/h11-venv/bin/python" -B -m unittest discover -s verification/security -v
+          "$RUNNER_TEMP/h11-venv/bin/python" -B -m unittest discover -s verification/evidence_admission -p test_preservation.py -v
+      - name: Inventory generated inputs and retain current scanner observations
+        run: '"$RUNNER_TEMP/h11-venv/bin/python" -B -m engineering.supply_chain.qualify --output "$RUNNER_TEMP/h11-results"'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: h11-supply-chain-observations
+          path: ${{ runner.temp }}/h11-results/
+          if-no-files-found: error
