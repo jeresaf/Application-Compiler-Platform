@@ -197,6 +197,12 @@ jobs:
         run: |
           set -euo pipefail
           "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B verification/cardinality/qualify.py --workspace "$RUNNER_TEMP/acp-cardinality" --maven-seed "$RUNNER_TEMP/acp-transferred-m2"
+      - name: Verify corrected candidate migration planning and recovery
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B -m unittest discover -s verification/cardinality -p test_evolution.py -v
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B engineering/recovery/qualify.py --cardinality --workspace "$RUNNER_TEMP/acp-cardinality-recovery"
       - name: Retain runtime results and browser logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -207,6 +213,8 @@ jobs:
             ${{ runner.temp }}/acp-successor-runtime/runtime-results.json
             ${{ runner.temp }}/acp-successor-runtime/traceability-results.json
             ${{ runner.temp }}/acp-cardinality/results.json
+            ${{ runner.temp }}/acp-cardinality-recovery/recovery-results.json
+            ${{ runner.temp }}/acp-cardinality-recovery/*-logs/concurrent-queries.json
             ${{ runner.temp }}/acp-successor-runtime/*-runtime/
           if-no-files-found: error
 

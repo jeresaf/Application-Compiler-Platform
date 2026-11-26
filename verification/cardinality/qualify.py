@@ -54,7 +54,7 @@ def smoke(project, domain):
             events = int(lab.sql('SELECT count(*) FROM acp_outbox'))
             assert events == (1 if domain == 'payment' else 3)
             history = lab.history()
-            assert [entry['version'] for entry in history] == ['1', '2', '3', '10']
+            assert [entry['version'] for entry in history] == ['1', '2', '3', '10', '11']
             return {'queryHTTP': 200, 'actionHTTP': 200, 'replayHTTP': 200,
                     'businessEvents': events, 'flyway': history}
         finally:

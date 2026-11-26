@@ -12,6 +12,7 @@ import time
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT), str(ROOT / 'tooling')]
 from engineering.cardinality.successor import MIGRATION
+from engineering.cardinality.participation import MIGRATION as PARTICIPATION
 from engineering.generator_builds.runtime import database
 from engineering.recovery.qualify import authenticated_database_ready
 from phase6_reference_tests import seed_sql, symbol
@@ -68,21 +69,48 @@ def execute(container, sql):
                                    input=sql, text=True, timeout=90).strip()
 
 
-def lock(tenant='tenant-one'):
+def raw_lock(tenant='tenant-one'):
     return f"""SELECT pg_advisory_xact_lock((k >> 32)::int, (k & 4294967295)::bit(32)::int)
                FROM (SELECT acp_cardinality_key('{tenant}'::bytea) AS k) AS key;"""
 
 
+def lock(tenant='tenant-one'):
+    return f"SELECT acp_cardinality_enter('{tenant}'::bytea);"
+
+
 def exercise(container, schema, project, domain, corrected):
     migrations = sorted((project / 'database').glob('V*.sql'))
-    historic = [path for path in migrations if path.name != MIGRATION]
+    historic = [path for path in migrations if path.name not in (MIGRATION, PARTICIPATION)]
     seed = seed_sql(domain)
     seed += [sql.replace("'fixture-resource'", "'second-resource'") for sql in seed[2:]]
     execute(container, f'CREATE SCHEMA {schema}; SET search_path={schema};\n'
             + '\n'.join(path.read_text() for path in historic)
             + '\n'.join(sql + ';' for sql in seed))
     if corrected:
-        execute(container, f'SET search_path={schema};\n' + (project / 'database' / MIGRATION).read_text())
+        v10 = (project / 'database' / MIGRATION).read_text()
+        if domain == 'payment':
+            edge = symbol('REL-MEMBER-PAYMENT', 'r')
+            # Corrupt only the disposable pre-upgrade database to exercise
+            # discovery of an invalid retained row.
+            execute(container, f"SET search_path={schema}; ALTER TABLE {edge} DISABLE TRIGGER USER; "
+                               f"DELETE FROM {edge} WHERE target_id='fixture-resource'; "
+                               f"ALTER TABLE {edge} ENABLE TRIGGER USER;")
+            with session(container, schema) as (send, receive):
+                send('BEGIN;\n' + v10)
+                assert '23514' in receive(), 'V10_INVALID_RETAINED_STATE_ACCEPTED'
+                send('ROLLBACK;')
+                receive()
+            assert execute(container, f"SELECT to_regprocedure('{schema}.acp_cardinality_key(bytea)') IS NULL;") == 't'
+            execute(container, f'SET search_path={schema}; ' + seed_sql(domain)[-1] + ';')
+        with session(container, schema) as (send, receive):
+            send('SELECT pg_backend_pid();')
+            pid = int(receive().strip())
+            send('BEGIN;\n' + v10)
+            assert 'ERROR' not in receive(), 'V10_INTERRUPTION_SETUP'
+            assert execute(container, f'SELECT pg_terminate_backend({pid}, 5000);') == 't'
+        assert execute(container, f"SELECT to_regprocedure('{schema}.acp_cardinality_key(bytea)') IS NULL;") == 't'
+        execute(container, f'SET search_path={schema};\n' + v10)
+        execute(container, f'SET search_path={schema};\n' + (project / 'database' / PARTICIPATION).read_text())
     table = symbol('ENT-PAYMENT' if domain == 'payment' else 'CASE', 'e')
     identity = symbol('FLD-PAYMENT-ID' if domain == 'payment' else 'CASE-ID', 'f')
     summary = symbol('FLD-TASK-SUMMARY', 'f')
@@ -95,6 +123,33 @@ def exercise(container, schema, project, domain, corrected):
             send(update('fixture-resource'))
             reply = receive()
             assert '55000' in reply, 'UNCOORDINATED_WRITER_NOT_REJECTED_AS_EXPECTED'
+            send('BEGIN;' + raw_lock() + update('fixture-resource'))
+            assert '55000' in receive(), 'ADVISORY_LOCK_ALONE_ACCEPTED'
+            send('ROLLBACK;')
+            receive()
+
+    if corrected:
+        writer = schema + '_writer'
+        retired = schema + '_retired'
+        execute(container, f"""
+            CREATE ROLE {writer} NOLOGIN;
+            CREATE ROLE {retired} NOLOGIN;
+            GRANT USAGE ON SCHEMA {schema} TO {writer}, {retired};
+            GRANT SELECT, UPDATE ON {schema}.{table} TO {writer}, {retired};
+            GRANT EXECUTE ON FUNCTION {schema}.acp_cardinality_enter(bytea) TO {writer};
+        """)
+        with session(container, schema) as (send, receive):
+            send(f'SET ROLE {writer}; UPDATE acp_cardinality_participation SET transaction_id=pg_current_xact_id();')
+            assert '42501' in receive(), 'WRITER_CAN_FORGE_PARTICIPATION'
+            send('BEGIN; ' + lock() + update('fixture-resource') + 'ROLLBACK;')
+            assert 'ERROR' not in receive(), 'PERMITTED_WRITER_FAILED'
+            send(f'RESET ROLE; SET ROLE {retired}; SELECT 1;')
+            assert 'ERROR' not in receive()
+            # Revocation takes effect on this already-established session as
+            # well as any future connection. The role has no inherited grants.
+            execute(container, f'REVOKE SELECT, UPDATE ON {schema}.{table} FROM {retired};')
+            send(update('fixture-resource'))
+            assert '42501' in receive(), 'RETIRED_WRITER_STILL_HAS_ACCESS'
 
     with ExitStack() as peers:
         first, first_read = peers.enter_context(session(container, schema))
@@ -122,7 +177,10 @@ def exercise(container, schema, project, domain, corrected):
             assert sum('ERROR' in result for result in (left, right)) == 1
     count = int(execute(container, f"SET search_path={schema}; SELECT count(*) FROM {table} WHERE {summary}='updated';"))
     assert count == (2 if corrected else 1)
-    return {'committedWrites': count, 'deadlocks': 0 if corrected else 1}
+    return {'committedWrites': count, 'deadlocks': 0 if corrected else 1,
+            **({'v10InterruptionRolledBack': True, 'writerRoleQualified': True,
+                'retiredRoleRejected': True, 'advisoryOnlyRejected': True,
+                'invalidRetainedStateRejected': domain == 'payment'} if corrected else {})}
 
 
 def main():

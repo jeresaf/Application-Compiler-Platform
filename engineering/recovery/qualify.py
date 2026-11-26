@@ -152,7 +152,7 @@ class Lab:
         schema=self.schema
         return self.data("SELECT jsonb_build_object('columns', (SELECT coalesce(jsonb_agg(to_jsonb(c) ORDER BY table_name,ordinal_position),'[]') FROM information_schema.columns c WHERE table_schema='"+schema+"'), 'constraints', (SELECT coalesce(jsonb_agg(jsonb_build_object('table',r.relname,'name',c.conname,'definition',pg_get_constraintdef(c.oid),'validated',c.convalidated) ORDER BY r.relname,c.conname),'[]') FROM pg_constraint c JOIN pg_class r ON r.oid=c.conrelid JOIN pg_namespace n ON n.oid=r.relnamespace WHERE n.nspname='"+schema+"'), 'indexes', (SELECT coalesce(jsonb_agg(to_jsonb(i) ORDER BY tablename,indexname),'[]') FROM pg_indexes i WHERE schemaname='"+schema+"'))")
     def state(self):
-        tables=self.data("SELECT coalesce(jsonb_agg(tablename ORDER BY tablename),'[]') FROM pg_tables WHERE schemaname='"+self.schema+"' AND (left(tablename,2) IN ('e_','r_') OR left(tablename,4)='acp_' OR tablename='recovery_transport') AND tablename NOT IN ('acp_rate','acp_sessions')")
+        tables=self.data("SELECT coalesce(jsonb_agg(tablename ORDER BY tablename),'[]') FROM pg_tables WHERE schemaname='"+self.schema+"' AND (left(tablename,2) IN ('e_','r_') OR left(tablename,4)='acp_' OR tablename='recovery_transport') AND tablename NOT IN ('acp_rate','acp_sessions','acp_cardinality_participation')")
         return {table:self.data('SELECT coalesce(jsonb_agg(to_jsonb(t) ORDER BY to_jsonb(t)::text),\'[]\') FROM "'+table+'" t') for table in tables}
     def query_database_observation(self):
         # No identities, queries, payloads, or exception text leave this probe.
@@ -260,7 +260,10 @@ class Lab:
 
 def migration_matrix(lab):
     original=lab.state();history=lab.history()
-    require([r['version'] for r in history]==['1','2','3'],'BASELINE_MIGRATION_VERSIONS')
+    cardinality = (lab.migrations/'V11__cardinality_participation.sql').is_file()
+    expected_versions = ['1','2','3','10','11'] if cardinality else ['1','2','3']
+    require([r['version'] for r in history] == expected_versions, 'BASELINE_MIGRATION_VERSIONS')
+    offset = 8 if cardinality else 0
     lab.record('initialApplicationMigrations',history=history,schema=lab.schema_state(),state=original)
     before_schema=lab.schema_state();lab.migration('migrate');require(lab.history()==history and lab.state()==original and lab.schema_state()==before_schema,'REPEATED_MIGRATION_MUTATION')
     lab.record('repeatedMigrationInvocation',history=history)
@@ -271,7 +274,7 @@ def migration_matrix(lab):
     require(lab.state()==original and lab.history()==history,'UNAVAILABLE_DATABASE_MUTATION')
     lab.record('unavailableDatabaseFailsClosed',failure=failed,recovery='restore only original disposable database URL; restart after complete matrix')
 
-    p=lab.migrations/'V4__recovery_probe.sql'
+    p=lab.migrations/f'V{4+offset}__recovery_probe.sql'
     good='CREATE TABLE recovery_probe(value text PRIMARY KEY); INSERT INTO recovery_probe VALUES(\'retained\');\n'
     p.write_text(good+'SELECT 1/0;\n');failed=lab.migration('migrate',ok=False)
     require(lab.sql("SELECT to_regclass('recovery_probe') IS NULL")=='t','TRANSACTIONAL_DDL_LEAK')
@@ -281,11 +284,11 @@ def migration_matrix(lab):
     stable=lab.history();p.write_text(good+'-- checksum fault in synthetic V4 only\n');failed=lab.migration('validate',ok=False)
     require(lab.history()==stable and lab.state()==original,'CHECKSUM_FAILURE_MUTATION')
     p.write_text(good);lab.migration('validate');lab.record('migrationChecksumMismatch',failure=failed,recovery='restore exact synthetic V4; validate; no repair')
-    (lab.migrations/'V6__later_probe.sql').write_text('CREATE TABLE recovery_later(value integer);\n');lab.migration('migrate');ordered=lab.history()
-    wrong=lab.migrations/'V5__late_arrival.sql';wrong.write_text('CREATE TABLE recovery_out_of_order(value integer);\n');failed=lab.migration('migrate',ok=False)
+    (lab.migrations/f'V{6+offset}__later_probe.sql').write_text('CREATE TABLE recovery_later(value integer);\n');lab.migration('migrate');ordered=lab.history()
+    wrong=lab.migrations/f'V{5+offset}__late_arrival.sql';wrong.write_text('CREATE TABLE recovery_out_of_order(value integer);\n');failed=lab.migration('migrate',ok=False)
     require(lab.history()==ordered and lab.sql("SELECT to_regclass('recovery_out_of_order') IS NULL")=='t','OUT_OF_ORDER_APPLIED')
     wrong.unlink();lab.migration('validate');lab.record('incorrectMigrationOrdering',failure=failed,recovery='withdraw unexecuted synthetic V5; no outOfOrder override')
-    p=lab.migrations/'V7__interrupted_probe.sql';p.write_text('CREATE TABLE recovery_interrupted(value integer); INSERT INTO recovery_interrupted VALUES(1); SELECT pg_advisory_xact_lock('+str(INTERRUPT)+');\n')
+    p=lab.migrations/f'V{7+offset}__interrupted_probe.sql';p.write_text('CREATE TABLE recovery_interrupted(value integer); INSERT INTO recovery_interrupted VALUES(1); SELECT pg_advisory_xact_lock('+str(INTERRUPT)+');\n')
     before=lab.history();path=lab.logs/'interrupted-migration.log';lab.capture_inputs('interrupted-migration')
     with lab.gate(INTERRUPT),path.open('wb') as out:
         process=subprocess.Popen(['java','-cp',lab.cp,'acp.recovery.MigrationProbe','migrate',str(lab.migrations),lab.schema],cwd=lab.backend,env=lab.env,stdout=out,stderr=subprocess.STDOUT,start_new_session=True)
@@ -297,7 +300,7 @@ def migration_matrix(lab):
     lab.record('interruptedMigrationProcessTermination',exit=code,rollback='TRANSACTION_ABORTED',history=lab.history())
     # PostgreSQL/Flyway keeps partial nontransactional DDL, but rolls back
     # its metadata transaction. Absence of a failed history row is NOT rollback.
-    p=lab.migrations/'V8__non_atomic_probe.sql';conf=lab.migrations/'V8__non_atomic_probe.sql.conf';conf.write_text('executeInTransaction=false\n')
+    p=lab.migrations/f'V{8+offset}__non_atomic_probe.sql';conf=lab.migrations/f'V{8+offset}__non_atomic_probe.sql.conf';conf.write_text('executeInTransaction=false\n')
     good='CREATE TABLE recovery_nonatomic(value integer); INSERT INTO recovery_nonatomic VALUES(1);\n';p.write_text(good+'SELECT 1/0;\n')
     previous=lab.history();failed=lab.migration('migrate',ok=False)
     require(lab.sql('SELECT count(*) FROM recovery_nonatomic')=='1','NONATOMIC_PARTIAL_WORK_NOT_OBSERVED')
@@ -307,7 +310,7 @@ def migration_matrix(lab):
     require(lab.history()==previous,'RECOVERY_CHANGED_SUCCESSFUL_HISTORY')
     lab.migration('migrate');lab.migration('validate');require(lab.state()==original and lab.history()[:-1]==previous,'RECOVERY_LOST_COMMITTED_DATA')
     lab.record('nonTransactionalMigrationRequiresCompensation',failure=failed,atomicRollback=False,partialRows=1,failureMetadata='NO_FAILED_HISTORY_ROW',failedHistory=failed_history,recovery=['drop only recovery_nonatomic','restore exact successful V8 input','assert successful history unchanged; no repair','migrate with native validation enabled','validate'],history=lab.history())
-    stable=lab.history();schema_before=lab.schema_state();p=lab.migrations/'V9__incompatible_required.sql'
+    stable=lab.history();schema_before=lab.schema_state();p=lab.migrations/f'V{9+offset}__incompatible_required.sql'
     table=symbol('ENT-PAYMENT' if lab.domain=='payment' else 'CASE','e')
     p.write_text('ALTER TABLE '+table+' ADD COLUMN recovery_required text NOT NULL;\n')
     failed=lab.failed_startup('incompatible-required-schema')
@@ -393,13 +396,20 @@ def runtime_matrix(lab,ui,domain):
     lab.record('revokedSessionRejected',httpStatus=code)
 
 
-def qualify(workspace):
+def qualify(workspace, *, cardinality=False):
     workspace=Path(workspace).absolute();workspace.mkdir(mode=0o700,exist_ok=False)
     source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     bindings={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in sorted((ROOT/'engineering/recovery').glob('*.py'))}
     result={'scope':'QUALIFICATION_ONLY','sourceCommit':source_commit,'image':IMAGE,'applications':{},'releaseClosure':'BLOCKED','phase6':'IN_PROGRESS','phase7':'NOT_STARTED','authority':'NOT_GRANTED'}
     for domain in ('payment','case-management'):
-        candidate,snapshot,request,plan=inputs(domain);project=workspace/domain;FilesystemArtifactStore(project).apply(plan)
+        candidate,snapshot,request,plan=inputs(domain)
+        if cardinality:
+            from types import SimpleNamespace
+            from engineering.cardinality.successor import CardinalityCandidate
+            candidate = CardinalityCandidate()
+            request = SimpleNamespace(**(vars(request) | {'generator': candidate.generator}))
+            plan = candidate.plan(snapshot, request)
+        project=workspace/domain;FilesystemArtifactStore(project).apply(plan)
         generated={a.path:sha((project/a.path).read_bytes()) for a in plan.artifacts}
         backend=project/'backend';logs=workspace/(domain+'-logs');logs.mkdir();migration_dir=workspace/(domain+'-migration-inputs');shutil.copytree(backend/'src/main/resources/db/migration',migration_dir)
         originals={p.name:sha(p.read_bytes()) for p in migration_dir.iterdir() if p.is_file()}
@@ -416,7 +426,8 @@ def qualify(workspace):
                 statements=list(seed_sql(domain))
                 for resource in ('original-committed','crash-before','crash-after'):
                     statements.extend(statement.replace('fixture-resource',resource) for statement in seed_sql(domain)[2:])
-                lab.sql('BEGIN;'+ ';'.join(statements)+';CREATE TABLE recovery_transport(identity text PRIMARY KEY,payload bytea NOT NULL);COMMIT;')
+                enter = "SELECT acp_cardinality_enter('tenant-one'::bytea);" if cardinality else ''
+                lab.sql('BEGIN;' + enter + ';'.join(statements)+';CREATE TABLE recovery_transport(identity text PRIMARY KEY,payload bytea NOT NULL);COMMIT;')
                 runtime_matrix(lab,ui,domain)
                 # Use committed application state for every migration fault.
                 stop(lab.process);migration_matrix(lab);before=lab.state();fresh=lab.launch();require(lab.state()==before,'RECOVERED_STARTUP_CHANGED_DATA')
@@ -436,4 +447,4 @@ def qualify(workspace):
     return result
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--workspace',type=Path,required=True);qualify(parser.parse_args().workspace)
+    parser=argparse.ArgumentParser();parser.add_argument('--workspace',type=Path,required=True);parser.add_argument('--cardinality',action='store_true');args=parser.parse_args();qualify(args.workspace,cardinality=args.cardinality)

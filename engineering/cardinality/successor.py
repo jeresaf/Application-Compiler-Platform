@@ -6,6 +6,7 @@ from pathlib import Path
 
 from engineering.generator_candidates.spring_vue_postgres_0_6.candidate import SuccessorCandidate
 from compiler_contracts import Document
+from engineering.cardinality import participation
 
 ROOT = Path(__file__).resolve().parent
 JAVA = 'backend/src/main/java/acp/infrastructure/'
@@ -143,6 +144,7 @@ class CardinalityCandidate(SuccessorCandidate):
         return sha(json.dumps({
             'parent': self.bundle,
             'overlay': sha(Path(__file__).read_bytes()),
+            'participation': sha(Path(participation.__file__).read_bytes()),
             'coordination': sha((ROOT / 'templates/TenantCoordination.java').read_bytes()),
         }, sort_keys=True).encode())
 
@@ -156,7 +158,24 @@ class CardinalityCandidate(SuccessorCandidate):
                 'productionAdmission': 'NOT_AUTHORIZED'}
 
     def plan_upgrade(self, previous, current, accepted_plan, bindings, history):
-        raise ValueError('CARDINALITY_SEMANTIC_UPGRADE_NOT_QUALIFIED')
+        # The inherited planner verifies actual history and separately approved
+        # bindings. A bulk backfill on a guarded table needs its own stopped,
+        # tenant-partitioned write plan and is outside this DDL-only path.
+        result = super().plan_upgrade(previous, current, accepted_plan, bindings, history)
+        old = previous.read()['content']
+        new = current.read()['content']
+        if old['schemaVersion'] != '0.3.0' or new['schemaVersion'] != '0.3.0':
+            raise ValueError('CARDINALITY_UPGRADE_VERSION_UNSUPPORTED')
+        endpoints = {node['data'][role]['id'] for node in old['nodes'] if node['kind'] == 'Relation'
+                     for role in ('source', 'target')}
+        nodes = {node['id']: node for node in new['nodes']}
+        for operation in result.read()['changes']:
+            node = nodes[operation['id']]
+            if node['kind'] != 'Field':
+                raise ValueError('CARDINALITY_UPGRADE_RELATION_CHANGE_UNSUPPORTED')
+            if 'BACKFILL' in operation['phases'] and node['data']['owner']['id'] in endpoints:
+                raise ValueError('CARDINALITY_UPGRADE_COORDINATED_BACKFILL_REQUIRED')
+        return result
 
     def lower(self, snapshot, *, compiler, pipeline):
         target = super().lower(snapshot, compiler=compiler, pipeline=pipeline)
@@ -186,8 +205,17 @@ class CardinalityCandidate(SuccessorCandidate):
         source['text'] = original.replace(anchor, anchor + '\n    private final TenantCoordination coordination;').replace(
             wiring, wiring + '\n        this.coordination=new TenantCoordination(jdbc,' + json.dumps(application, ensure_ascii=True) + ');').replace(
             locking, '        coordination.acquire(jwt.getClaimAsString("tenant"));\n' + locking)
+        runtime = (ROOT / 'templates/TenantCoordination.java').read_text()
+        anchor = '"SELECT pg_advisory_xact_lock(?, ?)"'
+        binding = 'statement.setInt(1, (int) (key >>> 32));\n                statement.setInt(2, (int) key);'
+        if runtime.count(anchor) != 1 or runtime.count(binding) != 1:
+            raise ValueError('CARDINALITY_COMPONENT_ANCESTRY')
+        runtime = runtime.replace(anchor, '"SELECT acp_cardinality_enter(?)"').replace(
+            binding, 'statement.setBytes(1, authorizedTenant.getBytes(StandardCharsets.UTF_8));')
         additions = {
-            JAVA + 'TenantCoordination.java': ((ROOT / 'templates/TenantCoordination.java').read_text(), 'CARDINALITY_RUNTIME'),
+            JAVA + 'TenantCoordination.java': (runtime, 'CARDINALITY_RUNTIME'),
+            'database/' + participation.MIGRATION: (participation.SQL, 'MIGRATION'),
+            'backend/src/main/resources/db/migration/' + participation.MIGRATION: (participation.SQL, 'MIGRATION'),
             'database/' + MIGRATION: (sql, 'MIGRATION'),
             'backend/src/main/resources/db/migration/' + MIGRATION: (sql, 'MIGRATION'),
         }
@@ -203,7 +231,9 @@ class CardinalityCandidate(SuccessorCandidate):
         build = provenance['build']
         generator = self.generator.split('+sha256:', 1)[0]
         build.update(generator=generator, bundleDigest='sha256:' + self.cardinality_bundle)
-        build['migrationDigests']['database/' + MIGRATION] = sha(sql.encode())
+        for path, (text, role) in additions.items():
+            if path.startswith('database/'):
+                build['migrationDigests'][path] = sha(text.encode())
         upgrade = json.loads(by['acp/target-upgrade.json']['text'])
         upgrade.update(to=build, migrations=build['migrationDigests'], databaseChange='ADDITIVE_CARDINALITY_QUALIFICATION_ONLY')
         by['acp/target-upgrade.json']['text'] = json.dumps(upgrade, sort_keys=True, separators=(',', ':')) + '\n'
