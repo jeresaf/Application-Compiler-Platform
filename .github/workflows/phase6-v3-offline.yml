@@ -125,6 +125,7 @@ jobs:
           if-no-files-found: error
 
   successor-application-runtime:
+    needs: successor-dependency-determinism
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -162,6 +163,29 @@ jobs:
           PYTHON
       - name: Obtain exact disposable PostgreSQL runtime
         run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ github.run_attempt == '1' && 'successor-verified-maven-inputs' || format('successor-verified-maven-inputs-attempt-{0}', github.run_attempt) }}
+          path: ${{ runner.temp }}/acp-transferred-m2
+      - name: Verify and select immutable same-run Maven inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3.14 -B - <<'PYTHON_LOCK'
+          import json, os
+          from pathlib import Path
+          from engineering.dependency_resolution.inputs import verify_tree
+          from engineering.dependency_resolution.qualify import SETTINGS
+          root = Path(os.environ['RUNNER_TEMP'])
+          reference = json.loads(Path('engineering/dependency_resolution/maven-artifacts.lock.json').read_bytes())
+          repo = root / 'acp-transferred-m2'
+          verify_tree(repo, reference['artifacts'])
+          assert len(reference['artifacts']) == 832
+          settings = root / 'acp-offline-settings.xml'
+          settings.write_bytes(SETTINGS)
+          with Path(os.environ['GITHUB_ENV']).open('a') as stream:
+              print(f'MAVEN_ARGS=-o -s {settings} -gs {settings} -Dmaven.repo.local={repo}', file=stream)
+          PYTHON_LOCK
       # Wrap engineering/generator_builds/runtime.py without changing its assertions or cleanup.
       - name: Exercise both generated applications with fresh isolated databases
         shell: bash

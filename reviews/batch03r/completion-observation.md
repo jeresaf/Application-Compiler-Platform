@@ -31,3 +31,7 @@ No successor migration or concurrency correction is in this checkpoint. The base
 The 832-member lock and offline Maven selection remain intact. Same-run transfer and exact member verification constrain consumed bytes. On later attempts the producers and consumers select an attempt-specific artifact name within the same workflow run. A consumer-only rerun fails closed if the producer did not publish for that attempt. Exact member verification still runs before consumption. Maven Central remains an upstream availability dependency. Durable storage requires separate custody authorization.
 
 **PARTIALLY_QUALIFIED.** SEC-01, SEC-02 and Phase 6 release closure remain BLOCKED. Phase 11 remains IN_PROGRESS. Phase 12 remains NOT_STARTED.
+
+## Hosted follow-up
+
+On `82269bb3f1d632f261aaa701371572cfa29d479d`, [deployment recovery](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/45791837457/job/139814646668) passed 15 checks per application with zero failures or skips and reaped processes. This execution validates recovery with the new recorder. It does not establish the original failure's cause. On the same commit, [application runtime](https://github.com/jeresaf/Application-Compiler-Platform/actions/runs/45791837457/job/139812530754) failed before Payment test execution. Its retained Maven log shows Maven Central HTTP 429 for the Spring Boot 4.1.1 parent POM. Runtime now uses the same verified attempt-local offline transfer as performance and recovery.
