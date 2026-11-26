@@ -10,7 +10,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path[:0] = [str(ROOT), str(ROOT / 'tooling')]
+sys.path[:0] = [str(ROOT), str(ROOT / 'tooling'), str(ROOT / 'tooling/tests')]
 from engineering.cardinality.successor import MIGRATION
 from engineering.cardinality.participation import MIGRATION as PARTICIPATION
 from engineering.generator_builds.runtime import database
@@ -78,6 +78,46 @@ def lock(tenant='tenant-one'):
     return f"SELECT acp_cardinality_enter('{tenant}'::bytea);"
 
 
+def recover_interrupted_migration(container, schema, sql, expected_absent):
+    with session(container, schema) as (send, receive):
+        send('SELECT pg_backend_pid();')
+        pid = int(receive().strip())
+        send('BEGIN;\n' + sql)
+        assert 'ERROR' not in receive(), 'MIGRATION_INTERRUPTION_SETUP'
+        assert execute(container, f'SELECT pg_terminate_backend({pid}, 5000);') == 't'
+    assert execute(container, f'SELECT {expected_absent};') == 't'
+    execute(container, f'SET search_path={schema};\n' + sql)
+
+
+def verify_payment_backfill(container, schema):
+    # The test history is synthetic. It exercises the exact accepted-plan
+    # port and SQL path without enrolling authority.
+    from compiler_contracts import Document
+    from engineering.cardinality.successor import CardinalityCandidate
+    from test_canonical03_migrations import fixture
+    from test_target_migrations import FixtureAcceptedHistory
+
+    previous, current, plan, bindings, _ = fixture()
+    approved = Document.of({**bindings.read(), 'cardinalityBackfillTenant': 'tenant-one'})
+    migration_plan = CardinalityCandidate().plan_upgrade(
+        previous, current, plan, approved, FixtureAcceptedHistory(plan, approved),
+    ).read()
+    try:
+        execute(container, f'SET search_path={schema};\n' + migration_plan['sql'])
+    except subprocess.CalledProcessError as error:
+        import re
+        state = re.search(r'ERROR:\s+([0-9A-Z]{5}):', error.output)
+        raise ValueError('COORDINATED_BACKFILL_' + (state[1] if state else 'EXECUTION_FAILED')) from None
+    field_node = next(node for node in current.read()['content']['nodes']
+                      if node['id'] == 'EVOLUTION-required-field')
+    table = symbol(field_node['data']['owner']['id'], 'e')
+    field = symbol(field_node['id'], 'f')
+    expected = approved.read()['requiredFieldBackfills']['EVOLUTION-required-field'].encode().hex()
+    rows = execute(container, f"SET search_path={schema}; SELECT encode({field},'hex') FROM {table};")
+    assert rows.splitlines() == [expected], 'COORDINATED_BACKFILL_BYTES'
+    return True
+
+
 def exercise(container, schema, project, domain, corrected):
     migrations = sorted((project / 'database').glob('V*.sql'))
     historic = [path for path in migrations if path.name not in (MIGRATION, PARTICIPATION)]
@@ -102,15 +142,10 @@ def exercise(container, schema, project, domain, corrected):
                 receive()
             assert execute(container, f"SELECT to_regprocedure('{schema}.acp_cardinality_key(bytea)') IS NULL;") == 't'
             execute(container, f'SET search_path={schema}; ' + seed_sql(domain)[-1] + ';')
-        with session(container, schema) as (send, receive):
-            send('SELECT pg_backend_pid();')
-            pid = int(receive().strip())
-            send('BEGIN;\n' + v10)
-            assert 'ERROR' not in receive(), 'V10_INTERRUPTION_SETUP'
-            assert execute(container, f'SELECT pg_terminate_backend({pid}, 5000);') == 't'
-        assert execute(container, f"SELECT to_regprocedure('{schema}.acp_cardinality_key(bytea)') IS NULL;") == 't'
-        execute(container, f'SET search_path={schema};\n' + v10)
-        execute(container, f'SET search_path={schema};\n' + (project / 'database' / PARTICIPATION).read_text())
+        recover_interrupted_migration(container, schema, v10,
+                                      f"to_regprocedure('{schema}.acp_cardinality_key(bytea)') IS NULL")
+        recover_interrupted_migration(container, schema, (project / 'database' / PARTICIPATION).read_text(),
+                                      f"to_regclass('{schema}.acp_cardinality_participation') IS NULL")
     table = symbol('ENT-PAYMENT' if domain == 'payment' else 'CASE', 'e')
     identity = symbol('FLD-PAYMENT-ID' if domain == 'payment' else 'CASE-ID', 'f')
     summary = symbol('FLD-TASK-SUMMARY', 'f')
@@ -162,6 +197,10 @@ def exercise(container, schema, project, domain, corrected):
             while execute(container, "SELECT count(*) FROM pg_locks WHERE locktype='advisory' AND objsubid=2 AND NOT granted;") != '1':
                 if time.monotonic() >= deadline:
                     raise TimeoutError('COORDINATION_WAITER_NOT_OBSERVED')
+            with session(container, schema) as (independent, independent_read):
+                independent("BEGIN; SET LOCAL statement_timeout='1s';" + lock('tenant-two')
+                            + lock('tenant-two') + 'ROLLBACK;')
+                assert 'ERROR' not in independent_read(), 'UNRELATED_TENANT_BLOCKED'
             first('COMMIT;')
             left = first_read()
             assert 'ERROR' not in second_read()
@@ -177,10 +216,15 @@ def exercise(container, schema, project, domain, corrected):
             assert sum('ERROR' in result for result in (left, right)) == 1
     count = int(execute(container, f"SET search_path={schema}; SELECT count(*) FROM {table} WHERE {summary}='updated';"))
     assert count == (2 if corrected else 1)
+    if corrected:
+        assert execute(container, f'SET search_path={schema}; SELECT count(*) FROM acp_cardinality_participation;') == '1'
     return {'committedWrites': count, 'deadlocks': 0 if corrected else 1,
-            **({'v10InterruptionRolledBack': True, 'writerRoleQualified': True,
+            **({'v10InterruptionRolledBack': True, 'v11InterruptionRolledBack': True,
+                'independentTenantProgress': True, 'participationRows': 1, 'writerRoleQualified': True,
                 'retiredRoleRejected': True, 'advisoryOnlyRejected': True,
-                'invalidRetainedStateRejected': domain == 'payment'} if corrected else {})}
+                'invalidRetainedStateRejected': domain == 'payment',
+                'coordinatedBackfillVerified': verify_payment_backfill(container, schema)
+                if domain == 'payment' else None} if corrected else {})}
 
 
 def main():

@@ -166,16 +166,48 @@ class CardinalityCandidate(SuccessorCandidate):
         new = current.read()['content']
         if old['schemaVersion'] != '0.3.0' or new['schemaVersion'] != '0.3.0':
             raise ValueError('CARDINALITY_UPGRADE_VERSION_UNSUPPORTED')
-        endpoints = {node['data'][role]['id'] for node in old['nodes'] if node['kind'] == 'Relation'
-                     for role in ('source', 'target')}
+        old_nodes = {node['id']: node for node in old['nodes']}
+        relations = [node for node in old['nodes'] if node['kind'] == 'Relation']
+        endpoints = {node['data'][role]['id'] for node in relations for role in ('source', 'target')}
         nodes = {node['id']: node for node in new['nodes']}
-        for operation in result.read()['changes']:
+        body = result.read()
+        guarded = set()
+        for operation in body['changes']:
             node = nodes[operation['id']]
             if node['kind'] != 'Field':
                 raise ValueError('CARDINALITY_UPGRADE_RELATION_CHANGE_UNSUPPORTED')
             if 'BACKFILL' in operation['phases'] and node['data']['owner']['id'] in endpoints:
-                raise ValueError('CARDINALITY_UPGRADE_COORDINATED_BACKFILL_REQUIRED')
-        return result
+                guarded.add(node['data']['owner']['id'])
+        if not guarded:
+            return result
+        # This value is part of the same independently approved bindings digest
+        # verified by the inherited planner. No review or identity is inferred.
+        tenant = bindings.read().get('cardinalityBackfillTenant')
+        if type(tenant) is not str or not tenant:
+            raise ValueError('CARDINALITY_UPGRADE_COORDINATED_BACKFILL_REQUIRED')
+        tenant_sql = "decode('" + tenant.encode('utf-8').hex() + "','hex')"
+        tables = {identifier(node, 'e') for node in endpoints}
+        tables.update(identifier(node['id'], 'r') for node in relations)
+        preflight = ['LOCK TABLE ' + ','.join(sorted(tables)) + ' IN ACCESS EXCLUSIVE MODE NOWAIT;']
+        for endpoint in sorted(guarded):
+            field = identifier(old_nodes[endpoint]['data']['tenantField']['id'], 'f')
+            table = identifier(endpoint, 'e')
+            preflight.append(f"DO $$ BEGIN IF EXISTS (SELECT 1 FROM {table} WHERE {field} IS DISTINCT FROM {tenant_sql}) "
+                             "THEN RAISE EXCEPTION 'ACP_CARDINALITY_BACKFILL_POPULATION'; END IF; END $$;")
+        preflight.append(f'SELECT acp_cardinality_enter({tenant_sql});')
+        # PostgreSQL prevents ALTER TABLE while this transaction has queued
+        # trigger events. Validate the completed field update before sealing
+        # its nullability, then restore the transaction's deferred mode.
+        statements = []
+        guarded_tables = {identifier(endpoint, 'e') for endpoint in guarded}
+        for line in body['sql'].splitlines():
+            parts = line.split()
+            if len(parts) > 3 and parts[:2] == ['ALTER', 'TABLE'] and parts[2] in guarded_tables and line.endswith(' SET NOT NULL;'):
+                statements.extend(['SET CONSTRAINTS ALL IMMEDIATE;', line, 'SET CONSTRAINTS ALL DEFERRED;'])
+            else:
+                statements.append(line)
+        body['sql'] = '\n'.join(preflight + statements) + '\n'
+        return Document.of(body)
 
     def lower(self, snapshot, *, compiler, pipeline):
         target = super().lower(snapshot, compiler=compiler, pipeline=pipeline)

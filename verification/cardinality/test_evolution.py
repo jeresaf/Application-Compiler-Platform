@@ -21,6 +21,20 @@ class CardinalityEvolutionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'CARDINALITY_UPGRADE_COORDINATED_BACKFILL_REQUIRED'):
             CardinalityCandidate().plan_upgrade(*fixture())
 
+    def test_guarded_single_tenant_backfill_requires_exact_approved_binding(self):
+        from compiler_contracts import Document
+        from test_target_migrations import FixtureAcceptedHistory
+
+        previous, current, plan, bindings, _ = fixture()
+        approved = Document.of({**bindings.read(), 'cardinalityBackfillTenant': 'tenant-one'})
+        result = CardinalityCandidate().plan_upgrade(
+            previous, current, plan, approved, FixtureAcceptedHistory(plan, approved),
+        ).read()
+        sql = result['sql']
+        self.assertIn('ACCESS EXCLUSIVE MODE NOWAIT', sql)
+        self.assertLess(sql.index('ACP_CARDINALITY_BACKFILL_POPULATION'), sql.index('acp_cardinality_enter'))
+        self.assertLess(sql.index('acp_cardinality_enter'), sql.index('UPDATE '))
+
     def test_absent_accepted_history_still_rejected(self):
         class MissingHistory:
             def read_accepted_plan(self, digest):

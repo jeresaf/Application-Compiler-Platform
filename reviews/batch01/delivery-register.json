@@ -193,7 +193,7 @@
       "requirement": "Pool starvation returns 500; finite pool alone is not safe arbitrary-concurrency admission.",
       "implementation": "34-connection bounded laboratory configuration; acquisition timeout; explicit DB-observed recovery/replay",
       "engineeringVerification": "Bounded H8 evidence. Sustained declared bound, deterministic pressure, authorization/idempotency, rollback/committed differentiation, no concealed retries.",
-      "batch03r": "H6 cardinality deadlock remains open; both opt-in generated applications passed bounded PostgreSQL contention and runtime smoke tests. V11 participation, role and migration tests extend the laboratory scope. See reviews/batch03r/cardinality-participation.md.",
+      "batch03r": "H6 cardinality deadlock remains open; both opt-in generated applications passed bounded PostgreSQL contention and runtime smoke tests. V11 participation, role and migration tests extend the laboratory scope. The disposable cutover verifier now uses independent application and migration principals. See reviews/batch03r/cardinality-cutover.md.",
       "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
       "productionAcceptance": "NOT_ACCEPTED",
       "evidence": [
