@@ -1,0 +1,48 @@
+[
+  {
+    "artifact": 15086085129,
+    "name": "successor-performance-scaling",
+    "run": 45749998438,
+    "job": 139675201372,
+    "expiresAt": "2027-02-24T03:36:26Z",
+    "publishedDigest": "sha256:7972b5101ef77655dd6d29d041ae515a2a4c1e1adc619a344ba5277420450bb3",
+    "downloadedSHA256": "7972b5101ef77655dd6d29d041ae515a2a4c1e1adc619a344ba5277420450bb3"
+  },
+  {
+    "artifact": 15085313133,
+    "name": "successor-deployment-recovery",
+    "run": 45749998438,
+    "job": 139675201454,
+    "expiresAt": "2027-02-24T03:36:26Z",
+    "publishedDigest": "sha256:a9384f52eba63266d9f638ca3f42323aa5887064a3ff95f361c3bc6526699788",
+    "downloadedSHA256": "a9384f52eba63266d9f638ca3f42323aa5887064a3ff95f361c3bc6526699788"
+  },
+  {
+    "artifact": 15085467709,
+    "name": "phase11-h6-failure",
+    "run": 45749998207,
+    "job": 139675200098,
+    "expiresAt": "2027-02-24T03:36:26Z",
+    "publishedDigest": "sha256:1afd0214b3b650e9820d306777c61300ec706a7c10591a5d52f4e3fda772cf42",
+    "downloadedSHA256": "1afd0214b3b650e9820d306777c61300ec706a7c10591a5d52f4e3fda772cf42",
+    "runAttempt": 1
+  },
+  {
+    "artifact": 15085899920,
+    "name": "phase6-remediation-0.5.0-closure-audit",
+    "run": 45749998166,
+    "job": 139681004098,
+    "expiresAt": "2027-02-24T03:36:26Z",
+    "publishedDigest": "sha256:0e25d8022fc7d8d640c834d40c1e877328860cfe7591571ae29f4a2e26e9b646",
+    "downloadedSHA256": "0e25d8022fc7d8d640c834d40c1e877328860cfe7591571ae29f4a2e26e9b646"
+  },
+  {
+    "artifact": 15086778175,
+    "name": "final-ci-aggregate-evidence",
+    "run": 45749998166,
+    "job": 139689395881,
+    "expiresAt": "2027-02-24T03:36:26Z",
+    "publishedDigest": "sha256:b6128b9e8b697afe5e5a15dc0a8d35abaf89d82b3b178b318156eeb53234ea67",
+    "downloadedSHA256": "b6128b9e8b697afe5e5a15dc0a8d35abaf89d82b3b178b318156eeb53234ea67"
+  }
+]

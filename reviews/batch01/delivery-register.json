@@ -193,6 +193,7 @@
       "requirement": "Pool starvation returns 500; finite pool alone is not safe arbitrary-concurrency admission.",
       "implementation": "34-connection bounded laboratory configuration; acquisition timeout; explicit DB-observed recovery/replay",
       "engineeringVerification": "Bounded H8 evidence. Sustained declared bound, deterministic pressure, authorization/idempotency, rollback/committed differentiation, no concealed retries.",
+      "batch03r": "H6 cardinality deadlock remains open; see reviews/batch03r/README.md.",
       "ownerApproval": "Separate explicit authorization for implementation/profile/authority changes; H8 is review only.",
       "productionAcceptance": "NOT_ACCEPTED",
       "evidence": [
@@ -3948,6 +3949,7 @@
       "requirement": "Retain performance and capacity qualification under exact inputs",
       "implementation": "Historical bounded workload and scaling evidence exists. Current failed or pending executions require separate reconciliation.",
       "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
+      "batch03r": "Performance stopped at Maven Central HTTP 429; same-run verified offline transfer implemented, hosted qualification pending.",
       "ownerApproval": "Pending where applicable",
       "productionAcceptance": "NOT_ACCEPTED",
       "evidence": [
