@@ -12,7 +12,8 @@ from canonical_json import load as canonical_load,digest as canonical_digest
 from canonical_ir import validate_snapshot
 from changes import graph,reverse,closure
 
-TOOLS=('project.summary','project.context','spec.query','spec.validate','compiler.plan','source.symbol','source.references','source.impact','compiler.verify','evolution.preview')
+BASE_TOOLS=('project.summary','project.context','spec.query','spec.validate','compiler.plan','source.symbol','source.references','source.impact','compiler.verify')
+TOOLS=BASE_TOOLS+('evolution.preview',)
 RESTRICTIONS=('READ_ONLY','NO_CHANGE_AUTHORIZATION','QUALIFICATION_ONLY','PHASE6_RELEASE_CLOSURE_BLOCKED','OPERATIONAL_SECURITY_NOT_ESTABLISHED','PRODUCTION_NOT_AUTHORIZED')
 
 def input_bytes(path):
@@ -37,7 +38,9 @@ def verification_inputs_match(expected, observed):
             for key, value in expected.items())
 
 class Application:
- def __init__(self,cfg):
+ catalog=BASE_TOOLS
+ def __init__(self,cfg,*,evolution_enabled=False):
+  self.catalog=TOOLS if evolution_enabled else BASE_TOOLS
   fields={'root','baseline','model','verification','plan'}
   require(set(cfg) in (fields, fields | {'evolution'}),'HOST_APPLICATION_FIELDS')
   self.root=Path(cfg['root']);self.cfg=cfg
@@ -93,7 +96,7 @@ class Application:
   self.fresh();out=self.envelope(operation);ids=self.selected(q);symbol=q['symbol']
   if symbol:require(symbol in self.symbols,'UNKNOWN_SYMBOL_ID')
   if operation=='project.summary':
-   rows=[{'project':self.snapshot['content']['applicationId'],'compiler':self.b['compiler'],'generator':self.b['generator'],'target':self.plan['targetIdentity'],'semanticObjects':len(self.nodes),'sourceSymbols':len(self.symbols),'supportedTools':list(TOOLS)}]
+   rows=[{'project':self.snapshot['content']['applicationId'],'compiler':self.b['compiler'],'generator':self.b['generator'],'target':self.plan['targetIdentity'],'semanticObjects':len(self.nodes),'sourceSymbols':len(self.symbols),'supportedTools':list(self.catalog)}]
   elif operation=='spec.validate':
    validate_snapshot(self.snapshot);rows=[{'result':'PASS','check':'canonical_ir.validate_snapshot','authority':'EXISTING_APPROVAL_UNCHANGED'}]
   elif operation=='compiler.plan':
@@ -135,14 +138,18 @@ class Application:
 class Service:
  def __init__(self,path):
   p=Path(path);raw=read(p.parent,p.name);cfg=json.loads(raw)
-  require(set(cfg)=={'schema','applications'} and cfg['schema']=='acp-mcp-host/1' and set(cfg['applications'])=={'payment','case-management'},'HOST_CONFIGURATION')
+  require(set(cfg)=={'schema','applications'} and cfg['schema'] in ('acp-mcp-host/1','acp-mcp-host/2') and set(cfg['applications'])=={'payment','case-management'},'HOST_CONFIGURATION')
+  self.catalog=TOOLS if cfg['schema']=='acp-mcp-host/2' else BASE_TOOLS
   self.config=cfg['applications'];self.apps={};self.preview_lock=Lock()
+  require('evolution' not in self.config['payment'] and
+          (self.catalog==TOOLS or 'evolution' not in self.config['case-management']),'HOST_EVOLUTION_SCOPE')
  def application(self,name):
   require(name in self.config,'UNKNOWN_APPLICATION')
   if name not in self.apps:
-   app=Application(self.config[name]);require(app.b['domain']==name,'APPLICATION_BINDING');self.apps[name]=app
+   app=Application(self.config[name],evolution_enabled=self.catalog==TOOLS);require(app.b['domain']==name,'APPLICATION_BINDING');self.apps[name]=app
   return self.apps[name]
  def call(self,operation,q):
+  require(operation in self.catalog,'UNSUPPORTED_OPERATION')
   if operation != 'evolution.preview':return self.application(q['application']).call(operation,q)
   require(self.preview_lock.acquire(blocking=False),'CHANGE_PREVIEW_BUSY')
   try:return self.application(q['application']).call(operation,q)

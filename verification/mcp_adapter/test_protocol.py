@@ -142,6 +142,24 @@ for case in (Protocol,Legacy):
 del case,name,method
 
 class Transport(unittest.TestCase):
+ def test_historical_preview_namespaces_keep_nine_tools(self):
+  async def verify():
+   from engineering.documents.mcp import create as documents
+   from engineering.jobs.mcp import create as jobs
+   from engineering.reporting.mcp import create as reporting
+   from engineering.mcp_adapter.server import create as foundation
+   import tempfile
+   with tempfile.TemporaryDirectory() as directory:
+    old=Path(directory)/'host.json'
+    cfg=json.loads(CONFIG.read_bytes());cfg['schema']='acp-mcp-host/1'
+    cfg['applications']['case-management'].pop('evolution')
+    old.write_bytes(encode(cfg))
+    self.assertIsNone(foundation(Service(old)).get_tool_input_schema('evolution.preview'))
+   for create in (documents,jobs,reporting):
+    server=create(object())
+    self.assertIsNone(server.get_tool_input_schema('evolution.preview'))
+    self.assertEqual(sum(server.get_tool_input_schema(tool) is not None for tool in TOOLS),9)
+  asyncio.run(verify())
  def test_retained_validator_is_distinguished_from_current_validator(self):
   from engineering.mcp_adapter.service import verification_inputs_match
   retained=Service(CONFIG).application('payment').verification['inputs']

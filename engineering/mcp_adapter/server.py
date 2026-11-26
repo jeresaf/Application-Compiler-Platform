@@ -6,7 +6,7 @@ from pydantic import BaseModel,ConfigDict,Field,ValidationError
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp_types import Tool,ToolAnnotations,ListToolsResult,CallToolResult,TextContent
-from engineering.mcp_adapter.service import Service,TOOLS,encode
+from engineering.mcp_adapter.service import BASE_TOOLS,Service,encode
 
 Identifier=Annotated[str,Field(min_length=1,max_length=180,pattern=r'^[A-Za-z0-9_.:-]+$')]
 class Query(BaseModel):
@@ -20,9 +20,11 @@ class Query(BaseModel):
  status: Literal['','PASS','FAIL','BLOCKED','NOT_RUN']=''
  limit: Annotated[int,Field(ge=1,le=50)]=20
  budget: Annotated[int,Field(ge=4096,le=32768)]=16384
+ cursor: Annotated[str,Field(max_length=90,pattern=r'^(|[a-f0-9]{64}:[0-9]{1,6})$')]=''
+
+class EvolutionQuery(Query):
  change: dict[str,Any]=Field(default_factory=dict)
  preset: Literal['','case-r6-r7']=''
- cursor: Annotated[str,Field(max_length=90,pattern=r'^(|[a-f0-9]{64}:[0-9]{1,6})$')]=''
 
 OUTPUT={'type':'object','additionalProperties':False,'properties':{'schema':{'const':'acp-mcp-tool-result/1'},'payload':{'type':['object','null']},'error':{'type':['string','null']}},'required':['schema','payload','error']}
 ALLOWED={
@@ -40,13 +42,15 @@ class BoundedInput:
   return raw.decode('utf-8',errors='strict')
 
 def create(service):
- tools=[Tool(name=n,description='ACP read-only '+n+'; no approval or execution authority.',input_schema=Query.model_json_schema(),output_schema=OUTPUT,annotations=ToolAnnotations(read_only_hint=True,destructive_hint=False,idempotent_hint=True,open_world_hint=False)) for n in TOOLS]
+ catalog=service.catalog if isinstance(service,Service) else BASE_TOOLS
+ def model(name):return EvolutionQuery if name=='evolution.preview' else Query
+ tools=[Tool(name=n,description='ACP read-only '+n+'; no approval or execution authority.',input_schema=model(n).model_json_schema(),output_schema=OUTPUT,annotations=ToolAnnotations(read_only_hint=True,destructive_hint=False,idempotent_hint=True,open_world_hint=False)) for n in catalog]
  async def listing(ctx,params):return ListToolsResult(tools=tools)
  async def invoke(ctx,params):
   value=None;error=None
   try:
-   if params.name not in TOOLS:raise ValueError('UNSUPPORTED_OPERATION')
-   q=Query.model_validate(params.arguments or {})
+   if params.name not in catalog:raise ValueError('UNSUPPORTED_OPERATION')
+   q=model(params.name).model_validate(params.arguments or {})
    if set(q.model_fields_set)-COMMON-ALLOWED[params.name]:raise ValueError('UNSUPPORTED_SELECTOR')
    with anyio.fail_after(240 if params.name == 'evolution.preview' else 30):
     value=await anyio.to_thread.run_sync(lambda:service.call(params.name,q.model_dump()),abandon_on_cancel=True)
@@ -57,7 +61,7 @@ def create(service):
    code=str(exc);error=code if code.isupper() and code.replace('_','').isalnum() and len(code)<80 else 'INPUT_INTEGRITY_FAILURE'
   result={'schema':'acp-mcp-tool-result/1','payload':value,'error':error}
   return CallToolResult(content=[TextContent(type='text',text=encode(result).decode())],structured_content=result,is_error=error is not None)
- return Server('ACP read-only MCP',version='0.1.0',instructions='Host-selected approved applications only. Results are observations, never semantic approval or release acceptance.',get_tool_input_schema=lambda n:Query.model_json_schema() if n in TOOLS else None,on_list_tools=listing,on_call_tool=invoke)
+ return Server('ACP read-only MCP',version='0.1.0',instructions='Host-selected approved applications only. Results are observations, never semantic approval or release acceptance.',get_tool_input_schema=lambda n:model(n).model_json_schema() if n in catalog else None,on_list_tools=listing,on_call_tool=invoke)
 
 async def serve(config):
  service=Service(config);server=create(service)

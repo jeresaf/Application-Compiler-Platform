@@ -11,7 +11,7 @@ def host(workspace,phase7,phase8,reuse=None,r8=None):
  w=Path(workspace).absolute();w.mkdir(mode=0o700,exist_ok=False)
  reference_inputs(phase7,w/'reference');raw=Path(phase8).read_bytes()
  if sha(raw)!=PHASE8_SHA256:raise ValueError('PHASE8_ARCHIVE_DIGEST')
- config={'schema':'acp-mcp-host/1','applications':{}}
+ config={'schema':'acp-mcp-host/2','applications':{}}
  with zipfile.ZipFile(phase8) as z:
   if z.testzip() is not None:raise ValueError('PHASE8_ARCHIVE_CORRUPT')
   q=json.loads(z.read('acp-verification/qualification.json'))
