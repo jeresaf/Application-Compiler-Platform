@@ -399,6 +399,11 @@ jobs:
         run: |
           set -euo pipefail
           "$RUNNER_TEMP/acp-performance-venv/bin/python3.14" -B engineering/performance/qualify.py --workspace "$RUNNER_TEMP/acp-performance" 2>&1 | tee "$RUNNER_TEMP/acp-performance.log"
+      - name: Measure the corrected candidate with the existing application workload
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-performance-venv/bin/python3.14" -B engineering/performance/runtime.py --cardinality --workspace "$RUNNER_TEMP/acp-cardinality-performance"
       - name: Retain exact measurements failures and generated build identities
         if: always()
         uses: actions/upload-artifact@v4
@@ -408,6 +413,7 @@ jobs:
             ${{ runner.temp }}/acp-performance.log
             ${{ runner.temp }}/acp-performance/qualification-results.json
             ${{ runner.temp }}/acp-performance/applications/performance-results.json
+            ${{ runner.temp }}/acp-cardinality-performance/performance-results.json
             ${{ runner.temp }}/acp-performance/applications/*-trial-*/
             ${{ runner.temp }}/acp-performance/rate-regressions/results.json
             ${{ runner.temp }}/acp-performance/rate-regressions/*/maven.log

@@ -15,6 +15,7 @@ from compiler_contracts import Document, Success, Stage, fingerprint, wire
 from compiler_core import compile_pipeline
 from compiler_reference import fixture_context, FixtureApproval
 from target_worker import ProductionTarget
+from engineering.cardinality.successor import CardinalityCandidate
 from engineering.generator_candidates.spring_vue_postgres_0_6 import SuccessorCandidate
 
 
@@ -54,10 +55,21 @@ class CandidatePort(SuccessorCandidate):
         return ProductionTarget.plan(self, target, request, inventory=inventory)
 
 
-def compile_fixture(domain, extra, *, nodes=None):
+
+class CardinalityPort(CandidatePort, CardinalityCandidate):
+    """Use the same scaling compiler stages with the explicitly selected overlay."""
+
+    def lower(self, realization, request):
+        target = super().lower(realization, request)
+        model = target.target_model.read()
+        model['cardinalityApplication'] = request.application
+        return replace(target, target_model=Document.of(model))
+
+
+def compile_fixture(domain, extra, *, nodes=None, cardinality=False):
     model = fixture(domain, extra)
     source, context = fixture_context(model)
-    target = CandidatePort()
+    target = CardinalityPort() if cardinality else CandidatePort()
     decisions = tuple(replace(d, choice=Document.of({'choice':target.profile['decisions'][d.role]})) for d in context.request.decisions)
     limits = context.request.resources
     # Same existing full-UI work policy. Never increase byte, node or depth caps.
@@ -93,8 +105,8 @@ def compile_fixture(domain, extra, *, nodes=None):
 
 if __name__ == '__main__':
     import argparse
-    p=argparse.ArgumentParser();p.add_argument('domain');p.add_argument('extra',type=int);a=p.parse_args()
-    print(json.dumps(compile_fixture(a.domain,a.extra)[0],sort_keys=True))
+    p=argparse.ArgumentParser();p.add_argument('domain');p.add_argument('extra',type=int);p.add_argument('--cardinality',action='store_true');a=p.parse_args()
+    print(json.dumps(compile_fixture(a.domain,a.extra,cardinality=a.cardinality)[0],sort_keys=True))
 
 
 def validate_trials(trials, *, baseline=False):
@@ -109,7 +121,7 @@ def validate_trials(trials, *, baseline=False):
     # timed sample is retained as a failure; it is not semantic nondeterminism.
 
 
-def measure_curve(workspace):
+def measure_curve(workspace, *, cardinality=False):
     """Fresh interpreter per sample: peak RSS is not contaminated by prior tiers."""
     import subprocess
     workspace=Path(workspace);workspace.mkdir(mode=0o700,exist_ok=False)
@@ -118,7 +130,7 @@ def measure_curve(workspace):
         for extra in (0,1,3,8,32,64):
             trials=[]
             for repetition in range(3):
-                completed=subprocess.run([sys.executable,'-B',str(Path(__file__).resolve()),domain,str(extra)],cwd=ROOT,
+                completed=subprocess.run([sys.executable,'-B',str(Path(__file__).resolve()),domain,str(extra),*(['--cardinality'] if cardinality else [])],cwd=ROOT,
                     check=True,capture_output=True,text=True,timeout=240)
                 row=json.loads(completed.stdout)
                 row['repetition']=repetition;trials.append(row);rows.append(row)

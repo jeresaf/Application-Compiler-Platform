@@ -197,6 +197,7 @@ R2_NEW_HASHES = {'engineering/reference_application/evolution.py': '911c8fe9f909
 R2_MODIFIED_HASHES = {'.github/workflows/phase10-reference.yml': 'a5c57a2efe40f5773e3ff0aeb67ca76142ca1dd33329a030ca30606bbce44e44'}
 
 H101_MODIFIED_HASHES = {'.github/workflows/acp-contracts.yml': 'e4deb80e4f4cf851d55a1f082002e94831ef0f473c3e8bee42a3bdff59759d28', '.github/workflows/phase6-v3-offline.yml': '193f062df424f686f693ec7906500d9ee8db4cbadcb30764130867a1d43b7e4f', 'engineering/dependency_resolution/inputs.py': 'dc68aa55c04ffd9151b5fd66253cf8280c2b5dfe385c9a5ee51a5ffa8d993b74', 'verification/dependency_resolution/test_inputs.py': '4c5c4fa9851d296dbcf3ca6c50ab8129dd7cd4c7a0f3f63f61ada684c5f5e76a', 'verification/maven_toolchain/test_maven.py': '52eabff06836dda2cfda5b35fff5c5629b60fb5ae25e5c0705fb443361845e39', 'engineering/ci/parity.py': 'f2ed324219790045bfd55407843cca660336da04b7279531a42d1d5e8fc17e8e', 'engineering/generator_builds/qualify.py': 'b86572f29c0d98516989f5cd328353f9e92da8783e1e6192a89b8de8d703a61c', 'verification/generator_builds/test_build_contract.py': '2bea45e5c9aa2499e8c2cabc5cfd09b3fb17462889d1c5ea8c385ec8e7a6365e'}
+BATCH03_PERFORMANCE_MODIFIED_HASHES = {'engineering/performance/runtime.py': '31e957c0e006fd99b53930aaf46064b5e47d64d4cff98cd90baccc0ec84314ab', 'engineering/performance/scaling.py': '01e24579fd15967a2d0ed6acaae814c2492a8fca8b85a9fec80ac6111fccd91a', '.github/workflows/phase6-v3-offline.yml': '0ecdd89adb410ba4e28096479f3c16033070147bf771dea7feba4e28021fb930'}
 BATCH03_CUTOVER_NEW_HASHES = {'reviews/batch03r/cardinality-cutover.md': '12e870ae79d35723c5b6624efad27260a9dda0878a917cd426bdd37f2375cc90'}
 BATCH03_CUTOVER_MODIFIED_HASHES = {'engineering/cardinality/successor.py': 'f76d68683a9214b6110b7264520e2cbe2ef91b735d61109cd98f7bf121ab3106', 'verification/cardinality/integrated.py': '2390d40de1fd023ea00c3ca9836ccfc8e5ebd0c9bbedf5613451aa0d287b980f', 'verification/cardinality/qualify.py': '779d417229a73700699634ad2424fba8df769e1c2280cc3edd3393265e99ab19', 'verification/cardinality/test_evolution.py': 'facad4817fb4a846c6afe4b837dd4ba65f78d2b7ca9075615a1c9b2e6827cba2', 'reviews/batch01/delivery-register.json': 'c077190a15b7712998be4c975edd40531ff721c8b37a3de868d8d2c10c987a7b'}
 BATCH03_PARTICIPATION_NEW_HASHES = {'engineering/cardinality/participation.py': '221b4121d826379e68ff36fb8f17168fc1181dbbac6f5d7ab7285bd11ea6fb91', 'verification/cardinality/test_evolution.py': 'bcb1c537b1c342189d365815a8890f04bc88d91111ccf4db5e23c7a39e7ff40c', 'reviews/batch03r/cardinality-participation.md': '1ddf533dce9058eab13fe5fa2ffb34a09145360b8b2c3f8500312c3726c829fc'}
@@ -263,6 +264,9 @@ def preserved_bytes(path):
         relative = path.relative_to(ROOT).as_posix()
     except ValueError:
         return actual
+    if relative in BATCH03_PERFORMANCE_MODIFIED_HASHES:
+        assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == BATCH03_PERFORMANCE_MODIFIED_HASHES[relative], relative
+        actual = subprocess.check_output(['git', 'show', 'c0df01f293c87e75bfccea181152374989b885f4:' + relative], cwd=ROOT)
     if relative in BATCH03_CUTOVER_MODIFIED_HASHES:
         assert not path.is_symlink() and hashlib.sha256(actual).hexdigest() == BATCH03_CUTOVER_MODIFIED_HASHES[relative], relative
         actual = subprocess.check_output(['git', 'show', 'c9a2c42df04648b6fbefb107e06fad50c955fe28:' + relative], cwd=ROOT)

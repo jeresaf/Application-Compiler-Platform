@@ -51,13 +51,19 @@ def startup_observer():
         existing.browser_gate.command=original_command
 
 
-def qualify(workspace):
+def qualify(workspace, *, cardinality=False):
+    from types import SimpleNamespace
+
+    candidate_type = existing.SuccessorCandidate
+    if cardinality:
+        from engineering.cardinality.successor import CardinalityCandidate
+        candidate_type = CardinalityCandidate
     workspace=Path(workspace).absolute();workspace.mkdir(mode=0o700,exist_ok=False)
     gate=existing.browser_gate
     original_tests,original_source,original_config=gate.tests,gate.server_source,gate.CONFIG
     gate.CONFIG=gate.CONFIG.replace('timeout:60000','timeout:180000')
     result={'scope':'QUALIFICATION_ONLY','sourceCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
-            'candidate':existing.SuccessorCandidate().descriptor(),'applications':{},
+            'candidate':candidate_type().descriptor(),'applications':{},
             'environment':{'python':platform.python_version(),'kernel':platform.release(),'machine':platform.machine(),
               'cpuCount':os.cpu_count(),'sharedHostLoad':os.getloadavg(),'meminfo':Path('/proc/meminfo').read_text(), 'cpuinfo':Path('/proc/cpuinfo').read_text(),
               'node':subprocess.check_output(['node','--version'],text=True).strip(),
@@ -72,6 +78,10 @@ def qualify(workspace):
     try:
         for domain in ('payment','case-management'):
             candidate,snapshot,request,plan=inputs(domain)
+            if cardinality:
+                candidate = candidate_type()
+                request = SimpleNamespace(**(vars(request) | {'generator': candidate.generator}))
+                plan = candidate.plan(snapshot, request)
             project=workspace/domain;store=FilesystemArtifactStore(project);store.apply(plan)
             store.adopt_human('frontend/src/extensions/identity.ts')
             inventory=store.inventory();plan=_ownership(candidate.plan(snapshot,request,inventory=inventory),inventory);store.apply(plan)
@@ -81,7 +91,13 @@ def qualify(workspace):
             # Pin the *test* authentication event across concurrent reads. No change
             # to production SessionGate or stale/expired/revoked acceptance rules.
             def source(current):
-                return original_source(current).replace('public class BrowserServer {','public class BrowserServer {\n static final Instant AUTH_EVENT=Instant.now();').replace('var now=Instant.now();return Jwt','var now=AUTH_EVENT;return Jwt').replace('Set.of("browser-authorized",','Set.of("browser-perf-0","browser-perf-1","browser-perf-2","browser-perf-3","browser-authorized",').replace('.claim("sid",token.equals', '.claim("sid",token.startsWith("browser-perf-")?token:token.equals')
+                fixture = original_source(current)
+                if cardinality:
+                    entry = 'new org.springframework.transaction.support.TransactionTemplate(manager).execute(status->{'
+                    if fixture.count(entry) != 1:
+                        raise ValueError('PERFORMANCE_CARDINALITY_FIXTURE_ANCESTRY')
+                    fixture = fixture.replace(entry, entry + "jdbc.execute(\"SELECT acp_cardinality_enter(convert_to('tenant-one','UTF8'))\");")
+                return fixture.replace('public class BrowserServer {','public class BrowserServer {\n static final Instant AUTH_EVENT=Instant.now();').replace('var now=Instant.now();return Jwt','var now=AUTH_EVENT;return Jwt').replace('Set.of("browser-authorized",','Set.of("browser-perf-0","browser-perf-1","browser-perf-2","browser-perf-3","browser-authorized",').replace('.claim("sid",token.equals', '.claim("sid",token.startsWith("browser-perf-")?token:token.equals')
             gate.server_source=source
             gate.tests=lambda current:BROWSER.replace('EVENTS','1' if current=='payment' else '3')
             trials=[]
@@ -131,5 +147,5 @@ def qualify(workspace):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--workspace',type=Path,required=True);a=p.parse_args()
-    with existing.supervised_processes():qualify(a.workspace)
+    p=argparse.ArgumentParser();p.add_argument('--workspace',type=Path,required=True);p.add_argument('--cardinality',action='store_true');a=p.parse_args()
+    with existing.supervised_processes():qualify(a.workspace,cardinality=a.cardinality)
