@@ -13,6 +13,17 @@ PRODUCER = '792f7f23a44ca6309977c395dc98938645036071'
 LOCK = Path('engineering/dependency_resolution/maven-artifacts.lock.json')
 
 
+def verify_metadata(metadata):
+    run = metadata.get('workflow_run') or {}
+    require(metadata.get('id') == 15031660633
+            and metadata.get('name') == 'successor-verified-maven-inputs'
+            and run.get('id') == 45631338502 and run.get('head_sha') == PRODUCER
+            and run.get('head_repository_id') == run.get('repository_id') == 1371285836,
+            'MAVEN_TRANSFER_PRODUCER')
+    require(metadata.get('expired') is False, 'MAVEN_TRANSFER_UNAVAILABLE_OR_EXPIRED')
+    require(metadata.get('digest') == 'sha256:' + ARCHIVE, 'MAVEN_TRANSFER_METADATA_DIGEST')
+
+
 def restore(archive, destination, artifacts):
     with zipfile.ZipFile(archive) as source:
         files = [entry for entry in source.infolist() if not entry.is_dir()]
@@ -37,9 +48,15 @@ def restore(archive, destination, artifacts):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('archive', type=Path)
-    parser.add_argument('destination', type=Path)
+    parser.add_argument('archive', type=Path, nargs='?')
+    parser.add_argument('destination', type=Path, nargs='?')
+    parser.add_argument('--metadata-only', type=Path)
     args = parser.parse_args()
+    if args.metadata_only is not None:
+        verify_metadata(json.loads(args.metadata_only.read_bytes()))
+        return
+    if args.archive is None or args.destination is None:
+        parser.error('archive and destination are required for restore')
     require(file_hash(args.archive) == ARCHIVE, 'MAVEN_TRANSFER_ARCHIVE')
     restore(args.archive, args.destination, json.loads(LOCK.read_bytes())['artifacts'])
     print(json.dumps({'artifact': 15031660633, 'producerCommit': PRODUCER,

@@ -59,6 +59,11 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           "$RUNNER_TEMP/acp-h6-venv/bin/python3.14" -B -m unittest discover -s verification/batch02 -p test_maven_transfer.py -v
+          if ! gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/15031660633" > "$RUNNER_TEMP/acp-batch02-maven-metadata.json"; then
+            echo "MAVEN_TRANSFER_METADATA_UNAVAILABLE" >&2
+            exit 1
+          fi
+          python3.14 -B -m engineering.ci.batch02_maven --metadata-only "$RUNNER_TEMP/acp-batch02-maven-metadata.json"
           gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/15031660633/zip" > "$RUNNER_TEMP/acp-batch02-maven.zip"
           python3.14 -B -m engineering.ci.batch02_maven "$RUNNER_TEMP/acp-batch02-maven.zip" "$RUNNER_TEMP/acp-batch02-m2"
       - name: Generate build and exercise operational failures and recovery

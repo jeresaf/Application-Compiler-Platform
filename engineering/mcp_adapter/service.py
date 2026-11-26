@@ -1,6 +1,7 @@
 """Read-only projections of existing ACP ports. Host inputs are never client paths."""
 import json,sys,os,stat,re
 from pathlib import Path
+from threading import Lock
 ROOT=Path(__file__).resolve().parents[2]
 sys.path[:0]=[str(ROOT),str(ROOT/'tooling')]
 from engineering.source_intelligence.model import encode,sha,digest,read,current,impact,require
@@ -11,7 +12,7 @@ from canonical_json import load as canonical_load,digest as canonical_digest
 from canonical_ir import validate_snapshot
 from changes import graph,reverse,closure
 
-TOOLS=('project.summary','project.context','spec.query','spec.validate','compiler.plan','source.symbol','source.references','source.impact','compiler.verify')
+TOOLS=('project.summary','project.context','spec.query','spec.validate','compiler.plan','source.symbol','source.references','source.impact','compiler.verify','evolution.preview')
 RESTRICTIONS=('READ_ONLY','NO_CHANGE_AUTHORIZATION','QUALIFICATION_ONLY','PHASE6_RELEASE_CLOSURE_BLOCKED','OPERATIONAL_SECURITY_NOT_ESTABLISHED','PRODUCTION_NOT_AUTHORIZED')
 
 def input_bytes(path):
@@ -27,11 +28,13 @@ def input_bytes(path):
 
 class Application:
  def __init__(self,cfg):
-  require(set(cfg)=={'root','baseline','model','verification','plan'},'HOST_APPLICATION_FIELDS')
+  fields={'root','baseline','model','verification','plan'}
+  require(set(cfg) in (fields, fields | {'evolution'}),'HOST_APPLICATION_FIELDS')
   self.root=Path(cfg['root']);self.cfg=cfg
   def load(key):
    item=cfg[key];require(set(item)=={'path','sha256'},'HOST_INPUT_FIELDS')
    path=Path(item['path']);raw=input_bytes(path);require(sha(raw)==item['sha256'],'HOST_INPUT_DIGEST');return json.loads(raw)
+  self.evolution=load('evolution') if 'evolution' in cfg else None
   self.baseline=load('baseline');self.model=load('model');self.verification=validate_result(load('verification'));self.plan=load('plan')
   # The explicit host preparation already used Session's native approval,
   # compiler and plan checks. Inspect the exact original approved snapshot;
@@ -51,7 +54,7 @@ class Application:
   self.symbols={s['id']:s for s in self.model['symbols']};self.edges=graph(self.snapshot)
   self.fresh()
  def fresh(self):
-  for key in ('baseline','model','verification','plan'):
+  for key in sorted(set(self.cfg)-{'root'}):
    item=self.cfg[key];p=Path(item['path']);require(sha(input_bytes(p))==item['sha256'],'STALE_HOST_INPUT')
   current(self.model,self.root)
  def symbol(self,s):
@@ -99,11 +102,14 @@ class Application:
    result=impact(self.model,self.root,symbol=symbol or None,semantic=next(iter(ids)) if ids else None)
    rows=[{'relationship':e} for e in result['provenDependencies']]+[{'definition':self.symbol(s)} for s in result['affectedDefinitions']]+[{'possibleImpact':e} for e in result['possibleImpacts']]
    out['impact']={k:result[k] for k in ('seeds','authority','limitation')}
+  elif operation=='evolution.preview':
+   from engineering.mcp_adapter.evolution import preview
+   out['preview'],rows=preview(self,q)
   elif operation=='compiler.verify':
    rows=[self.row(r) for r in self.verification['results'] if (not ids or any(o['id'] in ids for o in r['origins'])) and (not q['status'] or r['result']==q['status'])]
   else:raise ValueError('UNSUPPORTED_OPERATION')
   # Cursor is a deterministic continuation bound to operation, query and all inputs.
-  context=digest([operation,{k:v for k,v in q.items() if k!='cursor'},{k:self.cfg[k]['sha256'] for k in ('baseline','model','verification','plan')}])
+  context=digest([operation,{k:v for k,v in q.items() if k!='cursor'},{k:self.cfg[k]['sha256'] for k in sorted(set(self.cfg)-{'root'})}])
   offset=0
   if q['cursor']:
    parts=q['cursor'].split(':');require(len(parts)==2 and parts[0]==context and parts[1].isdigit(),'INVALID_CONTINUATION');offset=int(parts[1]);require(0<=offset<len(rows),'INVALID_CONTINUATION')
@@ -120,10 +126,14 @@ class Service:
  def __init__(self,path):
   p=Path(path);raw=read(p.parent,p.name);cfg=json.loads(raw)
   require(set(cfg)=={'schema','applications'} and cfg['schema']=='acp-mcp-host/1' and set(cfg['applications'])=={'payment','case-management'},'HOST_CONFIGURATION')
-  self.config=cfg['applications'];self.apps={}
+  self.config=cfg['applications'];self.apps={};self.preview_lock=Lock()
  def application(self,name):
   require(name in self.config,'UNKNOWN_APPLICATION')
   if name not in self.apps:
    app=Application(self.config[name]);require(app.b['domain']==name,'APPLICATION_BINDING');self.apps[name]=app
   return self.apps[name]
- def call(self,operation,q):return self.application(q['application']).call(operation,q)
+ def call(self,operation,q):
+  if operation != 'evolution.preview':return self.application(q['application']).call(operation,q)
+  require(self.preview_lock.acquire(blocking=False),'CHANGE_PREVIEW_BUSY')
+  try:return self.application(q['application']).call(operation,q)
+  finally:self.preview_lock.release()

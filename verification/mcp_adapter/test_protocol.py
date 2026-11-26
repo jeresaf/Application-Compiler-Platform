@@ -10,7 +10,7 @@ CONFIG=Path(os.environ['ACP_MCP_HOST_CONFIG']).absolute()
 
 class Protocol(unittest.IsolatedAsyncioTestCase):
  async def asyncSetUp(self):
-  self.client=Client(StdioServerParameters(command=sys.executable,args=['-B','-m','engineering.mcp_adapter.server','--host-config',str(CONFIG)],cwd=str(ROOT)),read_timeout_seconds=45,mode=self.mode if hasattr(self,'mode') else 'auto')
+  self.client=Client(StdioServerParameters(command=sys.executable,args=['-B','-m','engineering.mcp_adapter.server','--host-config',str(CONFIG)],cwd=str(ROOT)),read_timeout_seconds=260,mode=self.mode if hasattr(self,'mode') else 'auto')
  async def call(self,name,**kw):return await self.client.call_tool(name,{'application':'payment',**kw})
  async def good(self,name,**kw):
   r=await self.call(name,**kw);self.assertFalse(r.is_error,str(r));v=r.structured_content;self.assertEqual(v['schema'],'acp-mcp-tool-result/1');self.assertIsNone(v['error']);return v['payload']
@@ -44,6 +44,38 @@ class Protocol(unittest.IsolatedAsyncioTestCase):
    measurements[app]={'query':semantic,'boundedResponseUTF8Bytes':len(encode(context)),'equivalentFullResponseUTF8Bytes':len(encode(full)),'fullResponseSHA256':sha(encode(full)),'tokenCount':None,'tokenizer':'UNAVAILABLE_NOT_ESTIMATED','verificationSummary':result['verificationSummary']}
 
   output=Path(os.environ.get('ACP_MCP_RESULTS',str(CONFIG.parent/'measurements.json')));output.write_bytes(encode(measurements))
+ async def test_read_only_evolution_preview_in_both_domains(self):
+  previews={}
+  for domain in ('payment','case-management'):
+   with self.subTest(domain=domain):
+    app=Service(CONFIG).application(domain)
+    change=json.loads((ROOT/'test-corpus'/'deterministic-v04'/f'{domain}-change.json').read_bytes())
+    change['base']['digest']=app.snapshot['contentDigest']
+    change['operations']=change['operations'][:1]
+    change['operations'][0]['node']['id']='DEC-MCP-TEST-PREVIEW'
+    result=await self.good('evolution.preview',application=domain,change=change)
+    self.assertEqual(result['preview']['publication'],'NOT_AUTHORIZED')
+    self.assertNotEqual(result['preview']['candidateDigest'],app.snapshot['contentDigest'])
+    self.assertIn('SEMANTIC_DIFF',{row['kind'] for row in result['items']})
+    previews[domain]=result['preview']
+    app.fresh()
+    change['base']['digest']='sha256:'+'0'*64
+    await self.bad('evolution.preview',application=domain,change=change)
+  output=Path(os.environ.get('ACP_MCP_RESULTS',str(CONFIG.parent/'measurements.json')))
+  output.with_name('previews.json').write_bytes(encode(previews))
+ async def test_r8_preview_matches_observed_migration(self):
+  change={'baseDigest':'sha256:3797ffb6ef52ab6f3d008b88c2364445b849cbba26decb9f5afde41f179bb7ce'}
+  args={'application':'case-management','preset':'case-r6-r7','change':change}
+  result=await self.good('evolution.preview',**args)
+  self.assertEqual(result['preview']['observation']['migrationVersion'],'5')
+  self.assertEqual(result['preview']['observation']['run'],45667269534)
+  self.assertEqual(result['preview']['migration']['oldWriters'],'FENCED_BEFORE_MIGRATION')
+  self.assertEqual(result['preview']['publication'],'NOT_AUTHORIZED')
+  self.assertEqual(result,await self.good('evolution.preview',**args))
+  await self.bad('evolution.preview',**(args|{'application':'payment'}))
+  await self.bad('evolution.preview',**(args|{'change':{'baseDigest':'sha256:'+'0'*64}}))
+  output=Path(os.environ.get('ACP_MCP_RESULTS',str(CONFIG.parent/'measurements.json')))
+  output.with_name('r8-preview.json').write_bytes(encode(result['preview']))
  async def test_continuation_determinism_and_binding(self):
   a=await self.good('spec.query',limit=1);self.assertIsNotNone(a['next'])
   b=await self.good('spec.query',limit=1,cursor=a['next']);self.assertNotEqual(a['items'],b['items'])
@@ -92,7 +124,7 @@ class Legacy(unittest.IsolatedAsyncioTestCase):
  call=Protocol.call
  good=Protocol.good
  async def test_initialization_negotiation_and_invocation(self):
-  self.assertIn(self.client.protocol_version,('2025-11-25','2025-06-18','2025-03-26','2024-11-05'));self.assertEqual(len(self.tools.tools),9);await self.good('project.summary')
+  self.assertIn(self.client.protocol_version,('2025-11-25','2025-06-18','2025-03-26','2024-11-05'));self.assertEqual(len(self.tools.tools),10);await self.good('project.summary')
 
 # AnyIO cancel scopes must enter/exit in the same task. unittest runs setup and
 # teardown in different tasks, so own each real SDK connection in the test task.

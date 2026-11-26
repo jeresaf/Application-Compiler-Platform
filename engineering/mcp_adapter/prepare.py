@@ -7,7 +7,7 @@ from engineering.source_intelligence.analysis import prepare
 from engineering.mcp_adapter.service import Service
 PHASE8_SHA256='d2d26338105b5e6df7b4484c24fda7213452d998f50a610bfe7745c6404d67c8'
 
-def host(workspace,phase7,phase8,reuse=None):
+def host(workspace,phase7,phase8,reuse=None,r8=None):
  w=Path(workspace).absolute();w.mkdir(mode=0o700,exist_ok=False)
  reference_inputs(phase7,w/'reference');raw=Path(phase8).read_bytes()
  if sha(raw)!=PHASE8_SHA256:raise ValueError('PHASE8_ARCHIVE_DIGEST')
@@ -29,11 +29,15 @@ def host(workspace,phase7,phase8,reuse=None):
    result=location/'verification.json';result.write_bytes(report)
    plan=location/'plan.json';plan.write_bytes(encode({'schema':'acp-mcp-plan/1','inputs':session.inputs,'artifactPlanDigest':session.b['artifactPlanDigest'],'targetIdentity':session.target.target,'artifacts':[{'path':a.path,'sha256':session.b['files'][a.path]['sha256'],'ownership':str(a.owner),'origins':wire(a.mappings),'verification':list(a.verification)} for a in session.plan.artifacts]}))
    config['applications'][domain]={'root':str(location/domain),**{k:{'path':str(p),'sha256':sha(p.read_bytes())} for k,p in [('baseline',baseline),('model',model),('verification',result),('plan',plan)]}}
+ if r8:
+  from engineering.mcp_adapter.evolution import prepare_r8
+  evidence=w/'case-evolution.json';evidence.write_bytes(encode(prepare_r8(r8)))
+  config['applications']['case-management']['evolution']={'path':str(evidence),'sha256':sha(evidence.read_bytes())}
  path=w/'host.json';path.write_bytes(encode(config));service=Service(path)
  for domain in DOMAINS:service.application(domain)
  return path
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--workspace',required=True);p.add_argument('--phase7-archive',required=True);p.add_argument('--phase8-archive',required=True);p.add_argument('--reuse-applications');a=p.parse_args()
- print(host(a.workspace,a.phase7_archive,a.phase8_archive,a.reuse_applications))
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--workspace',required=True);p.add_argument('--phase7-archive',required=True);p.add_argument('--phase8-archive',required=True);p.add_argument('--reuse-applications');p.add_argument('--r8-archive');a=p.parse_args()
+ print(host(a.workspace,a.phase7_archive,a.phase8_archive,a.reuse_applications,a.r8_archive))
 if __name__=='__main__':main()

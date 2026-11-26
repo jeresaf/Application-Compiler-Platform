@@ -3843,12 +3843,13 @@
     {
       "id": "MCP-09",
       "requirement": "Expose authorized compiler lifecycle operations",
-      "implementation": "Read-only stdio adapter and bounded context. Mutation, approval, deployment and production trust remain unapproved.",
+      "implementation": "Read-only stdio adapter, bounded context and Batch 03 native semantic preview. Mutation, approval, deployment and production trust remain unapproved.",
       "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
       "ownerApproval": "Pending where applicable",
       "productionAcceptance": "NOT_ACCEPTED",
       "evidence": [
-        "docs/phase9-mcp.md"
+        "docs/phase9-mcp.md",
+        "reviews/batch03/README.md"
       ],
       "dependencies": [
         "VERIFY-08",
@@ -3935,6 +3936,11 @@
         "implementation": "H5/H6 use pinned V3 Maven archive with exact member verification",
         "remainingGap": "Hosted H5/H6 qualification on Batch 02; archive expiry remains external",
         "evidence": "reviews/batch02/README.md"
+      },
+      "batch03": {
+        "implementation": "Check GitHub producer and expiry metadata before archive download",
+        "remainingGap": "CI and dependency owners must approve durable immutable custody or qualified same-run acquisition",
+        "evidence": "reviews/batch03/README.md"
       }
     },
     {

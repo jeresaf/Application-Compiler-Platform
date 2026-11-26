@@ -33,3 +33,21 @@ class TransferTests(unittest.TestCase):
                     else:
                         restore(archive, dest, artifacts)
                         self.assertEqual((dest / name).read_bytes(), b'good')
+
+    def test_producer_metadata_and_expiry(self):
+        from engineering.ci.batch02_maven import ARCHIVE, PRODUCER, verify_metadata
+
+        valid = {'id': 15031660633, 'name': 'successor-verified-maven-inputs',
+                 'expired': False, 'digest': 'sha256:' + ARCHIVE,
+                 'workflow_run': {'id': 45631338502, 'head_sha': PRODUCER,
+                                  'head_repository_id': 1371285836, 'repository_id': 1371285836}}
+        verify_metadata(valid)
+        for change, code in [
+            ({'expired': True}, 'MAVEN_TRANSFER_UNAVAILABLE_OR_EXPIRED'),
+            ({'expired': None}, 'MAVEN_TRANSFER_UNAVAILABLE_OR_EXPIRED'),
+            ({'digest': 'sha256:' + '0' * 64}, 'MAVEN_TRANSFER_METADATA_DIGEST'),
+            ({'workflow_run': {**valid['workflow_run'], 'id': 1}}, 'MAVEN_TRANSFER_PRODUCER'),
+            ({'workflow_run': None}, 'MAVEN_TRANSFER_PRODUCER'),
+        ]:
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, code):
+                verify_metadata(valid | change)
