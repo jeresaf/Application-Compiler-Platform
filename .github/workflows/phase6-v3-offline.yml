@@ -192,6 +192,11 @@ jobs:
         run: |
           set -euo pipefail
           "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B engineering/traceability/runtime.py --workspace "$RUNNER_TEMP/acp-successor-runtime" 2>&1 | tee "$RUNNER_TEMP/acp-successor-runtime.log"
+      - name: Qualify opt-in cardinality generation and database contention
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B verification/cardinality/qualify.py --workspace "$RUNNER_TEMP/acp-cardinality" --maven-seed "$RUNNER_TEMP/acp-transferred-m2"
       - name: Retain runtime results and browser logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -201,6 +206,7 @@ jobs:
             ${{ runner.temp }}/acp-successor-runtime.log
             ${{ runner.temp }}/acp-successor-runtime/runtime-results.json
             ${{ runner.temp }}/acp-successor-runtime/traceability-results.json
+            ${{ runner.temp }}/acp-cardinality/results.json
             ${{ runner.temp }}/acp-successor-runtime/*-runtime/
           if-no-files-found: error
 
