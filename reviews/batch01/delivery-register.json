@@ -3949,7 +3949,7 @@
       "requirement": "Retain performance and capacity qualification under exact inputs",
       "implementation": "Historical bounded workload and scaling evidence exists. Current failed or pending executions require separate reconciliation.",
       "engineeringVerification": "See source-bound reports; batch integration results tracked separately.",
-      "batch03r": "Performance stopped at Maven Central HTTP 429; same-run verified offline transfer implemented, hosted qualification pending.",
+      "batch03r": "Performance stopped at Maven Central HTTP 429; same-run verified offline transfer implemented; hosted performance passed in run 45774835913, job 139757217626.",
       "ownerApproval": "Pending where applicable",
       "productionAcceptance": "NOT_ACCEPTED",
       "evidence": [

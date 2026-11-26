@@ -16,6 +16,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from uuid import uuid4
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path[:0]=[str(ROOT),str(ROOT/'tooling')]
@@ -81,6 +82,56 @@ def stop(process, *, crash=False):
     return process.returncode
 
 
+QUERY_COUNT = 4
+QUERY_ERROR_CODES = frozenset({
+    'RATE_DENIED', 'RATE_LIMITED', 'RATE_LIMIT_EXCEEDED', 'RATE_CAPACITY', 'CLOCK_REVERSED',
+    'INTERNAL_ERROR', 'UNAUTHORIZED', 'FORBIDDEN', 'ACCESS_DENIED', 'SESSION_STALE',
+    'SESSION_REVOKED', 'SESSION_EXPIRED',
+})
+QUERY_ERROR_CATEGORIES = frozenset({'AUTHORIZATION', 'SECURITY', 'RATE_LIMIT',
+                                   'TRANSIENT', 'INTERNAL', 'HTTP', 'VALIDATION'})
+
+
+def query_observation(lab, path, index):
+    correlation = str(uuid4())
+    start = time.monotonic_ns()
+    facts = {'index': index, 'correlationId': correlation, 'startedNs': start,
+             'httpStatus': None, 'errorCode': None, 'category': None, 'retryable': None}
+    try:
+        status, body = lab.http(path, {'QUERY-TEXT': ''}, correlation=correlation)
+        facts['httpStatus'] = status
+        if status != 200 and isinstance(body, dict):
+            code, category, retryable = (body.get(k) for k in ('code', 'category', 'retryable'))
+            if isinstance(code, str) and code in QUERY_ERROR_CODES:
+                facts['errorCode'] = code
+            if isinstance(category, str) and category in QUERY_ERROR_CATEGORIES:
+                facts['category'] = category
+            if isinstance(retryable, bool):
+                facts['retryable'] = retryable
+    except (TimeoutError, urllib.error.URLError, OSError, ValueError) as error:
+        reason = error.reason if isinstance(error, urllib.error.URLError) else error
+        facts['failure'] = ('TIMEOUT' if isinstance(reason, TimeoutError) else
+                            'INVALID_RESPONSE' if isinstance(reason, ValueError) else 'TRANSPORT')
+    end = time.monotonic_ns()
+    return {**facts, 'finishedNs': end, 'durationNs': end - start}
+
+
+def retain_query_batch(lab, rows, before, after):
+    complete = sorted(row['index'] for row in rows) == list(range(QUERY_COUNT))
+    passed = complete and all(row['httpStatus'] == 200 for row in rows)
+    record = {'application': lab.domain, 'pid': lab.process.pid,
+              'status': 'PASS' if passed else 'FAIL', 'complete': complete,
+              'requests': sorted(rows, key=lambda row: row['index']),
+              'before': before, 'after': after}
+    if hasattr(lab, 'application_log'):
+        record['applicationLog'] = lab.application_log
+    target = lab.logs / 'concurrent-queries.json'
+    with target.open('x') as stream:
+        json.dump(record, stream, sort_keys=True, indent=2)
+        stream.write('\n')
+    require(passed, 'RECOVERY_CONCURRENT_QUERY_FAILED')
+
+
 class Lab:
     def __init__(self,container,schema,backend,migrations,logs,domain):
         require(container.startswith('acp-06-runtime-'),'NOT_OWNED_DISPOSABLE_DATABASE')
@@ -103,6 +154,22 @@ class Lab:
     def state(self):
         tables=self.data("SELECT coalesce(jsonb_agg(tablename ORDER BY tablename),'[]') FROM pg_tables WHERE schemaname='"+self.schema+"' AND (left(tablename,2) IN ('e_','r_') OR left(tablename,4)='acp_' OR tablename='recovery_transport') AND tablename NOT IN ('acp_rate','acp_sessions')")
         return {table:self.data('SELECT coalesce(jsonb_agg(to_jsonb(t) ORDER BY to_jsonb(t)::text),\'[]\') FROM "'+table+'" t') for table in tables}
+    def query_database_observation(self):
+        # No identities, queries, payloads, or exception text leave this probe.
+        try:
+            return self.data("""SELECT jsonb_build_object(
+                'bucketCount',(SELECT count(*) FROM acp_rate),
+                'minClockNs',(SELECT min(last_ns)::text FROM acp_rate),
+                'maxClockNs',(SELECT max(last_ns)::text FROM acp_rate),
+                'minTokens',(SELECT min(tokens)::text FROM acp_rate),
+                'maxTokens',(SELECT max(tokens)::text FROM acp_rate),
+                'databaseDeadlocks',(SELECT deadlocks FROM pg_stat_database WHERE datname=current_database()),
+                'databaseRollbacks',(SELECT xact_rollback FROM pg_stat_database WHERE datname=current_database()),
+                'applicationConnections',(SELECT count(*) FROM pg_stat_activity WHERE application_name='acp-recovery'),
+                'applicationLockWaiters',(SELECT count(*) FROM pg_stat_activity WHERE application_name='acp-recovery' AND wait_event_type='Lock'))""")
+        except (OSError, ValueError, subprocess.SubprocessError):
+            return {'observation': 'UNAVAILABLE'}
+
     def admission(self):
         return {table:self.data('SELECT coalesce(jsonb_agg(to_jsonb(t) ORDER BY to_jsonb(t)::text),\'[]\') FROM '+table+' t') for table in ('acp_sessions','acp_rate')}
     def record(self,name,**facts):
@@ -152,15 +219,23 @@ class Lab:
                 with urllib.request.urlopen('http://127.0.0.1:'+str(self.port)+'/actuator/health',timeout=1) as r:return r.status==200 and json.load(r)['status']=='UP'
             except (urllib.error.URLError,TimeoutError,ConnectionError):return False
         wait_until(ready,'APPLICATION_READINESS',90)
+        self.application_log=path.name
         return {'pid':p.pid,'log':path.name,'ready':True}
 
-    def http(self,path,payload=None,token='browser-authorized',after=False):
+    def http(self,path,payload=None,token='browser-authorized',after=False,*,correlation=None):
         headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'}
+        if correlation:headers['X-Request-ID']=correlation
         if after:headers['X-ACP-Test-After-Commit']='hold'
         request=urllib.request.Request('http://127.0.0.1:'+str(self.port)+path,data=None if payload is None else json.dumps(payload).encode(),headers=headers)
         try:
             with urllib.request.urlopen(request,timeout=40) as response:return response.status,json.loads(response.read() or b'null')
-        except urllib.error.HTTPError as error:return error.code,json.loads(error.read() or b'null')
+        except urllib.error.HTTPError as error:
+            if not correlation:
+                return error.code, json.loads(error.read() or b'null')
+            try:
+                return error.code, json.loads(error.read(4097) or b'null')
+            except (ValueError, UnicodeError):
+                return error.code, None
 
     @contextmanager
     def gate(self,key):
@@ -308,11 +383,12 @@ def runtime_matrix(lab,ui,domain):
     require(lab.state()==protected,'DENIED_REQUEST_PUBLISHED_EFFECTS')
     # Exact shared actor partition: four requests, no CLOCK_REVERSED; overfill is 429.
     lab.sql('DELETE FROM acp_rate')
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        replies=list(pool.map(lambda _:lab.http(ui['queryPath'],{'QUERY-TEXT':''}),range(4)))
-    require(all(code==200 for code,_ in replies),'RECOVERY_CONCURRENT_QUERY_FAILED')
+    before_queries = lab.query_database_observation()
+    with ThreadPoolExecutor(max_workers=QUERY_COUNT) as pool:
+        replies = list(pool.map(lambda index: query_observation(lab, ui['queryPath'], index), range(QUERY_COUNT)))
+    retain_query_batch(lab, replies, before_queries, lab.query_database_observation())
     overload=[lab.http(ui['queryPath'],{'QUERY-TEXT':''})[0] for _ in range(20)];require(set(overload)<= {200,429} and 429 in overload,'RATE_LIMIT_NOT_ENFORCED')
-    lab.record('securityAndRateAfterRecovery',authorization=403,expired=401,unknown=401,tenantRows=0,concurrentStatuses=[c for c,_ in replies],overloadStatuses=overload)
+    lab.record('securityAndRateAfterRecovery',authorization=403,expired=401,unknown=401,tenantRows=0,concurrentStatuses=[row['httpStatus'] for row in replies],overloadStatuses=overload)
     lab.sql('UPDATE acp_sessions SET revoked=true');code,_=lab.http(ui['queryPath'],{'QUERY-TEXT':''});require(code==403,'REVOKED_SESSION_ACCEPTED')
     lab.record('revokedSessionRejected',httpStatus=code)
 

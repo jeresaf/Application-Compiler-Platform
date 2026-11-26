@@ -107,7 +107,7 @@ jobs:
         run: '"$RUNNER_TEMP/acp-build-venv/bin/python3.14" -B -m unittest discover -s verification/generator_builds -v'
       - uses: actions/download-artifact@v4
         with:
-          name: successor-verified-maven-inputs
+          name: ${{ github.run_attempt == '1' && 'successor-verified-maven-inputs' || format('successor-verified-maven-inputs-attempt-{0}', github.run_attempt) }}
           path: ${{ runner.temp }}/acp-transferred-m2
       - name: Compile both generated successor applications
         shell: bash
@@ -259,7 +259,7 @@ jobs:
           PYTHON
       - uses: actions/upload-artifact@v4
         with:
-          name: successor-verified-maven-inputs
+          name: ${{ github.run_attempt == '1' && 'successor-verified-maven-inputs' || format('successor-verified-maven-inputs-attempt-{0}', github.run_attempt) }}
           path: ${{ runner.temp }}/acp-verified-maven-transfer/
           if-no-files-found: error
       - name: Preserve exact inputs and independent clean-build outcomes
@@ -335,7 +335,7 @@ jobs:
         run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
       - uses: actions/download-artifact@v4
         with:
-          name: successor-verified-maven-inputs
+          name: ${{ github.run_attempt == '1' && 'successor-verified-maven-inputs' || format('successor-verified-maven-inputs-attempt-{0}', github.run_attempt) }}
           path: ${{ runner.temp }}/acp-transferred-m2
       - name: Verify and select immutable same-run Maven inputs
         shell: bash
@@ -411,15 +411,15 @@ jobs:
           "$RUNNER_TEMP/acp-recovery-venv/bin/python3.14" -B - <<'PYTHON'
           import unittest
           suite = unittest.defaultTestLoader.discover('verification/recovery')
-          assert suite.countTestCases() == 12, 'RECOVERY_TEST_COUNT'
+          assert suite.countTestCases() == 13, 'RECOVERY_TEST_COUNT'
           result = unittest.TextTestRunner(verbosity=2).run(suite)
-          assert result.wasSuccessful() and result.testsRun == 12 and not result.skipped
+          assert result.wasSuccessful() and result.testsRun == 13 and not result.skipped
           PYTHON
       - name: Obtain exact disposable PostgreSQL runtime
         run: docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
       - uses: actions/download-artifact@v4
         with:
-          name: successor-verified-maven-inputs
+          name: ${{ github.run_attempt == '1' && 'successor-verified-maven-inputs' || format('successor-verified-maven-inputs-attempt-{0}', github.run_attempt) }}
           path: ${{ runner.temp }}/acp-transferred-m2
       - name: Verify and select immutable same-run Maven inputs
         shell: bash

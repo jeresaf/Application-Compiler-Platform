@@ -1,7 +1,10 @@
 """Reject incomplete outcomes; actual execution is the separate disposable runner."""
 from copy import deepcopy
 from pathlib import Path
+import json
 import signal
+import tempfile
+import urllib.error
 import subprocess
 import sys
 import unittest
@@ -40,6 +43,38 @@ class RecoveryTests(unittest.TestCase):
         for statuses in ([200,500],[200]*20):
             rows=self.records();next(r for r in rows if r['test']=='securityAndRateAfterRecovery')['overloadStatuses']=statuses
             with self.assertRaisesRegex(ValueError,'SECURITY'):verify_observations(rows,1)
+    def test_failed_query_batch_retains_safe_diagnostics_before_rejection(self):
+        from engineering.recovery.qualify import query_observation, retain_query_batch
+        outcomes = [(429, {'code': 'RATE_LIMITED', 'category': 'HTTP', 'retryable': True}),
+                    (500, {'code': 'INTERNAL_ERROR', 'private': 'do-not-retain'}),
+                    (401, {'code': 'do-not-retain', 'category': 'do-not-retain'}),
+                    urllib.error.URLError('do-not-retain'), TimeoutError('do-not-retain'), None]
+        for outcome in outcomes:
+            with self.subTest(outcome=outcome), tempfile.TemporaryDirectory() as directory:
+                lab = Mock(domain='payment', logs=Path(directory))
+                lab.process.pid = 100
+                lab.application_log = 'application-4.log'
+                replies = [(200, {'private': 'do-not-retain'})] * 3
+                if outcome is not None:
+                    replies.append(outcome)
+                lab.http.side_effect = replies
+                rows = [query_observation(lab, '/query', i) for i in range(len(replies))]
+                with self.assertRaisesRegex(ValueError, 'RECOVERY_CONCURRENT_QUERY_FAILED'):
+                    retain_query_batch(lab, rows, {}, {})
+                raw = (lab.logs / 'concurrent-queries.json').read_text()
+                record = json.loads(raw)
+                self.assertNotIn('do-not-retain', raw)
+                self.assertEqual(record['status'], 'FAIL')
+                self.assertEqual(record['complete'], outcome is not None)
+                self.assertEqual(len(record['requests']), len(replies))
+                last = record['requests'][-1]
+                if isinstance(outcome, tuple):
+                    self.assertEqual(last['httpStatus'], outcome[0])
+                if isinstance(outcome, OSError):
+                    self.assertIn(last['failure'], {'TIMEOUT', 'TRANSPORT'})
+                self.assertEqual(len({r['correlationId'] for r in record['requests']}), len(replies))
+                self.assertTrue(all(r['durationNs'] >= 0 for r in record['requests']))
+
     def test_bounded_timeout_never_becomes_success(self):
         with self.assertRaisesRegex(TimeoutError,'held'):wait_until(lambda:False,'held',timeout=0)
         wait_until(lambda:True,'immediate')
