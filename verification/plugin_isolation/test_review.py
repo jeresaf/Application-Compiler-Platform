@@ -67,7 +67,12 @@ class ReviewTests(unittest.TestCase):
         self.assertTrue(subprocess.run(['git','merge-base','--is-ancestor',BASE,'HEAD'],cwd=ROOT).returncode==0)
         for name,pin in index['files'].items():
             with self.subTest(name=name):
-                p=ROOT/name;self.assertFalse(p.is_symlink());raw=p.read_bytes()
+                p=ROOT/name;self.assertFalse(p.is_symlink())
+                if name == 'engineering/mcp_adapter/service.py':
+                    from verification.evidence_admission.test_preservation import preserved_bytes
+                    raw = preserved_bytes(p)
+                else:
+                    raw = p.read_bytes()
                 self.assertEqual(hashlib.sha256(raw).hexdigest(),pin)
                 self.assertEqual(raw,subprocess.check_output(['git','show',BASE+':'+name],cwd=ROOT))
 

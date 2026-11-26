@@ -46,7 +46,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          "$RUNNER_TEMP/acp-mcp-venv/bin/python3.14" -B -m engineering.mcp_adapter.prepare --workspace "$RUNNER_TEMP/acp-mcp-host" --phase7-archive "$RUNNER_TEMP/acp-mcp-phase7.zip" --phase8-archive "$RUNNER_TEMP/acp-mcp-phase8.zip" --r8-archive "$RUNNER_TEMP/acp-mcp-r8.zip"
+          "$RUNNER_TEMP/acp-mcp-venv/bin/python3.14" -B -m engineering.mcp_adapter.prepare --workspace "$RUNNER_TEMP/acp-mcp-host" --phase7-archive "$RUNNER_TEMP/acp-mcp-phase7.zip" --phase8-archive "$RUNNER_TEMP/acp-mcp-phase8.zip" --r8-archive "$RUNNER_TEMP/acp-mcp-r8.zip" 2>&1 | tee "$RUNNER_TEMP/acp-mcp-prepare.log"
       - name: Actual MCP stdio clients and adversarial boundaries
         shell: bash
         run: |
@@ -58,6 +58,7 @@ jobs:
         with:
           name: phase9-readonly-mcp
           path: |
+            ${{ runner.temp }}/acp-mcp-prepare.log
             ${{ runner.temp }}/acp-mcp.log
             ${{ runner.temp }}/acp-mcp-results/*.json
           if-no-files-found: error

@@ -142,6 +142,13 @@ for case in (Protocol,Legacy):
 del case,name,method
 
 class Transport(unittest.TestCase):
+ def test_retained_validator_is_distinguished_from_current_validator(self):
+  from engineering.mcp_adapter.service import verification_inputs_match
+  retained=Service(CONFIG).application('payment').verification['inputs']
+  expected={**retained,'sourceValidatorSHA256':sha((ROOT/'engineering/source_intelligence/model.py').read_bytes())}
+  self.assertTrue(verification_inputs_match(expected,retained))
+  self.assertFalse(verification_inputs_match(expected,{**retained,'sourceValidatorSHA256':'0'*64}))
+  self.assertFalse(verification_inputs_match(expected,{**retained,'artifactPlanDigest':'sha256:'+'0'*64}))
  def test_oversized_raw_frame_connection_is_rejected(self):
   proc=subprocess.run([sys.executable,'-B','-m','engineering.mcp_adapter.server','--host-config',str(CONFIG)],input=b'x'*65537+b'\n',capture_output=True,timeout=45,cwd=ROOT)
   self.assertEqual(proc.returncode,2);self.assertNotIn(str(ROOT).encode(),proc.stdout+proc.stderr)

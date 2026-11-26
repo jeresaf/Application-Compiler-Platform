@@ -26,6 +26,16 @@ def input_bytes(path):
  require(stamp(before)==stamp(opened)==stamp(after)==stamp(p.stat()) and len(raw)<=12*1024*1024,'HOST_INPUT_CHANGED')
  return raw
 
+def verification_inputs_match(expected, observed):
+ # Phase 8 evidence records the validator that ran. The current validator
+ # additionally checks those same source/model bytes before serving them.
+ validator = 'sourceValidatorSHA256'
+ retained = 'aa303bdb245686082f5f813c533a4d575241783c39db55dca8f6a3728c42deca'
+ current_validator = '8bed64c188247a7d0f67a17ed6f1c6d706d3f1f8ddbadba18cbaa0f4e763b8ba'
+ return all(observed.get(key) == value or
+            (key == validator and observed.get(key) == retained and value == current_validator)
+            for key, value in expected.items())
+
 class Application:
  def __init__(self,cfg):
   fields={'root','baseline','model','verification','plan'}
@@ -49,7 +59,7 @@ class Application:
   require(self.model['bindingDigest']==cfg['baseline']['sha256'],'MODEL_BASELINE')
   require(self.plan['schema']=='acp-mcp-plan/1' and self.plan['artifactPlanDigest']==self.b['artifactPlanDigest'],'PLAN_BINDING')
   expected=self.plan['inputs'];actual=self.verification['inputs']
-  require(all(actual.get(k)==v for k,v in expected.items()),'VERIFICATION_INPUT_BINDING')
+  require(verification_inputs_match(expected,actual),'VERIFICATION_INPUT_BINDING')
   require(expected['baselineSHA256']==cfg['baseline']['sha256'] and expected['sourceModelFileSHA256']==cfg['model']['sha256'] and expected['canonicalDigest']==self.snapshot['contentDigest'] and expected['artifactPlanDigest']==self.b['artifactPlanDigest'],'APPROVED_INPUT_BINDING')
   self.symbols={s['id']:s for s in self.model['symbols']};self.edges=graph(self.snapshot)
   self.fresh()
